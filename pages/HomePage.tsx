@@ -100,7 +100,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* SECTION 2: PROYECTOS DESTACADOS */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-background transition-colors duration-300">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
             <h2 className="text-sm font-bold tracking-widest uppercase text-brand-accent mb-2">Servicios Audiovisuales</h2>
@@ -122,12 +122,12 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* NEW SECTION: SERVICIOS DETALLADOS PARA SEO */}
-      <section className="py-24 bg-black text-white">
+      <section className="py-24 bg-surface dark:bg-black border-y border-border/50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <h2 className="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase mb-4">Especialidades</h2>
-            <h3 className="text-3xl md:text-5xl font-black tracking-tighter">Servicios Audiovisuales en Alicante</h3>
-            <p className="mt-6 text-gray-400 max-w-2xl mx-auto text-lg">
+            <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-heading dark:text-white">Servicios Audiovisuales en Alicante</h3>
+            <p className="mt-6 text-text-secondary dark:text-gray-400 max-w-2xl mx-auto text-lg">
               Soluciones profesionales de <strong>vídeo y fotografía</strong> para marcas, artistas y eventos en toda la <strong>Comunidad Valenciana</strong>.
             </p>
           </div>
@@ -139,9 +139,9 @@ const HomePage: React.FC = () => {
               { title: "Dirección de Fotografía", desc: "Servicios de DOP para cortometrajes y cine, especializado en narrativa visual." },
               { title: "Edición y Multimedia", desc: "Postproducción profesional, etalonaje y creación de Reels para redes sociales." }
             ].map((service, idx) => (
-              <div key={idx} className="p-8 border border-white/10 rounded-2xl hover:border-brand-accent/50 transition-colors bg-white/5">
-                <h4 className="text-xl font-bold mb-4 text-brand-accent">{service.title}</h4>
-                <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>
+              <div key={idx} className="p-8 border border-border/50 dark:border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all duration-300 bg-background/50 dark:bg-white/5 shadow-sm hover:shadow-xl group">
+                <h4 className="text-xl font-bold mb-4 text-brand-accent group-hover:scale-105 transition-transform origin-left">{service.title}</h4>
+                <p className="text-text-secondary dark:text-gray-400 text-sm leading-relaxed">{service.desc}</p>
               </div>
             ))}
           </div>
@@ -149,7 +149,7 @@ const HomePage: React.FC = () => {
           <div className="mt-16 text-center">
             <Link
               to="/contact"
-              className="group relative inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-xl border border-white/20 text-white font-bold text-lg py-4 px-10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-white/20 hover:border-brand-accent/50 hover:text-brand-accent transition-all duration-500 transform hover:scale-[1.05] hover:-translate-y-1 overflow-hidden"
+              className="group relative inline-flex items-center justify-center gap-2 bg-white/10 dark:bg-white/10 backdrop-blur-xl border border-gray-200 dark:border-white/20 text-text-primary dark:text-white font-bold text-lg py-4 px-10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-white/20 hover:border-brand-accent/50 hover:text-brand-accent transition-all duration-500 transform hover:scale-[1.05] hover:-translate-y-1 overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-brand-accent/0 via-brand-accent/10 to-brand-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
               Hablemos
@@ -160,9 +160,8 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-
       {/* SECTION 3: EXPERTISE Y FILOSOFÍA */}
-      <section className="py-24 bg-surface dark:bg-surface/50 border-y border-border">
+      <section className="py-24 bg-background dark:bg-surface/50 border-y border-border transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-heading mb-6">La cámara no hace al cineasta, pero la visión sí.</h2>
@@ -204,71 +203,73 @@ const HomePage: React.FC = () => {
       {/* SECTION 4: SOBRE MÍ */}
       <motion.section 
         id="about" 
-        className="py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20 relative"
+        className="py-24 px-4 sm:px-6 lg:px-8 scroll-mt-20 relative bg-surface dark:bg-black transition-colors duration-300"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        {/* Background Decorative Blur */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+        <div className="max-w-6xl mx-auto relative">
+          {/* Background Decorative Blur */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none -z-10" />
 
-        <div className="text-center mb-16">
-          <span className="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase mb-4 block">Conóceme</span>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-heading tracking-tighter">Sobre Mí</h3>
-        </div>
+          <div className="text-center mb-16">
+            <span className="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase mb-4 block">Conóceme</span>
+            <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-heading tracking-tighter">Sobre Mí</h3>
+          </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 relative group">
-            {/* Image Container with Glow/Glass */}
-            <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 mx-auto lg:w-full lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
-              <img
-                src="https://i.postimg.cc/Qh3FMz10/Captura-de-pantalla-2026-05-13-161052.png"
-                alt="Josep Mira Lozano - Filmmaker y Director de Fotografía en Alicante"
-                className="w-full h-full object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-5 relative group">
+              {/* Image Container with Glow/Glass */}
+              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 mx-auto lg:w-full lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
+                <img
+                  src="https://i.postimg.cc/Qh3FMz10/Captura-de-pantalla-2026-05-13-161052.png"
+                  alt="Josep Mira Lozano - Filmmaker y Director de Fotografía en Alicante"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+              </div>
+              
+              {/* Background offset card decoration */}
+              <div className="absolute top-4 -right-4 w-full h-full border-2 border-brand-accent/30 rounded-3xl -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2" />
             </div>
             
-            {/* Background offset card decoration */}
-            <div className="absolute top-4 -right-4 w-full h-full border-2 border-brand-accent/30 rounded-3xl -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2" />
-          </div>
-          
-          <div className="lg:col-span-7 bg-surface/50 dark:bg-surface/10 backdrop-blur-xl border border-border/50 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
-            <h4 className="text-3xl font-bold text-heading mb-6">¿Quién soy?</h4>
-            <div className="text-lg text-text-secondary leading-relaxed space-y-5 font-light">
-              <p>
-                Soy un narrador, un comunicador y un apasionado del mundo audiovisual. Desde hace más de 15 años, mi objetivo ha sido claro: <strong className="text-text-primary font-medium">conectar y resonar a través de las historias</strong>.
-              </p>
-              <p>
-                Empecé explorando la música y la actuación, pero fue en el mundo del vídeo y, más tarde, del cine, donde encontré el medio perfecto para fusionar todas mis pasiones. Me defino como una persona creativa, resolutiva y un gran entusiasta del trabajo en equipo.
-              </p>
-              <p>
-                Mi trayectoria profesional se ha construido sobre esta base. Durante más de ocho años, he estado compartiendo mis pasiones en YouTube, donde comencé en un canal llamado <em>'Del Fan, Para el Fan'</em> antes de dedicarme por completo a la realización cinematográfica. A través de mi canal actual, busco desmitificar el cine, recreando planos de películas y sirviendo de plataforma para la divulgación y el aprendizaje del séptimo arte.
-              </p>
-              
-              <div className="block mt-8 p-6 bg-background/50 dark:bg-black/20 rounded-2xl border border-border/40">
-                <p className="text-base text-text-primary mb-3">
-                  Mi trabajo abarca todo el proceso creativo, desde que nace un proyecto hasta su materialización en pantalla. Me dedico por completo a planificar, diseñar y, finalmente, capturar cada detalle, cada emoción y cada instante en el set.
+            <div className="lg:col-span-7 bg-surface/50 dark:bg-surface/10 backdrop-blur-xl border border-border/50 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
+              <h4 className="text-3xl font-bold text-heading mb-6">¿Quién soy?</h4>
+              <div className="text-lg text-text-secondary leading-relaxed space-y-5 font-light">
+                <p>
+                  Soy un narrador, un comunicador y un apasionado del mundo audiovisual. Desde hace más de 15 años, mi objetivo ha sido claro: <strong className="text-text-primary font-medium">conectar y resonar a través de las historias</strong>.
                 </p>
-                <p className="text-sm font-medium italic text-brand-accent">
-                  "La cámara se convierte en la extensión de mi visión."
+                <p>
+                  Empecé explorando la música y la actuación, pero fue en el mundo del vídeo y, más tarde, del cine, donde encontré el medio perfecto para fusionar todas mis pasiones. Me defino como una persona creativa, resolutiva y un gran entusiasta del trabajo en equipo.
+                </p>
+                <p>
+                  Mi trayectoria profesional se ha construido sobre esta base. Durante más de ocho años, he estado compartiendo mis pasiones en YouTube, donde comencé en un canal llamado <em>'Del Fan, Para el Fan'</em> antes de dedicarme por completo a la realización cinematográfica. A través de mi canal actual, busco desmitificar el cine, recreando planos de películas y sirviendo de plataforma para la divulgación y el aprendizaje del séptimo arte.
+                </p>
+                
+                <div className="block mt-8 p-6 bg-background/50 dark:bg-black/20 rounded-2xl border border-border/40">
+                  <p className="text-base text-text-primary mb-3">
+                    Mi trabajo abarca todo el proceso creativo, desde que nace un proyecto hasta su materialización en pantalla. Me dedico por completo a planificar, diseñar y, finalmente, capturar cada detalle, cada emoción y cada instante en el set.
+                  </p>
+                  <p className="text-sm font-medium italic text-brand-accent">
+                    "La cámara se convierte en la extensión de mi visión."
+                  </p>
+                </div>
+
+                <p className="pt-2">
+                  Valoro cada proyecto como un acto de colaboración, una oportunidad para unirme a otros profesionales y construir algo que va más allá de la suma de sus partes. Si tu próximo proyecto busca una narrativa visual que conecte y resuene con el público, me encantaría explorar cómo podemos hacerlo realidad.
                 </p>
               </div>
 
-              <p className="pt-2">
-                Valoro cada proyecto como un acto de colaboración, una oportunidad para unirme a otros profesionales y construir algo que va más allá de la suma de sus partes. Si tu próximo proyecto busca una narrativa visual que conecte y resuene con el público, me encantaría explorar cómo podemos hacerlo realidad.
-              </p>
-            </div>
-
-            <div className="mt-10 pt-8 border-t border-border/50">
-              <span className="block text-sm font-semibold text-text-secondary uppercase tracking-wider mb-6">Áreas de Especialización</span>
-              <div className="flex flex-wrap gap-3">
-                {roles.map(role => (
-                  <span key={role} className="bg-brand-accent/10 border border-brand-accent/20 text-brand-accent py-2.5 px-5 rounded-full text-sm font-medium transition-colors hover:bg-brand-accent hover:text-white cursor-default">
-                    {role}
-                  </span>
-                ))}
+              <div className="mt-10 pt-8 border-t border-border/50">
+                <span className="block text-sm font-semibold text-text-secondary uppercase tracking-wider mb-6">Áreas de Especialización</span>
+                <div className="flex flex-wrap gap-3">
+                  {roles.map(role => (
+                    <span key={role} className="bg-brand-accent/10 border border-brand-accent/20 text-brand-accent py-2.5 px-5 rounded-full text-sm font-medium transition-colors hover:bg-brand-accent hover:text-white cursor-default">
+                      {role}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -276,38 +277,40 @@ const HomePage: React.FC = () => {
       </motion.section>
 
       {/* SECTION 5: MARCAS */}
-      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-border/50">
-        <div className="text-center mb-16">
-          <span className="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase mb-4 block">Confianza</span>
-          <h3 className="text-3xl md:text-4xl font-black text-heading tracking-tighter">Marcas con las que he trabajado</h3>
-        </div>
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-background dark:bg-surface/50 border-t border-border/50 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto relative">
+          <div className="text-center mb-16">
+            <span className="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase mb-4 block">Confianza</span>
+            <h3 className="text-3xl md:text-4xl font-black text-heading tracking-tighter">Marcas con las que he trabajado</h3>
+          </div>
 
-        <div className="flex flex-col items-center gap-y-10 md:gap-y-12 opacity-70 grayscale">
-          {/* Fila 1 */}
-          <div className="flex flex-wrap justify-center items-center gap-y-10 gap-x-12 md:gap-x-16">
-            <img src="https://www.edigitalagency.com.au/wp-content/uploads/new-Disney-logo-white-png-large-size.png" alt="Disney" className="h-10 md:h-14 object-contain filter invert dark:invert-0 opacity-80 hover:opacity-100 transition-opacity" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg" alt="Star Wars" className="h-12 md:h-16 object-contain dark:invert opacity-80 hover:opacity-100 transition-opacity" />
-            <div className="flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-opacity">
-              <span className="text-lg md:text-xl font-bold font-serif tracking-tighter uppercase text-heading leading-tight">Consell Valencià</span>
-              <span className="text-lg md:text-xl font-bold font-serif tracking-tighter uppercase text-heading leading-tight">de la Joventut</span>
+          <div className="flex flex-col items-center gap-y-10 md:gap-y-12 opacity-70 grayscale">
+            {/* Fila 1 */}
+            <div className="flex flex-wrap justify-center items-center gap-y-10 gap-x-12 md:gap-x-16">
+              <img src="https://www.edigitalagency.com.au/wp-content/uploads/new-Disney-logo-white-png-large-size.png" alt="Disney" className="h-10 md:h-14 object-contain filter invert dark:invert-0 opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg" alt="Star Wars" className="h-12 md:h-16 object-contain dark:invert opacity-80 hover:opacity-100 transition-opacity" />
+              <div className="flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-opacity">
+                <span className="text-lg md:text-xl font-bold font-serif tracking-tighter uppercase text-heading leading-tight">Consell Valencià</span>
+                <span className="text-lg md:text-xl font-bold font-serif tracking-tighter uppercase text-heading leading-tight">de la Joventut</span>
+              </div>
+              <img src="https://jobs.kinepolis.com/images/logo-kinepolis.png" alt="Kinepolis" className="h-8 md:h-10 object-contain filter invert dark:invert-0 opacity-80 hover:opacity-100 transition-opacity" />
             </div>
-            <img src="https://jobs.kinepolis.com/images/logo-kinepolis.png" alt="Kinepolis" className="h-8 md:h-10 object-contain filter invert dark:invert-0 opacity-80 hover:opacity-100 transition-opacity" />
+            {/* Fila 2 */}
+            <div className="flex flex-wrap justify-center items-center gap-y-10 gap-x-12 md:gap-x-16">
+              <div className="text-xl md:text-2xl font-black tracking-wide opacity-80 hover:opacity-100 transition-opacity uppercase text-heading">Ocisport</div>
+              <div className="text-lg md:text-xl font-light tracking-widest opacity-80 hover:opacity-100 transition-opacity uppercase text-heading">Mediterra Cinema</div>
+            </div>
           </div>
-          {/* Fila 2 */}
-          <div className="flex flex-wrap justify-center items-center gap-y-10 gap-x-12 md:gap-x-16">
-            <div className="text-xl md:text-2xl font-black tracking-wide opacity-80 hover:opacity-100 transition-opacity uppercase text-heading">Ocisport</div>
-            <div className="text-lg md:text-xl font-light tracking-widest opacity-80 hover:opacity-100 transition-opacity uppercase text-heading">Mediterra Cinema</div>
-          </div>
-        </div>
 
-        <div className="mt-20 flex flex-col justify-center items-center space-y-6">
-          <div className="inline-flex items-center gap-4 bg-surface dark:bg-surface/50 border border-border/50 rounded-full py-4 px-10 shadow-sm relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-accent/0 via-brand-accent/5 to-brand-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-            <span className="text-text-secondary text-sm md:text-base font-light italic">Trabajo en sinergia con</span>
-          </div>
-          <div className="flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
-            <span className="text-3xl md:text-5xl font-black tracking-[0.2em] text-heading">JUNO</span>
-            <span className="text-3xl md:text-5xl font-light tracking-[0.2em] text-heading ml-2">MEDIA</span>
+          <div className="mt-20 flex flex-col justify-center items-center space-y-6">
+            <div className="inline-flex items-center gap-4 bg-surface dark:bg-surface/50 border border-border/50 rounded-full py-4 px-10 shadow-sm relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-accent/0 via-brand-accent/10 to-brand-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+              <span className="text-text-secondary text-sm md:text-base font-light italic">Trabajo en sinergia con</span>
+            </div>
+            <div className="flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+              <span className="text-3xl md:text-5xl font-black tracking-[0.2em] text-heading">JUNO</span>
+              <span className="text-3xl md:text-5xl font-light tracking-[0.2em] text-heading ml-2">MEDIA</span>
+            </div>
           </div>
         </div>
       </section>
