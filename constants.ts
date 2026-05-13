@@ -402,7 +402,7 @@ Contar con el **apoyo crucial de Adrià Mira Lozano y Lara Ruiz Martín** fue fu
     title: "Recreación de 'El Padrino'",
     category: ['Recreaciones de Películas', 'Dirección de Fotografía', 'Postproducción'],
     thumbnailUrl: 'https://i9.ytimg.com/vi/WnSCN4aXDKA/maxresdefault.jpg?v=679bcbdd&sqp=CIT8kdAG&rs=AOn4CLCyKnwCfs3IcWmzYzI1ecB1Be9rOg',
-    youtubeVideoId: 'WZhPkKfJFaA',
+    youtubeVideoId: 'WnSCN4aXDKA',
     context: 'El Padrino es una de las mayores obras maestras de la historia del cine y un referente absoluto en el uso de la luz. Con el objetivo de estudiar la técnica de los grandes clásicos, decidí recrear el plano más icónico de Vito Corleone en su despacho. Este proyecto nace como un ejercicio de precisión técnica, demostrando cómo la creatividad y el control de la iluminación pueden transformar un espacio cotidiano en un set cinematográfico de alto nivel, manteniéndose fiel a la atmósfera solemne de la obra original.',
     role: 'En esta pieza asumí la Dirección y Dirección de Fotografía. Mi labor consistió en realizar un desglose exhaustivo del plano original de Gordon Willis para replicar su estética. Me encargué del diseño y construcción del set desde cero en el "sótano de las maravillas", la configuración de los esquemas de iluminación y la postproducción final, buscando la máxima fidelidad en cada textura y sombra.',
     process: [
@@ -412,9 +412,9 @@ Contar con el **apoyo crucial de Adrià Mira Lozano y Lara Ruiz Martín** fue fu
       '**Etalonaje y Reto Personal:** Dada mi condición de daltónico, la corrección de color fue un proceso de análisis comparativo riguroso. Utilicé referencias directas del fotograma original en DaVinci Resolve para igualar los tonos de piel y la densidad de las sombras, realizando ajustes precisos en postproducción (como el viraje de color de la pajarita) para garantizar una réplica visual exacta.'
     ],
     images: [
-      'https://i.ibb.co/pj0Km7bV/Captura-de-pantalla-2026-05-13-154204.png',
-      'https://i.ibb.co/8nxcMkRF/Captura-de-pantalla-2026-05-13-154114.png',
-      'https://i.ibb.co/FqXx28tG/Captura-de-pantalla-2026-05-13-154132.png'
+      'https://i.ibb.co/jP2769Q5/Captura-de-pantalla-2026-05-13-154204.png',
+      'https://i.ibb.co/0RRp3Vbv/Captura-de-pantalla-2026-05-13-154114.png',
+      'https://i.ibb.co/3ydQ8Qz8/Captura-de-pantalla-2026-05-13-154132.png'
     ],
     challenges: '',
     results: ''
@@ -434,9 +434,9 @@ Contar con el **apoyo crucial de Adrià Mira Lozano y Lara Ruiz Martín** fue fu
       '**Precisión Óptica:** El proyecto exigió una repetición completa del rodaje al detectar que el uso de una lente de 85mm no respetaba las proporciones originales. Tras analizar la escena, ajustamos el equipo a un 55mm, lo que obligó a redimensionar y reencuadrar todo el set para conseguir la perspectiva exacta del Imperio Contraataca.'
     ],
     images: [
-      'https://i.ibb.co/hJz8WM5X/Captura-de-pantalla-2026-05-13-154839.png',
-      'https://i.ibb.co/nM4fjSMy/Captura-de-pantalla-2026-05-13-154720.png',
-      'https://i.ibb.co/h1J9S6rd/Captura-de-pantalla-2026-05-13-154739.png'
+      'https://i.ibb.co/KxmsqgfX/Captura-de-pantalla-2026-05-13-154839.png',
+      'https://i.ibb.co/RGtfBnFM/Captura-de-pantalla-2026-05-13-154739.png',
+      'https://i.ibb.co/bgZQxQ4H/Captura-de-pantalla-2026-05-13-154720.png'
     ],
     challenges: '',
     results: ''

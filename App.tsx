@@ -9,10 +9,12 @@ import BlogPage from './pages/BlogPage';
 import ContactPage from './pages/ContactPage';
 import ThanksPage from './pages/ThanksPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import ScrollToTop from './components/ScrollToTop';
 
 const App: React.FC = () => {
   return (
     <HashRouter>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen bg-background text-text-primary transition-colors duration-300">
         <Navbar />
         <main className="flex-grow">
