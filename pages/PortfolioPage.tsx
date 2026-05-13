@@ -91,9 +91,9 @@ const PortfolioPage: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase mb-4 block">Portfolio</span>
-          <h1 className="text-5xl md:text-7xl font-black text-heading tracking-tighter mb-6">Mis Trabajos</h1>
+          <h1 className="text-5xl md:text-7xl font-black text-heading tracking-tighter mb-6">Trabajos Audiovisuales</h1>
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-text-secondary leading-relaxed font-light">
-            Una detallada selección de mi trayectoria visual. Desde el concepto inicial hasta el etalonaje final, cada fotograma tiene un doble propósito: estético y narrativo.
+            Selección de proyectos de <strong>videografía, cine y dirección de fotografía</strong> realizados en Alicante y la Comunidad Valenciana. Cada fotograma esculpido para narrar una historia única.
           </p>
         </motion.div>
 

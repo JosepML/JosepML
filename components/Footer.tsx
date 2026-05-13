@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinkedInIcon, InstagramIcon, YouTubeIcon } from './IconComponents';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -35,7 +36,11 @@ const Footer: React.FC = () => {
           </a>
         </div>
         <p>&copy; {new Date().getFullYear()} Josep Mira Lozano. Todos los derechos reservados.</p>
-        <p className="text-sm mt-2">Diseñado para inspirar.</p>
+        <div className="flex justify-center gap-4 mt-2 text-sm">
+          <p>Diseñado para inspirar.</p>
+          <span className="text-border">•</span>
+          <Link to="/privacy" className="hover:text-brand-accent transition-colors">Política de Privacidad</Link>
+        </div>
       </div>
     </footer>
   );

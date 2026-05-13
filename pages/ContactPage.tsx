@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Mail, MapPin, Send, User, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { LinkedInIcon, InstagramIcon, YouTubeIcon } from '../components/IconComponents';
+import { Link } from 'react-router-dom';
 
 const FORMSPREE_FORM_ID = "mrblvlpb";
 
 const ContactPage: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
   const formAction = `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -58,7 +60,7 @@ const ContactPage: React.FC = () => {
     if (status === 'error') {
       return `${baseClasses} bg-red-500/10 dark:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:bg-red-500/20 transform hover:scale-[1.02]`;
     }
-    return `${baseClasses} bg-white/40 dark:bg-white/5 backdrop-blur-2xl border border-white/60 dark:border-white/10 text-text-primary shadow-[0_8px_32px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:bg-white/60 dark:hover:bg-white/10 hover:border-brand-accent/50 dark:hover:border-brand-accent/50 hover:text-brand-accent hover:shadow-[0_8px_32px_rgba(229,9,20,0.15)] dark:hover:shadow-[0_8px_32px_rgba(229,9,20,0.25)] transform hover:scale-[1.02] hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed`;
+    return `${baseClasses} bg-white/40 dark:bg-white/5 backdrop-blur-2xl border border-white/60 dark:border-white/10 text-text-primary shadow-[0_8px_32px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.2)] hover:bg-white/60 dark:hover:bg-white/10 hover:border-brand-accent/50 dark:hover:border-brand-accent/50 hover:text-brand-accent hover:shadow-[0_8px_32px_rgba(229,9,20,0.15)] dark:hover:shadow-[0_8px_32px_rgba(229,9,20,0.25)] transform hover:scale-[1.02] hover:-translate-y-1 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:scale-100`;
   };
 
   const fieldsDisabled = status === 'submitting' || status === 'success';
@@ -79,7 +81,7 @@ const ContactPage: React.FC = () => {
           <span className="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase mb-4 block">Hablemos</span>
           <h1 className="text-5xl md:text-7xl font-black text-heading tracking-tighter mb-6">Contacto</h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-text-secondary leading-relaxed font-light">
-            ¿Tienes un proyecto en mente, un guion que rodar o una historia que contar? Cuéntame tu idea y la haremos realidad.
+            ¿Tienes un proyecto en mente en <strong>Alicante</strong> o la <strong>Comunidad Valenciana</strong>? Cuéntame tu idea de producción audiovisual o videografía y la haremos realidad.
           </p>
         </motion.div>
 
@@ -221,12 +223,31 @@ const ContactPage: React.FC = () => {
                     ></textarea>
                   </div>
                 </div>
+
+                {/* GDPR Disclaimer */}
+                <div className="flex items-start gap-3 mt-8">
+                  <div className="flex items-center h-6">
+                    <input
+                      id="privacy"
+                      name="privacy"
+                      type="checkbox"
+                      required
+                      checked={acceptedPrivacy}
+                      onChange={(e) => setAcceptedPrivacy(e.target.checked)}
+                      disabled={fieldsDisabled}
+                      className="w-5 h-5 rounded border-border/50 bg-background/50 dark:bg-black/20 text-brand-accent focus:ring-brand-accent/50 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    />
+                  </div>
+                  <label htmlFor="privacy" className="text-sm text-text-secondary leading-snug cursor-pointer select-none">
+                    He leído y acepto la <Link to="/privacy" target="_blank" className="text-brand-accent hover:underline font-medium">Política de Privacidad</Link>. Entiendo que mis datos serán tratados para responder a mi consulta.
+                  </label>
+                </div>
                 
                 {/* Submit Button & Status */}
                 <div className="pt-4">
                   <button 
                     type="submit" 
-                    disabled={status === 'submitting' || status === 'success'}
+                    disabled={status === 'submitting' || status === 'success' || !acceptedPrivacy}
                     className={getButtonClasses()}
                   >
                     {status === 'success' ? <CheckCircle2 className="w-5 h-5" /> : <Send className="w-5 h-5" />}
