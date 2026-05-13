@@ -103,8 +103,8 @@ const HomePage: React.FC = () => {
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-background transition-colors duration-300">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div>
-            <h2 className="text-sm font-bold tracking-widest uppercase text-brand-accent mb-2">Servicios Audiovisuales</h2>
-            <h3 className="text-4xl md:text-5xl font-extrabold text-heading">Proyectos de Vídeo y Cine</h3>
+            <h2 className="text-sm font-bold tracking-widest uppercase text-brand-accent mb-2">Selección</h2>
+            <h3 className="text-4xl md:text-5xl font-extrabold text-heading">Proyectos Destacados</h3>
           </div>
           <Link 
             to="/portfolio" 
@@ -121,44 +121,6 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* NEW SECTION: SERVICIOS DETALLADOS PARA SEO */}
-      <section className="py-24 bg-surface dark:bg-black border-y border-border/50 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="text-brand-accent text-sm font-bold tracking-[0.2em] uppercase mb-4">Especialidades</h2>
-            <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-heading dark:text-white">Servicios Audiovisuales en Alicante</h3>
-            <p className="mt-6 text-text-secondary dark:text-gray-400 max-w-2xl mx-auto text-lg">
-              Soluciones profesionales de <strong>vídeo y fotografía</strong> para marcas, artistas y eventos en toda la <strong>Comunidad Valenciana</strong>.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { title: "Vídeo Corporativo", desc: "Producción de vídeos para empresas en Alicante, spots publicitarios y contenido branding." },
-              { title: "Videografía de Eventos", desc: "Cobertura cinematográfica de eventos, conciertos y Aftermovies con edición rápida." },
-              { title: "Dirección de Fotografía", desc: "Servicios de DOP para cortometrajes y cine, especializado en narrativa visual." },
-              { title: "Edición y Multimedia", desc: "Postproducción profesional, etalonaje y creación de Reels para redes sociales." }
-            ].map((service, idx) => (
-              <div key={idx} className="p-8 border border-border/50 dark:border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all duration-300 bg-background/50 dark:bg-white/5 shadow-sm hover:shadow-xl group">
-                <h4 className="text-xl font-bold mb-4 text-brand-accent group-hover:scale-105 transition-transform origin-left">{service.title}</h4>
-                <p className="text-text-secondary dark:text-gray-400 text-sm leading-relaxed">{service.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-16 text-center">
-            <Link
-              to="/contact"
-              className="group relative inline-flex items-center justify-center gap-2 bg-white/10 dark:bg-white/10 backdrop-blur-xl border border-gray-200 dark:border-white/20 text-text-primary dark:text-white font-bold text-lg py-4 px-10 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-white/20 hover:border-brand-accent/50 hover:text-brand-accent transition-all duration-500 transform hover:scale-[1.05] hover:-translate-y-1 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-accent/0 via-brand-accent/10 to-brand-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-              Hablemos
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-
-        </div>
-      </section>
 
       {/* SECTION 3: SOBRE MÍ */}
       <motion.section 
@@ -188,7 +150,7 @@ const HomePage: React.FC = () => {
                 <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <img
                     src="https://i.postimg.cc/Qh3FMz10/Captura-de-pantalla-2026-05-13-161052.png"
-                    alt="Josep Mira Lozano - Filmmaker y Director de Fotografía en Alicante"
+                    alt="Josep Mira Lozano"
                     className="w-full h-full object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
@@ -244,7 +206,7 @@ const HomePage: React.FC = () => {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-heading mb-6">La cámara no hace al cineasta, pero la visión sí.</h2>
             <p className="text-text-secondary text-lg md:text-xl">
-              Como <strong>videógrafo y fotógrafo</strong>, cada plano tiene un propósito. Trato cada proyecto como un lienzo donde la luz, el encuadre y el ritmo del montaje esculpen la emoción. Ofrezco soluciones multimedia completas para producciones en la <strong>zona de Alicante</strong>.
+              Cada plano tiene un propósito. Trato cada proyecto como un lienzo donde la luz, el encuadre y el ritmo del montaje esculpen la emoción. Ofrezco soluciones artísticas y técnicas completas.
             </p>
           </div>
           
