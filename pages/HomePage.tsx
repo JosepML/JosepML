@@ -160,50 +160,10 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 3: EXPERTISE Y FILOSOFÍA */}
-      <section className="py-24 bg-background dark:bg-surface/50 border-y border-border transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-heading mb-6">La cámara no hace al cineasta, pero la visión sí.</h2>
-            <p className="text-text-secondary text-lg md:text-xl">
-              Como <strong>videógrafo y fotógrafo</strong>, cada plano tiene un propósito. Trato cada proyecto como un lienzo donde la luz, el encuadre y el ritmo del montaje esculpen la emoción. Ofrezco soluciones multimedia completas para producciones en la <strong>zona de Alicante</strong>.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {[
-              {
-                icon: Film,
-                title: "Dirección",
-                desc: "Liderando la visión artística del proyecto de principio a fin, asegurando que la narrativa y la emoción conecten con el espectador."
-              },
-              {
-                icon: Camera,
-                title: "Dirección de Fotografía",
-                desc: "Pintando con luz. Creación de esquemas de iluminación y selección óptica para definir la atmósfera exacta que requiere la historia."
-              },
-              {
-                icon: Video,
-                title: "Edición y Postproducción",
-                desc: "Dando ritmo y forma final a la pieza. Desde el montaje rítmico acelerado hasta el etalonaje cinematográfico que eleva la imagen final."
-              }
-            ].map((feature, i) => (
-              <div key={i} className="p-8 rounded-2xl bg-background/50 border border-border/50 hover:border-brand-accent/30 transition-colors">
-                <div className="w-12 h-12 bg-brand-accent/10 rounded-lg flex items-center justify-center text-brand-accent mb-6">
-                  <feature.icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-heading mb-3">{feature.title}</h3>
-                <p className="text-text-secondary">{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: SOBRE MÍ */}
+      {/* SECTION 3: SOBRE MÍ */}
       <motion.section 
         id="about" 
-        className="py-24 px-4 sm:px-6 lg:px-8 scroll-mt-20 relative bg-surface dark:bg-black transition-colors duration-300"
+        className="py-24 px-4 sm:px-6 lg:px-8 scroll-mt-20 relative bg-background dark:bg-surface/50 border-y border-border transition-colors duration-300"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -219,19 +179,21 @@ const HomePage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5 relative group">
-              {/* Image Container with Glow/Glass */}
-              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 mx-auto lg:w-full lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
-                <img
-                  src="https://i.postimg.cc/Qh3FMz10/Captura-de-pantalla-2026-05-13-161052.png"
-                  alt="Josep Mira Lozano - Filmmaker y Director de Fotografía en Alicante"
-                  className="w-full h-full object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+            <div className="lg:col-span-5 flex items-center justify-center p-8">
+              <div className="relative group w-64 h-64 sm:w-80 sm:h-80 lg:w-full lg:h-[500px]">
+                {/* Background offset card decoration - Adjusted for visibility and clipping fix */}
+                <div className="absolute top-6 -right-6 w-full h-full bg-gray-100/80 dark:bg-white/5 border-2 border-brand-accent dark:border-brand-accent/50 rounded-3xl z-0 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2 shadow-xl" />
+                
+                {/* Image Container with Glow/Glass */}
+                <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
+                  <img
+                    src="https://i.postimg.cc/Qh3FMz10/Captura-de-pantalla-2026-05-13-161052.png"
+                    alt="Josep Mira Lozano - Filmmaker y Director de Fotografía en Alicante"
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+                </div>
               </div>
-              
-              {/* Background offset card decoration */}
-              <div className="absolute top-4 -right-4 w-full h-full border-2 border-brand-accent/30 rounded-3xl -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2" />
             </div>
             
             <div className="lg:col-span-7 bg-surface/50 dark:bg-surface/10 backdrop-blur-xl border border-border/50 rounded-3xl p-8 sm:p-10 shadow-2xl relative">
@@ -275,6 +237,46 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </motion.section>
+
+      {/* SECTION 4: EXPERTISE Y FILOSOFÍA */}
+      <section className="py-24 bg-surface dark:bg-black transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-heading mb-6">La cámara no hace al cineasta, pero la visión sí.</h2>
+            <p className="text-text-secondary text-lg md:text-xl">
+              Como <strong>videógrafo y fotógrafo</strong>, cada plano tiene un propósito. Trato cada proyecto como un lienzo donde la luz, el encuadre y el ritmo del montaje esculpen la emoción. Ofrezco soluciones multimedia completas para producciones en la <strong>zona de Alicante</strong>.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            {[
+              {
+                icon: Film,
+                title: "Dirección",
+                desc: "Liderando la visión artística del proyecto de principio a fin, asegurando que la narrativa y la emoción conecten con el espectador."
+              },
+              {
+                icon: Camera,
+                title: "Dirección de Fotografía",
+                desc: "Pintando con luz. Creación de esquemas de iluminación y selección óptica para definir la atmósfera exacta que requiere la historia."
+              },
+              {
+                icon: Video,
+                title: "Edición y Postproducción",
+                desc: "Dando ritmo y forma final a la pieza. Desde el montaje rítmico acelerado hasta el etalonaje cinematográfico que eleva la imagen final."
+              }
+            ].map((feature, i) => (
+              <div key={i} className="p-8 rounded-2xl bg-background/50 border border-border/50 hover:border-brand-accent/30 transition-colors">
+                <div className="w-12 h-12 bg-brand-accent/10 rounded-lg flex items-center justify-center text-brand-accent mb-6">
+                  <feature.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-heading mb-3">{feature.title}</h3>
+                <p className="text-text-secondary">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* SECTION 5: MARCAS */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-background dark:bg-surface/50 border-t border-border/50 transition-colors duration-300">
