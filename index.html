@@ -163,7 +163,16 @@
       }
     </script>
 
-<link rel="stylesheet" href="/index.css">
+<!-- Google tag (gtag.js) - Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXX');
+    </script>
+    <link rel="stylesheet" href="/index.css">
   <script type="importmap">
 {
   "imports": {
@@ -175,8 +184,8 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/JosepML/assets/index-hhqKD94e.js"></script>
-</head>
+    <script type="module" crossorigin src="/JosepML/assets/index-hhqKD94e.js"></script>
+  </head>
   <body class="font-sans">
     <div id="root"></div>
     <div id="portal-root"></div>
