@@ -7,8 +7,8 @@ import { PROJECTS } from '../constants';
 import ProjectCard from '../components/ProjectCard';
 
 const roles = [
-  "Realizador Audiovisual", "DOP Junior", "Operador de Cámara", 
-  "Auxiliar de Cámara", "Editor de Vídeo"
+  "Realizador Audiovisual", "Director de Fotografía", "Operador de Cámara", 
+  "Gaffer", "Editor de Vídeo"
 ];
 
 const HomePage: React.FC = () => {
