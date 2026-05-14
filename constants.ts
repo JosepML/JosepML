@@ -94,8 +94,7 @@ Contar con el **apoyo crucial de Adrià Mira Lozano y Lara Ruiz Martín** fue fu
     images: [
       'https://i.ibb.co/pB88YNSL/INICIOKIBOKO-V6-mp4-snapshot-00-12-000.jpg',
       'https://i.ibb.co/fGHZtRV6/INICIOKIBOKO-V6-mp4-snapshot-01-50-777.jpg',
-      'https://i.ibb.co/yn3Y5k4T/INICIOKIBOKO-V6-mp4-snapshot-03-00-000.jpg',
-      'https://i.ibb.co/4g0J0GDf/INICIOKIBOKO-V6-mp4-snapshot-04-29-078.jpg'
+      'https://i.ibb.co/yn3Y5k4T/INICIOKIBOKO-V6-mp4-snapshot-03-00-000.jpg'
     ],
     sectionTitles: {
       context: 'Contexto',
