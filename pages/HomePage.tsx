@@ -189,7 +189,7 @@ const HomePage: React.FC = () => {
                 <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   <img
                     src="https://i.postimg.cc/Qh3FMz10/Captura-de-pantalla-2026-05-13-161052.png"
-                    alt="Josep Mira Lozano"
+                    alt="Retrato de Josep Mira Lozano, Director de Fotografía operando equipo en rodaje"
                     className="w-full h-full object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
@@ -201,7 +201,7 @@ const HomePage: React.FC = () => {
               <h4 className="text-3xl font-bold text-heading mb-6">¿Quién soy?</h4>
               <div className="text-lg text-text-secondary leading-relaxed space-y-5 font-light">
                 <p>
-                  Soy un narrador, un comunicador y un apasionado del mundo audiovisual. Desde hace más de 15 años, mi objetivo ha sido claro: <strong className="text-text-primary font-medium">conectar y resonar a través de las historias</strong>.
+                  Soy Josep Mira Lozano, un narrador, comunicador y un apasionado del mundo audiovisual. Desde hace más de 15 años, mi objetivo ha sido claro: <strong className="text-text-primary font-medium">conectar y resonar a través de las historias</strong>.
                 </p>
                 <p>
                   Empecé explorando la música y la actuación, pero fue en el mundo del vídeo y, más tarde, del cine, donde encontré el medio perfecto para fusionar todas mis pasiones. Me defino como una persona creativa, resolutiva y un gran entusiasta del trabajo en equipo.
