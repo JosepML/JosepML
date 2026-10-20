@@ -1,56 +1,54 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useReducir } from "./hooks";
+import { motion } from "motion/react";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
-import { formatoTimecode } from "./hooks";
 
 /**
- * Transiciones de página de los prototipos:
- * - crecer: la imagen de la tarjeta crece hasta ser la cabecera de la ficha (A)
- * - cortinilla: una cortina de tinta cruza la pantalla con el título (B)
- * - corte: corte seco a negro con código de tiempo (C)
- * Con "reducir movimiento" todas pasan a un fundido a negro corto.
+ * Transición de página del prototipo D · Cristal: la imagen de la tarjeta crece, con sus esquinas
+ * redondas, hasta ser la cabecera de la ficha mientras el resto se desenfoca como un cristal.
+ * Con "reducir movimiento" (o sin imagen) pasa a un fundido corto.
  */
-export type EstiloTransicion = "crecer" | "cortinilla" | "corte";
+type Rect = { top: number; left: number; width: number; height: number };
 
 type Viaje = {
   href: string;
-  estilo: EstiloTransicion | "fundido";
+  estilo: "cristal" | "fundido";
   fase: "salida" | "esperando" | "llegada";
   imagen?: string;
-  rect?: { top: number; left: number; width: number; height: number };
-  rotulo?: string;
+  rect?: Rect;
+  radio: number;
 };
 
-type Opciones = { estilo: EstiloTransicion; imagen?: HTMLImageElement | null; rotulo?: string };
-
-const Contexto = createContext<(href: string, opciones: Opciones) => void>(() => {});
+const Contexto = createContext<(href: string, imagen?: HTMLImageElement | null) => void>(() => {});
 
 export const useTransicion = () => useContext(Contexto);
 
-/** Alto de la cabecera de la ficha en la variante A: la imagen aterriza aquí */
-export const ALTO_CABECERA = 0.78;
+/** Cabecera de la ficha D: aquí aterriza la imagen (margen, alto respecto a la pantalla y radio) */
+export const CABECERA = { margen: 12, alto: 0.74, radio: 40 };
 
 export function ProveedorTransicion({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const reducir = useReducedMotion();
+  const reducir = useReducir();
   const [viaje, setViaje] = useState<Viaje | null>(null);
   const rutaSalida = useRef(pathname);
 
   const ir = useCallback(
-    (href: string, { estilo, imagen, rotulo }: Opciones) => {
+    (href: string, imagen?: HTMLImageElement | null) => {
       if (viaje) return;
       rutaSalida.current = pathname;
       const r = imagen?.getBoundingClientRect();
+      const marco = imagen?.closest<HTMLElement>("[data-radio]");
+      const radio = marco ? parseFloat(getComputedStyle(marco).borderTopLeftRadius) || 0 : 0;
       setViaje({
         href,
-        estilo: reducir ? "fundido" : estilo,
+        estilo: reducir || !imagen ? "fundido" : "cristal",
         fase: "salida",
         imagen: imagen?.currentSrc || imagen?.src,
         rect: r ? { top: r.top, left: r.left, width: r.width, height: r.height } : undefined,
-        rotulo,
+        radio,
       });
     },
     [pathname, reducir, viaje],
@@ -69,10 +67,7 @@ export function ProveedorTransicion({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (!viaje || viaje.fase !== "esperando" || pathname === rutaSalida.current) return;
     window.scrollTo(0, 0);
-    const t = window.setTimeout(
-      () => setViaje((v) => (v ? { ...v, fase: "llegada" } : v)),
-      viaje.estilo === "corte" ? 140 : 260,
-    );
+    const t = window.setTimeout(() => setViaje((v) => (v ? { ...v, fase: "llegada" } : v)), 220);
     return () => window.clearTimeout(t);
   }, [pathname, viaje]);
 
@@ -87,64 +82,37 @@ export function ProveedorTransicion({ children }: { children: React.ReactNode })
 }
 
 function Capa({ viaje, alSalir, alLlegar }: { viaje: Viaje; alSalir: () => void; alLlegar: () => void }) {
-  const { estilo, fase } = viaje;
-  const llegando = fase === "llegada";
+  const llegando = viaje.fase === "llegada";
 
-  if (estilo === "crecer" && viaje.imagen && viaje.rect) {
-    const destino = { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight * ALTO_CABECERA };
+  if (viaje.estilo === "cristal" && viaje.imagen && viaje.rect) {
+    const destino = {
+      top: CABECERA.margen,
+      left: CABECERA.margen,
+      width: document.documentElement.clientWidth - CABECERA.margen * 2,
+      height: window.innerHeight * CABECERA.alto - CABECERA.margen,
+      borderRadius: CABECERA.radio,
+    };
     return (
       <div className="pointer-events-auto fixed inset-0 z-[90]">
         <motion.div
-          className="absolute inset-0 bg-[#0d0b09]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: llegando ? 0 : 1 }}
-          transition={{ duration: llegando ? 0.4 : 0.5 }}
+          className="absolute inset-0 bg-black/30"
+          initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+          animate={{ opacity: llegando ? 0 : 1, backdropFilter: llegando ? "blur(0px)" : "blur(24px)" }}
+          transition={{ duration: llegando ? 0.45 : 0.6 }}
         />
         <motion.img
           src={viaje.imagen}
           alt=""
-          className="absolute object-cover"
-          initial={viaje.rect}
+          className="absolute object-cover shadow-2xl"
+          initial={{ ...viaje.rect, borderRadius: viaje.radio }}
           animate={llegando ? { ...destino, opacity: 0 } : { ...destino, opacity: 1 }}
-          transition={
-            llegando
-              ? { duration: 0.45, ease: "easeOut" }
-              : { duration: 0.85, ease: [0.76, 0, 0.24, 1] }
-          }
+          transition={llegando ? { duration: 0.5, ease: "easeOut" } : { duration: 0.85, ease: [0.65, 0, 0.2, 1] }}
           onAnimationComplete={() => (llegando ? alLlegar() : alSalir())}
         />
       </div>
     );
   }
 
-  if (estilo === "cortinilla") {
-    return (
-      <motion.div
-        className="pointer-events-auto fixed inset-0 z-[90] flex items-center justify-center bg-[#1b1712] text-[#ece6da]"
-        initial={{ y: "100%" }}
-        animate={{ y: llegando ? "-100%" : "0%" }}
-        transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-        onAnimationComplete={() => (llegando ? alLlegar() : alSalir())}
-      >
-        {viaje.rotulo && (
-          <motion.p
-            className="proto-b-serif px-6 text-center text-4xl italic sm:text-6xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: llegando ? 0 : 1, y: 0 }}
-            transition={{ delay: llegando ? 0 : 0.25, duration: 0.4 }}
-          >
-            {viaje.rotulo}
-          </motion.p>
-        )}
-      </motion.div>
-    );
-  }
-
-  if (estilo === "corte") {
-    return <Corte llegando={llegando} rotulo={viaje.rotulo} alSalir={alSalir} alLlegar={alLlegar} />;
-  }
-
-  // Fundido (reducir movimiento)
   return (
     <motion.div
       className="pointer-events-auto fixed inset-0 z-[90] bg-black"
@@ -153,31 +121,5 @@ function Capa({ viaje, alSalir, alLlegar }: { viaje: Viaje; alSalir: () => void;
       transition={{ duration: 0.3 }}
       onAnimationComplete={() => (llegando ? alLlegar() : alSalir())}
     />
-  );
-}
-
-function Corte({
-  llegando,
-  rotulo,
-  alSalir,
-  alLlegar,
-}: {
-  llegando: boolean;
-  rotulo?: string;
-  alSalir: () => void;
-  alLlegar: () => void;
-}) {
-  // Corte seco: sin interpolación, solo tiempos
-  useEffect(() => {
-    const t = window.setTimeout(llegando ? alLlegar : alSalir, llegando ? 60 : 320);
-    return () => window.clearTimeout(t);
-  }, [llegando, alSalir, alLlegar]);
-
-  return (
-    <div className="pointer-events-auto fixed inset-0 z-[90] flex flex-col items-center justify-center gap-3 bg-black font-mono text-xs uppercase tracking-[0.3em] text-white">
-      <span className="text-[#ff2a1f]">● Corte</span>
-      <span>{formatoTimecode(Math.floor(Math.random() * 24 * 600))}</span>
-      {rotulo && <span className="mt-2 text-white/60">{rotulo}</span>}
-    </div>
   );
 }

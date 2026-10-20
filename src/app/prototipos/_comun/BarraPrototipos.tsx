@@ -2,18 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { setRespetarSistema, useRespetarSistema, useSistemaReduce } from "./hooks";
 
-const VARIANTES = [
-  { letra: "a", nombre: "Sala" },
-  { letra: "b", nombre: "Papel" },
-  { letra: "c", nombre: "Contraste" },
-];
-
-/** Barra flotante para saltar entre prototipos durante la revisión. No va en la web final. */
+/**
+ * Barra flotante de revisión (no va en la web final): volver al índice y, si Windows tiene
+ * desactivados los efectos de animación, elegir entre ver las animaciones o respetar ese ajuste.
+ */
 export function BarraPrototipos() {
   const ruta = usePathname();
-  const actual = ruta.split("/")[2];
-  if (!actual) return null;
+  const sistemaReduce = useSistemaReduce();
+  const respetar = useRespetarSistema();
+  if (ruta === "/prototipos") return null;
 
   return (
     <nav
@@ -23,24 +22,19 @@ export function BarraPrototipos() {
       <Link href="/prototipos" className="rounded-full px-3 py-1.5 hover:text-white">
         Índice
       </Link>
-      {VARIANTES.map((v) => (
-        <Link
-          key={v.letra}
-          href={`/prototipos/${v.letra}`}
-          className={`rounded-full px-3 py-1.5 ${actual === v.letra ? "bg-white text-black" : "hover:text-white"}`}
+      <Link href="/prototipos/d" className="whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-black">
+        D · Cristal
+      </Link>
+      {sistemaReduce && (
+        <button
+          type="button"
+          onClick={() => setRespetarSistema(!respetar)}
+          className="whitespace-nowrap rounded-full px-3 py-1.5 hover:text-white"
+          title="Windows tiene desactivados los efectos de animación"
         >
-          {v.letra.toUpperCase()} <span className="hidden sm:inline">· {v.nombre}</span>
-        </Link>
-      ))}
-      <button
-        type="button"
-        onClick={() => {
-          window.location.href = `/prototipos/${actual}?apertura`;
-        }}
-        className="whitespace-nowrap rounded-full px-3 py-1.5 hover:text-white"
-      >
-        <span className="hidden sm:inline">Ver </span>apertura
-      </button>
+          {respetar ? "Animaciones: según Windows" : "Animaciones: sí"}
+        </button>
+      )}
     </nav>
   );
 }

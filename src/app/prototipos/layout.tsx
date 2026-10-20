@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import { Anton, IBM_Plex_Mono, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif } from "next/font/google";
 import { BarraPrototipos } from "./_comun/BarraPrototipos";
 import { SuavizadoScroll } from "./_comun/SuavizadoScroll";
 import { ProveedorTransicion } from "./_comun/Transicion";
 import "./prototipos.css";
 
-// Tipografías extra de las variantes B (Instrument Serif + IBM Plex Mono) y C (Anton + JetBrains Mono).
-// La A usa las de la base: Cormorant Garamond e Inter.
-const serifB = Instrument_Serif({ variable: "--font-b-serif", subsets: ["latin"], weight: "400", style: ["normal", "italic"] });
-const monoB = IBM_Plex_Mono({ variable: "--font-b-mono", subsets: ["latin"], weight: ["400", "500"] });
-const displayC = Anton({ variable: "--font-c-display", subsets: ["latin"], weight: "400" });
-const monoC = JetBrains_Mono({ variable: "--font-c-mono", subsets: ["latin"], weight: ["400", "500"] });
+// Serif cursiva para las palabras de acento del prototipo D (el texto va en Inter, de la base)
+const acento = Instrument_Serif({ variable: "--font-acento", subsets: ["latin"], weight: "400", style: ["normal", "italic"] });
 
 export const metadata: Metadata = {
   title: "Prototipos · Dirección visual",
@@ -19,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function LayoutPrototipos({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${serifB.variable} ${monoB.variable} ${displayC.variable} ${monoC.variable}`}>
+    <div className={acento.variable}>
       <ProveedorTransicion>
         <SuavizadoScroll />
         {children}

@@ -1,8 +1,7 @@
 "use client";
 
-import { useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
-import { usePantallaAncha } from "./hooks";
+import { usePantallaAncha, useReducir } from "./hooks";
 import { VideoYouTube } from "./VideoYouTube";
 
 type Props = {
@@ -20,7 +19,7 @@ type Props = {
  */
 export function VideoFondo({ id, inicio, poster, className = "", filtro }: Props) {
   const ancha = usePantallaAncha();
-  const reducir = useReducedMotion();
+  const reducir = useReducir();
   const [listo, setListo] = useState(false);
 
   useEffect(() => {

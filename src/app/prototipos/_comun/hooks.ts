@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 
 function useMedia(consulta: string, porDefecto = false) {
   return useSyncExternalStore(
@@ -24,52 +24,50 @@ export function usePantallaAncha() {
   return useMedia("(min-width: 768px)");
 }
 
-/**
- * Apertura solo en la primera visita de la sesión.
- * `?apertura` en la URL la fuerza (útil para revisar).
- */
-export function useApertura(clave: string) {
-  const [estado, setEstado] = useState<"pendiente" | "mostrar" | "no">("pendiente");
+// --- Reducir movimiento -------------------------------------------------------
+// El PC de Josep tiene desactivados los "Efectos de animación" de Windows, y el navegador lo traduce
+// en "reducir movimiento": la web se ve casi quieta. En los prototipos las animaciones van siempre,
+// salvo que se active "Respetar ajuste del sistema" en la barra inferior. En la web final se respetará siempre.
 
-  useEffect(() => {
-    let vista = false;
-    try {
-      vista = sessionStorage.getItem(clave) === "1";
-    } catch {}
-    const forzar = new URLSearchParams(window.location.search).has("apertura");
-    setEstado(forzar || !vista ? "mostrar" : "no");
-  }, [clave]);
+const CLAVE_RESPETAR = "proto-respetar-movimiento";
+const EVENTO_RESPETAR = "proto-respetar-movimiento";
 
-  const terminar = () => {
-    try {
-      sessionStorage.setItem(clave, "1");
-    } catch {}
-    setEstado("no");
+function suscribirRespetar(avisar: () => void) {
+  window.addEventListener(EVENTO_RESPETAR, avisar);
+  window.addEventListener("storage", avisar);
+  return () => {
+    window.removeEventListener(EVENTO_RESPETAR, avisar);
+    window.removeEventListener("storage", avisar);
   };
-
-  return { estado, terminar };
 }
 
-/** Código de tiempo tipo 00:00:12:08 que corre mientras el componente está montado. */
-export function useTimecode(activo = true, fps = 24) {
-  const [frames, setFrames] = useState(0);
-  useEffect(() => {
-    if (!activo) return;
-    const inicio = performance.now();
-    let id = 0;
-    const tick = (t: number) => {
-      setFrames(Math.floor(((t - inicio) / 1000) * fps));
-      id = requestAnimationFrame(tick);
-    };
-    id = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(id);
-  }, [activo, fps]);
-  return formatoTimecode(frames, fps);
+function leerRespetar() {
+  try {
+    return localStorage.getItem(CLAVE_RESPETAR) === "1";
+  } catch {
+    return false;
+  }
 }
 
-export function formatoTimecode(frames: number, fps = 24) {
-  const f = frames % fps;
-  const s = Math.floor(frames / fps);
-  const dos = (n: number) => String(n).padStart(2, "0");
-  return `${dos(Math.floor(s / 3600))}:${dos(Math.floor(s / 60) % 60)}:${dos(s % 60)}:${dos(f)}`;
+export function useRespetarSistema() {
+  return useSyncExternalStore(suscribirRespetar, leerRespetar, () => false);
+}
+
+export function setRespetarSistema(valor: boolean) {
+  try {
+    localStorage.setItem(CLAVE_RESPETAR, valor ? "1" : "0");
+  } catch {}
+  window.dispatchEvent(new Event(EVENTO_RESPETAR));
+}
+
+/** Sustituye a useReducedMotion en los prototipos. */
+export function useReducir() {
+  const sistema = useMedia("(prefers-reduced-motion: reduce)");
+  const respetar = useRespetarSistema();
+  return sistema && respetar;
+}
+
+/** true si el sistema pide reducir movimiento (para avisar en la barra). */
+export function useSistemaReduce() {
+  return useMedia("(prefers-reduced-motion: reduce)");
 }

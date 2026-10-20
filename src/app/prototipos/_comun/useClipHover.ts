@@ -1,8 +1,7 @@
 "use client";
 
-import { useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { usePunteroFino } from "./hooks";
+import { usePunteroFino, useReducir } from "./hooks";
 
 /**
  * Clip mudo al pasar el ratón: arranca tras una breve espera (para no cargar
@@ -10,7 +9,7 @@ import { usePunteroFino } from "./hooks";
  */
 export function useClipHover(espera = 350) {
   const fino = usePunteroFino();
-  const reducir = useReducedMotion();
+  const reducir = useReducir();
   const [encima, setEncima] = useState(false);
   const [activo, setActivo] = useState(false);
   const t = useRef<number>(0);
