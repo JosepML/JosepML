@@ -21,6 +21,11 @@ const eslintConfig = [
       "legacy/**",
     ],
   },
+  {
+    // Los prototipos usan imágenes externas de la web antigua; en la fase 5 se pasa a next/image
+    files: ["src/app/prototipos/**"],
+    rules: { "@next/next/no-img-element": "off" },
+  },
 ];
 
 export default eslintConfig;

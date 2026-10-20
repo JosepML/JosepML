@@ -46,6 +46,8 @@ Nota para Claude en la nube: el contenedor en la nube no puede conectar con `*.s
 - 2026-10-20: WhatsApp +34 618 867 115 como botón (no en texto). Correo josep.mira@gmail.com. Reel provisional: "Y el año que viene, ¿qué?" hasta que Josep monte uno nuevo.
 - 2026-10-20 (fase 2, propuesta pendiente de visto bueno): el contenido antiguo son 18 proyectos y 3 artículos. Clasificación por servicio (Dirección de fotografía, Filmmaker, Edición) y por tipo (Cortometraje, Videoclip, Publicidad, Documental, Eventos, Redes sociales, Recreación). Cada proyecto guarda su id antiguo para redirigir enlaces viejos. Detalle en `plan/contenido/mapa-de-contenido.md`.
 
+- 2026-10-20 (fase 3): el reel y los clips de las tarjetas serán archivos de vídeo propios cortos (no YouTube); la tabla `proyectos` necesita `clip_url` además del vídeo completo.
+
 ## Decisiones pendientes de Josep
 
 | Decisión | Por defecto si no dice nada | Fase |
@@ -54,3 +56,4 @@ Nota para Claude en la nube: el contenedor en la nube no puede conectar con `*.s
 | Plan de pago de Vercel para uso comercial (unos 20 USD/mes, confirmar precio) | Sí, solo desde el lanzamiento | 7 |
 | Fotos de Josep trabajando para "Sobre mí" | Usar las que tenga; si no, planificar sesión | 2 |
 | Idiomas | Solo español, base de datos preparada para añadir más | 4 |
+| Dirección visual (A Sala, B Papel, C Contraste o mezcla) | A · Sala, con el índice de trabajos y el antes/después de B | 3 |
