@@ -39,8 +39,8 @@ Directoras y directores de cortos, artistas que preparan un videoclip y marcas q
 **¿Cómo sabes qué luz necesita una historia?**
 Leyendo el guion muchas veces y hablando mucho con quien dirige. La técnica viene después; primero tiene que haber una idea de qué queremos contar con cada plano.
 
-**¿Traes tu propio equipo?**
-Sí `[pendiente: lista breve del equipo]`. Y si una historia pide algo más, lo buscamos.
+**¿Con qué equipo trabajas?**
+Tengo equipo propio de cámara e iluminación. Pero el equipo lo decide la historia: si un proyecto pide algo que no tengo, se alquila y se incluye en el presupuesto.
 
 **¿Se puede hacer cine con pocos medios?**
 Es lo que llevo años demostrando con mis recreaciones: una rejilla de estufa y papel de horno pueden ser la ventana de Vito Corleone. El ingenio también se ve en pantalla.

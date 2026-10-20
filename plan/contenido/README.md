@@ -6,7 +6,8 @@ Textos y mapa de contenido para que Josep los revise y la fase 4 los cargue en l
 
 | Archivo | Qué tiene |
 | --- | --- |
-| [mapa-de-contenido.md](mapa-de-contenido.md) | Servicios y tipos nuevos, dónde va cada proyecto y artículo, destacados, huecos |
+| [fundamentos.md](fundamentos.md) | **Empieza aquí.** Qué tiene que tener la web de un DF y filmmaker y cómo lo aplicamos |
+| [mapa-de-contenido.md](mapa-de-contenido.md) | Servicios y tipos, dónde va cada proyecto y artículo, destacados, ficha técnica y premios, huecos |
 | [inicio.md](inicio.md) | Portada, servicios, destacados, quién soy, logos, opiniones, llamada final |
 | [servicio-direccion-de-fotografia.md](servicio-direccion-de-fotografia.md) | Servicio 1 |
 | [servicio-filmmaker.md](servicio-filmmaker.md) | Servicio 2 |
@@ -15,13 +16,17 @@ Textos y mapa de contenido para que Josep los revise y la fase 4 los cargue en l
 | [trabajos-recreaciones-y-blog.md](trabajos-recreaciones-y-blog.md) | Trabajos, ficha de proyecto, Recreaciones, Blog |
 | [contacto-gracias-y-llamadas.md](contacto-gracias-y-llamadas.md) | Menú, pie, Contacto, Gracias, legales, llamadas a la acción, 404 |
 
-## Lo que necesito de Josep
+## Datos de Josep ya incorporados (2026-10-20)
 
-1. **Frase principal** de la portada: una de las 3 propuestas de `inicio.md` (recomendada: "Historias hechas de luz.").
-2. **WhatsApp:** número (el de la web actual es de relleno) y si el correo de contacto sigue siendo josep.mira@gmail.com.
-3. **Sobre mí:** centro y año del ciclo de Realización, lista corta de tu equipo y programas de edición.
-4. **Fotos tuyas** trabajando (para Sobre mí e Inicio).
-5. **Opiniones de clientes:** si tienes alguna, aunque sea por WhatsApp, con permiso para publicarla.
-6. **Reel** para la portada: si no hay uno nuevo, uso "Y el año que viene, ¿qué?" como ahora o monto uno provisional en la fase 3.
-7. **Logos de marcas:** confirmar que puedes mostrar Disney, Star Wars y Kinepolis.
-8. **Resultados vacíos** de Kiboko, EXPÁNDE(TE), EP Oscuridad, Sin Tiempo, Conciertos y Bodas: si tienes datos (visualizaciones, festivales, qué dijo el cliente), los añado.
+WhatsApp (+34 618 867 115, como botón), correo, IES Veles e Vents (sin año), sin sección de equipo (cámara en cada ficha), 5 opiniones de clientes, logos confirmados como clientes reales, reel provisional "Y el año que viene, ¿qué?", resultados y premios de El Cirujano, Y el año que viene, Kiboko, EP Oscuridad y Arkano.
+
+## Lo que aún falta (no bloquea; se puede completar desde el panel)
+
+1. **Kiboko:** nombres de los festivales donde fue seleccionado y dónde estuvo nominado a mejor montaje (en internet solo aparece el estreno en La Vila Joiosa).
+2. **El Cirujano:** año del premio a mejor fotografía en On Duty.
+3. **Y el año que viene, ¿qué?:** si fue 2.º o 3.º puesto.
+4. **Arkano:** confirmar las 17.000 visualizaciones.
+5. **Opiniones:** a quién corresponde cada frase (tipo de proyecto y, si dan permiso, nombre), y si se publica la del "puto máquina".
+6. **Cámara de cada proyecto** para la ficha técnica.
+7. **Fotos:** retrato y fotos de rodaje.
+8. **Reel nuevo** cuando lo montes (de 1 a 3 minutos, sin parones).

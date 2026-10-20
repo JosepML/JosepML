@@ -8,9 +8,21 @@
 - **Introducción:** Cortos, videoclips, spots, documentales y eventos. Cada uno con su historia, y aquí te cuento cómo los hice.
 - **Filtro por servicio:** Todos · Dirección de fotografía · Filmmaker · Edición
 - **Filtro por tipo:** Cortometraje · Videoclip · Publicidad · Documental · Eventos · Redes sociales · Recreación
+- **Vista "Fotogramas":** botón para cambiar de la lista de proyectos a una cuadrícula solo de fotogramas, cada uno enlazado a su proyecto.
+- **Tarjeta:** fotograma, título, mi papel y laurel si lo tiene.
 - **Si un filtro no tiene resultados:** Aún no hay trabajos con este filtro. Prueba con otro o escríbeme y te enseño más.
 
 ## Ficha de proyecto
+
+Orden de la ficha (ver `fundamentos.md`):
+
+1. Vídeo a lo ancho
+2. **Ficha técnica:** año · tipo · dirección · productora o cliente · mi papel · cámara
+3. **Premios y selecciones** (laureles), si los hay
+4. **Fotogramas** (galería de 4 a 8, proporción original)
+5. Textos del proyecto
+6. **Detrás de cámaras** (fotos de rodaje), si las hay
+7. Siguiente proyecto y llamada a la acción
 
 Los textos de cada proyecto se migran tal cual (ver `mapa-de-contenido.md`). Títulos de sección por defecto, cuando el proyecto no trae los suyos:
 

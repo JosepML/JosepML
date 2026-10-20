@@ -14,7 +14,7 @@ Tono: primera persona, cercano. Los textos entre corchetes `[...]` son datos que
 - **Introducción:** Me llamo Josep y llevo más de quince años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí.
 - **Botones:** "Ver trabajos" → /trabajos · "Hablemos" → /contacto
 
-Alternativas para la frase principal (que elija Josep):
+Alternativas para la frase principal (se usa la 1 por defecto; se puede cambiar desde el panel en cualquier momento):
 1. Historias hechas de luz. *(recomendada: conserva la idea de la web actual, "Narrativas hechas de luz", en más corto)*
 2. Pinto con luz. Cuento con imágenes.
 3. Que tu historia se vea como se siente.
@@ -30,7 +30,8 @@ Alternativas para la frase principal (que elija Josep):
 
 - **Antetítulo:** Selección
 - **Título:** Algunos trabajos de los que estoy orgulloso
-- **Proyectos (en este orden):** Y el año que viene, ¿qué? · 100 Baladas, Arkano · El Cirujano · No se está tan mal, Lovva · EXPÁNDE(TE) · Kiboko
+- **Proyectos (en este orden):** Y el año que viene, ¿qué? · 100 Baladas, Arkano · El Cirujano · No se está tan mal, Lovva · EP Oscuridad · Kiboko
+- **Cada tarjeta:** fotograma, título, mi papel y laurel si lo tiene
 - **Enlace:** Ver todos los trabajos → /trabajos
 
 ## 4. Quién soy (versión corta)
@@ -40,18 +41,31 @@ Alternativas para la frase principal (que elija Josep):
 - **Enlace:** Conóceme mejor → /sobre-mi
 - **Imagen:** foto de Josep en rodaje `[pendiente: foto nueva o la actual de postimg]`
 
-## 5. Han confiado en mí (franja de logos)
+## 5. Reconocimientos (franja de laureles)
+
+- Mejor fotografía · On Duty International Film Festival · El Cirujano
+- Podio · ESCAC Dreammakers Contest 2024 · Y el año que viene, ¿qué?
+- Nominación a mejor montaje · `[festival]` · Kiboko
+- 1,39 millones de visualizaciones · EP Oscuridad, Adrián Muñoz
+
+## 6. Han confiado en mí (franja de logos)
 
 Disney · Star Wars · Consell Valencià de la Joventut · Kinepolis · Ocisport · Mediterra Cinema · JUNO Media
 
-`[Confirmar con Josep que puede mostrar los logos de Disney, Star Wars y Kinepolis y en qué contexto trabajó con ellos.]`
+(Todos son clientes con los que Josep ha trabajado.)
 
-## 6. Opiniones (oculta hasta que haya)
+## 7. Opiniones
 
-- **Título:** Lo que dicen quienes han trabajado conmigo
-- Se muestra solo si hay al menos 2 opiniones publicadas.
+- **Título:** Lo que dicen quienes han confiado en mí
+- **Frases** (textos reales de clientes; se muestran con el tipo de proyecto, y con el nombre si dan permiso `[pendiente]`):
+  1. "La verdad que es increíble, nos ha encantado. La fusión de las canciones, los momentos... No puedo expresarlo con palabras. Ha quedado realmente precioso, es espectacular." · *Novios, vídeo de boda*
+  2. "Jo, me he emocionado. Me encanta. Es simplemente... PERFECTO. Mil gracias." · *Cliente* `[pendiente: tipo de proyecto]`
+  3. "GUUUAAAUUUUU, brutaaaaaal." · *Vídeo resumen de evento*
+  4. "He visto el vídeo resumen y muy chulo. Muy guapos los cambios." · *Vídeo resumen de evento*
+  5. "Está superguay, Josep. Muy chulo, muy chulo, muy chulo." · *Aftermovie*
+- La frase "¡Josep! ¡Qué eres un puto máquina, tío! Ens ha flipat a tots mogolló" se guarda en la base de datos sin publicar: es muy auténtica, pero el taco choca con el tono elegante. Josep decide.
 
-## 7. Llamada final
+## 8. Llamada final
 
 - **Título:** ¿Tienes una historia que contar?
 - **Texto:** Cuéntamela. Me encantará escucharla y pensar cómo llevarla a la pantalla.

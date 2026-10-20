@@ -12,7 +12,7 @@ Crear todas las tablas en Supabase y pasar automáticamente todo el contenido ac
 | Tabla | Guarda |
 | --- | --- |
 | servicios | nombre, slug, frase, descripción, qué incluye, pasos, preguntas frecuentes, cabecera, orden (sin precio: ver `00-contexto.md`) |
-| proyectos | título, slug, cliente, año, servicios y tipos, rol, contexto, proceso, retos, resultados, títulos de sección propios, vídeos (YouTube/Instagram/HTML), vídeo de proceso, clip de tarjeta, galería, destacado, publicado, orden, id antiguo |
+| proyectos | título, slug, cliente, año, dirección, productora/cliente, mi papel (corto), cámara, premios (año, nombre, festival, tipo), fotogramas, detrás de cámaras, servicios y tipos, rol, contexto, proceso, retos, resultados, títulos de sección propios, vídeos (YouTube/Instagram/HTML), vídeo de proceso, clip de tarjeta, galería, destacado, publicado, orden, id antiguo |
 | articulos | título, slug, fecha, extracto, contenido, categoría, publicado, SEO |
 | paginas y secciones | páginas libres con bloques ordenables (texto, imagen, vídeo, galería, proyectos, CTA) |
 | opiniones | cliente, texto, proyecto relacionado, publicado |

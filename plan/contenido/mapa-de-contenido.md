@@ -34,15 +34,15 @@ Se conservan todos los textos (contexto, rol, proceso, retos, resultados, títul
 
 | # | id antiguo | Título | Tipo | Servicios | slug nuevo | Destacado en Inicio | Notas |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `y-el-ano-que-viene-que` | Y el año que viene, ¿qué? | Cortometraje | Filmmaker, Dirección de fotografía, Edición | igual | **Sí (1)** | Finalista ESCAC Dreammakers 2024 de Cupra. Es también el vídeo de fondo actual de la portada |
+| 1 | `y-el-ano-que-viene-que` | Y el año que viene, ¿qué? | Cortometraje | Filmmaker, Dirección de fotografía, Edición | igual | **Sí (1)** | Podio del ESCAC Dreammakers Contest 2024 de Cupra, con J. A. Bayona en el jurado. Es también el vídeo de fondo actual de la portada |
 | 2 | `100-baladas-arkano` | 100 Baladas, Arkano | Videoclip | Filmmaker, Dirección de fotografía, Edición | igual | **Sí (2)** | Artista conocido, producción JUNO Media |
 | 3 | `el-viajero` | El Viajero | Cortometraje | Filmmaker, Dirección de fotografía, Edición | igual | No | Corto de fin de ciclo; bueno para "Sobre mí" |
 | 4 | `kiboko` | Kiboko, Documental Cinematográfico | Documental | Edición | igual | **Sí (6)** | Mejor ejemplo del servicio de Edición. `results` vacío |
 | 5 | `no-se-esta-tan-mal-lovva` | No se está tan mal, Lovva | Videoclip | Dirección de fotografía, Edición | igual | **Sí (4)** | |
 | 6 | `el-cirujano` | El Cirujano | Cortometraje | Dirección de fotografía | igual | **Sí (3)** | El trabajo de luz más reconocible (rojo) |
 | 7 | `sin-piedad` | Sin Piedad | Cortometraje | Dirección de fotografía | igual | No | **No tiene vídeo**; solo imágenes. En distribución a festivales |
-| 8 | `spot-juno-media` | EXPÁNDE(TE), spot para Juno Media | Publicidad | Filmmaker, Edición | `expandete-spot-juno-media` | **Sí (5)** | Único spot: clave para vender a empresas. `results` vacío |
-| 9 | `ep-oscuridad-adrian-munoz` | EP Oscuridad, Adrián Muñoz | Videoclip | Dirección de fotografía | igual | No | 7 visualizers + tráiler. `results` vacío |
+| 8 | `spot-juno-media` | EXPÁNDE(TE), spot para Juno Media | Publicidad | Filmmaker, Edición | `expandete-spot-juno-media` | No | El spot no llegó a publicarse; sigue en Trabajos como muestra. `results` vacío a propósito |
+| 9 | `ep-oscuridad-adrian-munoz` | EP Oscuridad, Adrián Muñoz | Videoclip | Dirección de fotografía | igual | **Sí (5)** | 7 visualizers + tráiler. 1.392.400 visualizaciones en total |
 | 10 | `sin-tiempo-peiko` | Sin Tiempo, Peiko | Videoclip | Filmmaker, Dirección de fotografía, Edición | igual | No | Proyecto de estudios. `results` vacío |
 | 11 | `cobertura-conciertos` | Conciertos | Eventos | Filmmaker, Edición | `conciertos` | No | 3 vídeos (Miami Show, Flama, Legends) + vídeo de proceso |
 | 12 | `bodas-cinematograficas` | Bodas | Eventos | Filmmaker, Edición | `bodas` | No | **Sin vídeo**: en la web antigua salía como "próximamente" oculto |
@@ -53,7 +53,7 @@ Se conservan todos los textos (contexto, rol, proceso, retos, resultados, títul
 | 17 | `godfather-recreation` | Recreación de 'El Padrino' | Recreación | Dirección de fotografía, Edición | `recreacion-el-padrino` | No | Rejilla de estufa como ventana |
 | 18 | `star-wars-hoth-recreation` | Recreación de 'Star Wars: El Imperio Contraataca' sin CGI | Recreación | Dirección de fotografía, Edición | `recreacion-star-wars-sin-cgi` | No | El id dice "Hoth" pero el texto habla de la Ciudad de las Nubes; por eso el slug nuevo no lo menciona |
 
-**Orden propuesto en Trabajos ("Todos"):** 1, 2, 6, 5, 8, 4, 9, 10, 3, 7, 13, 11, 14, 12. Primero lo más fuerte y variado; Bodas al final mientras no tenga vídeo.
+**Orden propuesto en Trabajos ("Todos"):** 1, 2, 6, 5, 9, 4, 8, 10, 3, 7, 13, 11, 14, 12. Primero lo más fuerte y variado; Bodas al final mientras no tenga vídeo.
 
 **Destacados por servicio** (bloque "Proyectos relacionados" de cada página de servicio):
 
@@ -61,10 +61,32 @@ Se conservan todos los textos (contexto, rol, proceso, retos, resultados, títul
 - Filmmaker: EXPÁNDE(TE), 100 Baladas, Conciertos, Eventos deportivos
 - Edición: Kiboko, Conciertos, Reels para RRSS, Y el año que viene, ¿qué?
 
+## Ficha técnica y premios por proyecto
+
+Datos para la ficha técnica (ver `fundamentos.md`). Salen de los textos antiguos y de lo que ha contado Josep el 2026-10-20. Lo marcado `[pendiente]` lo completa Josep desde el panel cuando pueda.
+
+| Proyecto | Dirección | Productora o cliente | Mi papel (tarjeta) | Premios, selecciones y resultados |
+| --- | --- | --- | --- | --- |
+| Y el año que viene, ¿qué? | Josep Mira Lozano | Proyecto propio (ESCAC Dreammakers, Cupra) | Dirección, fotografía y montaje | Podio del ESCAC Dreammakers Contest 2024, con J. A. Bayona en el jurado `[confirmar si fue 2.º o 3.º]` |
+| 100 Baladas, Arkano | Josep Mira Lozano (idea de Álex Gómez) | JUNO Media | Dirección y montaje | Videoclip de Arkano; 17.000 visualizaciones en YouTube `[confirmar cifra]` |
+| El Viajero | Josep Mira Lozano | Proyecto de fin de ciclo, IES Veles e Vents | Dirección y fotografía | |
+| Kiboko | Noelia Fluxá y Julie-Estel Soard | JUNO Media y Arca Films | Montaje | Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa (6 de junio de 2026). Selecciones en festivales y nominación a mejor montaje `[pendiente: nombres de los festivales; no aparecen en internet]` |
+| No se está tan mal, Lovva | Ángela Manzano | `[pendiente]` | Fotografía y montaje | |
+| El Cirujano | Kevin Ramos y Emilio Graña | Impulsos Creativos | Dirección de fotografía | **Mejor fotografía**, On Duty International Film Festival `[pendiente: año]` |
+| Sin Piedad | Ángela Manzano | Proyecto personal de Ángela Manzano | Dirección de fotografía | En preparación para festivales |
+| EXPÁNDE(TE) | Josep Mira Lozano | JUNO Media | Dirección y montaje | No publicado |
+| EP Oscuridad, Adrián Muñoz | JUNO Media | JUNO Media | Dirección de fotografía | 1.392.400 visualizaciones en las plataformas donde se publicó |
+| Sin Tiempo, Peiko | Josep Mira Lozano | Proyecto de estudios | Dirección y fotografía | |
+| Conciertos, Bodas, Eventos deportivos, Reels | | Varios clientes | Grabación y montaje | Opiniones de clientes (ver `inicio.md`) |
+| Recreaciones (4) | Josep Mira Lozano | Canal de YouTube | Dirección, fotografía y montaje | |
+
+**Cámara:** se añade por proyecto en la ficha técnica (Josep trabaja con Sony FX3 e iluminación Aputure). `[pendiente: cámara de cada proyecto]`
+
 ### Huecos detectados en los proyectos
 
-- `results` vacío en Kiboko, EXPÁNDE(TE), EP Oscuridad, Sin Tiempo, Conciertos y Bodas. La ficha nueva oculta la sección si está vacía; si Josep tiene datos (visualizaciones, festivales, reacción del cliente) conviene añadirlos.
+- `results` vacío en Kiboko, EXPÁNDE(TE), EP Oscuridad, Sin Tiempo, Conciertos y Bodas. Se rellena con la tabla de arriba donde hay datos; en EXPÁNDE(TE) y Sin Tiempo se queda vacío y la sección no se muestra.
 - Bodas y Sin Piedad no tienen vídeo.
+- **Fotogramas:** hay que sacar de 4 a 8 fotogramas por proyecto en alta calidad (fase 4, a partir de los vídeos o de Josep).
 - Las recreaciones necesitan imagen del plano original y de la recreación para el deslizador antes/después. Hay que revisar si las `images` actuales sirven o hay que sacar fotogramas.
 - Las miniaturas están en imgur, ibb.co, postimg, YouTube y webs de terceros (platinocrowdfunding, rbgescuela). En la fase 4 se descargan y se suben al almacenamiento propio para que no se rompan.
 

@@ -42,6 +42,8 @@ Nota para Claude en la nube: el contenedor en la nube no puede conectar con `*.s
 - 2026-10-20: Previsualización en local en el PC de Josep en vez de Vercel. Vercel (u otro alojamiento) solo para el lanzamiento.
 - 2026-10-20: Ejecución por fases en chats distintos con estos archivos .md.
 - 2026-10-20: **Sin precios en la web.** Los presupuestos no son fijos, nacen de cada proyecto. La web es un escaparate de Josep (su mirada, oficio, gusto y arte), no un catálogo: los textos hablan desde ahí. La tabla `servicios` no lleva campo de precio y el formulario no pregunta tramos de presupuesto.
+- 2026-10-20: Fundamentos de la web revisados (`plan/contenido/fundamentos.md`): el trabajo primero (menú empieza por Trabajos), ficha técnica por proyecto (dirección, productora, mi papel, cámara), galería de fotogramas, detrás de cámaras, premios y laureles visibles, opiniones visibles. **Sin sección de equipo**: la cámara va en la ficha de cada proyecto y lo que falte se alquila.
+- 2026-10-20: WhatsApp +34 618 867 115 como botón (no en texto). Correo josep.mira@gmail.com. Reel provisional: "Y el año que viene, ¿qué?" hasta que Josep monte uno nuevo.
 - 2026-10-20 (fase 2, propuesta pendiente de visto bueno): el contenido antiguo son 18 proyectos y 3 artículos. Clasificación por servicio (Dirección de fotografía, Filmmaker, Edición) y por tipo (Cortometraje, Videoclip, Publicidad, Documental, Eventos, Redes sociales, Recreación). Cada proyecto guarda su id antiguo para redirigir enlaces viejos. Detalle en `plan/contenido/mapa-de-contenido.md`.
 
 ## Decisiones pendientes de Josep
@@ -50,7 +52,5 @@ Nota para Claude en la nube: el contenedor en la nube no puede conectar con `*.s
 | --- | --- | --- |
 | Dominio propio (p. ej. josepmira.com) | Usar uno propio; comprarlo antes de lanzar si no lo tiene | 7 |
 | Plan de pago de Vercel para uso comercial (unos 20 USD/mes, confirmar precio) | Sí, solo desde el lanzamiento | 7 |
-| Reel actualizado para la portada | Montar uno provisional con material de los proyectos | 3 |
-| Opiniones de clientes | Sección preparada y oculta hasta que las haya | 2 |
 | Fotos de Josep trabajando para "Sobre mí" | Usar las que tenga; si no, planificar sesión | 2 |
 | Idiomas | Solo español, base de datos preparada para añadir más | 4 |

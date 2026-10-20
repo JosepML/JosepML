@@ -2,14 +2,14 @@
 
 ## Menú
 
-Servicios (desplegable: Dirección de fotografía · Filmmaker · Edición) · Trabajos · Sobre mí · Blog · Contacto · botón destacado **Hablemos**
+Trabajos · Servicios (desplegable: Dirección de fotografía · Filmmaker · Edición) · Sobre mí · Blog · Contacto · botón destacado **Hablemos**
 
 Recreaciones se enlaza desde Trabajos (filtro y tarjeta), desde Sobre mí y desde el pie, no desde el menú principal.
 
 ## Pie de página
 
 - **Frase:** Historias hechas de luz. Alicante, Comunidad Valenciana.
-- **Enlaces:** Servicios · Trabajos · Recreaciones · Sobre mí · Blog · Contacto
+- **Enlaces:** Trabajos · Servicios · Recreaciones · Sobre mí · Blog · Contacto
 - **Redes:** Instagram (@josepmiralozano) · LinkedIn · YouTube
 - **Legal:** Privacidad · Cookies · © [año] Josep Mira Lozano
 
@@ -40,8 +40,8 @@ Recreaciones se enlaza desde Trabajos (filtro y tarjeta), desde Sobre mí y desd
 
 ### Otras formas de contacto
 
-- **WhatsApp:** ¿Prefieres escribirme por WhatsApp? `[pendiente: número; en la web actual hay uno de relleno]`
-- **Correo:** josep.mira@gmail.com `[confirmar si quiere usar otro correo profesional]`
+- **WhatsApp:** botón "Escríbeme por WhatsApp" que abre el chat con un mensaje inicial ("Hola Josep, te escribo desde tu web..."). Número: +34 618 867 115, guardado en `ajustes`. No se muestra en texto para que no lo recojan los robots de spam.
+- **Correo:** josep.mira@gmail.com
 - **Redes:** Instagram · LinkedIn · YouTube
 
 ## Gracias

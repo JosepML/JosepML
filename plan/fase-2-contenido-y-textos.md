@@ -26,7 +26,7 @@ Definir qué dice la web y dónde va cada contenido actual: textos nuevos en ton
 | Contacto | Convertir | Formulario guiado (qué necesitas, tipo de proyecto, fecha), WhatsApp, correo |
 | Legales y Gracias | Cumplir | Privacidad, cookies, gracias |
 
-Menú: Servicios · Trabajos · Sobre mí · Blog · Contacto, con botón destacado "Hablemos".
+Menú: Trabajos · Servicios · Sobre mí · Blog · Contacto, con botón destacado "Hablemos".
 
 ## Tareas
 
@@ -54,4 +54,5 @@ Carpeta `plan/contenido/` con los textos y el mapa, para que Josep los edite o c
 - Hallazgo: hay 18 proyectos (14 + 4 recreaciones), no 21; el 21 incluía los 3 artículos. No falta contenido.
 - Propuesto: servicios Dirección de fotografía / Filmmaker / Edición; tipos Cortometraje, Videoclip, Publicidad, Documental, Eventos, Redes sociales, Recreación; 6 destacados en Inicio; slugs nuevos para 7 proyectos guardando el id antiguo para redirecciones.
 - Queda: datos de Josep (lista en `plan/contenido/README.md`: frase principal, WhatsApp, equipo, fotos, opiniones, reel, logos) y su visto bueno a textos y menú.
+- 2026-10-20 (segunda ronda): Josep pidió revisar a fondo qué debe tener la web de un DF y filmmaker. Nuevo `plan/contenido/fundamentos.md` y cambios en todo: ficha técnica, fotogramas, detrás de cámaras, premios, menú con Trabajos primero, sin sección de equipo, opiniones visibles, WhatsApp como botón, EP Oscuridad sustituye a EXPÁNDE(TE) (no publicado) en destacados. Pendiente lo que lista `plan/contenido/README.md`.
 - Decisiones de Josep: sin precios en la web; los textos deben hablar de él, su mirada y su arte, no vender tarifas. Reescritos los 3 servicios (nueva sección "Mi mirada"), Inicio y Contacto con ese enfoque; quitado el tramo de presupuesto del formulario.
