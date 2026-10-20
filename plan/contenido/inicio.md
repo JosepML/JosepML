@@ -11,7 +11,7 @@ Tono: primera persona, cercano. Los textos entre corchetes `[...]` son datos que
 
 - **Antetítulo:** Josep Mira Lozano · Director de fotografía y filmmaker
 - **Frase principal:** Historias hechas de luz.
-- **Introducción:** Me llamo Josep y llevo más de quince años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí.
+- **Introducción:** Me llamo Josep y llevo más de siete años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí.
 - **Botones:** "Ver trabajos" → /trabajos · "Hablemos" → /contacto
 
 Alternativas para la frase principal (se usa la 1 por defecto; se puede cambiar desde el panel en cualquier momento):

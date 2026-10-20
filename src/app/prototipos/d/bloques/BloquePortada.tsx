@@ -12,8 +12,8 @@ import { CURVA, Disponible, ModalVideo } from "../piezas";
 const PAPELES = ["director de fotografía", "filmmaker", "editor"];
 
 /**
- * Portada: el reel vive en una tarjeta redondeada que, al hacer scroll, se aleja
- * (escala y radio) como en las páginas de producto de Apple, y el texto sube y se funde.
+ * Portada: el reel vive en una tarjeta redondeada que, en el primer tramo de scroll, se aleja un poco
+ * como en las páginas de producto de Apple. El tramo es corto para que bajar no cueste.
  */
 export function BloquePortada({ bloque }: { bloque: Bloque }) {
   const { antetitulo, titulo, texto } = bloque.datos;
@@ -24,30 +24,29 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
   const [reel, setReel] = useState(false);
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  // Los rangos son fijos (useTransform guarda los del primer render); sin animación no se aplican
-  const escala = useTransform(scrollYProgress, [0, 1], [1, 0.86]);
-  const radio = useTransform(scrollYProgress, [0, 1], [28, 56]);
-  const yTexto = useTransform(scrollYProgress, [0, 0.55], [0, -140]);
-  const opTexto = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const opVer = useTransform(scrollYProgress, [0.45, 0.8], [0, 1]);
-  const escalaVer = useTransform(scrollYProgress, [0.45, 0.8], [0.9, 1]);
+  // Solo escala y opacidad (el radio fijo: animarlo obligaba a repintar el vídeo en cada fotograma)
+  const escala = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const yTexto = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const opTexto = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const opPista = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
   const palabras = titulo.trim().split(/\s+/);
 
   return (
-    <section ref={ref} className={anima ? "relative h-[200svh]" : "relative"}>
-      <div className={`${anima ? "sticky top-0" : "relative"} h-svh min-h-[620px] p-2 sm:p-3`}>
+    <section ref={ref} className={anima ? "relative h-[135svh]" : "relative"}>
+      <div className={`${anima ? "sticky top-0" : "relative"} h-svh min-h-[600px] p-2 sm:p-3`}>
         <motion.div
-          className="relative h-full w-full overflow-hidden bg-black"
-          style={anima ? { scale: escala, borderRadius: radio } : { borderRadius: 28 }}
+          className="relative h-full w-full overflow-hidden rounded-[28px] bg-black sm:rounded-[36px]"
+          style={anima ? { scale: escala } : undefined}
         >
-          <VideoFondo id={AJUSTES.reel.youtubeId} inicio={AJUSTES.reel.inicio} poster={AJUSTES.reel.poster} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_80%,rgba(229,9,20,0.18),transparent_60%)]" />
+          {/* El reel provisional es panorámico con bandas negras y subtítulos dentro: se recorta más para ocultarlos */}
+          <VideoFondo id={AJUSTES.reel.youtubeId} inicio={AJUSTES.reel.inicio} poster={AJUSTES.reel.poster} escala={1.45} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/35" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_25%_85%,rgba(229,9,20,0.2),transparent_60%)]" />
 
           {/* Texto principal */}
           <motion.div
-            className="absolute inset-x-0 bottom-0 z-10 px-5 pb-10 text-white sm:px-12 sm:pb-14"
+            className="absolute inset-x-0 bottom-0 z-10 px-5 pb-20 text-white sm:px-12 sm:pb-24"
             style={anima ? { y: yTexto, opacity: opTexto } : undefined}
           >
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8, ease: CURVA }}>
@@ -55,7 +54,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
             </motion.div>
             {antetitulo && (
               <motion.p
-                className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/70 sm:text-sm"
+                className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/70 sm:text-[13px]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.35, duration: 0.8 }}
@@ -63,34 +62,45 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                 {antetitulo}
               </motion.p>
             )}
-            <h1 className="mt-3 max-w-6xl text-[clamp(3rem,10vw,9.5rem)] font-black leading-[0.9] tracking-[-0.055em]">
+            <h1 className="mt-3 max-w-6xl text-[clamp(2.9rem,9.5vw,9rem)] font-extrabold leading-[0.95] tracking-[-0.05em]">
               {palabras.map((p, i) => {
                 const ultima = i === palabras.length - 1;
+                const [, palabra, signos] = ultima ? (p.match(/^(.*?)([?!.,:…]*)$/) ?? [, p, ""]) : [, p, ""];
                 return (
                   <motion.span
                     key={`${p}-${i}`}
-                    className={`mr-[0.2em] inline-block ${ultima ? "d-serif pr-[0.05em] text-[1.04em] font-normal tracking-[-0.02em]" : ""}`}
-                    initial={{ opacity: 0, y: reducir ? 0 : 50, filter: reducir ? "none" : "blur(16px)" }}
+                    className="mr-[0.22em] inline-block pb-[0.08em]"
+                    initial={{ opacity: 0, y: reducir ? 0 : 40, filter: reducir ? "none" : "blur(12px)" }}
                     animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     transition={{ delay: 0.45 + i * 0.09, duration: 1, ease: CURVA }}
                   >
-                    {ultima ? <span className="bg-gradient-to-r from-[#ff4d4d] to-[#ffb36b] bg-clip-text text-transparent">{p}</span> : p}
+                    {ultima ? (
+                      <>
+                        <span className="d-serif bg-gradient-to-r from-[#ff5a4d] to-[#ffb36b] bg-clip-text pr-[0.12em] text-[1.06em] font-normal tracking-[-0.02em] text-transparent">
+                          {palabra}
+                        </span>
+                        {/* El relleno evita que se corte la cursiva; el margen negativo pega el punto a la palabra */}
+                        {signos && <span className="-ml-[0.1em]">{signos}</span>}
+                      </>
+                    ) : (
+                      p
+                    )}
                   </motion.span>
                 );
               })}
             </h1>
 
-            <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="mt-7 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <motion.div
                 className="max-w-xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9, duration: 0.9, ease: CURVA }}
               >
-                <p className="text-xl font-semibold tracking-tight sm:text-2xl">
+                <p className="text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
                   Soy <PalabraRotatoria palabras={PAPELES} />
                 </p>
-                {texto && <p className="mt-3 text-base leading-relaxed text-white/75 sm:text-lg">{texto}</p>}
+                {texto && <p className="mt-3 max-w-lg text-[17px] leading-[1.6] text-white/80 [text-wrap:pretty] sm:text-lg">{texto}</p>}
               </motion.div>
 
               <motion.div
@@ -120,34 +130,27 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
             </div>
           </motion.div>
 
-          {/* Al alejarse la tarjeta aparece la invitación a ver el reel completo */}
-          {anima && (
-            <motion.button
-              type="button"
-              onClick={() => setReel(true)}
-              style={{ opacity: opVer, scale: escalaVer }}
-              className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-4 text-white"
-            >
-              <span className="flex h-24 w-24 items-center justify-center rounded-full border border-white/30 bg-white/15 backdrop-blur-2xl transition-transform duration-500 hover:scale-110">
-                <Icono nombre="play" className="ml-1 h-8 w-8" />
-              </span>
-              <span className="text-sm font-semibold tracking-tight">Mira el reel con sonido</span>
-            </motion.button>
-          )}
-
-          {/* Indicador de scroll */}
-          {anima && (
-            <motion.div style={{ opacity: opTexto }} className="absolute bottom-6 right-8 z-10 hidden items-center gap-2 text-xs text-white/60 lg:flex">
-              <span className="relative h-9 w-5 rounded-full border border-white/40">
+          {/* Indicador de scroll: una línea fina por la que baja una luz */}
+          <motion.a
+            href="#servicios"
+            aria-label="Bajar"
+            style={{ opacity: opPista }}
+            className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/70"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.6, duration: 1 }}
+          >
+            <span className="relative h-10 w-px overflow-hidden bg-white/25">
+              {!reducir && (
                 <motion.span
-                  className="absolute left-1/2 top-1.5 h-2 w-1 -translate-x-1/2 rounded-full bg-white/80"
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-transparent via-white to-transparent"
+                  animate={{ y: [-16, 40] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: [0.45, 0, 0.55, 1] }}
                 />
-              </span>
-              Desliza
-            </motion.div>
-          )}
+              )}
+            </span>
+            Desliza
+          </motion.a>
         </motion.div>
       </div>
       <ModalVideo id={AJUSTES.reel.youtubeId} abierto={reel} alCerrar={() => setReel(false)} />
@@ -155,26 +158,33 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
   );
 }
 
+/**
+ * Palabra que cambia con un fundido cruzado lento: la nueva sube un poco y se enfoca mientras la otra
+ * se va. Todas las palabras ocupan la misma celda (invisibles) para que la línea no cambie de ancho.
+ */
 function PalabraRotatoria({ palabras }: { palabras: string[] }) {
   const [i, setI] = useState(0);
   const reducir = useReducir();
 
   useEffect(() => {
-    const t = window.setInterval(() => setI((n) => (n + 1) % palabras.length), 2400);
+    const t = window.setInterval(() => setI((n) => (n + 1) % palabras.length), 3400);
     return () => window.clearInterval(t);
   }, [palabras.length]);
 
   return (
-    // Las palabras se apilan en la misma celda para que una entre mientras la otra sale
-    <span className="relative inline-grid overflow-hidden align-bottom">
+    <span className="relative inline-grid align-baseline">
+      {palabras.map((p) => (
+        <span key={p} className="invisible whitespace-nowrap [grid-area:1/1]" aria-hidden>
+          {p}
+        </span>
+      ))}
       <AnimatePresence initial={false}>
         <motion.span
           key={palabras[i]}
-          className="d-serif inline-block whitespace-nowrap text-[1.15em] text-[#ffb36b] [grid-area:1/1]"
-          initial={{ y: reducir ? 0 : "100%", opacity: 0 }}
-          animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: reducir ? 0 : "-100%", opacity: 0 }}
-          transition={{ duration: 0.55, ease: CURVA }}
+          className="whitespace-nowrap text-[#ffb36b] [grid-area:1/1]"
+          initial={{ opacity: 0, y: reducir ? 0 : "0.35em", filter: reducir ? "none" : "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1.1, ease: CURVA, delay: 0.25 } }}
+          exit={{ opacity: 0, y: reducir ? 0 : "-0.3em", filter: reducir ? "none" : "blur(6px)", transition: { duration: 0.8, ease: CURVA } }}
         >
           {palabras[i]}
         </motion.span>

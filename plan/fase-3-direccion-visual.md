@@ -104,8 +104,29 @@ Josep: "me parece muy buen camino", pero "va MUY petada" (pesada, con tirones).
 
 **Medición** (Chrome en el PC de Josep, RTX 5070 a 165 Hz, pantalla 2048×1152): recorriendo la página fotograma a fotograma, el hilo principal va holgado antes y después (p95 de 6 ms por fotograma; en móvil simulado con CPU ×4, p95 de 18 ms). Lo que se ha quitado es trabajo de composición en la GPU, que esa medida no recoge; hay que confirmarlo con Josep mirando la web.
 
+### 2026-10-20 · D: segunda ronda de cambios de Josep
+
+Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y lo que se hizo:
+
+- **Tipografía (lo más importante):** Inter no se estaba aplicando. `cristal.css` y `globals.css` apuntaban a `var(--font-sans)`, que con `@theme inline` de Tailwind no existe como variable CSS, y la web salía con la fuente del sistema (Segoe UI en Windows). Ahora usan `var(--font-sans-face)`. Inter en todo; la única cursiva es la palabra de acento de los titulares (Instrument Serif). Fuera la serif de la palabra que rota, la cita de Sobre mí, las frases de servicio, las obras premiadas y las comillas de las opiniones.
+- **Textos cortados:** los titulares iban con degradado recortado al texto e interlineado de 0,95-0,98, y se comían tildes, "¿" y letras con rabito. Ahora van en color sólido con interlineado 1,02-1,08 y `text-wrap: balance`; la palabra de acento lleva relleno para que la cursiva no se corte, y los signos de cierre quedan fuera de la cursiva.
+- **Controles de YouTube al entrar:** el vídeo solo se deja ver cuando YouTube avisa de que se está reproduciendo (API por `postMessage`), y se oculta si se para o termina el bucle. Debajo siempre está el póster. El reel se recorta más (`escala` 1,45) porque el provisional tiene bandas negras con subtítulos.
+- **Scroll de la portada:** zona fijada de 200svh a 135svh; solo escala (de 1 a 0,9) y fundido del texto; indicador "Desliza" con una línea por la que baja una luz. Fuera Lenis: scroll nativo (`scroll-behavior: smooth` solo para los enlaces internos).
+- **Rendimiento:** el radio de la tarjeta del reel ya no se anima (obligaba a repintar el vídeo en cada fotograma). Los clips de YouTube al pasar el ratón (servicios y trabajos) se sustituyen por un fundido entre fotogramas con zoom lento: cada clip cargaba un reproductor de YouTube entero. Solo queda un iframe vivo (el reel) y se desmonta fuera de pantalla.
+- **Palabra que rota** ("Soy director de fotografía / filmmaker / editor"): fundido cruzado lento (1,1 s, cada 3,4 s) con un leve desplazamiento y desenfoque, en Inter, sin que la línea cambie de ancho.
+- **Servicios:** sin texto vertical ni cambios de tamaño de letra al abrir; la tarjeta se ensancha en 0,9 s y el detalle entra después, con un ancho mínimo fijo para que no se recoloque. Botón "Ver proyectos y detalles".
+- **Página de cada servicio** (`/prototipos/d/servicios/<slug>`): cabecera con fotogramas, mi mirada, lo que aporto, con quién trabajo, sus proyectos, cómo trabajamos, preguntas frecuentes, llamada con el servicio ya marcado y enlaces a los otros servicios. Textos de `plan/contenido/servicio-*.md`.
+- **Selección:** ya no va ligada al scroll vertical. Carrusel con flechas de cristal, arrastre con el ratón y ajuste a cada tarjeta. Cada filtro tiene su propia selección y orden (`SELECCION` en `datos.ts`, de "Destacados por servicio"), con transición al cambiar. Se añaden los demás proyectos (EXPÁNDE(TE), Sin Tiempo, El Viajero, Sin Piedad, Conciertos, Eventos deportivos, Reels, Bodas).
+- **En números:** "+7 años" (no 15), 1,39 M, los dos premios y dos tarjetas de los canales de YouTube ("Del Fan, Para el Fan" y "Josep Mira"). Fuera "18 proyectos". "Más de quince años" pasa a "más de siete años" en la portada, Sobre mí, `inicio.md` y `sobre-mi.md`.
+- **Cómo trabajamos:** el paso activo sale del avance del scroll por la columna de pasos (antes cada tarjeta detectaba si estaba a la vista y, con dos a medias, parpadeaba); el número cambia con un fundido sin esperas. En móvil, lista normal.
+- Los bloques guardados en el navegador usan otra clave (`proto-d-bloques-v2`) para que los textos nuevos no queden tapados por los antiguos.
+
+**Dudas**
+
+- Cifras de suscriptores y enlace de "Del Fan, Para el Fan": pendientes de Josep (no se inventan).
+- Los textos dicen "más de ocho años en YouTube" (inicio, Sobre mí) y "más de nueve años creando contenido" (FAQ de Filmmaker), que no cuadran del todo con "más de 7 años". Pendiente de que Josep diga qué cifra usar en cada sitio.
+
 **Queda**
 
-- Confirmar con Josep si sigue habiendo tirones, dónde (sección) y en qué aparato (PC o móvil).
-- Visto bueno de Josep a D o lista de cambios. Después: pasar los tokens a `globals.css` y la tipografía a `layout.tsx`.
+- Que Josep lo revise (versión de producción en `localhost:3000/prototipos/d`). Después: pasar los tokens a `globals.css` y la tipografía a `layout.tsx`.
 - Datos pendientes ("Pendiente" en las fichas): año de *El Cirujano*, *Lovva*, *100 Baladas*, *EP Oscuridad* y *Kiboko*; productora de *Lovva*, *EP Oscuridad* y *Kiboko*; dirección de *Kiboko*; cámara de todos.

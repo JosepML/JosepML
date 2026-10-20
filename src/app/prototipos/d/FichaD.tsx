@@ -11,7 +11,7 @@ import { VideoFondo } from "../_comun/VideoFondo";
 import { fichaTecnicaD, PROYECTOS, SERVICIOS, type ProyectoD } from "./datos";
 import { Icono } from "./Iconos";
 import { Pie } from "./bloques/BloquesPersonales";
-import { RAIZ } from "./Marco";
+import { RAIZ } from "./rutas";
 import { CURVA, ModalVideo, Revelar, TituloConAcento } from "./piezas";
 
 export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
@@ -53,10 +53,11 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
                 </span>
               )}
             </motion.div>
-            <motion.h1 {...entrar(0.35)} className="mt-4 max-w-4xl text-[clamp(2.6rem,7.5vw,7rem)] font-black leading-[0.92] tracking-[-0.055em]">
+            <motion.h1 {...entrar(0.35)} className="mt-4 max-w-4xl pb-[0.06em] text-[clamp(2.5rem,7vw,6.5rem)] font-extrabold leading-[1] tracking-[-0.05em] [text-wrap:balance]">
               {p.titulo}
             </motion.h1>
           </div>
+          {p.youtubeId && (
           <motion.button
             {...entrar(0.5)}
             type="button"
@@ -68,6 +69,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
             </span>
             Ver completo
           </motion.button>
+          )}
         </div>
       </header>
 
@@ -85,7 +87,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
 
       <section className="mx-auto max-w-5xl px-4 py-24 text-center sm:px-8 sm:py-32">
         <Revelar>
-          <p className="text-[clamp(1.8rem,4vw,3.2rem)] font-bold leading-tight tracking-[-0.035em]">
+          <p className="text-[clamp(1.7rem,3.6vw,3rem)] font-bold leading-[1.15] tracking-[-0.03em] [text-wrap:balance]">
             <TituloConAcento texto={p.frase} />
           </p>
         </Revelar>
@@ -95,7 +97,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
       <section className="px-4 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <Revelar>
-            <h2 className="text-3xl font-black tracking-[-0.04em] sm:text-4xl">Fotogramas</h2>
+            <h2 className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">Fotogramas</h2>
           </Revelar>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {p.fotogramas.map((f, i) => (
@@ -118,7 +120,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
       <section className="px-4 py-24 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <Revelar>
-            <h2 className="text-3xl font-black tracking-[-0.04em] sm:text-4xl">Del LOG al color</h2>
+            <h2 className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">Del LOG al color</h2>
             <p className="mt-2 text-sm text-[var(--d-suave)]">Desliza para comparar. En el prototipo el LOG está simulado; en la web irán las dos imágenes reales.</p>
           </Revelar>
           <Revelar retraso={0.1} className="mt-8">
@@ -136,7 +138,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--d-acento)]">
                 {servicios.map((s) => s.nombre).join(" · ")}
               </p>
-              <h2 className="mt-2 text-3xl font-black tracking-[-0.04em] sm:text-4xl">
+              <h2 className="mt-2 text-3xl font-extrabold leading-[1.1] tracking-[-0.04em] sm:text-4xl">
                 <TituloConAcento texto="¿Quieres algo así para tu proyecto?" />
               </h2>
             </div>
@@ -162,7 +164,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between gap-4 p-6 text-white sm:p-10">
-                <h3 className="text-3xl font-black tracking-[-0.045em] sm:text-6xl">{siguiente.titulo}</h3>
+                <h3 className="pb-[0.06em] text-3xl font-extrabold leading-[1.05] tracking-[-0.045em] sm:text-6xl">{siguiente.titulo}</h3>
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/15 backdrop-blur-xl transition-transform duration-500 group-hover:scale-110">
                   <Icono nombre="flecha" className="h-5 w-5" />
                 </span>
@@ -173,7 +175,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
       </section>
 
       <Pie />
-      <ModalVideo id={p.youtubeId} abierto={video} alCerrar={() => setVideo(false)} />
+      {p.youtubeId && <ModalVideo id={p.youtubeId} abierto={video} alCerrar={() => setVideo(false)} />}
 
       <AnimatePresence>
         {foto && (

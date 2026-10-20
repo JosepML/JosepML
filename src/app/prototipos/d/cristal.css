@@ -23,7 +23,11 @@
   --d-curva: cubic-bezier(0.22, 1, 0.36, 1);
   background: var(--d-fondo);
   color: var(--d-texto);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  /* Inter de next/font (antes apuntaba a una variable inexistente y salía la fuente del sistema) */
+  font-family: var(--font-sans-face), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
   color-scheme: dark;
 }
 
@@ -200,18 +204,21 @@
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
-/* Texto con degradado (titulares) */
+/* Titulares en color sólido: el degradado recortado al texto cortaba las tildes, los "¿" y las letras con
+   rabito (p, g, j), que se salen de la caja de la línea con interlineados tan cerrados */
 .d-degradado {
-  background: linear-gradient(180deg, var(--d-texto) 30%, color-mix(in srgb, var(--d-texto) 55%, transparent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--d-texto);
 }
+/* La palabra de acento sí lleva degradado: con relleno alrededor para que la cursiva no se corte */
 .d-degradado-acento {
   background: linear-gradient(90deg, var(--d-acento), var(--d-calido));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding: 0.12em 0.14em 0.16em 0.04em;
+  margin: -0.12em -0.1em -0.16em -0.04em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* Punto de "disponible" que late */

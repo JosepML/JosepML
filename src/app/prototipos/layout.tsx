@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Serif } from "next/font/google";
 import { BarraPrototipos } from "./_comun/BarraPrototipos";
-import { SuavizadoScroll } from "./_comun/SuavizadoScroll";
 import { ProveedorTransicion } from "./_comun/Transicion";
 import "./prototipos.css";
 
@@ -17,7 +16,6 @@ export default function LayoutPrototipos({ children }: { children: React.ReactNo
   return (
     <div className={acento.variable}>
       <ProveedorTransicion>
-        <SuavizadoScroll />
         {children}
         <BarraPrototipos />
       </ProveedorTransicion>

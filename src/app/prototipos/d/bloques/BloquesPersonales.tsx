@@ -1,84 +1,76 @@
 "use client";
 
-import {
-  AnimatePresence,
-  motion,
-  useInView,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform
-} from "motion/react";
+import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { usePunteroFino, useReducir } from "../../_comun/hooks";
+import { useEscritorio, usePunteroFino, useReducir } from "../../_comun/hooks";
 import { AJUSTES, ARTICULOS, PASOS, SERVICIOS, type Bloque } from "../datos";
 import { Icono } from "../Iconos";
-import { CURVA, Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "../piezas";
+import { Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "../piezas";
 
-/** Cómo trabajo: el título se queda fijo y el paso activo cambia con el scroll. */
+/**
+ * Cómo trabajo: en ordenador el título se queda fijo y el paso activo sale del avance del scroll por la
+ * columna de pasos (un solo valor, sin parpadeos). En móvil y tableta, lista normal sin atenuar.
+ */
 export function BloqueProceso({ bloque }: { bloque: Bloque }) {
+  const escritorio = useEscritorio();
   const [activo, setActivo] = useState(0);
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start center", "end center"] });
+  const pasos = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: pasos, offset: ["start 60%", "end 60%"] });
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const n = Math.min(PASOS.length - 1, Math.max(0, Math.floor(v * PASOS.length)));
+    setActivo((a) => (a === n ? a : n));
+  });
 
   return (
-    <section ref={ref} className="px-4 py-24 sm:px-8 sm:py-32">
+    <section className="px-4 py-24 sm:px-8 sm:py-32">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-        <div className="lg:sticky lg:top-28 lg:h-[calc(100svh-10rem)] lg:self-start">
+        <div className="lg:sticky lg:top-28 lg:self-start">
           <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
           <div className="mt-12 hidden items-end gap-6 lg:flex">
             <div className="relative h-40 w-[3px] overflow-hidden rounded-full bg-[var(--d-borde)]">
-              <motion.div className="absolute inset-x-0 top-0 h-full origin-top rounded-full bg-gradient-to-b from-[var(--d-acento)] to-[var(--d-calido)]" style={{ scaleY: scrollYProgress }} />
+              <motion.div
+                className="absolute inset-x-0 top-0 h-full origin-top rounded-full bg-gradient-to-b from-[var(--d-acento)] to-[var(--d-calido)]"
+                style={{ scaleY: scrollYProgress }}
+              />
             </div>
-            <div className="overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={activo}
-                  className="text-[7rem] font-black leading-none tracking-[-0.07em] text-[var(--d-texto)]"
-                  initial={{ y: "60%", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: "-60%", opacity: 0 }}
-                  transition={{ duration: 0.45, ease: CURVA }}
-                >
-                  0{activo + 1}
-                </motion.p>
-              </AnimatePresence>
+            <div>
+              {/* Los números se apilan en la misma celda y se funden: nada salta aunque el scroll sea rápido */}
+              <div className="grid">
+                {PASOS.map((_, i) => (
+                  <span
+                    key={i}
+                    className="text-[7rem] font-extrabold leading-none tracking-[-0.06em] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] [grid-area:1/1]"
+                    style={{ opacity: activo === i ? 1 : 0, transform: `translateY(${activo === i ? 0 : activo > i ? -24 : 24}px)` }}
+                    aria-hidden={activo !== i}
+                  >
+                    0{i + 1}
+                  </span>
+                ))}
+              </div>
               <p className="text-sm text-[var(--d-tenue)]">de 0{PASOS.length}</p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 lg:gap-0">
+        <div ref={pasos} className="flex flex-col gap-4 lg:gap-6 lg:py-[12svh]">
           {PASOS.map((p, i) => (
-            <Paso key={p.titulo} indice={i} activo={activo === i} alVer={() => setActivo(i)} {...p} />
+            <div key={p.titulo} className="lg:flex lg:min-h-[46svh] lg:items-center">
+              <div
+                data-foco
+                className="cristal w-full rounded-[36px] p-8 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:p-10"
+                style={escritorio ? { opacity: activo === i ? 1 : 0.4, transform: `scale(${activo === i ? 1 : 0.97})` } : undefined}
+              >
+                <span className="text-sm font-bold text-[var(--d-acento)]">0{i + 1}</span>
+                <h3 className="mt-3 text-4xl font-extrabold tracking-[-0.04em] sm:text-5xl">{p.titulo}</h3>
+                <p className="mt-4 max-w-md text-lg leading-relaxed text-[var(--d-suave)] [text-wrap:pretty]">{p.texto}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function Paso({ indice, titulo, texto, activo, alVer }: { indice: number; titulo: string; texto: string; activo: boolean; alVer: () => void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const visto = useInView(ref, { amount: 0.55 });
-  useEffect(() => {
-    if (visto) alVer();
-  }, [visto, alVer]);
-
-  return (
-    <div ref={ref} className="lg:flex lg:min-h-[62svh] lg:items-center">
-      <motion.div
-        data-foco
-        className="cristal w-full rounded-[36px] p-8 sm:p-10"
-        animate={{ opacity: activo ? 1 : 0.35, scale: activo ? 1 : 0.96 }}
-        transition={{ duration: 0.6, ease: CURVA }}
-      >
-        <span className="text-sm font-bold text-[var(--d-acento)]">0{indice + 1}</span>
-        <h3 className="mt-3 text-4xl font-black tracking-[-0.045em] sm:text-5xl">{titulo}</h3>
-        <p className="mt-4 max-w-md text-lg leading-relaxed text-[var(--d-suave)]">{texto}</p>
-      </motion.div>
-    </div>
   );
 }
 
@@ -119,7 +111,7 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
               {imagen && <motion.img src={imagen} alt="Josep Mira Lozano en un rodaje" className="absolute inset-0 h-[116%] w-full object-cover object-top" style={{ y: reducir ? 0 : yImg, top: "-8%" }} />}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">+15 años · Alicante</span>
+                <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">+7 años · Alicante</span>
                 <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">
                   Percusionista desde los 3 años
                 </span>
@@ -132,11 +124,13 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
           <Titular antetitulo={antetitulo} titulo={titulo} />
           {texto && (
             <Revelar retraso={0.15}>
-              <p className="mt-6 text-lg leading-relaxed text-[var(--d-suave)] sm:text-xl">{texto}</p>
+              <p className="mt-6 text-lg leading-relaxed text-[var(--d-suave)] [text-wrap:pretty] sm:text-xl">{texto}</p>
             </Revelar>
           )}
           <Revelar retraso={0.22}>
-            <p className="d-serif mt-6 text-2xl text-[var(--d-texto)]">“La cámara se convierte en la extensión de mi mirada.”</p>
+            <p className="mt-6 border-l-2 border-[var(--d-acento)] pl-4 text-xl font-semibold leading-snug tracking-[-0.02em] text-[var(--d-texto)]">
+              La cámara se convierte en la extensión de mi mirada.
+            </p>
           </Revelar>
           <Revelar retraso={0.28}>
             <div className="mt-8 flex flex-wrap gap-2">
@@ -213,7 +207,7 @@ export function BloqueTexto({ bloque }: { bloque: Bloque }) {
         <div data-foco className="cristal grid gap-8 overflow-hidden rounded-[40px] p-8 sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-center">
           <div>
             {antetitulo && <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--d-acento)]">{antetitulo}</span>}
-            <h2 className="mt-3 text-4xl font-black leading-tight tracking-[-0.045em] sm:text-5xl">
+            <h2 className="mt-3 text-4xl font-extrabold leading-[1.08] tracking-[-0.04em] [text-wrap:balance] sm:text-5xl">
               <TituloConAcento texto={titulo} />
             </h2>
             {texto && <p className="mt-5 whitespace-pre-line text-lg leading-relaxed text-[var(--d-suave)]">{texto}</p>}
@@ -234,8 +228,8 @@ export function BloqueTexto({ bloque }: { bloque: Bloque }) {
 const TIPOS = ["Videoclip", "Cortometraje", "Spot", "Evento", "Boda", "Redes sociales"];
 
 /** Llamada final: invitación personal a escribir, con lo que tienes en mente marcado en chips. */
-export function BloqueLlamada({ bloque }: { bloque: Bloque }) {
-  const [elegidos, setElegidos] = useState<string[]>([]);
+export function BloqueLlamada({ bloque, preseleccion = [] }: { bloque: Bloque; preseleccion?: string[] }) {
+  const [elegidos, setElegidos] = useState<string[]>(preseleccion);
 
   useEffect(() => {
     const elegir = (e: Event) => {
@@ -258,7 +252,7 @@ export function BloqueLlamada({ bloque }: { bloque: Bloque }) {
           <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-b),transparent)]" />
           <div className="relative">
             <Disponible />
-            <h2 className="mx-auto mt-6 max-w-4xl text-[clamp(2.6rem,7vw,6.5rem)] font-black leading-[0.95] tracking-[-0.055em]">
+            <h2 className="mx-auto mt-6 max-w-4xl text-[clamp(2.5rem,6.5vw,6rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
               <TituloConAcento texto={bloque.datos.titulo} />
             </h2>
             {bloque.datos.texto && <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[var(--d-suave)] sm:text-xl">{bloque.datos.texto}</p>}

@@ -1,13 +1,12 @@
 "use client";
 
-import { CLIENTES, OPINIONES, type Bloque } from "../datos";
+import { CANALES, CLIENTES, OPINIONES, type Bloque } from "../datos";
 import { Icono } from "../Iconos";
 import { Contador, Revelar, Titular } from "../piezas";
 
 const CIFRAS = [
-  { valor: 15, prefijo: "+", sufijo: "", unidad: "años", texto: "contando historias con una cámara" },
+  { valor: 7, prefijo: "+", sufijo: "", unidad: "años", texto: "contando historias: primero en YouTube, después en el set" },
   { valor: 1.39, decimales: 2, sufijo: " M", unidad: "visualizaciones", texto: "del EP Oscuridad, de Adrián Muñoz" },
-  { valor: 18, prefijo: "", sufijo: "", unidad: "proyectos", texto: "entre cortos, videoclips, spots y eventos" },
 ];
 
 const PREMIOS = [
@@ -23,11 +22,11 @@ export function BloqueCifras({ bloque }: { bloque: Bloque }) {
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
         <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
           {CIFRAS.map((c, i) => (
-            <Revelar key={c.unidad} retraso={i * 0.08} className="lg:col-span-2">
+            <Revelar key={c.unidad} retraso={i * 0.08} className="lg:col-span-3">
               <div data-foco className="cristal flex h-full min-h-[220px] flex-col justify-between rounded-[32px] p-7">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--d-tenue)]">{c.unidad}</span>
                 <div>
-                  <p className="d-degradado text-[clamp(3.5rem,7vw,6rem)] font-black leading-none tracking-[-0.06em]">
+                  <p className="d-degradado text-[clamp(3.5rem,7vw,6rem)] font-extrabold leading-none tracking-[-0.055em]">
                     <Contador valor={c.valor} decimales={c.decimales} prefijo={c.prefijo} sufijo={c.sufijo} />
                   </p>
                   <p className="mt-3 text-sm text-[var(--d-suave)]">{c.texto}</p>
@@ -41,9 +40,37 @@ export function BloqueCifras({ bloque }: { bloque: Bloque }) {
                 <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-b),transparent)]" />
                 <Icono nombre="laurel" className="h-16 w-16 shrink-0 text-[#e9b45c]" />
                 <div className="relative">
-                  <p className="text-3xl font-black tracking-[-0.04em] sm:text-4xl">{p.premio}</p>
+                  <p className="text-3xl font-extrabold leading-tight tracking-[-0.035em] sm:text-4xl">{p.premio}</p>
                   <p className="mt-1 text-sm text-[var(--d-suave)]">{p.donde}</p>
-                  <p className="d-serif mt-2 text-lg text-[var(--d-acento)]">{p.obra}</p>
+                  <p className="mt-2 text-[15px] font-semibold text-[var(--d-acento)]">{p.obra}</p>
+                </div>
+              </div>
+            </Revelar>
+          ))}
+          {/* Canales de YouTube: de ahí vienen muchos de esos años. Las cifras de suscriptores, cuando Josep las pase */}
+          {CANALES.map((c, i) => (
+            <Revelar key={c.nombre} retraso={0.3 + i * 0.08} className="lg:col-span-3">
+              <div data-foco className="cristal flex h-full min-h-[180px] items-start gap-5 rounded-[32px] p-7">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#ff0033] text-white shadow-[0_10px_30px_-10px_rgba(255,0,51,0.7)]">
+                  <Icono nombre="play" className="ml-0.5 h-6 w-6" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--d-tenue)]">Canal de YouTube</p>
+                  <p className="mt-1 text-2xl font-bold tracking-[-0.03em]">{c.nombre}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--d-suave)]">{c.texto}</p>
+                  {c.url ? (
+                    <a
+                      href={c.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--d-acento)]"
+                    >
+                      Ver canal
+                      <Icono nombre="flecha" className="h-4 w-4" />
+                    </a>
+                  ) : (
+                    <p className="mt-4 text-xs text-[var(--d-tenue)]">Enlace pendiente</p>
+                  )}
                 </div>
               </div>
             </Revelar>
@@ -85,7 +112,7 @@ function Opinion({ texto, quien, tipo }: { texto: string; quien: string; tipo: s
   return (
     <figure data-foco className="cristal flex w-[320px] shrink-0 flex-col justify-between gap-6 rounded-[28px] p-6 sm:w-[380px]">
       <blockquote className="text-[17px] font-medium leading-snug tracking-[-0.01em]">
-        <span className="d-serif mr-1 text-3xl leading-none text-[var(--d-acento)]">“</span>
+        <span className="mb-2 block text-4xl font-extrabold leading-none text-[var(--d-acento)]">“</span>
         {texto}
       </blockquote>
       <figcaption className="flex items-center gap-3 text-xs text-[var(--d-suave)]">
@@ -112,7 +139,7 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
       <div className="d-mascara-lados mt-8 overflow-hidden">
         <div className="d-marquesina flex w-max items-center gap-14 pr-14" style={{ "--duracion": "45s" } as React.CSSProperties}>
           {doble.map((c, i) => (
-            <span key={i} className="flex items-center gap-14 whitespace-nowrap text-3xl font-black tracking-[-0.04em] text-[var(--d-tenue)] sm:text-5xl">
+            <span key={i} className="flex items-center gap-14 whitespace-nowrap text-3xl font-extrabold tracking-[-0.04em] text-[var(--d-tenue)] sm:text-5xl">
               {c}
               <span className="h-2 w-2 rounded-full bg-[var(--d-acento)]/60" />
             </span>

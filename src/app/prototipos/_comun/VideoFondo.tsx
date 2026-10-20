@@ -6,12 +6,15 @@ import { usePantallaAncha, useReducir } from "./hooks";
 import { VideoYouTube } from "./VideoYouTube";
 
 type Props = {
-  id: string;
+  /** Sin vídeo se queda el póster */
+  id?: string;
   inicio?: number;
   poster: string;
   className?: string;
   /** Filtro CSS para el póster y el vídeo (p. ej. blanco y negro) */
   filtro?: string;
+  /** Zoom extra del vídeo, para recortar bandas negras del original */
+  escala?: number;
 };
 
 /**
@@ -19,7 +22,7 @@ type Props = {
  * en pantallas anchas y sin "reducir movimiento" entra el vídeo encima.
  * Fuera de pantalla el vídeo se desmonta para no seguir decodificando.
  */
-export function VideoFondo({ id, inicio, poster, className = "", filtro }: Props) {
+export function VideoFondo({ id, inicio, poster, className = "", filtro, escala }: Props) {
   const ancha = usePantallaAncha();
   const reducir = useReducir();
   const caja = useRef<HTMLDivElement>(null);
@@ -41,7 +44,7 @@ export function VideoFondo({ id, inicio, poster, className = "", filtro }: Props
         className={`absolute inset-0 h-full w-full object-cover ${reducir || video ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
         fetchPriority="high"
       />
-      <VideoYouTube id={id} inicio={inicio} activo={video} />
+      {id && <VideoYouTube id={id} inicio={inicio} activo={video} escala={escala} />}
     </div>
   );
 }

@@ -24,6 +24,11 @@ export function usePantallaAncha() {
   return useMedia("(min-width: 768px)");
 }
 
+/** Ordenador (el punto `lg` de Tailwind). */
+export function useEscritorio() {
+  return useMedia("(min-width: 1024px)");
+}
+
 // --- Reducir movimiento -------------------------------------------------------
 // El PC de Josep tiene desactivados los "Efectos de animación" de Windows, y el navegador lo traduce
 // en "reducir movimiento": la web se ve casi quieta. En los prototipos las animaciones van siempre,

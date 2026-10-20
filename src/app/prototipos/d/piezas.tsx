@@ -57,28 +57,36 @@ export function Titular({
         </Revelar>
       )}
       <Revelar retraso={0.08}>
-        <h2 className="mt-5 text-[clamp(2.2rem,5.4vw,4.6rem)] font-black leading-[0.98] tracking-[-0.045em]">
+        <h2 className="mt-5 text-[clamp(2.1rem,5vw,4.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] [text-wrap:balance]">
           <TituloConAcento texto={titulo} />
         </h2>
       </Revelar>
       {texto && (
         <Revelar retraso={0.16}>
-          <p className={`mt-5 max-w-xl text-lg leading-relaxed text-[var(--d-suave)] ${centrado ? "mx-auto" : ""}`}>{texto}</p>
+          <p className={`mt-5 max-w-xl text-lg leading-relaxed text-[var(--d-suave)] [text-wrap:pretty] ${centrado ? "mx-auto" : ""}`}>{texto}</p>
         </Revelar>
       )}
     </div>
   );
 }
 
-/** Pone la última palabra del título en serif cursiva con degradado cálido. */
+/**
+ * Pone la última palabra del título en serif cursiva con degradado cálido: es la única cursiva de la web.
+ * Los signos de cierre (?, ., !) quedan fuera de la cursiva para que no se tuerzan.
+ */
 export function TituloConAcento({ texto }: { texto: string }) {
   const limpio = texto.trim();
   const i = limpio.lastIndexOf(" ");
   if (i === -1) return <span className="d-degradado">{limpio}</span>;
+  const ultima = limpio.slice(i + 1);
+  const [, palabra, signos] = ultima.match(/^(.*?)([?!.,:…]*)$/) ?? [, ultima, ""];
   return (
     <>
       <span className="d-degradado">{limpio.slice(0, i)} </span>
-      <span className="d-serif d-degradado-acento pr-[0.08em]">{limpio.slice(i + 1)}</span>
+      <span className="whitespace-nowrap">
+        <span className="d-serif d-degradado-acento">{palabra}</span>
+        {signos && <span className="d-degradado">{signos}</span>}
+      </span>
     </>
   );
 }
@@ -168,6 +176,44 @@ export function Disponible({ className = "" }: { className?: string }) {
       <span className="latido h-2 w-2 rounded-full bg-[#34c759]" />
       Disponible para nuevos proyectos
     </span>
+  );
+}
+
+/**
+ * Fotogramas que se funden uno tras otro mientras `activo` (al pasar el ratón), con un zoom muy lento.
+ * Sustituye a los clips de YouTube al pasar el ratón: cada clip cargaba un reproductor entero y daba tirones.
+ * En la web final aquí irá el clip propio en mp4.
+ */
+export function Diapositivas({ imagenes, activo, className = "", intervalo = 1600 }: { imagenes: string[]; activo: boolean; className?: string; intervalo?: number }) {
+  const [i, setI] = useState(0);
+  const reducir = useReducir();
+
+  useEffect(() => {
+    if (!activo || imagenes.length < 2 || reducir) {
+      setI(0);
+      return;
+    }
+    const t = window.setInterval(() => setI((n) => (n + 1) % imagenes.length), intervalo);
+    return () => window.clearInterval(t);
+  }, [activo, imagenes.length, intervalo, reducir]);
+
+  return (
+    <div className={`absolute inset-0 overflow-hidden ${className}`}>
+      {imagenes.map((src, n) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          data-transicion={n === 0 ? "" : undefined}
+          className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={{
+            opacity: n === i ? 1 : 0,
+            transform: activo && !reducir ? "scale(1.08)" : "scale(1.01)",
+            transitionDuration: `1000ms, ${activo ? 6000 : 1200}ms`,
+          }}
+        />
+      ))}
+    </div>
   );
 }
 

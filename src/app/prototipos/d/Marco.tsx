@@ -7,8 +7,7 @@ import { useEffect, useState } from "react";
 import { Editor } from "./Editor";
 import { ProveedorD, useEstadoD } from "./estado";
 import { Icono } from "./Iconos";
-
-export const RAIZ = "/prototipos/d";
+import { RAIZ } from "./rutas";
 
 const ENLACES = [
   { nombre: "Trabajos", href: `${RAIZ}#trabajos` },

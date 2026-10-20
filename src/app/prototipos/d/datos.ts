@@ -1,17 +1,20 @@
 // Prototipo D · Cristal. Los datos tienen la misma forma que las tablas de la base de datos (fase 4):
 // ajustes, servicios, proyectos, articulos, opiniones y, sobre todo, `bloques`: la portada (y cualquier
 // página) es una lista ordenada de bloques que Josep puede reordenar, ocultar, editar o crear desde el panel.
+// Textos de plan/contenido/ (servicio-*.md, inicio.md, mapa-de-contenido.md).
 
 export type ServicioD = {
   slug: string;
   nombre: string;
   frase: string;
   resumen: string;
+  mirada: string[];
   aporto: string[];
   paraQuien: string[];
-  imagen: string;
-  youtubeId: string;
-  inicioClip: number;
+  conQuien: string;
+  pasos: { titulo: string; texto: string }[];
+  preguntas: { p: string; r: string }[];
+  llamada: string;
 };
 
 export type ProyectoD = {
@@ -24,8 +27,9 @@ export type ProyectoD = {
   productora: string;
   papel: string;
   camara?: string;
-  youtubeId: string;
-  inicioClip: number;
+  /** Vídeo completo; algunos proyectos (Bodas, Sin Piedad) aún no tienen */
+  youtubeId?: string;
+  inicioClip?: number;
   poster: string;
   fotogramas: string[];
   frase: string;
@@ -47,48 +51,97 @@ export const SERVICIOS: ServicioD[] = [
     nombre: "Dirección de fotografía",
     frase: "La luz cuenta la mitad de la historia.",
     resumen: "Decido qué siente quien mira: la luz, el encuadre y el color al servicio de tu historia.",
+    mirada: [
+      "Para mí la fotografía no es hacer planos bonitos. Es decidir qué siente quien mira. Una sombra que no deja ver del todo un rostro, un contraluz que protege a alguien, un color que incomoda sin que sepas por qué: ahí está el oficio.",
+      "Antes de encender un foco me siento con la dirección a entender la historia. En El Cirujano llevamos el rojo hasta el infierno para meternos en la cabeza del asesino. En No se está tan mal fue justo lo contrario: una luz suave, casi una burbuja, para que el artista pudiera abrirse. Cada historia me pide un lenguaje distinto, y encontrarlo es lo que más disfruto.",
+    ],
     aporto: [
-      "Una propuesta visual propia: referencias, paleta y luz",
-      "Desglose de cámara y luz secuencia a secuencia",
-      "Cámara, ópticas y material según lo que pida la historia",
-      "Acompañamiento del color hasta el final",
+      "Una propuesta visual propia, con referencias, paleta y tratamiento de la luz",
+      "El desglose de cámara y luz secuencia a secuencia",
+      "La elección de cámara, ópticas y material según lo que la historia necesita",
+      "La dirección del equipo de cámara y eléctricos en rodaje",
+      "El acompañamiento del color hasta el final, para que el look llegue intacto",
     ],
     paraQuien: ["Cortometrajes", "Videoclips", "Spots"],
-    imagen: "https://www.platinocrowdfunding.com/storage/project/5454/img/eO2uv54rRAQy1AgsNjm0ybjXLN92jg4mkW9zFxZR.png",
-    youtubeId: "9uyjeDnqixo",
-    inicioClip: 40,
+    conQuien: "Directoras y directores de cortos, artistas que preparan un videoclip y marcas que quieren que su spot se sienta cine.",
+    pasos: [
+      { titulo: "Escucho", texto: "Me cuentas la historia, el tono y lo que quieres que sienta el espectador." },
+      { titulo: "Imagino", texto: "Te propongo una mirada: referencias, luz, encuadres." },
+      { titulo: "Ruedo", texto: "Me encargo de la imagen para que tú puedas centrarte en dirigir." },
+      { titulo: "Cuido el final", texto: "Acompaño el color para que el resultado sea el que soñamos." },
+    ],
+    preguntas: [
+      { p: "¿Cómo sabes qué luz necesita una historia?", r: "Leyendo el guion muchas veces y hablando mucho con quien dirige. La técnica viene después; primero tiene que haber una idea de qué queremos contar con cada plano." },
+      { p: "¿Con qué equipo trabajas?", r: "Tengo equipo propio de cámara e iluminación. Pero el equipo lo decide la historia: si un proyecto pide algo que no tengo, se alquila y se incluye en el presupuesto." },
+      { p: "¿Se puede hacer cine con pocos medios?", r: "Es lo que llevo años demostrando con mis recreaciones: una rejilla de estufa y papel de horno pueden ser la ventana de Vito Corleone. El ingenio también se ve en pantalla." },
+      { p: "¿Haces también el etalonaje?", r: "Puedo hacerlo yo o acompañar a quien lo haga, para que la imagen final sea la que diseñamos en rodaje." },
+      { p: "¿Dónde trabajas?", r: "Trabajo desde Alicante en toda la Comunidad Valenciana, y donde me lleve la historia." },
+    ],
+    llamada: "¿Tienes una historia que necesita luz?",
   },
   {
     slug: "filmmaker",
     nombre: "Filmmaker",
     frase: "De la primera idea al último fotograma.",
     resumen: "Idea, rodaje y montaje con una sola mirada de principio a fin. Nada se pierde por el camino.",
+    mirada: [
+      "Como filmmaker me encargo de todo el viaje: la idea, el rodaje y el montaje. Me gusta porque la pieza sale de una sola mirada, de principio a fin, y nada se pierde por el camino.",
+      "Da igual que sea un spot, el videoclip de Arkano, una orquesta en fiestas, una carrera de ciclismo o una boda: siempre busco la historia que hay dentro. Vengo de la música y el ritmo lo llevo dentro, así que ruedo pensando ya en el montaje. Y cuando toca grabar momentos reales, intento que la gente se olvide de la cámara, porque lo auténtico es lo que luego emociona.",
+    ],
     aporto: [
       "La idea y el guion, si aún no existen",
       "Una forma de contarlo que no se parezca a lo de siempre",
-      "Rodaje discreto cuando hace falta, ambicioso cuando se puede",
-      "Versiones para redes del mismo material",
+      "El rodaje con mi equipo, discreto cuando hace falta y ambicioso cuando se puede",
+      "El montaje, el color y el sonido con el mismo cuidado que el rodaje",
+      "Versiones para redes sacadas del mismo material",
     ],
     paraQuien: ["Marcas", "Artistas", "Eventos", "Bodas"],
-    imagen: "https://i.ytimg.com/vi/AWHJJA92MXM/maxresdefault.jpg",
-    youtubeId: "AWHJJA92MXM",
-    inicioClip: 25,
+    conQuien: "Marcas y empresas con algo que contar, artistas y grupos de música, organizadores de eventos y competiciones, y parejas que quieren una película de su boda y no un vídeo más.",
+    pasos: [
+      { titulo: "Escucho", texto: "Qué quieres contar, a quién y dónde se va a ver." },
+      { titulo: "Imagino", texto: "Te propongo una idea y cómo rodarla." },
+      { titulo: "Ruedo", texto: "Con la mirada puesta ya en el montaje." },
+      { titulo: "Monto", texto: "Te enseño una primera versión y la afinamos juntos hasta que te emocione." },
+    ],
+    preguntas: [
+      { p: "¿Necesito tener la idea clara?", r: "No. Muchas veces la mejor idea sale de la primera conversación. Tú me cuentas qué quieres provocar y yo te propongo cómo contarlo." },
+      { p: "¿Qué tiene de distinto un vídeo tuyo de boda?", r: "Lo planteo como un tráiler documental de unos 20 minutos, con la música elegida al milímetro. Una película que apetezca volver a ver, no un resumen del día." },
+      { p: "¿Y en conciertos y eventos?", r: "Antes de tocar la imagen construyo la música. Así la edición respira con el directo y te sientes en primera fila." },
+      { p: "¿Dónde trabajas?", r: "Trabajo desde Alicante en toda la Comunidad Valenciana, y donde me lleve la historia." },
+    ],
+    llamada: "¿Tienes algo que contar?",
   },
   {
     slug: "edicion",
     nombre: "Edición",
     frase: "El ritmo es lo que hace que no puedas dejar de mirar.",
     resumen: "Percusionista desde los 3 años: monto con el ritmo por dentro, como una partitura.",
-    aporto: [
-      "Una lectura del material para encontrar la historia",
-      "Montaje con estructura y ritmo pensados para dónde se verá",
-      "Color con identidad",
-      "Sonido y música, la mitad de lo que sentimos",
+    mirada: [
+      "El montaje es donde la historia se escribe por última vez. Puedes tener los mejores planos del mundo y que no emocionen, o unas pocas imágenes que te atrapen. La diferencia está en el ritmo.",
+      "Toco la percusión desde los 3 años, y eso se nota cuando monto. No encadeno planos bonitos: construyo una partitura. En Kiboko tuve que tejer horas de entrevistas reales con escenas de ficción sin que se notaran las costuras. En los aftermovies de conciertos, lo que busco es que la imagen baile al compás del directo.",
     ],
-    paraQuien: ["Documentales", "Aftermovies", "Contenido para redes"],
-    imagen: "https://i.ibb.co/vx4gxGQh/Captura-de-pantalla-2026-05-12-201300.png",
-    youtubeId: "O-TDpUpxIGw",
-    inicioClip: 30,
+    aporto: [
+      "Una lectura del material para encontrar la historia que hay dentro",
+      "Un montaje con estructura y ritmo pensados para dónde se va a ver",
+      "El color, para que la imagen tenga una identidad",
+      "El sonido y la música, que son la mitad de lo que sentimos",
+      "Versiones para redes cuando hacen falta",
+    ],
+    paraQuien: ["Documentales", "Aftermovies", "Redes"],
+    conQuien: "Productoras y directores con un documental, corto o videoclip ya rodado, artistas y eventos que quieren un aftermovie, y creadores y marcas que necesitan contenido con alma.",
+    pasos: [
+      { titulo: "Escucho", texto: "Me pasas el material y me cuentas qué quieres provocar." },
+      { titulo: "Busco la historia", texto: "Reviso todo y te enseño una primera estructura." },
+      { titulo: "Afinamos", texto: "Ritmo, música y color, con tus comentarios." },
+      { titulo: "Entrego", texto: "En los formatos que necesites." },
+    ],
+    preguntas: [
+      { p: "¿Qué hace que un montaje funcione?", r: "Que no se note. Que el espectador sienta lo que tiene que sentir sin darse cuenta de por qué. Eso se consigue con ritmo, y el ritmo se entrena." },
+      { p: "¿Puedo encargarte solo el color o solo el sonido?", r: "Sí, puedo encargarme solo de una parte de la postproducción." },
+      { p: "¿Editas contenido para redes con regularidad?", r: "Sí. He editado para creadores, YouTubers, Disney y el Consell Valencià de la Joventut." },
+      { p: "¿Cómo te paso el material?", r: "Por un enlace de descarga o en disco si es mucho." },
+    ],
+    llamada: "¿Tienes material esperando su historia?",
   },
 ];
 
@@ -113,10 +166,10 @@ export const PROYECTOS: ProyectoD[] = [
     slug: "100-baladas-arkano",
     titulo: "100 Baladas, Arkano",
     tipo: "Videoclip",
-    servicios: ["filmmaker", "edicion"],
-    direccion: "Josep Mira Lozano",
-    productora: "Idea original de Álex Gómez",
-    papel: "Dirección, cámara y montaje",
+    servicios: ["filmmaker", "direccion-de-fotografia", "edicion"],
+    direccion: "Josep Mira Lozano (idea de Álex Gómez)",
+    productora: "JUNO Media",
+    papel: "Dirección y montaje",
     youtubeId: "AWHJJA92MXM",
     inicioClip: 25,
     poster: "https://i.ytimg.com/vi/AWHJJA92MXM/maxresdefault.jpg",
@@ -167,8 +220,8 @@ export const PROYECTOS: ProyectoD[] = [
     titulo: "EP Oscuridad, Adrián Muñoz",
     tipo: "Videoclip",
     servicios: ["direccion-de-fotografia"],
-    direccion: "Adrián Muñoz",
-    productora: "Pendiente",
+    direccion: "JUNO Media",
+    productora: "JUNO Media",
     papel: "Dirección de fotografía",
     youtubeId: "At7qqcIhdHw",
     inicioClip: 30,
@@ -182,8 +235,8 @@ export const PROYECTOS: ProyectoD[] = [
     titulo: "Kiboko",
     tipo: "Documental",
     servicios: ["edicion"],
-    direccion: "Pendiente",
-    productora: "Pendiente",
+    direccion: "Noelia Fluxá y Julie-Estel Soard",
+    productora: "JUNO Media y Arca Films",
     papel: "Montaje",
     youtubeId: "O-TDpUpxIGw",
     inicioClip: 30,
@@ -192,21 +245,137 @@ export const PROYECTOS: ProyectoD[] = [
     frase: "Tejer horas de entrevistas reales con escenas de ficción sin que se noten las costuras.",
     laurel: { premio: "Nominación a mejor montaje", festival: "Festival pendiente" },
   },
+  {
+    slug: "expandete-spot-juno-media",
+    titulo: "EXPÁNDE(TE)",
+    tipo: "Publicidad",
+    servicios: ["filmmaker", "edicion"],
+    direccion: "Josep Mira Lozano",
+    productora: "JUNO Media",
+    papel: "Dirección y montaje",
+    youtubeId: "Pa6URCIllhE",
+    poster: "https://i.imgur.com/Km09TG5.png",
+    fotogramas: ["https://i.imgur.com/Km09TG5.png"],
+    frase: "Un spot con un tono mágico y emocional: de la idea y el guion al casting, las localizaciones y el montaje.",
+  },
+  {
+    slug: "sin-tiempo-peiko",
+    titulo: "Sin Tiempo, Peiko",
+    tipo: "Videoclip",
+    servicios: ["filmmaker", "direccion-de-fotografia", "edicion"],
+    direccion: "Josep Mira Lozano",
+    productora: "Proyecto de estudios",
+    papel: "Dirección y fotografía",
+    youtubeId: "wCnVb2o-k7Y",
+    poster: "https://i.imgur.com/uUiXiQT.png",
+    fotogramas: ["https://i.imgur.com/uUiXiQT.png"],
+    frase: "El ritmo de la canción convertido en planificación: cada movimiento de cámara acompaña el arco del personaje.",
+  },
+  {
+    slug: "el-viajero",
+    titulo: "El Viajero",
+    tipo: "Cortometraje",
+    servicios: ["filmmaker", "direccion-de-fotografia", "edicion"],
+    direccion: "Josep Mira Lozano",
+    productora: "Proyecto de fin de ciclo, IES Veles e Vents",
+    papel: "Dirección y fotografía",
+    youtubeId: "-TZXzZCVf8Y",
+    poster: "https://i.ytimg.com/vi/-TZXzZCVf8Y/maxresdefault.jpg",
+    fotogramas: ["https://i.ytimg.com/vi/-TZXzZCVf8Y/maxresdefault.jpg"],
+    frase: "Idea original, guion, dirección y fotografía: un universo complejo levantado con un equipo pequeño.",
+  },
+  {
+    slug: "sin-piedad",
+    titulo: "Sin Piedad",
+    tipo: "Cortometraje",
+    servicios: ["direccion-de-fotografia"],
+    direccion: "Ángela Manzano",
+    productora: "Proyecto personal de Ángela Manzano",
+    papel: "Dirección de fotografía",
+    poster: "https://i.imgur.com/j3loxUV.png",
+    fotogramas: ["https://i.imgur.com/j3loxUV.png"],
+    frase: "Un estado mental fracturado traducido en luz y composición, para que el espectador habite la opresión del personaje.",
+  },
+  {
+    slug: "conciertos",
+    titulo: "Conciertos",
+    tipo: "Eventos",
+    servicios: ["filmmaker", "edicion"],
+    direccion: "Josep Mira Lozano",
+    productora: "Varios clientes",
+    papel: "Grabación y montaje",
+    poster: "https://i.ibb.co/HDqT2xzW/Captura-de-pantalla-2026-05-12-210438.png",
+    fotogramas: ["https://i.ibb.co/HDqT2xzW/Captura-de-pantalla-2026-05-12-210438.png"],
+    frase: "Monto como músico: entiendo las canciones desde dentro y hago que la imagen baile al compás exacto del directo.",
+  },
+  {
+    slug: "eventos-deportivos",
+    titulo: "Eventos deportivos",
+    tipo: "Eventos",
+    servicios: ["filmmaker", "edicion"],
+    direccion: "Josep Mira Lozano",
+    productora: "Shimano Super Cup Massi (La Nucía)",
+    papel: "Grabación y montaje",
+    youtubeId: "m7rbFqf9dzE",
+    poster: "https://i.ibb.co/YBc4tqZw/Captura-de-pantalla-2026-05-13-141447.png",
+    fotogramas: ["https://i.ibb.co/YBc4tqZw/Captura-de-pantalla-2026-05-13-141447.png"],
+    frase: "El esfuerzo, la técnica y la tensión del deporte, para mantener al espectador al borde del asiento.",
+  },
+  {
+    slug: "reels-redes-sociales",
+    titulo: "Reels para redes",
+    tipo: "Redes sociales",
+    servicios: ["filmmaker", "edicion"],
+    direccion: "Josep Mira Lozano",
+    productora: "Consell Valencià de la Joventut y otros",
+    papel: "Grabación y montaje",
+    poster: "https://rbgescuela.com/wp-content/uploads/claves-reels-atractivos-instagram.jpg",
+    fotogramas: ["https://rbgescuela.com/wp-content/uploads/claves-reels-atractivos-instagram.jpg"],
+    frase: "Piezas verticales pensadas para el móvil, con el ritmo de cada perfil: de creadores a Disney.",
+  },
+  {
+    slug: "bodas",
+    titulo: "Bodas",
+    tipo: "Eventos",
+    servicios: ["filmmaker", "edicion"],
+    direccion: "Josep Mira Lozano",
+    productora: "Parejas",
+    papel: "Grabación y montaje",
+    poster: "https://i.imgur.com/uk36C7v.png",
+    fotogramas: ["https://i.imgur.com/uk36C7v.png"],
+    frase: "Que los novios se olviden de la cámara para que todo sea auténtico, y una película que apetezca volver a ver.",
+  },
 ];
+
+/** Selección y orden de cada filtro de Trabajos (de "Destacados por servicio" en mapa-de-contenido.md) */
+export const SELECCION: Record<string, string[]> = {
+  todos: ["y-el-ano-que-viene-que", "100-baladas-arkano", "el-cirujano", "no-se-esta-tan-mal-lovva", "ep-oscuridad-adrian-munoz", "kiboko", "expandete-spot-juno-media", "sin-tiempo-peiko"],
+  "direccion-de-fotografia": ["el-cirujano", "no-se-esta-tan-mal-lovva", "ep-oscuridad-adrian-munoz", "y-el-ano-que-viene-que", "sin-piedad", "sin-tiempo-peiko", "el-viajero"],
+  filmmaker: ["expandete-spot-juno-media", "100-baladas-arkano", "conciertos", "eventos-deportivos", "y-el-ano-que-viene-que", "bodas"],
+  edicion: ["kiboko", "conciertos", "reels-redes-sociales", "y-el-ano-que-viene-que", "no-se-esta-tan-mal-lovva", "100-baladas-arkano"],
+};
+
+export function proyectosDe(filtro: string): ProyectoD[] {
+  const orden = SELECCION[filtro] ?? [];
+  const elegidos = orden.map((s) => PROYECTOS.find((p) => p.slug === s)).filter((p): p is ProyectoD => !!p);
+  if (filtro === "todos") return elegidos;
+  // En la página de un servicio salen también el resto de sus proyectos, detrás de los destacados
+  return [...elegidos, ...PROYECTOS.filter((p) => p.servicios.includes(filtro) && !orden.includes(p.slug))];
+}
 
 export const ARTICULOS: ArticuloD[] = [
   {
     slug: "ia-artesano-audiovisual",
     titulo: "El artesano y la inteligencia artificial en el cine",
     fecha: "13 may 2025",
-    categoria: "Reflexión",
+    categoria: "Oficio",
     resumen: "Qué cambia la IA en la producción audiovisual y por qué el trabajo artesano sigue importando.",
   },
   {
     slug: "el-arte-de-contar-historias-con-luz",
     titulo: "Dirección de fotografía: el arte de contar historias con luz",
     fecha: "15 jul 2024",
-    categoria: "Oficio",
+    categoria: "Dirección de fotografía",
     resumen: "La luz es el pincel del director de fotografía. Cómo un esquema de luz cambia lo que sentimos.",
   },
   {
@@ -227,6 +396,20 @@ export const OPINIONES = [
 ];
 
 export const CLIENTES = ["Disney", "Star Wars", "Consell Valencià de la Joventut", "Kinepolis", "Ocisport", "Mediterra Cinema", "JUNO Media"];
+
+/** Canales de YouTube: de ahí viene buena parte de la experiencia. Las cifras de suscriptores las pone Josep. */
+export const CANALES = [
+  {
+    nombre: "Del Fan, Para el Fan",
+    texto: "Donde empecé a compartir mi pasión por el cine, mucho antes de dedicarme a rodar.",
+    url: undefined as string | undefined,
+  },
+  {
+    nombre: "Josep Mira",
+    texto: "Recreo planos míticos del cine con pocos medios y cuento cómo se hicieron.",
+    url: "https://www.youtube.com/channel/UCtyNSF1X0pNPxp5fhwu1NUA",
+  },
+];
 
 export const PASOS = [
   { titulo: "Escucho", texto: "Me cuentas la historia, el tono y lo que quieres que sienta quien la vea. Sin prisas y sin formularios eternos." },
@@ -260,10 +443,10 @@ export type Bloque = {
 
 /** Catálogo de tipos de bloque: lo que el panel ofrece al pulsar "Añadir sección" */
 export const CATALOGO: Record<TipoBloque, { nombre: string; descripcion: string; datos: Bloque["datos"] }> = {
-  portada: { nombre: "Portada con reel", descripcion: "Vídeo a pantalla completa y frase principal", datos: { antetitulo: "Director de fotografía · Filmmaker · Editor", titulo: "Historias hechas de luz.", texto: "Me llamo Josep y llevo más de quince años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí." } },
+  portada: { nombre: "Portada con reel", descripcion: "Vídeo a pantalla completa y frase principal", datos: { antetitulo: "Director de fotografía · Filmmaker · Editor", titulo: "Historias hechas de luz.", texto: "Me llamo Josep y llevo más de siete años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí." } },
   servicios: { nombre: "Servicios", descripcion: "Lo que ofreces, con lo que aportas y para quién", datos: { antetitulo: "Lo que hago", titulo: "¿En qué te puedo ayudar?", texto: "Tres formas de trabajar juntos. Elige una y la vemos con calma." } },
   trabajos: { nombre: "Trabajos", descripcion: "Carrusel de proyectos con filtro por servicio", datos: { antetitulo: "Selección", titulo: "Trabajos de los que estoy orgulloso" } },
-  cifras: { nombre: "Cifras y premios", descripcion: "Números que cuentan tu trayectoria", datos: { antetitulo: "En números", titulo: "Quince años detrás de la cámara" } },
+  cifras: { nombre: "Cifras y premios", descripcion: "Números, premios y canales de YouTube", datos: { antetitulo: "En números", titulo: "Más de siete años detrás de la cámara" } },
   proceso: { nombre: "Cómo trabajo", descripcion: "Pasos que se iluminan con el scroll", datos: { antetitulo: "Cómo trabajamos", titulo: "De tu idea a la pantalla, paso a paso" } },
   "sobre-mi": { nombre: "Sobre mí", descripcion: "Retrato y presentación personal", datos: { antetitulo: "Quién soy", titulo: "Hola, soy Josep", texto: "Empecé con la música y la interpretación, y en el vídeo encontré la forma de juntarlo todo. Desde entonces he rodado cortos, videoclips, spots, conciertos y bodas, y llevo más de ocho años en YouTube recreando planos míticos del cine con cuatro duros. Me gusta trabajar en equipo, resolver problemas en el set y que la gente se olvide de que hay una cámara.", imagen: "https://i.postimg.cc/Qh3FMz10/Captura-de-pantalla-2026-05-13-161052.png" } },
   opiniones: { nombre: "Opiniones", descripcion: "Frases de clientes en movimiento", datos: { antetitulo: "Opiniones", titulo: "Lo que dicen quienes han confiado en mí" } },
@@ -283,6 +466,14 @@ export const BLOQUES_INICIALES: Bloque[] = ORDEN_INICIAL.map((tipo) => ({
 }));
 
 export const getProyectoD = (slug: string) => PROYECTOS.find((p) => p.slug === slug);
+export const getServicioD = (slug: string) => SERVICIOS.find((s) => s.slug === slug);
+
+/** Imágenes de un servicio: los fotogramas de sus proyectos destacados */
+export function imagenesDe(servicio: string): string[] {
+  return proyectosDe(servicio)
+    .slice(0, 4)
+    .map((p) => p.poster);
+}
 
 export function fichaTecnicaD(p: ProyectoD): [string, string][] {
   return [

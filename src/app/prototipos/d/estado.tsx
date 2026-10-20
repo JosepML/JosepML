@@ -31,7 +31,8 @@ export const useEstadoD = () => {
   return c;
 };
 
-const CLAVE_BLOQUES = "proto-d-bloques";
+// Versión en la clave: al cambiar los textos por defecto, lo guardado antes en el navegador no los tapa
+const CLAVE_BLOQUES = "proto-d-bloques-v2";
 const CLAVE_TEMA = "proto-d-tema";
 
 function leer<T>(clave: string): T | null {
