@@ -11,7 +11,7 @@ Tono: primera persona, cercano. Los textos entre corchetes `[...]` son datos que
 
 - **Antetítulo:** Josep Mira Lozano · Director de fotografía y filmmaker
 - **Frase principal:** Historias hechas de luz.
-- **Introducción:** Me llamo Josep y llevo más de siete años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí.
+- **Introducción:** Me llamo Josep y llevo más de nueve años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí.
 - **Botones:** "Ver trabajos" → /trabajos · "Hablemos" → /contacto
 
 Alternativas para la frase principal (se usa la 1 por defecto; se puede cambiar desde el panel en cualquier momento):
@@ -37,7 +37,7 @@ Alternativas para la frase principal (se usa la 1 por defecto; se puede cambiar 
 ## 4. Quién soy (versión corta)
 
 - **Título:** Hola, soy Josep
-- **Texto:** Empecé con la música y la interpretación, y en el vídeo encontré la forma de juntarlo todo. Desde entonces he rodado cortos, videoclips, spots, conciertos y bodas, y llevo más de ocho años en YouTube recreando planos míticos del cine con cuatro duros. Me gusta trabajar en equipo, resolver problemas en el set y que la gente se olvide de que hay una cámara.
+- **Texto:** Empecé con la música y la interpretación, y en el vídeo encontré la forma de juntarlo todo. Desde entonces he rodado cortos, videoclips, spots, conciertos y bodas, y llevo más de nueve años en YouTube recreando planos míticos del cine con cuatro duros. Me gusta trabajar en equipo, resolver problemas en el set y que la gente se olvide de que hay una cámara.
 - **Enlace:** Conóceme mejor → /sobre-mi
 - **Imagen:** foto de Josep en rodaje `[pendiente: foto nueva o la actual de postimg]`
 

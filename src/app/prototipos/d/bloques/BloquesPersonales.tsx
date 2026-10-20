@@ -111,7 +111,7 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
               {imagen && <motion.img src={imagen} alt="Josep Mira Lozano en un rodaje" className="absolute inset-0 h-[116%] w-full object-cover object-top" style={{ y: reducir ? 0 : yImg, top: "-8%" }} />}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">+7 años · Alicante</span>
+                <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">+9 años · Alicante</span>
                 <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">
                   Percusionista desde los 3 años
                 </span>

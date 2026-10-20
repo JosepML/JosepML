@@ -18,7 +18,9 @@ type Props = {
  * así nunca asoman el botón de reproducir, la pausa ni la pantalla final. Debajo queda el póster.
  * Solo para los prototipos: en la web final irán clips propios (mp4/webm) más ligeros.
  */
-export function VideoYouTube({ id, inicio = 0, activo, retraso = 1200, escala }: Props) {
+// El reproductor nuevo de YouTube enseña sus controles centrales (anterior, pausa, siguiente) unos 2-3 s
+// al empezar aunque se pida controls=0: el vídeo no se deja ver hasta que han desaparecido.
+export function VideoYouTube({ id, inicio = 0, activo, retraso = 3500, escala }: Props) {
   const marco = useRef<HTMLIFrameElement>(null);
   const [reproduciendo, setReproduciendo] = useState(false);
   const [visible, setVisible] = useState(false);

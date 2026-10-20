@@ -5,7 +5,7 @@ import { Icono } from "../Iconos";
 import { Contador, Revelar, Titular } from "../piezas";
 
 const CIFRAS = [
-  { valor: 7, prefijo: "+", sufijo: "", unidad: "años", texto: "contando historias: primero en YouTube, después en el set" },
+  { valor: 9, prefijo: "+", sufijo: "", unidad: "años", texto: "contando historias: primero en YouTube, después en el set" },
   { valor: 1.39, decimales: 2, sufijo: " M", unidad: "visualizaciones", texto: "del EP Oscuridad, de Adrián Muñoz" },
 ];
 

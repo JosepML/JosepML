@@ -3,7 +3,7 @@
 Basado en el texto actual de la portada. Lo marcado `[pendiente]` son datos que debe completar o corregir Josep.
 
 - **SEO título:** Sobre mí · Josep Mira Lozano
-- **SEO descripción:** Soy Josep Mira Lozano, director de fotografía, filmmaker y editor. Vengo de la música y llevo más de siete años contando historias con imágenes.
+- **SEO descripción:** Soy Josep Mira Lozano, director de fotografía, filmmaker y editor. Vengo de la música y llevo más de nueve años contando historias con imágenes.
 
 ## Cabecera
 
@@ -13,11 +13,11 @@ Basado en el texto actual de la portada. Lo marcado `[pendiente]` son datos que 
 
 ## Mi historia
 
-Desde hace más de siete años mi objetivo es el mismo: conectar con la gente a través de las historias.
+Desde hace más de nueve años mi objetivo es el mismo: conectar con la gente a través de las historias.
 
 Soy percusionista desde los 3 años. Empecé por la música y la interpretación, pero fue en el vídeo, y después en el cine, donde encontré la forma de juntar todo lo que me apasiona. Estudié el ciclo superior de Realización en el IES Veles e Vents, donde rodé El Viajero, un corto de ciencia ficción hecho con cuatro personas y casi sin presupuesto. En 2024, mi corto "Y el año que viene, ¿qué?" subió al podio del ESCAC Dreammakers Contest de Cupra, con J. A. Bayona en el jurado.
 
-En paralelo, llevo más de ocho años compartiendo mi pasión en YouTube. Empecé en un canal llamado "Del Fan, Para el Fan" y hoy, en mi canal, recreo planos míticos del cine con muy pocos recursos: Nosferatu, El Padrino o El Imperio Contraataca. Es mi forma de demostrar que el cine es ingenio antes que dinero, y de aprender un poco más en cada plano.
+En paralelo, llevo más de nueve años compartiendo mi pasión en YouTube. Empecé en un canal llamado "Del Fan, Para el Fan" y hoy, en mi canal, recreo planos míticos del cine con muy pocos recursos: Nosferatu, El Padrino o El Imperio Contraataca. Es mi forma de demostrar que el cine es ingenio antes que dinero, y de aprender un poco más en cada plano.
 
 ## Cómo trabajo
 

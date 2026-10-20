@@ -128,5 +128,11 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 
 **Queda**
 
-- Que Josep lo revise (versión de producción en `localhost:3000/prototipos/d`). Después: pasar los tokens a `globals.css` y la tipografía a `layout.tsx`.
+- Que Josep lo revise (versión de producción en `localhost:3000/prototipos/d`).
+
+### 2026-10-20 · D: 9 años y controles de YouTube
+
+- Josep: "déjalo en 9 años". La experiencia pasa a **"más de nueve años"** / "+9" en todo (portada, cifras, Sobre mí, `inicio.md`, `sobre-mi.md`; también "ocho años en YouTube" → "nueve"). Resuelve la duda de arriba.
+- Seguían viéndose los controles de vídeo al entrar. Con capturas segundo a segundo se ve la causa: el reproductor nuevo de YouTube enseña sus controles centrales (anterior, pausa, siguiente) durante unos 2-3 s al empezar a reproducirse, aunque se pida `controls=0`. El vídeo ahora espera 3,5 s reproduciéndose, tapado por el póster, antes de aparecer.
+- Si aun así se ve alguna pieza de YouTube, la solución de verdad es no usar YouTube para el fondo: un mp4 propio corto (lo previsto para la web final) o Vimeo en modo `background`, que no tiene ninguna interfaz. Para el mp4 hace falta el archivo del reel (no está en el PC con un nombre reconocible) o permiso para descargarlo. Después: pasar los tokens a `globals.css` y la tipografía a `layout.tsx`.
 - Datos pendientes ("Pendiente" en las fichas): año de *El Cirujano*, *Lovva*, *100 Baladas*, *EP Oscuridad* y *Kiboko*; productora de *Lovva*, *EP Oscuridad* y *Kiboko*; dirección de *Kiboko*; cámara de todos.
