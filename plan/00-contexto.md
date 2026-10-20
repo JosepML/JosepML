@@ -41,6 +41,7 @@ Nota para Claude en la nube: el contenedor en la nube no puede conectar con `*.s
 - 2026-10-20: Plan de 7 fases aprobado.
 - 2026-10-20: Previsualización en local en el PC de Josep en vez de Vercel. Vercel (u otro alojamiento) solo para el lanzamiento.
 - 2026-10-20: Ejecución por fases en chats distintos con estos archivos .md.
+- 2026-10-20 (fase 2, propuesta pendiente de visto bueno): el contenido antiguo son 18 proyectos y 3 artículos. Clasificación por servicio (Dirección de fotografía, Filmmaker, Edición) y por tipo (Cortometraje, Videoclip, Publicidad, Documental, Eventos, Redes sociales, Recreación). Cada proyecto guarda su id antiguo para redirigir enlaces viejos. Detalle en `plan/contenido/mapa-de-contenido.md`.
 
 ## Decisiones pendientes de Josep
 

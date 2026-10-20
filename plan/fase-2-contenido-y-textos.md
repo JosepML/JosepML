@@ -1,6 +1,6 @@
 # Fase 2: Contenido y textos
 
-**Estado:** Pendiente
+**Estado:** En revisión (textos escritos, faltan datos y visto bueno de Josep)
 **Depende de:** fase 1. Puede ir en paralelo con las fases 3 y 4.
 
 ## Objetivo
@@ -30,14 +30,14 @@ Menú: Servicios · Trabajos · Sobre mí · Blog · Contacto, con botón destac
 
 ## Tareas
 
-- [ ] Leer los textos actuales y listar las ideas que se conservan
-- [ ] Mapa de contenido: cada uno de los 21 proyectos y 3 artículos → página, servicio(s) y tipo nuevos; marcar los destacados propuestos
-- [ ] Textos de Inicio (frase principal, introducción, bloques)
-- [ ] Textos de cada servicio: qué incluye, para quién, pasos de trabajo, 4 a 6 preguntas frecuentes, precio orientativo "Desde X €" (pedir cifras a Josep)
-- [ ] Texto de Sobre mí (pedir a Josep datos de trayectoria si faltan)
-- [ ] Textos de Contacto, Gracias y llamadas a la acción
-- [ ] Preguntar a Josep por opiniones de clientes, fotos suyas y reel (ver decisiones pendientes)
-- [ ] Guardar todo en `plan/contenido/` (un .md por página + `mapa-de-contenido.md`) para que la fase 4 lo cargue en la base de datos
+- [x] Leer los textos actuales y listar las ideas que se conservan
+- [x] Mapa de contenido: cada uno de los 21 proyectos y 3 artículos → página, servicio(s) y tipo nuevos; marcar los destacados propuestos
+- [x] Textos de Inicio (frase principal, introducción, bloques)
+- [x] Textos de cada servicio: qué incluye, para quién, pasos de trabajo, 4 a 6 preguntas frecuentes, precio orientativo "Desde X €" (pedir cifras a Josep)
+- [x] Texto de Sobre mí (pedir a Josep datos de trayectoria si faltan)
+- [x] Textos de Contacto, Gracias y llamadas a la acción
+- [x] Preguntar a Josep por opiniones de clientes, fotos suyas y reel (ver decisiones pendientes)
+- [x] Guardar todo en `plan/contenido/` (un .md por página + `mapa-de-contenido.md`) para que la fase 4 lo cargue en la base de datos
 
 ## Entregable
 
@@ -49,4 +49,9 @@ Carpeta `plan/contenido/` con los textos y el mapa, para que Josep los edite o c
 
 ## Registro
 
-(vacío)
+**2026-10-20**
+- Hecho: leídos `legacy/constants.ts` y `legacy/pages/*`. Escritos todos los textos en `plan/contenido/` (índice en `plan/contenido/README.md`): mapa de contenido, Inicio, los 3 servicios, Sobre mí, Trabajos/ficha/Recreaciones/Blog, Contacto/Gracias/legales/menú/llamadas a la acción.
+- Hallazgo: hay 18 proyectos (14 + 4 recreaciones), no 21; el 21 incluía los 3 artículos. No falta contenido.
+- Propuesto: servicios Dirección de fotografía / Filmmaker / Edición; tipos Cortometraje, Videoclip, Publicidad, Documental, Eventos, Redes sociales, Recreación; 6 destacados en Inicio; slugs nuevos para 7 proyectos guardando el id antiguo para redirecciones.
+- Queda: datos de Josep (lista en `plan/contenido/README.md`: precios, frase principal, plazos, WhatsApp, equipo, fotos, opiniones, reel, logos) y su visto bueno a textos y menú.
+- Decisiones de Josep: ninguna aún.

@@ -9,7 +9,7 @@ Plan completo y razonado (documento para leer y comentar): https://claude.ai/cod
 | Fase | Archivo | Estado |
 | --- | --- | --- |
 | 1. Preparación | [fase-1-preparacion.md](fase-1-preparacion.md) | Hecha |
-| 2. Contenido y textos | [fase-2-contenido-y-textos.md](fase-2-contenido-y-textos.md) | Pendiente |
+| 2. Contenido y textos | [fase-2-contenido-y-textos.md](fase-2-contenido-y-textos.md) | En revisión: textos en `plan/contenido/`, faltan datos de Josep |
 | 3. Dirección visual | [fase-3-direccion-visual.md](fase-3-direccion-visual.md) | Pendiente |
 | 4. Base de datos y migración | [fase-4-base-de-datos-y-migracion.md](fase-4-base-de-datos-y-migracion.md) | Pendiente |
 | 5. Web pública | [fase-5-web-publica.md](fase-5-web-publica.md) | Bloqueada por 2, 3 y 4 |
