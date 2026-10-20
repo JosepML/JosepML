@@ -23,9 +23,8 @@
   --d-curva: cubic-bezier(0.22, 1, 0.36, 1);
   background: var(--d-fondo);
   color: var(--d-texto);
-  /* Inter de next/font (antes apuntaba a una variable inexistente y salía la fuente del sistema) */
-  font-family: var(--font-sans-face), system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv11";
+  /* Montserrat (next/font, en prototipos/layout.tsx); Inter de la base como respaldo */
+  font-family: var(--font-base), var(--font-sans-face), system-ui, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   color-scheme: dark;
@@ -77,24 +76,31 @@
 }
 
 /* Foco de luz que sigue al ratón (las variables --mx/--my las pone useFoco) */
+/* Una mancha de luz fija que solo se desplaza con transform: antes se repintaba un degradado
+   en toda la tarjeta en cada movimiento del ratón */
 [data-foco] {
-  --mx: 50%;
-  --my: 50%;
+  --mx: -400px;
+  --my: -400px;
   --foco: 0;
+  overflow: hidden;
 }
 [data-foco]::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  left: 0;
+  top: 0;
+  width: 420px;
+  height: 420px;
   pointer-events: none;
   opacity: var(--foco);
+  transform: translate3d(calc(var(--mx) - 210px), calc(var(--my) - 210px), 0);
   transition: opacity 0.4s var(--d-curva);
-  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.14), transparent 45%);
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.13), transparent);
+  will-change: transform;
   z-index: 2;
 }
 .d-raiz[data-tema="claro"] [data-foco]::after {
-  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.7), transparent 45%);
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.75), transparent);
 }
 
 /* Botones píldora */
@@ -219,6 +225,20 @@
   margin: -0.12em -0.1em -0.16em -0.04em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+}
+
+/* Logos de clientes en un solo tono: negro en claro, blanco en oscuro, con la misma opacidad que el texto tenue */
+.d-logo {
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.d-logo:hover {
+  opacity: 0.9;
+}
+.d-raiz[data-tema="claro"] .d-logo {
+  filter: brightness(0);
+  opacity: 0.55;
 }
 
 /* Punto de "disponible" que late */

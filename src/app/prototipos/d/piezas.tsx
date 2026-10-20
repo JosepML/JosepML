@@ -205,6 +205,7 @@ export function Diapositivas({ imagenes, activo, className = "", intervalo = 160
           src={src}
           alt=""
           data-transicion={n === 0 ? "" : undefined}
+          draggable={false}
           className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{
             opacity: n === i ? 1 : 0,

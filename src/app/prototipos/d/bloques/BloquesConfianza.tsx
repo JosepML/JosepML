@@ -1,6 +1,7 @@
 "use client";
 
-import { CANALES, CLIENTES, OPINIONES, type Bloque } from "../datos";
+import { useState } from "react";
+import { CANALES, CLIENTES, JUNO, OPINIONES, type Bloque, type ClienteD } from "../datos";
 import { Icono } from "../Iconos";
 import { Contador, Revelar, Titular } from "../piezas";
 
@@ -128,24 +129,78 @@ function Opinion({ texto, quien, tipo }: { texto: string; quien: string; tipo: s
   );
 }
 
-/** Franja de clientes en movimiento. */
+/**
+ * Clientes: dos filas de logos que se mueven en sentidos opuestos (los logos oficiales, monocromos según
+ * el tema; sin logo, el nombre compuesto en texto) y un apartado propio para JUNO Media.
+ */
 export function BloqueClientes({ bloque }: { bloque: Bloque }) {
-  const doble = [...CLIENTES, ...CLIENTES];
   return (
-    <section className="py-16">
+    <section className="py-20 sm:py-28">
       <Revelar>
         <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--d-tenue)]">{bloque.datos.titulo}</p>
       </Revelar>
-      <div className="d-mascara-lados mt-8 overflow-hidden">
-        <div className="d-marquesina flex w-max items-center gap-14 pr-14" style={{ "--duracion": "45s" } as React.CSSProperties}>
-          {doble.map((c, i) => (
-            <span key={i} className="flex items-center gap-14 whitespace-nowrap text-3xl font-extrabold tracking-[-0.04em] text-[var(--d-tenue)] sm:text-5xl">
-              {c}
-              <span className="h-2 w-2 rounded-full bg-[var(--d-acento)]/60" />
-            </span>
-          ))}
-        </div>
+      <div className="d-marquesina-pausa d-mascara-lados mt-10 flex flex-col gap-8 overflow-hidden">
+        {CLIENTES.map((fila, n) => (
+          <div
+            key={n}
+            className={`${n % 2 ? "d-marquesina-inversa" : "d-marquesina"} flex w-max items-center`}
+            style={{ "--duracion": n % 2 ? "55s" : "48s" } as React.CSSProperties}
+          >
+            {/* Cuatro copias para que la fila llene pantallas anchas y el bucle no tenga costura */}
+            {[...fila, ...fila, ...fila, ...fila].map((c, i) => (
+              <Logo key={i} cliente={c} />
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div className="mx-auto mt-16 max-w-5xl px-4 sm:px-8">
+        <Revelar>
+          <div data-foco className="cristal relative overflow-hidden rounded-[40px] p-8 sm:p-12">
+            <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-a),transparent)]" />
+            <div className="relative grid gap-8 md:grid-cols-[auto_1fr] md:items-center md:gap-14">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--d-tenue)]">Trabajo en sinergia con</p>
+                <p className="mt-3 whitespace-nowrap text-5xl tracking-[0.12em] sm:text-6xl">
+                  <span className="font-extrabold">JUNO</span>
+                  <span className="ml-2 font-normal">MEDIA</span>
+                </p>
+              </div>
+              <div>
+                <p className="text-[17px] leading-relaxed text-[var(--d-suave)] [text-wrap:pretty]">{JUNO.texto}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {JUNO.clientes.map((c) => (
+                    <span key={c} className="rounded-full border border-[var(--d-borde)] bg-[var(--d-cristal)] px-4 py-2 text-sm font-semibold">
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Revelar>
       </div>
     </section>
+  );
+}
+
+/** Logo del cliente; si la imagen no carga (enlaces externos que caducan), su nombre en texto. */
+function Logo({ cliente: c }: { cliente: ClienteD }) {
+  const [roto, setRoto] = useState(false);
+  return (
+    <span className="flex h-16 shrink-0 items-center px-10 sm:px-14">
+      {c.logo && !roto ? (
+        <img
+          src={c.logo}
+          alt={c.nombre}
+          style={{ height: c.alto ?? 36 }}
+          className="d-logo w-auto object-contain"
+          draggable={false}
+          onError={() => setRoto(true)}
+        />
+      ) : (
+        <span className="whitespace-nowrap text-xl font-bold tracking-[-0.01em] text-[var(--d-tenue)] sm:text-2xl">{c.nombre}</span>
+      )}
+    </span>
   );
 }

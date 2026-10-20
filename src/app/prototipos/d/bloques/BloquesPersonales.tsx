@@ -83,7 +83,9 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
   const reducir = useReducir();
   const fino = usePunteroFino();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const yImg = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  // Antes la foto subía y bajaba con el scroll y se cortaba la cabeza: ahora solo un zoom muy leve,
+  // anclado arriba para que la cabeza quede siempre dentro
+  const escalaImg = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
   const rx = useMotionValue(0);
   const ry = useMotionValue(0);
   const srx = useSpring(rx, { stiffness: 150, damping: 18 });
@@ -108,13 +110,17 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
                 ry.set(0);
               }}
             >
-              {imagen && <motion.img src={imagen} alt="Josep Mira Lozano en un rodaje" className="absolute inset-0 h-[116%] w-full object-cover object-top" style={{ y: reducir ? 0 : yImg, top: "-8%" }} />}
+              {imagen && (
+                <motion.img
+                  src={imagen}
+                  alt="Josep Mira Lozano en un rodaje"
+                  className="absolute inset-0 h-full w-full origin-top object-cover object-[50%_0%]"
+                  style={{ scale: reducir ? 1 : escalaImg }}
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
                 <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">+9 años · Alicante</span>
-                <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">
-                  Percusionista desde los 3 años
-                </span>
               </div>
             </motion.div>
           </div>

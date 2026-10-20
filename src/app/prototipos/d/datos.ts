@@ -395,7 +395,37 @@ export const OPINIONES = [
   { texto: "Está superguay, Josep. Muy chulo, muy chulo, muy chulo.", quien: "Artista", tipo: "Aftermovie" },
 ];
 
-export const CLIENTES = ["Disney", "Star Wars", "Consell Valencià de la Joventut", "Kinepolis", "Ocisport", "Mediterra Cinema", "JUNO Media"];
+/**
+ * Clientes, en dos filas. `logo` es el logo oficial cuando hay uno fiable (los mismos de la web antigua);
+ * se pinta monocromo según el tema. Sin logo se compone el nombre en texto. En la fase 4, tabla `clientes`
+ * con el logo subido al almacenamiento.
+ */
+export type ClienteD = { nombre: string; logo?: string; alto?: number };
+
+export const CLIENTES: ClienteD[][] = [
+  [
+    { nombre: "Disney", logo: "https://www.edigitalagency.com.au/wp-content/uploads/new-Disney-logo-white-png-large-size.png", alto: 44 },
+    { nombre: "Star Wars", logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg", alto: 46 },
+    // El logo de la web antigua (jobs.kinepolis.com) ya no carga: nombre en texto hasta tener el oficial
+    { nombre: "Kinepolis" },
+    { nombre: "Consell Valencià de la Joventut" },
+    { nombre: "Ayuntamiento de l'Alfàs del Pi" },
+  ],
+  [
+    { nombre: "Ocisport" },
+    { nombre: "Mediterra Cinema" },
+    { nombre: "Cero Coma" },
+    { nombre: "Dreamore" },
+    { nombre: "Kymera Producciones" },
+  ],
+];
+
+/** Trabajo en sinergia con JUNO Media (sin decir que Josep es parte de JUNO): clientes de proyectos juntos */
+export const JUNO = {
+  nombre: "JUNO Media",
+  texto: "Muchos de mis proyectos nacen mano a mano con JUNO Media. Juntos hemos trabajado para:",
+  clientes: ["ForecourtTech", "Arkano", "SOM Events", "Albir Confort", "Mapache Events"],
+};
 
 /** Canales de YouTube: de ahí viene buena parte de la experiencia. Las cifras de suscriptores las pone Josep. */
 export const CANALES = [
@@ -456,7 +486,7 @@ export const CATALOGO: Record<TipoBloque, { nombre: string; descripcion: string;
   llamada: { nombre: "Llamada a la acción", descripcion: "Invitación a escribirte, con WhatsApp y correo", datos: { titulo: "¿Tienes una historia que contar?", texto: "Cuéntamela. Me encantará escucharla y pensar cómo llevarla a la pantalla." } },
 };
 
-const ORDEN_INICIAL: TipoBloque[] = ["portada", "servicios", "trabajos", "cifras", "proceso", "sobre-mi", "opiniones", "clientes", "blog", "llamada"];
+const ORDEN_INICIAL: TipoBloque[] = ["portada", "servicios", "trabajos", "cifras", "sobre-mi", "proceso", "opiniones", "clientes", "blog", "llamada"];
 
 export const BLOQUES_INICIALES: Bloque[] = ORDEN_INICIAL.map((tipo) => ({
   id: tipo,

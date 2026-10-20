@@ -134,5 +134,21 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 
 - Josep: "déjalo en 9 años". La experiencia pasa a **"más de nueve años"** / "+9" en todo (portada, cifras, Sobre mí, `inicio.md`, `sobre-mi.md`; también "ocho años en YouTube" → "nueve"). Resuelve la duda de arriba.
 - Seguían viéndose los controles de vídeo al entrar. Con capturas segundo a segundo se ve la causa: el reproductor nuevo de YouTube enseña sus controles centrales (anterior, pausa, siguiente) durante unos 2-3 s al empezar a reproducirse, aunque se pida `controls=0`. El vídeo ahora espera 3,5 s reproduciéndose, tapado por el póster, antes de aparecer.
-- Si aun así se ve alguna pieza de YouTube, la solución de verdad es no usar YouTube para el fondo: un mp4 propio corto (lo previsto para la web final) o Vimeo en modo `background`, que no tiene ninguna interfaz. Para el mp4 hace falta el archivo del reel (no está en el PC con un nombre reconocible) o permiso para descargarlo. Después: pasar los tokens a `globals.css` y la tipografía a `layout.tsx`.
+- Si aun así se ve alguna pieza de YouTube, la solución de verdad es no usar YouTube para el fondo: un mp4 propio corto (lo previsto para la web final) o Vimeo en modo `background`, que no tiene ninguna interfaz. Para el mp4 hace falta el archivo del reel (no está en el PC con un nombre reconocible) o permiso para descargarlo.
+
+### 2026-10-20 · D: tercera ronda (Montserrat, servicios, selección, clientes)
+
+- **Letra base Montserrat** (400-800) en todo el prototipo; Instrument Serif cursiva para la palabra de acento de los titulares, las frases de cada servicio y la palabra que rota de la portada (a Josep le gustaba esa letra ahí; lo que no le gustaba era el "Soy", que ahora va en Montserrat, más discreto).
+- **Portada sin fijar:** se baja con el scroll normal; mientras se va, la tarjeta se aleja un poco y el texto sube y se funde. La sección siguiente entra enseguida.
+- **Lo que hago:** tres tarjetas iguales que llevan a la página de cada servicio, con lo justo: nombre, frase, 3 "ideal para" y "Ver proyectos y cómo trabajo". Al pasar el ratón solo cambian transform y opacidad (antes cambiaban de ancho y eso recolocaba la sección en cada fotograma: era lo que daba tirones).
+- **Selección:** la pastilla del filtro se desliza con un muelle; al cambiar de filtro, las tarjetas que siguen se deslizan a su nuevo sitio y las nuevas entran escalonadas; arrastre con inercia y ajuste suave. La barra de avance usa un valor de Motion (antes cada scroll del carrusel volvía a pintar toda la sección).
+- **Quién soy** pasa antes de Cómo trabajamos. La foto ya no se desplaza con el scroll (cortaba la cabeza): zoom leve anclado arriba. Fuera el chip "Percusionista desde los 3 años"; en `sobre-mi.md` queda como una mención de pasada.
+- **Han confiado en mí:** dos filas de logos que se mueven en sentidos opuestos (logos oficiales de Disney y Star Wars de la web antigua, monocromos según el tema; el de Kinepolis ya no carga y sale en texto, como los que no tienen logo fiable) y el apartado "Trabajo en sinergia con JUNO Media" con sus clientes. Faltan los logos oficiales del resto.
+- **Foco de luz del ratón:** una mancha que se mueve con transform en vez de repintar un degradado en toda la tarjeta.
+- Bloques guardados en el navegador con clave `proto-d-bloques-v4` (nuevo orden).
+
+**Pendiente**
+
+- Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).
+- Logos oficiales de Kinepolis, Consell Valencià de la Joventut, Ayuntamiento de l'Alfàs del Pi, Ocisport, Mediterra Cinema, Cero Coma, Dreamore, Kymera, JUNO Media y sus clientes (que los pase Josep o descargarlos con su permiso). Después: pasar los tokens a `globals.css` y la tipografía a `layout.tsx`.
 - Datos pendientes ("Pendiente" en las fichas): año de *El Cirujano*, *Lovva*, *100 Baladas*, *EP Oscuridad* y *Kiboko*; productora de *Lovva*, *EP Oscuridad* y *Kiboko*; dirección de *Kiboko*; cámara de todos.

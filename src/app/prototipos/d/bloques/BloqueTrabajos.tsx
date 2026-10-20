@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Enlace } from "../../_comun/Enlace";
 import { usePunteroFino } from "../../_comun/hooks";
@@ -19,19 +19,26 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
   const [filtro, setFiltro] = useState("todos");
   const lista = proyectosDe(filtro);
   const pista = useRef<HTMLDivElement>(null);
-  const [bordes, setBordes] = useState({ inicio: true, fin: false, avance: 0 });
+  const [bordes, setBordes] = useState({ inicio: true, fin: false });
+  // El avance va en un valor de Motion: moverlo no vuelve a pintar el carrusel en cada fotograma de scroll
+  const avance = useMotionValue(0);
+  const barra = useSpring(avance, { stiffness: 220, damping: 30 });
+  const escalaBarra = useTransform(barra, (v) => Math.max(0.08, v));
 
   const medir = useCallback(() => {
     const el = pista.current;
     if (!el) return;
     const max = el.scrollWidth - el.clientWidth;
-    setBordes({ inicio: el.scrollLeft < 8, fin: el.scrollLeft > max - 8, avance: max > 0 ? el.scrollLeft / max : 0 });
-  }, []);
+    avance.set(max > 0 ? el.scrollLeft / max : 0);
+    const inicio = el.scrollLeft < 8;
+    const fin = el.scrollLeft > max - 8;
+    setBordes((b) => (b.inicio === inicio && b.fin === fin ? b : { inicio, fin }));
+  }, [avance]);
 
   useEffect(() => {
     const el = pista.current;
     if (!el) return;
-    el.scrollTo({ left: 0 });
+    el.scrollTo({ left: 0, behavior: "smooth" });
     medir();
     const ro = new ResizeObserver(medir);
     ro.observe(el);
@@ -66,7 +73,11 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
                 }`}
               >
                 {filtro === f.slug && (
-                  <motion.span layoutId="d-filtro" className="absolute inset-0 rounded-full bg-[var(--d-acento)]" transition={{ duration: 0.5, ease: CURVA }} />
+                  <motion.span
+                    layoutId="d-filtro"
+                    className="absolute inset-0 rounded-full bg-[var(--d-acento)] shadow-[0_6px_20px_-6px_rgba(229,9,20,0.7)]"
+                    transition={{ type: "spring", stiffness: 380, damping: 32, mass: 0.8 }}
+                  />
                 )}
                 <span className="relative">{f.nombre}</span>
               </button>
@@ -75,38 +86,37 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
         </Revelar>
       </div>
 
-      <div
+      {/* Al cambiar de filtro, las tarjetas que siguen se deslizan a su nuevo sitio (layout) y las nuevas
+          entran escalonadas con un muelle suave; las que sobran se encogen y desaparecen */}
+      <motion.div
         ref={pista}
+        layoutScroll
         onScroll={medir}
         {...arrastre}
         className="sin-barra mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-[max(1rem,calc((100vw-80rem)/2+2rem))] pb-2 [scroll-padding-inline:max(1rem,calc((100vw-80rem)/2+2rem))]"
       >
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={filtro}
-            className="flex gap-5"
-            initial="fuera"
-            animate="dentro"
-            exit="sale"
-            variants={{ dentro: { transition: { staggerChildren: 0.06 } } }}
-          >
-            {lista.map((p) => (
+        <AnimatePresence mode="popLayout" initial={false}>
+            {lista.map((p, i) => (
               <motion.div
                 key={p.slug}
+                layout
                 data-tarjeta
-                variants={{
-                  fuera: { opacity: 0, x: 40 },
-                  dentro: { opacity: 1, x: 0, transition: { duration: 0.7, ease: CURVA } },
-                  sale: { opacity: 0, transition: { duration: 0.22 } },
-                }}
+                initial={{ opacity: 0, scale: 0.94, y: 24 }}
+                animate={{ opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 160, damping: 22, delay: 0.05 + i * 0.06 } }}
+                exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.25, ease: CURVA } }}
+                transition={{ layout: { type: "spring", stiffness: 200, damping: 28 } }}
                 className="w-[78vw] max-w-[420px] shrink-0 snap-start sm:w-[min(46vw,560px)] sm:max-w-none"
               >
                 <TarjetaProyecto proyecto={p} />
               </motion.div>
             ))}
             <motion.div
+              key={`mas-${filtro}`}
+              layout
               data-tarjeta
-              variants={{ fuera: { opacity: 0 }, dentro: { opacity: 1, transition: { duration: 0.7 } }, sale: { opacity: 0, transition: { duration: 0.2 } } }}
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1, transition: { duration: 0.6, ease: CURVA, delay: 0.1 + lista.length * 0.06 } }}
+              exit={{ opacity: 0, transition: { duration: 0.2 } }}
               className="w-[60vw] max-w-[300px] shrink-0 snap-start sm:w-[300px]"
             >
               <div data-foco className="cristal flex h-full min-h-[300px] flex-col justify-between rounded-[32px] p-7">
@@ -143,17 +153,13 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
                 )}
               </div>
             </motion.div>
-          </motion.div>
         </AnimatePresence>
-      </div>
+      </motion.div>
 
       {/* Flechas y avance */}
       <div className="mx-auto mt-8 flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-8">
         <div className="h-[3px] w-40 overflow-hidden rounded-full bg-[var(--d-borde)]">
-          <div
-            className="h-full origin-left rounded-full bg-[var(--d-acento)] transition-transform duration-300"
-            style={{ transform: `scaleX(${Math.max(0.08, bordes.avance)})` }}
-          />
+          <motion.div className="h-full origin-left rounded-full bg-[var(--d-acento)]" style={{ scaleX: escalaBarra }} />
         </div>
         <div className="flex gap-2">
           {([-1, 1] as const).map((dir) => {
@@ -177,16 +183,20 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
   );
 }
 
-/** Arrastrar el carrusel con el ratón. Si se ha arrastrado, el clic no abre la tarjeta. */
+/**
+ * Arrastrar el carrusel con el ratón, con inercia al soltar (sigue un poco con la velocidad que llevaba
+ * y luego se ajusta a la tarjeta más cercana). Si se ha arrastrado, el clic no abre la tarjeta.
+ */
 function useArrastre(pista: React.RefObject<HTMLDivElement | null>) {
   const fino = usePunteroFino();
-  const estado = useRef({ x: 0, inicio: 0, activo: false, movido: false });
+  const estado = useRef({ x: 0, inicio: 0, activo: false, movido: false, ultimoX: 0, ultimoT: 0, velocidad: 0 });
 
   if (!fino) return {};
   return {
     onPointerDown: (e: React.PointerEvent) => {
       if (e.pointerType !== "mouse" || !pista.current) return;
-      estado.current = { x: e.clientX, inicio: pista.current.scrollLeft, activo: true, movido: false };
+      const t = performance.now();
+      estado.current = { x: e.clientX, inicio: pista.current.scrollLeft, activo: true, movido: false, ultimoX: e.clientX, ultimoT: t, velocidad: 0 };
     },
     onPointerMove: (e: React.PointerEvent) => {
       const s = estado.current;
@@ -199,15 +209,25 @@ function useArrastre(pista: React.RefObject<HTMLDivElement | null>) {
         el.style.scrollSnapType = "none";
         el.style.scrollBehavior = "auto";
       }
-      if (s.movido) el.scrollLeft = s.inicio - dx;
+      if (!s.movido) return;
+      el.scrollLeft = s.inicio - dx;
+      const t = performance.now();
+      if (t > s.ultimoT) s.velocidad = (e.clientX - s.ultimoX) / (t - s.ultimoT);
+      s.ultimoX = e.clientX;
+      s.ultimoT = t;
     },
     onPointerUp: () => {
       const el = pista.current;
-      estado.current.activo = false;
-      if (el) {
+      const s = estado.current;
+      s.activo = false;
+      if (!el) return;
+      el.style.scrollBehavior = "";
+      // Inercia: un empujón proporcional a la velocidad del gesto, y después vuelve el ajuste a tarjeta
+      const empuje = Math.max(-900, Math.min(900, -s.velocidad * 320));
+      if (s.movido && Math.abs(empuje) > 30) el.scrollBy({ left: empuje, behavior: "smooth" });
+      window.setTimeout(() => {
         el.style.scrollSnapType = "";
-        el.style.scrollBehavior = "";
-      }
+      }, s.movido ? 450 : 0);
     },
     onClickCapture: (e: React.MouseEvent) => {
       if (estado.current.movido) {
@@ -216,7 +236,6 @@ function useArrastre(pista: React.RefObject<HTMLDivElement | null>) {
         estado.current.movido = false;
       }
     },
-    onDragStart: (e: React.DragEvent) => e.preventDefault(),
   };
 }
 

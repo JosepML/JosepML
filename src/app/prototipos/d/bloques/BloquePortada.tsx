@@ -12,8 +12,9 @@ import { CURVA, Disponible, ModalVideo } from "../piezas";
 const PAPELES = ["director de fotografía", "filmmaker", "editor"];
 
 /**
- * Portada: el reel vive en una tarjeta redondeada que, en el primer tramo de scroll, se aleja un poco
- * como en las páginas de producto de Apple. El tramo es corto para que bajar no cueste.
+ * Portada: el reel en una tarjeta redondeada. Ya no se queda fijada: la página baja con el scroll normal
+ * y, mientras se va, la tarjeta se aleja un poco y el texto sube y se funde. La siguiente sección entra
+ * en cuanto empiezas a bajar.
  */
 export function BloquePortada({ bloque }: { bloque: Bloque }) {
   const { antetitulo, titulo, texto } = bloque.datos;
@@ -23,18 +24,18 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
   const anima = ancha && !reducir;
   const [reel, setReel] = useState(false);
 
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  // Solo escala y opacidad (el radio fijo: animarlo obligaba a repintar el vídeo en cada fotograma)
-  const escala = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const yTexto = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  const opTexto = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const opPista = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  // Solo transform y opacidad, que no recalculan nada al hacer scroll
+  const escala = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+  const yTexto = useTransform(scrollYProgress, [0, 1], [0, -90]);
+  const opTexto = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+  const opPista = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
   const palabras = titulo.trim().split(/\s+/);
 
   return (
-    <section ref={ref} className={anima ? "relative h-[135svh]" : "relative"}>
-      <div className={`${anima ? "sticky top-0" : "relative"} h-svh min-h-[600px] p-2 sm:p-3`}>
+    <section ref={ref} className="relative">
+      <div className="relative h-svh min-h-[600px] p-2 sm:p-3">
         <motion.div
           className="relative h-full w-full overflow-hidden rounded-[28px] bg-black sm:rounded-[36px]"
           style={anima ? { scale: escala } : undefined}
@@ -97,7 +98,8 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9, duration: 0.9, ease: CURVA }}
               >
-                <p className="text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
+                {/* "Soy" en la letra base, discreto; la palabra que rota en la cursiva artística, más grande */}
+                <p className="flex items-baseline gap-[0.35em] text-lg font-medium tracking-[-0.01em] text-white/85 sm:text-xl">
                   Soy <PalabraRotatoria palabras={PAPELES} />
                 </p>
                 {texto && <p className="mt-3 max-w-lg text-[17px] leading-[1.6] text-white/80 [text-wrap:pretty] sm:text-lg">{texto}</p>}
@@ -172,16 +174,16 @@ function PalabraRotatoria({ palabras }: { palabras: string[] }) {
   }, [palabras.length]);
 
   return (
-    <span className="relative inline-grid align-baseline">
+    <span className="d-serif relative inline-grid text-[1.7em] leading-none">
       {palabras.map((p) => (
-        <span key={p} className="invisible whitespace-nowrap [grid-area:1/1]" aria-hidden>
+        <span key={p} className="invisible whitespace-nowrap pr-[0.1em] [grid-area:1/1]" aria-hidden>
           {p}
         </span>
       ))}
       <AnimatePresence initial={false}>
         <motion.span
           key={palabras[i]}
-          className="whitespace-nowrap text-[#ffb36b] [grid-area:1/1]"
+          className="whitespace-nowrap bg-gradient-to-r from-[#ff7a5c] to-[#ffc07a] bg-clip-text pb-[0.1em] pr-[0.1em] text-transparent [grid-area:1/1]"
           initial={{ opacity: 0, y: reducir ? 0 : "0.35em", filter: reducir ? "none" : "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1.1, ease: CURVA, delay: 0.25 } }}
           exit={{ opacity: 0, y: reducir ? 0 : "-0.3em", filter: reducir ? "none" : "blur(6px)", transition: { duration: 0.8, ease: CURVA } }}

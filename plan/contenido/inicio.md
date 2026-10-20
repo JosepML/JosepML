@@ -50,7 +50,12 @@ Alternativas para la frase principal (se usa la 1 por defecto; se puede cambiar 
 
 ## 6. Han confiado en mí (franja de logos)
 
-Disney · Star Wars · Consell Valencià de la Joventut · Kinepolis · Ocisport · Mediterra Cinema · JUNO Media
+Dos filas de logos (oficiales si hay; si no, el nombre en texto):
+
+- Disney · Star Wars · Kinepolis · Consell Valencià de la Joventut · Ayuntamiento de l'Alfàs del Pi
+- Ocisport · Mediterra Cinema · Cero Coma (antes ImproVivencia) · Dreamore (productora audiovisual) · Kymera Producciones
+
+**Apartado propio: "Trabajo en sinergia con JUNO Media".** Sin decir que Josep es parte de JUNO: trabajan mano a mano. Texto: "Muchos de mis proyectos nacen mano a mano con JUNO Media. Juntos hemos trabajado para:" ForecourtTech · Arkano · SOM Events · Albir Confort · Mapache Events (lista ampliable desde el panel).
 
 (Todos son clientes con los que Josep ha trabajado.)
 
