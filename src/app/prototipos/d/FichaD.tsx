@@ -21,8 +21,8 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
   const siguiente = PROYECTOS[(PROYECTOS.findIndex((x) => x.slug === p.slug) + 1) % PROYECTOS.length];
   const servicios = SERVICIOS.filter((s) => p.servicios.includes(s.slug));
   const entrar = (retraso: number) => ({
-    initial: { opacity: 0, y: reducir ? 0 : 24, filter: reducir ? "none" : "blur(10px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+    initial: { opacity: 0, y: reducir ? 0 : 24 },
+    animate: { opacity: 1, y: 0 },
     transition: { delay: retraso, duration: 0.9, ease: CURVA },
   });
 
@@ -42,12 +42,12 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
         <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col gap-6 p-6 text-white sm:p-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <motion.div {...entrar(0.25)} className="flex flex-wrap gap-2">
-              <span className="rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium backdrop-blur-xl">
+              <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium">
                 {p.tipo}
                 {p.anio ? ` · ${p.anio}` : ""}
               </span>
               {p.laurel && (
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium backdrop-blur-xl">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium">
                   <Icono nombre="laurel" className="h-3.5 w-3.5 text-[#ffcf7a]" />
                   {p.laurel.premio} · {p.laurel.festival}
                 </span>
@@ -131,7 +131,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
       <section className="px-4 sm:px-8">
         <Revelar className="mx-auto max-w-7xl">
           <div className="cristal relative flex flex-col gap-6 overflow-hidden rounded-[40px] p-8 sm:flex-row sm:items-center sm:justify-between sm:p-12">
-            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[var(--d-orbe-a)] blur-3xl" />
+            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-a),transparent)]" />
             <div className="relative">
               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--d-acento)]">
                 {servicios.map((s) => s.nombre).join(" · ")}

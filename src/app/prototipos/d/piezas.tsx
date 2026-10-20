@@ -23,8 +23,8 @@ export function Revelar({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: reducir ? 0 : y, filter: reducir ? "none" : "blur(10px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: reducir ? 0 : y }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.9, delay: retraso, ease: CURVA }}
     >

@@ -86,7 +86,26 @@ Tres portadas con su ficha: **A · Sala** (negro cálido y tungsteno, Cormorant 
 - Reel y clips: archivos propios cortos (mp4/webm, sin sonido, 3-5 s) más póster, no YouTube (`clip_url` en `proyectos`). Cada servicio también necesita imagen y clip.
 - Imágenes con `<img>` en los prototipos; en la fase 5, `next/image` con el almacenamiento de Supabase.
 
+### 2026-10-20 · D: visto bueno al camino y pasada de rendimiento
+
+Josep: "me parece muy buen camino", pero "va MUY petada" (pesada, con tirones).
+
+**Cambios**
+
+- **Cristal sin `backdrop-filter`** en las tarjetas (`.cristal`): base translúcida + brillo en diagonal + borde y reflejo. El desenfoque real queda solo en `.cristal-fuerte` (menú, editor, botón de editar). Antes había decenas de capas desenfocando lo que tenían detrás, algunas moviéndose (marquesinas de opiniones, galería horizontal, tarjetas de servicios que cambian de ancho).
+- **Orbes del fondo** con degradados radiales en vez de `filter: blur(90px)` animado.
+- Sin desenfoque en los elementos que se mueven: barra de datos y chips de las tarjetas de trabajos, chips del retrato, iconos de servicios. Círculos de luz decorativos (llamada, premios, ficha) con degradado radial en vez de `blur-3xl`/`blur-[100px]`.
+- Animaciones de entrada (`Revelar`, ficha) y palabra que rota sin `filter: blur`: solo opacidad y desplazamiento. El desenfoque de entrada queda solo en el titular de la portada, una vez.
+- Transición de página: velo oscuro con opacidad en vez de animar un desenfoque a pantalla completa.
+- El reel (y el clip de la cabecera de la ficha) se desmonta al salir de pantalla; antes seguía reproduciéndose el iframe de YouTube.
+- Foco de luz del ratón: como mucho una actualización por fotograma.
+- Servicios: la tarjeta se abre si el ratón se queda 160 ms, no al cruzarla.
+- Josep revisa ahora con la **versión de producción** (`npm run build` + `npm run start`), no con el modo de desarrollo, que es mucho más lento. Tras cada cambio hay que volver a compilar.
+
+**Medición** (Chrome en el PC de Josep, RTX 5070 a 165 Hz, pantalla 2048×1152): recorriendo la página fotograma a fotograma, el hilo principal va holgado antes y después (p95 de 6 ms por fotograma; en móvil simulado con CPU ×4, p95 de 18 ms). Lo que se ha quitado es trabajo de composición en la GPU, que esa medida no recoge; hay que confirmarlo con Josep mirando la web.
+
 **Queda**
 
+- Confirmar con Josep si sigue habiendo tirones, dónde (sección) y en qué aparato (PC o móvil).
 - Visto bueno de Josep a D o lista de cambios. Después: pasar los tokens a `globals.css` y la tipografía a `layout.tsx`.
 - Datos pendientes ("Pendiente" en las fichas): año de *El Cirujano*, *Lovva*, *100 Baladas*, *EP Oscuridad* y *Kiboko*; productora de *Lovva*, *EP Oscuridad* y *Kiboko*; dirección de *Kiboko*; cámara de todos.

@@ -157,16 +157,16 @@ export function TarjetaProyecto({ proyecto: p, movil }: { proyecto: ProyectoD; m
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
 
         {p.laurel && (
-          <span className="absolute left-4 top-4 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/25 px-3 py-1.5 text-[11px] font-medium text-white backdrop-blur-xl">
+          <span className="absolute left-4 top-4 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white">
             <Icono nombre="laurel" className="h-3.5 w-3.5 text-[#ffcf7a]" />
             {p.laurel.premio}
           </span>
         )}
-        <span className="absolute right-4 top-4 z-[3] flex h-10 w-10 translate-y-1 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white opacity-0 backdrop-blur-xl transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="absolute right-4 top-4 z-[3] flex h-10 w-10 translate-y-1 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           <Icono nombre="flecha" className="h-4 w-4 -rotate-45" />
         </span>
 
-        <div className="absolute inset-x-3 bottom-3 z-[3] rounded-[24px] border border-white/15 bg-white/10 p-4 text-white backdrop-blur-2xl transition-transform duration-500 group-hover:-translate-y-1 sm:p-5">
+        <div className="absolute inset-x-3 bottom-3 z-[3] rounded-[24px] border border-white/15 bg-black/45 p-4 text-white transition-transform duration-500 group-hover:-translate-y-1 sm:p-5">
           <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/60">
             {p.tipo}
             {p.anio ? ` · ${p.anio}` : ""}

@@ -48,6 +48,7 @@ function Tarjeta({ servicio, abierta, alActivar, ancha }: { servicio: ServicioD;
   const reducir = useReducir();
   const [clip, setClip] = useState(false);
   const espera = useRef(0);
+  const intencion = useRef(0);
 
   // El clip arranca un momento después de abrirse, solo con ratón
   useEffect(() => {
@@ -60,7 +61,11 @@ function Tarjeta({ servicio, abierta, alActivar, ancha }: { servicio: ServicioD;
   return (
     <motion.article
       data-foco
-      onPointerEnter={() => fino && alActivar()}
+      // Se abre si el ratón se queda un instante: cruzar las tarjetas no dispara tres aperturas seguidas
+      onPointerEnter={() => {
+        if (fino) intencion.current = window.setTimeout(alActivar, 160);
+      }}
+      onPointerLeave={() => window.clearTimeout(intencion.current)}
       onClick={alActivar}
       className="cristal group relative cursor-pointer overflow-hidden rounded-[36px] transition-[flex-grow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
       style={ancha ? { flexGrow: abierta ? 3.2 : 1, flexBasis: 0, minWidth: 0 } : undefined}
@@ -74,12 +79,12 @@ function Tarjeta({ servicio, abierta, alActivar, ancha }: { servicio: ServicioD;
 
       <div className={`relative z-[3] flex h-full flex-col justify-between p-6 text-white sm:p-8 ${ancha ? "" : abierta ? "min-h-[520px]" : "min-h-[150px]"}`}>
         <div className="flex items-start justify-between gap-4">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-xl">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/15">
             <Icono nombre={ICONOS[servicio.slug]} className="h-6 w-6" />
           </span>
           <motion.span
             animate={{ rotate: abierta ? 45 : 0 }}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-xl"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/15"
           >
             <Icono nombre="mas" className="h-4 w-4" />
           </motion.span>
@@ -122,7 +127,7 @@ function Tarjeta({ servicio, abierta, alActivar, ancha }: { servicio: ServicioD;
                 <div className="mt-6 flex flex-wrap items-center gap-2">
                   <span className="text-xs text-white/55">Ideal para</span>
                   {servicio.paraQuien.map((q) => (
-                    <span key={q} className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs backdrop-blur">
+                    <span key={q} className="rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs">
                       {q}
                     </span>
                   ))}

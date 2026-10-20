@@ -119,8 +119,8 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
               {imagen && <motion.img src={imagen} alt="Josep Mira Lozano en un rodaje" className="absolute inset-0 h-[116%] w-full object-cover object-top" style={{ y: reducir ? 0 : yImg, top: "-8%" }} />}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                <span className="rounded-full border border-white/20 bg-white/15 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-xl">+15 años · Alicante</span>
-                <span className="rounded-full border border-white/20 bg-white/15 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-xl">
+                <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">+15 años · Alicante</span>
+                <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">
                   Percusionista desde los 3 años
                 </span>
               </div>
@@ -254,8 +254,8 @@ export function BloqueLlamada({ bloque }: { bloque: Bloque }) {
     <section id={bloque.id === "llamada" ? "llamada" : undefined} className="scroll-mt-24 px-3 py-16 sm:px-6 sm:py-24">
       <Revelar>
         <div className="cristal relative mx-auto max-w-7xl overflow-hidden rounded-[48px] px-6 py-16 text-center sm:px-12 sm:py-24">
-          <div className="pointer-events-none absolute -left-24 -top-24 h-96 w-96 rounded-full bg-[var(--d-orbe-a)] blur-[100px]" />
-          <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[var(--d-orbe-b)] blur-[100px]" />
+          <div className="pointer-events-none absolute -left-24 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-a),transparent)]" />
+          <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-b),transparent)]" />
           <div className="relative">
             <Disponible />
             <h2 className="mx-auto mt-6 max-w-4xl text-[clamp(2.6rem,7vw,6.5rem)] font-black leading-[0.95] tracking-[-0.055em]">

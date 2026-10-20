@@ -53,12 +53,20 @@ function Lienzo({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Foco de luz en las tarjetas con data-foco: un solo escuchador para toda la página. */
+/**
+ * Foco de luz en las tarjetas con data-foco: un solo escuchador para toda la página,
+ * y como mucho una actualización por fotograma (el ratón da más eventos que fotogramas).
+ */
 function useFoco() {
   useEffect(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     let actual: HTMLElement | null = null;
-    const mover = (e: PointerEvent) => {
+    let ultimo: PointerEvent | null = null;
+    let pendiente = 0;
+    const pintar = () => {
+      pendiente = 0;
+      const e = ultimo;
+      if (!e) return;
       const el = (e.target as HTMLElement | null)?.closest<HTMLElement>("[data-foco]") ?? null;
       if (actual && actual !== el) actual.style.setProperty("--foco", "0");
       actual = el;
@@ -68,8 +76,15 @@ function useFoco() {
       el.style.setProperty("--my", `${e.clientY - r.top}px`);
       el.style.setProperty("--foco", "1");
     };
+    const mover = (e: PointerEvent) => {
+      ultimo = e;
+      if (!pendiente) pendiente = requestAnimationFrame(pintar);
+    };
     document.addEventListener("pointermove", mover, { passive: true });
-    return () => document.removeEventListener("pointermove", mover);
+    return () => {
+      document.removeEventListener("pointermove", mover);
+      cancelAnimationFrame(pendiente);
+    };
   }, []);
 }
 

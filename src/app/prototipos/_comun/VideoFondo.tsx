@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { usePantallaAncha, useReducir } from "./hooks";
 import { VideoYouTube } from "./VideoYouTube";
 
@@ -16,10 +17,13 @@ type Props = {
 /**
  * Reel de fondo. Primero se pinta el fotograma (carga rápida en móvil);
  * en pantallas anchas y sin "reducir movimiento" entra el vídeo encima.
+ * Fuera de pantalla el vídeo se desmonta para no seguir decodificando.
  */
 export function VideoFondo({ id, inicio, poster, className = "", filtro }: Props) {
   const ancha = usePantallaAncha();
   const reducir = useReducir();
+  const caja = useRef<HTMLDivElement>(null);
+  const visible = useInView(caja, { margin: "100px" });
   const [listo, setListo] = useState(false);
 
   useEffect(() => {
@@ -27,15 +31,17 @@ export function VideoFondo({ id, inicio, poster, className = "", filtro }: Props
     return () => window.clearTimeout(t);
   }, []);
 
+  const video = listo && ancha && !reducir && visible;
+
   return (
-    <div className={`absolute inset-0 overflow-hidden bg-black ${className}`} style={{ filter: filtro }}>
+    <div ref={caja} className={`absolute inset-0 overflow-hidden bg-black ${className}`} style={{ filter: filtro }}>
       <img
         src={poster}
         alt=""
-        className={`absolute inset-0 h-full w-full object-cover ${reducir ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
+        className={`absolute inset-0 h-full w-full object-cover ${reducir || video ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
         fetchPriority="high"
       />
-      <VideoYouTube id={id} inicio={inicio} activo={listo && ancha && !reducir} />
+      <VideoYouTube id={id} inicio={inicio} activo={video} />
     </div>
   );
 }

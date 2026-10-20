@@ -171,9 +171,9 @@ function PalabraRotatoria({ palabras }: { palabras: string[] }) {
         <motion.span
           key={palabras[i]}
           className="d-serif inline-block whitespace-nowrap text-[1.15em] text-[#ffb36b] [grid-area:1/1]"
-          initial={{ y: reducir ? 0 : "100%", opacity: 0, filter: reducir ? "none" : "blur(8px)" }}
-          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
-          exit={{ y: reducir ? 0 : "-100%", opacity: 0, filter: reducir ? "none" : "blur(8px)" }}
+          initial={{ y: reducir ? 0 : "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: reducir ? 0 : "-100%", opacity: 0 }}
           transition={{ duration: 0.55, ease: CURVA }}
         >
           {palabras[i]}

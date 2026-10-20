@@ -12,13 +12,14 @@
   --d-acento: #e50914;
   --d-calido: #ff8a3d;
   --d-cristal: rgba(255, 255, 255, 0.06);
-  --d-cristal-fuerte: rgba(30, 30, 34, 0.55);
+  --d-cristal-base: rgba(255, 255, 255, 0.05);
+  --d-cristal-fuerte: rgba(30, 30, 34, 0.6);
   --d-borde: rgba(255, 255, 255, 0.12);
   --d-reflejo: rgba(255, 255, 255, 0.22);
-  --d-sombra: 0 30px 80px -30px rgba(0, 0, 0, 0.8);
-  --d-orbe-a: rgba(229, 9, 20, 0.32);
-  --d-orbe-b: rgba(255, 138, 61, 0.22);
-  --d-orbe-c: rgba(120, 80, 255, 0.14);
+  --d-sombra: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  --d-orbe-a: rgba(229, 9, 20, 0.4);
+  --d-orbe-b: rgba(255, 138, 61, 0.28);
+  --d-orbe-c: rgba(120, 80, 255, 0.18);
   --d-curva: cubic-bezier(0.22, 1, 0.36, 1);
   background: var(--d-fondo);
   color: var(--d-texto);
@@ -33,13 +34,14 @@
   --d-suave: rgba(29, 29, 31, 0.64);
   --d-tenue: rgba(29, 29, 31, 0.42);
   --d-cristal: rgba(255, 255, 255, 0.55);
-  --d-cristal-fuerte: rgba(255, 255, 255, 0.72);
+  --d-cristal-base: rgba(255, 255, 255, 0.62);
+  --d-cristal-fuerte: rgba(255, 255, 255, 0.75);
   --d-borde: rgba(255, 255, 255, 0.9);
   --d-reflejo: rgba(255, 255, 255, 0.9);
   --d-sombra: 0 30px 70px -30px rgba(40, 30, 20, 0.28);
-  --d-orbe-a: rgba(229, 9, 20, 0.16);
-  --d-orbe-b: rgba(255, 138, 61, 0.2);
-  --d-orbe-c: rgba(120, 80, 255, 0.1);
+  --d-orbe-a: rgba(229, 9, 20, 0.2);
+  --d-orbe-b: rgba(255, 138, 61, 0.26);
+  --d-orbe-c: rgba(120, 80, 255, 0.14);
   color-scheme: light;
 }
 
@@ -50,20 +52,24 @@
   letter-spacing: -0.01em;
 }
 
-/* Cristal: desenfoque + saturación, borde translúcido y un reflejo arriba */
+/* Cristal: base translúcida con brillo en diagonal, borde claro y un reflejo arriba.
+   Sin backdrop-filter: desenfocar lo que hay detrás en cada tarjeta era lo que más pesaba al hacer scroll. */
 .cristal {
   position: relative;
-  background: linear-gradient(145deg, var(--d-cristal), transparent 140%), var(--d-cristal);
-  backdrop-filter: blur(28px) saturate(170%);
-  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 55%),
+    var(--d-cristal-base);
   border: 1px solid var(--d-borde);
   box-shadow:
     inset 0 1px 0 var(--d-reflejo),
     inset 0 -1px 0 rgba(255, 255, 255, 0.03),
     var(--d-sombra);
 }
+/* Solo el menú, el editor y las piezas pequeñas que flotan sobre el contenido desenfocan de verdad */
 .cristal-fuerte {
   background: var(--d-cristal-fuerte);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
 /* Foco de luz que sigue al ratón (las variables --mx/--my las pone useFoco) */
@@ -124,34 +130,34 @@
   overflow: hidden;
   pointer-events: none;
 }
+/* Degradados radiales en vez de filter: blur (que se recalculaba en cada fotograma de la animación) */
 .orbes span {
   position: absolute;
   border-radius: 999px;
-  filter: blur(90px);
   will-change: transform;
 }
 .orbes span:nth-child(1) {
-  width: 46vw;
-  height: 46vw;
-  left: -10vw;
-  top: 10vh;
-  background: var(--d-orbe-a);
+  width: 70vw;
+  height: 70vw;
+  left: -22vw;
+  top: -2vh;
+  background: radial-gradient(closest-side, var(--d-orbe-a), transparent);
   animation: orbe-1 26s ease-in-out infinite alternate;
 }
 .orbes span:nth-child(2) {
-  width: 38vw;
-  height: 38vw;
-  right: -8vw;
-  top: 40vh;
-  background: var(--d-orbe-b);
+  width: 60vw;
+  height: 60vw;
+  right: -20vw;
+  top: 28vh;
+  background: radial-gradient(closest-side, var(--d-orbe-b), transparent);
   animation: orbe-2 32s ease-in-out infinite alternate;
 }
 .orbes span:nth-child(3) {
-  width: 30vw;
-  height: 30vw;
-  left: 30vw;
-  bottom: -12vh;
-  background: var(--d-orbe-c);
+  width: 50vw;
+  height: 50vw;
+  left: 22vw;
+  bottom: -24vh;
+  background: radial-gradient(closest-side, var(--d-orbe-c), transparent);
   animation: orbe-3 38s ease-in-out infinite alternate;
 }
 @keyframes orbe-1 {

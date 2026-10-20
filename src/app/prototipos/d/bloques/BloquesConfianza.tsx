@@ -38,7 +38,7 @@ export function BloqueCifras({ bloque }: { bloque: Bloque }) {
           {PREMIOS.map((p, i) => (
             <Revelar key={p.premio} retraso={0.2 + i * 0.08} className="lg:col-span-3">
               <div data-foco className="cristal relative flex h-full min-h-[200px] items-center gap-6 overflow-hidden rounded-[32px] p-7">
-                <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[var(--d-orbe-b)] blur-3xl" />
+                <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-b),transparent)]" />
                 <Icono nombre="laurel" className="h-16 w-16 shrink-0 text-[#e9b45c]" />
                 <div className="relative">
                   <p className="text-3xl font-black tracking-[-0.04em] sm:text-4xl">{p.premio}</p>

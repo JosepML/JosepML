@@ -94,10 +94,11 @@ function Capa({ viaje, alSalir, alLlegar }: { viaje: Viaje; alSalir: () => void;
     };
     return (
       <div className="pointer-events-auto fixed inset-0 z-[90]">
+        {/* Velo oscuro solo con opacidad: animar un desenfoque a pantalla completa daba tirones */}
         <motion.div
-          className="absolute inset-0 bg-black/30"
-          initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-          animate={{ opacity: llegando ? 0 : 1, backdropFilter: llegando ? "blur(0px)" : "blur(24px)" }}
+          className="absolute inset-0 bg-black/60"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: llegando ? 0 : 1 }}
           transition={{ duration: llegando ? 0.45 : 0.6 }}
         />
         <motion.img
