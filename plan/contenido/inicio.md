@@ -24,7 +24,7 @@ Alternativas para la frase principal (que elija Josep):
 - **Título de sección:** Lo que hago
 - **Dirección de fotografía.** Decido qué siente quien mira: la luz, el encuadre y el color al servicio de la historia. → Ver servicio
 - **Filmmaker.** De la primera idea al último fotograma, con una sola mirada de principio a fin. → Ver servicio
-- **Edición.** Soy músico antes que editor: en el montaje construyo una partitura. → Ver servicio
+- **Edición.** Percusionista desde los 3 años: monto con el ritmo por dentro. → Ver servicio
 
 ## 3. Trabajos destacados
 

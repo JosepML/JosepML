@@ -15,14 +15,14 @@ Basado en el texto actual de la portada. Lo marcado `[pendiente]` son datos que 
 
 Desde hace más de quince años mi objetivo es el mismo: conectar con la gente a través de las historias.
 
-Empecé por la música y la interpretación, pero fue en el vídeo, y después en el cine, donde encontré la forma de juntar todo lo que me apasiona. Estudié el ciclo superior de Realización `[pendiente: centro y año]`, donde rodé El Viajero, un corto de ciencia ficción hecho con cuatro personas y casi sin presupuesto. En 2024, mi corto "Y el año que viene, ¿qué?" quedó finalista en el ESCAC Dreammakers Contest de Cupra.
+Soy percusionista desde los 3 años. Empecé por la música y la interpretación, pero fue en el vídeo, y después en el cine, donde encontré la forma de juntar todo lo que me apasiona. Estudié el ciclo superior de Realización `[pendiente: centro y año]`, donde rodé El Viajero, un corto de ciencia ficción hecho con cuatro personas y casi sin presupuesto. En 2024, mi corto "Y el año que viene, ¿qué?" quedó finalista en el ESCAC Dreammakers Contest de Cupra.
 
 En paralelo, llevo más de ocho años compartiendo mi pasión en YouTube. Empecé en un canal llamado "Del Fan, Para el Fan" y hoy, en mi canal, recreo planos míticos del cine con muy pocos recursos: Nosferatu, El Padrino o El Imperio Contraataca. Es mi forma de demostrar que el cine es ingenio antes que dinero, y de aprender un poco más en cada plano.
 
 ## Cómo trabajo
 
 - **La historia manda.** Antes de pensar en cámaras o luces, quiero entender qué quieres contar y a quién.
-- **El ritmo lo llevo dentro.** Mi formación como músico se nota en el montaje: la imagen baila con la música.
+- **El ritmo lo llevo dentro.** Llevo tocando la percusión desde los 3 años y se nota en el montaje: la imagen baila con la música.
 - **Resuelvo.** Si falta presupuesto, sobra ingenio. Una rejilla de estufa puede ser la ventana de Vito Corleone.
 - **Equipo.** Cada proyecto es una colaboración. Me gusta sumar y que todo el mundo en el set se sienta parte.
 

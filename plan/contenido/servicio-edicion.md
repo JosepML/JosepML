@@ -13,7 +13,7 @@ Campos para la tabla `servicios`. Sin precios: cada presupuesto nace de lo que p
 
 El montaje es donde la historia se escribe por última vez. Puedes tener los mejores planos del mundo y que no emocionen, o unas pocas imágenes que te atrapen. La diferencia está en el ritmo.
 
-Soy músico antes que editor, y eso lo cambia todo. No encadeno planos bonitos: construyo una partitura. Busco los acentos, los silencios, el momento exacto en que un corte te pilla desprevenido. En Kiboko tuve que tejer horas de entrevistas reales con escenas de ficción sin que se notaran las costuras. En los aftermovies de conciertos, lo que busco es que la imagen baile al compás del directo.
+Toco la percusión desde los 3 años, y eso se nota cuando monto. No encadeno planos bonitos: construyo una partitura. Busco los acentos, los silencios, el momento exacto en que un corte te pilla desprevenido. En Kiboko tuve que tejer horas de entrevistas reales con escenas de ficción sin que se notaran las costuras. En los aftermovies de conciertos, lo que busco es que la imagen baile al compás del directo.
 
 ## Lo que aporto
 
