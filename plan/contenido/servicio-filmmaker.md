@@ -1,63 +1,60 @@
 # Servicio: Filmmaker
 
-Campos para la tabla `servicios`.
+Campos para la tabla `servicios`. Sin precios: cada presupuesto nace de lo que pide cada proyecto.
 
 - **nombre:** Filmmaker
 - **slug:** `filmmaker`
 - **orden:** 2
-- **frase:** Tu vídeo, de la idea a la pantalla.
-- **precio orientativo:** Desde `[X]` € por pieza `[pendiente: cifra de Josep]`
-- **SEO título:** Filmmaker y videógrafo en Alicante · Josep Mira Lozano
-- **SEO descripción:** Spots, vídeo corporativo, videoclips, conciertos, bodas y eventos deportivos en Alicante y la Comunidad Valenciana. Idea, rodaje y edición.
+- **frase:** De la primera idea al último fotograma.
+- **SEO título:** Filmmaker en Alicante · Josep Mira Lozano
+- **SEO descripción:** Spots, videoclips, conciertos, bodas y eventos contados como cine. Idea, rodaje y montaje con una mirada propia.
 
-## Descripción
+## Mi mirada
 
-Si necesitas un vídeo y no quieres coordinar a cinco personas, aquí entro yo. Me encargo de todo: pensamos juntos la idea, la ruedo y la monto. Lo he hecho con un spot para JUNO Media, con el videoclip de Arkano, con orquestas, con carreras de ciclismo y con bodas. Vengo de la música, así que el ritmo lo llevo dentro, y se nota en el montaje.
+Como filmmaker me encargo de todo el viaje: la idea, el rodaje y el montaje. Me gusta porque la pieza sale de una sola mirada, de principio a fin, y nada se pierde por el camino.
 
-## Qué incluye
+Da igual que sea un spot, el videoclip de Arkano, una orquesta en fiestas, una carrera de ciclismo o una boda: siempre busco la historia que hay dentro. Vengo de la música y el ritmo lo llevo dentro, así que ruedo pensando ya en el montaje, en dónde va a caer cada corte. Y cuando toca grabar momentos reales, intento que la gente se olvide de la cámara, porque lo auténtico es lo que luego emociona.
 
-- Idea y guion (si no los tienes)
-- Planificación del rodaje: localizaciones, horarios y lo que haga falta
-- Grabación con mi equipo
-- Edición, color y sonido
-- Versiones para redes sociales (vertical, cortes cortos) si las necesitas
-- Hasta `[2]` rondas de cambios `[confirmar con Josep]`
+## Lo que aporto
 
-## Para quién
+- La idea y el guion, si aún no existen
+- Una forma de contarlo que no se parezca a lo de siempre
+- El rodaje con mi equipo, discreto cuando hace falta y ambicioso cuando se puede
+- El montaje, el color y el sonido con el mismo cuidado que el rodaje
+- Versiones para redes sacadas del mismo material
 
-- Marcas y empresas que quieren un spot o un vídeo corporativo
-- Artistas y grupos que preparan un videoclip o quieren grabar un concierto
-- Organizadores de eventos y competiciones deportivas
-- Parejas que se casan y quieren una película de su boda, no un vídeo más
+## Con quién trabajo
 
-## Cómo trabajo
+Marcas y empresas con algo que contar, artistas y grupos de música, organizadores de eventos y competiciones, y parejas que quieren una película de su boda y no un vídeo más.
 
-1. **Me cuentas.** Qué necesitas, para cuándo y dónde se va a ver.
-2. **Te propongo.** Una idea, un plan de rodaje y un presupuesto cerrado.
-3. **Rodamos.** Discreto cuando toca (bodas, eventos) y con equipo cuando hace falta (spots, videoclips).
-4. **Te entrego.** Primera versión, cambios y entrega final en los formatos que necesites.
+## Cómo trabajamos
+
+1. **Escucho.** Qué quieres contar, a quién y dónde se va a ver.
+2. **Imagino.** Te propongo una idea y cómo rodarla.
+3. **Ruedo.** Con la mirada puesta ya en el montaje.
+4. **Monto.** Te enseño una primera versión y la afinamos juntos hasta que te emocione.
 
 ## Preguntas frecuentes
 
-**¿Cuánto se tarda en tener el vídeo?**
-Depende del tipo de pieza. Un aftermovie o un reel, en pocos días. Un spot o un videoclip, unas semanas. Te doy la fecha exacta en el presupuesto. `[confirmar plazos con Josep]`
-
-**¿Puedes hacer también los vídeos para redes?**
-Sí. Llevo más de nueve años creando contenido y he editado miles de vídeos verticales. Puedo sacar reels del mismo rodaje.
-
-**¿Grabas bodas?**
-Sí. Mis vídeos de boda son como un tráiler documental de unos 20 minutos, con la música elegida al milímetro.
-
 **¿Necesito tener la idea clara?**
-No. Muchas veces la mejor idea sale de la primera conversación. Tú me cuentas qué quieres conseguir y yo te propongo cómo contarlo.
+No. Muchas veces la mejor idea sale de la primera conversación. Tú me cuentas qué quieres provocar y yo te propongo cómo contarlo.
 
-**¿Trabajas fuera de Alicante?**
-Sí, en toda la Comunidad Valenciana y donde haga falta. El desplazamiento se presupuesta aparte.
+**¿Qué tiene de distinto un vídeo tuyo de boda?**
+Lo planteo como un tráiler documental de unos 20 minutos, con la música elegida al milímetro. Una película que apetezca volver a ver, no un resumen del día.
+
+**¿Y en conciertos y eventos?**
+Antes de tocar la imagen construyo la música. Así la edición respira con el directo y te sientes en primera fila.
+
+**¿Puedes hacer también contenido para redes?**
+Sí. Llevo más de nueve años creando contenido y sé lo que hace que alguien deje de hacer scroll.
+
+**¿Dónde trabajas?**
+Trabajo desde Alicante en toda la Comunidad Valenciana, y donde me lleve la historia.
 
 ## Proyectos relacionados
 
 EXPÁNDE(TE), spot para Juno Media · 100 Baladas, Arkano · Conciertos · Eventos deportivos
 
-## Botón
+## Llamada final
 
-Pide presupuesto → /contacto?servicio=filmmaker
+¿Tienes algo que contar? → Cuéntamelo (/contacto?servicio=filmmaker)

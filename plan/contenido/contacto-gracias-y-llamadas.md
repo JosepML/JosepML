@@ -16,9 +16,9 @@ Recreaciones se enlaza desde Trabajos (filtro y tarjeta), desde Sobre mí y desd
 ## Contacto
 
 - **SEO título:** Contacto · Josep Mira Lozano
-- **SEO descripción:** Cuéntame tu proyecto audiovisual en Alicante o la Comunidad Valenciana. Te respondo con ideas y presupuesto.
+- **SEO descripción:** Cuéntame tu proyecto audiovisual en Alicante o la Comunidad Valenciana. Hablemos de cómo contarlo.
 - **Título:** Hablemos
-- **Introducción:** ¿Tienes un proyecto en mente? Cuéntamelo con tus palabras, aunque solo sea una idea. Te contesto en menos de 48 horas `[confirmar]` con lo que se me ocurre y un presupuesto.
+- **Introducción:** ¿Tienes un proyecto en mente? Cuéntamelo con tus palabras, aunque solo sea una idea. Cada proyecto es distinto, así que el presupuesto nace de lo que necesite el tuyo. Empecemos por la historia.
 
 ### Formulario guiado
 
@@ -27,7 +27,6 @@ Recreaciones se enlaza desde Trabajos (filtro y tarjeta), desde Sobre mí y desd
 | servicio | ¿Qué necesitas? | Opciones: Dirección de fotografía · Filmmaker (idea, rodaje y edición) · Edición · Aún no lo sé | Sí |
 | tipo | ¿Qué tipo de proyecto es? | Opciones: Cortometraje · Videoclip · Spot o vídeo de marca · Evento o concierto · Boda · Contenido para redes · Otro | No |
 | fecha | ¿Para cuándo? | Fecha aproximada o "Sin fecha aún" | No |
-| presupuesto | Presupuesto aproximado | Opciones: Menos de 500 € · 500 a 1.500 € · 1.500 a 3.000 € · Más de 3.000 € · Prefiero hablarlo `[revisar tramos con Josep]` | No |
 | mensaje | Cuéntame tu idea | Texto largo. Ejemplo: "Somos un grupo de Alcoy y queremos un videoclip para nuestro próximo single..." | Sí |
 | nombre | Tu nombre | Texto | Sí |
 | email | Tu correo | Email | Sí |
@@ -48,7 +47,7 @@ Recreaciones se enlaza desde Trabajos (filtro y tarjeta), desde Sobre mí y desd
 ## Gracias
 
 - **Título:** ¡Gracias por escribirme!
-- **Texto:** Ya tengo tu mensaje. Lo leo con calma y te contesto en menos de 48 horas `[confirmar]`. Mientras tanto, puedes echar un vistazo a mis trabajos.
+- **Texto:** Ya tengo tu mensaje. Lo leo con calma y te contesto en cuanto pueda. Mientras tanto, puedes echar un vistazo a mis trabajos.
 - **Botones:** Ver trabajos → /trabajos · Volver al inicio → /
 
 ## Legales
@@ -61,9 +60,9 @@ Recreaciones se enlaza desde Trabajos (filtro y tarjeta), desde Sobre mí y desd
 | Dónde | Texto | Botón |
 | --- | --- | --- |
 | Final de Inicio | ¿Tienes una historia que contar? | Hablemos |
-| Página de servicio | ¿Encaja con lo que buscas? | Pide presupuesto |
+| Página de servicio | (frase propia de cada servicio) | Cuéntamela |
 | Ficha de proyecto | ¿Quieres algo así? | Hablemos |
-| Recreaciones | ¿Te imaginas lo que puedo hacer con tu presupuesto? | Hablemos |
+| Recreaciones | ¿Y si lo próximo que creamos es tu historia? | Hablemos |
 | Sobre mí | Me encantará escucharte. | Hablemos |
 | Final de artículo | Si tienes un proyecto entre manos, hablemos. | Escríbeme |
 | Página 404 | Este plano se quedó en la sala de montaje. | Volver al inicio |

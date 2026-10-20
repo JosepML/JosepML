@@ -33,7 +33,7 @@ Los textos de cada proyecto se migran tal cual (ver `mapa-de-contenido.md`). Tí
 - **Introducción:** Recrear un plano de una gran película es la mejor escuela que conozco. Lo desmonto pieza a pieza, luz, encuadre, textura, y lo vuelvo a montar en casa con lo que tengo a mano. Así demuestro que el cine es ingenio antes que presupuesto.
 - **Deslizador:** "Original" / "Mi recreación"
 - **Por cada recreación:** vídeo, deslizador antes/después y los textos actuales (contexto, proceso y retos, resultado).
-- **Llamada final:** ¿Te imaginas lo que puedo hacer con tu presupuesto? → Hablemos
+- **Llamada final:** ¿Y si lo próximo que creamos es tu historia? → Hablemos
 
 Orden: Nosferatu · El Padrino · Star Wars (Luke y Vader) · Star Wars sin CGI
 

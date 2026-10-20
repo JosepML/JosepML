@@ -1,5 +1,7 @@
 # Contenido de la web nueva (fase 2)
 
+**Enfoque (decidido por Josep, 2026-10-20):** la web es un escaparate de Josep, de su mirada, su oficio, su gusto y su arte; no un catálogo con tarifas. Sin precios: cada presupuesto nace de las necesidades de cada proyecto.
+
 Textos y mapa de contenido para que Josep los revise y la fase 4 los cargue en la base de datos. Todo lo que está entre `[corchetes]` falta por confirmar.
 
 | Archivo | Qué tiene |
@@ -15,14 +17,11 @@ Textos y mapa de contenido para que Josep los revise y la fase 4 los cargue en l
 
 ## Lo que necesito de Josep
 
-1. **Precios orientativos** "Desde X €" para Dirección de fotografía (por jornada), Filmmaker (por pieza) y Edición (por pieza).
-2. **Frase principal** de la portada: una de las 3 propuestas de `inicio.md` (recomendada: "Historias hechas de luz.").
-3. **Plazo de respuesta** a los mensajes (he puesto 48 horas) y **rondas de cambios** incluidas (he puesto 2).
-4. **Tramos de presupuesto** del formulario de contacto.
-5. **WhatsApp:** número (el de la web actual es de relleno) y si el correo de contacto sigue siendo josep.mira@gmail.com.
-6. **Sobre mí:** centro y año del ciclo de Realización, lista corta de tu equipo y programas de edición.
-7. **Fotos tuyas** trabajando (para Sobre mí e Inicio).
-8. **Opiniones de clientes:** si tienes alguna, aunque sea por WhatsApp, con permiso para publicarla.
-9. **Reel** para la portada: si no hay uno nuevo, uso "Y el año que viene, ¿qué?" como ahora o monto uno provisional en la fase 3.
-10. **Logos de marcas:** confirmar que puedes mostrar Disney, Star Wars y Kinepolis.
-11. **Resultados vacíos** de Kiboko, EXPÁNDE(TE), EP Oscuridad, Sin Tiempo, Conciertos y Bodas: si tienes datos (visualizaciones, festivales, qué dijo el cliente), los añado.
+1. **Frase principal** de la portada: una de las 3 propuestas de `inicio.md` (recomendada: "Historias hechas de luz.").
+2. **WhatsApp:** número (el de la web actual es de relleno) y si el correo de contacto sigue siendo josep.mira@gmail.com.
+3. **Sobre mí:** centro y año del ciclo de Realización, lista corta de tu equipo y programas de edición.
+4. **Fotos tuyas** trabajando (para Sobre mí e Inicio).
+5. **Opiniones de clientes:** si tienes alguna, aunque sea por WhatsApp, con permiso para publicarla.
+6. **Reel** para la portada: si no hay uno nuevo, uso "Y el año que viene, ¿qué?" como ahora o monto uno provisional en la fase 3.
+7. **Logos de marcas:** confirmar que puedes mostrar Disney, Star Wars y Kinepolis.
+8. **Resultados vacíos** de Kiboko, EXPÁNDE(TE), EP Oscuridad, Sin Tiempo, Conciertos y Bodas: si tienes datos (visualizaciones, festivales, qué dijo el cliente), los añado.

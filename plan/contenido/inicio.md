@@ -11,7 +11,7 @@ Tono: primera persona, cercano. Los textos entre corchetes `[...]` son datos que
 
 - **Antetítulo:** Josep Mira Lozano · Director de fotografía y filmmaker
 - **Frase principal:** Historias hechas de luz.
-- **Introducción:** Me llamo Josep y llevo más de quince años detrás de una cámara. Ruedo cortos, videoclips, spots y eventos, y cuido cada plano como si fuera el único.
+- **Introducción:** Me llamo Josep y llevo más de quince años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí.
 - **Botones:** "Ver trabajos" → /trabajos · "Hablemos" → /contacto
 
 Alternativas para la frase principal (que elija Josep):
@@ -21,10 +21,10 @@ Alternativas para la frase principal (que elija Josep):
 
 ## 2. Qué hago (3 servicios)
 
-- **Título de sección:** En qué te puedo ayudar
-- **Dirección de fotografía.** Diseño la luz y la cámara para que cada plano diga lo que tiene que decir. Para cortos, videoclips y spots. → Ver servicio
-- **Filmmaker.** Me encargo de tu vídeo de principio a fin: idea, rodaje y montaje. Para marcas, artistas y eventos. → Ver servicio
-- **Edición.** Le doy ritmo, color y sonido a tu material para que se sienta cine. → Ver servicio
+- **Título de sección:** Lo que hago
+- **Dirección de fotografía.** Decido qué siente quien mira: la luz, el encuadre y el color al servicio de la historia. → Ver servicio
+- **Filmmaker.** De la primera idea al último fotograma, con una sola mirada de principio a fin. → Ver servicio
+- **Edición.** Soy músico antes que editor: en el montaje construyo una partitura. → Ver servicio
 
 ## 3. Trabajos destacados
 
@@ -54,7 +54,5 @@ Disney · Star Wars · Consell Valencià de la Joventut · Kinepolis · Ocisport
 ## 7. Llamada final
 
 - **Título:** ¿Tienes una historia que contar?
-- **Texto:** Cuéntamela. Te respondo en menos de 48 horas con ideas y un presupuesto a medida.
+- **Texto:** Cuéntamela. Me encantará escucharla y pensar cómo llevarla a la pantalla.
 - **Botón:** Hablemos → /contacto
-
-`[Confirmar con Josep el plazo de respuesta "48 horas".]`
