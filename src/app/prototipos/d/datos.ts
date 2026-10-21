@@ -451,12 +451,27 @@ export const PASOS = [
   { titulo: "Cuido el final", texto: "Montaje, color y sonido con el mismo mimo que el rodaje, hasta que el resultado sea el que soñamos." },
 ];
 
+/**
+ * Lo que grabo como filmmaker: retoma la rejilla de servicios de la web antigua (vídeo corporativo,
+ * eventos, edición para redes...) con los trabajos reales de cada tipo. Sin precios. Cada pieza lleva al
+ * proyecto que la representa. En la fase 4, tabla `servicios_filmmaker` (o tipos de proyecto con texto).
+ */
+export const FILMMAKER = [
+  { nombre: "Spots y vídeo corporativo", texto: "Para marcas y empresas que quieren contar algo con alma, no solo enseñar un producto.", proyecto: "expandete-spot-juno-media" },
+  { nombre: "Videoclips", texto: "La canción manda: una imagen que respira al ritmo de la música.", proyecto: "100-baladas-arkano" },
+  { nombre: "Conciertos y aftermovies", texto: "Monto como músico, para que la imagen baile al compás del directo.", proyecto: "conciertos" },
+  { nombre: "Bodas", texto: "Una película que apetezca volver a ver, no un resumen del día.", proyecto: "bodas" },
+  { nombre: "Eventos deportivos", texto: "El esfuerzo, la técnica y la tensión, con el espectador al borde del asiento.", proyecto: "eventos-deportivos" },
+  { nombre: "Contenido para redes", texto: "Piezas verticales pensadas para el móvil, con el ritmo de cada perfil.", proyecto: "reels-redes-sociales" },
+];
+
 // ---------------------------------------------------------------------------
 // Bloques: así se guardará cada sección en la tabla `bloques` (pagina, orden, tipo, visible, datos jsonb)
 
 export type TipoBloque =
   | "portada"
   | "servicios"
+  | "filmmaker"
   | "trabajos"
   | "cifras"
   | "proceso"
@@ -478,9 +493,10 @@ export type Bloque = {
 export const CATALOGO: Record<TipoBloque, { nombre: string; descripcion: string; datos: Bloque["datos"] }> = {
   portada: { nombre: "Portada con reel", descripcion: "Vídeo a pantalla completa y frase principal", datos: { antetitulo: "Director de fotografía · Filmmaker · Editor", titulo: "Historias hechas de luz.", texto: "Me llamo Josep y llevo más de nueve años contando historias con luz, encuadre y ritmo. Cada plano que firmo lleva algo de mí." } },
   servicios: { nombre: "Servicios", descripcion: "Lo que ofreces, con lo que aportas y para quién", datos: { antetitulo: "Lo que hago", titulo: "¿En qué te puedo ayudar?", texto: "Tres formas de trabajar juntos. Elige una y la vemos con calma." } },
+  filmmaker: { nombre: "Lo que grabo", descripcion: "Tipos de vídeo que haces como filmmaker, con un trabajo de cada uno", datos: { antetitulo: "Filmmaker", titulo: "Lo que puedo grabar para ti", texto: "Del spot a la boda: cada encargo con la misma mirada de cine." } },
   trabajos: { nombre: "Trabajos", descripcion: "Carrusel de proyectos con filtro por servicio", datos: { antetitulo: "Selección", titulo: "Trabajos de los que estoy orgulloso" } },
   cifras: { nombre: "Cifras y premios", descripcion: "Números, premios y canales de YouTube", datos: { antetitulo: "En números", titulo: "Más de nueve años detrás de la cámara" } },
-  proceso: { nombre: "Cómo trabajo", descripcion: "Pasos que se iluminan con el scroll", datos: { antetitulo: "Cómo trabajamos", titulo: "De tu idea a la pantalla, paso a paso" } },
+  proceso: { nombre: "Cómo trabajo", descripcion: "Los cuatro pasos de un encargo, de un vistazo", datos: { antetitulo: "Cómo trabajamos", titulo: "De tu idea a la pantalla, paso a paso" } },
   "sobre-mi": { nombre: "Sobre mí", descripcion: "Retrato y presentación personal", datos: { antetitulo: "Quién soy", titulo: "Hola, soy Josep", texto: "Empecé con la música y la interpretación, y en el vídeo encontré la forma de juntarlo todo. Desde entonces he rodado cortos, videoclips, spots, conciertos y bodas, y llevo más de nueve años en YouTube recreando planos míticos del cine con cuatro duros. Me gusta trabajar en equipo, resolver problemas en el set y que la gente se olvide de que hay una cámara.", imagen: "https://i.postimg.cc/Qh3FMz10/Captura-de-pantalla-2026-05-13-161052.png" } },
   opiniones: { nombre: "Opiniones", descripcion: "Frases de clientes en movimiento", datos: { antetitulo: "Opiniones", titulo: "Lo que dicen quienes han confiado en mí" } },
   clientes: { nombre: "Clientes", descripcion: "Franja de marcas con las que has trabajado", datos: { titulo: "Han confiado en mí" } },
@@ -489,7 +505,7 @@ export const CATALOGO: Record<TipoBloque, { nombre: string; descripcion: string;
   llamada: { nombre: "Llamada a la acción", descripcion: "Invitación a escribirte, con WhatsApp y correo", datos: { titulo: "¿Tienes una historia que contar?", texto: "Cuéntamela. Me encantará escucharla y pensar cómo llevarla a la pantalla." } },
 };
 
-const ORDEN_INICIAL: TipoBloque[] = ["portada", "servicios", "trabajos", "cifras", "sobre-mi", "proceso", "opiniones", "clientes", "blog", "llamada"];
+const ORDEN_INICIAL: TipoBloque[] = ["portada", "servicios", "filmmaker", "trabajos", "sobre-mi", "cifras", "proceso", "opiniones", "clientes", "blog", "llamada"];
 
 export const BLOQUES_INICIALES: Bloque[] = ORDEN_INICIAL.map((tipo) => ({
   id: tipo,

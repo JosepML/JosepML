@@ -109,7 +109,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
                   className="group relative block aspect-[2.39/1] w-full overflow-hidden rounded-[28px]"
                   aria-label="Ampliar fotograma"
                 >
-                  <img src={img(f, 1200)} alt={`Fotograma de ${p.titulo}`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
+                  <img src={img(f, 3840)} alt={`Fotograma de ${p.titulo}`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
                 </button>
               </Revelar>
             ))}
@@ -159,7 +159,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
             <div data-radio data-foco className="relative aspect-[2.39/1] overflow-hidden rounded-[40px] bg-black">
               <img
                 data-transicion
-                src={img(siguiente.poster, 1920)}
+                src={img(siguiente.poster, 3840)}
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105"
               />
@@ -188,7 +188,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
             onClick={() => setFoto(null)}
           >
             <motion.img
-              src={img(foto, 2048)}
+              src={img(foto, 3840)}
               alt=""
               className="max-h-[88svh] max-w-full rounded-[24px] shadow-2xl"
               initial={{ scale: 0.92 }}

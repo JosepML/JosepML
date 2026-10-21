@@ -190,14 +190,14 @@ export function Diapositivas({
   activo,
   className = "",
   intervalo = 1600,
-  ancho = 1080,
+  ancho = 1920,
 }: {
   imagenes: string[];
   activo: boolean;
   className?: string;
   intervalo?: number;
   /** Ancho de la imagen servida: el de la tarjeta en pantalla, no más (subirla a la GPU cuesta según sus píxeles) */
-  ancho?: 640 | 750 | 828 | 1080 | 1200 | 1920;
+  ancho?: 640 | 750 | 828 | 1080 | 1200 | 1920 | 3840;
 }) {
   const [i, setI] = useState(0);
   const reducir = useReducir();

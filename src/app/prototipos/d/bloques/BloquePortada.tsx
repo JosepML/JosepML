@@ -37,7 +37,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
     <section ref={ref} className="relative">
       <div className="relative h-svh min-h-[600px] p-2 sm:p-3">
         <motion.div
-          className="relative h-full w-full overflow-hidden rounded-[28px] bg-black sm:rounded-[36px]"
+          className="relative h-full w-full overflow-hidden rounded-[28px] bg-black [will-change:transform] sm:rounded-[36px]"
           style={anima ? { scale: escala } : undefined}
         >
           {/* El reel provisional es panorámico con bandas negras y subtítulos dentro: se recorta más para ocultarlos */}
@@ -99,7 +99,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                 transition={{ delay: 0.9, duration: 0.9, ease: CURVA }}
               >
                 {/* "Soy" en la letra base, discreto; la palabra que rota en la cursiva artística, más grande */}
-                <p className="flex items-baseline gap-[0.35em] text-lg font-medium tracking-[-0.01em] text-white/85 sm:text-xl">
+                <p className="flex items-baseline gap-[0.3em] text-[clamp(1.6rem,2.6vw,2.4rem)] font-bold leading-none tracking-[-0.03em] text-white">
                   Soy <PalabraRotatoria palabras={PAPELES} />
                 </p>
                 {texto && <p className="mt-3 max-w-lg text-[17px] leading-[1.6] text-white/80 [text-wrap:pretty] sm:text-lg">{texto}</p>}
@@ -174,7 +174,7 @@ function PalabraRotatoria({ palabras }: { palabras: string[] }) {
   }, [palabras.length]);
 
   return (
-    <span className="d-serif relative inline-grid text-[1.7em] leading-none">
+    <span className="d-serif relative inline-grid text-[1.24em] leading-none font-normal tracking-[-0.01em]">
       {palabras.map((p) => (
         <span key={p} className="invisible whitespace-nowrap pr-[0.1em] [grid-area:1/1]" aria-hidden>
           {p}
@@ -183,7 +183,7 @@ function PalabraRotatoria({ palabras }: { palabras: string[] }) {
       <AnimatePresence initial={false}>
         <motion.span
           key={palabras[i]}
-          className="whitespace-nowrap bg-gradient-to-r from-[#ff7a5c] to-[#ffc07a] bg-clip-text pb-[0.1em] pr-[0.1em] text-transparent [grid-area:1/1]"
+          className="whitespace-nowrap bg-gradient-to-r from-[#ff3b30] via-[#ff6a4d] to-[#ffb36b] bg-clip-text pb-[0.1em] pr-[0.1em] text-transparent [filter:drop-shadow(0_0_18px_rgba(255,80,60,0.35))] [grid-area:1/1]"
           initial={{ opacity: 0, y: reducir ? 0 : "0.35em", filter: reducir ? "none" : "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1.1, ease: CURVA, delay: 0.25 } }}
           exit={{ opacity: 0, y: reducir ? 0 : "-0.3em", filter: reducir ? "none" : "blur(6px)", transition: { duration: 0.8, ease: CURVA } }}

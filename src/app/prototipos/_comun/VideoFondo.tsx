@@ -54,7 +54,7 @@ export function VideoFondo({ id, inicio, poster, className = "", filtro, escala 
   return (
     <div ref={caja} className={`absolute inset-0 overflow-hidden bg-black ${className}`} style={{ filter: filtro }}>
       <img
-        src={img(poster, 2048)}
+        src={img(poster, 3840)}
         alt=""
         className={`absolute inset-0 h-full w-full object-cover ${reducir || video || !visible ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
         fetchPriority="high"

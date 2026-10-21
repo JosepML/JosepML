@@ -202,6 +202,17 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - El fotograma roto de El Cirujano se quita de la lista hasta que Josep pase otro (quedan los dos que funcionan).
 - **Lo que queda:** en la primera pasada por la portada caen unos 5 fotogramas de 24-50 ms al salir del hero hacia "Lo que hago" y al llegar a "Cómo trabajamos"; en una segunda pasada, ninguno. Es el navegador preparando por primera vez en la GPU esas zonas; probado quitando sombras, desenfoques, orbes, menú, iframe, animaciones de servicios y textos con degradado, y ninguno lo cambia.
 
+### 2026-10-21 · D: ronda de la tarde
+
+- **Calidad de imagen:** las fotos se sirven con calidad 90 y al menos al doble del tamaño en pantalla (tarjetas a 1200-1920 px, cabeceras y fotogramas a 3840). El optimizador no amplía por encima del original.
+- **Cómo trabajamos:** fuera el scroll paso a paso y el botón de saltar. Los cuatro pasos a la vez en una fila de tarjetas de cristal con su número; una línea fina los une y se traza al llegar; entran escalonadas y se iluminan al pasar el ratón.
+- **Selección:** tarjetas verticales más estrechas (se ven la central y casi dos vecinas por lado) y avance con flechas, puntos o clic con un deslizamiento propio de 0,6 s con curva suave (el "smooth" del navegador era brusco).
+- **"Soy …"** más grande y en negrita; la palabra que rota en la cursiva artística con un degradado rojo-cálido y un brillo sutil, ajustada para que su tamaño óptico iguale al de "Soy".
+- **Orden:** "En números" justo después de "Quién soy". Nueva sección **"Lo que puedo grabar para ti"** (Filmmaker), justo después de "Lo que hago": retoma la rejilla de servicios de la web antigua con seis tipos de encargo (spots y vídeo corporativo, videoclips, conciertos y aftermovies, bodas, eventos deportivos, redes), cada uno con la foto de un trabajo real que lleva a su ficha. Datos en `FILMMAKER` (datos.ts), sin precios. Bloques guardados con clave `proto-d-bloques-v5`.
+- **Lo que hago:** en reposo solo icono y nombre; al pasar el ratón sube la frase, para quién y el enlace (en táctil se ve todo). Recorte con `clip-path` y el mismo radio para que la imagen no asome bajo la sombra.
+- **Índice lateral** en la portada (solo escritorio): una marca fina por sección, la actual más larga y en rojo, nombre al pasar el ratón, clic para ir con la curva del scroll mágico. Aparece al salir del hero para no tapar el titular.
+- **Tirones:** la tarjeta del hero y la foto de Sobre mí cambian de escala con el scroll; ahora llevan `will-change: transform` para que el navegador no las vuelva a dibujar a cada tamaño. Primera pasada por la portada: de 7-8 fotogramas lentos a 4. Comparado con el scroll nativo del navegador (6 fotogramas lentos), el scroll mágico no es la causa. Los que quedan aparecen la primera vez que se ve una sección con muchas fotos grandes.
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).

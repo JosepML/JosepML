@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { BloquePortada } from "./bloques/BloquePortada";
-import { BloqueServicios } from "./bloques/BloqueServicios";
+import { BloqueFilmmaker, BloqueServicios } from "./bloques/BloqueServicios";
 import { BloqueTrabajos } from "./bloques/BloqueTrabajos";
 import { BloqueClientes, BloqueCifras, BloqueOpiniones } from "./bloques/BloquesConfianza";
 import { BloqueBlog, BloqueLlamada, BloqueProceso, BloqueSobreMi, BloqueTexto, Pie } from "./bloques/BloquesPersonales";
@@ -10,11 +10,13 @@ import { startTransition, useEffect, useState } from "react";
 import { img } from "../_comun/imagen";
 import { CATALOGO, imagenesDe, PROYECTOS, SERVICIOS, type Bloque, type TipoBloque } from "./datos";
 import { useEstadoD } from "./estado";
+import { IndiceLateral } from "./IndiceLateral";
 
 /** Cada tipo de bloque de la base de datos tiene su componente. Un tipo nuevo = un componente nuevo. */
 const COMPONENTES: Record<TipoBloque, (p: { bloque: Bloque }) => React.ReactNode> = {
   portada: BloquePortada,
   servicios: BloqueServicios,
+  filmmaker: BloqueFilmmaker,
   trabajos: BloqueTrabajos,
   cifras: BloqueCifras,
   proceso: BloqueProceso,
@@ -37,13 +39,13 @@ function usePrecargaImagenes() {
     const cancelar = window.cancelIdleCallback ?? window.clearTimeout;
     const id = ocioso(() => {
       const urls = new Set<string>();
-      for (const s of SERVICIOS) imagenesDe(s.slug).forEach((u) => urls.add(img(u, 750)));
+      for (const s of SERVICIOS) imagenesDe(s.slug).forEach((u) => urls.add(img(u, 1200)));
       for (const p of PROYECTOS) {
-        (p.fotogramas.length > 1 ? p.fotogramas : [p.poster]).forEach((u) => urls.add(img(u, 1080)));
+        (p.fotogramas.length > 1 ? p.fotogramas : [p.poster]).forEach((u) => urls.add(img(u, 1920)));
         urls.add(img(p.poster, 256));
       }
       const sobre = CATALOGO["sobre-mi"].datos.imagen;
-      if (sobre) urls.add(img(sobre, 1080));
+      if (sobre) urls.add(img(sobre, 1920));
       for (const u of urls) {
         const i = new Image();
         i.decoding = "async";
@@ -112,6 +114,7 @@ export function PortadaD() {
         })}
       </AnimatePresence>
       <Pie />
+      <IndiceLateral bloques={visibles} />
     </main>
   );
 }

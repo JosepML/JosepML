@@ -1,135 +1,51 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useEscritorio, usePunteroFino, useReducir } from "../../_comun/hooks";
+import { usePunteroFino, useReducir } from "../../_comun/hooks";
 import { AJUSTES, ARTICULOS, PASOS, SERVICIOS, type Bloque } from "../datos";
 import { Icono } from "../Iconos";
-import { Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "../piezas";
-import { deslizarA, encuadre } from "../scrollMagico";
+import { CURVA, Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "../piezas";
 import { img } from "../../_comun/imagen";
 
+
 /**
- * Cómo trabajo: en ordenador el título se queda fijo y el paso activo sale del avance del scroll por la
- * columna de pasos (un solo valor, sin parpadeos). En móvil y tableta, lista normal sin atenuar.
+ * Cómo trabajo: los cuatro pasos a la vez, en una fila de tarjetas de cristal (dos columnas en tableta,
+ * una en móvil). Al llegar, una línea fina se traza de izquierda a derecha y las tarjetas entran
+ * escalonadas; al pasar el ratón, la tarjeta se ilumina. Encaja con el scroll normal: se ve de un vistazo.
  */
 export function BloqueProceso({ bloque }: { bloque: Bloque }) {
-  const escritorio = useEscritorio();
   const reducir = useReducir();
-  const [activo, setActivo] = useState(0);
-  const pasos = useRef<HTMLDivElement>(null);
-  const tarjetas = useRef<(HTMLDivElement | null)[]>([]);
-  const { scrollYProgress } = useScroll({ target: pasos, offset: ["start 50%", "end 50%"] });
-  const { scrollY } = useScroll();
-  const seccion = useRef<HTMLElement>(null);
-  const visible = useInView(seccion);
-
-  // Paso activo: el que tiene el centro más cerca del centro de la pantalla. Coincide con donde deja
-  // cada paso el scroll mágico, que centra uno por gesto de rueda (cada paso lleva data-punto).
-  // Solo se calcula con la sección en pantalla (antes medía las tarjetas en cada scroll de toda la página).
-  useMotionValueEvent(scrollY, "change", () => {
-    if (!visible) return;
-    const centro = window.innerHeight / 2;
-    let mejor = 0;
-    let distancia = Infinity;
-    tarjetas.current.forEach((t, i) => {
-      if (!t) return;
-      const r = t.getBoundingClientRect();
-      const d = Math.abs(r.top + r.height / 2 - centro);
-      if (d < distancia) {
-        distancia = d;
-        mejor = i;
-      }
-    });
-    setActivo((a) => (a === mejor ? a : mejor));
-  });
-
   return (
-    <section ref={seccion} className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[10svh]">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-        <div className="lg:sticky lg:top-[22svh] lg:self-start">
-          <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
-          <div className="mt-12 hidden items-end gap-6 lg:flex">
-            <div className="relative h-40 w-[3px] overflow-hidden rounded-full bg-[var(--d-borde)]">
-              <motion.div
-                className="absolute inset-x-0 top-0 h-full origin-top rounded-full bg-gradient-to-b from-[var(--d-acento)] to-[var(--d-calido)]"
-                style={{ scaleY: scrollYProgress }}
-              />
-            </div>
-            <div>
-              {/* Los números se apilan en la misma celda y se funden: nada salta aunque el scroll sea rápido */}
-              <div className="grid">
-                {PASOS.map((_, i) => (
-                  <span
-                    key={i}
-                    className="text-[7rem] font-extrabold leading-none tracking-[-0.06em] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] [grid-area:1/1]"
-                    style={{ opacity: activo === i ? 1 : 0, transform: `translateY(${activo === i ? 0 : activo > i ? -24 : 24}px)` }}
-                    aria-hidden={activo !== i}
-                  >
+    <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
+      <div className="mx-auto max-w-7xl">
+        <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
+        <div className="relative mt-14 lg:mt-[6svh]">
+          {/* Línea que une los pasos (solo en escritorio), trazada una vez al aparecer */}
+          <motion.span
+            aria-hidden
+            className="absolute left-0 right-0 top-[2.1rem] hidden h-px origin-left bg-gradient-to-r from-[var(--d-acento)] via-[var(--d-calido)] to-transparent lg:block"
+            initial={{ scaleX: reducir ? 1 : 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 1.4, ease: CURVA }}
+          />
+          <ol className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+            {PASOS.map((p, i) => (
+              <Revelar key={p.titulo} retraso={0.15 + i * 0.12}>
+                <li data-foco className="cristal group h-full rounded-[32px] p-7 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 lg:p-8">
+                  <span className="relative flex h-[2.6rem] w-[2.6rem] items-center justify-center rounded-full bg-[var(--d-acento)] text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(229,9,20,0.7)]">
                     0{i + 1}
                   </span>
-                ))}
-              </div>
-              {/* Los cuatro pasos como accesos directos: el activo resaltado, cualquiera se puede pulsar */}
-              <div className="mt-2 flex items-center gap-1" role="tablist" aria-label="Pasos">
-                {PASOS.map((p, i) => (
-                  <button
-                    key={p.titulo}
-                    type="button"
-                    role="tab"
-                    aria-selected={activo === i}
-                    aria-label={`Paso ${i + 1}: ${p.titulo}`}
-                    onClick={() => {
-                      const t = tarjetas.current[i];
-                      if (t) deslizarA(encuadre(t), reducir);
-                    }}
-                    className={`rounded-full px-2.5 py-1 text-sm font-semibold tabular-nums transition-colors duration-300 ${
-                      activo === i ? "bg-[var(--d-cristal)] text-[var(--d-texto)]" : "text-[var(--d-tenue)] hover:text-[var(--d-texto)]"
-                    }`}
-                  >
-                    0{i + 1}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-          {/* Para quien no quiera ver todos los pasos: pasa directamente a la sección siguiente */}
-          <button
-            type="button"
-            onClick={(e) => {
-              const seccion = (e.currentTarget.closest("main > *") as HTMLElement | null)?.nextElementSibling as HTMLElement | null;
-              if (seccion) deslizarA(encuadre(seccion), reducir);
-            }}
-            className="cristal boton mt-8 px-4 py-2 text-[13px] text-[var(--d-suave)] hover:text-[var(--d-texto)]"
-          >
-            Saltar al siguiente apartado
-            <Icono nombre="flecha" className="h-4 w-4 rotate-90" />
-          </button>
-        </div>
-
-        <div ref={pasos} className="flex flex-col gap-4 lg:gap-0 lg:py-[10svh]">
-          {PASOS.map((p, i) => (
-            <div
-              key={p.titulo}
-              ref={(el) => {
-                tarjetas.current[i] = el;
-              }}
-              data-punto
-              // 70svh por paso: al centrar uno, el anterior y el siguiente quedan fuera de la pantalla
-              className="lg:flex lg:min-h-[70svh] lg:items-center"
-            >
-              <div
-                data-foco
-                className="cristal w-full rounded-[36px] p-8 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:p-10"
-                style={escritorio ? { opacity: activo === i ? 1 : 0.4, transform: `scale(${activo === i ? 1 : 0.97})` } : undefined}
-              >
-                <span className="text-sm font-bold text-[var(--d-acento)]">0{i + 1}</span>
-                <h3 className="mt-3 text-4xl font-extrabold tracking-[-0.04em] sm:text-5xl">{p.titulo}</h3>
-                <p className="mt-4 max-w-md text-lg leading-relaxed text-[var(--d-suave)] [text-wrap:pretty]">{p.texto}</p>
-              </div>
-            </div>
-          ))}
+                  <h3 className="mt-6 text-3xl font-extrabold tracking-[-0.035em]">{p.titulo}</h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-[var(--d-suave)] transition-colors duration-500 [text-wrap:pretty] group-hover:text-[var(--d-texto)]">
+                    {p.texto}
+                  </p>
+                </li>
+              </Revelar>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
@@ -174,9 +90,9 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
             >
               {imagen && (
                 <motion.img
-                  src={img(imagen, 1080)}
+                  src={img(imagen, 1920)}
                   alt="Josep Mira Lozano en un rodaje"
-                  className="absolute inset-0 h-full w-full origin-top object-cover object-[50%_0%]"
+                  className="absolute inset-0 h-full w-full origin-top object-cover object-[50%_0%] [will-change:transform]"
                   style={{ scale: reducir ? 1 : escalaImg }}
                 />
               )}
@@ -281,7 +197,7 @@ export function BloqueTexto({ bloque }: { bloque: Bloque }) {
             {texto && <p className="mt-5 whitespace-pre-line text-lg leading-relaxed text-[var(--d-suave)]">{texto}</p>}
           </div>
           {imagen ? (
-            <img src={img(imagen, 1080)} alt="" className="aspect-[4/3] w-full rounded-[28px] object-cover" />
+            <img src={img(imagen, 1920)} alt="" className="aspect-[4/3] w-full rounded-[28px] object-cover" />
           ) : (
             <div className="relative hidden aspect-[4/3] overflow-hidden rounded-[28px] md:block">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,var(--d-orbe-a),transparent_60%),radial-gradient(circle_at_70%_70%,var(--d-orbe-b),transparent_60%)]" />

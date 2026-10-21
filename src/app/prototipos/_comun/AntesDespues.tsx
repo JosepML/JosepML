@@ -34,9 +34,9 @@ export function AntesDespues({ imagen, antes = "LOG", despues = "Etalonaje", cla
       }}
       onPointerMove={(e) => e.buttons === 1 && mover(e.clientX)}
     >
-      <img src={img(imagen, 1920)} alt="Fotograma después del etalonaje" className="absolute inset-0 h-full w-full object-cover" />
+      <img src={img(imagen, 3840)} alt="Fotograma después del etalonaje" className="absolute inset-0 h-full w-full object-cover" />
       <img
-        src={img(imagen, 1920)}
+        src={img(imagen, 3840)}
         alt="El mismo fotograma en LOG, antes del color"
         className="absolute inset-0 h-full w-full object-cover"
         style={{ clipPath: `inset(0 ${100 - pos}% 0 0)`, filter: "saturate(0.25) contrast(0.62) brightness(1.18)" }}

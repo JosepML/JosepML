@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { animate, AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Enlace } from "../../_comun/Enlace";
 import { usePunteroFino, useReducir } from "../../_comun/hooks";
@@ -117,10 +117,11 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
   const movil = ancho > 0 && ancho < 640;
   // En ordenador la tarjeta cabe en la pantalla junto al titular: como mucho la mitad del alto visible
   const altoVentana = typeof window === "undefined" ? 900 : window.innerHeight;
-  const W = movil ? ancho * 0.84 : Math.min(ancho * 0.56, 820, altoVentana * 0.42 * (16 / 9));
-  const gap = movil ? 14 : 28;
+  // Tarjetas verticales y más estrechas: en pantalla ancha se ven la central y casi dos vecinas por lado
+  const W = movil ? ancho * 0.78 : Math.min(ancho * 0.22, 440, altoVentana * 0.5 * (3 / 4));
+  const gap = movil ? 14 : 24;
   const paso = W + gap;
-  const alto = W * (movil ? 5 / 4 : 9 / 16);
+  const alto = W * (4 / 3);
   const lado = Math.max(0, (ancho - W) / 2);
 
   const [activa, setActiva] = useState(0);
@@ -139,10 +140,30 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
     });
   }, [paso, proyectos.length]);
 
+  // Avance con flechas, puntos o clic en una vecina: un deslizamiento propio de 0,6 s con curva suave (el
+  // "smooth" del navegador resultaba brusco). El ajuste nativo se aparta durante el viaje y vuelve al final.
+  const viaje = useRef<{ stop: () => void } | null>(null);
   const ir = useCallback(
     (n: number) => {
-      const destino = Math.max(0, Math.min(proyectos.length - 1, n));
-      pista.current?.scrollTo({ left: destino * paso, behavior: reducir ? "auto" : "smooth" });
+      const el = pista.current;
+      if (!el) return;
+      const destino = Math.max(0, Math.min(proyectos.length - 1, n)) * paso;
+      viaje.current?.stop();
+      if (reducir) {
+        el.scrollLeft = destino;
+        return;
+      }
+      el.style.scrollSnapType = "none";
+      viaje.current = animate(el.scrollLeft, destino, {
+        duration: 0.6,
+        ease: [0.65, 0, 0.25, 1],
+        onUpdate: (v) => {
+          el.scrollLeft = v;
+        },
+        onComplete: () => {
+          el.style.scrollSnapType = "";
+        },
+      });
     },
     [paso, proyectos.length, reducir],
   );
@@ -324,7 +345,7 @@ function TarjetaCarrusel({ proyecto: p, activa }: { proyecto: ProyectoD; activa:
               {p.tipo}
               {p.anio ? ` · ${p.anio}` : ""} · {p.papel}
             </p>
-            <h3 className="mt-2 text-2xl font-bold leading-tight tracking-[-0.025em] sm:text-4xl">{p.titulo}</h3>
+            <h3 className="mt-2 text-2xl font-bold leading-tight tracking-[-0.025em] [text-wrap:balance]">{p.titulo}</h3>
           </div>
           <span
             className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 transition-[opacity,transform] duration-500 group-hover:scale-110"
@@ -357,7 +378,7 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: ProyectoD }) {
         data-foco
         className="relative aspect-[4/5] overflow-hidden rounded-[32px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[3/2]"
       >
-        <Diapositivas imagenes={p.fotogramas.length > 1 ? p.fotogramas : [p.poster]} activo={encima && fino} ancho={750} />
+        <Diapositivas imagenes={p.fotogramas.length > 1 ? p.fotogramas : [p.poster]} activo={encima && fino} ancho={1200} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
 
         {p.laurel && (
