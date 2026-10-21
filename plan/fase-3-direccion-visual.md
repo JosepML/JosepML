@@ -162,6 +162,11 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - **Cómo trabajamos:** cada paso es un punto del scroll mágico (data-punto): cada gesto de rueda centra el siguiente paso, y al terminar el último se pasa a la siguiente sección. El paso activo es el más cercano al centro de la pantalla.
 - **Han confiado en mí, equilibrado:** la primera parte gana peso (titular de verdad "Han confiado en mí", logos y nombres más grandes y con más aire) y JUNO Media pasa a secundaria (marca pequeña en línea con "En sinergia con", frase y muro de marcas más discretos).
 
+### 2026-10-21 · D: Han confiado en mí, luminancia
+
+- "En sinergia con" y "JUNO MEDIA" en dos líneas separadas, con aire entre ambas; después la frase y el muro de marcas.
+- Escala de luminancia propia de la sección, igual en claro y oscuro (variables en `cristal.css`): titular 100 %, clientes 82 % (y los logos de imagen con la misma opacidad y una altura óptica parecida a los nombres en texto), marca JUNO 66 %, antetítulos y frase 58 %, marcas de JUNO 52 %, líneas 12 % (antes en modo claro las líneas eran blancas y no se veían). Espaciado vertical coherente entre las dos partes. Comprobado con capturas en los dos temas.
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).

@@ -152,20 +152,19 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
       </div>
 
       {/* Segunda parte, secundaria dentro de la misma sección: JUNO más pequeño y con menos contraste */}
-      <div className="mx-auto mt-16 max-w-5xl px-4 text-center sm:px-8 lg:mt-[7svh]">
+      <div className="mx-auto mt-14 max-w-5xl px-4 text-center sm:px-8 lg:mt-[6svh]">
         <Revelar>
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--d-tenue)]">En sinergia con</p>
-            <p className="text-2xl leading-none tracking-[0.14em] text-[var(--d-suave)] sm:text-3xl">
-              <span className="font-extrabold">JUNO</span>
-              <span className="ml-[0.3em] font-light">MEDIA</span>
-            </p>
-          </div>
-          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[var(--d-tenue)] [text-wrap:balance]">{JUNO.texto}</p>
+          {/* Dos líneas separadas: el rótulo pequeño arriba y la marca debajo, con aire entre ambas */}
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--d-ante)]">En sinergia con</p>
+          <p className="mt-5 text-3xl leading-none tracking-[0.16em] text-[var(--d-juno)] sm:text-4xl">
+            <span className="font-extrabold">JUNO</span>
+            <span className="ml-[0.3em] font-light">MEDIA</span>
+          </p>
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--d-ante)] [text-wrap:balance]">{JUNO.texto}</p>
         </Revelar>
         <Revelar retraso={0.12}>
           {/* Las marcas en fila, separadas por líneas finas: nada de etiquetas */}
-          <div className="mx-auto mt-7 grid grid-cols-2 border-y border-[var(--d-borde)] opacity-80 md:grid-cols-5 md:divide-x md:divide-[var(--d-borde)]">
+          <div className="mx-auto mt-8 grid grid-cols-2 border-y border-[var(--d-linea)] md:grid-cols-5 md:divide-x md:divide-[var(--d-linea)]">
             {JUNO.clientes.map((c) => (
               <div key={c.nombre} className="flex h-16 items-center justify-center">
                 <Logo cliente={c} compacto />
@@ -187,14 +186,16 @@ function Logo({ cliente: c, compacto, grande }: { cliente: ClienteD; compacto?: 
         <img
           src={c.logo}
           alt={c.nombre}
-          style={{ height: (c.alto ?? 36) * (grande ? 1.45 : 1) }}
+          style={{ height: (c.alto ?? 36) * (grande ? 0.85 : compacto ? 0.6 : 1) }}
           className="d-logo w-auto object-contain"
           draggable={false}
           onError={() => setRoto(true)}
         />
       ) : c.estilo === "firma" ? (
         // Artistas: su nombre como firma, en la cursiva de acento
-        <span className={`d-serif whitespace-nowrap text-[var(--d-tenue)] transition-colors duration-300 hover:text-[var(--d-texto)] ${compacto ? "text-3xl" : "text-5xl"}`}>
+        <span
+          className={`d-serif whitespace-nowrap transition-colors duration-300 hover:text-[var(--d-texto)] ${compacto ? "text-3xl text-[var(--d-medio)]" : "text-5xl text-[var(--d-cliente)]"}`}
+        >
           {c.nombre}
         </span>
       ) : (
@@ -202,9 +203,9 @@ function Logo({ cliente: c, compacto, grande }: { cliente: ClienteD; compacto?: 
         <span
           className={`whitespace-nowrap font-semibold uppercase transition-colors duration-300 hover:text-[var(--d-texto)] ${
             compacto
-              ? "text-[12px] tracking-[0.18em] text-[var(--d-tenue)]"
+              ? "text-[12px] tracking-[0.18em] text-[var(--d-medio)]"
               : grande
-                ? "text-lg tracking-[0.2em] text-[var(--d-suave)] sm:text-[22px]"
+                ? "text-lg tracking-[0.2em] text-[var(--d-cliente)] sm:text-[22px]"
                 : "text-[15px] tracking-[0.22em] text-[var(--d-tenue)] sm:text-base"
           }`}
         >

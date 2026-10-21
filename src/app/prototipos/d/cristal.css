@@ -9,6 +9,14 @@
   --d-texto: #f5f5f7;
   --d-suave: rgba(245, 245, 247, 0.62);
   --d-tenue: rgba(245, 245, 247, 0.38);
+  /* Escala de luminancia de "Han confiado en mí": titular 100 %, clientes 82 %, marca JUNO 66 %,
+     antetítulos y frase 58 %, marcas de JUNO 52 %, líneas 12 % */
+  --d-cliente: rgba(245, 245, 247, 0.82);
+  --d-juno: rgba(245, 245, 247, 0.66);
+  --d-ante: rgba(245, 245, 247, 0.58);
+  --d-medio: rgba(245, 245, 247, 0.52);
+  --d-linea: rgba(245, 245, 247, 0.12);
+  --d-logo-opacidad: 0.82;
   --d-acento: #e50914;
   --d-calido: #ff8a3d;
   --d-cristal: rgba(255, 255, 255, 0.06);
@@ -36,6 +44,12 @@
   --d-texto: #1d1d1f;
   --d-suave: rgba(29, 29, 31, 0.64);
   --d-tenue: rgba(29, 29, 31, 0.42);
+  --d-cliente: rgba(29, 29, 31, 0.82);
+  --d-juno: rgba(29, 29, 31, 0.68);
+  --d-ante: rgba(29, 29, 31, 0.6);
+  --d-medio: rgba(29, 29, 31, 0.54);
+  --d-linea: rgba(29, 29, 31, 0.12);
+  --d-logo-opacidad: 0.82;
   --d-cristal: rgba(255, 255, 255, 0.55);
   --d-cristal-base: rgba(255, 255, 255, 0.62);
   --d-cristal-fuerte: rgba(255, 255, 255, 0.75);
@@ -227,18 +241,18 @@
   box-decoration-break: clone;
 }
 
-/* Logos de clientes en un solo tono: negro en claro, blanco en oscuro, con la misma opacidad que el texto tenue */
+/* Logos de clientes en un solo tono (negro en claro, blanco en oscuro) y con la misma luminancia que los
+   nombres en texto de la misma fila (--d-suave), para que ninguno destaque sobre los demás */
 .d-logo {
   filter: brightness(0) invert(1);
-  opacity: 0.5;
+  opacity: var(--d-logo-opacidad);
   transition: opacity 0.3s;
 }
 .d-logo:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 .d-raiz[data-tema="claro"] .d-logo {
   filter: brightness(0);
-  opacity: 0.55;
 }
 
 /* Punto de "disponible" que late */
