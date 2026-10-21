@@ -1,6 +1,6 @@
 "use client";
 
-import { animate, AnimatePresence, motion, useMotionValue } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Enlace } from "../../_comun/Enlace";
 import { usePunteroFino, useReducir } from "../../_comun/hooks";
@@ -10,14 +10,18 @@ import { RAIZ } from "../rutas";
 import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
 
 const FILTROS = [{ slug: "todos", nombre: "Todos" }, ...SERVICIOS.map((s) => ({ slug: s.slug, nombre: s.nombre }))];
-const MUELLE = { type: "spring", stiffness: 120, damping: 22, mass: 1 } as const;
 
 /**
- * Trabajos: carrusel de tarjeta protagonista. La activa, centrada, grande y nítida; las vecinas más
- * pequeñas y atenuadas. Se avanza de una en una (flechas, arrastre o pulsando una vecina) con un muelle
- * suave, y el fondo de la sección se funde con el fotograma de la tarjeta activa. Todo con transform y
- * opacidad. Al cambiar de filtro no hay animaciones de layout: altura fija, la lista se funde y la nueva
- * entra escalonada desde la primera tarjeta.
+ * Trabajos: carrusel de tarjeta protagonista sobre scroll horizontal nativo con ajuste (scroll-snap).
+ * El navegador mueve las tarjetas en el compositor, así que el avance va fluido; antes un carrusel hecho
+ * a mano animaba con JavaScript la pista y siete tarjetas en cada fotograma, con un fondo desenfocado
+ * a pantalla completa, y daba tirones.
+ * - La tarjeta activa (centrada) se detecta por la posición del scroll; las vecinas se atenúan y encogen
+ *   con una transición CSS que solo se dispara cuando cambia la activa.
+ * - Flechas, puntos y clic en una vecina hacen scroll suave nativo; con el ratón también se arrastra.
+ * - El fondo se tiñe con el fotograma de la activa: una imagen diminuta ampliada (se ve desenfocada sin
+ *   usar filtros) con un fundido de opacidad.
+ * - Al cambiar de filtro: altura fija, la lista se funde y la nueva entra escalonada desde la primera.
  */
 export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
   const [filtro, setFiltro] = useState("todos");
@@ -25,17 +29,18 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
 
   return (
     <section id={bloque.id === "trabajos" ? "trabajos" : undefined} className="relative overflow-hidden py-20 sm:py-24 lg:py-[5svh]">
-      {/* Fondo: fotograma de la tarjeta activa, muy oscuro y difuminado, con fundido al cambiar */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <AnimatePresence initial={false}>
           {fondo && (
             <motion.img
               key={fondo}
               src={fondo}
               alt=""
-              className="absolute inset-0 h-full w-full scale-125 object-cover blur-[50px]"
+              // A un octavo del tamaño con un desenfoque pequeño y ampliada ×8: se ve muy difuminada pero el
+              // desenfoque se calcula sobre 64 veces menos píxeles, y solo una vez por cambio de tarjeta
+              className="absolute left-1/2 top-1/2 h-[12.5%] w-[12.5%] object-cover blur-[6px] [transform:translate(-50%,-50%)_scale(8.6)] [will-change:transform,opacity]"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.28 }}
+              animate={{ opacity: 0.3 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.1, ease: CURVA }}
             />
@@ -105,8 +110,8 @@ function useAncho(ref: React.RefObject<HTMLElement | null>) {
 }
 
 function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar: (poster: string) => void }) {
-  const caja = useRef<HTMLDivElement>(null);
-  const ancho = useAncho(caja);
+  const pista = useRef<HTMLDivElement>(null);
+  const ancho = useAncho(pista);
   const reducir = useReducir();
   const movil = ancho > 0 && ancho < 640;
   // En ordenador la tarjeta cabe en la pantalla junto al titular: como mucho la mitad del alto visible
@@ -115,27 +120,33 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
   const gap = movil ? 14 : 28;
   const paso = W + gap;
   const alto = W * (movil ? 5 / 4 : 9 / 16);
+  const lado = Math.max(0, (ancho - W) / 2);
 
   const [activa, setActiva] = useState(0);
-  const x = useMotionValue(0);
-  const arrastrando = useRef(false);
+  const pendiente = useRef(0);
+  const arrastre = useArrastre(pista);
 
-  const centrar = useCallback((n: number) => ancho / 2 - W / 2 - n * paso, [ancho, W, paso]);
+  // Tarjeta activa según la posición del scroll (como mucho una vez por fotograma)
+  const alHacerScroll = useCallback(() => {
+    if (pendiente.current) return;
+    pendiente.current = requestAnimationFrame(() => {
+      pendiente.current = 0;
+      const el = pista.current;
+      if (!el || !paso) return;
+      const n = Math.max(0, Math.min(proyectos.length - 1, Math.round(el.scrollLeft / paso)));
+      setActiva((a) => (a === n ? a : n));
+    });
+  }, [paso, proyectos.length]);
 
   const ir = useCallback(
     (n: number) => {
       const destino = Math.max(0, Math.min(proyectos.length - 1, n));
-      setActiva(destino);
-      animate(x, centrar(destino), reducir ? { duration: 0 } : MUELLE);
+      pista.current?.scrollTo({ left: destino * paso, behavior: reducir ? "auto" : "smooth" });
     },
-    [proyectos.length, x, centrar, reducir],
+    [paso, proyectos.length, reducir],
   );
 
-  // Al medir (o cambiar el tamaño de la ventana) se coloca sin animación
-  useLayoutEffect(() => {
-    if (ancho) x.set(centrar(activa));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ancho]);
+  useEffect(() => () => cancelAnimationFrame(pendiente.current), []);
 
   useEffect(() => {
     if (proyectos[activa]) alCambiar(proyectos[activa].poster);
@@ -143,8 +154,7 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
 
   return (
     <motion.div
-      ref={caja}
-      className="relative mt-12 select-none lg:mt-[4svh]"
+      className="relative mt-12 lg:mt-[4svh]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.3 } }}
       exit={{ opacity: 0, transition: { duration: 0.22 } }}
@@ -154,50 +164,37 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
       }}
     >
       {/* Altura fija: nada se recoloca al cambiar de filtro */}
-      <div className="relative overflow-hidden" style={{ height: alto ? alto + 8 : undefined }}>
-        <motion.div
-          className="absolute left-0 top-0 flex cursor-grab active:cursor-grabbing"
-          style={{ x, gap, touchAction: "pan-y" }}
-          drag="x"
-          dragElastic={0.14}
-          dragMomentum={false}
-          dragConstraints={{ left: centrar(proyectos.length - 1) - 80, right: centrar(0) + 80 }}
-          onDragStart={() => {
-            arrastrando.current = true;
-          }}
-          onDragEnd={(_, info) => {
-            const avance = -(info.offset.x + info.velocity.x * 0.25) / paso;
-            ir(Math.round(activa + Math.max(-2, Math.min(2, avance))));
-            window.setTimeout(() => (arrastrando.current = false), 50);
-          }}
-        >
-          {proyectos.map((p, j) => (
+      <div
+        ref={pista}
+        onScroll={alHacerScroll}
+        {...arrastre}
+        className="sin-barra flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain py-1"
+        style={{ gap, paddingInline: lado, scrollPaddingInline: lado, height: alto ? alto + 8 : undefined }}
+      >
+        {proyectos.map((p, j) => (
+          <div
+            key={p.slug}
+            className="shrink-0 snap-center transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [will-change:transform]"
+            style={{ width: W, height: alto, transform: `scale(${j === activa ? 1 : 0.86})`, opacity: j === activa ? 1 : 0.42 }}
+            onClickCapture={(e) => {
+              // Pulsar una vecina la trae al centro; solo la activa abre el proyecto
+              if (j !== activa) {
+                e.preventDefault();
+                e.stopPropagation();
+                ir(j);
+              }
+            }}
+          >
             <motion.div
-              key={p.slug}
-              className="shrink-0"
-              style={{ width: W, height: alto }}
-              animate={{ scale: j === activa ? 1 : 0.86, opacity: j === activa ? 1 : 0.42 }}
-              transition={MUELLE}
-              onClickCapture={(e) => {
-                // Pulsar una vecina la trae al centro; solo la activa abre el proyecto
-                if (arrastrando.current || j !== activa) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  if (!arrastrando.current) ir(j);
-                }
-              }}
+              className="h-full"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: CURVA, delay: 0.08 + Math.min(j, 4) * 0.07 }}
             >
-              <motion.div
-                className="h-full"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: CURVA, delay: 0.08 + Math.min(j, 4) * 0.07 }}
-              >
-                <TarjetaCarrusel proyecto={p} activa={j === activa} />
-              </motion.div>
+              <TarjetaCarrusel proyecto={p} activa={j === activa} />
             </motion.div>
-          ))}
-        </motion.div>
+          </div>
+        ))}
       </div>
 
       {/* Indicador y flechas */}
@@ -214,10 +211,11 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
               className="relative h-2 py-3 transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
               style={{ width: j === activa ? 28 : 8 }}
             >
-              <span className="absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-[var(--d-borde)]" />
-              {j === activa && (
-                <motion.span layoutId="d-punto" className="absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-[var(--d-acento)]" transition={MUELLE} />
-              )}
+              <span
+                className={`absolute inset-x-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full transition-colors duration-500 ${
+                  j === activa ? "bg-[var(--d-acento)]" : "bg-[var(--d-borde)]"
+                }`}
+              />
             </button>
           ))}
         </div>
@@ -243,6 +241,58 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
   );
 }
 
+/**
+ * Arrastrar el carrusel con el ratón (con el dedo y el trackpad ya lo hace el navegador). Al soltar, un
+ * pequeño empujón con la velocidad del gesto y el ajuste nativo lo deja centrado en una tarjeta.
+ * Si se ha arrastrado, el clic no abre la tarjeta.
+ */
+function useArrastre(pista: React.RefObject<HTMLDivElement | null>) {
+  const fino = usePunteroFino();
+  const estado = useRef({ x: 0, inicio: 0, activo: false, movido: false, ultimoX: 0, ultimoT: 0, velocidad: 0 });
+
+  if (!fino) return {};
+  return {
+    onPointerDown: (e: React.PointerEvent) => {
+      if (e.pointerType !== "mouse" || !pista.current) return;
+      const t = performance.now();
+      estado.current = { x: e.clientX, inicio: pista.current.scrollLeft, activo: true, movido: false, ultimoX: e.clientX, ultimoT: t, velocidad: 0 };
+    },
+    onPointerMove: (e: React.PointerEvent) => {
+      const s = estado.current;
+      const el = pista.current;
+      if (!s.activo || !el) return;
+      const dx = e.clientX - s.x;
+      if (!s.movido && Math.abs(dx) > 6) {
+        s.movido = true;
+        el.setPointerCapture(e.pointerId);
+        el.style.scrollSnapType = "none";
+      }
+      if (!s.movido) return;
+      el.scrollLeft = s.inicio - dx;
+      const t = performance.now();
+      if (t > s.ultimoT) s.velocidad = (e.clientX - s.ultimoX) / (t - s.ultimoT);
+      s.ultimoX = e.clientX;
+      s.ultimoT = t;
+    },
+    onPointerUp: () => {
+      const el = pista.current;
+      const s = estado.current;
+      s.activo = false;
+      if (!el || !s.movido) return;
+      const empuje = Math.max(-700, Math.min(700, -s.velocidad * 260));
+      el.style.scrollSnapType = "";
+      el.scrollBy({ left: empuje, behavior: "smooth" });
+    },
+    onClickCapture: (e: React.MouseEvent) => {
+      if (estado.current.movido) {
+        e.preventDefault();
+        e.stopPropagation();
+        estado.current.movido = false;
+      }
+    },
+  };
+}
+
 function TarjetaCarrusel({ proyecto: p, activa }: { proyecto: ProyectoD; activa: boolean }) {
   const fino = usePunteroFino();
   const [encima, setEncima] = useState(false);
@@ -257,7 +307,8 @@ function TarjetaCarrusel({ proyecto: p, activa }: { proyecto: ProyectoD; activa:
       draggable={false}
       tabIndex={activa ? 0 : -1}
     >
-      <div data-radio className="relative h-full overflow-hidden rounded-[32px] bg-black shadow-[0_40px_80px_-40px_rgba(0,0,0,0.8)]">
+      {/* Sombra fija (no se anima) y radio fijo: al escalar la tarjeta no hay que repintar nada */}
+      <div data-radio className="relative h-full overflow-hidden rounded-[32px] bg-black shadow-[0_30px_60px_-36px_rgba(0,0,0,0.75)]">
         <Diapositivas imagenes={p.fotogramas.length > 1 ? p.fotogramas : [p.poster]} activo={activa && encima && fino} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
         {p.laurel && (

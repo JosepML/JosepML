@@ -7,6 +7,7 @@ import { useEscritorio, usePunteroFino, useReducir } from "../../_comun/hooks";
 import { AJUSTES, ARTICULOS, PASOS, SERVICIOS, type Bloque } from "../datos";
 import { Icono } from "../Iconos";
 import { Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "../piezas";
+import { deslizarA, encuadre } from "../scrollMagico";
 
 /**
  * Cómo trabajo: en ordenador el título se queda fijo y el paso activo sale del avance del scroll por la
@@ -14,6 +15,7 @@ import { Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "
  */
 export function BloqueProceso({ bloque }: { bloque: Bloque }) {
   const escritorio = useEscritorio();
+  const reducir = useReducir();
   const [activo, setActivo] = useState(0);
   const pasos = useRef<HTMLDivElement>(null);
   const tarjetas = useRef<(HTMLDivElement | null)[]>([]);
@@ -64,9 +66,41 @@ export function BloqueProceso({ bloque }: { bloque: Bloque }) {
                   </span>
                 ))}
               </div>
-              <p className="text-sm text-[var(--d-tenue)]">de 0{PASOS.length}</p>
+              {/* Los cuatro pasos como accesos directos: el activo resaltado, cualquiera se puede pulsar */}
+              <div className="mt-2 flex items-center gap-1" role="tablist" aria-label="Pasos">
+                {PASOS.map((p, i) => (
+                  <button
+                    key={p.titulo}
+                    type="button"
+                    role="tab"
+                    aria-selected={activo === i}
+                    aria-label={`Paso ${i + 1}: ${p.titulo}`}
+                    onClick={() => {
+                      const t = tarjetas.current[i];
+                      if (t) deslizarA(encuadre(t), reducir);
+                    }}
+                    className={`rounded-full px-2.5 py-1 text-sm font-semibold tabular-nums transition-colors duration-300 ${
+                      activo === i ? "bg-[var(--d-cristal)] text-[var(--d-texto)]" : "text-[var(--d-tenue)] hover:text-[var(--d-texto)]"
+                    }`}
+                  >
+                    0{i + 1}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
+          {/* Para quien no quiera ver todos los pasos: pasa directamente a la sección siguiente */}
+          <button
+            type="button"
+            onClick={(e) => {
+              const seccion = (e.currentTarget.closest("main > *") as HTMLElement | null)?.nextElementSibling as HTMLElement | null;
+              if (seccion) deslizarA(encuadre(seccion), reducir);
+            }}
+            className="cristal boton mt-8 px-4 py-2 text-[13px] text-[var(--d-suave)] hover:text-[var(--d-texto)]"
+          >
+            Saltar al siguiente apartado
+            <Icono nombre="flecha" className="h-4 w-4 rotate-90" />
+          </button>
         </div>
 
         <div ref={pasos} className="flex flex-col gap-4 lg:gap-0 lg:py-[10svh]">
