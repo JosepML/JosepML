@@ -57,7 +57,7 @@ export function Titular({
         </Revelar>
       )}
       <Revelar retraso={0.08}>
-        <h2 className="mt-5 text-[clamp(2.1rem,5vw,4.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] [text-wrap:balance]">
+        <h2 className="mt-5 text-[clamp(2rem,min(5vw,7.4svh),4.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] [text-wrap:balance]">
           <TituloConAcento texto={titulo} />
         </h2>
       </Revelar>

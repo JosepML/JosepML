@@ -16,17 +16,32 @@ export function BloqueProceso({ bloque }: { bloque: Bloque }) {
   const escritorio = useEscritorio();
   const [activo, setActivo] = useState(0);
   const pasos = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: pasos, offset: ["start 60%", "end 60%"] });
+  const tarjetas = useRef<(HTMLDivElement | null)[]>([]);
+  const { scrollYProgress } = useScroll({ target: pasos, offset: ["start 50%", "end 50%"] });
+  const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const n = Math.min(PASOS.length - 1, Math.max(0, Math.floor(v * PASOS.length)));
-    setActivo((a) => (a === n ? a : n));
+  // Paso activo: el que tiene el centro más cerca del centro de la pantalla. Coincide con donde deja
+  // cada paso el scroll mágico, que centra uno por gesto de rueda (cada paso lleva data-punto).
+  useMotionValueEvent(scrollY, "change", () => {
+    const centro = window.innerHeight / 2;
+    let mejor = 0;
+    let distancia = Infinity;
+    tarjetas.current.forEach((t, i) => {
+      if (!t) return;
+      const r = t.getBoundingClientRect();
+      const d = Math.abs(r.top + r.height / 2 - centro);
+      if (d < distancia) {
+        distancia = d;
+        mejor = i;
+      }
+    });
+    setActivo((a) => (a === mejor ? a : mejor));
   });
 
   return (
-    <section className="px-4 py-24 sm:px-8 sm:py-32">
+    <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[10svh]">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-        <div className="lg:sticky lg:top-28 lg:self-start">
+        <div className="lg:sticky lg:top-[22svh] lg:self-start">
           <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
           <div className="mt-12 hidden items-end gap-6 lg:flex">
             <div className="relative h-40 w-[3px] overflow-hidden rounded-full bg-[var(--d-borde)]">
@@ -54,9 +69,16 @@ export function BloqueProceso({ bloque }: { bloque: Bloque }) {
           </div>
         </div>
 
-        <div ref={pasos} className="flex flex-col gap-4 lg:gap-6 lg:py-[12svh]">
+        <div ref={pasos} className="flex flex-col gap-4 lg:gap-6 lg:py-[10svh]">
           {PASOS.map((p, i) => (
-            <div key={p.titulo} className="lg:flex lg:min-h-[46svh] lg:items-center">
+            <div
+              key={p.titulo}
+              ref={(el) => {
+                tarjetas.current[i] = el;
+              }}
+              data-punto
+              className="lg:flex lg:min-h-[52svh] lg:items-center"
+            >
               <div
                 data-foco
                 className="cristal w-full rounded-[36px] p-8 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] sm:p-10"
@@ -92,12 +114,12 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
   const sry = useSpring(ry, { stiffness: 150, damping: 18 });
 
   return (
-    <section ref={ref} id={bloque.id === "sobre-mi" ? "sobre-mi" : undefined} className="scroll-mt-24 px-4 py-24 sm:px-8 sm:py-32">
+    <section ref={ref} id={bloque.id === "sobre-mi" ? "sobre-mi" : undefined} className="scroll-mt-24 px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <Revelar>
           <div style={{ perspective: 1200 }}>
             <motion.div
-              className="relative aspect-[4/5] overflow-hidden rounded-[44px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)]"
+              className="relative mx-auto aspect-[4/5] overflow-hidden rounded-[44px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] lg:h-[min(76svh,720px)]"
               style={{ rotateX: srx, rotateY: sry }}
               onPointerMove={(e) => {
                 if (!fino || reducir) return;
@@ -162,7 +184,7 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
 /** Últimos artículos: el contenido que Josep crea desde el panel aparece aquí solo. */
 export function BloqueBlog({ bloque }: { bloque: Bloque }) {
   return (
-    <section id={bloque.id === "blog" ? "blog" : undefined} className="scroll-mt-24 px-4 py-24 sm:px-8 sm:py-32">
+    <section id={bloque.id === "blog" ? "blog" : undefined} className="scroll-mt-24 px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
@@ -251,19 +273,19 @@ export function BloqueLlamada({ bloque, preseleccion = [] }: { bloque: Bloque; p
   const mensajeWa = `Hola, Josep. ${elegidos.length ? `Tengo en mente: ${elegidos.join(", ")}. ` : ""}Me gustaría contarte mi proyecto.`;
 
   return (
-    <section id={bloque.id === "llamada" ? "llamada" : undefined} className="scroll-mt-24 px-3 py-16 sm:px-6 sm:py-24">
+    <section id={bloque.id === "llamada" ? "llamada" : undefined} className="scroll-mt-24 px-3 py-16 sm:px-6 sm:py-24 lg:py-[5svh]">
       <Revelar>
-        <div className="cristal relative mx-auto max-w-7xl overflow-hidden rounded-[48px] px-6 py-16 text-center sm:px-12 sm:py-24">
+        <div className="cristal relative mx-auto max-w-7xl overflow-hidden rounded-[48px] px-6 py-16 text-center sm:px-12 sm:py-24 lg:py-[6svh]">
           <div className="pointer-events-none absolute -left-24 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-a),transparent)]" />
           <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-b),transparent)]" />
           <div className="relative">
             <Disponible />
-            <h2 className="mx-auto mt-6 max-w-4xl text-[clamp(2.5rem,6.5vw,6rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+            <h2 className="mx-auto mt-6 max-w-4xl text-[clamp(2.4rem,min(6.5vw,9svh),6rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
               <TituloConAcento texto={bloque.datos.titulo} />
             </h2>
             {bloque.datos.texto && <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[var(--d-suave)] sm:text-xl">{bloque.datos.texto}</p>}
 
-            <p className="mt-10 text-sm font-semibold">¿Qué tienes en mente?</p>
+            <p className="mt-10 text-sm font-semibold lg:mt-[4svh]">¿Qué tienes en mente?</p>
             <div className="mx-auto mt-4 flex max-w-3xl flex-wrap justify-center gap-2">
               {[...SERVICIOS.map((s) => s.nombre), ...TIPOS].map((t) => {
                 const si = elegidos.includes(t);
@@ -285,7 +307,7 @@ export function BloqueLlamada({ bloque, preseleccion = [] }: { bloque: Bloque; p
               })}
             </div>
 
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row lg:mt-[4svh]">
               <a href={`mailto:${AJUSTES.correo}?subject=${encodeURIComponent(asunto)}`} className="boton boton-acento px-8 py-4 text-base">
                 <Icono nombre="correo" className="h-5 w-5" />
                 Escríbeme

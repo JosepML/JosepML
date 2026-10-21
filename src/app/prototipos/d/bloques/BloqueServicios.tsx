@@ -17,10 +17,10 @@ export const ICONOS_SERVICIO: Record<string, string> = { "direccion-de-fotografi
  */
 export function BloqueServicios({ bloque }: { bloque: Bloque }) {
   return (
-    <section id={bloque.id === "servicios" ? "servicios" : undefined} className="px-4 py-24 sm:px-8 sm:py-32">
+    <section id={bloque.id === "servicios" ? "servicios" : undefined} className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
-        <div className="mt-14 grid gap-4 md:grid-cols-3">
+        <div className="mt-14 grid gap-4 md:grid-cols-3 lg:mt-[5svh]">
           {SERVICIOS.map((s, i) => (
             <Revelar key={s.slug} retraso={i * 0.08}>
               <Tarjeta servicio={s} />
@@ -41,7 +41,7 @@ function Tarjeta({ servicio: s }: { servicio: ServicioD }) {
       href={`${RAIZ}/servicios/${s.slug}`}
       onPointerEnter={() => setEncima(true)}
       onPointerLeave={() => setEncima(false)}
-      className="group relative block aspect-[4/5] overflow-hidden rounded-[36px] bg-black text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 md:aspect-[3/4]"
+      className="group relative block aspect-[4/5] overflow-hidden rounded-[36px] bg-black text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
     >
       <Diapositivas imagenes={imagenesDe(s.slug)} activo={encima && fino} className="opacity-80 transition-opacity duration-700 group-hover:opacity-100" />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />

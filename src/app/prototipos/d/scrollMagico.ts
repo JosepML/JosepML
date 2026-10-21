@@ -5,17 +5,19 @@ import { useEffect } from "react";
 
 const CURVA_SCROLL = [0.65, 0, 0.25, 1] as const;
 const DURACION = 1.05;
-/** Margen para el menú flotante: la sección queda justo debajo */
-const MARGEN = 0;
+
+type Punto = { destino: number; top: number; alto: number; libre: boolean };
 
 /**
- * "Scroll mágico": con la rueda del ratón, cada gesto lleva con una curva suave (empieza despacio, acelera
- * y frena con calma) al principio de la sección siguiente o anterior. Reglas para que no moleste:
- * - Solo responde a la rueda: nunca se mueve solo.
- * - Si la sección actual es más alta que la pantalla y aún queda contenido en esa dirección, el scroll es
- *   normal hasta llegar a su borde; entonces el siguiente gesto salta a la siguiente.
- * - Mientras dura el viaje y la inercia del trackpad que venga detrás, se ignora la rueda (no se encadenan saltos).
- * - Apagado en pantallas táctiles, con "reducir movimiento", con el editor abierto o con una ventana (vídeo) abierta.
+ * "Scroll mágico" (solo en la portada): con la rueda del ratón, cada gesto lleva con una curva suave al
+ * siguiente punto. Puntos:
+ * - Cada sección de la portada, centrada en la pantalla (si cabe) o desde su inicio (si es más alta).
+ * - Dentro de una sección, los elementos marcados con data-punto (los pasos de "Cómo trabajamos"),
+ *   cada uno centrado.
+ * Reglas para que no moleste: solo responde a la rueda (nunca se mueve solo); en una sección más alta
+ * que la pantalla y sin puntos, el scroll es normal hasta su borde; se ignora la inercia del trackpad
+ * mientras dura el viaje; se cancela con teclado o clic; apagado en táctil, con "reducir movimiento",
+ * con el editor abierto o con un vídeo abierto.
  */
 export function useScrollMagico(activo: boolean) {
   useEffect(() => {
@@ -25,11 +27,31 @@ export function useScrollMagico(activo: boolean) {
     let ultimoEvento = 0;
     let control: { stop: () => void } | null = null;
 
-    const puntos = () =>
-      [...document.querySelectorAll<HTMLElement>("main > *")]
-        .map((el) => ({ top: el.getBoundingClientRect().top + window.scrollY, alto: el.offsetHeight }))
-        .filter((p) => p.alto > 40)
-        .sort((a, b) => a.top - b.top);
+    const calcular = (): Punto[] => {
+      const vh = window.innerHeight;
+      const max = document.documentElement.scrollHeight - vh;
+      const lista: Punto[] = [];
+      for (const el of document.querySelectorAll<HTMLElement>("main > *")) {
+        const r = el.getBoundingClientRect();
+        const top = r.top + window.scrollY;
+        const alto = el.offsetHeight;
+        if (alto < 40) continue;
+        const subs = el.querySelectorAll<HTMLElement>("[data-punto]");
+        if (subs.length) {
+          for (const s of subs) {
+            const rs = s.getBoundingClientRect();
+            const centro = rs.top + window.scrollY + rs.height / 2;
+            lista.push({ destino: centro - vh / 2, top, alto, libre: false });
+          }
+        } else {
+          const cabe = alto <= vh + 2;
+          lista.push({ destino: cabe ? top + alto / 2 - vh / 2 : top, top, alto, libre: !cabe });
+        }
+      }
+      return lista
+        .map((p) => ({ ...p, destino: Math.max(0, Math.min(max, Math.round(p.destino))) }))
+        .sort((a, b) => a.destino - b.destino);
+    };
 
     const rueda = (e: WheelEvent) => {
       const ahora = performance.now();
@@ -49,33 +71,25 @@ export function useScrollMagico(activo: boolean) {
       control = null;
 
       const y = window.scrollY;
-      const alto = window.innerHeight;
-      const lista = puntos();
+      const vh = window.innerHeight;
+      const puntos = calcular();
       const abajo = e.deltaY > 0;
-      // Sección en la que estamos: la última cuyo inicio ya ha pasado (con un poco de margen)
-      const actual = [...lista].reverse().find((p) => p.top <= y + 8) ?? lista[0];
-      if (!actual) return;
 
-      if (abajo) {
-        const finActual = actual.top + actual.alto;
-        // Queda contenido de esta sección por debajo de la pantalla: scroll normal
-        if (finActual > y + alto + 4) return;
-        const siguiente = lista.find((p) => p.top > y + 8);
-        if (!siguiente) return;
-        viajar(e, siguiente.top - MARGEN);
-      } else {
-        // Hacia arriba: si estamos dentro de una sección alta y no en su inicio, scroll normal
-        if (y > actual.top + 8 && actual.alto > alto) return;
-        const destino = y > actual.top + 8 ? actual.top : ([...lista].reverse().find((p) => p.top < y - 8)?.top ?? 0);
-        // Si la sección de arriba es más alta que la pantalla, se aterriza en su final, no en su principio
-        const previa = lista.find((p) => p.top === destino);
-        const final = previa && previa.alto > alto && destino < actual.top ? previa.top + previa.alto - alto : destino;
-        viajar(e, Math.max(0, final - MARGEN));
+      // Sección alta sin puntos que ocupa la pantalla: scroll normal mientras quede contenido en esa dirección
+      const libre = puntos.find((p) => p.libre && p.top <= y + 4 && p.top + p.alto >= y + vh - 4);
+      if (libre) {
+        if (abajo && libre.top + libre.alto > y + vh + 4) return;
+        if (!abajo && libre.top < y - 4) return;
       }
+
+      const destino = abajo
+        ? puntos.find((p) => p.destino > y + 6)?.destino
+        : [...puntos].reverse().find((p) => p.destino < y - 6)?.destino;
+      if (destino === undefined) return;
+      viajar(e, destino);
     };
 
     const viajar = (e: WheelEvent, destino: number) => {
-      if (Math.abs(destino - window.scrollY) < 4) return;
       e.preventDefault();
       viajando = true;
       control = animate(window.scrollY, destino, {
@@ -88,7 +102,7 @@ export function useScrollMagico(activo: boolean) {
       });
     };
 
-    // Si el usuario coge la barra de scroll o pulsa teclas, se cancela el viaje
+    // Si el usuario pulsa una tecla o hace clic, se cancela el viaje
     const cancelar = () => {
       control?.stop();
       viajando = false;

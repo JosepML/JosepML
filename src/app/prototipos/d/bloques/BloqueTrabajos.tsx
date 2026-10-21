@@ -24,7 +24,7 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
   const [fondo, setFondo] = useState<string | null>(null);
 
   return (
-    <section id={bloque.id === "trabajos" ? "trabajos" : undefined} className="relative overflow-hidden py-20 sm:py-24">
+    <section id={bloque.id === "trabajos" ? "trabajos" : undefined} className="relative overflow-hidden py-20 sm:py-24 lg:py-[5svh]">
       {/* Fondo: fotograma de la tarjeta activa, muy oscuro y difuminado, con fundido al cambiar */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <AnimatePresence initial={false}>
@@ -111,7 +111,7 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
   const movil = ancho > 0 && ancho < 640;
   // En ordenador la tarjeta cabe en la pantalla junto al titular: como mucho la mitad del alto visible
   const altoVentana = typeof window === "undefined" ? 900 : window.innerHeight;
-  const W = movil ? ancho * 0.84 : Math.min(ancho * 0.56, 820, altoVentana * 0.46 * (16 / 9));
+  const W = movil ? ancho * 0.84 : Math.min(ancho * 0.56, 820, altoVentana * 0.42 * (16 / 9));
   const gap = movil ? 14 : 28;
   const paso = W + gap;
   const alto = W * (movil ? 5 / 4 : 9 / 16);
@@ -144,7 +144,7 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
   return (
     <motion.div
       ref={caja}
-      className="relative mt-12 select-none"
+      className="relative mt-12 select-none lg:mt-[4svh]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.3 } }}
       exit={{ opacity: 0, transition: { duration: 0.22 } }}
@@ -201,7 +201,7 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
       </div>
 
       {/* Indicador y flechas */}
-      <div className="relative mx-auto mt-8 flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-8">
+      <div className="relative mx-auto mt-8 flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-8 lg:mt-[3svh]">
         <div className="flex items-center gap-1.5" role="tablist" aria-label="Proyectos">
           {proyectos.map((p, j) => (
             <button

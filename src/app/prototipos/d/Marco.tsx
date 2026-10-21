@@ -3,6 +3,7 @@
 import { useReducir } from "../_comun/hooks";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Editor } from "./Editor";
 import { ProveedorD, useEstadoD } from "./estado";
@@ -29,7 +30,9 @@ function Lienzo({ children }: { children: React.ReactNode }) {
   const { tema, editando } = useEstadoD();
   const reducir = useReducir();
   useFoco();
-  useScrollMagico(!reducir && !editando);
+  // Solo en la portada: en las fichas y páginas de servicio el scroll es el normal
+  const ruta = usePathname();
+  useScrollMagico(ruta === RAIZ && !reducir && !editando);
 
   // El fondo de la página (fuera del lienzo) sigue al tema, para que no asome otro color al hacer scroll elástico
   useEffect(() => {

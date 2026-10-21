@@ -155,6 +155,13 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - **Han confiado en mí:** una sola fila, mucho más lenta (110 s por vuelta), se para al pasar el ratón.
 - **JUNO Media:** fuera las pastillas. Pieza propia centrada: "En sinergia con", la marca JUNO MEDIA grande, la frase "Trabajo codo con codo con JUNO Media en producciones para marcas como estas." y las marcas en una fila con separadores finos (versalitas espaciadas; Arkano como firma en la cursiva de acento).
 
+### 2026-10-21 · D: ajuste fino del scroll mágico y equilibrio de clientes
+
+- **Scroll mágico solo en la portada** (no en fichas, servicios ni artículos).
+- **Cada sección llega centrada y entera:** el destino es el centro de la sección cuando cabe en la pantalla (si es más alta, su inicio y scroll libre hasta su borde). En escritorio las secciones se compactan con márgenes y tamaños en función del alto de la pantalla (`svh`): titulares, tarjetas de servicios, carrusel, foto de Sobre mí, llamada final. "En números" pasa a dos filas (cifras y premios en una, canales en otra). Medido: a 1920×950 (y en la pantalla de Josep) caben todas; a 1440×770 todas; a 1366×640 algunas (cifras, Sobre mí, opiniones, llamada) son algo más altas y usan el scroll libre.
+- **Cómo trabajamos:** cada paso es un punto del scroll mágico (data-punto): cada gesto de rueda centra el siguiente paso, y al terminar el último se pasa a la siguiente sección. El paso activo es el más cercano al centro de la pantalla.
+- **Han confiado en mí, equilibrado:** la primera parte gana peso (titular de verdad "Han confiado en mí", logos y nombres más grandes y con más aire) y JUNO Media pasa a secundaria (marca pequeña en línea con "En sinergia con", frase y muro de marcas más discretos).
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).
