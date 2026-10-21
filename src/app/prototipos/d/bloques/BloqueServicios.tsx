@@ -58,7 +58,9 @@ function TarjetaFoto({
       style={{ clipPath: "inset(0 round 36px)", borderRadius: 36 }}
     >
       <Diapositivas imagenes={imagenes} activo={encima && fino} ancho={ancho} className="opacity-80 transition-opacity duration-700 group-hover:opacity-100" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
+      {/* El degradado sobresale 2 px por cada lado: la capa de la imagen (con zoom) puede quedar medio píxel
+          más abajo que el degradado y asomaba un filo claro por el borde inferior */}
+      <div className="absolute -inset-[2px] bg-gradient-to-t from-black from-[3%] via-black/45 to-black/10" />
       {children(encima, fino)}
     </div>
   );
@@ -89,6 +91,7 @@ function Tarjeta({ servicio: s }: { servicio: ServicioD }) {
             </div>
             <div>
               <h3 className="text-[30px] font-bold leading-[1.1] tracking-[-0.03em] [text-wrap:balance]">{s.nombre}</h3>
+              {/* Entre el título y el enlace aparecen, al pasar el ratón, la frase y para quién */}
               <Revelable>
                 <p className="d-serif mt-2 text-[26px] leading-tight text-[#ffc07a]">{s.frase}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
@@ -98,11 +101,12 @@ function Tarjeta({ servicio: s }: { servicio: ServicioD }) {
                     </span>
                   ))}
                 </div>
-                <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-white/85">
-                  Ver proyectos y cómo trabajo
-                  <Icono nombre="flecha" className="h-4 w-4" />
-                </span>
               </Revelable>
+              {/* Siempre visible: en reposo sube el título para que no quede pegado abajo */}
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white/85 transition-[margin] duration-700 group-hover:mt-6">
+                Ver proyectos y cómo trabajo
+                <Icono nombre="flecha" className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+              </span>
             </div>
           </div>
         )}

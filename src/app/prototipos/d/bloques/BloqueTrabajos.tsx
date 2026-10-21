@@ -332,7 +332,7 @@ function TarjetaCarrusel({ proyecto: p, activa }: { proyecto: ProyectoD; activa:
       {/* Sombra fija (no se anima) y radio fijo: al escalar la tarjeta no hay que repintar nada */}
       <div data-radio className="relative h-full overflow-hidden rounded-[32px] bg-black shadow-[0_30px_60px_-36px_rgba(0,0,0,0.75)]">
         <Diapositivas imagenes={p.fotogramas.length > 1 ? p.fotogramas : [p.poster]} activo={activa && encima && fino} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+        <div className="absolute -inset-[2px] bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
         {p.laurel && (
           <span className="absolute left-5 top-5 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white">
             <Icono nombre="laurel" className="h-3.5 w-3.5 text-[#ffcf7a]" />
@@ -379,7 +379,7 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: ProyectoD }) {
         className="relative aspect-[4/5] overflow-hidden rounded-[32px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[3/2]"
       >
         <Diapositivas imagenes={p.fotogramas.length > 1 ? p.fotogramas : [p.poster]} activo={encima && fino} ancho={1200} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
+        <div className="absolute -inset-[2px] bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
 
         {p.laurel && (
           <span className="absolute left-4 top-4 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white">
