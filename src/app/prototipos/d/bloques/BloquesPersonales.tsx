@@ -69,7 +69,7 @@ export function BloqueProceso({ bloque }: { bloque: Bloque }) {
           </div>
         </div>
 
-        <div ref={pasos} className="flex flex-col gap-4 lg:gap-6 lg:py-[10svh]">
+        <div ref={pasos} className="flex flex-col gap-4 lg:gap-0 lg:py-[10svh]">
           {PASOS.map((p, i) => (
             <div
               key={p.titulo}
@@ -77,7 +77,8 @@ export function BloqueProceso({ bloque }: { bloque: Bloque }) {
                 tarjetas.current[i] = el;
               }}
               data-punto
-              className="lg:flex lg:min-h-[52svh] lg:items-center"
+              // 70svh por paso: al centrar uno, el anterior y el siguiente quedan fuera de la pantalla
+              className="lg:flex lg:min-h-[70svh] lg:items-center"
             >
               <div
                 data-foco

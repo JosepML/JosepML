@@ -130,25 +130,27 @@ function Opinion({ texto, quien, tipo }: { texto: string; quien: string; tipo: s
 }
 
 /**
- * Clientes: una sola fila de logos que pasa despacio (se para al pasar el ratón), con los logos
- * oficiales monocromos según el tema y, sin logo, el nombre compuesto como marca. Debajo, JUNO Media
- * como pieza propia: su marca grande, una frase en primera persona y las marcas de los proyectos juntos.
+ * Clientes: todas las marcas a la vista a la vez, quietas (logos oficiales monocromos según el tema y,
+ * sin logo, el nombre compuesto como marca). Debajo, JUNO Media como apartado secundario: rótulo, marca,
+ * una frase en primera persona y las marcas de los proyectos juntos.
  */
 export function BloqueClientes({ bloque }: { bloque: Bloque }) {
-  // Cuatro copias para que la fila llene pantallas anchas y el bucle de la marquesina no tenga costura
-  const fila = [...CLIENTES, ...CLIENTES, ...CLIENTES, ...CLIENTES];
   return (
     <section className="py-20 sm:py-28 lg:py-[6svh]">
-      {/* Primera parte, la principal: titular de verdad y logos grandes con aire */}
+      {/* Primera parte, la principal: titular de verdad y todas las marcas a la vista a la vez */}
       <div className="px-4 sm:px-8">
         <Titular antetitulo="Clientes" titulo={bloque.datos.titulo} centrado />
       </div>
-      <div className="d-marquesina-pausa d-mascara-lados mt-12 overflow-hidden py-4 lg:mt-[5svh]">
-        <div className="d-marquesina flex w-max items-center" style={{ "--duracion": "110s" } as React.CSSProperties}>
-          {fila.map((c, i) => (
-            <Logo key={i} cliente={c} grande />
-          ))}
-        </div>
+      {/* Sin marquesina: todas las marcas quietas y visibles desde el primer momento, Disney y Star Wars
+          primero. Entran escalonadas una sola vez y se iluminan al pasar el ratón */}
+      <div className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-y-2 px-4 sm:grid-cols-3 sm:px-8 lg:mt-[5svh] lg:grid-cols-5">
+        {CLIENTES.map((c, i) => (
+          <Revelar key={c.nombre} retraso={i * 0.05} y={14}>
+            <div className="flex h-24 items-center justify-center px-3 text-center lg:h-28">
+              <Logo cliente={c} grande />
+            </div>
+          </Revelar>
+        ))}
       </div>
 
       {/* Segunda parte, secundaria dentro de la misma sección: JUNO más pequeño y con menos contraste */}
@@ -181,7 +183,7 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
 function Logo({ cliente: c, compacto, grande }: { cliente: ClienteD; compacto?: boolean; grande?: boolean }) {
   const [roto, setRoto] = useState(false);
   return (
-    <span className={`flex shrink-0 items-center ${compacto ? "h-12 px-3" : grande ? "h-24 px-12 sm:px-16" : "h-16 px-10 sm:px-14"}`}>
+    <span className={`flex shrink-0 items-center justify-center ${compacto ? "h-12 px-3" : grande ? "h-20" : "h-16 px-10 sm:px-14"}`}>
       {c.logo && !roto ? (
         <img
           src={c.logo}
@@ -201,12 +203,13 @@ function Logo({ cliente: c, compacto, grande }: { cliente: ClienteD; compacto?: 
       ) : (
         // Sin logo: el nombre compuesto como marca (versalitas espaciadas), no como etiqueta
         <span
-          className={`whitespace-nowrap font-semibold uppercase transition-colors duration-300 hover:text-[var(--d-texto)] ${
+          className={`font-semibold uppercase transition-colors duration-300 hover:text-[var(--d-texto)] ${
             compacto
-              ? "text-[12px] tracking-[0.18em] text-[var(--d-medio)]"
+              ? "whitespace-nowrap text-[12px] tracking-[0.18em] text-[var(--d-medio)]"
               : grande
-                ? "text-lg tracking-[0.2em] text-[var(--d-cliente)] sm:text-[22px]"
-                : "text-[15px] tracking-[0.22em] text-[var(--d-tenue)] sm:text-base"
+                ? // Los nombres largos pueden partirse en dos líneas centradas dentro de su celda
+                  "max-w-[15ch] text-[15px] leading-snug tracking-[0.16em] text-[var(--d-cliente)] [text-wrap:balance] sm:text-[17px]"
+                : "whitespace-nowrap text-[15px] tracking-[0.22em] text-[var(--d-tenue)] sm:text-base"
           }`}
         >
           {c.nombre}

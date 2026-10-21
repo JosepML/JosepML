@@ -41,7 +41,11 @@ export function PortadaD() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className={`relative ${editando ? "outline-2 -outline-offset-8 outline-dashed outline-[var(--d-acento)]/40 rounded-[40px]" : ""}`}
+              // En escritorio cada sección ocupa al menos la pantalla entera con el contenido centrado: el scroll
+              // mágico la deja encuadrada y no asoman las vecinas (la portada ya mide una pantalla; el proceso es más alto)
+              className={`relative ${b.tipo !== "portada" && b.tipo !== "proceso" ? "lg:flex lg:min-h-svh lg:flex-col lg:justify-center" : ""} ${
+                editando ? "outline-2 -outline-offset-8 outline-dashed outline-[var(--d-acento)]/40 rounded-[40px]" : ""
+              }`}
             >
               {editando && (
                 <span className="cristal cristal-fuerte absolute left-6 top-6 z-[40] rounded-full px-3 py-1 text-[11px] font-semibold">

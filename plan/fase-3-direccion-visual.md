@@ -167,6 +167,12 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - "En sinergia con" y "JUNO MEDIA" en dos líneas separadas, con aire entre ambas; después la frase y el muro de marcas.
 - Escala de luminancia propia de la sección, igual en claro y oscuro (variables en `cristal.css`): titular 100 %, clientes 82 % (y los logos de imagen con la misma opacidad y una altura óptica parecida a los nombres en texto), marca JUNO 66 %, antetítulos y frase 58 %, marcas de JUNO 52 %, líneas 12 % (antes en modo claro las líneas eran blancas y no se veían). Espaciado vertical coherente entre las dos partes. Comprobado con capturas en los dos temas.
 
+### 2026-10-21 · D: clientes sin marquesina y secciones encuadradas
+
+- Marca JUNO MEDIA un escalón más luminosa (74 % en oscuro, 76 % en claro); el resto de la escala igual.
+- **Clientes sin marquesina:** era rápida y, al llegar, podían no verse Disney o Star Wars. Ahora todas las marcas están quietas y a la vista a la vez, en una rejilla de 5 × 2 (3 o 2 columnas en pantallas más estrechas), Disney y Star Wars primero, con la misma luminancia; los nombres largos se parten en dos líneas centradas. Entran escalonadas una sola vez y se iluminan al pasar el ratón. Nada se mueve en bucle.
+- **Secciones encuadradas:** en escritorio cada sección de la portada ocupa al menos la pantalla entera con el contenido centrado (salvo la portada, que ya mide una pantalla, y Cómo trabajamos). Así el scroll mágico la deja encuadrada y no asoman la de arriba ni la de abajo. En Cómo trabajamos, 70svh por paso para que al centrar uno no asomen sus vecinos. Comprobado recorriendo la portada entera con la rueda y capturando cada parada.
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).

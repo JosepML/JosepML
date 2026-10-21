@@ -9,10 +9,10 @@
   --d-texto: #f5f5f7;
   --d-suave: rgba(245, 245, 247, 0.62);
   --d-tenue: rgba(245, 245, 247, 0.38);
-  /* Escala de luminancia de "Han confiado en mí": titular 100 %, clientes 82 %, marca JUNO 66 %,
+  /* Escala de luminancia de "Han confiado en mí": titular 100 %, clientes 82 %, marca JUNO 74 %,
      antetítulos y frase 58 %, marcas de JUNO 52 %, líneas 12 % */
   --d-cliente: rgba(245, 245, 247, 0.82);
-  --d-juno: rgba(245, 245, 247, 0.66);
+  --d-juno: rgba(245, 245, 247, 0.74);
   --d-ante: rgba(245, 245, 247, 0.58);
   --d-medio: rgba(245, 245, 247, 0.52);
   --d-linea: rgba(245, 245, 247, 0.12);
@@ -45,7 +45,7 @@
   --d-suave: rgba(29, 29, 31, 0.64);
   --d-tenue: rgba(29, 29, 31, 0.42);
   --d-cliente: rgba(29, 29, 31, 0.82);
-  --d-juno: rgba(29, 29, 31, 0.68);
+  --d-juno: rgba(29, 29, 31, 0.76);
   --d-ante: rgba(29, 29, 31, 0.6);
   --d-medio: rgba(29, 29, 31, 0.54);
   --d-linea: rgba(29, 29, 31, 0.12);
