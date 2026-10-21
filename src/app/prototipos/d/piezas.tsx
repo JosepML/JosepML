@@ -185,7 +185,20 @@ export function Disponible({ className = "" }: { className?: string }) {
  * Sustituye a los clips de YouTube al pasar el ratón: cada clip cargaba un reproductor entero y daba tirones.
  * En la web final aquí irá el clip propio en mp4.
  */
-export function Diapositivas({ imagenes, activo, className = "", intervalo = 1600 }: { imagenes: string[]; activo: boolean; className?: string; intervalo?: number }) {
+export function Diapositivas({
+  imagenes,
+  activo,
+  className = "",
+  intervalo = 1600,
+  ancho = 1080,
+}: {
+  imagenes: string[];
+  activo: boolean;
+  className?: string;
+  intervalo?: number;
+  /** Ancho de la imagen servida: el de la tarjeta en pantalla, no más (subirla a la GPU cuesta según sus píxeles) */
+  ancho?: 640 | 750 | 828 | 1080 | 1200 | 1920;
+}) {
   const [i, setI] = useState(0);
   const reducir = useReducir();
 
@@ -203,7 +216,7 @@ export function Diapositivas({ imagenes, activo, className = "", intervalo = 160
       {imagenes.map((src, n) => (
         <img
           key={src}
-          src={img(src, 1200)}
+          src={img(src, ancho)}
           alt=""
           data-transicion={n === 0 ? "" : undefined}
           draggable={false}

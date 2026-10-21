@@ -193,6 +193,15 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - El vídeo de la portada se pausa fuera de pantalla en vez de desmontarse (rehacer el iframe daba fotogramas de 40-70 ms al salir de la portada).
 - **Queda:** siguen unos pocos fotogramas lentos (20-60 ms) al salir de la portada hacia "Lo que hago", sobre todo en modo desarrollo; hay que volver a medir en producción tras la pausa del vídeo. Pendiente también pasar el script de arranque a producción (`build` + `start`), que va más fluido que el modo desarrollo. El fotograma `iili.io/BmoHrCl.png` de El Cirujano ya no existe (404).
 
+### 2026-10-21 · D: rendimiento, segunda parte
+
+- **El script de arranque** (`scripts/iniciar-prototipos.bat`) compila y arranca la versión de producción (`npm run build` + `npm run start`), mucho más fluida que el modo desarrollo; si la compilación falla, avisa y arranca en modo desarrollo.
+- **Volver de una ficha a la portada** congelaba la pantalla 242 ms. Con una traza se vio que no era montar la portada sino el reproductor de YouTube del reel al crearse (el propio YouTube ocupa la GPU unos 250 ms al arrancar). Ahora el iframe solo se crea con el vídeo a la vista y la página quieta 0,7 s, y fuera de pantalla se pausa en vez de destruirse. Peor fotograma al volver: de 242 a 24 ms. Además, al volver a la portada desde otra página, primero se montan las dos primeras secciones y el resto en segundo plano.
+- Cambio claro/oscuro: peor fotograma de 37 a 18 ms.
+- Fotos servidas al ancho de cada tarjeta (servicios y rejillas a 750 px, carrusel a 1080, cabeceras a 1920-2048).
+- El fotograma roto de El Cirujano se quita de la lista hasta que Josep pase otro (quedan los dos que funcionan).
+- **Lo que queda:** en la primera pasada por la portada caen unos 5 fotogramas de 24-50 ms al salir del hero hacia "Lo que hago" y al llegar a "Cómo trabajamos"; en una segunda pasada, ninguno. Es el navegador preparando por primera vez en la GPU esas zonas; probado quitando sombras, desenfoques, orbes, menú, iframe, animaciones de servicios y textos con degradado, y ninguno lo cambia.
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).

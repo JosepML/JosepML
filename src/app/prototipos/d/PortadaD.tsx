@@ -6,7 +6,7 @@ import { BloqueServicios } from "./bloques/BloqueServicios";
 import { BloqueTrabajos } from "./bloques/BloqueTrabajos";
 import { BloqueClientes, BloqueCifras, BloqueOpiniones } from "./bloques/BloquesConfianza";
 import { BloqueBlog, BloqueLlamada, BloqueProceso, BloqueSobreMi, BloqueTexto, Pie } from "./bloques/BloquesPersonales";
-import { useEffect } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { img } from "../_comun/imagen";
 import { CATALOGO, imagenesDe, PROYECTOS, SERVICIOS, type Bloque, type TipoBloque } from "./datos";
 import { useEstadoD } from "./estado";
@@ -37,9 +37,9 @@ function usePrecargaImagenes() {
     const cancelar = window.cancelIdleCallback ?? window.clearTimeout;
     const id = ocioso(() => {
       const urls = new Set<string>();
-      for (const s of SERVICIOS) imagenesDe(s.slug).forEach((u) => urls.add(img(u, 1200)));
+      for (const s of SERVICIOS) imagenesDe(s.slug).forEach((u) => urls.add(img(u, 750)));
       for (const p of PROYECTOS) {
-        urls.add(img(p.poster, 1200));
+        (p.fotogramas.length > 1 ? p.fotogramas : [p.poster]).forEach((u) => urls.add(img(u, 1080)));
         urls.add(img(p.poster, 256));
       }
       const sobre = CATALOGO["sobre-mi"].datos.imagen;
@@ -55,16 +55,38 @@ function usePrecargaImagenes() {
   }, []);
 }
 
+// La primera carga se hidrata entera (tiene que coincidir con el HTML del servidor). Las siguientes
+// veces que se monta la portada en el navegador (al volver desde una ficha) montar todo de golpe
+// congelaba la pantalla unos 240 ms: entonces se montan primero las dos primeras secciones y el resto
+// en segundo plano, con huecos de la misma altura mientras tanto.
+let portadaYaMontada = false;
+const INMEDIATAS = 2;
+
+function useMontajeEscalonado() {
+  const [todo, setTodo] = useState(() => !portadaYaMontada);
+  useEffect(() => {
+    portadaYaMontada = true;
+    if (todo) return;
+    const ocioso = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 120));
+    const cancelar = window.cancelIdleCallback ?? window.clearTimeout;
+    const id = ocioso(() => startTransition(() => setTodo(true)), { timeout: 400 } as IdleRequestOptions);
+    return () => cancelar(id as number);
+  }, [todo]);
+  return todo;
+}
+
 export function PortadaD() {
   const { bloques, editando } = useEstadoD();
   const visibles = bloques.filter((b) => b.visible);
   usePrecargaImagenes();
+  const todo = useMontajeEscalonado();
 
   return (
     <main>
       <AnimatePresence initial={false}>
-        {visibles.map((b) => {
+        {visibles.map((b, i) => {
           const Componente = COMPONENTES[b.tipo];
+          if (!todo && i >= INMEDIATAS) return <div key={b.id} id={`bloque-${b.id}`} className="min-h-svh" aria-hidden />;
           return (
             <motion.div
               key={b.id}

@@ -190,7 +190,7 @@ export const PROYECTOS: ProyectoD[] = [
     fotogramas: [
       "https://www.platinocrowdfunding.com/storage/project/5454/img/eO2uv54rRAQy1AgsNjm0ybjXLN92jg4mkW9zFxZR.png",
       "https://www.platinocrowdfunding.com/storage/project/5454/img/bj9n3eW3a65uyo5krgOrW1dhpgJAtqk8bvY5x687.png",
-      "https://iili.io/BmoHrCl.png",
+      // El tercer fotograma (iili.io/BmoHrCl.png) ya no existe en su servidor: pendiente de que Josep pase otro
     ],
     frase: "Llevamos el rojo hasta el infierno para meternos en la cabeza del asesino. La luz no sale de las lámparas: sale de su mente.",
     laurel: { premio: "Mejor fotografía", festival: "On Duty International Film Festival" },

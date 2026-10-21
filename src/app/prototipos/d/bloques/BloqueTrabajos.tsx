@@ -357,7 +357,7 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: ProyectoD }) {
         data-foco
         className="relative aspect-[4/5] overflow-hidden rounded-[32px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[3/2]"
       >
-        <Diapositivas imagenes={p.fotogramas.length > 1 ? p.fotogramas : [p.poster]} activo={encima && fino} />
+        <Diapositivas imagenes={p.fotogramas.length > 1 ? p.fotogramas : [p.poster]} activo={encima && fino} ancho={750} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
 
         {p.laurel && (

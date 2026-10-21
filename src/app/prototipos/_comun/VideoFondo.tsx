@@ -30,10 +30,24 @@ export function VideoFondo({ id, inicio, poster, className = "", filtro, escala 
   const visible = useInView(caja, { margin: "100px" });
   const [listo, setListo] = useState(false);
 
+  // Crear el reproductor de YouTube bloquea la GPU unos 250 ms (lo inicia el propio YouTube), así que
+  // solo se crea con el vídeo a la vista y la página quieta un momento: nunca en mitad de un scroll.
+  // Una vez creado se queda (fuera de pantalla se pausa).
   useEffect(() => {
-    const t = window.setTimeout(() => setListo(true), 600);
-    return () => window.clearTimeout(t);
-  }, []);
+    if (listo || !visible) return;
+    let t = window.setTimeout(() => setListo(true), 700);
+    const reiniciar = () => {
+      window.clearTimeout(t);
+      t = window.setTimeout(() => setListo(true), 700);
+    };
+    window.addEventListener("scroll", reiniciar, { passive: true });
+    window.addEventListener("wheel", reiniciar, { passive: true });
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("scroll", reiniciar);
+      window.removeEventListener("wheel", reiniciar);
+    };
+  }, [listo, visible]);
 
   const video = Boolean(id) && listo && ancha && !reducir;
 

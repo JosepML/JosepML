@@ -29,9 +29,23 @@ if not exist "node_modules" (
   )
 )
 
+REM Version de produccion: va mucho mas fluida que el modo desarrollo. Compilar tarda un minuto.
+echo Preparando la web ^(tarda un minuto^)...
+call npm.cmd run build
+if errorlevel 1 (
+  echo.
+  echo Aviso: no se pudo preparar la version final. Se arranca en modo desarrollo ^(mas lento^).
+  echo.
+  echo Web en marcha: http://localhost:3000/prototipos
+  echo Para parar el servidor, pulsa Ctrl+C en esta ventana.
+  call npm.cmd run dev
+  pause
+  exit /b 0
+)
+
 echo.
 echo Web en marcha: http://localhost:3000/prototipos
 echo Para parar el servidor, pulsa Ctrl+C en esta ventana.
 echo.
-call npm.cmd run dev
+call npm.cmd run start
 pause

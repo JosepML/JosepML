@@ -36,7 +36,7 @@ export function PaginaServicio({ servicio: s }: { servicio: ServicioD }) {
   return (
     <main>
       <header className="relative m-2 h-[82svh] min-h-[560px] overflow-hidden rounded-[28px] bg-black sm:m-3 sm:rounded-[40px]">
-        <Diapositivas imagenes={imagenesDe(s.slug)} activo intervalo={3800} />
+        <Diapositivas imagenes={imagenesDe(s.slug)} activo intervalo={3800} ancho={1920} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/30" />
         <div className="absolute inset-x-0 bottom-0 z-10 p-6 pb-10 text-white sm:p-12 sm:pb-14">
           <motion.div {...entrar(0.15)} className="flex items-center gap-3">
