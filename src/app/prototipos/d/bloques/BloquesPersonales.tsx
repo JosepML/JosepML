@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePunteroFino, useReducir } from "../../_comun/hooks";
 import { AJUSTES, ARTICULOS, PASOS, SERVICIOS, type Bloque } from "../datos";
 import { Icono } from "../Iconos";
-import { CURVA, Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "../piezas";
+import { Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "../piezas";
 import { img } from "../../_comun/imagen";
 
 
@@ -16,21 +16,11 @@ import { img } from "../../_comun/imagen";
  * escalonadas; al pasar el ratón, la tarjeta se ilumina. Encaja con el scroll normal: se ve de un vistazo.
  */
 export function BloqueProceso({ bloque }: { bloque: Bloque }) {
-  const reducir = useReducir();
   return (
     <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
         <div className="relative mt-14 lg:mt-[6svh]">
-          {/* Línea que une los pasos (solo en escritorio), trazada una vez al aparecer */}
-          <motion.span
-            aria-hidden
-            className="absolute left-0 right-0 top-[2.1rem] hidden h-px origin-left bg-gradient-to-r from-[var(--d-acento)] via-[var(--d-calido)] to-transparent lg:block"
-            initial={{ scaleX: reducir ? 1 : 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 1.4, ease: CURVA }}
-          />
           <ol className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
             {PASOS.map((p, i) => (
               <Revelar key={p.titulo} retraso={0.15 + i * 0.12}>
