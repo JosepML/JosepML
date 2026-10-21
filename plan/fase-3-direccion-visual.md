@@ -147,6 +147,14 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - **Foco de luz del ratón:** una mancha que se mueve con transform en vez de repintar un degradado en toda la tarjeta.
 - Bloques guardados en el navegador con clave `proto-d-bloques-v4` (nuevo orden).
 
+### 2026-10-21 · D: scroll mágico, carrusel protagonista y JUNO Media
+
+- **Scroll mágico** (`d/scrollMagico.ts`): con la rueda del ratón, cada gesto lleva con una curva suave (1,05 s, lenta al empezar y al frenar) al inicio de la sección siguiente o anterior. Solo responde a la rueda (nunca salta solo); dentro de secciones más altas que la pantalla el scroll es normal hasta su borde; se ignora la inercia del trackpad mientras dura el viaje; se cancela con teclado o clic; apagado en táctil, con "reducir movimiento", con el editor abierto o con un vídeo abierto. El coordinador proponía en cambio un "asentado" automático al dejar de hacer scroll; se eligió lo que pidió Josep (que la rueda lleve al siguiente punto) porque además así nada se mueve sin que él lo pida.
+- **Selección, carrusel protagonista:** la tarjeta activa centrada, grande y nítida; las vecinas más pequeñas y atenuadas; avance de una en una con flechas, arrastre (también con el dedo) o pulsando una vecina, con un muelle suave. Indicador de progreso fino. El fondo de la sección se funde con el fotograma de la tarjeta activa. Tarjeta limitada a la mitad del alto de la pantalla.
+- **Salto al cambiar de filtro:** venía de las animaciones de layout dentro de un contenedor con scroll. Ahora: altura fija, la lista se funde (0,22 s) y la nueva entra escalonada desde la primera tarjeta. Comprobado con capturas cada 250 ms: sin saltos.
+- **Han confiado en mí:** una sola fila, mucho más lenta (110 s por vuelta), se para al pasar el ratón.
+- **JUNO Media:** fuera las pastillas. Pieza propia centrada: "En sinergia con", la marca JUNO MEDIA grande, la frase "Trabajo codo con codo con JUNO Media en producciones para marcas como estas." y las marcas en una fila con separadores finos (versalitas espaciadas; Arkano como firma en la cursiva de acento).
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).

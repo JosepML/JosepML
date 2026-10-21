@@ -8,6 +8,7 @@ import { Editor } from "./Editor";
 import { ProveedorD, useEstadoD } from "./estado";
 import { Icono } from "./Iconos";
 import { RAIZ } from "./rutas";
+import { useScrollMagico } from "./scrollMagico";
 
 const ENLACES = [
   { nombre: "Trabajos", href: `${RAIZ}#trabajos` },
@@ -25,9 +26,10 @@ export function MarcoD({ children }: { children: React.ReactNode }) {
 }
 
 function Lienzo({ children }: { children: React.ReactNode }) {
-  const { tema } = useEstadoD();
+  const { tema, editando } = useEstadoD();
   const reducir = useReducir();
   useFoco();
+  useScrollMagico(!reducir && !editando);
 
   // El fondo de la página (fuera del lienzo) sigue al tema, para que no asome otro color al hacer scroll elástico
   useEffect(() => {

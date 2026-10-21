@@ -396,35 +396,38 @@ export const OPINIONES = [
 ];
 
 /**
- * Clientes, en dos filas. `logo` es el logo oficial cuando hay uno fiable (los mismos de la web antigua);
- * se pinta monocromo según el tema. Sin logo se compone el nombre en texto. En la fase 4, tabla `clientes`
- * con el logo subido al almacenamiento.
+ * Clientes, en una sola fila. `logo` es el logo oficial cuando hay uno fiable (los mismos de la web
+ * antigua); se pinta monocromo según el tema. Sin logo, el nombre compuesto como marca; `estilo: "firma"`
+ * para artistas (su nombre en la cursiva de acento). En la fase 4, tabla `clientes` con el logo subido
+ * al almacenamiento.
  */
-export type ClienteD = { nombre: string; logo?: string; alto?: number };
+export type ClienteD = { nombre: string; logo?: string; alto?: number; estilo?: "firma" };
 
-export const CLIENTES: ClienteD[][] = [
-  [
-    { nombre: "Disney", logo: "https://www.edigitalagency.com.au/wp-content/uploads/new-Disney-logo-white-png-large-size.png", alto: 44 },
-    { nombre: "Star Wars", logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg", alto: 46 },
-    // El logo de la web antigua (jobs.kinepolis.com) ya no carga: nombre en texto hasta tener el oficial
-    { nombre: "Kinepolis" },
-    { nombre: "Consell Valencià de la Joventut" },
-    { nombre: "Ayuntamiento de l'Alfàs del Pi" },
-  ],
-  [
-    { nombre: "Ocisport" },
-    { nombre: "Mediterra Cinema" },
-    { nombre: "Cero Coma" },
-    { nombre: "Dreamore" },
-    { nombre: "Kymera Producciones" },
-  ],
+export const CLIENTES: ClienteD[] = [
+  { nombre: "Disney", logo: "https://www.edigitalagency.com.au/wp-content/uploads/new-Disney-logo-white-png-large-size.png", alto: 44 },
+  { nombre: "Star Wars", logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg", alto: 46 },
+  // El logo de la web antigua (jobs.kinepolis.com) ya no carga: nombre hasta tener el oficial
+  { nombre: "Kinepolis" },
+  { nombre: "Consell Valencià de la Joventut" },
+  { nombre: "Ayuntamiento de l'Alfàs del Pi" },
+  { nombre: "Ocisport" },
+  { nombre: "Mediterra Cinema" },
+  { nombre: "Cero Coma" },
+  { nombre: "Dreamore" },
+  { nombre: "Kymera Producciones" },
 ];
 
-/** Trabajo en sinergia con JUNO Media (sin decir que Josep es parte de JUNO): clientes de proyectos juntos */
+/** Trabajo en sinergia con JUNO Media (sin decir que Josep es parte de JUNO): marcas de proyectos juntos */
 export const JUNO = {
   nombre: "JUNO Media",
-  texto: "Muchos de mis proyectos nacen mano a mano con JUNO Media. Juntos hemos trabajado para:",
-  clientes: ["ForecourtTech", "Arkano", "SOM Events", "Albir Confort", "Mapache Events"],
+  texto: "Trabajo codo con codo con JUNO Media en producciones para marcas como estas.",
+  clientes: [
+    { nombre: "ForecourtTech" },
+    { nombre: "Arkano", estilo: "firma" },
+    { nombre: "SOM Events" },
+    { nombre: "Albir Confort" },
+    { nombre: "Mapache Events" },
+  ] as ClienteD[],
 };
 
 /** Canales de YouTube: de ahí viene buena parte de la experiencia. Las cifras de suscriptores las pone Josep. */

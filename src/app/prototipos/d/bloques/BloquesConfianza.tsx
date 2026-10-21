@@ -130,53 +130,45 @@ function Opinion({ texto, quien, tipo }: { texto: string; quien: string; tipo: s
 }
 
 /**
- * Clientes: dos filas de logos que se mueven en sentidos opuestos (los logos oficiales, monocromos según
- * el tema; sin logo, el nombre compuesto en texto) y un apartado propio para JUNO Media.
+ * Clientes: una sola fila de logos que pasa despacio (se para al pasar el ratón), con los logos
+ * oficiales monocromos según el tema y, sin logo, el nombre compuesto como marca. Debajo, JUNO Media
+ * como pieza propia: su marca grande, una frase en primera persona y las marcas de los proyectos juntos.
  */
 export function BloqueClientes({ bloque }: { bloque: Bloque }) {
+  // Cuatro copias para que la fila llene pantallas anchas y el bucle de la marquesina no tenga costura
+  const fila = [...CLIENTES, ...CLIENTES, ...CLIENTES, ...CLIENTES];
   return (
     <section className="py-20 sm:py-28">
       <Revelar>
         <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--d-tenue)]">{bloque.datos.titulo}</p>
       </Revelar>
-      <div className="d-marquesina-pausa d-mascara-lados mt-10 flex flex-col gap-8 overflow-hidden">
-        {CLIENTES.map((fila, n) => (
-          <div
-            key={n}
-            className={`${n % 2 ? "d-marquesina-inversa" : "d-marquesina"} flex w-max items-center`}
-            style={{ "--duracion": n % 2 ? "55s" : "48s" } as React.CSSProperties}
-          >
-            {/* Cuatro copias para que la fila llene pantallas anchas y el bucle no tenga costura */}
-            {[...fila, ...fila, ...fila, ...fila].map((c, i) => (
-              <Logo key={i} cliente={c} />
-            ))}
-          </div>
-        ))}
+      <div className="d-marquesina-pausa d-mascara-lados mt-10 overflow-hidden">
+        <div className="d-marquesina flex w-max items-center" style={{ "--duracion": "110s" } as React.CSSProperties}>
+          {fila.map((c, i) => (
+            <Logo key={i} cliente={c} />
+          ))}
+        </div>
       </div>
 
-      <div className="mx-auto mt-16 max-w-5xl px-4 sm:px-8">
+      <div className="mx-auto mt-24 max-w-6xl px-4 text-center sm:px-8">
         <Revelar>
-          <div data-foco className="cristal relative overflow-hidden rounded-[40px] p-8 sm:p-12">
-            <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-[radial-gradient(closest-side,var(--d-orbe-a),transparent)]" />
-            <div className="relative grid gap-8 md:grid-cols-[auto_1fr] md:items-center md:gap-14">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--d-tenue)]">Trabajo en sinergia con</p>
-                <p className="mt-3 whitespace-nowrap text-5xl tracking-[0.12em] sm:text-6xl">
-                  <span className="font-extrabold">JUNO</span>
-                  <span className="ml-2 font-normal">MEDIA</span>
-                </p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--d-tenue)]">En sinergia con</p>
+          <p className="mt-5 text-[clamp(3rem,9vw,6.5rem)] leading-none tracking-[0.14em]">
+            <span className="font-extrabold">JUNO</span>
+            <span className="ml-[0.3em] font-light">MEDIA</span>
+          </p>
+        </Revelar>
+        <Revelar retraso={0.1}>
+          <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-[var(--d-suave)] [text-wrap:balance] sm:text-xl">{JUNO.texto}</p>
+        </Revelar>
+        <Revelar retraso={0.18}>
+          {/* Las marcas en fila, separadas por líneas finas: nada de etiquetas */}
+          <div className="mx-auto mt-12 grid max-w-6xl grid-cols-2 border-y border-[var(--d-borde)] md:grid-cols-5 md:divide-x md:divide-[var(--d-borde)]">
+            {JUNO.clientes.map((c) => (
+              <div key={c.nombre} className="flex h-24 items-center justify-center">
+                <Logo cliente={c} compacto />
               </div>
-              <div>
-                <p className="text-[17px] leading-relaxed text-[var(--d-suave)] [text-wrap:pretty]">{JUNO.texto}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {JUNO.clientes.map((c) => (
-                    <span key={c} className="rounded-full border border-[var(--d-borde)] bg-[var(--d-cristal)] px-4 py-2 text-sm font-semibold">
-                      {c}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </Revelar>
       </div>
@@ -185,10 +177,10 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
 }
 
 /** Logo del cliente; si la imagen no carga (enlaces externos que caducan), su nombre en texto. */
-function Logo({ cliente: c }: { cliente: ClienteD }) {
+function Logo({ cliente: c, compacto }: { cliente: ClienteD; compacto?: boolean }) {
   const [roto, setRoto] = useState(false);
   return (
-    <span className="flex h-16 shrink-0 items-center px-10 sm:px-14">
+    <span className={`flex h-16 shrink-0 items-center ${compacto ? "px-3" : "px-10 sm:px-14"}`}>
       {c.logo && !roto ? (
         <img
           src={c.logo}
@@ -198,8 +190,18 @@ function Logo({ cliente: c }: { cliente: ClienteD }) {
           draggable={false}
           onError={() => setRoto(true)}
         />
+      ) : c.estilo === "firma" ? (
+        // Artistas: su nombre como firma, en la cursiva de acento
+        <span className="d-serif whitespace-nowrap text-4xl text-[var(--d-tenue)] transition-colors duration-300 hover:text-[var(--d-texto)]">{c.nombre}</span>
       ) : (
-        <span className="whitespace-nowrap text-xl font-bold tracking-[-0.01em] text-[var(--d-tenue)] sm:text-2xl">{c.nombre}</span>
+        // Sin logo: el nombre compuesto como marca (versalitas espaciadas), no como etiqueta
+        <span
+          className={`whitespace-nowrap font-semibold uppercase text-[var(--d-tenue)] transition-colors duration-300 hover:text-[var(--d-texto)] ${
+            compacto ? "text-[13px] tracking-[0.18em]" : "text-[15px] tracking-[0.22em] sm:text-base"
+          }`}
+        >
+          {c.nombre}
+        </span>
       )}
     </span>
   );
