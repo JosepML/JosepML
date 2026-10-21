@@ -57,10 +57,15 @@ function TarjetaFoto({
       className={`group relative isolate h-full overflow-hidden bg-black text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 ${className}`}
       style={{ clipPath: "inset(0 round 36px)", borderRadius: 36 }}
     >
-      <Diapositivas imagenes={imagenes} activo={encima && fino} ancho={ancho} className="opacity-80 transition-opacity duration-700 group-hover:opacity-100" />
-      {/* El degradado sobresale 2 px por cada lado: la capa de la imagen (con zoom) puede quedar medio píxel
-          más abajo que el degradado y asomaba un filo claro por el borde inferior */}
-      <div className="absolute -inset-[2px] bg-gradient-to-t from-black from-[3%] via-black/45 to-black/10" />
+      {/* La foto se desvanece del todo antes del borde inferior (máscara): con zoom va en su propia capa y,
+          recortada aparte del degradado, sus píxeles se colaban en el suavizado del borde redondeado */}
+      <Diapositivas
+        imagenes={imagenes}
+        activo={encima && fino}
+        ancho={ancho}
+        className="opacity-80 transition-opacity duration-700 [mask-image:linear-gradient(to_top,transparent,#000_16%)] group-hover:opacity-100"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
       {children(encima, fino)}
     </div>
   );
