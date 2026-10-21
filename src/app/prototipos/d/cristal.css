@@ -255,6 +255,32 @@
   filter: brightness(0);
 }
 
+/* Barrido de luz en "Han confiado en mí": cada marca está al 82 % (escala de la sección) y sube al 100 %
+   cuando le llega la luz. Una sola animación de opacidad por marca, con retrasos escalonados en el JSX para
+   que la luz cruce la rejilla en diagonal: pasada de unos 3 s y pausa de unos 4 s (ciclo de 7 s).
+   Solo con data-barrido (sección en pantalla y movimiento permitido); con el ratón encima se para y se
+   ilumina la marca concreta. */
+.d-barrido-marca {
+  display: inline-flex;
+  opacity: 0.82;
+  transition: opacity 0.4s var(--d-curva);
+}
+.d-barrido[data-barrido] .d-barrido-marca {
+  animation: d-barrido 7s ease-in-out infinite;
+}
+.d-barrido:hover .d-barrido-marca {
+  animation: none;
+}
+.d-barrido .d-barrido-marca:hover {
+  opacity: 1;
+}
+@keyframes d-barrido {
+  0% { opacity: 0.82; }
+  9% { opacity: 1; }
+  21% { opacity: 0.82; }
+  100% { opacity: 0.82; }
+}
+
 /* Punto de "disponible" que late */
 @keyframes latido {
   0% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.6); }

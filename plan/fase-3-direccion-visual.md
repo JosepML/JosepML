@@ -173,6 +173,11 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - **Clientes sin marquesina:** era rápida y, al llegar, podían no verse Disney o Star Wars. Ahora todas las marcas están quietas y a la vista a la vez, en una rejilla de 5 × 2 (3 o 2 columnas en pantallas más estrechas), Disney y Star Wars primero, con la misma luminancia; los nombres largos se parten en dos líneas centradas. Entran escalonadas una sola vez y se iluminan al pasar el ratón. Nada se mueve en bucle.
 - **Secciones encuadradas:** en escritorio cada sección de la portada ocupa al menos la pantalla entera con el contenido centrado (salvo la portada, que ya mide una pantalla, y Cómo trabajamos). Así el scroll mágico la deja encuadrada y no asoman la de arriba ni la de abajo. En Cómo trabajamos, 70svh por paso para que al centrar uno no asomen sus vecinos. Comprobado recorriendo la portada entera con la rueda y capturando cada parada.
 
+### 2026-10-21 · D: barrido de luz en clientes
+
+- Josep eligió "solo el 1" de las propuestas para dar dinamismo a "Han confiado en mí": un **barrido de luz**. Cada marca está al 82 % y sube al 100 % cuando le llega la luz; la luz cruza la rejilla de izquierda a derecha en diagonal leve (la fila de abajo un poco después). Pasada de unos 3 s y pausa de unos 4 s. Una sola animación de opacidad por marca (`.d-barrido` en `cristal.css`), sin mover nada de sitio: siempre se ven todas. Solo mientras la sección está en pantalla; con el ratón encima se para y se ilumina la marca concreta; sin barrido con "reducir movimiento". Se mantiene la entrada escalonada al aparecer.
+- Se probó también una rejilla de líneas que se dibujaba al llegar (la opción 1 de otra lista de propuestas) y se quitó: Josep pidió solo una opción.
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).

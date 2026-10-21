@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { motion, useInView } from "motion/react";
+import { useRef, useState } from "react";
+import { useReducir } from "../../_comun/hooks";
 import { CANALES, CLIENTES, JUNO, OPINIONES, type Bloque, type ClienteD } from "../datos";
 import { Icono } from "../Iconos";
-import { Contador, Revelar, Titular } from "../piezas";
+import { Contador, CURVA, Revelar, Titular } from "../piezas";
 
 const CIFRAS = [
   { valor: 9, prefijo: "+", sufijo: "", unidad: "años", texto: "contando historias: primero en YouTube, después en el set" },
@@ -135,21 +137,38 @@ function Opinion({ texto, quien, tipo }: { texto: string; quien: string; tipo: s
  * una frase en primera persona y las marcas de los proyectos juntos.
  */
 export function BloqueClientes({ bloque }: { bloque: Bloque }) {
+  const rejilla = useRef<HTMLDivElement>(null);
+  const enPantalla = useInView(rejilla, { amount: 0.4 });
+  const reducir = useReducir();
   return (
     <section className="py-20 sm:py-28 lg:py-[6svh]">
       {/* Primera parte, la principal: titular de verdad y todas las marcas a la vista a la vez */}
       <div className="px-4 sm:px-8">
         <Titular antetitulo="Clientes" titulo={bloque.datos.titulo} centrado />
       </div>
-      {/* Sin marquesina: todas las marcas quietas y visibles desde el primer momento, Disney y Star Wars
-          primero. Entran escalonadas una sola vez y se iluminan al pasar el ratón */}
-      <div className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-y-2 px-4 sm:grid-cols-3 sm:px-8 lg:mt-[5svh] lg:grid-cols-5">
+      {/* Sin marquesina: todas las marcas quietas y visibles, Disney y Star Wars primero. Entran escalonadas
+          una sola vez y, mientras la sección está en pantalla, un barrido de luz suave las recorre en
+          diagonal cada pocos segundos (ver .d-barrido en cristal.css) */}
+      <div
+        ref={rejilla}
+        data-barrido={enPantalla && !reducir ? "" : undefined}
+        className="d-barrido mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-y-2 px-4 sm:grid-cols-3 sm:px-8 lg:mt-[5svh] lg:grid-cols-5"
+      >
         {CLIENTES.map((c, i) => (
-          <Revelar key={c.nombre} retraso={i * 0.05} y={14}>
-            <div className="flex h-24 items-center justify-center px-3 text-center lg:h-28">
-              <Logo cliente={c} grande />
-            </div>
-          </Revelar>
+          <motion.div
+            key={c.nombre}
+            className="flex h-24 items-center justify-center px-3 text-center lg:h-28"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: CURVA, delay: i * 0.05 }}
+          >
+            {/* El barrido sube la opacidad de cada marca por turnos: columna (de izquierda a derecha) y fila (un
+                poco después la de abajo), así la luz cruza la rejilla en una diagonal leve */}
+            <span className="d-barrido-marca" style={{ animationDelay: `${(i % 5) * 0.34 + Math.floor(i / 5) * 0.22}s` }}>
+              <Logo cliente={c} grande barrido />
+            </span>
+          </motion.div>
         ))}
       </div>
 
@@ -179,8 +198,11 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
   );
 }
 
-/** Logo del cliente; si la imagen no carga (enlaces externos que caducan), su nombre en texto. */
-function Logo({ cliente: c, compacto, grande }: { cliente: ClienteD; compacto?: boolean; grande?: boolean }) {
+/**
+ * Logo del cliente; si la imagen no carga (enlaces externos que caducan), su nombre en texto.
+ * Con `barrido` va a tono pleno y la luminancia la pone el contenedor del barrido de luz (82 % → 100 %).
+ */
+function Logo({ cliente: c, compacto, grande, barrido }: { cliente: ClienteD; compacto?: boolean; grande?: boolean; barrido?: boolean }) {
   const [roto, setRoto] = useState(false);
   return (
     <span className={`flex shrink-0 items-center justify-center ${compacto ? "h-12 px-3" : grande ? "h-20" : "h-16 px-10 sm:px-14"}`}>
@@ -189,14 +211,14 @@ function Logo({ cliente: c, compacto, grande }: { cliente: ClienteD; compacto?: 
           src={c.logo}
           alt={c.nombre}
           style={{ height: (c.alto ?? 36) * (grande ? 0.85 : compacto ? 0.6 : 1) }}
-          className="d-logo w-auto object-contain"
+          className={`d-logo w-auto object-contain ${barrido ? "!opacity-100" : ""}`}
           draggable={false}
           onError={() => setRoto(true)}
         />
       ) : c.estilo === "firma" ? (
         // Artistas: su nombre como firma, en la cursiva de acento
         <span
-          className={`d-serif whitespace-nowrap transition-colors duration-300 hover:text-[var(--d-texto)] ${compacto ? "text-3xl text-[var(--d-medio)]" : "text-5xl text-[var(--d-cliente)]"}`}
+          className={`d-serif whitespace-nowrap transition-colors duration-300 hover:text-[var(--d-texto)] ${compacto ? "text-3xl text-[var(--d-medio)]" : `text-5xl ${barrido ? "text-[var(--d-texto)]" : "text-[var(--d-cliente)]"}`}`}
         >
           {c.nombre}
         </span>
@@ -208,7 +230,7 @@ function Logo({ cliente: c, compacto, grande }: { cliente: ClienteD; compacto?: 
               ? "whitespace-nowrap text-[12px] tracking-[0.18em] text-[var(--d-medio)]"
               : grande
                 ? // Los nombres largos pueden partirse en dos líneas centradas dentro de su celda
-                  "max-w-[15ch] text-[15px] leading-snug tracking-[0.16em] text-[var(--d-cliente)] [text-wrap:balance] sm:text-[17px]"
+                  `max-w-[15ch] text-[15px] leading-snug tracking-[0.16em] [text-wrap:balance] sm:text-[17px] ${barrido ? "text-[var(--d-texto)]" : "text-[var(--d-cliente)]"}`
                 : "whitespace-nowrap text-[15px] tracking-[0.22em] text-[var(--d-tenue)] sm:text-base"
           }`}
         >
