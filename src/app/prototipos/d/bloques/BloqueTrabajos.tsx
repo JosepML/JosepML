@@ -9,6 +9,7 @@ import { Icono } from "../Iconos";
 import { RAIZ } from "../rutas";
 import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
 import { img } from "../../_comun/imagen";
+import { MASCARA_BORDE } from "./BloqueServicios";
 
 const FILTROS = [{ slug: "todos", nombre: "Todos" }, ...SERVICIOS.map((s) => ({ slug: s.slug, nombre: s.nombre }))];
 
@@ -314,9 +315,6 @@ function useArrastre(pista: React.RefObject<HTMLDivElement | null>) {
     },
   };
 }
-
-/** La foto se desvanece antes del borde inferior para que no se cuele en el suavizado de la esquina redondeada */
-const MASCARA_BORDE = "[mask-image:linear-gradient(to_top,transparent,#000_12%)]";
 
 function TarjetaCarrusel({ proyecto: p, activa }: { proyecto: ProyectoD; activa: boolean }) {
   const fino = usePunteroFino();

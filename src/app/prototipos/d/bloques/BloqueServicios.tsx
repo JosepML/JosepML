@@ -9,6 +9,9 @@ import { Icono } from "../Iconos";
 import { RAIZ } from "../rutas";
 import { Diapositivas, Revelar, Titular } from "../piezas";
 
+/** Desvanece la foto de una tarjeta antes del borde inferior, para que no asome en el suavizado de la esquina */
+export const MASCARA_BORDE = "[mask-image:linear-gradient(to_top,transparent,#000_10%)]";
+
 export const ICONOS_SERVICIO: Record<string, string> = { "direccion-de-fotografia": "camara", filmmaker: "claqueta", edicion: "ritmo" };
 
 /**
@@ -57,15 +60,17 @@ function TarjetaFoto({
       className={`group relative isolate h-full overflow-hidden bg-black text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 ${className}`}
       style={{ clipPath: "inset(0 round 36px)", borderRadius: 36 }}
     >
-      {/* La foto se desvanece del todo antes del borde inferior (máscara): con zoom va en su propia capa y,
-          recortada aparte del degradado, sus píxeles se colaban en el suavizado del borde redondeado */}
+      {/* Máscara: la foto se desvanece del todo antes del borde inferior. Con zoom va en su propia capa y se
+          recorta aparte del degradado, así que en el suavizado del borde se colaba 1 px gris de la foto */}
       <Diapositivas
         imagenes={imagenes}
         activo={encima && fino}
         ancho={ancho}
-        className="opacity-80 transition-opacity duration-700 [mask-image:linear-gradient(to_top,transparent,#000_16%)] group-hover:opacity-100"
+        className={`opacity-80 transition-opacity duration-700 group-hover:opacity-100 ${MASCARA_BORDE}`}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
+      {/* Negro del todo en el quinto inferior, donde va el texto: si no, lo que hay al pie de la foto (el borde
+          de una persiana, el suelo...) se transparentaba como una raya bajo el título */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,#000_24%,rgba(0,0,0,0.55)_50%,rgba(0,0,0,0.1)_100%)]" />
       {children(encima, fino)}
     </div>
   );
