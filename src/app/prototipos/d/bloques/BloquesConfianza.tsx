@@ -89,19 +89,22 @@ export function BloqueOpiniones({ bloque }: { bloque: Bloque }) {
   const fila1 = [...OPINIONES, ...OPINIONES];
   const fila2 = [...OPINIONES.slice(2), ...OPINIONES.slice(0, 2)];
   const fila2Doble = [...fila2, ...fila2];
+  // Las filas solo se mueven con la sección en pantalla: fuera de ella no hay animación (ni capa) que mantener
+  const ref = useRef<HTMLElement>(null);
+  const enPantalla = useInView(ref, { margin: "100px" });
 
   return (
-    <section className="overflow-hidden py-24 sm:py-32 lg:py-[6svh]">
+    <section ref={ref} className="overflow-hidden py-24 sm:py-32 lg:py-[6svh]">
       <div className="px-4 sm:px-8">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} centrado />
       </div>
       <div className="d-marquesina-pausa d-mascara-lados mt-14 flex flex-col gap-4 lg:mt-[5svh]">
-        <div className="d-marquesina flex w-max gap-4" style={{ "--duracion": "70s" } as React.CSSProperties}>
+        <div className={`${enPantalla ? "d-marquesina" : ""} flex w-max gap-4`} style={{ "--duracion": "70s" } as React.CSSProperties}>
           {fila1.map((o, i) => (
             <Opinion key={`a-${i}`} {...o} />
           ))}
         </div>
-        <div className="d-marquesina-inversa flex w-max gap-4" style={{ "--duracion": "80s" } as React.CSSProperties}>
+        <div className={`${enPantalla ? "d-marquesina-inversa" : ""} flex w-max gap-4`} style={{ "--duracion": "80s" } as React.CSSProperties}>
           {fila2Doble.map((o, i) => (
             <Opinion key={`b-${i}`} {...o} />
           ))}

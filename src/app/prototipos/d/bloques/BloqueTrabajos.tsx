@@ -8,6 +8,7 @@ import { proyectosDe, SERVICIOS, type Bloque, type ProyectoD } from "../datos";
 import { Icono } from "../Iconos";
 import { RAIZ } from "../rutas";
 import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
+import { img } from "../../_comun/imagen";
 
 const FILTROS = [{ slug: "todos", nombre: "Todos" }, ...SERVICIOS.map((s) => ({ slug: s.slug, nombre: s.nombre }))];
 
@@ -34,11 +35,11 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
           {fondo && (
             <motion.img
               key={fondo}
-              src={fondo}
+              src={img(fondo, 256)}
               alt=""
               // A un octavo del tamaño con un desenfoque pequeño y ampliada ×8: se ve muy difuminada pero el
               // desenfoque se calcula sobre 64 veces menos píxeles, y solo una vez por cambio de tarjeta
-              className="absolute left-1/2 top-1/2 h-[12.5%] w-[12.5%] object-cover blur-[6px] [transform:translate(-50%,-50%)_scale(8.6)] [will-change:transform,opacity]"
+              className="absolute left-1/2 top-1/2 h-[12.5%] w-[12.5%] object-cover blur-[6px] [transform:translate(-50%,-50%)_scale(8.6)]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.3 }}
               exit={{ opacity: 0 }}
@@ -174,7 +175,7 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
         {proyectos.map((p, j) => (
           <div
             key={p.slug}
-            className="shrink-0 snap-center transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] [will-change:transform]"
+            className="shrink-0 snap-center transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{ width: W, height: alto, transform: `scale(${j === activa ? 1 : 0.86})`, opacity: j === activa ? 1 : 0.42 }}
             onClickCapture={(e) => {
               // Pulsar una vecina la trae al centro; solo la activa abre el proyecto

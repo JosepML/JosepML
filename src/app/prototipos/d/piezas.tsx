@@ -4,6 +4,7 @@ import { useReducir } from "../_comun/hooks";
 import { animate, AnimatePresence, motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Icono } from "./Iconos";
+import { img } from "../_comun/imagen";
 
 export const CURVA = [0.22, 1, 0.36, 1] as const;
 
@@ -202,10 +203,11 @@ export function Diapositivas({ imagenes, activo, className = "", intervalo = 160
       {imagenes.map((src, n) => (
         <img
           key={src}
-          src={src}
+          src={img(src, 1200)}
           alt=""
           data-transicion={n === 0 ? "" : undefined}
           draggable={false}
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{
             opacity: n === i ? 1 : 0,

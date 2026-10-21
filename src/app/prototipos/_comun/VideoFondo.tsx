@@ -4,6 +4,7 @@ import { useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { usePantallaAncha, useReducir } from "./hooks";
 import { VideoYouTube } from "./VideoYouTube";
+import { img } from "./imagen";
 
 type Props = {
   /** Sin vídeo se queda el póster */
@@ -20,7 +21,7 @@ type Props = {
 /**
  * Reel de fondo. Primero se pinta el fotograma (carga rápida en móvil);
  * en pantallas anchas y sin "reducir movimiento" entra el vídeo encima.
- * Fuera de pantalla el vídeo se desmonta para no seguir decodificando.
+ * Fuera de pantalla el vídeo se pausa (no se desmonta: rehacer el iframe daba tirones al salir de la portada).
  */
 export function VideoFondo({ id, inicio, poster, className = "", filtro, escala }: Props) {
   const ancha = usePantallaAncha();
@@ -34,17 +35,17 @@ export function VideoFondo({ id, inicio, poster, className = "", filtro, escala 
     return () => window.clearTimeout(t);
   }, []);
 
-  const video = listo && ancha && !reducir && visible;
+  const video = Boolean(id) && listo && ancha && !reducir;
 
   return (
     <div ref={caja} className={`absolute inset-0 overflow-hidden bg-black ${className}`} style={{ filter: filtro }}>
       <img
-        src={poster}
+        src={img(poster, 2048)}
         alt=""
-        className={`absolute inset-0 h-full w-full object-cover ${reducir || video ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
+        className={`absolute inset-0 h-full w-full object-cover ${reducir || video || !visible ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
         fetchPriority="high"
       />
-      {id && <VideoYouTube id={id} inicio={inicio} activo={video} escala={escala} />}
+      {id && <VideoYouTube id={id} inicio={inicio} activo={video} escala={escala} pausado={!visible} />}
     </div>
   );
 }

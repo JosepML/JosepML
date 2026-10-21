@@ -11,6 +11,7 @@ import { imagenesDe, proyectosDe, SERVICIOS, type ServicioD } from "../datos";
 import { Icono } from "../Iconos";
 import { RAIZ } from "../rutas";
 import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
+import { img } from "../../_comun/imagen";
 
 const TITULO_MIRADA: Record<string, string> = {
   "direccion-de-fotografia": "Decido qué siente quien mira",
@@ -165,7 +166,7 @@ export function PaginaServicio({ servicio: s }: { servicio: ServicioD }) {
         <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-2">
           {otros.map((o) => (
             <Link key={o.slug} href={`${RAIZ}/servicios/${o.slug}`} className="group relative block h-56 overflow-hidden rounded-[32px] bg-black">
-              <img src={imagenesDe(o.slug)[0]} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-[1.4s] group-hover:scale-105" />
+              <img src={img(imagenesDe(o.slug)[0], 1200)} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-[1.4s] group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 to-black/10" />
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-7 text-white">
                 <div>

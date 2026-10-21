@@ -44,7 +44,7 @@ function Lienzo({ children }: { children: React.ReactNode }) {
   }, [tema]);
 
   return (
-    <div data-tema={tema} data-reducir={reducir ? "" : undefined} className="d-raiz d-grano relative min-h-svh overflow-x-clip transition-colors duration-700">
+    <div data-tema={tema} data-reducir={reducir ? "" : undefined} className="d-raiz relative min-h-svh overflow-x-clip transition-colors duration-700">
       <div className="orbes" aria-hidden>
         <span />
         <span />

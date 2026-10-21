@@ -6,7 +6,9 @@ import { BloqueServicios } from "./bloques/BloqueServicios";
 import { BloqueTrabajos } from "./bloques/BloqueTrabajos";
 import { BloqueClientes, BloqueCifras, BloqueOpiniones } from "./bloques/BloquesConfianza";
 import { BloqueBlog, BloqueLlamada, BloqueProceso, BloqueSobreMi, BloqueTexto, Pie } from "./bloques/BloquesPersonales";
-import { CATALOGO, type Bloque, type TipoBloque } from "./datos";
+import { useEffect } from "react";
+import { img } from "../_comun/imagen";
+import { CATALOGO, imagenesDe, PROYECTOS, SERVICIOS, type Bloque, type TipoBloque } from "./datos";
 import { useEstadoD } from "./estado";
 
 /** Cada tipo de bloque de la base de datos tiene su componente. Un tipo nuevo = un componente nuevo. */
@@ -24,9 +26,39 @@ const COMPONENTES: Record<TipoBloque, (p: { bloque: Bloque }) => React.ReactNode
   llamada: BloqueLlamada,
 };
 
+/**
+ * Con la página ya cargada y el navegador libre, descarga y decodifica en segundo plano las fotos de la
+ * portada que aún no están en pantalla. Así, al llegar a cada sección, la imagen ya está lista y no cae
+ * un fotograma largo justo en mitad del deslizamiento.
+ */
+function usePrecargaImagenes() {
+  useEffect(() => {
+    const ocioso = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 1500));
+    const cancelar = window.cancelIdleCallback ?? window.clearTimeout;
+    const id = ocioso(() => {
+      const urls = new Set<string>();
+      for (const s of SERVICIOS) imagenesDe(s.slug).forEach((u) => urls.add(img(u, 1200)));
+      for (const p of PROYECTOS) {
+        urls.add(img(p.poster, 1200));
+        urls.add(img(p.poster, 256));
+      }
+      const sobre = CATALOGO["sobre-mi"].datos.imagen;
+      if (sobre) urls.add(img(sobre, 1080));
+      for (const u of urls) {
+        const i = new Image();
+        i.decoding = "async";
+        i.src = u;
+        i.decode().catch(() => {});
+      }
+    });
+    return () => cancelar(id as number);
+  }, []);
+}
+
 export function PortadaD() {
   const { bloques, editando } = useEstadoD();
   const visibles = bloques.filter((b) => b.visible);
+  usePrecargaImagenes();
 
   return (
     <main>

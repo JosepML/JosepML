@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useInView, useMotionValue, useMotionValueEvent, useScroll, useSpring, useTransform } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useEscritorio, usePunteroFino, useReducir } from "../../_comun/hooks";
@@ -8,6 +8,7 @@ import { AJUSTES, ARTICULOS, PASOS, SERVICIOS, type Bloque } from "../datos";
 import { Icono } from "../Iconos";
 import { Disponible, EVENTO_SERVICIO, Revelar, Titular, TituloConAcento } from "../piezas";
 import { deslizarA, encuadre } from "../scrollMagico";
+import { img } from "../../_comun/imagen";
 
 /**
  * Cómo trabajo: en ordenador el título se queda fijo y el paso activo sale del avance del scroll por la
@@ -21,10 +22,14 @@ export function BloqueProceso({ bloque }: { bloque: Bloque }) {
   const tarjetas = useRef<(HTMLDivElement | null)[]>([]);
   const { scrollYProgress } = useScroll({ target: pasos, offset: ["start 50%", "end 50%"] });
   const { scrollY } = useScroll();
+  const seccion = useRef<HTMLElement>(null);
+  const visible = useInView(seccion);
 
   // Paso activo: el que tiene el centro más cerca del centro de la pantalla. Coincide con donde deja
   // cada paso el scroll mágico, que centra uno por gesto de rueda (cada paso lleva data-punto).
+  // Solo se calcula con la sección en pantalla (antes medía las tarjetas en cada scroll de toda la página).
   useMotionValueEvent(scrollY, "change", () => {
+    if (!visible) return;
     const centro = window.innerHeight / 2;
     let mejor = 0;
     let distancia = Infinity;
@@ -41,7 +46,7 @@ export function BloqueProceso({ bloque }: { bloque: Bloque }) {
   });
 
   return (
-    <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[10svh]">
+    <section ref={seccion} className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[10svh]">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
         <div className="lg:sticky lg:top-[22svh] lg:self-start">
           <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
@@ -169,7 +174,7 @@ export function BloqueSobreMi({ bloque }: { bloque: Bloque }) {
             >
               {imagen && (
                 <motion.img
-                  src={imagen}
+                  src={img(imagen, 1080)}
                   alt="Josep Mira Lozano en un rodaje"
                   className="absolute inset-0 h-full w-full origin-top object-cover object-[50%_0%]"
                   style={{ scale: reducir ? 1 : escalaImg }}
@@ -276,7 +281,7 @@ export function BloqueTexto({ bloque }: { bloque: Bloque }) {
             {texto && <p className="mt-5 whitespace-pre-line text-lg leading-relaxed text-[var(--d-suave)]">{texto}</p>}
           </div>
           {imagen ? (
-            <img src={imagen} alt="" className="aspect-[4/3] w-full rounded-[28px] object-cover" />
+            <img src={img(imagen, 1080)} alt="" className="aspect-[4/3] w-full rounded-[28px] object-cover" />
           ) : (
             <div className="relative hidden aspect-[4/3] overflow-hidden rounded-[28px] md:block">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,var(--d-orbe-a),transparent_60%),radial-gradient(circle_at_70%_70%,var(--d-orbe-b),transparent_60%)]" />

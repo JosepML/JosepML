@@ -10,6 +10,8 @@ type Props = {
   retraso?: number;
   /** Zoom sobre el recorte base (1.18), p. ej. para ocultar bandas negras */
   escala?: number;
+  /** Pausa el vídeo sin desmontarlo (por ejemplo, cuando sale de pantalla) */
+  pausado?: boolean;
 };
 
 /**
@@ -20,10 +22,19 @@ type Props = {
  */
 // El reproductor nuevo de YouTube enseña sus controles centrales (anterior, pausa, siguiente) unos 2-3 s
 // al empezar aunque se pida controls=0: el vídeo no se deja ver hasta que han desaparecido.
-export function VideoYouTube({ id, inicio = 0, activo, retraso = 3500, escala }: Props) {
+export function VideoYouTube({ id, inicio = 0, activo, retraso = 3500, escala, pausado = false }: Props) {
   const marco = useRef<HTMLIFrameElement>(null);
   const [reproduciendo, setReproduciendo] = useState(false);
   const [visible, setVisible] = useState(false);
+
+  // Fuera de pantalla se pausa en vez de desmontarse: quitar y volver a crear el iframe de YouTube costaba
+  // fotogramas de 40-70 ms justo al salir de la portada. Pausado no decodifica vídeo y se oculta solo
+  // (deja de estar "reproduciendo"); al volver sigue donde iba.
+  useEffect(() => {
+    const w = marco.current?.contentWindow;
+    if (!w || !activo) return;
+    w.postMessage(JSON.stringify({ event: "command", func: pausado ? "pauseVideo" : "playVideo", args: [], id, channel: "widget" }), "*");
+  }, [pausado, activo, id]);
 
   // Hablar con el reproductor: pedirle que nos avise de los cambios de estado
   useEffect(() => {
