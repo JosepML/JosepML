@@ -36,7 +36,8 @@ export type ProyectoD = {
   laurel?: { premio: string; festival: string };
 };
 
-export type ArticuloD = { slug: string; titulo: string; fecha: string; resumen: string; categoria: string };
+/** `imagen`: portada del artículo (fotograma propio de Josep siempre que encaje con el tema) */
+export type ArticuloD = { slug: string; titulo: string; fecha: string; resumen: string; categoria: string; imagen: string };
 
 export const AJUSTES = {
   nombre: "Josep Mira Lozano",
@@ -386,6 +387,8 @@ export const ARTICULOS: ArticuloD[] = [
     fecha: "13 may 2025",
     categoria: "Oficio",
     resumen: "Qué cambia la IA en la producción audiovisual y por qué el trabajo artesano sigue importando.",
+    // Fotograma de la recreación de Star Wars sin CGI: oficio artesano frente a lo digital
+    imagen: "https://i.ibb.co/KxmsqgfX/Captura-de-pantalla-2026-05-13-154839.png",
   },
   {
     slug: "el-arte-de-contar-historias-con-luz",
@@ -393,13 +396,8 @@ export const ARTICULOS: ArticuloD[] = [
     fecha: "15 jul 2024",
     categoria: "Dirección de fotografía",
     resumen: "La luz es el pincel del director de fotografía. Cómo un esquema de luz cambia lo que sentimos.",
-  },
-  {
-    slug: "dslr-vs-cine",
-    titulo: "DSLR contra cine: la cámara no hace al cineasta",
-    fecha: "28 jun 2024",
-    categoria: "Equipo",
-    resumen: "Por qué la mirada de quien graba importa más que la cámara que lleva en las manos.",
+    // Fotograma de El Cirujano (premio a mejor fotografía), que el artículo usa de ejemplo
+    imagen: "https://www.platinocrowdfunding.com/storage/project/5454/img/eO2uv54rRAQy1AgsNjm0ybjXLN92jg4mkW9zFxZR.png",
   },
 ];
 

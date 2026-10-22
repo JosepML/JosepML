@@ -15,7 +15,7 @@ Publicar la web nueva en un solo paso controlado, con la antigua lista para volv
 ## Antes de publicar
 
 - [ ] Todas las fases aprobadas y la lista de cambios cerrada
-- [ ] Recuento final: 21 proyectos, 3 artículos, Recreaciones y páginas fijas visibles
+- [ ] Recuento final: 18 proyectos (14 trabajos y 4 recreaciones), 2 artículos, Recreaciones y páginas fijas visibles
 - [ ] Formulario probado: llega el correo y aparece en el panel
 - [ ] GA4 recibiendo visitas
 - [ ] Redirecciones de direcciones antiguas probadas
