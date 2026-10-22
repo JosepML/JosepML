@@ -6,7 +6,7 @@ tipo: eventos
 servicios: [filmmaker, edicion]
 año: [pendiente]
 direccion: Josep Mira Lozano
-productora_cliente: Flama, Mapache Events, Orquesta Azara y Miami Show
+productora_cliente: Tamilah y Fluxà (marcas Agüita de Coco y Flama), Mapache Events, Orquesta Azara y Miami Show
 mi_papel: Grabación y montaje
 camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
@@ -37,5 +37,5 @@ Que el aftermovie se sienta como el concierto y no como una lista de clips. Cada
 Tres piezas de muestra: Miami Show, Flama y Legends. Y un vídeo de proceso que explica cómo se construye un aftermovie.
 
 ## Para revisar con Josep (no se publica)
-- Año de cada evento. Y confirmar "Tamila y Fluxa" (en tu mensaje no se entendía bien): ¿otro cliente?
+- Año de cada evento.
 - ¿Quieres añadir alguna opinión de organizador o de artista?
