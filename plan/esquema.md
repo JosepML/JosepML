@@ -152,6 +152,8 @@ Antes de dar por buena la suite, se comprobó que detecta fallos: abriendo `borr
 
 ## Alta del administrador (una vez)
 
+Hecho el 2026-10-22: Josep tiene su usuario, está en `administradores` (comprobado con `es_admin()`) y el registro público está cerrado.
+
 1. Josep crea su usuario en Supabase: Authentication > Users > **Add user**, con su correo y una contraseña que elige él. La contraseña no se escribe nunca en el repositorio ni en el chat.
 2. Claude añade su `user_id` a `administradores`.
 3. Josep cierra el registro: Authentication > Sign In / Providers > desactivar **Allow new users to sign up**. Mientras tanto no hay riesgo: alguien que se registrara no sería administrador y solo vería lo publicado.
