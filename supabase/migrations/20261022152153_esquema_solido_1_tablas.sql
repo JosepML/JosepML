@@ -1,5 +1,5 @@
 -- Esquema sólido, parte 1 de 3: tablas (revisión de la tarea B).
--- Sustituye a 20261022144748_esquema_inicial (sus tablas vacías se borran en la parte 0).
+-- Sustituye a 20261022144748_esquema_inicial (apartado en la parte 0 al esquema archivo_v1).
 -- Las razones de cada decisión están en plan/esquema.md.
 
 -- 1. Tipos ----------------------------------------------------------------------------
@@ -33,6 +33,18 @@ create table public.idiomas (
 create unique index idiomas_un_solo_predeterminado on public.idiomas (predeterminado) where predeterminado;
 
 insert into public.idiomas (codigo, nombre, predeterminado) values ('es', 'Español', true);
+
+-- 2b. Ajustes ------------------------------------------------------------------------
+-- Clave y valor para lo general del sitio. Cambia al instante, sin borrador.
+
+create table public.ajustes (
+  clave text primary key,
+  valor jsonb not null,
+  actualizado_en timestamptz not null default now()
+);
+
+insert into public.ajustes (clave, valor, actualizado_en)
+select clave, valor, actualizado_en from archivo_v1.ajustes;
 
 -- 3. Medios ---------------------------------------------------------------------------
 -- Un medio es un archivo del bucket `medios` (ruta) o, mientras se migra, una URL externa (url_origen).
@@ -403,6 +415,7 @@ create table public.revisiones (
 create index revisiones_fila_idx on public.revisiones (tabla, fila_id, creado_en desc);
 
 -- RLS activada desde ya (sin políticas = nadie lee ni escribe). Las políticas llegan en la migración de seguridad.
+alter table public.ajustes enable row level security;
 alter table public.idiomas enable row level security;
 alter table public.medios enable row level security;
 alter table public.tipos_proyecto enable row level security;

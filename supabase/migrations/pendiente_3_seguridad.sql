@@ -19,7 +19,7 @@ begin
   end loop;
 
   -- Catálogos públicos: todos leen; solo el administrador escribe.
-  foreach t in array array['idiomas', 'medios', 'tipos_proyecto', 'categorias_articulo', 'redirecciones'] loop
+  foreach t in array array['ajustes', 'idiomas', 'medios', 'tipos_proyecto', 'categorias_articulo', 'redirecciones'] loop
     execute format('alter table public.%I enable row level security', t);
     execute format('create policy "Todos: leen" on public.%I for select to anon, authenticated using (true)', t);
     execute format('create policy "Administrador: crea" on public.%I for insert to authenticated with check ((select public.es_admin()))', t);
@@ -33,10 +33,6 @@ begin
     execute format('create policy "Administrador: todo" on public.%I for all to authenticated using ((select public.es_admin())) with check ((select public.es_admin()))', t);
   end loop;
 
-  -- Ajustes: la lectura pública ya existe; el administrador escribe.
-  execute 'create policy "Administrador: crea" on public.ajustes for insert to authenticated with check ((select public.es_admin()))';
-  execute 'create policy "Administrador: cambia" on public.ajustes for update to authenticated using ((select public.es_admin())) with check ((select public.es_admin()))';
-  execute 'create policy "Administrador: borra" on public.ajustes for delete to authenticated using ((select public.es_admin()))';
 end;
 $$;
 
@@ -96,12 +92,5 @@ set file_size_limit = 52428800,
     ]
 where id = 'medios';
 
-create policy "Medios: el administrador lista" on storage.objects for select to authenticated
-  using (bucket_id = 'medios' and (select public.es_admin()));
-create policy "Medios: el administrador sube" on storage.objects for insert to authenticated
-  with check (bucket_id = 'medios' and (select public.es_admin()));
-create policy "Medios: el administrador cambia" on storage.objects for update to authenticated
-  using (bucket_id = 'medios' and (select public.es_admin()))
-  with check (bucket_id = 'medios' and (select public.es_admin()));
-create policy "Medios: el administrador borra" on storage.objects for delete to authenticated
-  using (bucket_id = 'medios' and (select public.es_admin()));
+-- Las políticas del bucket vienen de la primera versión, reconvertidas en la parte 0:
+-- «Medios: el administrador gestiona» (todas las acciones, solo admin) y una anulada.

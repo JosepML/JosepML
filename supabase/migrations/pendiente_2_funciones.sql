@@ -405,7 +405,7 @@ declare
   t text;
 begin
   foreach t in array array[
-    'medios', 'tipos_proyecto', 'categorias_articulo', 'servicios', 'proyectos', 'articulos', 'paginas',
+    'ajustes', 'medios', 'tipos_proyecto', 'categorias_articulo', 'servicios', 'proyectos', 'articulos', 'paginas',
     'bloques', 'clientes', 'opiniones', 'canales', 'mensajes', 'borradores'
   ] loop
     execute format(

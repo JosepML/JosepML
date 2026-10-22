@@ -35,6 +35,8 @@ insert into public.bloques (id, pagina_id, orden, tipo, datos) values
 insert into public.borradores (tabla, fila_id, datos) values
   ('proyectos', 'd0000000-0000-4000-8000-000000000001', '{"titulo": "Cambio sin publicar"}');
 
+insert into storage.objects (bucket_id, name) values ('medios', 'prueba/archivo-de-prueba.jpg');
+
 -- Integridad (como propietario) ---------------------------------------------------------
 
 do $$
@@ -94,6 +96,12 @@ begin
   end if;
   if (select count(*) from public.bloques where pagina_id = 'e0000000-0000-4000-8000-000000000001') <> 1 then
     raise exception 'FALLO: el público no ve los bloques de una página publicada';
+  end if;
+  if exists (select 1 from storage.objects where bucket_id = 'medios') then
+    raise exception 'FALLO: el público puede listar los archivos del bucket';
+  end if;
+  if (select valor ->> 'nombre' from public.ajustes where clave = 'sitio') is null then
+    raise exception 'FALLO: el público no lee los ajustes';
   end if;
 
   begin
@@ -284,6 +292,10 @@ begin
   perform public.publicar('paginas', 'e0000000-0000-4000-8000-000000000001');
   if exists (select 1 from public.bloques where pagina_id = 'e0000000-0000-4000-8000-000000000001') then
     raise exception 'FALLO: quitar todos los bloques no los borró';
+  end if;
+
+  if not exists (select 1 from storage.objects where bucket_id = 'medios') then
+    raise exception 'FALLO: el administrador no ve los archivos del bucket';
   end if;
 
   -- El administrador gestiona mensajes
