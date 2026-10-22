@@ -93,4 +93,5 @@ set file_size_limit = 52428800,
 where id = 'medios';
 
 -- Las políticas del bucket vienen de la primera versión, reconvertidas en la parte 0:
--- «Medios: el administrador gestiona» (todas las acciones, solo admin) y una anulada.
+-- «Medios: escritura solo administrador» (todas las acciones, solo admin) y «Medios: lectura pública»,
+-- anulada (anon, using false). Los nombres no se pueden cambiar desde aquí.

@@ -8,7 +8,7 @@ Proyecto de Supabase: **Web Josep Mira** (`oadmqwtnxpbotxcgzaoo`, eu-west-3). Nu
 
 ## Decisiones y por qué
 
-Revisado por Opus el 2026-10-22 sobre una primera versión hecha con Haiku. La primera versión se borró (estaba vacía; respaldo en `supabase/respaldos/`) porque tenía fallos de base: tipos de bloque distintos de los del prototipo D, servicios fijados a mano en los proyectos, imágenes como URLs sueltas sin integridad, publicar en varios pasos sin transacción ni historial, y traducciones sin vínculo entre ellas.
+Revisado por Opus el 2026-10-22 sobre una primera versión hecha con Haiku. La primera versión se archivó en el esquema `archivo_v1` (estaba vacía; respaldo en `supabase/respaldos/`), cerrado al público y a la sesión, porque tenía fallos de base: tipos de bloque distintos de los del prototipo D, servicios fijados a mano en los proyectos, imágenes como URLs sueltas sin integridad, publicar en varios pasos sin transacción ni historial, y traducciones sin vínculo entre ellas.
 
 1. **Borrador y publicado sin tocar la versión en vivo.** Cada fila de contenido tiene `estado` (`borrador` o `publicado`): el público solo ve lo publicado. Lo que Josep edita se autoguarda en la tabla `borradores`, nunca en la fila. Así puede editar un proyecto publicado durante días sin que la web cambie hasta que pulsa Publicar.
    - *Descartado:* una columna `borrador` dentro de cada tabla. El público puede leer las filas publicadas, y con una política mal escrita leería también los borradores. En una tabla aparte, el público no tiene ni permiso de tabla.
@@ -162,7 +162,18 @@ Antes de dar por buena la suite, se comprobó que detecta fallos: abriendo `borr
 | --- | --- |
 | `20261020151832_create_ajustes` | Tabla `ajustes` (fase 1). Reconstruida en el repo a partir de la base |
 | `20261022144748_esquema_inicial` | Primera versión (Haiku). Sustituida |
-| `*_esquema_solido_0_limpiar` | Borra las tablas vacías de la primera versión. La ejecutó Josep en el editor SQL, porque los borrados piden su confirmación |
-| `*_esquema_solido_1_tablas` | Tipos, tablas e índices. RLS activada desde el principio |
-| `*_esquema_solido_2_funciones` | Borradores, publicación, historial, validaciones, redirecciones |
-| `*_esquema_solido_3_seguridad` | Políticas RLS, permisos y almacenamiento |
+| `20261022152009_esquema_solido_0_archivar` | Mueve las tablas vacías de la primera versión al esquema `archivo_v1`, sin acceso desde la API. Se archiva en vez de borrar porque los borrados piden una confirmación que no llega a este hilo |
+| `20261022152153_esquema_solido_1_tablas` | Tipos, tablas e índices. RLS activada desde el principio |
+| `20261022153000_esquema_solido_2_funciones` | Borradores, publicación, historial, validaciones, redirecciones. La ejecutó Josep en el editor SQL (contiene `delete` dentro de funciones, que pide confirmación), así que no figura en el historial de Supabase; se comprobó que las 17 funciones coinciden con este archivo. La versión es aproximada |
+| `20261022153230_esquema_solido_3_seguridad` | Políticas RLS, permisos y almacenamiento |
+
+### Pendiente de limpieza (opcional, lo hace Josep desde el panel)
+
+- Borrar el esquema `archivo_v1` cuando ya no haga falta (`drop schema archivo_v1 cascade`). Sus avisos de rendimiento («multiple permissive policies») desaparecen con él; no afectan a la web porque nadie puede acceder a ese esquema.
+- Las dos políticas del bucket conservan su nombre antiguo: «Medios: escritura solo administrador» es la que vale (solo el administrador escribe) y «Medios: lectura pública» está anulada (`using (false)`). Se pueden renombrar o borrar en Storage > Policies.
+- Los avisos «unused index» son normales con la base vacía: los índices cubren claves ajenas y listados.
+
+### Estado comprobado el 2026-10-22
+
+- Advisors de seguridad: 0 avisos.
+- `supabase/tests/seguridad_y_publicacion.sql` ejecutado contra la base real con `execute_sql`: «Todas las pruebas pasan», y la transacción se deshizo (0 usuarios, 0 proyectos, 0 mensajes, 0 objetos después).
