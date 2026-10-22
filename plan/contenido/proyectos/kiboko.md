@@ -8,7 +8,7 @@ año: 2026
 direccion: Noelia Fluxá y Julie-Estel Soard
 productora_cliente: JUNO Media [pendiente: confirmar si participa Arca Films]
 mi_papel: Edición
-camara: no aplica (montaje)
+camara: no aplica (solo montaje; material rodado en ARRI)
 premios: [{ año: 2026, nombre: Nominación a mejor montaje, tipo: nominación, festival: [pendiente] }]
 destacado: 6
 estado: borrador

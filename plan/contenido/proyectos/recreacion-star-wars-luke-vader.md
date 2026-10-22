@@ -8,7 +8,7 @@ año: 2025
 direccion: Josep Mira Lozano
 productora_cliente: Canal de YouTube
 mi_papel: Concepción, dirección y ejecución
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 0
 estado: borrador
@@ -40,5 +40,4 @@ Más que una simple recreación, fue una demostración de que con ingenio y dedi
 
 ## Para revisar con Josep (no se publica)
 - Confirmar el año (2025, por el 45.º aniversario).
-- Cámara y óptica usadas.
 - ¿Quieres añadir qué aprendiste del proceso con la maqueta?

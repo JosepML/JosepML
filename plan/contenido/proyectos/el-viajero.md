@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Josep Mira Lozano
 productora_cliente: Proyecto final del ciclo superior de Realización (IES Veles e Vents)
 mi_papel: Idea original, guion, dirección y dirección de fotografía
-camara: [pendiente]
+camara: Canon C200 · ópticas Canon prime (50 mm)
 premios: []
 destacado: 0
 estado: borrador
@@ -38,11 +38,9 @@ Fue mi idea original y también mi guion. Dirigí el corto y me encargué de la 
 La falta de presupuesto. Nos obligó a ser ingeniosos con cada recurso y a encontrar soluciones para cada obstáculo. La máquina del tiempo fue el mayor de los retos: hacerla funcionar requirió dedicación y mucho ingenio.
 
 ## El resultado
-*El Viajero* cumplió su propósito como proyecto académico, y demostró que con un equipo pequeño, pasión y una idea sólida se puede hacer cine de calidad. Lo más valioso fue la lección sobre la colaboración. Su final abierto deja la puerta a una posible secuela, que algún día me gustaría rodar.
+*El Viajero* cumplió su propósito como proyecto académico, y demostró que con un equipo pequeño, pasión y una idea sólida se puede hacer cine de calidad. Lo más valioso fue la lección sobre la colaboración. Además, el corto supera las 22.000 visualizaciones en YouTube. Su final abierto deja la puerta a una posible secuela, que algún día me gustaría rodar.
 
 **Equipo:** Alba Gisbert (ayudante de dirección), Sebastian Alonso Pérez y Mar Garrido y Lara Ruiz Martín (actores), Andreu Pastor (sonido).
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
-- Cámara y óptica usadas.
-- Confirmar los nombres del equipo y cómo quieres escribirlos.

@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Josep Mira Lozano
 productora_cliente: Canal de YouTube
 mi_papel: Dirección, dirección de fotografía, diseño de set y postproducción
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 0
 estado: borrador
@@ -40,5 +40,3 @@ Una réplica fiel del plano, hecha con materiales de casa y mucho método.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
-- Cámara y óptica usadas.
-- ¿Quieres mantener la mención a tu daltonismo? Es un dato personal: lo dejo, pero puedes quitarlo.

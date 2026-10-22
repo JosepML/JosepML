@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Josep Mira Lozano
 productora_cliente: Proyecto de estudios
 mi_papel: Dirección y dirección de fotografía
-camara: [pendiente]
+camara: Canon C200 · ópticas Canon prime (50 mm)
 premios: []
 destacado: 0
 estado: borrador
@@ -35,5 +35,5 @@ Que la diferencia entre los dos mundos se viera en la imagen sin necesidad de ex
 Es un proyecto de estudios que me sirve como muestra de dirección y de dirección de fotografía en un formato narrativo.
 
 ## Para revisar con Josep (no se publica)
-- Año de rodaje y cámara.
+- Año de rodaje.
 - ¿Quieres añadir algún detalle del rodaje en las casas o en la celda?

@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Josep Mira Lozano
 productora_cliente: Canal de YouTube
 mi_papel: Dirección y dirección de fotografía
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 0
 estado: borrador
@@ -40,5 +40,3 @@ Una recreación con la misma atmósfera lumínica del original, lograda sin CGI.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
-- Confirmar que el lugar del plano es la Ciudad de las Nubes. El id antiguo lo llama "Hoth", pero el texto habla de la Ciudad de las Nubes, por eso el slug no lo menciona.
-- Cámara y óptica usadas (el texto antiguo cita el 55 mm).

@@ -8,7 +8,7 @@ año: 2024
 direccion: Josep Mira Lozano
 productora_cliente: Proyecto propio para el ESCAC Dreammakers Contest 2024 (Cupra)
 mi_papel: Guion, dirección, fotografía, montaje y actuación
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron
 premios: [{ año: 2024, nombre: ESCAC Dreammakers Contest, tipo: podio }]
 destacado: 1
 estado: borrador
@@ -37,5 +37,4 @@ El tiempo. Idear, grabar, editar y terminar el corto en 15 días fue una carrera
 El corto subió al podio del concurso y me abrió la puerta a becas de la ESCAC, una de las escuelas de cine más importantes de España. Pero lo que más me llevo es la satisfacción personal de haberlo hecho, y las lecciones que dejó. Y una confirmación: aunque lo hice casi todo yo, el cine sigue siendo un trabajo de equipo.
 
 ## Para revisar con Josep (no se publica)
-- ¿Cámara y óptica usadas?
 - ¿Hay alguna anécdota del rodaje o una frase de los créditos que quieras contar?

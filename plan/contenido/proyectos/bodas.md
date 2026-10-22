@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Josep Mira Lozano
 productora_cliente: Clientes particulares
 mi_papel: Cobertura y edición
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 0
 estado: borrador
@@ -32,9 +32,8 @@ Me encargo de la cobertura completa y de la edición de la pieza. Mi objetivo es
 Estar en todos los momentos sin estorbar. Una boda tiene muchos instantes que no se repiten, y hay que captarlos con discreción y después saber qué merece entrar en el montaje.
 
 ## El resultado
-Cada boda termina en una película hecha a medida, con la música elegida por la pareja. Esta ficha muestra fotogramas de una selección, porque el vídeo completo no es público.
+Cada boda termina en una película hecha a medida, con la música elegida por la pareja. Esta ficha muestra solo fotogramas, para respetar la intimidad de los novios. Si quieres ver referencias completas, escríbeme y te las enseño.
 
 ## Para revisar con Josep (no se publica)
-- Este proyecto no tiene vídeo público. ¿Quieres que la ficha muestre fotogramas, un clip con permiso de los novios o ninguno?
 - Las imágenes de la galería llevan el nombre de los novios en el archivo: hay que renombrarlas antes de subirlas, por privacidad.
-- Año, cámara y ópticas.
+- Año.

@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: JUNO Media
 productora_cliente: JUNO Media
 mi_papel: Dirección de fotografía
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 5
 estado: borrador
@@ -34,8 +34,7 @@ Me encargué de la dirección de fotografía. Mi reto principal era traducir ese
 Que siete piezas separadas formaran un único descenso. Cada visualizer tenía que funcionar solo y, a la vez, avanzar en la historia del EP.
 
 ## El resultado
-Los vídeos han sumado 1.392.400 visualizaciones en total en las plataformas donde se publicaron.
+Los vídeos han sumado 1.392.400 visualizaciones en total en YouTube, Instagram y Spotify.
 
 ## Para revisar con Josep (no se publica)
-- Confirmar las plataformas y la fecha de publicación.
-- Cámara y óptica usadas.
+- Fecha de publicación.

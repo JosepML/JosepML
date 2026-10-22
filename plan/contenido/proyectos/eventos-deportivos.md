@@ -6,9 +6,9 @@ tipo: eventos
 servicios: [filmmaker, edicion]
 año: [pendiente]
 direccion: Josep Mira Lozano
-productora_cliente: [pendiente]
+productora_cliente: Ocisport · Shimano Super Cup Massi (La Nucía)
 mi_papel: Filmmaker y edición
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 0
 estado: borrador
@@ -37,6 +37,5 @@ Estar en el sitio correcto en el momento justo, y después convertir horas de ca
 Un pack de piezas de la competición, en formato de televisión y de redes sociales.
 
 ## Para revisar con Josep (no se publica)
-- Año de la competición y cliente o organizador, si puede citarse.
-- Cámaras y ópticas usadas.
+- Año de la competición.
 - ¿Hay alguna pieza que quieras destacar en la ficha?

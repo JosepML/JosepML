@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Ángela Manzano
 productora_cliente: Proyecto personal de Ángela Manzano
 mi_papel: Dirección de fotografía
-camara: [pendiente]
+camara: Blackmagic [modelo pendiente] · ópticas [pendiente]
 premios: []
 destacado: 0
 estado: borrador
@@ -36,9 +36,7 @@ Fui el director de fotografía, responsable de la imagen. El reto era traducir u
 Hacer que un espacio neutro se sienta como varios lugares distintos, cada uno con su carga emocional.
 
 ## El resultado
-El cortometraje está en fase previa a su distribución, con una estrategia pensada para el circuito de festivales nacionales e internacionales.
+El cortometraje está en fase previa a su distribución, con una estrategia pensada para el circuito de festivales nacionales e internacionales. Todavía no es público, así que de momento esta ficha muestra solo fotogramas. Cuando exista tráiler, lo pondré aquí.
 
 ## Para revisar con Josep (no se publica)
-- Confirmar que no hay vídeo público y que la ficha puede quedarse solo con fotogramas.
 - Año de rodaje.
-- Cámara y óptica usadas.

@@ -6,9 +6,9 @@ tipo: videoclip
 servicios: [direccion-de-fotografia, edicion]
 año: [pendiente]
 direccion: Ángela Manzano
-productora_cliente: [pendiente]
+productora_cliente: Proyecto propio, sin productora
 mi_papel: Dirección de fotografía y edición
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron
 premios: []
 destacado: 4
 estado: borrador
@@ -37,6 +37,4 @@ Sostener una sola emoción a lo largo de muchos espacios. Cada set tenía su luz
 El videoclip consigue que la intimidad no se rompa aunque cambie el escenario. Lo que más me gusta es que la luz hace el trabajo emocional sin necesidad de subrayarlo.
 
 ## Para revisar con Josep (no se publica)
-- Productora del videoclip (en el mapa figura como pendiente).
 - Año de estreno.
-- Cámara y óptica usadas.

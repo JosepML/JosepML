@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Josep Mira Lozano (idea original de Álex Gómez)
 productora_cliente: JUNO Media
 mi_papel: Dirección, operación de cámara y montaje
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron
 premios: []
 destacado: 2
 estado: borrador
@@ -36,5 +36,4 @@ El videoclip ha superado las 17.000 visualizaciones en YouTube. Para mí, trabaj
 
 ## Para revisar con Josep (no se publica)
 - Año de estreno del videoclip.
-- ¿Cámara y óptica?
 - ¿Hay una frase o anécdota de Arkano o del rodaje que quieras incluir?

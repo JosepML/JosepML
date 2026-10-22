@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Josep Mira Lozano
 productora_cliente: Consell Valencià de la Joventut, Disney y creadores de contenido
 mi_papel: Grabación y edición de contenido vertical
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 0
 estado: borrador
@@ -39,4 +39,4 @@ Piezas de muestra en Instagram y YouTube Shorts: un reel para el Consell Valenci
 ## Para revisar con Josep (no se publica)
 - Permiso de Disney y del Consell para mostrar sus nombres y sus piezas.
 - Cifra exacta de visualizaciones, si quieres citarla.
-- Año de las piezas y cámara usada.
+- Año de las piezas.

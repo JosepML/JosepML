@@ -1,6 +1,6 @@
 # Textos de proyectos y artículos (tarea E)
 
-Estado: **borrador para revisión de Josep**. Respuestas de Josep del 2026-10-22 ya aplicadas (podio, 17.000 visualizaciones, spot no comercializado, título de Nosferatu). Josep revisa en tandas de 4 o 5 proyectos. Hasta su visto bueno, los archivos no se cargan en la base de datos.
+Estado: **borrador para revisión de Josep**. Cámaras, clientes citables y plataformas ya cargados (2026-10-22). Respuestas de Josep del 2026-10-22 ya aplicadas (podio, 17.000 visualizaciones, spot no comercializado, título de Nosferatu). Josep revisa en tandas de 4 o 5 proyectos. Hasta su visto bueno, los archivos no se cargan en la base de datos.
 
 ## Cómo está hecho cada archivo
 
@@ -35,11 +35,13 @@ Los artículos del blog están en `../articulos/`, con el mismo formato.
 
 Orden propuesto en Trabajos ("Todos"), tomado del mapa: 1, 2, 6, 5, 9, 4, 8, 10, 3, 7, 13, 11, 14, 12. Las recreaciones solo aparecen con su filtro.
 
-## Artículos (3)
+## Artículos (2)
+
+Josep decidió (2026-10-22) retirar el artículo "DSLR vs. Cine". Sigue en `legacy/constants.ts` por si se quiere recuperar. La categoría "Equipo" del blog queda sin uso.
+
 
 - `ia-artesano-audiovisual` (Oficio, 2025-05-13)
 - `el-arte-de-contar-historias-con-luz` (Dirección de fotografía, 2024-07-15)
-- `dslr-vs-cine-la-camara-no-hace-al-cineasta` (Equipo, 2024-06-28)
 
 ## Reglas aplicadas
 

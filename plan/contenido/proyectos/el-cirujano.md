@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Kevin Ramos y Emilio Graña
 productora_cliente: Impulsos Creativos
 mi_papel: Dirección de fotografía
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron
 premios: [{ año: [pendiente], nombre: Mejor fotografía, tipo: ganado, festival: On Duty International Film Festival }]
 destacado: 3
 estado: borrador
@@ -38,5 +38,4 @@ Es el trabajo de luz más reconocible que tengo hasta ahora. Recibió el premio 
 
 ## Para revisar con Josep (no se publica)
 - Año de la selección y del premio.
-- Cámara y óptica usadas.
 - Fotogramas en alta calidad para la galería (las imágenes actuales son de baja resolución).
