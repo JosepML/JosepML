@@ -15,7 +15,7 @@ import { img } from "../../_comun/imagen";
 
 const TITULO_MIRADA: Record<string, string> = {
   "direccion-de-fotografia": "Decido qué siente quien mira",
-  filmmaker: "Una sola mirada, de principio a fin",
+  filmmaker: "Con tu equipo, o de principio a fin",
   edicion: "Monto con el ritmo por dentro",
 };
 
