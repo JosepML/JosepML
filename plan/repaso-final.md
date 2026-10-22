@@ -58,7 +58,7 @@ Marca cada casilla cuando esté hecha en la web de verdad (no en el prototipo).
 - [ ] El Cirujano: falta el tercer fotograma (la URL antigua ya no existe) y los que hay son de baja resolución. Pedir fotogramas en alta a Josep.
 - [ ] Bodas: renombrar los archivos de imagen (llevan el nombre de los novios) y confirmar qué se muestra (solo fotogramas).
 - [ ] Reels: permiso para nombrar a Disney y al Consell Valencià de la Joventut; cifra de visualizaciones o «cientos de miles».
-- [ ] Cada ficha con 4 a 8 fotogramas buenos. Las que tengan menos, se piden a Josep o se sacan de sus vídeos publicados en YouTube (son suyos).
+- [ ] Cada ficha con 4 a 8 fotogramas buenos. Las que tengan menos, se piden a Josep o se sacan de sus vídeos publicados en YouTube (son suyos). *2026-10-22: en el prototipo ya tienen 4 a 7 todas menos Y el año que viene (3), El Cirujano (2) y Reels (1, y no es suya). Ver `plan/traspaso-imagenes.md`.*
 
 ### Recreaciones
 - [ ] Deslizador antes y después en las 4. Falta la imagen del plano original de cada película. Estas sí se pueden buscar en internet (ver sección 4), anotando la fuente.
@@ -67,7 +67,7 @@ Marca cada casilla cuando esté hecha en la web de verdad (no en el prototipo).
 
 ### Blog
 - [x] Imagen en cada tarjeta (prototipo, 2026-10-22): IA → fotograma de la recreación de Star Wars sin CGI; luz → fotograma de El Cirujano. Son imágenes propias de Josep.
-- [ ] Imagen de cabecera dentro de cada artículo y, si hace falta, imágenes en el cuerpo (con texto alternativo).
+- [x] Imagen de cabecera dentro de cada artículo y, si hace falta, imágenes en el cuerpo (con texto alternativo). *2026-10-22: en `plan/contenido/articulos/*.md`, todas propias. Falta pintarlas en S9.*
 - [ ] Artículo de la luz: Josep dijo que es corto. Ampliarlo con ejemplos reales (El Cirujano, EP Oscuridad, El Padrino) usando los textos ya aprobados de esas fichas, y pasárselo a Josep.
 - [ ] Artículo de la IA: preguntar si quiere los emojis de vuelta (se quitaron).
 
@@ -101,7 +101,7 @@ Cada imagen de internet se apunta aquí con fuente y licencia:
 
 | Imagen | Dónde se usa | Fuente | Licencia |
 | --- | --- | --- | --- |
-| (ninguna todavía) | | | |
+| (ninguna todavía: todo lo usado hasta ahora es de Josep) | | | |
 
 ## 5. Preguntas abiertas para Josep
 
@@ -120,5 +120,7 @@ Recogidas en `/mnt/project-files/textos-proyectos/pendientes.md` y en la secció
 Su último mensaje se cortó en «continuemos con el plan, pero sigamos…»: preguntarle si quería añadir algo.
 
 ## Registro
+
+- 2026-10-22 (hilo de imágenes): galerías completas en las fichas del prototipo, imágenes propias en los artículos y plan para lo que necesita el PC de Josep en `plan/traspaso-imagenes.md`.
 
 - 2026-10-22: documento creado. Blog del prototipo con imagen en las tarjetas y sin el artículo del DSLR.
