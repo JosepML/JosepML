@@ -14,6 +14,18 @@ import { RAIZ } from "./rutas";
 import { CURVA, ModalVideo, Revelar, TituloConAcento } from "./piezas";
 import { Visor } from "./Visor";
 import { img } from "../_comun/imagen";
+import { TEXTOS } from "./textos";
+
+/** Negrita **así** y cursiva *así* dentro de un texto de proyecto */
+function Inline({ texto }: { texto: string }) {
+  return (
+    <>
+      {texto.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((t, i) =>
+        t.startsWith("**") ? <strong key={i}>{t.slice(2, -2)}</strong> : t.startsWith("*") && t.length > 2 ? <em key={i}>{t.slice(1, -1)}</em> : t,
+      )}
+    </>
+  );
+}
 
 export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
   const reducir = useReducir();
@@ -21,6 +33,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
   const [foto, setFoto] = useState<number | null>(null);
   const siguiente = PROYECTOS[(PROYECTOS.findIndex((x) => x.slug === p.slug) + 1) % PROYECTOS.length];
   const servicios = SERVICIOS.filter((s) => p.servicios.includes(s.slug));
+  const textos = TEXTOS[p.slug];
   const entrar = (retraso: number) => ({
     initial: { opacity: 0, y: reducir ? 0 : 24 },
     animate: { opacity: 1, y: 0 },
@@ -88,11 +101,40 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
 
       <section className="mx-auto max-w-5xl px-4 py-24 text-center sm:px-8 sm:py-32">
         <Revelar>
-          <p className="text-[clamp(1.7rem,3.6vw,3rem)] font-bold leading-[1.15] tracking-[-0.03em] [text-wrap:balance]">
-            <TituloConAcento texto={p.frase} />
+          <p className="text-[clamp(1.4rem,2.6vw,2.2rem)] font-bold leading-[1.2] tracking-[-0.03em] [text-wrap:balance]">
+            {textos ? <Inline texto={textos.tarjeta} /> : <TituloConAcento texto={p.frase} />}
           </p>
         </Revelar>
       </section>
+
+      {textos && (
+        <section className="px-4 pb-24 sm:px-8">
+          <div className="mx-auto grid max-w-3xl gap-14">
+            {textos.secciones.map((s) => (
+              <Revelar key={s.titulo}>
+                <h2 className="text-2xl font-extrabold tracking-[-0.04em] sm:text-3xl">{s.titulo}</h2>
+                <div className="mt-4 space-y-4 text-[17px] leading-[1.65] opacity-90">
+                  {s.bloques.map((b, i) =>
+                    b.t === "p" ? (
+                      <p key={i}>
+                        <Inline texto={b.x} />
+                      </p>
+                    ) : (
+                      <ul key={i} className="list-disc space-y-2 pl-5 marker:text-[var(--d-acento)]">
+                        {b.x.map((li) => (
+                          <li key={li}>
+                            <Inline texto={li} />
+                          </li>
+                        ))}
+                      </ul>
+                    ),
+                  )}
+                </div>
+              </Revelar>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Fotogramas: cuadrícula de miniaturas; al pulsar una se abre el visor a pantalla completa */}
       <section className="px-4 pb-24 sm:px-8">
