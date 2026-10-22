@@ -14,7 +14,7 @@ Público mixto (Josep, 2026-10-22): mi cliente principal son productoras y compa
 
 ## Mi mirada
 
-La mayoría de mis encargos llegan de productoras y de compañeros que me llaman para sus proyectos. Me sumo al equipo, entiendo lo que quiere quien dirige y lo pongo por delante de mi gusto. Otras veces me escribe directamente una empresa, un artista o un particular, y entonces me encargo de todo el viaje: la idea, el rodaje y el montaje.
+Para mí, un buen rodaje empieza por entender la historia de otra persona. Me encanta sumarme a equipos y a ideas que no son mías: escuchar a quien dirige, leer lo que necesita cada escena y aportar mi mirada sin pisar la suya. Y cuando el proyecto empieza conmigo, disfruto igual llevándolo de la primera idea al último fotograma.
 
 Vídeo corporativo, un videoclip, una orquesta en fiestas, una carrera de ciclismo o una boda: en todos busco la historia que hay dentro. Vengo de la música, así que ruedo pensando ya en el montaje. Y cuando toca grabar momentos reales, intento que la gente se olvide de la cámara, porque lo auténtico es lo que luego emociona.
 
