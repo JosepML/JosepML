@@ -1,10 +1,9 @@
 "use client";
 
 import { useReducir } from "../_comun/hooks";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
-import { AntesDespues } from "../_comun/AntesDespues";
 import { Enlace } from "../_comun/Enlace";
 import { CABECERA } from "../_comun/Transicion";
 import { VideoFondo } from "../_comun/VideoFondo";
@@ -13,12 +12,13 @@ import { Icono } from "./Iconos";
 import { Pie } from "./bloques/BloquesPersonales";
 import { RAIZ } from "./rutas";
 import { CURVA, ModalVideo, Revelar, TituloConAcento } from "./piezas";
+import { Visor } from "./Visor";
 import { img } from "../_comun/imagen";
 
 export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
   const reducir = useReducir();
   const [video, setVideo] = useState(false);
-  const [foto, setFoto] = useState<string | null>(null);
+  const [foto, setFoto] = useState<number | null>(null);
   const siguiente = PROYECTOS[(PROYECTOS.findIndex((x) => x.slug === p.slug) + 1) % PROYECTOS.length];
   const servicios = SERVICIOS.filter((s) => p.servicios.includes(s.slug));
   const entrar = (retraso: number) => ({
@@ -94,39 +94,35 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
         </Revelar>
       </section>
 
-      {/* Fotogramas */}
-      <section className="px-4 sm:px-8">
+      {/* Fotogramas: cuadrícula de miniaturas; al pulsar una se abre el visor a pantalla completa */}
+      <section className="px-4 pb-24 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <Revelar>
             <h2 className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">Fotogramas</h2>
           </Revelar>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <div className="mt-8 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
             {p.fotogramas.map((f, i) => (
-              <Revelar key={f} retraso={i * 0.06} className={i === 0 && p.fotogramas.length > 2 ? "sm:col-span-2" : ""}>
+              <Revelar key={f} retraso={Math.min(i, 7) * 0.05}>
                 <button
                   type="button"
-                  onClick={() => setFoto(f)}
-                  className="group relative block aspect-[2.39/1] w-full overflow-hidden rounded-[28px]"
-                  aria-label="Ampliar fotograma"
+                  onClick={() => setFoto(i)}
+                  className="group relative block aspect-video w-full overflow-hidden rounded-[18px] bg-black"
+                  aria-label={`Ver el fotograma ${i + 1} en grande`}
                 >
-                  <img src={img(f, 3840)} alt={`Fotograma de ${p.titulo}`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
+                  <img
+                    src={img(f, 828)}
+                    alt={`Fotograma de ${p.titulo}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center bg-black/0 text-white opacity-0 transition-[opacity,background-color] duration-300 group-hover:bg-black/25 group-hover:opacity-100">
+                    <Icono nombre="ampliar" className="h-6 w-6" />
+                  </span>
                 </button>
               </Revelar>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Antes y después del color */}
-      <section className="px-4 py-24 sm:px-8">
-        <div className="mx-auto max-w-7xl">
-          <Revelar>
-            <h2 className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">Del LOG al color</h2>
-            <p className="mt-2 text-sm text-[var(--d-suave)]">Desliza para comparar. En el prototipo el LOG está simulado; en la web irán las dos imágenes reales.</p>
-          </Revelar>
-          <Revelar retraso={0.1} className="mt-8">
-            <AntesDespues imagen={p.poster} className="rounded-[32px]" />
-          </Revelar>
         </div>
       </section>
 
@@ -178,27 +174,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
       <Pie />
       {p.youtubeId && <ModalVideo id={p.youtubeId} abierto={video} alCerrar={() => setVideo(false)} />}
 
-      <AnimatePresence>
-        {foto && (
-          <motion.div
-            className="fixed inset-0 z-[95] flex items-center justify-center bg-black/60 p-4 backdrop-blur-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setFoto(null)}
-          >
-            <motion.img
-              src={img(foto, 3840)}
-              alt=""
-              className="max-h-[88svh] max-w-full rounded-[24px] shadow-2xl"
-              initial={{ scale: 0.92 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.95 }}
-              transition={{ duration: 0.45, ease: CURVA }}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Visor fotos={p.fotogramas} indice={foto} alCambiar={setFoto} titulo={p.titulo} />
     </main>
   );
 }

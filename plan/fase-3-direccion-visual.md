@@ -213,6 +213,13 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - **Índice lateral** en la portada (solo escritorio): una marca fina por sección, la actual más larga y en rojo, nombre al pasar el ratón, clic para ir con la curva del scroll mágico. Aparece al salir del hero para no tapar el titular.
 - **Tirones:** la tarjeta del hero y la foto de Sobre mí cambian de escala con el scroll; ahora llevan `will-change: transform` para que el navegador no las vuelva a dibujar a cada tamaño. Primera pasada por la portada: de 7-8 fotogramas lentos a 4. Comparado con el scroll nativo del navegador (6 fotogramas lentos), el scroll mágico no es la causa. Los que quedan aparecen la primera vez que se ve una sección con muchas fotos grandes.
 
+### 2026-10-22 · D: remates de Selección, índice y ficha de proyecto
+
+- **Selección cabe en una pantalla** también con el escalado de Windows al 150 % (unos 1280 × 632 px): medía 657 px y ahora 600. Tarjeta como mucho al 46 % del alto visible, y el enlace "Ver los trabajos por servicio" pasa a la fila de los puntos y las flechas. En tarjetas estrechas, versión compacta (menos margen, título más pequeño, solo tipo y año).
+- **Selección en modo claro:** las vecinas se apagaban con opacidad y sobre el fondo claro quedaban lechosas. Ahora se apagan con un velo negro (`--d-velo-vecina`: 0,6 en oscuro, 0,3 en claro).
+- **Índice lateral:** al llegar a la última sección (o al final de la página) se despliega solo con los nombres de todas las secciones y el titular "¿Quieres volver a algo?", en cascada; al subir se repliega. Entre 1024 y 1440 px el contenido de las secciones deja sitio a la izquierda para que el índice no tape los titulares (regla al final de `cristal.css`).
+- **Ficha de proyecto:** los fotogramas pasan a una cuadrícula de miniaturas (2 a 4 columnas) y al pulsar se abre un visor a pantalla completa (`Visor.tsx`): fondo oscuro, contador, flechas, teclado (← → Esc), deslizar con el dedo, foto a 3840 px con las vecinas precargadas y cierre con fundido. Fuera el bloque "Del LOG al color".
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).

@@ -25,6 +25,8 @@
   --d-borde: rgba(255, 255, 255, 0.12);
   --d-reflejo: rgba(255, 255, 255, 0.22);
   --d-sombra: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+  /* Velo que apaga las tarjetas vecinas de Selección */
+  --d-velo-vecina: 0.6;
   --d-orbe-a: rgba(229, 9, 20, 0.4);
   --d-orbe-b: rgba(255, 138, 61, 0.28);
   --d-orbe-c: rgba(120, 80, 255, 0.18);
@@ -56,6 +58,7 @@
   --d-borde: rgba(255, 255, 255, 0.9);
   --d-reflejo: rgba(255, 255, 255, 0.9);
   --d-sombra: 0 30px 70px -30px rgba(40, 30, 20, 0.28);
+  --d-velo-vecina: 0.3;
   --d-orbe-a: rgba(229, 9, 20, 0.2);
   --d-orbe-b: rgba(255, 138, 61, 0.26);
   --d-orbe-c: rgba(120, 80, 255, 0.14);
@@ -319,4 +322,14 @@
 .d-raiz[data-reducir] .boton:hover {
   transform: none;
 }
+}
+
+/* Índice lateral: en pantallas de escritorio de menos de 1440 px (portátiles con escalado de Windows) el
+   contenido de las secciones empezaba debajo del índice. Se le deja sitio a la izquierda solo al contenido
+   (no al fondo de la sección ni al carrusel, que siguen a todo el ancho). Fuera de la capa para que gane
+   a los márgenes de Tailwind. */
+@media (min-width: 1024px) and (max-width: 1439.98px) {
+  .d-raiz [id^="bloque-"]:not([id="bloque-portada"]) .max-w-7xl:not(.max-w-7xl .max-w-7xl) {
+    padding-left: 5rem;
+  }
 }

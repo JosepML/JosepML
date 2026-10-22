@@ -81,18 +81,22 @@ export function BloqueTrabajos({ bloque }: { bloque: Bloque }) {
       </div>
 
       <AnimatePresence mode="wait" initial={false}>
-        <Carrusel key={filtro} proyectos={proyectosDe(filtro)} alCambiar={setFondo} />
+        <Carrusel
+          key={filtro}
+          proyectos={proyectosDe(filtro)}
+          alCambiar={setFondo}
+          pie={
+            <Enlace
+              href={filtro === "todos" ? `${RAIZ}/servicios/${SERVICIOS[0].slug}` : `${RAIZ}/servicios/${filtro}`}
+              className="hidden items-center gap-1.5 text-sm font-semibold text-[var(--d-suave)] transition-colors hover:text-[var(--d-texto)] sm:inline-flex"
+            >
+              {filtro === "todos" ? "Ver los trabajos por servicio" : `Todo lo de ${FILTROS.find((f) => f.slug === filtro)?.nombre.toLowerCase()}`}
+              <Icono nombre="flecha" className="h-4 w-4" />
+            </Enlace>
+          }
+        />
       </AnimatePresence>
 
-      <div className="relative mx-auto mt-2 flex max-w-7xl justify-center px-4 sm:px-8">
-        <Enlace
-          href={filtro === "todos" ? `${RAIZ}/servicios/${SERVICIOS[0].slug}` : `${RAIZ}/servicios/${filtro}`}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--d-suave)] transition-colors hover:text-[var(--d-texto)]"
-        >
-          {filtro === "todos" ? "Ver los trabajos por servicio" : `Todo lo de ${FILTROS.find((f) => f.slug === filtro)?.nombre.toLowerCase()}`}
-          <Icono nombre="flecha" className="h-4 w-4" />
-        </Enlace>
-      </div>
     </section>
   );
 }
@@ -111,15 +115,25 @@ function useAncho(ref: React.RefObject<HTMLElement | null>) {
   return ancho;
 }
 
-function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar: (poster: string) => void }) {
+function Carrusel({
+  proyectos,
+  alCambiar,
+  pie,
+}: {
+  proyectos: ProyectoD[];
+  alCambiar: (poster: string) => void;
+  /** Enlace a los trabajos por servicio: va en la fila de los puntos y las flechas, no en una fila propia */
+  pie: React.ReactNode;
+}) {
   const pista = useRef<HTMLDivElement>(null);
   const ancho = useAncho(pista);
   const reducir = useReducir();
   const movil = ancho > 0 && ancho < 640;
-  // En ordenador la tarjeta cabe en la pantalla junto al titular: como mucho la mitad del alto visible
+  // En ordenador la sección entera (titular, tarjeta y controles) cabe en una pantalla, también en
+  // portátiles con el escalado de Windows al 150 % (unos 630 px de alto): la tarjeta, como mucho el 46 %
   const altoVentana = typeof window === "undefined" ? 900 : window.innerHeight;
   // Tarjetas verticales y más estrechas: en pantalla ancha se ven la central y casi dos vecinas por lado
-  const W = movil ? ancho * 0.78 : Math.min(ancho * 0.22, 440, altoVentana * 0.5 * (3 / 4));
+  const W = movil ? ancho * 0.78 : Math.min(ancho * 0.22, 440, altoVentana * 0.46 * (3 / 4));
   const gap = movil ? 14 : 24;
   const paso = W + gap;
   const alto = W * (4 / 3);
@@ -197,8 +211,8 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
         {proyectos.map((p, j) => (
           <div
             key={p.slug}
-            className="shrink-0 snap-center transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-            style={{ width: W, height: alto, transform: `scale(${j === activa ? 1 : 0.86})`, opacity: j === activa ? 1 : 0.42 }}
+            className="shrink-0 snap-center transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{ width: W, height: alto, transform: `scale(${j === activa ? 1 : 0.86})` }}
             onClickCapture={(e) => {
               // Pulsar una vecina la trae al centro; solo la activa abre el proyecto
               if (j !== activa) {
@@ -214,14 +228,14 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: CURVA, delay: 0.08 + Math.min(j, 4) * 0.07 }}
             >
-              <TarjetaCarrusel proyecto={p} activa={j === activa} />
+              <TarjetaCarrusel proyecto={p} activa={j === activa} compacta={W < 300} />
             </motion.div>
           </div>
         ))}
       </div>
 
       {/* Indicador y flechas */}
-      <div className="relative mx-auto mt-8 flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-8 lg:mt-[3svh]">
+      <div className="relative mx-auto mt-8 flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-8 lg:mt-[2.5svh]">
         <div className="flex items-center gap-1.5" role="tablist" aria-label="Proyectos">
           {proyectos.map((p, j) => (
             <button
@@ -242,6 +256,7 @@ function Carrusel({ proyectos, alCambiar }: { proyectos: ProyectoD[]; alCambiar:
             </button>
           ))}
         </div>
+        {pie}
         <div className="flex gap-2">
           {([-1, 1] as const).map((dir) => {
             const apagada = dir === -1 ? activa === 0 : activa === proyectos.length - 1;
@@ -316,7 +331,8 @@ function useArrastre(pista: React.RefObject<HTMLDivElement | null>) {
   };
 }
 
-function TarjetaCarrusel({ proyecto: p, activa }: { proyecto: ProyectoD; activa: boolean }) {
+/** `compacta`: tarjeta estrecha (pantallas bajas): menos margen, título más pequeño y solo tipo y año arriba */
+function TarjetaCarrusel({ proyecto: p, activa, compacta }: { proyecto: ProyectoD; activa: boolean; compacta: boolean }) {
   const fino = usePunteroFino();
   const [encima, setEncima] = useState(false);
 
@@ -334,22 +350,29 @@ function TarjetaCarrusel({ proyecto: p, activa }: { proyecto: ProyectoD; activa:
       <div data-radio className="relative h-full overflow-hidden rounded-[32px] bg-black shadow-[0_30px_60px_-36px_rgba(0,0,0,0.75)]">
         <Diapositivas imagenes={p.fotogramas.length > 1 ? p.fotogramas : [p.poster]} activo={activa && encima && fino} className={MASCARA_BORDE} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+        {/* Las vecinas se apagan con un velo negro y no con opacidad: sobre el fondo claro la opacidad las
+            dejaba lechosas. El velo es más denso en oscuro (--d-velo-vecina) para que se parezcan */}
+        <div
+          className="absolute inset-0 z-[4] bg-black transition-opacity duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={{ opacity: activa ? 0 : "var(--d-velo-vecina)" }}
+        />
         {p.laurel && (
           <span className="absolute left-5 top-5 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white">
             <Icono nombre="laurel" className="h-3.5 w-3.5 text-[#ffcf7a]" />
             {p.laurel.premio}
           </span>
         )}
-        <div className="absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between gap-4 p-6 text-white sm:p-8">
+        <div className={`absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between text-white ${compacta ? "gap-3 p-5" : "gap-4 p-6 sm:p-8"}`}>
           <div className="min-w-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
               {p.tipo}
-              {p.anio ? ` · ${p.anio}` : ""} · {p.papel}
+              {p.anio ? ` · ${p.anio}` : ""}
+              {compacta ? "" : ` · ${p.papel}`}
             </p>
-            <h3 className="mt-2 text-2xl font-bold leading-tight tracking-[-0.025em] [text-wrap:balance]">{p.titulo}</h3>
+            <h3 className={`mt-2 font-bold leading-tight tracking-[-0.025em] [text-wrap:balance] ${compacta ? "text-lg" : "text-2xl"}`}>{p.titulo}</h3>
           </div>
           <span
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 transition-[opacity,transform] duration-500 group-hover:scale-110"
+            className={`flex shrink-0 ${compacta ? "h-10 w-10" : "h-12 w-12"} items-center justify-center rounded-full border border-white/25 bg-white/10 transition-[opacity,transform] duration-500 group-hover:scale-110`}
             style={{ opacity: activa ? 1 : 0 }}
           >
             <Icono nombre="flecha" className="h-5 w-5 -rotate-45" />

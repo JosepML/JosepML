@@ -13,6 +13,7 @@ const TRAZOS: Record<string, React.ReactNode> = {
   flecha: <path d="M5 12h14M13 6l6 6-6 6" />,
   izquierda: <path d="M15 6l-6 6 6 6" />,
   derecha: <path d="M9 6l6 6-6 6" />,
+  ampliar: <path d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5" />,
   play: <path d="M8 5.5v13l11-6.5z" fill="currentColor" />,
   correo: (
     <>
