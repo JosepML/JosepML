@@ -1,0 +1,124 @@
+# Hoja de ruta: del prototipo D a la web completa
+
+Fecha: 2026-10-22. Sustituye al orden de trabajo de las fases 4, 5 y 6 (sus archivos siguen valiendo como lista de comprobación). Cada tarea se hace en **un hilo propio**, salvo la A, que se termina en el hilo de la fase 3.
+
+**Modelo:** **Opus** para lo que decide la arquitectura, el diseño o la voz de Josep. **Sonnet** para lo que sigue un patrón ya hecho. Las tareas de Sonnet solo empiezan cuando existe la pieza de Opus que copian.
+
+## Reglas para todos los hilos
+
+1. Lee `CLAUDE.md`, `plan/README.md`, `plan/00-contexto.md`, este archivo y solo los archivos que cite tu tarea.
+2. Rama `claude/project-thread-9vb26d`. Nunca `master`. Nunca el proyecto de Supabase "JML Studio".
+3. El diseño de referencia es el prototipo D (`src/app/prototipos/d/`). No inventes estética nueva: copia sus piezas, tokens y movimientos.
+4. Rendimiento: anima solo `transform` y `opacity`. Sin `backdrop-filter` en elementos que se mueven. Imágenes en calidad alta (q90, 2x). Pruébalo con el escalado de Windows al 150 % (el de Josep).
+5. Antes de cada commit, ejecuta `npm run lint`, `npx tsc --noEmit` y `npm run build`. Al terminar, marca la tarea aquí con `[x]` y añade una línea al *Registro* de abajo.
+6. Lo que se vea en pantalla, Josep lo revisa en `http://localhost:3000` en su PC (sesión en su equipo). Sin su visto bueno, la tarea no está hecha.
+
+## Decisiones de arquitectura (las fija Opus en B y C; las tareas de Sonnet no las cambian)
+
+- **Rutas:** la web final vive en `src/app/(web)/` (Inicio `/`, `/trabajos`, `/trabajos/[slug]`, `/servicios/[slug]`, `/recreaciones`, `/sobre-mi`, `/blog`, `/blog/[slug]`, `/contacto`, `/gracias`, legales). El panel vive en `src/app/admin/`. `/prototipos` se borra en la fase 7.
+- **Datos:** Supabase `oadmqwtnxpbotxcgzaoo`. Lectura en servidor (`src/lib/datos/*.ts`, una función por consulta) con caché y etiquetas. Al publicar se llama a `revalidateTag`.
+- **Un solo editor:** Josep, con Supabase Auth (correo y contraseña, registro cerrado). Tabla `administradores` y función `es_admin()` en todas las políticas RLS. Lectura pública solo de lo publicado.
+- **Borrador y publicado:** cada fila editable tiene `estado` (`borrador` o `publicado`). Josep edita, ve la vista previa y pulsa Publicar.
+- **Flujo de edición cómodo (dos puertas):**
+  1. **Editar en la propia web.** Si Josep ha iniciado sesión, aparece la pastilla «Editar página», como en el prototipo. Con ella edita los textos donde están, cambia imágenes arrastrando, reordena, oculta y añade secciones, todo con guardado automático en borrador. Después pulsa Publicar.
+  2. **Panel `/admin`** para lo que son listas: proyectos, artículos, servicios, clientes, opiniones, mensajes, medios y ajustes. Formularios con autoguardado, subida de imágenes arrastrando y vista previa. Funciona también en el móvil.
+
+## Tareas
+
+### A · Remates de la dirección visual · Opus · hilo de la fase 3 (en curso)
+- [ ] Selección sin espacio sobrante, para que el scroll quede limpio
+- [ ] Al llegar al final de la página, el índice lateral se despliega como llamada a volver a una sección
+- [ ] Selección bien en modo claro
+- [ ] Ficha: galería en miniaturas con visor a pantalla completa
+- [ ] Ficha: quitar «Del LOG al color»
+- [ ] Fijar los tokens de diseño definitivos (colores, letras, radios, sombras y curvas de movimiento) en `src/styles/tokens.css`, y las piezas reutilizables (cristal, pastilla, tarjeta con foto, botón, etiqueta y titular con palabra de acento) documentadas en `plan/fase-3-direccion-visual.md`
+- [ ] Visto bueno de Josep → fase 3 «Hecha»
+
+**Hecho cuando:** Josep da el visto bueno a D y los tokens están en un archivo único que importan las tareas C a K.
+
+### B · Base de datos, seguridad y acceso · Opus · hilo nuevo
+Lee: `plan/fase-4-base-de-datos-y-migracion.md`, `plan/contenido/mapa-de-contenido.md`, `src/app/prototipos/d/datos.ts`, `legacy/types.ts`.
+- [ ] Esquema SQL como migraciones (y copia en `supabase/migrations/`): `servicios`, `proyectos` (con ficha técnica, premios jsonb, `clip_url`, `video_portada_url`, galería ordenada, `id_antiguo`, `estado`, `orden`, `destacado`), `articulos`, `paginas`, `bloques` (pagina, orden, tipo, visible, datos jsonb, estado), `clientes` (nombre, logo, orden, `con_juno`), `opiniones`, `canales` (YouTube), `medios`, `mensajes`, `ajustes`, `administradores`. Preparado para varios idiomas, con una columna `idioma` por defecto `es`.
+- [ ] RLS en todas las tablas y función `es_admin()`. `mensajes`: inserción pública con límite y lectura solo para el administrador.
+- [ ] Bucket `medios` (lectura pública, escritura solo del administrador).
+- [ ] Usuario de Josep creado, con el registro público cerrado. La contraseña la pone él; nunca se escribe en el repositorio.
+- [ ] Tipos generados en `src/lib/supabase/tipos.ts`.
+- [ ] Avisos de seguridad de Supabase (advisors) a cero.
+- [ ] `plan/esquema.md`: tabla por tabla, para qué sirve cada campo y qué tipos de bloque existen, con el formato de su `datos`.
+
+**Hecho cuando:** el esquema está aplicado, los advisors no dan avisos y `plan/esquema.md` lo explica.
+
+### C · Esqueleto de la web pública e Inicio conectado · Opus · hilo nuevo · necesita A y B
+- [ ] Pasar el prototipo D a componentes de producción en `src/components/` (Marco, menú, pie, índice lateral, scroll mágico, transición, tarjetas, bloques)
+- [ ] Capa de datos `src/lib/datos/` con caché por etiquetas y `revalidarContenido()`
+- [ ] Inicio `/` construido a partir de `bloques` de la base de datos (cada tipo de bloque es un componente)
+- [ ] Vídeo de portada como archivo propio (mp4 en Storage) en lugar de YouTube. Necesita el archivo de Josep; mientras no llegue, se usa YouTube.
+- [ ] `plan/patron-paginas.md`: cómo se hace una página nueva (receta que seguirán las tareas de Sonnet)
+
+**Hecho cuando:** Inicio en `localhost:3000` se ve igual que el prototipo D, leyendo los datos de Supabase.
+
+### D · Sistema de edición · Opus · hilo nuevo · necesita B y C
+- [ ] Inicio de sesión en `/admin/entrar` y protección de `/admin` con el middleware
+- [ ] Modo «Editar página» real sobre `bloques`: texto editable en su sitio, cambiar imagen arrastrando (subida a `medios`), reordenar, ocultar, añadir y duplicar secciones, autoguardado en borrador, Publicar y Descartar
+- [ ] Base del panel `/admin`: barra lateral, lista con búsqueda y orden arrastrando, formulario genérico con autoguardado, campo de imagen, campo de galería, campo de vídeo (YouTube, Instagram o archivo), vista previa y Publicar
+- [ ] Proyectos completos en el panel (crear, editar, duplicar, ocultar, reordenar y destacar), que sirven de modelo para las demás pantallas
+- [ ] `plan/patron-panel.md`: receta para añadir una pantalla nueva al panel
+
+**Hecho cuando:** Josep crea un proyecto de prueba y edita un texto de Inicio, y los dos se ven publicados sin tocar código.
+
+### E · Textos de los proyectos y artículos · Opus · hilo nuevo · puede empezar ya
+Lee: `legacy/constants.ts`, `plan/contenido/fundamentos.md`, `plan/contenido/mapa-de-contenido.md`, `plan/contenido/trabajos-recreaciones-y-blog.md` y la web original (https://josepml.github.io/JosepML/#/).
+- [ ] Para cada uno de los 18 proyectos: reescribir el cuerpo en la voz de la web nueva (primera persona, cálido y concreto, sin vender tarifas) y con **más contenido**: la historia, mi papel, decisiones de luz y cámara, el reto, cómo se resolvió, el resultado y una cita o anécdota. Un archivo por proyecto en `plan/contenido/proyectos/<slug>.md` con sus campos de ficha.
+- [ ] Revisar los 3 artículos del blog con el mismo criterio.
+- [ ] Una lista corta de preguntas a Josep por proyecto, solo donde falten datos reales. Nunca se inventan premios, cifras ni nombres.
+- [ ] Josep revisa en tandas de 4 o 5 proyectos.
+
+**Hecho cuando:** los 18 proyectos y los 3 artículos tienen su archivo aprobado por Josep.
+
+### Tareas para Sonnet (cada una en su hilo; siguen `plan/patron-paginas.md` o `plan/patron-panel.md`)
+
+| Id | Tarea | Necesita | Hecho cuando |
+| --- | --- | --- | --- |
+| S1 | Script `scripts/migrar-legacy.ts`: proyectos y artículos de `legacy/constants.ts` a Supabase, guardando `id_antiguo` | B | 18/18 proyectos y 3/3 artículos en la base de datos; recuento en `fase-4` |
+| S2 | Copiar las ~90 imágenes de ImgBB e Imgur al bucket `medios` y reescribir las URLs (en el PC de Josep) | B, S1 | 0 URLs externas de imagen en la base de datos |
+| S3 | Cargar en la base de datos los textos de `plan/contenido/` (servicios, bloques de Inicio, Sobre mí, clientes, opiniones, canales) | B | Inicio y servicios sin textos fijos en el código |
+| S4 | Cargar los textos aprobados de E en `proyectos` y `articulos` | E, S1 | Cada ficha muestra su texto nuevo |
+| S5 | `/trabajos` con filtros por servicio y tipo, y la ficha `/trabajos/[slug]` (galería con visor y siguiente proyecto) | C | Las 18 fichas se abren sin errores, en claro y oscuro |
+| S6 | `/servicios/[slug]` (los 3) | C | Igual que el prototipo, con sus proyectos y preguntas frecuentes |
+| S7 | `/recreaciones` con antes y después | C | Las 4 recreaciones con su deslizador |
+| S8 | `/sobre-mi` | C | Texto, fotos y canales de YouTube |
+| S9 | `/blog` y `/blog/[slug]` | C | 3 artículos legibles, con el ancho de lectura cuidado |
+| S10 | `/contacto` guiado que guarda en `mensajes` y avisa por correo; `/gracias` | C | Un mensaje de prueba llega al correo y a la base de datos |
+| S11 | Privacidad, cookies (aviso) y GA4 `G-RKBDRMVL1J` tras aceptar | C | GA4 recibe la visita solo tras aceptar |
+| S12 | SEO: metadatos, Schema.org (Person, Service, CreativeWork, Article), `sitemap.xml`, `robots.txt` e imágenes OG | S5–S9 | Validadores de Google sin errores |
+| S13 | Redirecciones de las URLs antiguas con hash (`/#/project/<id>`, etc.) | S1, S5 | Todas las URLs antiguas llevan a su página nueva |
+| S14 | Panel: artículos con editor visual (títulos, negritas, imágenes y vídeos en el texto) y SEO con vista previa de Google | D | Josep escribe y publica un artículo de prueba |
+| S15 | Panel: servicios, clientes (logos), opiniones, canales y ajustes | D | Cada cosa se edita y se ve en la web |
+| S16 | Panel: biblioteca de medios (subir, recortar, texto alternativo, ver dónde se usa) | D | Subir, recortar y reutilizar una imagen |
+| S17 | Panel: mensajes (nuevo, respondido, cerrado) | D, S10 | El mensaje de prueba cambia de estado |
+| S18 | Copia de seguridad semanal de la base de datos y los archivos, fuera de Supabase | B | Primera copia restaurada en prueba |
+| S19 | Guía del panel `plan/guia-del-panel.md`, con capturas | D, S14–S17 | Josep la sigue sin ayuda |
+| S20 | Repaso final: móvil, teclado, accesibilidad, «reducir movimiento» y Lighthouse en verde | todo | Informe con todo en verde |
+
+### F · Lanzamiento · Opus · hilo de la fase 7
+Sigue `plan/fase-7-lanzamiento.md`. Solo con la orden expresa de Josep.
+
+## Orden recomendado
+
+1. **Ya:** A (hilo de la fase 3), B y E en paralelo.
+2. **Cuando estén A y B:** C. Después, S1, S2 y S3 en paralelo.
+3. **Cuando esté C:** D, y S5 a S11 en paralelo (cada una en su hilo).
+4. **Cuando esté D:** S14 a S17, y S4 cuando E esté aprobada.
+5. **Al final:** S12, S13, S18, S19 y S20. Después, F.
+
+## Pendiente de Josep (no bloquea, pero cuanto antes mejor)
+
+- Vídeo de portada como archivo (mp4) o permiso para sacarlo de su canal.
+- Logos oficiales de los clientes, o permiso para descargarlos de sus webs.
+- Enlace del canal «Del Fan, Para el Fan» y cifras de suscriptores, si quiere mostrarlas.
+- Cámara y año de cada proyecto, y los datos que pida E.
+- Retrato y fotos de rodaje para «Sobre mí».
+
+## Registro
+
+- 2026-10-22: hoja de ruta creada a partir de la revisión de Josep del prototipo D.

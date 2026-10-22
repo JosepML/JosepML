@@ -6,6 +6,8 @@ Plan completo y razonado (documento para leer y comentar): https://claude.ai/cod
 
 ## Estado de las fases
 
+**Orden de trabajo desde el 2026-10-22:** [hoja-de-ruta.md](hoja-de-ruta.md) (tareas para Opus y para Sonnet, cada una en su hilo).
+
 | Fase | Archivo | Estado |
 | --- | --- | --- |
 | 1. Preparación | [fase-1-preparacion.md](fase-1-preparacion.md) | Hecha |
