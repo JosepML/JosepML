@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Josep Mira Lozano
 productora_cliente: JUNO Media
 mi_papel: Dirección, producción y postproducción (guion, casting, localizaciones y montaje)
-camara: Blackmagic [modelo pendiente] · ópticas prime [¿DZO? pendiente]
+camara: Blackmagic Pocket Cinema Camera 6K Pro · ópticas prime [¿DZO? pendiente]
 premios: []
 destacado: 0
 estado: borrador
