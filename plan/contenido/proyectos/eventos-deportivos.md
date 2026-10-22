@@ -21,10 +21,10 @@ Cobertura de ciclismo de élite, como la Shimano Super Cup Massi en La Nucía, p
 En una carrera la acción pasa una sola vez y muy rápido. Grabo a pie de pista y monto.
 
 ## Decisiones clave
-- **Elegir sitio** en los puntos más espectaculares del circuito.
-- **Cámara rápida y cerrada** para que se note la velocidad.
-- **Un pack de piezas**: reels para redes y piezas largas con calidad de emisión.
-- **Sonido realzado** (ruedas, esfuerzo, público) sobre una base musical fuerte.
+- **Elegir sitio.** Me coloco en los puntos más espectaculares del circuito.
+- **Cámara rápida y cerrada.** Seguimiento preciso para que se note la velocidad.
+- **Un pack por canal.** Reels para redes y piezas largas con calidad de emisión.
+- **Sonido realzado.** Ruedas, esfuerzo y público sobre una base musical fuerte.
 
 ## El reto
 Estar en el sitio justo en el momento justo y condensar la carrera sin perder tensión.

@@ -21,14 +21,14 @@ Videoclip de Arkano producido por JUNO Media. Lo dirigí, llevé la cámara y lo
 *100 Baladas* es un single personal de Arkano, escrito con su pareja y estrenado el 14 de febrero. La idea era de Álex Gómez; yo la adapté al formato y al ritmo de un videoclip. Producción de Noelia Fluxà y Julie-Estel Soard.
 
 ## Decisiones clave
-- **La distancia entre los dos como hilo**: plano a plano se acercan, hasta el final del tema.
-- **Cortes sobre los cambios de la canción**, no a un ritmo fijo.
+- **La distancia como hilo.** Plano a plano, Arkano y su pareja se acercan hasta el final del tema.
+- **Montaje a la canción.** Los cortes siguen sus cambios, no un ritmo fijo.
 
 ## El reto
 Dirigir una idea que no era mía sin perder lo que la hacía especial.
 
 ## Resultado
-Más de 17.000 visualizaciones en YouTube.
+- Más de 17.000 visualizaciones en YouTube.
 
 ## Para revisar con Josep (no se publica)
 - Año de estreno.

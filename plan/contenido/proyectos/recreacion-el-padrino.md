@@ -21,10 +21,10 @@ El plano de Vito Corleone en su despacho, con la luz de Gordon Willis, en un só
 Quise estudiar cómo ilumina Willis recreando su plano más conocido. Dirigí, fotografié y construí el set.
 
 ## Decisiones clave
-- **Ventana**: rejilla de estufa de butano con cinta negra, papel de horno de difusor y LED detrás.
-- **Ojos en sombra**: Aputure 300d II con softbox cenital y negativo en el suelo.
-- **Temperatura**: cámara hacia cálido y fondo compensado con geles fríos.
-- **Color**: soy daltónico, así que igualé pieles y sombras en DaVinci Resolve con el fotograma original.
+- **La ventana.** Rejilla de estufa de butano, cinta negra, papel de horno como difusor y LED detrás.
+- **Ojos en sombra.** Aputure 300d II con softbox cenital y un negativo en el suelo.
+- **Temperatura.** Cámara hacia cálido y fondo compensado con geles fríos.
+- **Color sin verlo.** Soy daltónico: igualé pieles y sombras en DaVinci Resolve con el fotograma original.
 
 ## El reto
 Recrear la luz de una ventana que no existía, y un color que no veo como los demás.

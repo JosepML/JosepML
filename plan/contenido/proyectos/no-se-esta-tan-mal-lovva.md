@@ -21,9 +21,9 @@ Videoclip de Lovva (dirección de Ángela Manzano). Hice la fotografía y el mon
 Una canción sobre aceptarse a uno mismo. La directora pedía una "burbuja" visual donde el artista pudiera mostrarse vulnerable sin perder fuerza.
 
 ## Decisiones clave
-- **Luz puntual en vez de plana**: contraluces, destellos suaves y puntos de luz que envuelven al artista.
-- **Cristal y agua** para dar textura con reflejos y refracciones.
-- **Un esquema de luz por set**, y un montaje que enlaza los siete sin romper el ritmo.
+- **Luz puntual, no plana.** Contraluces, destellos suaves y puntos de luz que envuelven al artista.
+- **Cristal y agua.** Reflejos y refracciones para dar textura.
+- **Un esquema por set.** Siete luces distintas, enlazadas en montaje sin romper el ritmo.
 
 ## El reto
 Que siete espacios distintos se sintieran como un mismo lugar emocional.

@@ -21,10 +21,10 @@ Corto de Ángela Manzano sobre el abuso laboral. Hice la fotografía, casi toda 
 Un hombre machacado en su trabajo decide secuestrar a su jefa. Se cuenta desde su cabeza, con tono onírico.
 
 ## Decisiones clave
-- **Un ciclorama, muchos lugares**: cada espacio lo crea la luz.
-- **Oficina como limbo**: luz uniforme y fría sobre el blanco.
-- **Prisión mental**: sombras duras de persiana y tonos azulados, sin paredes.
-- **Secuestro**: contraluz intenso, como un halo teatral.
+- **Un ciclorama, muchos lugares.** Cada espacio lo crea la luz.
+- **Oficina como limbo.** Luz uniforme y fría sobre el blanco.
+- **Prisión mental.** Sombras de persiana y tonos azulados, sin paredes.
+- **Secuestro.** Contraluz intenso, como un halo teatral.
 
 ## El reto
 Que un solo espacio blanco pareciera varios lugares con carga emocional distinta.

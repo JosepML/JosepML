@@ -21,9 +21,9 @@ Videoclip narrativo de Peiko, proyecto de estudios. Lo dirigí y lo fotografié:
 Una canción sobre el paso del tiempo y la distancia entre el éxito y el fracaso, contada con una historia dramática. Rodado con Canon C200 y un 50 mm fijo.
 
 ## Decisiones clave
-- **Casa moderna frente a casa podrida**: dos atmósferas opuestas que muestran la fractura del personaje.
-- **Cámara y óptica planificadas desde la canción**, al servicio del arco del personaje.
-- **Final en una celda**, con luz más fría y Peiko cantando agarrado a los barrotes.
+- **Dos casas opuestas.** Una moderna y otra podrida, para mostrar la fractura del personaje.
+- **Plan desde la canción.** Cámara y óptica al servicio del arco del personaje.
+- **Final en una celda.** Luz más fría y Peiko agarrado a los barrotes.
 
 ## El reto
 Que la caída se viera en la imagen y no solo en la letra.

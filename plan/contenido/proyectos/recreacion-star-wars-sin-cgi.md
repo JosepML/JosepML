@@ -21,13 +21,12 @@ Luke en la Ciudad de las Nubes sin CGI: pilares de alfombra, tuberías de ferret
 Llevo una década haciendo contenido de Star Wars. Aquí recreé el plano más icónico de Luke solo con recursos físicos: dirección, fotografía, atrezo y postproducción.
 
 ## Decisiones clave
-- **Pilares** de alfombra enrollada forrada de goma EVA; **tuberías** de fontanería.
-- **Luces de fondo** con papel gris perforado y desenfoque que convierte los agujeros en halos.
-- **Luz**: LED magnético para el contraluz, modificador concentrado para sombras duras y negativo en el suelo.
-- **Óptica**: repetí el rodaje entero al pasar de 85 a 55 mm.
+- **Decorado de ferretería.** Pilares de alfombra forrada de goma EVA y tuberías de fontanería.
+- **Luces de fondo.** Papel gris perforado; el desenfoque convierte los agujeros en halos.
+- **Luz dura.** LED magnético de contraluz, modificador concentrado y negativo en el suelo.
 
 ## El reto
-La perspectiva: con el 85 mm las proporciones no eran las del original.
+La perspectiva. Con un 85 mm las proporciones no eran las del original, así que rehíce el rodaje entero con un 55 mm.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

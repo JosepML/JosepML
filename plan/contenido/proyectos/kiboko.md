@@ -21,9 +21,9 @@ Docuficción de JUNO Media sobre el bar Kiboko de La Vila Joiosa en los 80. La m
 Dirigida por Noelia Fluxá y Julie-Estel Soard. El Kiboko fue un refugio de libertad y música; lo cuenta Ana, una cronista ficticia que hoy investiga su historia. Rodada en ARRI. Yo hice el montaje.
 
 ## Decisiones clave
-- **Ordenar primero**: sincronizar, cribar y estructurar horas de entrevistas junto a la ficción.
-- **Testimonio y ficción en diálogo**: las entrevistas responden a lo que Ana investiga.
-- **Dos ritmos**: vibrante y con banda sonora en el bar de 1986; pausado en las entrevistas.
+- **Ordenar primero.** Sincronizar, cribar y estructurar horas de entrevistas junto a la ficción.
+- **Testimonio y ficción en diálogo.** Las entrevistas responden a lo que Ana investiga.
+- **Dos ritmos.** Vibrante en el bar de 1986; pausado en las entrevistas.
 
 ## El reto
 Pasar del testimonio a la ficción sin que se note el salto ni se pierda la emoción.

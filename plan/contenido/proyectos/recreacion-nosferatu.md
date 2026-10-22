@@ -21,15 +21,15 @@ Una escena de *Nosferatu* recreada con Comboi Films, con cartón, una rampa de m
 En mi canal recreo planos de cine con muy pocos medios. Aquí, la sombra del vampiro en la ventana y la protagonista que levita. Yo dirigí y coordiné.
 
 ## Decisiones clave
-- **Sombra de cartón y cinta**, escalada para encajar en la ventana y proyectada con un spotlight a distancia y ángulo medidos.
-- **Levitación con rampa de madera**, escondida por el ángulo y la luz.
-- **Luz general**: Aputure 300D con softbox.
+- **La sombra.** Silueta de cartón y cinta, escalada a la ventana y proyectada con un spotlight.
+- **La levitación.** Una rampa de madera, escondida por el ángulo y la luz.
+- **Luz general.** Aputure 300D con softbox.
 
 ## El reto
 La cortina debía moverse con el viento y esa noche no soplaba. Hilos y cartones no funcionaron; un soplador de hojas dio el viento dosificable, y hilos finos movían la silueta al compás.
 
 ## Resultado
-Un plano muy parecido al original con unos 100 € de material.
+- Un plano casi idéntico al original con unos 100 € de material.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

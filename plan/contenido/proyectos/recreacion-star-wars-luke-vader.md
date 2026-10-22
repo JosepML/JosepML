@@ -21,10 +21,10 @@ El duelo de Luke y Vader en la Ciudad Nube, para el 45.º aniversario de *El Imp
 Idea, dirección, fotografía y postproducción míos, con medios caseros.
 
 ## Decisiones clave
-- **Maqueta en miniatura**, como las películas originales.
-- **Muchas pruebas de diafragma e ISO** hasta exponer y enfocar bien algo tan pequeño.
-- **Siluetas al aire libre** contra una pared blanca, tras fallar en interior.
-- **Sables y personajes** añadidos fotograma a fotograma.
+- **Maqueta.** Un set en miniatura, como en las películas originales.
+- **Exposición.** Muchas pruebas de diafragma e ISO para enfocar algo tan pequeño.
+- **Siluetas.** Rodadas al aire libre contra una pared blanca, tras fallar en interior.
+- **Postproducción.** Sables y personajes añadidos fotograma a fotograma.
 
 ## El reto
 Espacio y luz: dar a una maqueta pequeña la profundidad de un set real.

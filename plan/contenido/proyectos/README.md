@@ -15,6 +15,10 @@ Cada ficha tiene que servirle a un cliente: qué era, qué hice yo, qué decisio
 
 El prototipo lee estos archivos a través de `src/app/prototipos/d/textos.ts`, que se regenera con `node scripts/textos-prototipo.mjs` (no se edita a mano).
 
+## Cómo se ve en la ficha (2026-10-22)
+
+Descripción corta arriba; después filas tipo dosier con la etiqueta a la izquierda: *El proyecto*, *Decisiones clave* (tarjetas numeradas: cada punto se escribe `**Título.** Frase.`), *El reto* (frase destacada) y *Resultado* (hechos con laurel). Cierra la `frase` de `datos.ts` con la doble tipografía.
+
 ## Cómo está hecho cada archivo
 
 - **Cabecera (frontmatter):** campos de la ficha técnica que van a `proyectos`. Todo lo que dice `[pendiente]` es un dato que falta; no se publica hasta que Josep lo complete.

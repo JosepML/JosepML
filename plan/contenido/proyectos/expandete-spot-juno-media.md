@@ -21,9 +21,9 @@ Spot narrativo para JUNO Media: guion, casting, localizaciones, dirección y mon
 JUNO Media quería contar su lema, "cine para sanar", sin que pareciera un anuncio. Escribí una fábula: una niña con ideas infinitas ayuda a su vecino, bloqueado, a liberar las suyas. La fotografía fue de Juanfran Jiménez, con quien preparé el rodaje.
 
 ## Decisiones clave
-- **Tres actos y giro final**: nadie sabe que es publicidad hasta que aparecen las fundadoras, Noelia Fluxà y Julie-Estel Soard.
-- **Dos casas enfrentadas**, con las dos habitaciones conectadas por la mirada a través de la ventana.
-- **Casting con oficio**: Amaia Miranda como niña, para rodar rápido y natural.
+- **Giro final.** Tres actos, y nadie sabe que es publicidad hasta que aparecen las fundadoras.
+- **Dos casas enfrentadas.** La niña y el adulto se miran a través de la ventana.
+- **Casting con oficio.** Amaia Miranda, actriz infantil con experiencia, para rodar rápido y natural.
 
 ## El reto
 Encontrar las dos viviendas que la historia necesitaba.

@@ -21,15 +21,15 @@ Reels y shorts verticales para Disney, el Consell Valencià de la Joventut y cre
 Más de nueve años haciendo contenido para redes. Un vídeo vertical se juega la atención en tres segundos, y cada cliente necesita sonar distinto.
 
 ## Decisiones clave
-- **Gancho** en los tres primeros segundos.
-- **Sin tiempos muertos**: cortes a la música, zooms digitales y diseño sonoro.
-- **Cada cliente, su tono**: cambio luz, color, subtítulos y ritmo (frescura, magia o claridad).
+- **Gancho.** Lo más potente, en los tres primeros segundos.
+- **Sin tiempos muertos.** Cortes a la música, zooms digitales y diseño sonoro.
+- **Cada cliente, su tono.** Cambian la luz, el color, los subtítulos y el ritmo.
 
 ## El reto
 Cambiar de registro entre clientes sin perder el ritmo de cada plataforma.
 
 ## Resultado
-Cientos de miles de visualizaciones entre todas las piezas.
+- Cientos de miles de visualizaciones entre todas las piezas.
 
 ## Para revisar con Josep (no se publica)
 - Permiso de Disney y del Consell para mostrar sus nombres y piezas.
