@@ -29,8 +29,5 @@ Quise estudiar cómo ilumina Willis recreando su plano más conocido. Dirigí, f
 ## El reto
 Recrear la luz de una ventana que no existía, y un color que no veo como los demás.
 
-## Lo que demuestra
-Sé desglosar la luz de un maestro y reproducirla con lo que hay.
-
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

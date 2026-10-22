@@ -32,9 +32,6 @@ Unos 15 días reales para idear, rodar, montar y entregar. Me quedé solo con lo
 - Podio del concurso.
 - Beca de la ESCAC como puerta abierta.
 
-## Lo que demuestra
-Puedo llevar una pieza completa, de guion a entrega, con plazo cerrado y un resultado que compite.
-
 ## Para revisar con Josep (no se publica)
 - Plazo: 30 días del concurso frente a unos 15 reales. ¿Es así?
 - ¿Qué puesto exacto del podio?

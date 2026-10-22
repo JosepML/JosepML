@@ -32,8 +32,5 @@ Hacer creíble una máquina del tiempo sin dinero.
 ## Resultado
 Más de 22.000 visualizaciones en YouTube. Final abierto, con puerta a una secuela.
 
-## Lo que demuestra
-Puedo resolver con ingenio lo que otros resolverían con presupuesto.
-
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

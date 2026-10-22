@@ -99,10 +99,10 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
         </dl>
       </motion.section>
 
-      <section className="mx-auto max-w-5xl px-4 py-24 text-center sm:px-8 sm:py-32">
+      <section className="mx-auto max-w-3xl px-4 pb-16 pt-20 text-center sm:px-8 sm:pt-28">
         <Revelar>
-          <p className="text-[clamp(1.4rem,2.6vw,2.2rem)] font-bold leading-[1.2] tracking-[-0.03em] [text-wrap:balance]">
-            {textos ? <Inline texto={textos.tarjeta} /> : <TituloConAcento texto={p.frase} />}
+          <p className="text-[clamp(1.1rem,1.6vw,1.35rem)] leading-[1.55] text-[var(--d-suave)] [text-wrap:balance]">
+            {textos ? <Inline texto={textos.tarjeta} /> : p.frase}
           </p>
         </Revelar>
       </section>
@@ -135,6 +135,15 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
           </div>
         </section>
       )}
+
+      {/* Conclusión: frase corta con la última palabra en cursiva */}
+      <section className="mx-auto max-w-5xl px-4 pb-24 text-center sm:px-8">
+        <Revelar>
+          <p className="text-[clamp(1.7rem,3.6vw,3rem)] font-bold leading-[1.15] tracking-[-0.03em] [text-wrap:balance]">
+            <TituloConAcento texto={p.frase} />
+          </p>
+        </Revelar>
+      </section>
 
       {/* Fotogramas: cuadrícula de miniaturas; al pulsar una se abre el visor a pantalla completa */}
       <section className="px-4 pb-24 sm:px-8">

@@ -29,9 +29,6 @@ Un hombre machacado en su trabajo decide secuestrar a su jefa. Se cuenta desde s
 ## El reto
 Que un solo espacio blanco pareciera varios lugares con carga emocional distinta.
 
-## Lo que demuestra
-Puedo construir mundos con luz cuando no hay decorado.
-
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
 - Cámara: ¿Blackmagic Pocket 4K seguro?

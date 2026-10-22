@@ -31,8 +31,5 @@ Siete vídeos que funcionan sueltos en redes y que, juntos, forman un solo desce
 ## Resultado
 1.392.400 visualizaciones entre YouTube, Instagram y Spotify.
 
-## Lo que demuestra
-Puedo pensar la imagen de una serie entera, no solo de una pieza.
-
 ## Para revisar con Josep (no se publica)
 - Fecha de publicación.

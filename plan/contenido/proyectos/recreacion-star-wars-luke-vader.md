@@ -29,8 +29,5 @@ Idea, dirección, fotografía y postproducción míos, con medios caseros.
 ## El reto
 Espacio y luz: dar a una maqueta pequeña la profundidad de un set real.
 
-## Lo que demuestra
-Curiosidad técnica y paciencia: pruebo, corrijo y entrego.
-
 ## Para revisar con Josep (no se publica)
 - Confirmar el año (2025).

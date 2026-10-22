@@ -32,9 +32,6 @@ Pasar del testimonio a la ficción sin que se note el salto ni se pierda la emoc
 - Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa (6 de junio de 2026).
 - Selección en festivales y nominación a mejor montaje.
 
-## Lo que demuestra
-Puedo montar un relato largo con material muy distinto y que se sienta uno.
-
 ## Para revisar con Josep (no se publica)
 - Nombres de los festivales y de la nominación.
 - Duración final y horas de material bruto.

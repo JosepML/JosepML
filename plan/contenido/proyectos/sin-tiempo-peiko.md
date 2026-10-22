@@ -28,9 +28,6 @@ Una canción sobre el paso del tiempo y la distancia entre el éxito y el fracas
 ## El reto
 Que la caída se viera en la imagen y no solo en la letra.
 
-## Lo que demuestra
-Sé traducir una canción en un plan de dirección y fotografía.
-
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
 - ¿Qué diferenciaba la luz de las dos casas?

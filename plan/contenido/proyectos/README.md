@@ -6,10 +6,10 @@ Estado: **borrador para revisión de Josep**. Cámaras, clientes citables y plat
 
 Cada ficha tiene que servirle a un cliente: qué era, qué hice yo, qué decisiones concretas tomé (luz, cámara, montaje) y por qué, el reto con su solución y el resultado con hechos. Frases cortas y listas.
 
-- **Tarjeta:** qué es, para quién, mi papel y el dato más fuerte. Dos frases como mucho.
+- **Tarjeta:** descripción cortita (una o dos frases) que abre la ficha.
 - **El proyecto:** qué es y qué hice yo, con los créditos del equipo, en pocas líneas.
 - **Decisiones clave:** máximo cuatro; cada una es una decisión y su efecto.
-- **Lo que demuestra:** una frase con la conclusión útil para un cliente, basada solo en hechos de la ficha.
+- **Conclusión:** la cierra la frase con doble tipografía de `datos.ts` (`frase`), no el .md.
 - **El resultado:** solo hechos (premios, cifras, estrenos). Si no hay ninguno, la sección se deja vacía y no se muestra.
 - Lo que falta para que una ficha informe de verdad está en sus preguntas de «Para revisar».
 

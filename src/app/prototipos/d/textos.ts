@@ -45,15 +45,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "Más de 17.000 visualizaciones en YouTube."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Puedo adaptar la idea de otra persona a un formato nuevo y entregar con un artista de primer nivel."
-          }
-        ]
       }
     ]
   },
@@ -88,15 +79,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
           {
             "t": "p",
             "x": "Estar en los momentos que no se repiten sin que se note."
-          }
-        ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Cuido el día más importante de una pareja con ojo de cine. Escríbeme y te enseño referencias."
           }
         ]
       }
@@ -135,15 +117,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "Que tenga ritmo y cuente el concierto en vez de ser una lista de clips."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Monto con oído de músico: la imagen sigue acentos y cambios de la canción."
-          }
-        ]
       }
     ]
   },
@@ -178,15 +151,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
           {
             "t": "p",
             "x": "Que el mundo casi sobrenatural de los crímenes y la investigación realista convivieran sin romper la tensión. Lo resolví separándolos por luz y color."
-          }
-        ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Sé convertir una idea de guion en un lenguaje de luz y color, y sostenerlo de principio a fin. Premio a mejor fotografía."
           }
         ]
       }
@@ -235,15 +199,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "Más de 22.000 visualizaciones en YouTube. Final abierto, con puerta a una secuela."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Puedo resolver con ingenio lo que otros resolverían con presupuesto."
-          }
-        ]
       }
     ]
   },
@@ -289,15 +244,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "1.392.400 visualizaciones entre YouTube, Instagram y Spotify."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Puedo pensar la imagen de una serie entera, no solo de una pieza."
-          }
-        ]
       }
     ]
   },
@@ -335,15 +281,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "Estar en el sitio justo en el momento justo y condensar la carrera sin perder tensión."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Entrego material útil para la competición, listo para cada canal."
-          }
-        ]
       }
     ]
   },
@@ -378,15 +315,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
           {
             "t": "p",
             "x": "Encontrar las dos viviendas que la historia necesitaba."
-          }
-        ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Puedo llevar una pieza para una marca de la idea al montaje, y contarla sin vender a gritos."
           }
         ]
       }
@@ -437,15 +365,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             ]
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Puedo montar un relato largo con material muy distinto y que se sienta uno."
-          }
-        ]
       }
     ]
   },
@@ -480,15 +399,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
           {
             "t": "p",
             "x": "Que siete espacios distintos se sintieran como un mismo lugar emocional."
-          }
-        ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Sé diseñar luz para varios decorados y mantener la coherencia en el montaje."
           }
         ]
       }
@@ -526,15 +436,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
           {
             "t": "p",
             "x": "Recrear la luz de una ventana que no existía, y un color que no veo como los demás."
-          }
-        ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Sé desglosar la luz de un maestro y reproducirla con lo que hay."
           }
         ]
       }
@@ -582,15 +483,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "Un plano muy parecido al original con unos 100 € de material."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Resuelvo problemas de rodaje sobre la marcha sin perder la imagen buscada."
-          }
-        ]
       }
     ]
   },
@@ -628,15 +520,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "Espacio y luz: dar a una maqueta pequeña la profundidad de un set real."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Curiosidad técnica y paciencia: pruebo, corrijo y entrego."
-          }
-        ]
       }
     ]
   },
@@ -672,15 +555,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
           {
             "t": "p",
             "x": "La perspectiva: con el 85 mm las proporciones no eran las del original."
-          }
-        ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Detecto un error de óptica y rehago el rodaje entero por la imagen."
           }
         ]
       }
@@ -728,15 +602,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "Cientos de miles de visualizaciones entre todas las piezas."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Me adapto a la identidad de cada cliente sin perder el ritmo."
-          }
-        ]
       }
     ]
   },
@@ -774,15 +639,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
             "x": "Que un solo espacio blanco pareciera varios lugares con carga emocional distinta."
           }
         ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Puedo construir mundos con luz cuando no hay decorado."
-          }
-        ]
       }
     ]
   },
@@ -817,15 +673,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
           {
             "t": "p",
             "x": "Que la caída se viera en la imagen y no solo en la letra."
-          }
-        ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Sé traducir una canción en un plan de dirección y fotografía."
           }
         ]
       }
@@ -874,15 +721,6 @@ export const TEXTOS: Record<string, TextosProyecto> = {
               "Podio del concurso.",
               "Beca de la ESCAC como puerta abierta."
             ]
-          }
-        ]
-      },
-      {
-        "titulo": "Lo que demuestra",
-        "bloques": [
-          {
-            "t": "p",
-            "x": "Puedo llevar una pieza completa, de guion a entrega, con plazo cerrado y un resultado que compite."
           }
         ]
       }

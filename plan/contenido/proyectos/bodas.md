@@ -28,9 +28,6 @@ He grabado muchas bodas, siempre con muy buenas valoraciones. Cubro el día ente
 ## El reto
 Estar en los momentos que no se repiten sin que se note.
 
-## Lo que demuestra
-Cuido el día más importante de una pareja con ojo de cine. Escríbeme y te enseño referencias.
-
 ## Para revisar con Josep (no se publica)
 - Renombra las imágenes de la galería: llevan el nombre de los novios.
 - ¿Cuántas bodas, aproximadamente?

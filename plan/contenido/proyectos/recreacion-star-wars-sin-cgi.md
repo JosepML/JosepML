@@ -29,8 +29,5 @@ Llevo una década haciendo contenido de Star Wars. Aquí recreé el plano más i
 ## El reto
 La perspectiva: con el 85 mm las proporciones no eran las del original.
 
-## Lo que demuestra
-Detecto un error de óptica y rehago el rodaje entero por la imagen.
-
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

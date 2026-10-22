@@ -29,9 +29,6 @@ En una carrera la acción pasa una sola vez y muy rápido. Grabo a pie de pista 
 ## El reto
 Estar en el sitio justo en el momento justo y condensar la carrera sin perder tensión.
 
-## Lo que demuestra
-Entrego material útil para la competición, listo para cada canal.
-
 ## Para revisar con Josep (no se publica)
 - Año de la competición.
 - ¿Qué se emitió en televisión y dónde? Sería el mejor resultado de esta ficha.

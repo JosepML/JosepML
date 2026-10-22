@@ -31,9 +31,6 @@ La cortina debía moverse con el viento y esa noche no soplaba. Hilos y cartones
 ## Resultado
 Un plano muy parecido al original con unos 100 € de material.
 
-## Lo que demuestra
-Resuelvo problemas de rodaje sobre la marcha sin perder la imagen buscada.
-
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
 - Imagen del plano original para el antes/después.

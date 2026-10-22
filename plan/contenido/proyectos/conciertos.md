@@ -28,9 +28,6 @@ Un aftermovie cuenta un directo en poco tiempo: el espectáculo, la entrega de l
 ## El reto
 Que tenga ritmo y cuente el concierto en vez de ser una lista de clips.
 
-## Lo que demuestra
-Monto con oído de músico: la imagen sigue acentos y cambios de la canción.
-
 ## Para revisar con Josep (no se publica)
 - Año de cada evento.
 - ¿Alguna opinión de organizador o artista?

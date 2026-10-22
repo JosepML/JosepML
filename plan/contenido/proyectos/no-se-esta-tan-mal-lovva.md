@@ -28,9 +28,6 @@ Una canción sobre aceptarse a uno mismo. La directora pedía una "burbuja" visu
 ## El reto
 Que siete espacios distintos se sintieran como un mismo lugar emocional.
 
-## Lo que demuestra
-Sé diseñar luz para varios decorados y mantener la coherencia en el montaje.
-
 ## Para revisar con Josep (no se publica)
 - Año de estreno y visualizaciones, si quieres citarlas.
 - ¿Cuántos días para los siete sets? ¿Con qué fuentes hiciste destellos y contraluces?

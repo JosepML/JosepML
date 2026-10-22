@@ -30,9 +30,6 @@ Dirigir una idea que no era mía sin perder lo que la hacía especial.
 ## Resultado
 Más de 17.000 visualizaciones en YouTube.
 
-## Lo que demuestra
-Puedo adaptar la idea de otra persona a un formato nuevo y entregar con un artista de primer nivel.
-
 ## Para revisar con Josep (no se publica)
 - Año de estreno.
 - Esta ficha sigue corta en decisiones: ¿cómo resolviste el acercamiento (movimientos, ópticas, localización, luz)? ¿Días de rodaje?

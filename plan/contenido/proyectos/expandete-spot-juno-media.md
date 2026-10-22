@@ -28,9 +28,6 @@ JUNO Media quería contar su lema, "cine para sanar", sin que pareciera un anunc
 ## El reto
 Encontrar las dos viviendas que la historia necesitaba.
 
-## Lo que demuestra
-Puedo llevar una pieza para una marca de la idea al montaje, y contarla sin vender a gritos.
-
 ## Para revisar con Josep (no se publica)
 - Año de rodaje y cómo resolviste las localizaciones.
 - Cámara: Blackmagic Pocket 6K Pro; ópticas por confirmar.

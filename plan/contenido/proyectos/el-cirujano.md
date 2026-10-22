@@ -28,9 +28,6 @@ Una inspectora persigue a un asesino en serie que convierte a sus víctimas en o
 ## El reto
 Que el mundo casi sobrenatural de los crímenes y la investigación realista convivieran sin romper la tensión. Lo resolví separándolos por luz y color.
 
-## Lo que demuestra
-Sé convertir una idea de guion en un lenguaje de luz y color, y sostenerlo de principio a fin. Premio a mejor fotografía.
-
 ## Para revisar con Josep (no se publica)
 - Año del premio.
 - ¿Con qué conseguiste el rojo (geles, LED de color, etalonaje) y la luz fría de la investigación? Con ese dato la ficha se completa.

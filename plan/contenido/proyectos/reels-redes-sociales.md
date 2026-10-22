@@ -31,9 +31,6 @@ Cambiar de registro entre clientes sin perder el ritmo de cada plataforma.
 ## Resultado
 Cientos de miles de visualizaciones entre todas las piezas.
 
-## Lo que demuestra
-Me adapto a la identidad de cada cliente sin perder el ritmo.
-
 ## Para revisar con Josep (no se publica)
 - Permiso de Disney y del Consell para mostrar sus nombres y piezas.
 - Cifra de la pieza más vista, si quieres citarla.
