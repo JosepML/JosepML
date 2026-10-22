@@ -15,24 +15,22 @@ estado: borrador
 ---
 
 ## Tarjeta
-Aftermovies de conciertos y orquestas para Tamilah y Fluxà, Mapache Events, Orquesta Azara y Miami Show. Grabo y monto a partir de la música.
+Aftermovies de conciertos y orquestas. Grabo y monto a partir de la música, y soy músico.
 
-## La historia
-Un aftermovie tiene que contar un directo en pocos minutos: el espectáculo, la entrega de los artistas y el público. Aquí hay tres (Miami Show, Flama y Legends) y un vídeo del proceso.
+## El proyecto
+Un aftermovie cuenta un directo en poco tiempo: el espectáculo, la entrega de los artistas y el público. Clientes: Tamilah y Fluxà (Agüita de Coco y Flama), Mapache Events, Orquesta Azara y Miami Show.
 
-## Mi papel
-Grabación y montaje. Soy músico, y monto leyendo la estructura de las canciones: ritmos, acentos y cambios.
-
-## Cómo lo hicimos
-- **Primero el audio:** antes de tocar la imagen hago un mix con los temas más potentes y cambios de tempo. Ese mix es el esqueleto del vídeo.
-- **Grabo pensando en el montaje:** pregunto a los artistas por los momentos fuertes del repertorio, cubro muchos encuadres y me aseguro de tener el playback para que labios e instrumentos cuadren.
-- **Estructura:** lo más rompedor al principio y lo más espectacular al cierre.
-- **Sonido:** efectos y ambiente del público para que se sienta la primera fila.
-- **Cámara:** Sony FX3 con ópticas Tamron y Sony.
+## Decisiones clave
+- **Primero el audio**: un mix con los temas más potentes y cambios de tempo es el esqueleto del vídeo.
+- **Grabar pensando en el montaje**: hablo con los artistas, cubro muchos encuadres y tomo el playback.
+- **Lo más rompedor al principio y lo más espectacular al cierre**, con ambiente del público para sentir la primera fila.
 
 ## El reto
-Que el aftermovie tenga ritmo y cuente el concierto, en lugar de ser una lista de clips bonitos.
+Que tenga ritmo y cuente el concierto en vez de ser una lista de clips.
+
+## Lo que demuestra
+Monto con oído de músico: la imagen sigue acentos y cambios de la canción.
 
 ## Para revisar con Josep (no se publica)
 - Año de cada evento.
-- ¿Alguna opinión de organizador o de artista?
+- ¿Alguna opinión de organizador o artista?

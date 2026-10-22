@@ -15,23 +15,22 @@ estado: borrador
 ---
 
 ## Tarjeta
-Cobertura de ciclismo de élite, como la Shimano Super Cup Massi en La Nucía, para Ocisport. Grabo y monto piezas para redes y para televisión.
+Cobertura de ciclismo de élite, como la Shimano Super Cup Massi en La Nucía, para Ocisport. Piezas para redes y para televisión.
 
-## La historia
-En una carrera, la acción pasa una sola vez y muy rápido. Mi trabajo es captar la velocidad y el esfuerzo sin estorbar a los corredores.
+## El proyecto
+En una carrera la acción pasa una sola vez y muy rápido. Grabo a pie de pista y monto.
 
-## Mi papel
-Grabación a pie de pista y montaje.
-
-## Cómo lo hicimos
-- **Elegir sitio:** me coloco en los puntos más espectaculares del circuito, donde la carrera da más.
-- **Cámara rápida y cerrada:** seguimiento preciso y encuadres cerrados para que se note la velocidad.
-- **Un pack de piezas:** reels y clips cortos para redes, y piezas largas con calidad de emisión para televisión.
-- **Sonido:** cortes sobre una base musical fuerte y el ambiente realzado: ruedas, esfuerzo, público.
-- **Cámara:** Sony FX3 con ópticas Tamron y Sony.
+## Decisiones clave
+- **Elegir sitio** en los puntos más espectaculares del circuito.
+- **Cámara rápida y cerrada** para que se note la velocidad.
+- **Un pack de piezas**: reels para redes y piezas largas con calidad de emisión.
+- **Sonido realzado** (ruedas, esfuerzo, público) sobre una base musical fuerte.
 
 ## El reto
-Estar en el sitio justo en el momento justo y, después, condensar la carrera sin perder la tensión.
+Estar en el sitio justo en el momento justo y condensar la carrera sin perder tensión.
+
+## Lo que demuestra
+Entrego material útil para la competición, listo para cada canal.
 
 ## Para revisar con Josep (no se publica)
 - Año de la competición.

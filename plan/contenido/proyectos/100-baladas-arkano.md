@@ -15,25 +15,24 @@ estado: borrador
 ---
 
 ## Tarjeta
-Videoclip de Arkano producido por JUNO Media. Lo dirigí, llevé la cámara y lo monté. Más de 17.000 visualizaciones en YouTube.
+Videoclip de Arkano producido por JUNO Media. Lo dirigí, llevé la cámara y lo monté. Más de 17.000 visualizaciones.
 
-## La historia
-*100 Baladas* es una canción muy personal de Arkano, escrita junto a su pareja. El videoclip se estrenó el 14 de febrero, a propósito. La idea de partida era de Álex Gómez: Arkano y su pareja se van acercando a lo largo del tema. Mi trabajo fue convertir esa idea en un videoclip rodable y con ritmo.
+## El proyecto
+*100 Baladas* es un single personal de Arkano, escrito con su pareja y estrenado el 14 de febrero. La idea era de Álex Gómez; yo la adapté al formato y al ritmo de un videoclip. Producción de Noelia Fluxà y Julie-Estel Soard.
 
-## Mi papel
-Adapté la idea, dirigí el rodaje, operé la cámara y monté. En producción, Noelia Fluxà y Julie-Estel Soard, de JUNO Media.
-
-## Cómo lo hicimos
-- **La distancia como hilo:** la historia se cuenta con el espacio entre los dos. Plano a plano se acercan, hasta el final de la canción.
-- **Montaje a la canción:** los cortes siguen los cambios del tema, no un ritmo fijo.
-- **Cámara:** Sony FX3 con ópticas Tamron.
+## Decisiones clave
+- **La distancia entre los dos como hilo**: plano a plano se acercan, hasta el final del tema.
+- **Cortes sobre los cambios de la canción**, no a un ritmo fijo.
 
 ## El reto
-Dirigir una idea que no era mía. Había que respetar lo que Álex había imaginado y, a la vez, ajustarlo a la duración y al ritmo de un videoclip.
+Dirigir una idea que no era mía sin perder lo que la hacía especial.
 
-## El resultado
+## Resultado
 Más de 17.000 visualizaciones en YouTube.
+
+## Lo que demuestra
+Puedo adaptar la idea de otra persona a un formato nuevo y entregar con un artista de primer nivel.
 
 ## Para revisar con Josep (no se publica)
 - Año de estreno.
-- Esta ficha es la más pobre en decisiones concretas. ¿Cómo resolviste el acercamiento (movimientos de cámara, ópticas, localización)? ¿Luz natural o iluminada? ¿Cuántos días de rodaje?
+- Esta ficha sigue corta en decisiones: ¿cómo resolviste el acercamiento (movimientos, ópticas, localización, luz)? ¿Días de rodaje?

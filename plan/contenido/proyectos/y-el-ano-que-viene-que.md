@@ -15,27 +15,27 @@ estado: borrador
 ---
 
 ## Tarjeta
-Mi corto para el ESCAC Dreammakers Contest 2024 de Cupra: guion, dirección, fotografía, montaje y actuación. Quedó en el podio.
+Mi corto para el ESCAC Dreammakers Contest 2024 de Cupra: lo escribí, dirigí, fotografié, monté y protagonicé. Podio.
 
-## La historia
-El concurso daba 30 días para hacer un corto con tres palabras obligatorias: *Ojo*, *Cine* y *Barcelona*. Las uní con lo único que de verdad las une para mí: mi relación con el cine. Es un corto autobiográfico, contado en voz en off.
+## El proyecto
+Tres palabras obligatorias (*Ojo*, *Cine* y *Barcelona*) y un mes para hacer un corto. Las uní con mi relación con el cine, en un relato autobiográfico con voz en off. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín.
 
-## Mi papel
-Lo escribí, lo dirigí, lo fotografié, lo monté y salgo en él. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín.
-
-## Cómo lo hicimos
-- **La voz en off, primero:** escribí la narración antes que nada, con *Amélie* como referencia: una voz cálida que cuenta desde dentro del personaje.
-- **Montaje rápido contra voz tranquila:** el contraste entre el ritmo acelerado de la imagen y la calma de la voz es lo que da energía al corto.
-- **Cámara:** Sony FX3 con ópticas Tamron.
+## Decisiones clave
+- **Voz en off escrita antes que nada**, con *Amélie* de referencia: cálida y cercana.
+- **Montaje acelerado contra una voz tranquila**: ese contraste da la energía.
+- **Encuadres planificados a la vez que voz y montaje**, porque en un corto así las tres cosas se deciden juntas.
 
 ## El reto
-El tiempo. Entre idear, rodar, montar y entregar tuve unos 15 días. Lo resolví quedándome solo con lo que contaba la historia y descartando lo accesorio.
+Unos 15 días reales para idear, rodar, montar y entregar. Me quedé solo con lo que contaba la historia.
 
-## El resultado
-- Podio del ESCAC Dreammakers Contest 2024.
-- El premio me abrió la puerta a becas de la ESCAC.
+## Resultado
+- Podio del concurso.
+- Beca de la ESCAC como puerta abierta.
+
+## Lo que demuestra
+Puedo llevar una pieza completa, de guion a entrega, con plazo cerrado y un resultado que compite.
 
 ## Para revisar con Josep (no se publica)
-- La web antigua dice 30 días (el plazo del concurso) y 15 días (el reto). He puesto que el concurso daba 30 y tú tuviste unos 15. ¿Es así?
+- Plazo: 30 días del concurso frente a unos 15 reales. ¿Es así?
 - ¿Qué puesto exacto del podio?
-- Una decisión de imagen que recuerdes (luz natural o tuya, localizaciones de Barcelona, algún plano difícil). Es lo que más falta en esta ficha.
+- Una decisión de imagen que recuerdes (luz, localización, plano difícil).

@@ -15,25 +15,24 @@ estado: borrador
 ---
 
 ## Tarjeta
-Siete visualizers y un tráiler para el EP de Adrián Muñoz, producidos por JUNO Media. Hice la dirección de fotografía. Más de 1,39 millones de visualizaciones.
+Siete visualizers y un tráiler para el EP de Adrián Muñoz (JUNO Media). Hice la dirección de fotografía. Más de 1,39 millones de visualizaciones.
 
-## La historia
-*Oscuridad* es un EP conceptual sobre una pareja que se rompe: el enfado, la soledad, la ruptura, las cicatrices y, al final, la resignación de "K le den a Cupido". Cada canción tiene su visualizer.
+## El proyecto
+*Oscuridad* cuenta cómo se rompe una pareja: el enfado, la soledad, la ruptura, las cicatrices y la resignación. Una canción, un vídeo.
 
-## Mi papel
-Dirección de fotografía de los siete vídeos y del tráiler. Tenían que funcionar por separado y, vistos seguidos, contar una caída.
-
-## Cómo lo hicimos
-- **Pantalla partida:** a un lado, el artista cantando; al otro, bucles con la historia de la pareja. Encuadré e iluminé las dos mitades para que se leyeran juntas sin saturar.
-- **De color a blanco y negro:** el primer tema va en color y cada uno de los siguientes, más desaturado, hasta el blanco y negro del séptimo.
-- **Una luz por emoción:** cada bucle tiene su esquema (soledad, cicatrices…), siempre con contraste cuidado y atmósfera densa.
-- **Cámara:** Sony FX3 con ópticas Tamron y Sony.
+## Decisiones clave
+- **Pantalla partida**: el artista a un lado y bucles con la pareja al otro, encuadrados e iluminados para leerse juntos.
+- **De color a blanco y negro**: cada tema pierde saturación hasta el séptimo, que es blanco y negro.
+- **Una luz por emoción**, con contraste cuidado y atmósfera densa.
 
 ## El reto
-Siete vídeos que se ven sueltos en redes y tienen que funcionar solos, pero que juntos forman un solo arco. El paso del color al blanco y negro resuelve las dos cosas.
+Siete vídeos que funcionan sueltos en redes y que, juntos, forman un solo descenso.
 
-## El resultado
+## Resultado
 1.392.400 visualizaciones entre YouTube, Instagram y Spotify.
+
+## Lo que demuestra
+Puedo pensar la imagen de una serie entera, no solo de una pieza.
 
 ## Para revisar con Josep (no se publica)
 - Fecha de publicación.

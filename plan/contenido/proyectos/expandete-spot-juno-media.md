@@ -15,27 +15,22 @@ estado: borrador
 ---
 
 ## Tarjeta
-Spot narrativo para JUNO Media. Escribí el guion, hice el casting y las localizaciones, lo dirigí y lo monté. Pieza de muestra, no comercializada.
+Spot narrativo para JUNO Media: guion, casting, localizaciones, dirección y montaje míos. Pieza de muestra, no comercializada.
 
-## La historia
-JUNO Media quería un spot que contara su lema, "cine para sanar", sin que pareciera un anuncio. Escribí una fábula: Juno, una niña con ideas infinitas (la productora), ayuda a su vecino, un adulto bloqueado (el cliente), a liberar las suyas.
+## El proyecto
+JUNO Media quería contar su lema, "cine para sanar", sin que pareciera un anuncio. Escribí una fábula: una niña con ideas infinitas ayuda a su vecino, bloqueado, a liberar las suyas. La fotografía fue de Juanfran Jiménez, con quien preparé el rodaje.
 
-## Mi papel
-Dirección, producción y postproducción: guion, casting, localizaciones y montaje. La fotografía fue de Juanfran Jiménez, con quien preparé el rodaje.
-
-## Cómo lo hicimos
-- **El anuncio se descubre al final:** tres actos y, hasta el giro final, nadie sabe que es publicidad. Ahí aparecen las fundadoras reales, Noelia Fluxà y Julie-Estel Soard.
-- **Dos casas frente a frente:** la habitación de la niña y el estudio del adulto se ven a través de una ventana. Esa línea de mirada sostiene la relación entre los dos.
-- **Casting:** Amaia Miranda, actriz infantil con experiencia, para rodar rápido sin perder naturalidad; y las fundadoras haciendo de sí mismas.
-- **Cámara:** Blackmagic Pocket Cinema Camera 6K Pro.
+## Decisiones clave
+- **Tres actos y giro final**: nadie sabe que es publicidad hasta que aparecen las fundadoras, Noelia Fluxà y Julie-Estel Soard.
+- **Dos casas enfrentadas**, con las dos habitaciones conectadas por la mirada a través de la ventana.
+- **Casting con oficio**: Amaia Miranda como niña, para rodar rápido y natural.
 
 ## El reto
-Las localizaciones. La historia solo funcionaba con dos viviendas enfrentadas cuyas ventanas se vieran entre sí.
+Encontrar las dos viviendas que la historia necesitaba.
 
-## El resultado
-No se llegó a comercializar. Lo enseño como muestra de cómo escribo y dirijo una pieza para una marca.
+## Lo que demuestra
+Puedo llevar una pieza para una marca de la idea al montaje, y contarla sin vender a gritos.
 
 ## Para revisar con Josep (no se publica)
-- Año de rodaje.
-- ¿Cómo encontraste las dos casas (o cómo lo resolviste si no eran enfrentadas)? Es el final que le falta al reto.
-- Ópticas: ¿DZO?
+- Año de rodaje y cómo resolviste las localizaciones.
+- Cámara: Blackmagic Pocket 6K Pro; ópticas por confirmar.

@@ -15,24 +15,22 @@ estado: borrador
 ---
 
 ## Tarjeta
-Videoclip de Lovva dirigido por Ángela Manzano. Hice la fotografía y el montaje: siete sets, cada uno con su propia luz.
+Videoclip de Lovva (dirección de Ángela Manzano). Hice la fotografía y el montaje: siete sets, cada uno con su luz, en una sola atmósfera.
 
-## La historia
-*No se está tan mal* habla de aceptarse a uno mismo. La directora quería una "burbuja": un espacio protegido donde el artista pudiera mostrarse vulnerable sin perder fuerza.
+## El proyecto
+Una canción sobre aceptarse a uno mismo. La directora pedía una "burbuja" visual donde el artista pudiera mostrarse vulnerable sin perder fuerza.
 
-## Mi papel
-Dirección de fotografía y montaje. Primero diseñé la luz de cada set; después, en montaje, uní los siete en un solo recorrido.
-
-## Cómo lo hicimos
-- **Luz puntual, no plana:** contraluces marcados, destellos suaves y puntos de luz concretos que envuelven al artista.
-- **Cristal y agua:** reflejos y refracciones para dar textura a la imagen.
-- **Siete sets, siete esquemas:** construimos y rodamos siete escenarios, cada uno con su propio esquema de luz.
-- **Montaje:** al saltar de un set a otro mantengo el ritmo del videoclip sin romper la atmósfera.
-- **Cámara:** Sony FX3 con ópticas Tamron.
+## Decisiones clave
+- **Luz puntual en vez de plana**: contraluces, destellos suaves y puntos de luz que envuelven al artista.
+- **Cristal y agua** para dar textura con reflejos y refracciones.
+- **Un esquema de luz por set**, y un montaje que enlaza los siete sin romper el ritmo.
 
 ## El reto
 Que siete espacios distintos se sintieran como un mismo lugar emocional.
 
+## Lo que demuestra
+Sé diseñar luz para varios decorados y mantener la coherencia en el montaje.
+
 ## Para revisar con Josep (no se publica)
 - Año de estreno y visualizaciones, si quieres citarlas.
-- ¿Cuántos días para los siete sets? ¿Qué fuentes usaste para los destellos y contraluces?
+- ¿Cuántos días para los siete sets? ¿Con qué fuentes hiciste destellos y contraluces?

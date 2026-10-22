@@ -15,29 +15,25 @@ estado: borrador
 ---
 
 ## Tarjeta
-Corto de ciencia ficción en los años 50, mi proyecto final del ciclo de Realización. Idea, guion, dirección y fotografía, con un equipo de cuatro personas. Más de 22.000 visualizaciones en YouTube.
+Corto de ciencia ficción en los años 50, mi proyecto final del ciclo de Realización. Cuatro personas de equipo. Más de 22.000 visualizaciones.
 
-## La historia
-Pedro, un relojero obsesivo de los años 50, construye una máquina del tiempo. Altera el futuro, le sale mal, y su yo del futuro vuelve para advertirle.
+## El proyecto
+Un relojero obsesivo construye una máquina del tiempo y su yo del futuro vuelve para advertirle. Idea, guion, dirección y fotografía míos. Equipo: Alba Gisbert, Sebastian Alonso Pérez, Mar Garrido, Lara Ruiz Martín y Andreu Pastor. Música de David Bellido y Jesús Jiménez.
 
-## Mi papel
-Idea original, guion, dirección y dirección de fotografía.
-
-Equipo: Alba Gisbert (ayudante de dirección), Sebastian Alonso Pérez, Mar Garrido y Lara Ruiz Martín (actores) y Andreu Pastor (sonido). Música original de David Bellido y Jesús Jiménez.
-
-## Cómo lo hicimos
-- **Los 50 sin presupuesto:** un apartamento antiguo y atrezo sacado de casas de familiares, como un teléfono de mesa y una radio.
-- **La máquina, hecha a mano:** la construimos desde cero, con manivela que funciona, engranajes y tuberías.
-- **La bombilla como luz principal:** en las escenas de la máquina, clave baja con la bombilla de la propia máquina como fuente. Es creíble y sube la tensión.
-- **Música:** inspirada en Ludwig Göransson (*Oppenheimer*), con un "clic de reloj" que recorre todo el corto.
-- **Cámara:** Canon C200 con un 50 mm fijo.
+## Decisiones clave
+- **Los 50 sin presupuesto**: apartamento antiguo y atrezo de casas de familiares.
+- **Máquina hecha a mano**, con manivela, engranajes y tuberías que funcionan.
+- **La bombilla de la máquina como luz principal**, en clave baja.
+- **Música con un clic de reloj** que recorre todo el corto. Cámara: Canon C200 con un 50 mm fijo.
 
 ## El reto
-Hacer creíble una máquina del tiempo sin dinero. Por eso la construimos con piezas que funcionan: el actor la toca y responde en el plano.
+Hacer creíble una máquina del tiempo sin dinero.
 
-## El resultado
-- Más de 22.000 visualizaciones en YouTube.
-- Final abierto, con la puerta a una secuela que me gustaría rodar.
+## Resultado
+Más de 22.000 visualizaciones en YouTube. Final abierto, con puerta a una secuela.
+
+## Lo que demuestra
+Puedo resolver con ingenio lo que otros resolverían con presupuesto.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

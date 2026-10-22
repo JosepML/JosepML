@@ -15,26 +15,25 @@ estado: borrador
 ---
 
 ## Tarjeta
-Una escena de *Nosferatu* recreada con Comboi Films usando cartón, una rampa de madera y un soplador de hojas.
+Una escena de *Nosferatu* recreada con Comboi Films, con cartón, una rampa de madera y un soplador de hojas.
 
-## La historia
-En mi canal recreo planos de cine con muy pocos medios. Aquí, la sombra del vampiro en la ventana y la protagonista que levita.
+## El proyecto
+En mi canal recreo planos de cine con muy pocos medios. Aquí, la sombra del vampiro en la ventana y la protagonista que levita. Yo dirigí y coordiné.
 
-## Mi papel
-Dirección y coordinación general: planifiqué cada toma y coordiné el equipo junto a Comboi Films.
-
-## Cómo lo hicimos
-- **La sombra:** silueta y mano de Nosferatu en cartón y cinta, escaladas para que la sombra encajara en la ventana. Un spotlight, a distancia y ángulo medidos, la proyecta nítida sobre la cortina.
-- **Luz general:** Aputure 300D con softbox.
-- **La levitación:** una rampa de madera bajo la actriz, que mantiene el cuerpo tenso. El ángulo de cámara y la luz esconden la rampa.
-- **Arte:** cuadros del lugar parecidos a los de la escena original.
+## Decisiones clave
+- **Sombra de cartón y cinta**, escalada para encajar en la ventana y proyectada con un spotlight a distancia y ángulo medidos.
+- **Levitación con rampa de madera**, escondida por el ángulo y la luz.
+- **Luz general**: Aputure 300D con softbox.
 
 ## El reto
-La cortina tenía que moverse con el viento y esa noche no soplaba nada. Con hilos y cartones el movimiento se veía falso. Lo resolvimos con un soplador de hojas, que dejaba dosificar el "viento", y con hilos finos que movían la silueta al compás de la cortina.
+La cortina debía moverse con el viento y esa noche no soplaba. Hilos y cartones no funcionaron; un soplador de hojas dio el viento dosificable, y hilos finos movían la silueta al compás.
 
-## El resultado
-Un plano muy parecido al original, con unos 100 € de material.
+## Resultado
+Un plano muy parecido al original con unos 100 € de material.
+
+## Lo que demuestra
+Resuelvo problemas de rodaje sobre la marcha sin perder la imagen buscada.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
-- Imagen del plano original para el deslizador antes/después.
+- Imagen del plano original para el antes/después.
