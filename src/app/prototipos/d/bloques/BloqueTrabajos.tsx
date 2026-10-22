@@ -10,6 +10,7 @@ import { RAIZ } from "../rutas";
 import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
 import { img } from "../../_comun/imagen";
 import { MASCARA_BORDE } from "./BloqueServicios";
+import { CURVA_VIAJE } from "@/styles/movimiento";
 
 const FILTROS = [{ slug: "todos", nombre: "Todos" }, ...SERVICIOS.map((s) => ({ slug: s.slug, nombre: s.nombre }))];
 
@@ -171,7 +172,7 @@ function Carrusel({
       el.style.scrollSnapType = "none";
       viaje.current = animate(el.scrollLeft, destino, {
         duration: 0.6,
-        ease: [0.65, 0, 0.25, 1],
+        ease: CURVA_VIAJE,
         onUpdate: (v) => {
           el.scrollLeft = v;
         },

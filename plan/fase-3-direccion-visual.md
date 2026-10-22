@@ -220,6 +220,29 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - **Índice lateral:** al llegar a la última sección (o al final de la página) se despliega solo con los nombres de todas las secciones y el titular "¿Quieres volver a algo?", en cascada; al subir se repliega. Entre 1024 y 1440 px el contenido de las secciones deja sitio a la izquierda para que el índice no tape los titulares (regla al final de `cristal.css`).
 - **Ficha de proyecto:** los fotogramas pasan a una cuadrícula de miniaturas (2 a 4 columnas) y al pulsar se abre un visor a pantalla completa (`Visor.tsx`): fondo oscuro, contador, flechas, teclado (← → Esc), deslizar con el dedo, foto a 3840 px con las vecinas precargadas y cierre con fundido. Fuera el bloque "Del LOG al color".
 
+### 2026-10-22 · Tokens de diseño y piezas reutilizables (tarea A)
+
+- La línea pequeña de la llamada final ("Te respondo personalmente…") va acotada y centrada, para que el índice lateral desplegado no la tape en pantallas estrechas.
+- **Tokens definitivos en `src/styles/tokens.css`:** colores de claro y oscuro (según `data-tema`), marca, letras, escala de texto, radios, sombras, curvas y duraciones. Las curvas y duraciones para motion están en `src/styles/movimiento.ts` (`CURVA`, `CURVA_VIAJE`, `DURACION`). El prototipo D ya los usa: `cristal.css` solo da nombres cortos (`--d-*` = `--jm-*`), y `piezas.tsx`, `scrollMagico.ts` y el carrusel leen las curvas de `movimiento.ts`. Se comprobó que no cambia nada visible: capturas idénticas antes y después, y los mismos valores calculados en claro y oscuro.
+
+#### Piezas reutilizables (para pasarlas a `src/components/` en la tarea C)
+
+| Pieza | Qué es | Dónde está |
+| --- | --- | --- |
+| Cristal | Fondo translúcido con brillo en diagonal, borde claro, reflejo arriba y sombra del tema. Sin `backdrop-filter`. `.cristal-fuerte` sí desenfoca, pero solo en lo que flota (menú, editor, índice) | `.cristal` y `.cristal-fuerte` en `src/app/prototipos/d/cristal.css` |
+| Pastilla | Antetítulo o chip de cristal: `rounded-full`, 11 px, mayúsculas, peso 600, tracking 0,16em. Variante "Disponible" con punto verde que late | `Titular` y `Disponible` en `d/piezas.tsx`; `.latido` en `cristal.css` |
+| Botón | Píldora con icono; `.boton-acento` es el rojo con sombra. Leve escala al pasar el ratón (desactivada con "reducir movimiento") | `.boton` y `.boton-acento` en `cristal.css` |
+| Etiqueta | Texto pequeño en mayúsculas para tipo, año y papel, y chip de premio con laurel | `TarjetaCarrusel` y `TarjetaProyecto` en `d/bloques/BloqueTrabajos.tsx`; icono `laurel` en `d/Iconos.tsx` |
+| Titular con palabra de acento | Antetítulo en pastilla, titular grande (`--jm-titular`) y la última palabra en Instrument Serif cursiva con degradado rojo-naranja. Los signos de cierre quedan fuera de la cursiva | `Titular` y `TituloConAcento` en `d/piezas.tsx`; `.d-serif` y `.d-degradado-acento` en `cristal.css` |
+| Tarjeta con foto | Recorte con `clip-path` del mismo radio, fotos que se funden con zoom lento al pasar el ratón, degradado negro abajo y máscara para que la foto no asome por el borde; contenido que se revela entre el título y el enlace | `TarjetaFoto` y `Revelable` en `d/bloques/BloqueServicios.tsx`; `Diapositivas` en `d/piezas.tsx`; `MASCARA_BORDE` |
+| Tarjeta de proyecto | Variante para carrusel (vecinas con velo `--jm-velo-vecina` y versión compacta) y para rejilla (pie de cristal oscuro y foco de luz que sigue al ratón con `[data-foco]`) | `TarjetaCarrusel` y `TarjetaProyecto` en `d/bloques/BloqueTrabajos.tsx` |
+| Aparición al entrar | Fundido y subida de 28 px en 0,9 s con `CURVA` | `Revelar` en `d/piezas.tsx` |
+| Índice lateral | Una marca por sección, nombre al pasar el ratón; al final se despliega con todas las secciones. Entre 1024 y 1440 px el contenido le deja sitio (regla al final de `cristal.css`) | `d/IndiceLateral.tsx` |
+| Scroll mágico | Solo en Inicio: cada gesto lleva a la sección siguiente o anterior, centrada, con `CURVA_VIAJE`; un gesto rápido justo después de llegar se salta una | `d/scrollMagico.ts` (`useScrollMagico`, `deslizarA`, `encuadre`) |
+| Carrusel | Scroll nativo con ajuste (`scroll-snap`), avance propio de 0,6 s con `CURVA_VIAJE`, arrastre con ratón y fondo teñido con el fotograma activo | `Carrusel` en `d/bloques/BloqueTrabajos.tsx` |
+| Visor de fotos | Pantalla completa: flechas, teclado, deslizar con el dedo, contador, foto a 3840 px con las vecinas precargadas | `d/Visor.tsx` |
+| Imagen en calidad alta | Optimizador de Next a calidad 90 y al doble del tamaño en pantalla | `img()` en `src/app/prototipos/_comun/imagen.ts` |
+
 **Pendiente**
 
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).

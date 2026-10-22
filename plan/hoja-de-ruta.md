@@ -26,12 +26,12 @@ Fecha: 2026-10-22. Sustituye al orden de trabajo de las fases 4, 5 y 6 (sus arch
 ## Tareas
 
 ### A · Remates de la dirección visual · Opus · hilo de la fase 3 (en curso)
-- [ ] Selección sin espacio sobrante, para que el scroll quede limpio
-- [ ] Al llegar al final de la página, el índice lateral se despliega como llamada a volver a una sección
-- [ ] Selección bien en modo claro
-- [ ] Ficha: galería en miniaturas con visor a pantalla completa
-- [ ] Ficha: quitar «Del LOG al color»
-- [ ] Fijar los tokens de diseño definitivos (colores, letras, radios, sombras y curvas de movimiento) en `src/styles/tokens.css`, y las piezas reutilizables (cristal, pastilla, tarjeta con foto, botón, etiqueta y titular con palabra de acento) documentadas en `plan/fase-3-direccion-visual.md`
+- [x] Selección sin espacio sobrante, para que el scroll quede limpio
+- [x] Al llegar al final de la página, el índice lateral se despliega como llamada a volver a una sección
+- [x] Selección bien en modo claro
+- [x] Ficha: galería en miniaturas con visor a pantalla completa
+- [x] Ficha: quitar «Del LOG al color»
+- [x] Fijar los tokens de diseño definitivos (colores, letras, radios, sombras y curvas de movimiento) en `src/styles/tokens.css`, y las piezas reutilizables (cristal, pastilla, tarjeta con foto, botón, etiqueta y titular con palabra de acento) documentadas en `plan/fase-3-direccion-visual.md`
 - [ ] Visto bueno de Josep → fase 3 «Hecha»
 
 **Hecho cuando:** Josep da el visto bueno a D y los tokens están en un archivo único que importan las tareas C a K.
@@ -123,3 +123,4 @@ Sigue `plan/fase-7-lanzamiento.md`. Solo con la orden expresa de Josep.
 
 - 2026-10-22: hoja de ruta creada a partir de la revisión de Josep del prototipo D.
 - 2026-10-22 (tarea E): textos en borrador de los 18 proyectos (`plan/contenido/proyectos/`) y los 3 artículos (`plan/contenido/articulos/`), con preguntas para Josep en cada archivo. Pendiente de su revisión en tandas; E sigue sin marcar hasta su visto bueno.
+- 2026-10-22 (tarea A): remates de Selección, índice lateral desplegable y ficha (miniaturas con visor, sin «Del LOG al color»); tokens en `src/styles/tokens.css` y `src/styles/movimiento.ts`, usados ya por el prototipo D; piezas reutilizables documentadas en `plan/fase-3-direccion-visual.md`. Falta el visto bueno de Josep.

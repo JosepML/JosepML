@@ -3,70 +3,43 @@
 
 /* En la capa components para que las utilidades de Tailwind (fixed, absolute...) puedan sobrescribirlas */
 @layer components {
+/* Los valores viven en src/styles/tokens.css (claro y oscuro según data-tema, que lleva este mismo
+   elemento): aquí solo se les da el nombre corto que usa el prototipo */
 .d-raiz {
-  --d-fondo: #09090b;
-  --d-fondo-2: #121214;
-  --d-texto: #f5f5f7;
-  --d-suave: rgba(245, 245, 247, 0.62);
-  --d-tenue: rgba(245, 245, 247, 0.38);
-  /* Escala de luminancia de "Han confiado en mí": titular 100 %, clientes 82 %, marca JUNO 74 %,
-     antetítulos y frase 58 %, marcas de JUNO 52 %, líneas 12 % */
-  --d-cliente: rgba(245, 245, 247, 0.82);
-  --d-juno: rgba(245, 245, 247, 0.74);
-  --d-ante: rgba(245, 245, 247, 0.58);
-  --d-medio: rgba(245, 245, 247, 0.52);
-  --d-linea: rgba(245, 245, 247, 0.12);
-  --d-logo-opacidad: 0.82;
-  --d-acento: #e50914;
-  --d-calido: #ff8a3d;
-  --d-cristal: rgba(255, 255, 255, 0.06);
-  --d-cristal-base: rgba(255, 255, 255, 0.05);
-  --d-cristal-fuerte: rgba(30, 30, 34, 0.6);
-  --d-borde: rgba(255, 255, 255, 0.12);
-  --d-reflejo: rgba(255, 255, 255, 0.22);
-  --d-sombra: 0 30px 60px -30px rgba(0, 0, 0, 0.7);
-  /* Velo que apaga las tarjetas vecinas de Selección */
-  --d-velo-vecina: 0.6;
-  --d-orbe-a: rgba(229, 9, 20, 0.4);
-  --d-orbe-b: rgba(255, 138, 61, 0.28);
-  --d-orbe-c: rgba(120, 80, 255, 0.18);
-  --d-curva: cubic-bezier(0.22, 1, 0.36, 1);
+  --d-fondo: var(--jm-fondo);
+  --d-fondo-2: var(--jm-fondo-2);
+  --d-texto: var(--jm-texto);
+  --d-suave: var(--jm-suave);
+  --d-tenue: var(--jm-tenue);
+  --d-cliente: var(--jm-cliente);
+  --d-juno: var(--jm-juno);
+  --d-ante: var(--jm-ante);
+  --d-medio: var(--jm-medio);
+  --d-linea: var(--jm-linea);
+  --d-logo-opacidad: var(--jm-logo-opacidad);
+  --d-acento: var(--jm-acento);
+  --d-calido: var(--jm-calido);
+  --d-cristal: var(--jm-cristal);
+  --d-cristal-base: var(--jm-cristal-base);
+  --d-cristal-fuerte: var(--jm-cristal-fuerte);
+  --d-borde: var(--jm-borde);
+  --d-reflejo: var(--jm-reflejo);
+  --d-sombra: var(--jm-sombra);
+  --d-velo-vecina: var(--jm-velo-vecina);
+  --d-orbe-a: var(--jm-orbe-a);
+  --d-orbe-b: var(--jm-orbe-b);
+  --d-orbe-c: var(--jm-orbe-c);
+  --d-curva: var(--jm-curva);
   background: var(--d-fondo);
   color: var(--d-texto);
   /* Montserrat (next/font, en prototipos/layout.tsx); Inter de la base como respaldo */
-  font-family: var(--font-base), var(--font-sans-face), system-ui, sans-serif;
+  font-family: var(--jm-letra);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  color-scheme: dark;
-}
-
-.d-raiz[data-tema="claro"] {
-  --d-fondo: #f5f5f7;
-  --d-fondo-2: #ffffff;
-  --d-texto: #1d1d1f;
-  --d-suave: rgba(29, 29, 31, 0.64);
-  --d-tenue: rgba(29, 29, 31, 0.42);
-  --d-cliente: rgba(29, 29, 31, 0.82);
-  --d-juno: rgba(29, 29, 31, 0.76);
-  --d-ante: rgba(29, 29, 31, 0.6);
-  --d-medio: rgba(29, 29, 31, 0.54);
-  --d-linea: rgba(29, 29, 31, 0.12);
-  --d-logo-opacidad: 0.82;
-  --d-cristal: rgba(255, 255, 255, 0.55);
-  --d-cristal-base: rgba(255, 255, 255, 0.62);
-  --d-cristal-fuerte: rgba(255, 255, 255, 0.75);
-  --d-borde: rgba(255, 255, 255, 0.9);
-  --d-reflejo: rgba(255, 255, 255, 0.9);
-  --d-sombra: 0 30px 70px -30px rgba(40, 30, 20, 0.28);
-  --d-velo-vecina: 0.3;
-  --d-orbe-a: rgba(229, 9, 20, 0.2);
-  --d-orbe-b: rgba(255, 138, 61, 0.26);
-  --d-orbe-c: rgba(120, 80, 255, 0.14);
-  color-scheme: light;
 }
 
 .d-serif {
-  font-family: var(--font-acento), Georgia, serif;
+  font-family: var(--jm-letra-acento);
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.01em;

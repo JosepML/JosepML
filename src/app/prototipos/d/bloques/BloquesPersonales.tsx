@@ -268,7 +268,8 @@ export function BloqueLlamada({ bloque, preseleccion = [] }: { bloque: Bloque; p
                 WhatsApp
               </a>
             </div>
-            <p className="mt-6 text-xs text-[var(--d-tenue)]">
+            {/* Ancho de lectura acotado y centrado: así no queda bajo el índice lateral desplegado en pantallas estrechas */}
+            <p className="mx-auto mt-6 max-w-md text-xs leading-relaxed text-[var(--d-tenue)] [text-wrap:balance]">
               Te respondo personalmente, normalmente en menos de 24 horas. En la web final habrá también un formulario corto que
               se guarda en tu panel.
             </p>

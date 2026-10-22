@@ -3,7 +3,7 @@
 import { animate } from "motion/react";
 import { useEffect } from "react";
 
-const CURVA_SCROLL = [0.65, 0, 0.25, 1] as const;
+import { CURVA_VIAJE as CURVA_SCROLL } from "@/styles/movimiento";
 const DURACION = 1.05;
 /** Un gesto que llega justo después de terminar un viaje cuenta como "voy con prisa" */
 const MARGEN_PRISA = 450;

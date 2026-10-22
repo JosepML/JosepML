@@ -6,7 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { Icono } from "./Iconos";
 import { img } from "../_comun/imagen";
 
-export const CURVA = [0.22, 1, 0.36, 1] as const;
+export { CURVA } from "@/styles/movimiento";
+import { CURVA } from "@/styles/movimiento";
 
 /** Aparece al entrar en pantalla: fundido, leve subida y desenfoque que se aclara. */
 export function Revelar({
