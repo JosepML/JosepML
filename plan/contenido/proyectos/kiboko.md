@@ -15,28 +15,28 @@ estado: borrador
 ---
 
 ## Tarjeta
-Un documental híbrido sobre el bar Kiboko, La Vila Joiosa, y la generación de los 80 que lo hizo libre.
+Documental híbrido sobre el bar Kiboko (La Vila Joiosa, años 80). Yo hice el montaje. Estreno con aforo completo en junio de 2026.
 
 ## La historia
-*Kiboko* es una docuficción que viaja a La Vila Joiosa de los 80, al mítico bar Kiboko: un refugio de libertad, música y vanguardia en tiempos convulsos. La película lo cuenta a través de Ana, una cronista ficticia que investiga la historia del local en el presente. Pasado y presente se funden para rendir homenaje a una generación que desafió los prejuicios y construyó otra forma de vivir.
-
-Lo dirigieron y produjeron Noelia Fluxá y Julie-Estel Soard. Mi parte fue la edición, y ahí estaba el gran reto: una cantidad enorme de material que había que convertir en un solo relato.
+*Kiboko* es una docuficción dirigida y producida por Noelia Fluxá y Julie-Estel Soard (JUNO Media). Cuenta la historia del bar Kiboko, un refugio de libertad, música y vanguardia en La Vila Joiosa en los años 80. Lo hace a través de Ana, una cronista ficticia que investiga el local hoy.
 
 ## Mi papel
-Me encargué de la edición. Tuve que construir un relato coherente que entrelazara muchas entrevistas reales con escenas de ficción y la voz en off de Ana. El objetivo en la sala de montaje fue que el paso del testimonio documental a la narrativa de cine fluyera con naturalidad, sin perder la emoción.
+**Montaje.** Tenía que combinar tres materiales en un solo relato:
+- Entrevistas reales a quienes vivieron el Kiboko.
+- Escenas de ficción recreadas.
+- La voz en off de la protagonista.
 
 ## Cómo lo hicimos
-**Un híbrido narrativo.** El desafío mayor fue el equilibrio entre realidad y ficción. Trabajé el montaje para que los testimonios de quienes vivieron el Kiboko original dialogaran de forma orgánica con la historia de la cronista, sin que el relato perdiera el foco.
-
-**Gestionar la complejidad.** Había una cantidad enorme de material. Sincronizar, cribar y estructurar horas de entrevistas junto con la escenografía de ficción y la música exigió un flujo de trabajo muy riguroso. El mensaje de libertad y resistencia colectiva no podía diluirse entre los saltos temporales.
-
-**Ritmo y nostalgia.** Para llevar al espectador a 1986, el montaje tuvo que ajustarse al pulso de la época. Las escenas recreadas del bar piden un ritmo vibrante, apoyado en la banda sonora, que contrasta con los momentos más íntimos de las entrevistas.
+- **Equilibrio realidad/ficción:** los testimonios dialogan con la trama de la cronista sin que el relato pierda el foco.
+- **Volumen de material:** sincronizar, cribar y estructurar horas de entrevistas junto a la ficción y la música, con un flujo de trabajo muy ordenado.
+- **Ritmo:** las escenas del bar (1986) llevan un montaje vibrante apoyado en la banda sonora. Las entrevistas, un ritmo más pausado.
 
 ## El reto
-Equilibrar dos lenguajes que no siempre se llevan bien: el testimonio real, que necesita pausa, y la ficción, que necesita ritmo. Encontrar ese punto medio fue el trabajo más delicado del proyecto.
+Pasar del testimonio documental a la ficción sin que se note el salto ni se pierda la emoción.
 
 ## El resultado
-El documental tuvo su estreno con aforo completo en el Teatre Auditori de La Vila Joiosa, el 6 de junio de 2026. Después llegaron selecciones en festivales y una nominación a mejor montaje.
+- Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa (6 de junio de 2026).
+- Selecciones en festivales y nominación a mejor montaje.
 
 ## Para revisar con Josep (no se publica)
 - Nombres de los festivales de selección y el de la nominación a mejor montaje (no aparecen en internet).

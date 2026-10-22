@@ -15,26 +15,26 @@ estado: borrador
 ---
 
 ## Tarjeta
-Un videoclip sobre aceptarse, construido como una burbuja de luz para que el artista se muestre sin miedo.
+Videoclip de Lovva con 7 sets distintos, cada uno con su luz, unidos en una sola atmósfera.
 
 ## La historia
-*No se está tan mal* es un videoclip para el artista Lovva, dirigido por Ángela Manzano. Es un viaje emocional hacia la aceptación personal y el amor propio. La idea central era construir un espacio visual seguro, una "burbuja" estética donde el artista pudiera mostrar sus emociones con honestidad, entre la vulnerabilidad y el empoderamiento.
+*No se está tan mal* es un videoclip para Lovva, dirigido por Ángela Manzano, sobre la aceptación personal y el amor propio. El concepto era una "burbuja" visual donde el artista pudiera mostrar sus emociones con honestidad.
 
 ## Mi papel
-Tuve una doble función: la dirección de fotografía en el rodaje y la edición en la sala de montaje. La primera parte era materializar desde la cámara esa sensación de intimidad y protección. La segunda, unir muchos escenarios distintos en un flujo rítmico que acompañara la delicadeza de la canción.
+- **Dirección de fotografía.**
+- **Edición.**
 
 ## Cómo lo hicimos
-**La luz como refugio.** En lugar de una iluminación plana, esculpí el espacio con destellos suaves, contraluces marcados y puntos de luz estratégicos. Así envolví al artista en una atmósfera de pureza, que refuerza la idea de burbuja protectora.
-
-**Texturas y refracciones.** Para mostrar la exposición de los sentimientos, jugué con la luz sobre cristales y agua. Esos materiales crean reflejos orgánicos que dan a cada plano una sensibilidad etérea.
-
-**Siete mundos, una sola obra.** Llegamos a rodar hasta siete sets distintos, cada uno con su esquema de luz complejo. En el montaje, mi tarea fue sincronizar esos universos para que el salto de un espacio a otro mantuviera el dinamismo de un videoclip sin romper la atmósfera íntima.
+- **Luz:** en lugar de luz plana, destellos suaves, contraluces marcados y puntos de luz concretos.
+- **Texturas:** reflejos y refracciones en cristal y agua.
+- **7 sets:** construimos y rodamos hasta siete escenarios, cada uno con un esquema de luz propio.
+- **Montaje:** sincronicé los siete mundos para que el salto entre ellos mantuviera el ritmo de videoclip sin romper la atmósfera.
 
 ## El reto
-Sostener una sola emoción a lo largo de muchos espacios. Cada set tenía su luz, y cada cambio tenía que sentirse como una misma historia.
+Mantener una misma emoción a lo largo de siete espacios distintos.
 
 ## El resultado
-El videoclip consigue que la intimidad no se rompa aunque cambie el escenario. Lo que más me gusta es que la luz hace el trabajo emocional sin necesidad de subrayarlo.
+Un videoclip donde la intimidad se sostiene de principio a fin. Proyecto propio, sin productora.
 
 ## Para revisar con Josep (no se publica)
 - Año de estreno.

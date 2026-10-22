@@ -15,26 +15,33 @@ estado: borrador
 ---
 
 ## Tarjeta
-Un corto de 30 días sobre el cine, la memoria y las ganas de seguir.
+Corto escrito, rodado y montado en 30 días para el ESCAC Dreammakers Contest 2024 de Cupra. Subió al podio.
 
 ## La historia
-Hay concursos que se ganan y concursos que te cambian el año. El ESCAC Dreammakers Contest 2024, de Cupra, fue de los segundos. El reto era escribir, rodar y montar una historia de cine en apenas 30 días, a partir de tres palabras que no tenían nada que ver entre sí: *Ojo*, *Cine* y *Barcelona*.
-
-Durante días di vueltas a esas palabras sin encontrar la manera de unirlas. Hasta que entendí que la única forma honesta de hacerlo era hablar de mí: de mi relación con el cine, de por qué empecé a querer contar historias. Así nació "Y el año que viene, ¿qué?", un corto íntimo que es también un retrato de mi propio camino.
+El ESCAC Dreammakers Contest 2024, de Cupra, pedía un cortometraje en 30 días a partir de tres palabras: *Ojo*, *Cine* y *Barcelona*. La única forma de unirlas sin que sonara forzado era hablar de mí: de mi relación con el cine. El resultado es un corto personal, con voz en off y un montaje muy rápido.
 
 ## Mi papel
-Fue un proyecto de "hombre orquesta". Me encargué de casi todo: escribí la idea, dirigí, llevé la fotografía, monté el corto y, además, actué en el papel protagonista. Contar con el apoyo de Adrià Mira Lozano y Lara Ruiz Martín fue clave para que pudiera hacerse realmente.
+Lo hice casi todo:
+- **Guion:** la idea y el texto.
+- **Dirección:** visión artística y dirección en el set.
+- **Dirección de fotografía.**
+- **Montaje.**
+- **Actor protagonista.**
+
+Con el apoyo de Adrià Mira Lozano y Lara Ruiz Martín.
 
 ## Cómo lo hicimos
-La narración parte de una voz en off muy cercana, en el estilo de *Amélie*: un viaje introspectivo que guía al espectador por dentro del personaje. Para que la voz tuviera calidez, el montaje se fue por el lado contrario: un ritmo muy rápido, con cortes nerviosos que siguen la energía de la pasión por el cine que el corto cuenta.
-
-En la luz, la idea era que cada plano dijera algo sin necesidad de explicarlo. Como fotógrafo, pensaba cada encuadre en función de la voz y del montaje, porque en un proyecto así las tres cosas se deciden a la vez.
+- **Narración:** voz en off cálida que guía al espectador por dentro del personaje, con *Amélie* como referencia.
+- **Montaje:** ritmo muy acelerado, para contrastar con la calma de la voz.
+- **Imagen:** planifiqué los encuadres a la vez que la voz y el montaje, porque en un corto de este tamaño las tres cosas se deciden juntas.
 
 ## El reto
-El tiempo. Idear, grabar, editar y terminar el corto en 15 días fue una carrera contra el reloj. Me enseñó a tomar decisiones rápido, a priorizar y a mantener la calma cuando todo aprieta. Y me demostró que, con la dedicación adecuada, los plazos ajustados también pueden dar buen cine.
+El plazo. Idear, grabar, editar y entregar en unos 15 días obliga a decidir rápido, a descartar lo accesorio y a quedarse solo con lo que cuenta la historia.
 
 ## El resultado
-El corto subió al podio del concurso y me abrió la puerta a becas de la ESCAC, una de las escuelas de cine más importantes de España. Pero lo que más me llevo es la satisfacción personal de haberlo hecho, y las lecciones que dejó. Y una confirmación: aunque lo hice casi todo yo, el cine sigue siendo un trabajo de equipo.
+- Podio del ESCAC Dreammakers Contest 2024.
+- El premio me abrió la puerta a becas de la ESCAC.
+- Aprendizaje: aunque lo hice casi todo yo, en cine al final todo es trabajo de equipo.
 
 ## Para revisar con Josep (no se publica)
 - ¿Hay alguna anécdota del rodaje o una frase de los créditos que quieras contar?

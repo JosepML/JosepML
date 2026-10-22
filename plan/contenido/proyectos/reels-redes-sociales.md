@@ -15,26 +15,25 @@ estado: borrador
 ---
 
 ## Tarjeta
-Reels verticales para creadores, marcas de entretenimiento y entidades sociales. Cada uno con su ritmo.
+Reels verticales para Disney, el Consell Valencià de la Joventut y creadores de YouTube. Cientos de miles de visualizaciones entre todos.
 
 ## La historia
-Las redes sociales tienen un lenguaje propio: rápido, magnético y en constante cambio. Con más de nueve años creando contenido digital, he producido y editado muchísimos vídeos pensados para impactar desde el primer segundo, para detener el scroll. Cada cliente tiene su tono, y mi trabajo es encontrarlo.
+Reels y shorts verticales para clientes muy distintos: creadores y YouTubers, marcas de entretenimiento como Disney y entidades como el Consell Valencià de la Joventut. Más de nueve años creando contenido digital, con cientos de miles de visualizaciones entre las piezas.
 
 ## Mi papel
-Me encargo de la grabación y la edición de contenido vertical, pensado solo para el móvil. He trabajado con perfiles muy distintos: creadores y YouTubers, marcas de entretenimiento de la talla de Disney y entidades institucionales y sociales como el Consell Valencià de la Joventut.
+- **Grabación** de contenido vertical.
+- **Edición.**
 
 ## Cómo lo hicimos
-**El gancho.** En un reel, los tres primeros segundos deciden el resultado. Coloco el concepto más potente o la imagen más llamativa al inicio, para captar la atención desde el principio.
-
-**Ritmo sin pausas.** Uso cortes al ritmo de la música, zooms digitales casi invisibles y un diseño sonoro con transiciones y efectos, para que el ojo no tenga ningún punto muerto.
-
-**Cada marca, su identidad.** El proceso cambia según el cliente. Ajusto la luz, el etalonaje, la tipografía de los subtítulos y el tono del montaje. Para un creador busco frescura; para una marca de entretenimiento, magia; para una entidad, claridad.
+- **Gancho:** lo más potente va en los tres primeros segundos.
+- **Ritmo:** cortes a tiempo con la música, zooms digitales y diseño sonoro.
+- **Identidad del cliente:** cambio la luz, el etalonaje, la tipografía de los subtítulos y el tono según quien sea: frescura para un creador, magia para una marca de entretenimiento, claridad para una entidad.
 
 ## El reto
-Que el mismo lenguaje sirva para perfiles tan distintos sin perder la identidad de cada uno.
+Adaptarme a perfiles muy distintos sin perder el ritmo propio de cada plataforma.
 
 ## El resultado
-Piezas de muestra en Instagram y YouTube Shorts: un reel para el Consell Valencià de la Joventut, una publicidad para Disney, reels para creadores de YouTube y reels cinematográficos. Entre todas suman cientos de miles de visualizaciones.
+Piezas de muestra en Instagram y YouTube Shorts: reel del Consell, publicidad para Disney, reels para creadores y reels cinematográficos.
 
 ## Para revisar con Josep (no se publica)
 - Permiso de Disney y del Consell para mostrar sus nombres y sus piezas.

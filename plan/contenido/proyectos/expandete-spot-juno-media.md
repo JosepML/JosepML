@@ -15,28 +15,28 @@ estado: borrador
 ---
 
 ## Tarjeta
-El primer spot para JUNO Media: una historia de una niña con ideas infinitas y un vecino con el bloqueo creativo.
+Primer spot para JUNO Media, con guion, casting y localizaciones míos. No se ha comercializado.
 
 ## La historia
-Este proyecto nació con un objetivo: crear el primer spot publicitario para JUNO Media. La prioridad era transmitir su filosofía, hacer "cine para sanar" y contar historias de alta calidad cinematográfica. Queríamos una pieza emotiva, inspirada en las grandes campañas que se apoyan en ideas universales, y que conectara tanto con empresas como con artistas.
+El objetivo era transmitir la filosofía de JUNO Media, "cine para sanar", en un spot narrativo y emotivo. La historia: Juno, una niña con ideas infinitas (la esencia de la productora), y su vecino, un adulto con bloqueo creativo (el cliente). JUNO Media le ayuda a desbloquearlas.
 
 ## Mi papel
-Asumí la dirección, la producción y la postproducción. Me ocupé de todo el planteamiento: la idea original, el guion, el casting, la búsqueda de localizaciones y el montaje final. Trabajé mano a mano con Juanfran Jiménez, director de fotografía, para coordinar el rodaje y que la imagen acompañara el tono mágico que pedía la historia.
+- **Dirección y producción.**
+- **Guion, casting y búsqueda de localizaciones.**
+- **Montaje y postproducción.**
+
+Dirección de fotografía: Juanfran Jiménez, con quien coordiné el rodaje.
 
 ## Cómo lo hicimos
-**Una metáfora.** La historia gira en torno a la imaginación. Juno es una niña con ideas infinitas que representa la esencia de la productora, y su vecino es un adulto con un bloqueo creativo que representa al cliente. La trama muestra cómo JUNO Media interviene para desbloquear y expandir esas ideas atrapadas.
-
-**Tres actos sin spoilers.** El spot se estructura en tres actos para que el espectador se meta en la historia sin saber que es publicidad hasta el final. El giro final muestra a las fundadoras de la productora, Noelia Fluxà y Julie-Estel Soard, cerrando el círculo narrativo.
-
-**Localizaciones con sentido.** El mayor reto logístico fue encontrar dos viviendas enfrentadas, con la habitación de la niña y el estudio del adulto conectados visualmente por una ventana. Esa disposición era clave para contar la relación entre los personajes.
-
-**Casting.** La protagonista infantil fue Amaia Miranda, con experiencia que dio agilidad a un rodaje intensivo. Mezclar actores profesionales con las fundadoras reales de la marca dio al resultado una capa extra de autenticidad.
+- **Estructura:** tres actos. El espectador no sabe que es publicidad hasta el giro final, donde aparecen las fundadoras, Noelia Fluxà y Julie-Estel Soard.
+- **Localizaciones:** dos viviendas enfrentadas, con la habitación de la niña y el estudio del adulto conectados por una ventana.
+- **Casting:** la actriz infantil Amaia Miranda, por su experiencia en rodajes intensivos, y las fundadoras reales de la marca.
 
 ## El reto
-Encontrar el entorno perfecto que la historia necesitaba, y hacerlo dentro de los plazos de un rodaje intensivo.
+Encontrar las dos viviendas que la historia necesitaba.
 
 ## El resultado
-El spot no se ha comercializado como campaña, así que no es público fuera de esta web. Queda aquí como muestra de dirección y de narrativa para marcas.
+El spot no se ha comercializado. Queda aquí como muestra de dirección, producción y narrativa para marcas.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

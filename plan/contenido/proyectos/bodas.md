@@ -15,24 +15,25 @@ estado: borrador
 ---
 
 ## Tarjeta
-Bodas filmadas como películas: un tráiler documental que se puede volver a ver sin perder el interés.
+Bodas montadas como un tráiler documental de unos 20 minutos, con música elegida con cada pareja. Solo fotogramas.
 
 ## La historia
-He tenido el placer de acompañar a muchas parejas en su gran día. Mi enfoque es convertir un evento personal en una obra de cine que dure. Quiero capturar la esencia de la celebración con una mirada profesional y cercana, sin que nadie sienta que está delante de una cámara.
+He grabado muchas bodas. En lugar del vídeo convencional, trabajo con una película principal en formato "tráiler documental" de unos 20 minutos.
 
 ## Mi papel
-Me encargo de la cobertura completa y de la edición de la pieza. Mi objetivo es que los novios se olviden de la cámara, para que los momentos sean auténticos, y después darles forma en un montaje que respire la misma emoción que se vivió ese día.
+- **Cobertura completa** del día.
+- **Edición.**
 
 ## Cómo lo hicimos
-**Un tráiler documental.** Huyo del vídeo de boda convencional. La película principal es un "tráiler documental" de unos 20 minutos: ágil, emocionante y dinámico, para que se pueda ver una y otra vez.
-
-**La música como alma.** Hago una selección musical pensada para cada pareja, y cada transición y cada acorde se ajustan al gusto de los novios y al ritmo de las imágenes. Esa precisión rítmica es lo que convierte el vídeo en una experiencia de cine, hecha a medida.
+- **Cobertura discreta:** el objetivo es que los novios se olviden de la cámara, para captar momentos reales.
+- **Tráiler documental:** montaje ágil y dinámico, pensado para verse varias veces.
+- **Música:** selección musical a medida de la pareja, con cada transición ajustada al ritmo de las imágenes.
 
 ## El reto
-Estar en todos los momentos sin estorbar. Una boda tiene muchos instantes que no se repiten, y hay que captarlos con discreción y después saber qué merece entrar en el montaje.
+Estar en los momentos que no se repiten sin molestar.
 
 ## El resultado
-Cada boda termina en una película hecha a medida, con la música elegida por la pareja. Esta ficha muestra solo fotogramas, para respetar la intimidad de los novios. Si quieres ver referencias completas, escríbeme y te las enseño.
+Una película por boda, con música elegida con la pareja. Esta ficha muestra solo fotogramas, por respeto a la intimidad de los novios. Si quieres ver referencias, escríbeme y te las enseño.
 
 ## Para revisar con Josep (no se publica)
 - Las imágenes de la galería llevan el nombre de los novios en el archivo: hay que renombrarlas antes de subirlas, por privacidad.

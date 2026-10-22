@@ -15,26 +15,26 @@ estado: borrador
 ---
 
 ## Tarjeta
-Cobertura de competiciones de élite, del pie de pista al montaje: el esfuerzo del deporte, al borde del asiento.
+Cobertura de carreras como la Shimano Super Cup Massi (La Nucía), con piezas para televisión y para redes.
 
 ## La historia
-El deporte de élite pide una cobertura a la altura del rendimiento de sus atletas. Un buen ejemplo es mi trabajo en la Shimano Super Cup Massi, en La Nucía. En las pruebas de ciclismo, la velocidad y el esfuerzo son los protagonistas, y el reto es captar toda esa energía sin interferir en la carrera.
+Cobertura de pruebas de ciclismo de élite, como la Shimano Super Cup Massi, en La Nucía. Clientes citados: Ocisport y la propia Shimano Super Cup Massi. El reto es captar la velocidad y el esfuerzo sin interferir en la carrera.
 
 ## Mi papel
-Como filmmaker y editor, me encargo de una cobertura integral. Empieza a pie de pista, con una intensidad alta, y sigue en la sala de montaje. Mi objetivo es traducir el esfuerzo, la técnica y la tensión del deporte en piezas que mantengan al espectador al borde del asiento.
+- **Grabación** a pie de pista.
+- **Edición.**
 
 ## Cómo lo hicimos
-**Grabar con intensidad.** Me sitúo en los puntos más críticos del circuito para captar la acción. Uso movimientos rápidos, seguimientos precisos y encuadres cerrados para transmitir la velocidad y el riesgo que viven los deportistas.
-
-**Un pack para TV y redes.** Estructuro la postproducción para entregar contenido en varios formatos. Por un lado, reels y clips frenéticos, pensados para el consumo rápido en redes sociales. Por otro, piezas más largas y detalladas, con calidad de emisión para televisión.
-
-**Montaje adrenalínico.** Sincronizo los cortes más espectaculares con una base musical contundente, y potencio el sonido ambiente: el derrape de las ruedas, el esfuerzo de los corredores, el rugido del público. Así la pieza se siente como estar allí.
+- **Posición:** me coloco en los puntos más espectaculares del circuito.
+- **Cámara:** movimientos rápidos, seguimiento preciso y encuadres cerrados para transmitir la velocidad.
+- **Entregables:** reels y clips cortos para redes y piezas más largas, con calidad de emisión, para televisión.
+- **Montaje:** cortes sincronizados con una base musical fuerte, reforzando el sonido ambiente (ruedas, esfuerzo, público).
 
 ## El reto
-Estar en el sitio correcto en el momento justo, y después convertir horas de carrera en piezas cortas que conserven la tensión.
+Estar en el sitio correcto en el momento justo y mantener la tensión al condensar la carrera.
 
 ## El resultado
-Un pack de piezas de la competición, en formato de televisión y de redes sociales.
+Un pack de piezas en varios formatos, del clip de redes a la pieza para televisión.
 
 ## Para revisar con Josep (no se publica)
 - Año de la competición.
