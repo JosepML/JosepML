@@ -48,6 +48,13 @@ begin
 
   ok := false;
   begin
+    insert into public.proyectos (slug, premios) values ('prueba-premio-sin-nombre', '[{"anio": 2024, "festival": "X"}]');
+  exception when raise_exception then ok := true;
+  end;
+  if not ok then raise exception 'FALLO: se aceptó un premio sin nombre'; end if;
+
+  ok := false;
+  begin
     insert into public.proyectos (slug) values ('Slug Con Espacios');
   exception when check_violation then ok := true;
   end;

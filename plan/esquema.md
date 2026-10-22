@@ -1,0 +1,168 @@
+# Esquema de la base de datos
+
+Proyecto de Supabase: **Web Josep Mira** (`oadmqwtnxpbotxcgzaoo`, eu-west-3). Nunca "JML Studio".
+
+- Migraciones: `supabase/migrations/` (en orden por fecha).
+- Pruebas: `supabase/tests/` (cómo se ejecutan, al final de este documento).
+- Tipos de TypeScript: `src/lib/supabase/tipos.ts` (se regeneran tras cada migración).
+
+## Decisiones y por qué
+
+Revisado por Opus el 2026-10-22 sobre una primera versión hecha con Haiku. La primera versión se borró (estaba vacía; respaldo en `supabase/respaldos/`) porque tenía fallos de base: tipos de bloque distintos de los del prototipo D, servicios fijados a mano en los proyectos, imágenes como URLs sueltas sin integridad, publicar en varios pasos sin transacción ni historial, y traducciones sin vínculo entre ellas.
+
+1. **Borrador y publicado sin tocar la versión en vivo.** Cada fila de contenido tiene `estado` (`borrador` o `publicado`): el público solo ve lo publicado. Lo que Josep edita se autoguarda en la tabla `borradores`, nunca en la fila. Así puede editar un proyecto publicado durante días sin que la web cambie hasta que pulsa Publicar.
+   - *Descartado:* una columna `borrador` dentro de cada tabla. El público puede leer las filas publicadas, y con una política mal escrita leería también los borradores. En una tabla aparte, el público no tiene ni permiso de tabla.
+2. **Publicar es una función de la base de datos (`publicar`), en una sola transacción.** Aplica el borrador, guarda la versión anterior en `revisiones`, sincroniza servicios o bloques, marca como publicado y borra el borrador. Si algo falla, no cambia nada. Si lo hiciera la app en varios pasos, un corte a mitad dejaría la web a medias.
+3. **Historial de versiones (`revisiones`).** Cada publicación guarda la versión anterior (las 30 últimas por fila). `restaurar_revision` la vuelve a poner en el borrador, sin publicar, para que Josep la revise.
+4. **El borrador se valida al guardarlo.** Un trigger rechaza campos que no existen (por ejemplo `precio`) y valores del tipo equivocado (un año con letras), así el error sale al escribir y no al publicar.
+5. **Una página se edita y publica entera.** El borrador de una página contiene la lista completa de sus bloques, en orden. Publicar los crea, cambia, reordena, oculta y borra de golpe. Es lo que pide el modo «Editar página»: Josep mueve secciones, cambia textos y, hasta que pulsa Publicar, la web sigue igual.
+6. **Las imágenes son filas de `medios`, y todo apunta a ellas por id.** Las columnas `*_id` tienen clave foránea: no se puede borrar una imagen en uso. Las listas en JSON (galerías, bloques, artículos) se validan con triggers, y borrar un medio que aparece en ellas da un error que dice dónde se usa. Durante la migración, un medio puede ser una URL externa (`url_origen`); la tarea S2 la descarga, la sube al bucket y rellena `ruta`.
+   - *Contrapartida asumida:* la tabla `medios` la puede leer el público (la web la necesita para pintar las imágenes con su texto alternativo y su tamaño). Una imagen subida para un proyecto aún sin publicar se podría encontrar si alguien busca en la API. Para un portfolio es aceptable; si algún día hace falta, se restringe a los medios en uso por contenido publicado.
+7. **Servicios de cada proyecto en una tabla de unión (`proyecto_servicios`).** Con clave foránea a `servicios`, así un servicio nuevo creado desde el panel funciona sin tocar el esquema. Guarda además el orden y si es destacado *en la página de ese servicio* («Destacados por servicio» de `mapa-de-contenido.md`).
+8. **Tipos de proyecto y categorías del blog son tablas, no listas fijas.** Josep puede añadir una categoría sin migración. `tipos_proyecto.en_listado_general` recoge la regla de que las recreaciones no salen en «Todos».
+9. **Enums para lo que depende del código.** Estados, tipos de bloque y tipos de medio son enums de Postgres: el TypeScript generado da uniones exactas (`'borrador' | 'publicado'`) y el compilador avisa de errores. Añadir un tipo de bloque es una migración, a propósito: cada tipo necesita su componente.
+10. **Varios idiomas, preparado de verdad.** Tabla `idiomas` (con `es` como predeterminado). El contenido traducible tiene `idioma` (con clave foránea) y `grupo`: la fila en español y su traducción comparten `grupo`, y así el selector de idioma encuentra la otra versión. Las claves únicas son por idioma: `(idioma, slug)`.
+11. **Redirecciones automáticas.** Cambiar el slug de algo publicado crea una redirección de la ruta vieja a la nueva (y actualiza las cadenas). Las URLs antiguas con `#` se resuelven con `id_antiguo` (tarea S13).
+12. **Artículos como documento estructurado, no HTML.** `articulos.contenido` es el documento del editor visual (formato ProseMirror/TipTap). La web lo pinta con componentes propios: no hay HTML guardado que pueda inyectar código, y las imágenes del texto apuntan a `medios`. Los vídeos de Instagram se guardan como enlace, no como el HTML de inserción de la web antigua.
+13. **Seguridad en tres capas.** RLS en todas las tablas; permisos de tabla retirados al público donde no debe entrar (`borradores`, `revisiones`, `administradores` y la lectura de `mensajes`); y funciones que comprueban `es_admin()`. `TRUNCATE` (que se salta la RLS) está retirado para todos los roles de la API.
+14. **`es_admin()` sin privilegios elevados.** Es `SECURITY INVOKER`: la RLS de `administradores` deja leer la propia fila. La única función `SECURITY DEFINER` es el freno de mensajes, que no se puede llamar desde la API.
+15. **Una política por rol y acción.** Evita que Postgres evalúe varias políticas en cada lectura (aviso de rendimiento de Supabase) y hace las reglas fáciles de leer.
+16. **Sin precios y sin equipo.** Ninguna tabla tiene precio, tarifa ni tramo de presupuesto, ni tabla de equipos. La cámara va en la ficha de cada proyecto (`camara`).
+
+## Tablas
+
+### Contenido con borrador y publicado
+
+Todas tienen `estado`, `publicado_en` (primera publicación), `creado_en` y `actualizado_en`. Las traducibles tienen también `idioma` y `grupo`.
+
+**`proyectos`**: las fichas de trabajo. Los nombres de los textos son los de la tarea E (`plan/contenido/proyectos/`).
+
+| Campo | Para qué |
+| --- | --- |
+| `slug`, `id_antiguo` | Dirección (`/trabajos/<slug>`) e id de la web antigua, para redirigir enlaces viejos |
+| `titulo`, `tipo_id` | Título y tipo (tabla `tipos_proyecto`) |
+| `anio`, `direccion`, `productora`, `papel`, `camara` | Ficha técnica. `papel` es el corto de la tarjeta («Dirección y montaje»). En los archivos de E: `año`, `productora_cliente` y `mi_papel` de la cabecera |
+| `premios` | Lista: `[{"anio": 2024, "nombre": "Mejor fotografía", "tipo": "ganado", "festival": "..."}]`. `nombre` es obligatorio |
+| `tarjeta`, `historia`, `mi_papel`, `como_lo_hicimos`, `el_reto`, `el_resultado` | Textos (Markdown básico: párrafos, cursiva, negrita). Sección vacía = no se muestra |
+| `titulos_seccion` | Títulos propios de alguna sección: `{"historia": "..."}` |
+| `youtube_id`, `youtube_inicio` | Vídeo principal y segundo en el que empieza el clip de vista previa |
+| `videos`, `videos_debajo_del_texto` | Vídeos extra: `[{"tipo": "youtube" \| "youtube-short" \| "instagram" \| "archivo", "id" \| "url" \| "medio": ..., "titulo": "...", "rol": "proceso"}]` |
+| `imagen_id`, `clip_id`, `video_portada_id` | Póster, clip corto de la tarjeta (mp4) y vídeo de cabecera de la ficha (todos a `medios`) |
+| `galeria`, `detras_de_camaras` | Listas ordenadas: `[{"medio": "<id>", "pie": "..."}]` |
+| `destacado_orden` | Posición en Inicio (1, 2, 3...). Vacío = no sale en Inicio |
+| `orden` | Orden en Trabajos |
+| `seo_titulo`, `seo_descripcion` | SEO |
+
+Los servicios del proyecto están en `proyecto_servicios` (`orden` y `destacado` dentro de la página de cada servicio). En el borrador viajan como `"servicios": ["<id servicio>", ...]`.
+
+**`servicios`**: las páginas de servicio (`/servicios/<slug>`). `nombre`, `frase`, `resumen`, `mirada` (lista de párrafos), `aporto` y `para_quien` (listas de frases), `con_quien`, `pasos` (`[{"titulo", "texto"}]`), `preguntas` (`[{"pregunta", "respuesta"}]`), `llamada`, `imagen_id`, SEO y `orden`.
+
+**`articulos`**: el blog. `slug`, `id_antiguo`, `titulo`, `fecha` (la que se muestra), `extracto`, `contenido` (documento del editor), `categoria_id`, `imagen_id` y SEO.
+
+**`paginas`**: Inicio (`inicio`), Sobre mí, Recreaciones, Contacto, legales y las que Josep cree. `slug`, `titulo`, `imagen_id` (para compartir) y SEO. El contenido está en `bloques`. La página `inicio` no puede cambiar de slug.
+
+**`clientes`**: logos. `nombre`, `logo_id`, `alto_logo` (px), `estilo` (`logo`, `nombre` o `firma`, la cursiva para artistas), `enlace`, `con_juno` (va en «Trabajo en sinergia con JUNO Media») y `orden`. No se traduce.
+
+**`opiniones`**: `texto`, `autor` («Novios»), `contexto` («Vídeo de boda»), `proyecto_id` opcional y `orden`.
+
+**`canales`**: canales de YouTube. `nombre`, `texto`, `url`, `cifra` (suscriptores, si Josep quiere mostrarla) y `orden`.
+
+### Estructura
+
+| Tabla | Para qué |
+| --- | --- |
+| `bloques` | Secciones publicadas de cada página: `pagina_id`, `orden`, `tipo`, `visible`, `datos` |
+| `proyecto_servicios` | Servicios de cada proyecto, con orden y destacado por servicio |
+| `tipos_proyecto` | Cortometraje, Videoclip, Publicidad, Documental, Eventos, Redes sociales y Recreación (cargados) |
+| `categorias_articulo` | Oficio, Dirección de fotografía, Equipo y Detrás de cámaras (cargadas) |
+| `idiomas` | `es` (predeterminado) |
+| `medios` | Biblioteca: `ruta` en el bucket o `url_origen` mientras se migra, `tipo`, `mime`, `bytes`, `ancho`, `alto`, `duracion`, `titulo`, `texto_alternativo` |
+| `redirecciones` | `desde` → `hacia`, automáticas al cambiar un slug publicado |
+| `ajustes` | Clave y valor (ya existía). Cambia al instante, sin borrador |
+
+### Privadas (solo Josep)
+
+| Tabla | Para qué |
+| --- | --- |
+| `administradores` | Quién puede editar: el `user_id` de Josep en Supabase Auth |
+| `borradores` | Cambios sin publicar: `tabla`, `fila_id`, `datos` |
+| `revisiones` | Versiones anteriores a cada publicación |
+| `mensajes` | Formulario de contacto: `nombre`, `correo`, `telefono`, `servicio`, `mensaje`, `origen`, `acepta_privacidad` (siempre sí), `estado` (`nuevo`, `respondido`, `cerrado`) y `notas` de Josep. El público solo puede insertar, con estado `nuevo` y sin notas. Tope de 30 por hora en toda la web (el límite por persona llega con S10) |
+
+## Tipos de bloque
+
+Los once primeros son los del prototipo D (`TipoBloque` en `src/app/prototipos/d/datos.ts`). `galeria`, `video` y `cita` son para páginas libres.
+
+Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo`, `texto` (Markdown básico) e `imagen` (id de `medios`). Los extras de cada tipo los fija la tarea C al pasar cada bloque a componente; esta es la propuesta de partida:
+
+| `tipo` | Qué es | Extras en `datos` | Datos que lee de otras tablas |
+| --- | --- | --- | --- |
+| `portada` | Vídeo a pantalla completa y frase principal | `video`: `{"youtubeId", "inicio", "medio"}` | |
+| `servicios` | Lo que ofrezco | | `servicios` |
+| `filmmaker` | Lo que grabo, con un trabajo de cada tipo | `piezas`: `[{"nombre", "texto", "proyecto": "<id>"}]` | `proyectos` |
+| `trabajos` | Carrusel de proyectos con filtro por servicio | | `proyectos` con `destacado_orden` |
+| `cifras` | Números, premios y canales | `cifras`: `[{"valor", "etiqueta"}]` | `proyectos.premios`, `canales` |
+| `proceso` | Los pasos de un encargo | `pasos`: `[{"titulo", "texto"}]` | |
+| `sobre-mi` | Retrato y presentación | | |
+| `opiniones` | Frases de clientes | | `opiniones` |
+| `clientes` | Logos y apartado JUNO Media | `juno`: `{"titulo", "texto"}` | `clientes` |
+| `blog` | Últimos artículos | `cantidad` | `articulos` |
+| `texto` | Sección libre | | |
+| `llamada` | Invitación a escribir (WhatsApp y correo) | | `ajustes` |
+| `galeria` | Rejilla de imágenes | `imagenes`: `[{"medio", "pie"}]` | |
+| `video` | Un vídeo | `youtubeId` o `medio` | |
+| `cita` | Frase destacada | `autor` | |
+
+## Cómo se usa desde la app (contrato para C y D)
+
+| Acción | Cómo |
+| --- | --- |
+| Leer para la web pública | `select` normal con la clave pública: la RLS ya filtra lo publicado |
+| Autoguardar | `upsert` en `borradores` (`tabla`, `fila_id`, `datos` con solo los campos editados; las listas, completas) |
+| Ver la vista previa | Fila publicada + `borradores.datos` encima |
+| Publicar | `rpc('publicar', { p_tabla, p_id })`, y después `revalidateTag` |
+| Descartar | `rpc('descartar', { p_tabla, p_id })` |
+| Restaurar una versión | `rpc('restaurar_revision', { p_revision })`, y después Publicar |
+| Crear | `insert` con `estado = 'borrador'` y `slug`; el contenido va al borrador |
+| Ocultar o volver a mostrar | `update estado` (al instante) |
+| Reordenar una lista | `update orden` (al instante). Las secciones de una página se reordenan en su borrador |
+
+Campos que viajan en el borrador: todos los de la fila menos `id`, `grupo`, `idioma`, `estado`, `orden`, `publicado_en`, `creado_en` y `actualizado_en`. Además, `servicios` en los proyectos y `bloques` en las páginas (`[{"id", "tipo", "visible", "datos"}]`, en orden; los bloques nuevos llevan un uuid generado en el navegador).
+
+## Seguridad: quién puede qué
+
+| | Público | Con sesión, sin ser admin | Josep (admin) |
+| --- | --- | --- | --- |
+| Contenido con estado | Lee lo publicado | Lee lo publicado | Todo |
+| `bloques`, `proyecto_servicios` | Lee los de lo publicado | Igual | Todo |
+| Catálogos (`idiomas`, `medios`, `tipos_proyecto`, `categorias_articulo`, `redirecciones`), `ajustes` | Lee | Lee | Todo |
+| `mensajes` | Solo envía uno nuevo | Igual | Todo |
+| `borradores`, `revisiones` | Sin permiso | Nada | Todo |
+| `publicar`, `descartar`, `restaurar_revision` | Sin permiso | Error «solo el administrador» | Sí |
+| Bucket `medios` | Ve los archivos por su URL; no puede listar | Igual | Sube, cambia, borra y lista. Máximo 50 MB por archivo; solo imágenes, mp4/webm y pdf |
+
+## Pruebas
+
+`supabase/tests/seguridad_y_publicacion.sql` comprueba la RLS y los permisos como público, como usuario sin permisos y como administrador, la integridad (imágenes en uso, slugs, premios) y el flujo completo (autoguardar, publicar, historial, restaurar, descartar, bloques de página, redirecciones). Todo dentro de una transacción que se deshace: no deja rastro. Si algo falla, se para con un error que empieza por «FALLO».
+
+- **En local** (PostgreSQL 16): `entorno_local.sql`, después las migraciones en orden y por último las pruebas.
+- **En el proyecto real**: con `execute_sql` del MCP de Supabase.
+
+Antes de dar por buena la suite, se comprobó que detecta fallos: abriendo `borradores` al público o haciendo visible un borrador, salta con «FALLO».
+
+## Alta del administrador (una vez)
+
+1. Josep crea su usuario en Supabase: Authentication > Users > **Add user**, con su correo y una contraseña que elige él. La contraseña no se escribe nunca en el repositorio ni en el chat.
+2. Claude añade su `user_id` a `administradores`.
+3. Josep cierra el registro: Authentication > Sign In / Providers > desactivar **Allow new users to sign up**. Mientras tanto no hay riesgo: alguien que se registrara no sería administrador y solo vería lo publicado.
+
+## Historial de migraciones
+
+| Versión | Qué hace |
+| --- | --- |
+| `20261020151832_create_ajustes` | Tabla `ajustes` (fase 1). Reconstruida en el repo a partir de la base |
+| `20261022144748_esquema_inicial` | Primera versión (Haiku). Sustituida |
+| `*_esquema_solido_0_limpiar` | Borra las tablas vacías de la primera versión. La ejecutó Josep en el editor SQL, porque los borrados piden su confirmación |
+| `*_esquema_solido_1_tablas` | Tipos, tablas e índices. RLS activada desde el principio |
+| `*_esquema_solido_2_funciones` | Borradores, publicación, historial, validaciones, redirecciones |
+| `*_esquema_solido_3_seguridad` | Políticas RLS, permisos y almacenamiento |
