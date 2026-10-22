@@ -2,6 +2,18 @@
 
 Estado: **borrador para revisión de Josep**. Cámaras, clientes citables y plataformas ya cargados (2026-10-22). Respuestas de Josep del 2026-10-22 ya aplicadas (podio, 17.000 visualizaciones, spot no comercializado, título de Nosferatu). Josep revisa en tandas de 4 o 5 proyectos. Hasta su visto bueno, los archivos no se cargan en la base de datos.
 
+## Criterio de los textos (revisión de Opus, 2026-10-22)
+
+Cada ficha tiene que servirle a un cliente: qué era, qué hice yo, qué decisiones concretas tomé (luz, cámara, montaje) y por qué, el reto con su solución y el resultado con hechos. Frases cortas y listas.
+
+- **Tarjeta:** qué es, para quién, mi papel y el dato más fuerte. Dos frases como mucho.
+- **Mi papel:** una o dos frases y los créditos del equipo; no repetir en lista lo que ya dice la ficha técnica.
+- **Cómo lo hicimos:** cada punto es una decisión y su efecto. Última línea: la cámara, si está confirmada.
+- **El resultado:** solo hechos (premios, cifras, estrenos). Si no hay ninguno, la sección se deja vacía y no se muestra.
+- Lo que falta para que una ficha informe de verdad está en sus preguntas de «Para revisar».
+
+El prototipo lee estos archivos a través de `src/app/prototipos/d/textos.ts`, que se regenera con `node scripts/textos-prototipo.mjs` (no se edita a mano).
+
 ## Cómo está hecho cada archivo
 
 - **Cabecera (frontmatter):** campos de la ficha técnica que van a `proyectos`. Todo lo que dice `[pendiente]` es un dato que falta; no se publica hasta que Josep lo complete.

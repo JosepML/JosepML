@@ -15,28 +15,27 @@ estado: borrador
 ---
 
 ## Tarjeta
-Primer spot para JUNO Media, con guion, casting y localizaciones míos. No se ha comercializado.
+Spot narrativo para JUNO Media. Escribí el guion, hice el casting y las localizaciones, lo dirigí y lo monté. Pieza de muestra, no comercializada.
 
 ## La historia
-El objetivo era transmitir la filosofía de JUNO Media, "cine para sanar", en un spot narrativo y emotivo. La historia: Juno, una niña con ideas infinitas (la esencia de la productora), y su vecino, un adulto con bloqueo creativo (el cliente). JUNO Media le ayuda a desbloquearlas.
+JUNO Media quería un spot que contara su lema, "cine para sanar", sin que pareciera un anuncio. Escribí una fábula: Juno, una niña con ideas infinitas (la productora), ayuda a su vecino, un adulto bloqueado (el cliente), a liberar las suyas.
 
 ## Mi papel
-- **Dirección y producción.**
-- **Guion, casting y búsqueda de localizaciones.**
-- **Montaje y postproducción.**
-
-Dirección de fotografía: Juanfran Jiménez, con quien coordiné el rodaje.
+Dirección, producción y postproducción: guion, casting, localizaciones y montaje. La fotografía fue de Juanfran Jiménez, con quien preparé el rodaje.
 
 ## Cómo lo hicimos
-- **Estructura:** tres actos. El espectador no sabe que es publicidad hasta el giro final, donde aparecen las fundadoras, Noelia Fluxà y Julie-Estel Soard.
-- **Localizaciones:** dos viviendas enfrentadas, con la habitación de la niña y el estudio del adulto conectados por una ventana.
-- **Casting:** la actriz infantil Amaia Miranda, por su experiencia en rodajes intensivos, y las fundadoras reales de la marca.
+- **El anuncio se descubre al final:** tres actos y, hasta el giro final, nadie sabe que es publicidad. Ahí aparecen las fundadoras reales, Noelia Fluxà y Julie-Estel Soard.
+- **Dos casas frente a frente:** la habitación de la niña y el estudio del adulto se ven a través de una ventana. Esa línea de mirada sostiene la relación entre los dos.
+- **Casting:** Amaia Miranda, actriz infantil con experiencia, para rodar rápido sin perder naturalidad; y las fundadoras haciendo de sí mismas.
+- **Cámara:** Blackmagic Pocket Cinema Camera 6K Pro.
 
 ## El reto
-Encontrar las dos viviendas que la historia necesitaba.
+Las localizaciones. La historia solo funcionaba con dos viviendas enfrentadas cuyas ventanas se vieran entre sí.
 
 ## El resultado
-El spot no se ha comercializado. Queda aquí como muestra de dirección, producción y narrativa para marcas.
+No se llegó a comercializar. Lo enseño como muestra de cómo escribo y dirijo una pieza para una marca.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
+- ¿Cómo encontraste las dos casas (o cómo lo resolviste si no eran enfrentadas)? Es el final que le falta al reto.
+- Ópticas: ¿DZO?

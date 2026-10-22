@@ -15,26 +15,26 @@ estado: borrador
 ---
 
 ## Tarjeta
-Bodas montadas como un tráiler documental de unos 20 minutos, con música elegida con cada pareja. Solo fotogramas.
+Bodas contadas como un tráiler documental de unos 20 minutos, con música elegida con cada pareja. Por privacidad, aquí solo hay fotogramas.
 
 ## La historia
-He grabado muchas bodas. En lugar del vídeo convencional, trabajo con una película principal en formato "tráiler documental" de unos 20 minutos.
+He grabado muchas bodas, siempre con muy buenas valoraciones. No hago el vídeo largo y lineal de siempre: la película principal es un tráiler documental de unos 20 minutos, ágil, que apetece volver a ver.
 
 ## Mi papel
-- **Cobertura completa** del día.
-- **Edición.**
+Cubro el día entero y monto la película.
 
 ## Cómo lo hicimos
-- **Cobertura discreta:** el objetivo es que los novios se olviden de la cámara, para captar momentos reales.
-- **Tráiler documental:** montaje ágil y dinámico, pensado para verse varias veces.
-- **Música:** selección musical a medida de la pareja, con cada transición ajustada al ritmo de las imágenes.
+- **Discreción:** busco que los novios se olviden de la cámara. Los mejores momentos salen así.
+- **Tráiler documental:** montaje ágil en lugar de una crónica de principio a fin.
+- **Música a medida:** elijo los temas con la pareja y ajusto cada transición al ritmo de las imágenes.
+- **Cámara:** Sony FX3 con ópticas Tamron y Sony.
 
 ## El reto
-Estar en los momentos que no se repiten sin molestar.
+Estar en los momentos que no se repiten sin que se note que estoy.
 
 ## El resultado
-Una película por boda, con música elegida con la pareja. Esta ficha muestra solo fotogramas, por respeto a la intimidad de los novios. Si quieres ver referencias, escríbeme y te las enseño.
+Si quieres ver una boda completa, escríbeme y te enseño referencias.
 
 ## Para revisar con Josep (no se publica)
-- Las imágenes de la galería llevan el nombre de los novios en el archivo: hay que renombrarlas antes de subirlas, por privacidad.
-- Año.
+- Las imágenes de la galería llevan el nombre de los novios en el archivo: hay que renombrarlas antes de subirlas.
+- ¿Cuántas bodas, aproximadamente, si quieres citarlo?

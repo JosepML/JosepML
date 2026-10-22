@@ -15,24 +15,25 @@ estado: borrador
 ---
 
 ## Tarjeta
-7 visualizers y un tráiler para el EP de Adrián Muñoz, con un arco de color que pasa de color a blanco y negro. 1.392.400 visualizaciones.
+Siete visualizers y un tráiler para el EP de Adrián Muñoz, producidos por JUNO Media. Hice la dirección de fotografía. Más de 1,39 millones de visualizaciones.
 
 ## La historia
-*Oscuridad* es un EP conceptual de Adrián Muñoz sobre el amor y el desamor de una pareja. Cada una de las siete canciones tiene su visualizer, más un tráiler, todo dirigido y producido por JUNO Media. Los temas recorren el enfado, la soledad, la ruptura, las cicatrices y la resignación de "K le den a Cupido".
+*Oscuridad* es un EP conceptual sobre una pareja que se rompe: el enfado, la soledad, la ruptura, las cicatrices y, al final, la resignación de "K le den a Cupido". Cada canción tiene su visualizer.
 
 ## Mi papel
-**Dirección de fotografía.** Un arco de imagen que uniera los siete vídeos.
+Dirección de fotografía de los siete vídeos y del tráiler. Tenían que funcionar por separado y, vistos seguidos, contar una caída.
 
 ## Cómo lo hicimos
-- **Pantalla partida:** un lado, el artista interpretando; el otro, bucles narrativos de la pareja. Hubo que planificar encuadre y luz para que las dos mitades convivieran sin saturar.
-- **Arco de color:** la primera canción en color y, tema a tema, menos saturación, hasta llegar a blanco y negro en la séptima.
-- **Luz por canción:** esquemas de iluminación adaptados a cada bucle (soledad, cicatrices…), con contraste cuidado y atmósferas densas.
+- **Pantalla partida:** a un lado, el artista cantando; al otro, bucles con la historia de la pareja. Encuadré e iluminé las dos mitades para que se leyeran juntas sin saturar.
+- **De color a blanco y negro:** el primer tema va en color y cada uno de los siguientes, más desaturado, hasta el blanco y negro del séptimo.
+- **Una luz por emoción:** cada bucle tiene su esquema (soledad, cicatrices…), siempre con contraste cuidado y atmósfera densa.
+- **Cámara:** Sony FX3 con ópticas Tamron y Sony.
 
 ## El reto
-Que cada visualizer funcionara solo y, a la vez, todos formaran un único descenso.
+Siete vídeos que se ven sueltos en redes y tienen que funcionar solos, pero que juntos forman un solo arco. El paso del color al blanco y negro resuelve las dos cosas.
 
 ## El resultado
-- 1.392.400 visualizaciones en total, en YouTube, Instagram y Spotify.
+1.392.400 visualizaciones entre YouTube, Instagram y Spotify.
 
 ## Para revisar con Josep (no se publica)
 - Fecha de publicación.

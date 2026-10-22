@@ -15,28 +15,22 @@ estado: borrador
 ---
 
 ## Tarjeta
-El duelo final de Luke y Vader en la Ciudad Nube, recreado con una maqueta, siluetas y sables añadidos fotograma a fotograma.
+El duelo de Luke y Vader en la Ciudad Nube, recreado para el 45.º aniversario de *El Imperio Contraataca* con una maqueta, siluetas y sables añadidos fotograma a fotograma.
 
 ## La historia
-Para el 45.º aniversario de *El Imperio Contraataca* recreé el duelo final entre Luke Skywalker y Darth Vader en la Ciudad Nube, con medios caseros.
+Por el aniversario quise recrear el enfrentamiento final entre Luke y Vader con medios caseros.
 
 ## Mi papel
-- **Idea.**
-- **Dirección.**
-- **Ejecución.**
+Idea, dirección, fotografía y postproducción.
 
 ## Cómo lo hicimos
-- **Maqueta:** un set en miniatura, como las películas originales.
-- **Luz y foco:** ajustes de diafragma e ISO hasta que todos los elementos se veían bien.
-- **Siluetas:** los primeros intentos fallaron; salí al exterior y usé una pared blanca de fondo.
-- **Postproducción:** sables de luz añadidos fotograma a fotograma y personajes superpuestos al fondo de la maqueta.
+- **Maqueta:** como en la película original, el escenario es una miniatura.
+- **Exponer algo tan pequeño:** iluminar y enfocar la maqueta exigió muchas pruebas de diafragma e ISO hasta que todo se leía bien.
+- **Siluetas:** en interior no funcionaban; las rodé al aire libre contra una pared blanca.
+- **Postproducción:** personajes superpuestos sobre la maqueta y sables añadidos fotograma a fotograma.
 
 ## El reto
-El espacio y la luz. Iluminar y enfocar una maqueta exige probar muchas veces.
-
-## El resultado
-Una recreación completa del duelo con maqueta, siluetas y sables añadidos fotograma a fotograma.
+Espacio y luz: dar a una maqueta pequeña la profundidad de un set real.
 
 ## Para revisar con Josep (no se publica)
 - Confirmar el año (2025, por el 45.º aniversario).
-- ¿Quieres añadir qué aprendiste del proceso con la maqueta?

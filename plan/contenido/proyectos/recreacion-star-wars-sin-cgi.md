@@ -15,28 +15,22 @@ estado: borrador
 ---
 
 ## Tarjeta
-Luke en la Ciudad de las Nubes sin un solo fotograma de CGI: alfombras, tuberías y papel perforado. Rodaje repetido por un cambio de lente.
+Luke en la Ciudad de las Nubes sin CGI: pilares de alfombra, tuberías de ferretería y un fondo de papel perforado. Repetí el rodaje entero al cambiar del 85 al 55 mm.
 
 ## La historia
-Recreé el plano más icónico de Luke en la Ciudad de las Nubes, de *El Imperio Contraataca*, sin CGI, solo con recursos físicos.
+Llevo una década haciendo contenido de Star Wars. Aquí recreé el plano más icónico de Luke en la Ciudad de las Nubes solo con recursos físicos.
 
 ## Mi papel
-- **Dirección y dirección de fotografía.**
-- **Desglose del plano original de 1980.**
-- **Atrezo y postproducción.**
+Dirección y dirección de fotografía: desglose del plano de 1980, atrezo, luz y postproducción.
 
 ## Cómo lo hicimos
-- **Pilares:** alfombra enrollada forrada de goma Eva.
-- **Tuberías:** tubos de fontanería y ferretería, con estanterías para las estructuras superiores.
-- **Fondo de luces de Bespin:** papel gris perforado a mano con un fondo blanco iluminado detrás. El desenfoque de la lente convierte los agujeros en los halos del original.
-- **Luz:** una pequeña luz LED magnética para el contraluz de las tuberías, un modificador concentrado para las sombras duras de Luke y un negativo en el suelo para los negros.
-- **Óptica:** repetimos el rodaje completo porque el 85 mm no respetaba las proporciones. Pasamos a un 55 mm y reencuadramos todo el set.
+- **Pilares:** una alfombra enrollada y forrada de goma EVA.
+- **Tuberías:** tubos de fontanería y ferretería, con estanterías para las estructuras de arriba.
+- **Las luces de fondo:** papel gris perforado a mano con un fondo blanco iluminado detrás. El desenfoque de la lente convierte los agujeros en los halos del original.
+- **Luz:** un LED magnético pequeño para el contraluz de las tuberías, un modificador concentrado para las sombras duras de Luke y un negativo en el suelo para mantener los negros.
 
 ## El reto
-Reproducir la profundidad del plano con materiales de ferretería, y corregir la perspectiva tras cambiar de lente.
-
-## El resultado
-Una recreación con la atmósfera lumínica del original, sin CGI.
+La perspectiva. Con un 85 mm las proporciones no eran las del original. Repetí el rodaje con un 55 mm y reencuadré todo el set.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

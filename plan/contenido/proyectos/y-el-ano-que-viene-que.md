@@ -15,33 +15,27 @@ estado: borrador
 ---
 
 ## Tarjeta
-Corto escrito, rodado y montado en 30 días para el ESCAC Dreammakers Contest 2024 de Cupra. Subió al podio.
+Mi corto para el ESCAC Dreammakers Contest 2024 de Cupra: guion, dirección, fotografía, montaje y actuación. Quedó en el podio.
 
 ## La historia
-El ESCAC Dreammakers Contest 2024, de Cupra, pedía un cortometraje en 30 días a partir de tres palabras: *Ojo*, *Cine* y *Barcelona*. La única forma de unirlas sin que sonara forzado era hablar de mí: de mi relación con el cine. El resultado es un corto personal, con voz en off y un montaje muy rápido.
+El concurso daba 30 días para hacer un corto con tres palabras obligatorias: *Ojo*, *Cine* y *Barcelona*. Las uní con lo único que de verdad las une para mí: mi relación con el cine. Es un corto autobiográfico, contado en voz en off.
 
 ## Mi papel
-Lo hice casi todo:
-- **Guion:** la idea y el texto.
-- **Dirección:** visión artística y dirección en el set.
-- **Dirección de fotografía.**
-- **Montaje.**
-- **Actor protagonista.**
-
-Con el apoyo de Adrià Mira Lozano y Lara Ruiz Martín.
+Lo escribí, lo dirigí, lo fotografié, lo monté y salgo en él. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín.
 
 ## Cómo lo hicimos
-- **Narración:** voz en off cálida que guía al espectador por dentro del personaje, con *Amélie* como referencia.
-- **Montaje:** ritmo muy acelerado, para contrastar con la calma de la voz.
-- **Imagen:** planifiqué los encuadres a la vez que la voz y el montaje, porque en un corto de este tamaño las tres cosas se deciden juntas.
+- **La voz en off, primero:** escribí la narración antes que nada, con *Amélie* como referencia: una voz cálida que cuenta desde dentro del personaje.
+- **Montaje rápido contra voz tranquila:** el contraste entre el ritmo acelerado de la imagen y la calma de la voz es lo que da energía al corto.
+- **Cámara:** Sony FX3 con ópticas Tamron.
 
 ## El reto
-El plazo. Idear, grabar, editar y entregar en unos 15 días obliga a decidir rápido, a descartar lo accesorio y a quedarse solo con lo que cuenta la historia.
+El tiempo. Entre idear, rodar, montar y entregar tuve unos 15 días. Lo resolví quedándome solo con lo que contaba la historia y descartando lo accesorio.
 
 ## El resultado
 - Podio del ESCAC Dreammakers Contest 2024.
 - El premio me abrió la puerta a becas de la ESCAC.
-- Aprendizaje: aunque lo hice casi todo yo, en cine al final todo es trabajo de equipo.
 
 ## Para revisar con Josep (no se publica)
-- ¿Hay alguna anécdota del rodaje o una frase de los créditos que quieras contar?
+- La web antigua dice 30 días (el plazo del concurso) y 15 días (el reto). He puesto que el concurso daba 30 y tú tuviste unos 15. ¿Es así?
+- ¿Qué puesto exacto del podio?
+- Una decisión de imagen que recuerdes (luz natural o tuya, localizaciones de Barcelona, algún plano difícil). Es lo que más falta en esta ficha.

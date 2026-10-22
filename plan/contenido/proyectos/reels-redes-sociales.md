@@ -15,27 +15,25 @@ estado: borrador
 ---
 
 ## Tarjeta
-Reels verticales para Disney, el Consell Valencià de la Joventut y creadores de YouTube. Cientos de miles de visualizaciones entre todos.
+Reels y shorts verticales para Disney, el Consell Valencià de la Joventut y creadores de YouTube. Grabo y monto para que funcionen en el móvil.
 
 ## La historia
-Reels y shorts verticales para clientes muy distintos: creadores y YouTubers, marcas de entretenimiento como Disney y entidades como el Consell Valencià de la Joventut. Más de nueve años creando contenido digital, con cientos de miles de visualizaciones entre las piezas.
+Llevo más de nueve años haciendo contenido para redes. Un vídeo vertical se juega la atención en los tres primeros segundos, y cada cliente necesita sonar distinto.
 
 ## Mi papel
-- **Grabación** de contenido vertical.
-- **Edición.**
+Grabación y edición de contenido vertical.
 
 ## Cómo lo hicimos
 - **Gancho:** lo más potente va en los tres primeros segundos.
-- **Ritmo:** cortes a tiempo con la música, zooms digitales y diseño sonoro.
-- **Identidad del cliente:** cambio la luz, el etalonaje, la tipografía de los subtítulos y el tono según quien sea: frescura para un creador, magia para una marca de entretenimiento, claridad para una entidad.
+- **Sin tiempos muertos:** cortes a la música, zooms digitales y diseño sonoro.
+- **Cada cliente, su tono:** cambio la luz, el color, la tipografía de los subtítulos y el ritmo. Frescura para un creador, magia para una marca de entretenimiento, claridad para una entidad pública.
 
 ## El reto
-Adaptarme a perfiles muy distintos sin perder el ritmo propio de cada plataforma.
+Cambiar de registro de un cliente a otro sin perder el ritmo de cada plataforma.
 
 ## El resultado
-Piezas de muestra en Instagram y YouTube Shorts: reel del Consell, publicidad para Disney, reels para creadores y reels cinematográficos.
+Cientos de miles de visualizaciones entre todas las piezas.
 
 ## Para revisar con Josep (no se publica)
 - Permiso de Disney y del Consell para mostrar sus nombres y sus piezas.
-- Cifra exacta de visualizaciones, si quieres citarla.
-- Año de las piezas.
+- Cifra de visualizaciones de la pieza más vista, si quieres citarla.

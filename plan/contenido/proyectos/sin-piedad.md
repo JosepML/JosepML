@@ -15,26 +15,27 @@ estado: borrador
 ---
 
 ## Tarjeta
-Cortometraje de Ángela Manzano sobre el abuso laboral. Rodado en ciclorama. En preparación para festivales.
+Corto de Ángela Manzano sobre el abuso laboral. Hice la dirección de fotografía, casi todo sobre un ciclorama blanco. En preparación para festivales.
 
 ## La historia
-Un hombre marcado por el maltrato profesional decide secuestrar a su jefa. Dirigido por Ángela Manzano, el corto explora el trauma acumulado desde una mirada onírica.
+Un hombre machacado por su trabajo decide secuestrar a su jefa. La película lo cuenta desde dentro de su cabeza, con un tono onírico.
 
 ## Mi papel
-**Dirección de fotografía.** Traducir el estado mental del protagonista en luz y composición.
+Dirección de fotografía: traducir su estado mental a luz y composición.
 
 ## Cómo lo hicimos
-- **Luz intrusiva:** luces prácticas cálidas para simular normalidad, con sombras profundas sobre el protagonista.
-- **Secuestro:** luz de fondo intensa que crea un halo teatral.
-- **Ciclorama blanco:** convertimos un espacio neutro en varios escenarios solo con la luz.
-- **Recuerdos del trabajo:** luz uniforme y fría sobre el fondo blanco.
-- **Introspección:** sombras duras de persianas y tonos azulados para crear una "prisión mental".
+- **Un ciclorama, muchos lugares:** gran parte se rodó sobre un ciclorama blanco. Cada espacio lo crea la luz.
+- **Recuerdos de la oficina:** luz uniforme y fría sobre el blanco. Un limbo estéril.
+- **Prisión mental:** sombras duras de persiana y tonos azulados, sin necesidad de paredes.
+- **Confrontación con la jefa:** prácticas cálidas que fingen normalidad, con sombras profundas sobre él.
+- **Secuestro:** contraluz intenso que crea un halo teatral.
 
 ## El reto
-Hacer que un solo espacio blanco parezca varios lugares con una carga emocional distinta.
+Que un solo espacio blanco pareciera varios lugares, cada uno con su carga emocional.
 
 ## El resultado
-Preparado para el circuito de festivales nacionales e internacionales. De momento no es público, por eso esta ficha muestra solo fotogramas. Cuando exista tráiler, lo pondremos aquí.
+Aún no es público: se prepara para festivales nacionales e internacionales. Por eso aquí solo hay fotogramas.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
+- Cámara: ¿Blackmagic Pocket 4K seguro? Cuando lo confirmes, añado la línea de cámara.

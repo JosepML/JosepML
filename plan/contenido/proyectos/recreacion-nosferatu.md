@@ -15,27 +15,25 @@ estado: borrador
 ---
 
 ## Tarjeta
-Una escena de *Nosferatu* recreada con cartón, cinta y un soplador de hojas. Con Comboi Films.
+Una escena de *Nosferatu* recreada con Comboi Films usando cartón, una rampa de madera y un soplador de hojas.
 
 ## La historia
-Recreo planos de cine con pocos medios para demostrar que el ingenio vale más que el presupuesto. Aquí, una escena de *Nosferatu*: la sombra del vampiro y la protagonista levitando.
+En mi canal recreo planos de cine con muy pocos medios. Aquí, la sombra del vampiro en la ventana y la protagonista que levita.
 
 ## Mi papel
-- **Dirección y coordinación general.**
-- **Planificación de cada toma.**
-
-Con Comboi Films.
+Dirección y coordinación general: planifiqué cada toma y coordiné el equipo junto a Comboi Films.
 
 ## Cómo lo hicimos
-- **Arte:** cuadros parecidos a los de la escena original, y silueta y mano de Nosferatu hechas con cartón y cinta, escaladas para encajar en la ventana.
-- **Levitación:** una rampa de madera bajo el cuerpo de la actriz, que mantiene el cuerpo tenso. El ángulo de cámara y la luz ocultan el truco.
-- **Luz:** un Aputure 300D con softbox para la luz general y un spotlight a distancia y ángulo precisos para proyectar la silueta sobre la cortina.
+- **La sombra:** silueta y mano de Nosferatu en cartón y cinta, escaladas para que la sombra encajara en la ventana. Un spotlight, a distancia y ángulo medidos, la proyecta nítida sobre la cortina.
+- **Luz general:** Aputure 300D con softbox.
+- **La levitación:** una rampa de madera bajo la actriz, que mantiene el cuerpo tenso. El ángulo de cámara y la luz esconden la rampa.
+- **Arte:** cuadros del lugar parecidos a los de la escena original.
 
 ## El reto
-La cortina debía moverse con el viento, pero esa noche no había ni una ráfaga. Probamos hilos y cartones sin éxito. La solución fue un soplador de hojas, con control total de la intensidad. Además, hilos finos movían la silueta de Nosferatu en sincronía con la cortina.
+La cortina tenía que moverse con el viento y esa noche no soplaba nada. Con hilos y cartones el movimiento se veía falso. Lo resolvimos con un soplador de hojas, que dejaba dosificar el "viento", y con hilos finos que movían la silueta al compás de la cortina.
 
 ## El resultado
-Un plano muy parecido al original, hecho con cartón, cinta, una rampa y un soplador de hojas.
+Un plano muy parecido al original, con unos 100 € de material.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

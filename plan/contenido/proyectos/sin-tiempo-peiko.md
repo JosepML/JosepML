@@ -15,28 +15,22 @@ estado: borrador
 ---
 
 ## Tarjeta
-Videoclip narrativo de Peiko con dos mundos opuestos: una casa moderna y una casa podrida. Proyecto de estudios.
+Videoclip narrativo de Peiko, proyecto de estudios. Lo dirigí y lo fotografié: dos casas opuestas y una celda.
 
 ## La historia
-*Sin Tiempo* mezcla la interpretación musical con un drama sobre el paso del tiempo, las consecuencias de los actos y la pérdida de libertad. Se apoya en un contraste: un mundo moderno y lujoso frente a otro podrido, como la propia letra habla de la distancia entre el éxito y el fracaso.
+*Sin Tiempo* habla del paso del tiempo, de las consecuencias de los actos y de la distancia entre el éxito y el fracaso. El videoclip mezcla la actuación de Peiko con una historia dramática.
 
 ## Mi papel
-- **Dirección.**
-- **Dirección de fotografía.**
-
-Proyecto de estudios.
+Dirección y dirección de fotografía. Pasé la canción a un plan de rodaje en el que cada movimiento de cámara y cada óptica acompañan el arco del personaje.
 
 ## Cómo lo hicimos
-- **Casa Moderna vs. Casa Podrida:** dos atmósferas distintas para mostrar la fractura en la vida del personaje.
-- **Planificación:** convertí el ritmo de la canción en un plan técnico, con cada movimiento de cámara y decisión óptica al servicio del arco del personaje.
-- **Clímax:** el vídeo sale de los espacios residenciales y acaba con una luz más fría, con el artista cantando agarrado a los barrotes de una celda.
+- **Casa Moderna y Casa Podrida:** dos espacios con atmósferas opuestas, el éxito y la ruina, que muestran la fractura del personaje.
+- **Final en la celda:** el vídeo sale de las casas y termina con una luz más fría, con Peiko cantando agarrado a los barrotes.
+- **Cámara:** Canon C200 con un 50 mm fijo.
 
 ## El reto
-Que la caída se viera en la imagen, no solo en la historia.
-
-## El resultado
-Una pieza de estudios que me sirve de muestra de dirección y de fotografía en un formato narrativo.
+Que la caída del personaje se viera en la imagen y no solo en la letra.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.
-- ¿Quieres añadir algún detalle del rodaje en las casas o en la celda?
+- ¿Qué diferenciaba la luz de las dos casas (temperatura, fuentes, contraste)?

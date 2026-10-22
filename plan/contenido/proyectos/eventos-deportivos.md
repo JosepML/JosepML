@@ -15,27 +15,24 @@ estado: borrador
 ---
 
 ## Tarjeta
-Cobertura de carreras como la Shimano Super Cup Massi (La Nucía), con piezas para televisión y para redes.
+Cobertura de ciclismo de élite, como la Shimano Super Cup Massi en La Nucía, para Ocisport. Grabo y monto piezas para redes y para televisión.
 
 ## La historia
-Cobertura de pruebas de ciclismo de élite, como la Shimano Super Cup Massi, en La Nucía. Clientes citados: Ocisport y la propia Shimano Super Cup Massi. El reto es captar la velocidad y el esfuerzo sin interferir en la carrera.
+En una carrera, la acción pasa una sola vez y muy rápido. Mi trabajo es captar la velocidad y el esfuerzo sin estorbar a los corredores.
 
 ## Mi papel
-- **Grabación** a pie de pista.
-- **Edición.**
+Grabación a pie de pista y montaje.
 
 ## Cómo lo hicimos
-- **Posición:** me coloco en los puntos más espectaculares del circuito.
-- **Cámara:** movimientos rápidos, seguimiento preciso y encuadres cerrados para transmitir la velocidad.
-- **Entregables:** reels y clips cortos para redes y piezas más largas, con calidad de emisión, para televisión.
-- **Montaje:** cortes sincronizados con una base musical fuerte, reforzando el sonido ambiente (ruedas, esfuerzo, público).
+- **Elegir sitio:** me coloco en los puntos más espectaculares del circuito, donde la carrera da más.
+- **Cámara rápida y cerrada:** seguimiento preciso y encuadres cerrados para que se note la velocidad.
+- **Un pack de piezas:** reels y clips cortos para redes, y piezas largas con calidad de emisión para televisión.
+- **Sonido:** cortes sobre una base musical fuerte y el ambiente realzado: ruedas, esfuerzo, público.
+- **Cámara:** Sony FX3 con ópticas Tamron y Sony.
 
 ## El reto
-Estar en el sitio correcto en el momento justo y mantener la tensión al condensar la carrera.
-
-## El resultado
-Un pack de piezas en varios formatos, del clip de redes a la pieza para televisión.
+Estar en el sitio justo en el momento justo y, después, condensar la carrera sin perder la tensión.
 
 ## Para revisar con Josep (no se publica)
 - Año de la competición.
-- ¿Hay alguna pieza que quieras destacar en la ficha?
+- ¿Qué se emitió en televisión y dónde? Sería el mejor resultado de esta ficha.

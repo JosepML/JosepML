@@ -15,29 +15,24 @@ estado: borrador
 ---
 
 ## Tarjeta
-Aftermovies de conciertos y orquestas: montaje al ritmo de la música, con un mix musical como base.
+Aftermovies de conciertos y orquestas para Tamilah y Fluxà, Mapache Events, Orquesta Azara y Miami Show. Grabo y monto a partir de la música.
 
 ## La historia
-Aftermovies de conciertos y actuaciones de orquestas de pueblo. El objetivo es contar el directo en formato corto: el espectáculo, la entrega de los artistas y el ambiente del público. Piezas de muestra: Miami Show, Flama y Legends, más un vídeo del proceso.
+Un aftermovie tiene que contar un directo en pocos minutos: el espectáculo, la entrega de los artistas y el público. Aquí hay tres (Miami Show, Flama y Legends) y un vídeo del proceso.
 
 ## Mi papel
-- **Grabación.**
-- **Montaje.**
-
-Mi formación musical me permite montar a partir de la estructura de las canciones: ritmos, acentos y cambios.
+Grabación y montaje. Soy músico, y monto leyendo la estructura de las canciones: ritmos, acentos y cambios.
 
 ## Cómo lo hicimos
-- **Primero el mix musical:** selecciono los temas más potentes y construyo un ritmo continuo, con cambios de tempo.
-- **Grabación pensada para el montaje:** hablo con los artistas para conocer los momentos fuertes y grabo muchos encuadres y el playback.
+- **Primero el audio:** antes de tocar la imagen hago un mix con los temas más potentes y cambios de tempo. Ese mix es el esqueleto del vídeo.
+- **Grabo pensando en el montaje:** pregunto a los artistas por los momentos fuertes del repertorio, cubro muchos encuadres y me aseguro de tener el playback para que labios e instrumentos cuadren.
 - **Estructura:** lo más rompedor al principio y lo más espectacular al cierre.
-- **Sonido:** efectos y ambiente del público para que se sienta como estar en primera fila.
+- **Sonido:** efectos y ambiente del público para que se sienta la primera fila.
+- **Cámara:** Sony FX3 con ópticas Tamron y Sony.
 
 ## El reto
-Que el aftermovie transmita la energía del concierto y no sea una lista de clips.
-
-## El resultado
-Tres piezas de muestra y un vídeo del proceso. Clientes: Tamilah y Fluxà (Agüita de Coco y Flama), Mapache Events, Orquesta Azara y Miami Show.
+Que el aftermovie tenga ritmo y cuente el concierto, en lugar de ser una lista de clips bonitos.
 
 ## Para revisar con Josep (no se publica)
 - Año de cada evento.
-- ¿Quieres añadir alguna opinión de organizador o de artista?
+- ¿Alguna opinión de organizador o de artista?

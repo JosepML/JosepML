@@ -15,30 +15,25 @@ estado: borrador
 ---
 
 ## Tarjeta
-Videoclip de Arkano, producido por JUNO Media y estrenado el 14 de febrero. Más de 17.000 visualizaciones en YouTube.
+Videoclip de Arkano producido por JUNO Media. Lo dirigí, llevé la cámara y lo monté. Más de 17.000 visualizaciones en YouTube.
 
 ## La historia
-*100 Baladas* es un single muy personal de Arkano, escrito junto a su pareja. El videoclip se lanzó el 14 de febrero, a propósito. La idea original era de Álex Gómez, y yo la adapté al formato y al ritmo de un videoclip. En pantalla vemos a Arkano y a su pareja acercándose cada vez más.
+*100 Baladas* es una canción muy personal de Arkano, escrita junto a su pareja. El videoclip se estrenó el 14 de febrero, a propósito. La idea de partida era de Álex Gómez: Arkano y su pareja se van acercando a lo largo del tema. Mi trabajo fue convertir esa idea en un videoclip rodable y con ritmo.
 
 ## Mi papel
-- **Adaptación audiovisual** de la idea de Álex Gómez.
-- **Dirección** y supervisión artística y técnica.
-- **Operación de cámara.**
-- **Montaje.**
-
-Producción: JUNO Media, con Noelia Fluxà y Julie-Estel Soard en el rodaje.
+Adapté la idea, dirigí el rodaje, operé la cámara y monté. En producción, Noelia Fluxà y Julie-Estel Soard, de JUNO Media.
 
 ## Cómo lo hicimos
-- **Ritmo:** el montaje sigue los cambios de la canción.
-- **Narrativa visual:** la distancia entre los dos se va cerrando plano a plano, hasta el final del tema.
+- **La distancia como hilo:** la historia se cuenta con el espacio entre los dos. Plano a plano se acercan, hasta el final de la canción.
+- **Montaje a la canción:** los cortes siguen los cambios del tema, no un ritmo fijo.
+- **Cámara:** Sony FX3 con ópticas Tamron.
 
 ## El reto
-Partir de una idea ya escrita por otra persona y traducirla a un formato distinto sin perder lo que la hacía especial.
+Dirigir una idea que no era mía. Había que respetar lo que Álex había imaginado y, a la vez, ajustarlo a la duración y al ritmo de un videoclip.
 
 ## El resultado
-- Más de 17.000 visualizaciones en YouTube.
-- Mi primer videoclip para un artista de la talla de Arkano.
+Más de 17.000 visualizaciones en YouTube.
 
 ## Para revisar con Josep (no se publica)
-- Año de estreno del videoclip.
-- ¿Hay una frase o anécdota de Arkano o del rodaje que quieras incluir?
+- Año de estreno.
+- Esta ficha es la más pobre en decisiones concretas. ¿Cómo resolviste el acercamiento (movimientos de cámara, ópticas, localización)? ¿Luz natural o iluminada? ¿Cuántos días de rodaje?

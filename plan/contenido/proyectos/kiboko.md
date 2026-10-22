@@ -15,30 +15,27 @@ estado: borrador
 ---
 
 ## Tarjeta
-Documental híbrido sobre el bar Kiboko (La Vila Joiosa, años 80). Yo hice el montaje. Estreno con aforo completo en junio de 2026.
+Docuficción de Noelia Fluxá y Julie-Estel Soard (JUNO Media) sobre el bar Kiboko de La Vila Joiosa en los 80. La monté yo. Estreno con aforo completo en junio de 2026.
 
 ## La historia
-*Kiboko* es una docuficción dirigida y producida por Noelia Fluxá y Julie-Estel Soard (JUNO Media). Cuenta la historia del bar Kiboko, un refugio de libertad, música y vanguardia en La Vila Joiosa en los años 80. Lo hace a través de Ana, una cronista ficticia que investiga el local hoy.
+El Kiboko fue un refugio de libertad, música y vanguardia en La Vila Joiosa de los años 80. La película lo cuenta a través de Ana, una cronista ficticia que hoy investiga su historia.
 
 ## Mi papel
-**Montaje.** Tenía que combinar tres materiales en un solo relato:
-- Entrevistas reales a quienes vivieron el Kiboko.
-- Escenas de ficción recreadas.
-- La voz en off de la protagonista.
+Montaje. Tenía que unir tres materiales en un solo relato: entrevistas reales a quienes vivieron el Kiboko, escenas de ficción recreadas y la voz en off de Ana. El material se rodó en ARRI.
 
 ## Cómo lo hicimos
-- **Equilibrio realidad/ficción:** los testimonios dialogan con la trama de la cronista sin que el relato pierda el foco.
-- **Volumen de material:** sincronizar, cribar y estructurar horas de entrevistas junto a la ficción y la música, con un flujo de trabajo muy ordenado.
-- **Ritmo:** las escenas del bar (1986) llevan un montaje vibrante apoyado en la banda sonora. Las entrevistas, un ritmo más pausado.
+- **Orden antes que ritmo:** con horas de entrevistas, lo primero fue sincronizar, cribar y estructurar todo con un flujo de trabajo muy ordenado.
+- **Testimonio y ficción en diálogo:** las entrevistas responden a lo que Ana investiga, para que el salto entre realidad y ficción no se note.
+- **Dos ritmos:** las escenas del bar en 1986, rápidas y apoyadas en la banda sonora; las entrevistas, pausadas.
 
 ## El reto
-Pasar del testimonio documental a la ficción sin que se note el salto ni se pierda la emoción.
+Pasar del testimonio documental a la ficción sin perder la emoción ni el hilo.
 
 ## El resultado
-- Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa (6 de junio de 2026).
-- Selecciones en festivales y nominación a mejor montaje.
+- Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa, el 6 de junio de 2026.
+- Selección en festivales y nominación a mejor montaje.
 
 ## Para revisar con Josep (no se publica)
-- Nombres de los festivales de selección y el de la nominación a mejor montaje (no aparecen en internet).
-- Confirmar si Arca Films participa como productora, porque el mapa lo menciona y el texto antiguo no.
-- ¿Quieres añadir alguna frase de la producción o del estreno?
+- Nombres de los festivales y del que te nominó a mejor montaje.
+- Duración final y horas de material bruto, si las sabes: es el dato que mejor muestra el trabajo de montaje.
+- Confirmar si Arca Films participa como productora.
