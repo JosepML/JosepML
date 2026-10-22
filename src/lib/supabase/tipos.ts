@@ -631,6 +631,7 @@ export type Database = {
           el_resultado: string
           el_reto: string
           estado: Database["public"]["Enums"]["estado_publicacion"]
+          frase: string
           galeria: Json
           grupo: string
           historia: string
@@ -670,6 +671,7 @@ export type Database = {
           el_resultado?: string
           el_reto?: string
           estado?: Database["public"]["Enums"]["estado_publicacion"]
+          frase?: string
           galeria?: Json
           grupo?: string
           historia?: string
@@ -709,6 +711,7 @@ export type Database = {
           el_resultado?: string
           el_reto?: string
           estado?: Database["public"]["Enums"]["estado_publicacion"]
+          frase?: string
           galeria?: Json
           grupo?: string
           historia?: string
