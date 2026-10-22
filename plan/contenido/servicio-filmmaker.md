@@ -14,7 +14,7 @@ Público mixto (Josep, 2026-10-22): mi cliente principal son productoras y compa
 
 ## Mi mirada
 
-Para mí, una buena pieza es una idea que llega intacta a la pantalla. Me gusta acompañarla en todo su viaje, desde la primera conversación hasta el montaje, o sumarme al equipo que ya la está levantando. El cine se hace entre muchos, y lo que más disfruto es buscar juntos la mejor forma de contarla.
+Como filmmaker puedo acompañar todo el viaje: la idea, el rodaje y el montaje. Me gusta porque el concepto va creciendo de principio a fin sin perderse por el camino. Y si ya tienes una idea entre manos, me sumo con las mismas ganas: el cine se hace entre muchos, y cada mirada suma.
 
 Vídeo corporativo, un videoclip, una orquesta en fiestas, una carrera de ciclismo o una boda: en todos busco la historia que hay dentro. Vengo de la música, así que ruedo pensando ya en el montaje. Y cuando toca grabar momentos reales, intento que la gente se olvide de la cámara, porque lo auténtico es lo que luego emociona.
 
