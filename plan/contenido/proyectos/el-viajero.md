@@ -27,7 +27,7 @@ Lo escribí y lo rodamos casi sin presupuesto, con un equipo mínimo: Alba Gisbe
 - **Un clic de reloj.** La música, inspirada en Göransson, repite ese motivo todo el corto.
 
 ## El reto
-Hacer creíble una máquina del tiempo sin dinero. La construimos con piezas que funcionan: el actor la toca y responde en el plano.
+Hacer creíble una ciencia ficción de época sin dinero ni efectos. Todo tenía que existir delante de la cámara.
 
 ## Resultado
 - Más de 22.000 visualizaciones en YouTube.

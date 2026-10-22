@@ -73,11 +73,29 @@ export function Titular({
 }
 
 /**
- * Pone la última palabra del título en serif cursiva con degradado cálido: es la única cursiva de la web.
- * Los signos de cierre (?, ., !) quedan fuera de la cursiva para que no se tuerzan.
+ * Doble tipografía: la parte marcada con *asteriscos* va en serif cursiva con degradado cálido (es la única
+ * cursiva de la web). Sin marcas, se acentúa la última palabra. Marca la idea entera («*blanco y negro*»),
+ * no media expresión. Los signos de cierre (?, ., !) quedan fuera de la cursiva para que no se tuerzan.
  */
 export function TituloConAcento({ texto }: { texto: string }) {
   const limpio = texto.trim();
+  if (/\*[^*]+\*/.test(limpio)) {
+    return (
+      <>
+        {limpio.split(/(\*[^*]+\*)/g).filter(Boolean).map((t, i) =>
+          t.startsWith("*") ? (
+            <span key={i} className="d-serif d-degradado-acento">
+              {t.slice(1, -1)}
+            </span>
+          ) : (
+            <span key={i} className="d-degradado">
+              {t}
+            </span>
+          ),
+        )}
+      </>
+    );
+  }
   const i = limpio.lastIndexOf(" ");
   if (i === -1) return <span className="d-degradado">{limpio}</span>;
   const ultima = limpio.slice(i + 1);

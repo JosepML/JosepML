@@ -45,7 +45,7 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "Música a medida",
-        "texto": "Cada transición, ajustada a la imagen."
+        "texto": "La elegimos juntos, y monto cada transición sobre ella."
       }
     ],
     "reto": "Estar en los momentos que no se repiten sin que se note.",
@@ -76,12 +76,12 @@ export const TEXTOS: Record<string, TextosProyecto> = {
   "el-cirujano": {
     "tarjeta": "Una inspectora persigue a un asesino que convierte a sus víctimas en obras de arte, y las pistas apuntan a su compañero.",
     "proyecto": [
-      "Un thriller psicológico. Propuse dejar el naturalismo a un lado y que la luz y el color nos metieran en la cabeza del asesino."
+      "Un thriller psicológico. Propuse dejar el naturalismo a un lado y contar con la luz y el color lo que el guion no dice en voz alta: cómo piensa el asesino."
     ],
     "decisiones": [
       {
-        "titulo": "Luz sin fuente",
-        "texto": "En los espacios del crimen no hay lámparas ni ventanas que justifiquen la luz."
+        "titulo": "Luz imposible",
+        "texto": "En los escenarios del crimen la luz no tiene una fuente real: es la forma en que él ve el mundo."
       },
       {
         "titulo": "Rojo infierno",
@@ -120,7 +120,7 @@ export const TEXTOS: Record<string, TextosProyecto> = {
         "texto": "La música, inspirada en Göransson, repite ese motivo todo el corto."
       }
     ],
-    "reto": "Hacer creíble una máquina del tiempo sin dinero. La construimos con piezas que funcionan: el actor la toca y responde en el plano.",
+    "reto": "Hacer creíble una ciencia ficción de época sin dinero ni efectos. Todo tenía que existir delante de la cámara.",
     "resultado": [
       "Más de 22.000 visualizaciones en YouTube."
     ]
@@ -150,9 +150,9 @@ export const TEXTOS: Record<string, TextosProyecto> = {
     ]
   },
   "eventos-deportivos": {
-    "tarjeta": "Ciclismo de élite, como la Shimano Super Cup Massi en La Nucía: la acción pasa una sola vez y muy rápido.",
+    "tarjeta": "Ciclismo de élite, como la Shimano Super Cup Massi en La Nucía, grabado a pie de pista.",
     "proyecto": [
-      "Para Ocisport, con piezas para redes y para televisión."
+      "Para Ocisport. La carrera no se repite, así que casi todo depende de dónde me coloque. De ahí salen piezas para redes y para televisión."
     ],
     "decisiones": [
       {
@@ -345,7 +345,7 @@ export const TEXTOS: Record<string, TextosProyecto> = {
   "reels-redes-sociales": {
     "tarjeta": "Vídeo vertical para Disney, el Consell Valencià de la Joventut y creadores de YouTube.",
     "proyecto": [
-      "Llevo más de nueve años haciendo contenido para redes. Un vertical se juega la atención en tres segundos, y cada cliente necesita sonar distinto."
+      "Llevo más de nueve años haciendo contenido para redes, y cada cliente necesita sonar distinto: un creador, una marca de entretenimiento o una entidad pública."
     ],
     "decisiones": [
       {
@@ -411,9 +411,9 @@ export const TEXTOS: Record<string, TextosProyecto> = {
     "resultado": []
   },
   "y-el-ano-que-viene-que": {
-    "tarjeta": "Tres palabras obligatorias, *Ojo*, *Cine* y *Barcelona*, y un mes para convertirlas en un corto.",
+    "tarjeta": "El ESCAC Dreammakers Contest de Cupra pedía un corto con tres palabras obligatorias: *Ojo*, *Cine* y *Barcelona*.",
     "proyecto": [
-      "Las uní de la única forma que me parecía honesta: contando mi propia relación con el cine. Es un relato autobiográfico en voz en off, y también me puse delante de la cámara. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín."
+      "Las uní de la única forma que me parecía honesta, contando mi propia relación con el cine. Es un relato autobiográfico en voz en off, y también me puse delante de la cámara. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín."
     ],
     "decisiones": [
       {

@@ -23,7 +23,7 @@ He grabado muchas bodas, siempre con muy buenas valoraciones. La película princ
 ## Decisiones clave
 - **Discreción.** Los novios se olvidan de la cámara y los momentos salen solos.
 - **Tráiler documental.** Montaje ágil, pensado para volver a verse.
-- **Música a medida.** Cada transición, ajustada a la imagen.
+- **Música a medida.** La elegimos juntos, y monto cada transición sobre ella.
 
 ## El reto
 Estar en los momentos que no se repiten sin que se note.

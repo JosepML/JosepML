@@ -160,7 +160,7 @@ export const PROYECTOS: ProyectoD[] = [
     inicioClip: 30,
     poster: "https://i.imgur.com/ESU7wLA.jpeg",
     fotogramas: ["https://i.imgur.com/ESU7wLA.jpeg", "https://i.imgur.com/qtM2MCm.jpg", "https://i.imgur.com/FdyOIDU.jpg"],
-    frase: "Una carta de amor al cine, escrita desde dentro.",
+    frase: "Un concurso me pidió tres palabras. Le respondí con *mi historia*.",
     laurel: { premio: "Podio", festival: "ESCAC Dreammakers 2024" },
   },
   {
@@ -176,7 +176,7 @@ export const PROYECTOS: ProyectoD[] = [
     inicioClip: 25,
     poster: "https://i.ytimg.com/vi/AWHJJA92MXM/maxresdefault.jpg",
     fotogramas: ["https://i.ytimg.com/vi/AWHJJA92MXM/maxresdefault.jpg"],
-    frase: "Una historia de amor contada con lo único que cambia en cada plano: la distancia.",
+    frase: "Todo el videoclip cabe en un solo gesto: *acercarse*.",
   },
   {
     slug: "el-cirujano",
@@ -195,7 +195,7 @@ export const PROYECTOS: ProyectoD[] = [
       "https://www.platinocrowdfunding.com/storage/project/5454/img/bj9n3eW3a65uyo5krgOrW1dhpgJAtqk8bvY5x687.png",
       // El tercer fotograma (iili.io/BmoHrCl.png) ya no existe en su servidor: pendiente de que Josep pase otro
     ],
-    frase: "Llevamos el rojo hasta el infierno para meternos en la cabeza del asesino. La luz no sale de las lámparas: sale de su mente.",
+    frase: "Iluminé los crímenes como los vería *el asesino*.",
     laurel: { premio: "Mejor fotografía", festival: "On Duty International Film Festival" },
   },
   {
@@ -217,7 +217,7 @@ export const PROYECTOS: ProyectoD[] = [
       "https://i.ibb.co/Wp7ZCfxz/No-Se-Esta-Tan-Mal-LOVVA-V4-4k-mp4-snapshot-01-25-345.jpg",
       "https://i.ibb.co/TDs4pBhq/No-Se-Esta-Tan-Mal-LOVVA-V4-4k-mp4-snapshot-02-41-047.jpg",
     ],
-    frase: "Siete sets distintos y una sola sensación: estar a salvo.",
+    frase: "Una canción vulnerable necesitaba una luz *que la protegiera*.",
   },
   {
     slug: "ep-oscuridad-adrian-munoz",
@@ -232,7 +232,7 @@ export const PROYECTOS: ProyectoD[] = [
     inicioClip: 30,
     poster: "https://i.imgur.com/MgsvdAf.png",
     fotogramas: ["https://i.imgur.com/MgsvdAf.png"],
-    frase: "Siete vídeos y un solo descenso: la luz va apagándose canción a canción hasta llegar a la oscuridad.",
+    frase: "Siete canciones y un color que se apaga hasta el *blanco y negro*.",
     laurel: { premio: "1,39 M visualizaciones", festival: "YouTube y plataformas" },
   },
   {
@@ -249,7 +249,7 @@ export const PROYECTOS: ProyectoD[] = [
     inicioClip: 30,
     poster: "https://i.ibb.co/vx4gxGQh/Captura-de-pantalla-2026-05-12-201300.png",
     fotogramas: ["https://i.ibb.co/vx4gxGQh/Captura-de-pantalla-2026-05-12-201300.png"],
-    frase: "Tejer horas de entrevistas reales con escenas de ficción sin que se noten las costuras.",
+    frase: "Memoria real y ficción, montadas para que no se vean *las costuras*.",
     laurel: { premio: "Nominación a mejor montaje", festival: "Festival pendiente" },
   },
   {
@@ -264,7 +264,7 @@ export const PROYECTOS: ProyectoD[] = [
     youtubeId: "Pa6URCIllhE",
     poster: "https://i.imgur.com/Km09TG5.png",
     fotogramas: ["https://i.imgur.com/Km09TG5.png"],
-    frase: "Un anuncio que se gana la atención antes de pedirla.",
+    frase: "Un anuncio que se gana la atención *antes de pedirla*.",
   },
   {
     slug: "sin-tiempo-peiko",
@@ -278,7 +278,7 @@ export const PROYECTOS: ProyectoD[] = [
     youtubeId: "wCnVb2o-k7Y",
     poster: "https://i.imgur.com/uUiXiQT.png",
     fotogramas: ["https://i.imgur.com/uUiXiQT.png"],
-    frase: "Una caída contada en tres espacios: el éxito, la ruina y el encierro.",
+    frase: "Del lujo a *los barrotes*, al ritmo de una canción.",
   },
   {
     slug: "el-viajero",
@@ -292,7 +292,7 @@ export const PROYECTOS: ProyectoD[] = [
     youtubeId: "-TZXzZCVf8Y",
     poster: "https://i.ytimg.com/vi/-TZXzZCVf8Y/maxresdefault.jpg",
     fotogramas: ["https://i.ytimg.com/vi/-TZXzZCVf8Y/maxresdefault.jpg"],
-    frase: "La falta de presupuesto no limita: obliga a inventar.",
+    frase: "Sin dinero para efectos, construimos una máquina del tiempo *de verdad*.",
   },
   {
     slug: "sin-piedad",
@@ -304,7 +304,7 @@ export const PROYECTOS: ProyectoD[] = [
     papel: "Dirección de fotografía",
     poster: "https://i.imgur.com/j3loxUV.png",
     fotogramas: ["https://i.imgur.com/j3loxUV.png"],
-    frase: "Una prisión hecha solo de luz.",
+    frase: "Una cárcel hecha *solo de luz*.",
   },
   {
     slug: "conciertos",
@@ -317,7 +317,7 @@ export const PROYECTOS: ProyectoD[] = [
     camara: "Sony FX3 · Tamron y Sony",
     poster: "https://i.ibb.co/HDqT2xzW/Captura-de-pantalla-2026-05-12-210438.png",
     fotogramas: ["https://i.ibb.co/HDqT2xzW/Captura-de-pantalla-2026-05-12-210438.png"],
-    frase: "Monto como músico: la imagen baila al compás exacto del directo.",
+    frase: "Un aftermovie se monta *de oído*.",
   },
   {
     slug: "eventos-deportivos",
@@ -331,7 +331,7 @@ export const PROYECTOS: ProyectoD[] = [
     youtubeId: "m7rbFqf9dzE",
     poster: "https://i.ibb.co/YBc4tqZw/Captura-de-pantalla-2026-05-13-141447.png",
     fotogramas: ["https://i.ibb.co/YBc4tqZw/Captura-de-pantalla-2026-05-13-141447.png"],
-    frase: "El esfuerzo, la técnica y la tensión del deporte, para mantener al espectador al borde del asiento.",
+    frase: "En una carrera, cada plano pasa *una sola vez*.",
   },
   {
     slug: "reels-redes-sociales",
@@ -344,7 +344,7 @@ export const PROYECTOS: ProyectoD[] = [
     camara: "Sony FX3 · Tamron y Sony",
     poster: "https://rbgescuela.com/wp-content/uploads/claves-reels-atractivos-instagram.jpg",
     fotogramas: ["https://rbgescuela.com/wp-content/uploads/claves-reels-atractivos-instagram.jpg"],
-    frase: "Tres segundos para ganarse a alguien, y el resto para que se quede.",
+    frase: "Tres segundos para ganarse a alguien, y el resto *para que se quede*.",
   },
   {
     slug: "bodas",
@@ -357,7 +357,7 @@ export const PROYECTOS: ProyectoD[] = [
     camara: "Sony FX3 · Tamron y Sony",
     poster: "https://i.imgur.com/uk36C7v.png",
     fotogramas: ["https://i.imgur.com/uk36C7v.png"],
-    frase: "El día más importante, con la mirada de una película.",
+    frase: "El día más importante de una pareja, con *ojos de cine*.",
   },
 ];
 

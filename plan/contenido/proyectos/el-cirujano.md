@@ -18,10 +18,10 @@ estado: borrador
 Una inspectora persigue a un asesino que convierte a sus víctimas en obras de arte, y las pistas apuntan a su compañero.
 
 ## El proyecto
-Un thriller psicológico. Propuse dejar el naturalismo a un lado y que la luz y el color nos metieran en la cabeza del asesino.
+Un thriller psicológico. Propuse dejar el naturalismo a un lado y contar con la luz y el color lo que el guion no dice en voz alta: cómo piensa el asesino.
 
 ## Decisiones clave
-- **Luz sin fuente.** En los espacios del crimen no hay lámparas ni ventanas que justifiquen la luz.
+- **Luz imposible.** En los escenarios del crimen la luz no tiene una fuente real: es la forma en que él ve el mundo.
 - **Rojo infierno.** Un rojo intenso en las escenas más oscuras, como aviso de peligro.
 - **Investigación fría.** Una luz analítica para la parte policial, que marca la doble vida de los personajes.
 

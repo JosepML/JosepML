@@ -15,10 +15,10 @@ estado: borrador
 ---
 
 ## Tarjeta
-Tres palabras obligatorias, *Ojo*, *Cine* y *Barcelona*, y un mes para convertirlas en un corto.
+El ESCAC Dreammakers Contest de Cupra pedía un corto con tres palabras obligatorias: *Ojo*, *Cine* y *Barcelona*.
 
 ## El proyecto
-Las uní de la única forma que me parecía honesta: contando mi propia relación con el cine. Es un relato autobiográfico en voz en off, y también me puse delante de la cámara. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín.
+Las uní de la única forma que me parecía honesta, contando mi propia relación con el cine. Es un relato autobiográfico en voz en off, y también me puse delante de la cámara. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín.
 
 ## Decisiones clave
 - **La voz primero.** Escribí la narración antes que nada, con *Amélie* como referencia: cálida y cercana.

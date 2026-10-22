@@ -18,7 +18,7 @@ estado: borrador
 Vídeo vertical para Disney, el Consell Valencià de la Joventut y creadores de YouTube.
 
 ## El proyecto
-Llevo más de nueve años haciendo contenido para redes. Un vertical se juega la atención en tres segundos, y cada cliente necesita sonar distinto.
+Llevo más de nueve años haciendo contenido para redes, y cada cliente necesita sonar distinto: un creador, una marca de entretenimiento o una entidad pública.
 
 ## Decisiones clave
 - **Gancho.** Lo más potente, en los tres primeros segundos.

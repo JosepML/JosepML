@@ -15,10 +15,10 @@ estado: borrador
 ---
 
 ## Tarjeta
-Ciclismo de élite, como la Shimano Super Cup Massi en La Nucía: la acción pasa una sola vez y muy rápido.
+Ciclismo de élite, como la Shimano Super Cup Massi en La Nucía, grabado a pie de pista.
 
 ## El proyecto
-Para Ocisport, con piezas para redes y para televisión.
+Para Ocisport. La carrera no se repite, así que casi todo depende de dónde me coloque. De ahí salen piezas para redes y para televisión.
 
 ## Decisiones clave
 - **Elegir sitio.** Me coloco en los puntos más espectaculares del circuito.
