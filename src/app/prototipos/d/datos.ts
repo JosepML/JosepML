@@ -85,7 +85,7 @@ export const SERVICIOS: ServicioD[] = [
     frase: "Me sumo a tu historia, o te ayudo a encontrarla.",
     resumen: "Me sumo a tu equipo o llevo el proyecto de principio a fin: idea, rodaje y montaje, siempre con mirada de cine.",
     mirada: [
-      "Como filmmaker puedo acompañar todo el viaje: la idea, el rodaje y el montaje. Me gusta porque el concepto se mantiene vivo de principio a fin y nada se pierde por el camino. Y si ya traes una idea, vengas de una productora, seas compañero de oficio o simplemente tengas algo que contar, me encantará sumar mi mirada a la tuya para llevarla a la pantalla.",
+      "Para mí, una buena pieza es una idea que llega intacta a la pantalla. Me gusta acompañarla en todo su viaje, desde la primera conversación hasta el montaje, o sumarme al equipo que ya la está levantando. El cine se hace entre muchos, y lo que más disfruto es buscar juntos la mejor forma de contarla.",
       "Vídeo corporativo, un videoclip, una orquesta en fiestas, una carrera de ciclismo o una boda: en todos busco la historia que hay dentro. Vengo de la música, así que ruedo pensando ya en el montaje. Y cuando toca grabar momentos reales, intento que la gente se olvide de la cámara, porque lo auténtico es lo que luego emociona.",
     ],
     aporto: [
