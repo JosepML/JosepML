@@ -51,7 +51,8 @@ Marca cada casilla cuando esté hecha en la web de verdad (no en el prototipo).
 - [ ] Filmmaker: confirmar con Josep la frase «como filmmaker o como operador de cámara» de la pregunta frecuente «¿Te sumas a proyectos de otros?».
 
 ### Trabajos y fichas (14 proyectos + 4 recreaciones)
-- [ ] Texto nuevo de cada ficha (S4) y frase final con acento (`*marcas*`).
+- [x] Texto nuevo de cada ficha en la base (S4, 2026-10-22).
+- [ ] Frase final con acento (`*marcas*`) de las 4 recreaciones: no existe todavía. Proponerla a Josep (corta, sin fórmulas «no es X: es Y») y guardarla en `proyectos.frase`.
 - [ ] Año de casi todos los proyectos: hoy solo tienen año «Y el año que viene» (2024) y Kiboko (2026). Ver la tabla de `/mnt/project-files/textos-proyectos/pendientes.md`. Mientras falte, la ficha dice «Pendiente»: **antes de publicar, ocultar el campo si está vacío** en vez de mostrar «Pendiente».
 - [ ] Cámara de Sin Piedad (se cree Blackmagic Pocket 4K, sin confirmar).
 - [ ] Kiboko: nombre de los festivales y de la nominación a mejor montaje. Hoy el laurel dice «Festival pendiente»: no se publica así.

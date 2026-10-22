@@ -43,8 +43,9 @@ Todas tienen `estado`, `publicado_en` (primera publicación), `creado_en` y `act
 | `titulo`, `tipo_id` | Título y tipo (tabla `tipos_proyecto`) |
 | `anio`, `direccion`, `productora`, `papel`, `camara` | Ficha técnica. `papel` es el corto de la tarjeta («Dirección y montaje»). En los archivos de E: `año`, `productora_cliente` y `mi_papel` de la cabecera |
 | `premios` | Lista: `[{"anio": 2024, "nombre": "Mejor fotografía", "tipo": "ganado", "festival": "..."}]`. `nombre` es obligatorio |
-| `tarjeta`, `historia`, `mi_papel`, `como_lo_hicimos`, `el_reto`, `el_resultado` | Textos (Markdown básico: párrafos, cursiva, negrita). Sección vacía = no se muestra |
-| `titulos_seccion` | Títulos propios de alguna sección: `{"historia": "..."}` |
+| `tarjeta`, `historia`, `mi_papel`, `como_lo_hicimos`, `el_reto`, `el_resultado` | Textos (Markdown básico: párrafos, cursiva, negrita). Sección vacía = no se muestra. Con la estructura de E: `historia` = «El proyecto», `como_lo_hicimos` = «Decisiones clave» (lista `- **Título.** texto`, tarjetas numeradas), `el_reto` = «El reto», `el_resultado` = «Resultado» (lista de hechos). `mi_papel` queda vacío: el papel ya está en la ficha |
+| `frase` | Frase final de la ficha con doble tipografía; la cursiva va entre `*asteriscos*`. Vacía = no se muestra |
+| `titulos_seccion` | Títulos visibles de las secciones. Hoy todas las fichas: `{"historia": "El proyecto", "como_lo_hicimos": "Decisiones clave", "el_reto": "El reto", "el_resultado": "Resultado"}` |
 | `youtube_id`, `youtube_inicio` | Vídeo principal y segundo en el que empieza el clip de vista previa |
 | `videos`, `videos_debajo_del_texto` | Vídeos extra: `[{"tipo": "youtube" \| "youtube-short" \| "instagram" \| "archivo", "id" \| "url" \| "medio": ..., "titulo": "...", "rol": "proceso"}]` |
 | `imagen_id`, `clip_id`, `video_portada_id` | Póster, clip corto de la tarjeta (mp4) y vídeo de cabecera de la ficha (todos a `medios`) |
@@ -57,7 +58,7 @@ Los servicios del proyecto están en `proyecto_servicios` (`orden` y `destacado`
 
 **`servicios`**: las páginas de servicio (`/servicios/<slug>`). `nombre`, `frase`, `resumen`, `mirada` (lista de párrafos), `aporto` y `para_quien` (listas de frases), `con_quien`, `pasos` (`[{"titulo", "texto"}]`), `preguntas` (`[{"pregunta", "respuesta"}]`), `llamada`, `imagen_id`, SEO y `orden`.
 
-**`articulos`**: el blog. `slug`, `id_antiguo`, `titulo`, `fecha` (la que se muestra), `extracto`, `contenido` (documento del editor), `categoria_id`, `imagen_id` y SEO.
+**`articulos`**: el blog. `slug`, `id_antiguo`, `titulo`, `fecha` (la que se muestra), `extracto`, `contenido` (documento del editor), `categoria_id`, `imagen_id` y SEO. En `contenido` hay nodos `paragraph`, `heading` (nivel 2), texto con marcas `italic` y `bold`, e `image` con `attrs: {"medio": "<id de medios>", "alt": "...", "pie": "..."}`.
 
 **`paginas`**: Inicio (`inicio`), Sobre mí, Recreaciones, Contacto, legales y las que Josep cree. `slug`, `titulo`, `imagen_id` (para compartir) y SEO. El contenido está en `bloques`. La página `inicio` no puede cambiar de slug.
 
@@ -168,6 +169,7 @@ Hecho el 2026-10-22: Josep tiene su usuario, está en `administradores` (comprob
 | `20261022152153_esquema_solido_1_tablas` | Tipos, tablas e índices. RLS activada desde el principio |
 | `20261022153000_esquema_solido_2_funciones` | Borradores, publicación, historial, validaciones, redirecciones. La ejecutó Josep en el editor SQL (contiene `delete` dentro de funciones, que pide confirmación), así que no figura en el historial de Supabase; se comprobó que las 17 funciones coinciden con este archivo. La versión es aproximada |
 | `20261022153230_esquema_solido_3_seguridad` | Políticas RLS, permisos y almacenamiento |
+| `20261022230000_proyectos_frase` | Columna `proyectos.frase` (frase final de la ficha). Tarea S4 |
 
 ### Pendiente de limpieza (opcional, lo hace Josep desde el panel)
 

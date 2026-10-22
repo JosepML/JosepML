@@ -35,7 +35,7 @@ Proyectos y artículos están `publicado` para que la web local (tarea C) los le
 
 ## Pendiente que no es de este hilo
 
-- **S4**: comparar con `supabase/datos/proyectos_y_articulos.sql` y corregir por UPDATE: póster de Reels (hoy es una imagen de `rbgescuela.com`, ajena) y de El Padrino (la URL de `i9.ytimg.com` caduca), `titulos_seccion`, título y extracto de los artículos según `datos.ts`, imágenes dentro de los artículos.
+- ~~**S4**~~ hecho el 2026-10-22: ver `plan/traspaso-textos-s4.md`. Los textos coincidían; se corrigieron pósteres, `titulos_seccion`, cámaras de las recreaciones y los artículos (`supabase/datos/s4_correcciones.sql`). Si se vuelve a ejecutar `migrar-legacy.mjs`, aplicar ese archivo después.
 - **S2**: pasar las 90 imágenes a Storage, rellenar `ruta` y limpiar `url_origen`. Las de Bodas llevan el nombre de los novios en la URL (visible hoy en `medios.url_origen`, que el público puede leer): renombrar y borrar el origen.
 - **Datos que faltan** (preguntas a Josep en `/mnt/project-files/textos-proyectos/pendientes.md`): año de 15 proyectos, cámara de Sin Piedad, festivales de Kiboko, año del premio de El Cirujano. Antes de publicar, la ficha no debe mostrar «Pendiente» sino ocultar el campo.
 - Servicios: completar mirada, aporto, para quién, pasos, preguntas, etc. y publicarlos.

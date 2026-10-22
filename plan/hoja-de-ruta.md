@@ -82,7 +82,7 @@ Lee: `legacy/constants.ts`, `plan/contenido/fundamentos.md`, `plan/contenido/map
 | S1 ✓ | Script `scripts/migrar-legacy.mjs` (hecho 2026-10-22, ver `plan/traspaso-carga-base.md`): proyectos y artículos de `legacy/constants.ts` a Supabase, guardando `id_antiguo` | B | 18/18 proyectos y 3/3 artículos en la base de datos; recuento en `fase-4` |
 | S2 | Copiar las ~90 imágenes de ImgBB e Imgur al bucket `medios` y reescribir las URLs (en el PC de Josep) | B, S1 | 0 URLs externas de imagen en la base de datos |
 | S3 | Cargar en la base de datos los textos de `plan/contenido/` (servicios, bloques de Inicio, Sobre mí, clientes, opiniones, canales) | B | Inicio y servicios sin textos fijos en el código |
-| S4 | Cargar los textos aprobados de E en `proyectos` y `articulos` | E, S1 | Cada ficha muestra su texto nuevo |
+| S4 ✓ | Cargar los textos aprobados de E en `proyectos` y `articulos` | E, S1 | Cada ficha muestra su texto nuevo |
 | S5 | `/trabajos` con filtros por servicio y tipo, y la ficha `/trabajos/[slug]` (galería con visor y siguiente proyecto) | C | Las 18 fichas se abren sin errores, en claro y oscuro |
 | S6 | `/servicios/[slug]` (los 3) | C | Igual que el prototipo, con sus proyectos y preguntas frecuentes |
 | S7 | `/recreaciones` con antes y después | C | Las 4 recreaciones con su deslizador |
@@ -128,3 +128,4 @@ Sigue `plan/fase-7-lanzamiento.md`. Solo con la orden expresa de Josep.
 - 2026-10-22 (tarea E, revisión): Opus revisa los 18 textos de proyectos con un criterio más exigente (decisiones concretas, cámara, reto con solución, resultado solo con hechos; sin relleno). Criterio en `plan/contenido/proyectos/README.md`. `textos.ts` del prototipo se regenera con `scripts/textos-prototipo.mjs`.
 - 2026-10-22: `plan/repaso-final.md` con el repaso de cada sección, las preguntas abiertas y el orden de los hilos siguientes para dejar la web «niquelada». Blog del prototipo con imagen en las tarjetas; artículo del DSLR retirado.
 - 2026-10-22 (tarea S1): 18/18 proyectos, 2/2 artículos (el del DSLR retirado), 36 `proyecto_servicios`, 90 medios y 3 servicios mínimos cargados en la base con `scripts/migrar-legacy.mjs`. Detalle y pendientes en `plan/traspaso-carga-base.md`.
+- 2026-10-22 (tarea S4): textos de los 18 proyectos y los 2 artículos en la base, comprobados contra `plan/contenido/` (los cargó S1; S4 añadió la columna `frase` y corrigió pósteres, títulos de sección, cámaras y artículos con sus fotos). Nota en `plan/traspaso-textos-s4.md`. Falta la frase final de las 4 recreaciones.
