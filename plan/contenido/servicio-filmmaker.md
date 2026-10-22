@@ -14,7 +14,7 @@ Público mixto (Josep, 2026-10-22): mi cliente principal son productoras y compa
 
 ## Mi mirada
 
-Como filmmaker puedo encargarme de todo el viaje: la idea, el rodaje y el montaje. Me gusta porque la pieza sale de una sola mirada, de principio a fin, y nada se pierde por el camino. Y si ya traes una idea, vengas de una productora, seas compañero de oficio o simplemente tengas algo que contar, me encantará ayudarte a llevarla a la pantalla y cuidarla como si fuera mía.
+Como filmmaker puedo acompañar todo el viaje: la idea, el rodaje y el montaje. Me gusta porque el concepto se mantiene vivo de principio a fin y nada se pierde por el camino. Y si ya traes una idea, vengas de una productora, seas compañero de oficio o simplemente tengas algo que contar, me encantará sumar mi mirada a la tuya para llevarla a la pantalla.
 
 Vídeo corporativo, un videoclip, una orquesta en fiestas, una carrera de ciclismo o una boda: en todos busco la historia que hay dentro. Vengo de la música, así que ruedo pensando ya en el montaje. Y cuando toca grabar momentos reales, intento que la gente se olvide de la cámara, porque lo auténtico es lo que luego emociona.
 

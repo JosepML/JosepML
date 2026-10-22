@@ -23,7 +23,7 @@ Alternativas para la frase principal (se usa la 1 por defecto; se puede cambiar 
 
 - **Título de sección:** Lo que hago
 - **Dirección de fotografía.** Decido qué siente quien mira: la luz, el encuadre y el color al servicio de la historia. → Ver servicio
-- **Filmmaker.** De la primera idea al último fotograma, con una sola mirada de principio a fin. → Ver servicio
+- **Filmmaker.** Me sumo a tu historia, o te ayudo a encontrarla. → Ver servicio
 - **Edición.** Percusionista desde los 3 años: monto con el ritmo por dentro. → Ver servicio
 
 ## 3. Trabajos destacados
