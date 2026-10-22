@@ -122,3 +122,4 @@ Sigue `plan/fase-7-lanzamiento.md`. Solo con la orden expresa de Josep.
 ## Registro
 
 - 2026-10-22: hoja de ruta creada a partir de la revisión de Josep del prototipo D.
+- 2026-10-22 (tarea E): textos en borrador de los 18 proyectos (`plan/contenido/proyectos/`) y los 3 artículos (`plan/contenido/articulos/`), con preguntas para Josep en cada archivo. Pendiente de su revisión en tandas; E sigue sin marcar hasta su visto bueno.
