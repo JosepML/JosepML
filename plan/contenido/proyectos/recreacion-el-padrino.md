@@ -15,10 +15,10 @@ estado: borrador
 ---
 
 ## Tarjeta
-El plano de Vito Corleone en su despacho, con la luz de Gordon Willis, en un sótano y con la rejilla de una estufa como ventana.
+El despacho de Vito Corleone, con la rejilla de una estufa como ventana.
 
 ## El proyecto
-Quise estudiar cómo ilumina Willis recreando su plano más conocido. Dirigí, fotografié y construí el set.
+Quise estudiar cómo ilumina Gordon Willis recreando su plano más conocido. Construí el set desde cero en un sótano.
 
 ## Decisiones clave
 - **La ventana.** Rejilla de estufa de butano, cinta negra, papel de horno como difusor y LED detrás.

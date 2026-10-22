@@ -15,19 +15,19 @@ estado: borrador
 ---
 
 ## Tarjeta
-Corto de Ángela Manzano sobre el abuso laboral. Hice la fotografía, casi toda sobre un ciclorama blanco. En preparación para festivales.
+Un hombre machacado por su trabajo decide secuestrar a su jefa.
 
 ## El proyecto
-Un hombre machacado en su trabajo decide secuestrar a su jefa. Se cuenta desde su cabeza, con tono onírico.
+Ángela Manzano lo cuenta desde dentro de su cabeza, con tono onírico. Mi trabajo fue traducir ese estado mental a luz y composición. Aún no es público: se prepara para festivales, por eso aquí solo hay fotogramas.
 
 ## Decisiones clave
-- **Un ciclorama, muchos lugares.** Cada espacio lo crea la luz.
 - **Oficina como limbo.** Luz uniforme y fría sobre el blanco.
+- **Confrontación.** Prácticas cálidas que fingen normalidad, con sombras profundas sobre él.
 - **Prisión mental.** Sombras de persiana y tonos azulados, sin paredes.
 - **Secuestro.** Contraluz intenso, como un halo teatral.
 
 ## El reto
-Que un solo espacio blanco pareciera varios lugares con carga emocional distinta.
+Rodamos casi todo sobre un ciclorama blanco. Había que convertir un solo espacio neutro en varios lugares, cada uno con su carga emocional.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje.

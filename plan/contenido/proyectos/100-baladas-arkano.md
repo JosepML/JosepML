@@ -15,17 +15,17 @@ estado: borrador
 ---
 
 ## Tarjeta
-Videoclip de Arkano producido por JUNO Media. Lo dirigí, llevé la cámara y lo monté. Más de 17.000 visualizaciones.
+Una canción de amor de Arkano, escrita con su pareja y estrenada un 14 de febrero.
 
 ## El proyecto
-*100 Baladas* es un single personal de Arkano, escrito con su pareja y estrenado el 14 de febrero. La idea era de Álex Gómez; yo la adapté al formato y al ritmo de un videoclip. Producción de Noelia Fluxà y Julie-Estel Soard.
+La idea de partida era de Álex Gómez: una pareja que se va acercando a lo largo del tema. Mi trabajo fue convertirla en un videoclip rodable y con ritmo, con la producción de Noelia Fluxà y Julie-Estel Soard.
 
 ## Decisiones clave
 - **La distancia como hilo.** Plano a plano, Arkano y su pareja se acercan hasta el final del tema.
-- **Montaje a la canción.** Los cortes siguen sus cambios, no un ritmo fijo.
+- **Montaje a la canción.** Los cortes siguen los cambios del tema, no un ritmo fijo.
 
 ## El reto
-Dirigir una idea que no era mía sin perder lo que la hacía especial.
+Dirigir una idea ajena sin perder lo que la hacía especial. La ajusté a la duración y al pulso de un videoclip sin tocar su centro: el acercamiento.
 
 ## Resultado
 - Más de 17.000 visualizaciones en YouTube.

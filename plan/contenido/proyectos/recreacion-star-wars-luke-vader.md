@@ -15,10 +15,10 @@ estado: borrador
 ---
 
 ## Tarjeta
-El duelo de Luke y Vader en la Ciudad Nube, para el 45.º aniversario de *El Imperio Contraataca*: maqueta, siluetas y sables fotograma a fotograma.
+El duelo de Luke y Vader con una maqueta, siluetas y sables añadidos fotograma a fotograma.
 
 ## El proyecto
-Idea, dirección, fotografía y postproducción míos, con medios caseros.
+Para el 45.º aniversario de *El Imperio Contraataca* recreé el duelo final en la Ciudad Nube, con medios caseros.
 
 ## Decisiones clave
 - **Maqueta.** Un set en miniatura, como en las películas originales.

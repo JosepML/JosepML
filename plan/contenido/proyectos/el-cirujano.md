@@ -15,18 +15,18 @@ estado: borrador
 ---
 
 ## Tarjeta
-Thriller psicológico de Impulsos Creativos, con la luz y el color como mapa de la mente de un asesino.
+Una inspectora persigue a un asesino que convierte a sus víctimas en obras de arte, y las pistas apuntan a su compañero.
 
 ## El proyecto
-Una inspectora persigue a un asesino en serie que convierte a sus víctimas en obras de arte, y las pistas apuntan a su compañero. Dirigido por Kevin Ramos y Emilio Graña. Yo hice la dirección de fotografía.
+Un thriller psicológico. Propuse dejar el naturalismo a un lado y que la luz y el color nos metieran en la cabeza del asesino.
 
 ## Decisiones clave
-- **Luz sin fuente.** En los espacios del asesino la luz no sale de lámparas ni ventanas: sale de su mente.
+- **Luz sin fuente.** En los espacios del crimen no hay lámparas ni ventanas que justifiquen la luz.
 - **Rojo infierno.** Un rojo intenso en las escenas más oscuras, como aviso de peligro.
-- **Investigación fría.** Una luz analítica que marca la doble vida de los personajes.
+- **Investigación fría.** Una luz analítica para la parte policial, que marca la doble vida de los personajes.
 
 ## El reto
-Que el mundo casi sobrenatural de los crímenes y la investigación realista convivieran sin romper la tensión. Lo resolví separándolos por luz y color.
+Que lo casi sobrenatural de los crímenes y lo realista de la investigación convivieran sin bajar la tensión. Los separé por luz y color.
 
 ## Resultado
 - Mejor fotografía en el On Duty International Film Festival.

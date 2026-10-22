@@ -15,15 +15,15 @@ estado: borrador
 ---
 
 ## Tarjeta
-Bodas contadas como un tráiler documental de unos 20 minutos, con música elegida con cada pareja. Por privacidad, aquí solo hay fotogramas.
+Bodas contadas como un tráiler documental, no como una crónica del día.
 
 ## El proyecto
-He grabado muchas bodas, siempre con muy buenas valoraciones. Cubro el día entero y monto la película.
+He grabado muchas bodas, siempre con muy buenas valoraciones. La película principal dura unos 20 minutos, con música elegida con cada pareja. Por privacidad, aquí solo hay fotogramas.
 
 ## Decisiones clave
 - **Discreción.** Los novios se olvidan de la cámara y los momentos salen solos.
-- **Tráiler documental.** Unos 20 minutos ágiles en lugar de una crónica lineal.
-- **Música a medida.** Elegida con la pareja, con cada transición ajustada a la imagen.
+- **Tráiler documental.** Montaje ágil, pensado para volver a verse.
+- **Música a medida.** Cada transición, ajustada a la imagen.
 
 ## El reto
 Estar en los momentos que no se repiten sin que se note.

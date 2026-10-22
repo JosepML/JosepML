@@ -15,18 +15,18 @@ estado: borrador
 ---
 
 ## Tarjeta
-Videoclip de Lovva (dirección de Ángela Manzano). Hice la fotografía y el montaje: siete sets, cada uno con su luz, en una sola atmósfera.
+Una canción sobre aceptarse a uno mismo, y una imagen pensada como refugio.
 
 ## El proyecto
-Una canción sobre aceptarse a uno mismo. La directora pedía una "burbuja" visual donde el artista pudiera mostrarse vulnerable sin perder fuerza.
+Ángela Manzano pedía una burbuja visual donde Lovva pudiera mostrarse vulnerable sin perder fuerza. Para rodarla construimos siete sets.
 
 ## Decisiones clave
 - **Luz puntual, no plana.** Contraluces, destellos suaves y puntos de luz que envuelven al artista.
-- **Cristal y agua.** Reflejos y refracciones para dar textura.
-- **Un esquema por set.** Siete luces distintas, enlazadas en montaje sin romper el ritmo.
+- **Cristal y agua.** Reflejos y refracciones que dan textura a cada plano.
+- **Un esquema por set.** Cada uno de los siete sets tiene su propia luz.
 
 ## El reto
-Que siete espacios distintos se sintieran como un mismo lugar emocional.
+Que siete espacios distintos se sintieran como un mismo lugar. En montaje los enlacé sin romper la atmósfera ni el ritmo.
 
 ## Para revisar con Josep (no se publica)
 - Año de estreno y visualizaciones, si quieres citarlas.

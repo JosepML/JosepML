@@ -15,18 +15,18 @@ estado: borrador
 ---
 
 ## Tarjeta
-Aftermovies de conciertos y orquestas. Grabo y monto a partir de la música, y soy músico.
+Aftermovies que cuentan un directo en pocos minutos: el espectáculo, los artistas y el público.
 
 ## El proyecto
-Un aftermovie cuenta un directo en poco tiempo: el espectáculo, la entrega de los artistas y el público. Clientes: Tamilah y Fluxà (Agüita de Coco y Flama), Mapache Events, Orquesta Azara y Miami Show.
+Para Tamilah y Fluxà (Agüita de Coco y Flama), Mapache Events, Orquesta Azara y Miami Show. Aquí hay tres piezas y un vídeo del proceso.
 
 ## Decisiones clave
 - **Primero el audio.** Un mix con los temas más potentes y cambios de tempo es el esqueleto del vídeo.
-- **Grabar para montar.** Hablo con los artistas, cubro muchos encuadres y tomo el playback.
+- **Grabar para montar.** Hablo con los artistas, cubro muchos encuadres y tomo el playback para que labios e instrumentos cuadren.
 - **Estructura.** Lo más rompedor al principio y lo más espectacular al cierre, con el ambiente del público.
 
 ## El reto
-Que tenga ritmo y cuente el concierto en vez de ser una lista de clips.
+Que tenga ritmo y cuente el concierto, en lugar de ser una lista de clips bonitos.
 
 ## Para revisar con Josep (no se publica)
 - Año de cada evento.

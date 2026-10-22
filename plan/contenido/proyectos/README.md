@@ -15,6 +15,10 @@ Cada ficha tiene que servirle a un cliente: qué era, qué hice yo, qué decisio
 
 El prototipo lee estos archivos a través de `src/app/prototipos/d/textos.ts`, que se regenera con `node scripts/textos-prototipo.mjs` (no se edita a mano).
 
+## Concordancia con la ficha técnica (2026-10-22)
+
+El cuadro de arriba (año, tipo, dirección, productora, mi papel, cámara) y el laurel ya dan los créditos: el texto **no los repite**. La tarjeta es la premisa; *El proyecto*, el encargo y mi aportación; las decisiones no repiten la frase final; y la frase final (`frase` en `datos.ts`) es la conclusión, no un resumen de créditos.
+
 ## Cómo se ve en la ficha (2026-10-22)
 
 Descripción corta arriba; después filas tipo dosier con la etiqueta a la izquierda: *El proyecto*, *Decisiones clave* (tarjetas numeradas: cada punto se escribe `**Título.** Frase.`), *El reto* (frase destacada) y *Resultado* (hechos con laurel). Cierra la `frase` de `datos.ts` con la doble tipografía.

@@ -15,17 +15,17 @@ estado: borrador
 ---
 
 ## Tarjeta
-Mi corto para el ESCAC Dreammakers Contest 2024 de Cupra: lo escribí, dirigí, fotografié, monté y protagonicé. Podio.
+Tres palabras obligatorias, *Ojo*, *Cine* y *Barcelona*, y un mes para convertirlas en un corto.
 
 ## El proyecto
-Tres palabras obligatorias (*Ojo*, *Cine* y *Barcelona*) y un mes para hacer un corto. Las uní con mi relación con el cine, en un relato autobiográfico con voz en off. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín.
+Las uní de la única forma que me parecía honesta: contando mi propia relación con el cine. Es un relato autobiográfico en voz en off, y también me puse delante de la cámara. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín.
 
 ## Decisiones clave
-- **La voz primero.** Una voz en off cálida, con *Amélie* como referencia.
-- **Contraste de ritmos.** Montaje acelerado contra una voz tranquila.
+- **La voz primero.** Escribí la narración antes que nada, con *Amélie* como referencia: cálida y cercana.
+- **Contraste de ritmos.** Un montaje acelerado contra una voz tranquila. De ahí sale la energía.
 
 ## El reto
-Unos 15 días reales para idear, rodar, montar y entregar. Me quedé solo con lo que contaba la historia.
+El plazo real fue de unos 15 días para idear, rodar, montar y entregar. Lo resolví quedándome solo con lo que contaba la historia.
 
 ## Resultado
 - Podio del ESCAC Dreammakers Contest 2024.

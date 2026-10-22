@@ -15,19 +15,19 @@ estado: borrador
 ---
 
 ## Tarjeta
-Corto de ciencia ficción en los años 50, mi proyecto final del ciclo de Realización. Cuatro personas de equipo. Más de 22.000 visualizaciones.
+Un relojero de los años 50 construye una máquina del tiempo, y su yo del futuro vuelve para advertirle.
 
 ## El proyecto
-Un relojero obsesivo construye una máquina del tiempo y su yo del futuro vuelve para advertirle. Idea, guion, dirección y fotografía míos. Equipo: Alba Gisbert, Sebastian Alonso Pérez, Mar Garrido, Lara Ruiz Martín y Andreu Pastor. Música de David Bellido y Jesús Jiménez.
+Lo escribí y lo rodamos casi sin presupuesto, con un equipo mínimo: Alba Gisbert, Sebastian Alonso Pérez, Mar Garrido, Lara Ruiz Martín y Andreu Pastor. Música original de David Bellido y Jesús Jiménez.
 
 ## Decisiones clave
 - **Los 50 sin presupuesto.** Un apartamento antiguo y atrezo de casas de familiares.
 - **Máquina hecha a mano.** Manivela, engranajes y tuberías que funcionan de verdad.
-- **La bombilla como luz principal.** Clave baja con la luz de la propia máquina.
-- **Un clic de reloj.** La música original repite ese motivo durante todo el corto.
+- **La bombilla como luz principal.** Clave baja, con la luz de la propia máquina.
+- **Un clic de reloj.** La música, inspirada en Göransson, repite ese motivo todo el corto.
 
 ## El reto
-Hacer creíble una máquina del tiempo sin dinero.
+Hacer creíble una máquina del tiempo sin dinero. La construimos con piezas que funcionan: el actor la toca y responde en el plano.
 
 ## Resultado
 - Más de 22.000 visualizaciones en YouTube.

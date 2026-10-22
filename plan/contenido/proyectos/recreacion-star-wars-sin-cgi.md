@@ -18,7 +18,7 @@ estado: borrador
 Luke en la Ciudad de las Nubes sin CGI: pilares de alfombra, tuberías de ferretería y fondo de papel perforado.
 
 ## El proyecto
-Llevo una década haciendo contenido de Star Wars. Aquí recreé el plano más icónico de Luke solo con recursos físicos: dirección, fotografía, atrezo y postproducción.
+Llevo una década haciendo contenido de Star Wars. Aquí recreé el plano más icónico de Luke solo con recursos físicos.
 
 ## Decisiones clave
 - **Decorado de ferretería.** Pilares de alfombra forrada de goma EVA y tuberías de fontanería.

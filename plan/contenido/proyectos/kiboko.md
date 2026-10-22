@@ -15,21 +15,21 @@ estado: borrador
 ---
 
 ## Tarjeta
-Docuficción de JUNO Media sobre el bar Kiboko de La Vila Joiosa en los 80. La monté yo. Estreno con aforo completo en junio de 2026.
+El bar Kiboko fue un refugio de libertad y música en La Vila Joiosa de los 80. Esta docuficción lo recupera.
 
 ## El proyecto
-Dirigida por Noelia Fluxá y Julie-Estel Soard. El Kiboko fue un refugio de libertad y música; lo cuenta Ana, una cronista ficticia que hoy investiga su historia. Rodada en ARRI. Yo hice el montaje.
+Lo cuenta Ana, una cronista ficticia que hoy investiga el local. Mi trabajo fue unir tres materiales en un solo relato: entrevistas reales, escenas de ficción y su voz en off.
 
 ## Decisiones clave
-- **Ordenar primero.** Sincronizar, cribar y estructurar horas de entrevistas junto a la ficción.
+- **Ordenar primero.** Sincronizar, cribar y estructurar horas de entrevistas antes de buscar el ritmo.
 - **Testimonio y ficción en diálogo.** Las entrevistas responden a lo que Ana investiga.
-- **Dos ritmos.** Vibrante en el bar de 1986; pausado en las entrevistas.
+- **Dos ritmos.** Vibrante en el bar de 1986, apoyado en la música; pausado en las entrevistas.
 
 ## El reto
-Pasar del testimonio a la ficción sin que se note el salto ni se pierda la emoción.
+El volumen: horas de material en tres formatos distintos, y una historia que no podía perder el foco ni la emoción.
 
 ## Resultado
-- Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa (6 de junio de 2026).
+- Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa, el 6 de junio de 2026.
 - Selección en festivales y nominación a mejor montaje.
 
 ## Para revisar con Josep (no se publica)

@@ -15,10 +15,10 @@ estado: borrador
 ---
 
 ## Tarjeta
-Reels y shorts verticales para Disney, el Consell Valencià de la Joventut y creadores de YouTube.
+Vídeo vertical para Disney, el Consell Valencià de la Joventut y creadores de YouTube.
 
 ## El proyecto
-Más de nueve años haciendo contenido para redes. Un vídeo vertical se juega la atención en tres segundos, y cada cliente necesita sonar distinto.
+Llevo más de nueve años haciendo contenido para redes. Un vertical se juega la atención en tres segundos, y cada cliente necesita sonar distinto.
 
 ## Decisiones clave
 - **Gancho.** Lo más potente, en los tres primeros segundos.
@@ -26,7 +26,7 @@ Más de nueve años haciendo contenido para redes. Un vídeo vertical se juega l
 - **Cada cliente, su tono.** Cambian la luz, el color, los subtítulos y el ritmo.
 
 ## El reto
-Cambiar de registro entre clientes sin perder el ritmo de cada plataforma.
+Cambiar de registro de un cliente a otro sin perder el ritmo de cada plataforma.
 
 ## Resultado
 - Cientos de miles de visualizaciones entre todas las piezas.

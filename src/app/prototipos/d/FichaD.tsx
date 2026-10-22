@@ -27,11 +27,11 @@ function Inline({ texto }: { texto: string }) {
   );
 }
 
-/** Fila de la ficha: etiqueta fija a la izquierda en escritorio y el contenido a la derecha */
+/** Fila de la ficha: etiqueta a la izquierda en escritorio y el contenido a la derecha */
 function Bloque({ etiqueta, children }: { etiqueta: string; children: React.ReactNode }) {
   return (
     <div className="grid gap-5 border-t border-[var(--d-linea)] pt-10 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12">
-      <Revelar className="lg:sticky lg:top-28 lg:self-start">
+      <Revelar>
         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--d-acento)] lg:pt-2">{etiqueta}</p>
       </Revelar>
       <Revelar retraso={0.06}>{children}</Revelar>
@@ -125,7 +125,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
           <div className="mx-auto max-w-6xl space-y-14">
             {textos.proyecto.length > 0 && (
               <Bloque etiqueta="El proyecto">
-                <div className="space-y-4 text-[clamp(1.1rem,1.5vw,1.3rem)] leading-[1.6] [text-wrap:pretty]">
+                <div className="space-y-4 text-[17px] leading-[1.65] sm:text-lg [text-wrap:pretty]">
                   {textos.proyecto.map((x) => (
                     <p key={x}>
                       <Inline texto={x} />
@@ -143,7 +143,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
                       <article className="cristal h-full rounded-[28px] p-6 sm:p-7">
                         <span className="text-sm font-semibold tabular-nums text-[var(--d-acento)]">{String(i + 1).padStart(2, "0")}</span>
                         {d.titulo && <h3 className="mt-3 text-xl font-extrabold leading-[1.2] tracking-[-0.03em]">{d.titulo}</h3>}
-                        <p className="mt-2 text-[15px] leading-[1.6] text-[var(--d-suave)] [text-wrap:pretty]">
+                        <p className="mt-2 text-base leading-[1.6] text-[var(--d-suave)] [text-wrap:pretty]">
                           <Inline texto={d.texto} />
                         </p>
                       </article>
@@ -155,7 +155,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
 
             {textos.reto && (
               <Bloque etiqueta="El reto">
-                <p className="text-[clamp(1.3rem,2.1vw,1.75rem)] font-semibold leading-[1.35] tracking-[-0.02em] [text-wrap:pretty]">
+                <p className="text-[17px] leading-[1.65] sm:text-lg [text-wrap:pretty]">
                   <Inline texto={textos.reto} />
                 </p>
               </Bloque>
@@ -165,7 +165,7 @@ export function FichaD({ proyecto: p }: { proyecto: ProyectoD }) {
               <Bloque etiqueta="Resultado">
                 <ul className="grid gap-3 sm:grid-cols-2">
                   {textos.resultado.map((r) => (
-                    <li key={r} className="cristal cristal-fuerte sm:[&:last-child:nth-child(odd)]:col-span-2 flex items-start gap-3 rounded-[24px] p-5 text-[17px] font-semibold leading-[1.4]">
+                    <li key={r} className="cristal cristal-fuerte sm:[&:last-child:nth-child(odd)]:col-span-2 flex items-start gap-3 rounded-[24px] p-5 text-[17px] leading-[1.5] sm:text-lg">
                       <Icono nombre="laurel" className="mt-0.5 h-5 w-5 shrink-0 text-[var(--d-acento)]" />
                       <span>
                         <Inline texto={r} />

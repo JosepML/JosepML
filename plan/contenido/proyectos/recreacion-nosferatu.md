@@ -15,10 +15,10 @@ estado: borrador
 ---
 
 ## Tarjeta
-Una escena de *Nosferatu* recreada con Comboi Films, con cartón, una rampa de madera y un soplador de hojas.
+Una escena de *Nosferatu* recreada con cartón, una rampa de madera y un soplador de hojas.
 
 ## El proyecto
-En mi canal recreo planos de cine con muy pocos medios. Aquí, la sombra del vampiro en la ventana y la protagonista que levita. Yo dirigí y coordiné.
+En mi canal recreo planos de cine con muy pocos medios. Esta la hicimos con Comboi Films: la sombra del vampiro en la ventana y la protagonista que levita.
 
 ## Decisiones clave
 - **La sombra.** Silueta de cartón y cinta, escalada a la ventana y proyectada con un spotlight.
@@ -26,7 +26,7 @@ En mi canal recreo planos de cine con muy pocos medios. Aquí, la sombra del vam
 - **Luz general.** Aputure 300D con softbox.
 
 ## El reto
-La cortina debía moverse con el viento y esa noche no soplaba. Hilos y cartones no funcionaron; un soplador de hojas dio el viento dosificable, y hilos finos movían la silueta al compás.
+La cortina debía moverse con el viento y esa noche no soplaba. Hilos y cartones no funcionaron; un soplador de hojas dio un viento dosificable, e hilos finos movían la silueta al compás.
 
 ## Resultado
 - Un plano casi idéntico al original con unos 100 € de material.

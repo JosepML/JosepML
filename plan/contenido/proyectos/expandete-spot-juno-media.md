@@ -15,18 +15,18 @@ estado: borrador
 ---
 
 ## Tarjeta
-Spot narrativo para JUNO Media: guion, casting, localizaciones, dirección y montaje míos. Pieza de muestra, no comercializada.
+Un spot que no parece un anuncio hasta el último plano.
 
 ## El proyecto
-JUNO Media quería contar su lema, "cine para sanar", sin que pareciera un anuncio. Escribí una fábula: una niña con ideas infinitas ayuda a su vecino, bloqueado, a liberar las suyas. La fotografía fue de Juanfran Jiménez, con quien preparé el rodaje.
+JUNO Media quería contar su lema, «cine para sanar». Escribí una fábula: una niña con ideas infinitas ayuda a su vecino, bloqueado, a liberar las suyas. También hice el casting y busqué las localizaciones; la fotografía fue de Juanfran Jiménez. Es una pieza de muestra que no llegó a comercializarse.
 
 ## Decisiones clave
-- **Giro final.** Tres actos, y nadie sabe que es publicidad hasta que aparecen las fundadoras.
-- **Dos casas enfrentadas.** La niña y el adulto se miran a través de la ventana.
+- **Giro final.** Tres actos, y la marca solo aparece al final, con sus fundadoras haciendo de sí mismas.
+- **Dos casas enfrentadas.** La niña y el adulto se miran a través de la ventana: esa mirada sostiene la historia.
 - **Casting con oficio.** Amaia Miranda, actriz infantil con experiencia, para rodar rápido y natural.
 
 ## El reto
-Encontrar las dos viviendas que la historia necesitaba.
+Encontrar dos viviendas enfrentadas con las ventanas a la vista. Sin esa geografía, la historia no existía.
 
 ## Para revisar con Josep (no se publica)
 - Año de rodaje y cómo resolviste las localizaciones.

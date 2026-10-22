@@ -10,9 +10,9 @@ export type TextosProyecto = {
 
 export const TEXTOS: Record<string, TextosProyecto> = {
   "100-baladas-arkano": {
-    "tarjeta": "Videoclip de Arkano producido por JUNO Media. Lo dirigí, llevé la cámara y lo monté. Más de 17.000 visualizaciones.",
+    "tarjeta": "Una canción de amor de Arkano, escrita con su pareja y estrenada un 14 de febrero.",
     "proyecto": [
-      "*100 Baladas* es un single personal de Arkano, escrito con su pareja y estrenado el 14 de febrero. La idea era de Álex Gómez; yo la adapté al formato y al ritmo de un videoclip. Producción de Noelia Fluxà y Julie-Estel Soard."
+      "La idea de partida era de Álex Gómez: una pareja que se va acercando a lo largo del tema. Mi trabajo fue convertirla en un videoclip rodable y con ritmo, con la producción de Noelia Fluxà y Julie-Estel Soard."
     ],
     "decisiones": [
       {
@@ -21,18 +21,18 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "Montaje a la canción",
-        "texto": "Los cortes siguen sus cambios, no un ritmo fijo."
+        "texto": "Los cortes siguen los cambios del tema, no un ritmo fijo."
       }
     ],
-    "reto": "Dirigir una idea que no era mía sin perder lo que la hacía especial.",
+    "reto": "Dirigir una idea ajena sin perder lo que la hacía especial. La ajusté a la duración y al pulso de un videoclip sin tocar su centro: el acercamiento.",
     "resultado": [
       "Más de 17.000 visualizaciones en YouTube."
     ]
   },
   "bodas": {
-    "tarjeta": "Bodas contadas como un tráiler documental de unos 20 minutos, con música elegida con cada pareja. Por privacidad, aquí solo hay fotogramas.",
+    "tarjeta": "Bodas contadas como un tráiler documental, no como una crónica del día.",
     "proyecto": [
-      "He grabado muchas bodas, siempre con muy buenas valoraciones. Cubro el día entero y monto la película."
+      "He grabado muchas bodas, siempre con muy buenas valoraciones. La película principal dura unos 20 minutos, con música elegida con cada pareja. Por privacidad, aquí solo hay fotogramas."
     ],
     "decisiones": [
       {
@@ -41,20 +41,20 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "Tráiler documental",
-        "texto": "Unos 20 minutos ágiles en lugar de una crónica lineal."
+        "texto": "Montaje ágil, pensado para volver a verse."
       },
       {
         "titulo": "Música a medida",
-        "texto": "Elegida con la pareja, con cada transición ajustada a la imagen."
+        "texto": "Cada transición, ajustada a la imagen."
       }
     ],
     "reto": "Estar en los momentos que no se repiten sin que se note.",
     "resultado": []
   },
   "conciertos": {
-    "tarjeta": "Aftermovies de conciertos y orquestas. Grabo y monto a partir de la música, y soy músico.",
+    "tarjeta": "Aftermovies que cuentan un directo en pocos minutos: el espectáculo, los artistas y el público.",
     "proyecto": [
-      "Un aftermovie cuenta un directo en poco tiempo: el espectáculo, la entrega de los artistas y el público. Clientes: Tamilah y Fluxà (Agüita de Coco y Flama), Mapache Events, Orquesta Azara y Miami Show."
+      "Para Tamilah y Fluxà (Agüita de Coco y Flama), Mapache Events, Orquesta Azara y Miami Show. Aquí hay tres piezas y un vídeo del proceso."
     ],
     "decisiones": [
       {
@@ -63,25 +63,25 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "Grabar para montar",
-        "texto": "Hablo con los artistas, cubro muchos encuadres y tomo el playback."
+        "texto": "Hablo con los artistas, cubro muchos encuadres y tomo el playback para que labios e instrumentos cuadren."
       },
       {
         "titulo": "Estructura",
         "texto": "Lo más rompedor al principio y lo más espectacular al cierre, con el ambiente del público."
       }
     ],
-    "reto": "Que tenga ritmo y cuente el concierto en vez de ser una lista de clips.",
+    "reto": "Que tenga ritmo y cuente el concierto, en lugar de ser una lista de clips bonitos.",
     "resultado": []
   },
   "el-cirujano": {
-    "tarjeta": "Thriller psicológico de Impulsos Creativos, con la luz y el color como mapa de la mente de un asesino.",
+    "tarjeta": "Una inspectora persigue a un asesino que convierte a sus víctimas en obras de arte, y las pistas apuntan a su compañero.",
     "proyecto": [
-      "Una inspectora persigue a un asesino en serie que convierte a sus víctimas en obras de arte, y las pistas apuntan a su compañero. Dirigido por Kevin Ramos y Emilio Graña. Yo hice la dirección de fotografía."
+      "Un thriller psicológico. Propuse dejar el naturalismo a un lado y que la luz y el color nos metieran en la cabeza del asesino."
     ],
     "decisiones": [
       {
         "titulo": "Luz sin fuente",
-        "texto": "En los espacios del asesino la luz no sale de lámparas ni ventanas: sale de su mente."
+        "texto": "En los espacios del crimen no hay lámparas ni ventanas que justifiquen la luz."
       },
       {
         "titulo": "Rojo infierno",
@@ -89,18 +89,18 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "Investigación fría",
-        "texto": "Una luz analítica que marca la doble vida de los personajes."
+        "texto": "Una luz analítica para la parte policial, que marca la doble vida de los personajes."
       }
     ],
-    "reto": "Que el mundo casi sobrenatural de los crímenes y la investigación realista convivieran sin romper la tensión. Lo resolví separándolos por luz y color.",
+    "reto": "Que lo casi sobrenatural de los crímenes y lo realista de la investigación convivieran sin bajar la tensión. Los separé por luz y color.",
     "resultado": [
       "Mejor fotografía en el On Duty International Film Festival."
     ]
   },
   "el-viajero": {
-    "tarjeta": "Corto de ciencia ficción en los años 50, mi proyecto final del ciclo de Realización. Cuatro personas de equipo. Más de 22.000 visualizaciones.",
+    "tarjeta": "Un relojero de los años 50 construye una máquina del tiempo, y su yo del futuro vuelve para advertirle.",
     "proyecto": [
-      "Un relojero obsesivo construye una máquina del tiempo y su yo del futuro vuelve para advertirle. Idea, guion, dirección y fotografía míos. Equipo: Alba Gisbert, Sebastian Alonso Pérez, Mar Garrido, Lara Ruiz Martín y Andreu Pastor. Música de David Bellido y Jesús Jiménez."
+      "Lo escribí y lo rodamos casi sin presupuesto, con un equipo mínimo: Alba Gisbert, Sebastian Alonso Pérez, Mar Garrido, Lara Ruiz Martín y Andreu Pastor. Música original de David Bellido y Jesús Jiménez."
     ],
     "decisiones": [
       {
@@ -113,22 +113,22 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "La bombilla como luz principal",
-        "texto": "Clave baja con la luz de la propia máquina."
+        "texto": "Clave baja, con la luz de la propia máquina."
       },
       {
         "titulo": "Un clic de reloj",
-        "texto": "La música original repite ese motivo durante todo el corto."
+        "texto": "La música, inspirada en Göransson, repite ese motivo todo el corto."
       }
     ],
-    "reto": "Hacer creíble una máquina del tiempo sin dinero.",
+    "reto": "Hacer creíble una máquina del tiempo sin dinero. La construimos con piezas que funcionan: el actor la toca y responde en el plano.",
     "resultado": [
       "Más de 22.000 visualizaciones en YouTube."
     ]
   },
   "ep-oscuridad-adrian-munoz": {
-    "tarjeta": "Siete visualizers y un tráiler para el EP de Adrián Muñoz (JUNO Media). Hice la dirección de fotografía. Más de 1,39 millones de visualizaciones.",
+    "tarjeta": "Un EP sobre una pareja que se rompe, contado en siete visualizers y un tráiler.",
     "proyecto": [
-      "*Oscuridad* cuenta cómo se rompe una pareja: el enfado, la soledad, la ruptura, las cicatrices y la resignación. Una canción, un vídeo."
+      "Adrián Muñoz recorre el enfado, la soledad, la ruptura, las cicatrices y la resignación. Mi trabajo fue pensar la imagen de la serie entera, no de cada vídeo por separado."
     ],
     "decisiones": [
       {
@@ -141,18 +141,18 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "Una luz por emoción",
-        "texto": "Contraste cuidado y atmósfera densa en cada bucle."
+        "texto": "Un esquema distinto para cada bucle, siempre con contraste cuidado."
       }
     ],
-    "reto": "Siete vídeos que funcionan sueltos en redes y que, juntos, forman un solo descenso.",
+    "reto": "Siete piezas que se ven sueltas en redes. El paso del color al blanco y negro le da a cada una su identidad y, a la vez, las ordena.",
     "resultado": [
       "1.392.400 visualizaciones entre YouTube, Instagram y Spotify."
     ]
   },
   "eventos-deportivos": {
-    "tarjeta": "Cobertura de ciclismo de élite, como la Shimano Super Cup Massi en La Nucía, para Ocisport. Piezas para redes y para televisión.",
+    "tarjeta": "Ciclismo de élite, como la Shimano Super Cup Massi en La Nucía: la acción pasa una sola vez y muy rápido.",
     "proyecto": [
-      "En una carrera la acción pasa una sola vez y muy rápido. Grabo a pie de pista y monto."
+      "Para Ocisport, con piezas para redes y para televisión."
     ],
     "decisiones": [
       {
@@ -172,40 +172,40 @@ export const TEXTOS: Record<string, TextosProyecto> = {
         "texto": "Ruedas, esfuerzo y público sobre una base musical fuerte."
       }
     ],
-    "reto": "Estar en el sitio justo en el momento justo y condensar la carrera sin perder tensión.",
+    "reto": "Estar en el sitio justo en el momento justo y, luego, condensar la carrera sin perder tensión.",
     "resultado": []
   },
   "expandete-spot-juno-media": {
-    "tarjeta": "Spot narrativo para JUNO Media: guion, casting, localizaciones, dirección y montaje míos. Pieza de muestra, no comercializada.",
+    "tarjeta": "Un spot que no parece un anuncio hasta el último plano.",
     "proyecto": [
-      "JUNO Media quería contar su lema, \"cine para sanar\", sin que pareciera un anuncio. Escribí una fábula: una niña con ideas infinitas ayuda a su vecino, bloqueado, a liberar las suyas. La fotografía fue de Juanfran Jiménez, con quien preparé el rodaje."
+      "JUNO Media quería contar su lema, «cine para sanar». Escribí una fábula: una niña con ideas infinitas ayuda a su vecino, bloqueado, a liberar las suyas. También hice el casting y busqué las localizaciones; la fotografía fue de Juanfran Jiménez. Es una pieza de muestra que no llegó a comercializarse."
     ],
     "decisiones": [
       {
         "titulo": "Giro final",
-        "texto": "Tres actos, y nadie sabe que es publicidad hasta que aparecen las fundadoras."
+        "texto": "Tres actos, y la marca solo aparece al final, con sus fundadoras haciendo de sí mismas."
       },
       {
         "titulo": "Dos casas enfrentadas",
-        "texto": "La niña y el adulto se miran a través de la ventana."
+        "texto": "La niña y el adulto se miran a través de la ventana: esa mirada sostiene la historia."
       },
       {
         "titulo": "Casting con oficio",
         "texto": "Amaia Miranda, actriz infantil con experiencia, para rodar rápido y natural."
       }
     ],
-    "reto": "Encontrar las dos viviendas que la historia necesitaba.",
+    "reto": "Encontrar dos viviendas enfrentadas con las ventanas a la vista. Sin esa geografía, la historia no existía.",
     "resultado": []
   },
   "kiboko": {
-    "tarjeta": "Docuficción de JUNO Media sobre el bar Kiboko de La Vila Joiosa en los 80. La monté yo. Estreno con aforo completo en junio de 2026.",
+    "tarjeta": "El bar Kiboko fue un refugio de libertad y música en La Vila Joiosa de los 80. Esta docuficción lo recupera.",
     "proyecto": [
-      "Dirigida por Noelia Fluxá y Julie-Estel Soard. El Kiboko fue un refugio de libertad y música; lo cuenta Ana, una cronista ficticia que hoy investiga su historia. Rodada en ARRI. Yo hice el montaje."
+      "Lo cuenta Ana, una cronista ficticia que hoy investiga el local. Mi trabajo fue unir tres materiales en un solo relato: entrevistas reales, escenas de ficción y su voz en off."
     ],
     "decisiones": [
       {
         "titulo": "Ordenar primero",
-        "texto": "Sincronizar, cribar y estructurar horas de entrevistas junto a la ficción."
+        "texto": "Sincronizar, cribar y estructurar horas de entrevistas antes de buscar el ritmo."
       },
       {
         "titulo": "Testimonio y ficción en diálogo",
@@ -213,19 +213,19 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "Dos ritmos",
-        "texto": "Vibrante en el bar de 1986; pausado en las entrevistas."
+        "texto": "Vibrante en el bar de 1986, apoyado en la música; pausado en las entrevistas."
       }
     ],
-    "reto": "Pasar del testimonio a la ficción sin que se note el salto ni se pierda la emoción.",
+    "reto": "El volumen: horas de material en tres formatos distintos, y una historia que no podía perder el foco ni la emoción.",
     "resultado": [
-      "Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa (6 de junio de 2026).",
+      "Estreno con aforo completo en el Teatre Auditori de La Vila Joiosa, el 6 de junio de 2026.",
       "Selección en festivales y nominación a mejor montaje."
     ]
   },
   "no-se-esta-tan-mal-lovva": {
-    "tarjeta": "Videoclip de Lovva (dirección de Ángela Manzano). Hice la fotografía y el montaje: siete sets, cada uno con su luz, en una sola atmósfera.",
+    "tarjeta": "Una canción sobre aceptarse a uno mismo, y una imagen pensada como refugio.",
     "proyecto": [
-      "Una canción sobre aceptarse a uno mismo. La directora pedía una \"burbuja\" visual donde el artista pudiera mostrarse vulnerable sin perder fuerza."
+      "Ángela Manzano pedía una burbuja visual donde Lovva pudiera mostrarse vulnerable sin perder fuerza. Para rodarla construimos siete sets."
     ],
     "decisiones": [
       {
@@ -234,20 +234,20 @@ export const TEXTOS: Record<string, TextosProyecto> = {
       },
       {
         "titulo": "Cristal y agua",
-        "texto": "Reflejos y refracciones para dar textura."
+        "texto": "Reflejos y refracciones que dan textura a cada plano."
       },
       {
         "titulo": "Un esquema por set",
-        "texto": "Siete luces distintas, enlazadas en montaje sin romper el ritmo."
+        "texto": "Cada uno de los siete sets tiene su propia luz."
       }
     ],
-    "reto": "Que siete espacios distintos se sintieran como un mismo lugar emocional.",
+    "reto": "Que siete espacios distintos se sintieran como un mismo lugar. En montaje los enlacé sin romper la atmósfera ni el ritmo.",
     "resultado": []
   },
   "recreacion-el-padrino": {
-    "tarjeta": "El plano de Vito Corleone en su despacho, con la luz de Gordon Willis, en un sótano y con la rejilla de una estufa como ventana.",
+    "tarjeta": "El despacho de Vito Corleone, con la rejilla de una estufa como ventana.",
     "proyecto": [
-      "Quise estudiar cómo ilumina Willis recreando su plano más conocido. Dirigí, fotografié y construí el set."
+      "Quise estudiar cómo ilumina Gordon Willis recreando su plano más conocido. Construí el set desde cero en un sótano."
     ],
     "decisiones": [
       {
@@ -271,9 +271,9 @@ export const TEXTOS: Record<string, TextosProyecto> = {
     "resultado": []
   },
   "recreacion-nosferatu": {
-    "tarjeta": "Una escena de *Nosferatu* recreada con Comboi Films, con cartón, una rampa de madera y un soplador de hojas.",
+    "tarjeta": "Una escena de *Nosferatu* recreada con cartón, una rampa de madera y un soplador de hojas.",
     "proyecto": [
-      "En mi canal recreo planos de cine con muy pocos medios. Aquí, la sombra del vampiro en la ventana y la protagonista que levita. Yo dirigí y coordiné."
+      "En mi canal recreo planos de cine con muy pocos medios. Esta la hicimos con Comboi Films: la sombra del vampiro en la ventana y la protagonista que levita."
     ],
     "decisiones": [
       {
@@ -289,15 +289,15 @@ export const TEXTOS: Record<string, TextosProyecto> = {
         "texto": "Aputure 300D con softbox."
       }
     ],
-    "reto": "La cortina debía moverse con el viento y esa noche no soplaba. Hilos y cartones no funcionaron; un soplador de hojas dio el viento dosificable, y hilos finos movían la silueta al compás.",
+    "reto": "La cortina debía moverse con el viento y esa noche no soplaba. Hilos y cartones no funcionaron; un soplador de hojas dio un viento dosificable, e hilos finos movían la silueta al compás.",
     "resultado": [
       "Un plano casi idéntico al original con unos 100 € de material."
     ]
   },
   "recreacion-star-wars-luke-vader": {
-    "tarjeta": "El duelo de Luke y Vader en la Ciudad Nube, para el 45.º aniversario de *El Imperio Contraataca*: maqueta, siluetas y sables fotograma a fotograma.",
+    "tarjeta": "El duelo de Luke y Vader con una maqueta, siluetas y sables añadidos fotograma a fotograma.",
     "proyecto": [
-      "Idea, dirección, fotografía y postproducción míos, con medios caseros."
+      "Para el 45.º aniversario de *El Imperio Contraataca* recreé el duelo final en la Ciudad Nube, con medios caseros."
     ],
     "decisiones": [
       {
@@ -323,7 +323,7 @@ export const TEXTOS: Record<string, TextosProyecto> = {
   "recreacion-star-wars-sin-cgi": {
     "tarjeta": "Luke en la Ciudad de las Nubes sin CGI: pilares de alfombra, tuberías de ferretería y fondo de papel perforado.",
     "proyecto": [
-      "Llevo una década haciendo contenido de Star Wars. Aquí recreé el plano más icónico de Luke solo con recursos físicos: dirección, fotografía, atrezo y postproducción."
+      "Llevo una década haciendo contenido de Star Wars. Aquí recreé el plano más icónico de Luke solo con recursos físicos."
     ],
     "decisiones": [
       {
@@ -343,9 +343,9 @@ export const TEXTOS: Record<string, TextosProyecto> = {
     "resultado": []
   },
   "reels-redes-sociales": {
-    "tarjeta": "Reels y shorts verticales para Disney, el Consell Valencià de la Joventut y creadores de YouTube.",
+    "tarjeta": "Vídeo vertical para Disney, el Consell Valencià de la Joventut y creadores de YouTube.",
     "proyecto": [
-      "Más de nueve años haciendo contenido para redes. Un vídeo vertical se juega la atención en tres segundos, y cada cliente necesita sonar distinto."
+      "Llevo más de nueve años haciendo contenido para redes. Un vertical se juega la atención en tres segundos, y cada cliente necesita sonar distinto."
     ],
     "decisiones": [
       {
@@ -361,24 +361,24 @@ export const TEXTOS: Record<string, TextosProyecto> = {
         "texto": "Cambian la luz, el color, los subtítulos y el ritmo."
       }
     ],
-    "reto": "Cambiar de registro entre clientes sin perder el ritmo de cada plataforma.",
+    "reto": "Cambiar de registro de un cliente a otro sin perder el ritmo de cada plataforma.",
     "resultado": [
       "Cientos de miles de visualizaciones entre todas las piezas."
     ]
   },
   "sin-piedad": {
-    "tarjeta": "Corto de Ángela Manzano sobre el abuso laboral. Hice la fotografía, casi toda sobre un ciclorama blanco. En preparación para festivales.",
+    "tarjeta": "Un hombre machacado por su trabajo decide secuestrar a su jefa.",
     "proyecto": [
-      "Un hombre machacado en su trabajo decide secuestrar a su jefa. Se cuenta desde su cabeza, con tono onírico."
+      "Ángela Manzano lo cuenta desde dentro de su cabeza, con tono onírico. Mi trabajo fue traducir ese estado mental a luz y composición. Aún no es público: se prepara para festivales, por eso aquí solo hay fotogramas."
     ],
     "decisiones": [
       {
-        "titulo": "Un ciclorama, muchos lugares",
-        "texto": "Cada espacio lo crea la luz."
-      },
-      {
         "titulo": "Oficina como limbo",
         "texto": "Luz uniforme y fría sobre el blanco."
+      },
+      {
+        "titulo": "Confrontación",
+        "texto": "Prácticas cálidas que fingen normalidad, con sombras profundas sobre él."
       },
       {
         "titulo": "Prisión mental",
@@ -389,47 +389,43 @@ export const TEXTOS: Record<string, TextosProyecto> = {
         "texto": "Contraluz intenso, como un halo teatral."
       }
     ],
-    "reto": "Que un solo espacio blanco pareciera varios lugares con carga emocional distinta.",
+    "reto": "Rodamos casi todo sobre un ciclorama blanco. Había que convertir un solo espacio neutro en varios lugares, cada uno con su carga emocional.",
     "resultado": []
   },
   "sin-tiempo-peiko": {
-    "tarjeta": "Videoclip narrativo de Peiko, proyecto de estudios. Lo dirigí y lo fotografié: dos casas opuestas y una celda.",
+    "tarjeta": "Una canción sobre el paso del tiempo y la distancia entre el éxito y el fracaso, contada como un drama.",
     "proyecto": [
-      "Una canción sobre el paso del tiempo y la distancia entre el éxito y el fracaso, contada con una historia dramática. Rodado con Canon C200 y un 50 mm fijo."
+      "Peiko canta y, a la vez, vive la caída de su personaje. Pasé la canción a un plan de rodaje: cada movimiento de cámara y cada óptica acompañan ese arco."
     ],
     "decisiones": [
       {
         "titulo": "Dos casas opuestas",
-        "texto": "Una moderna y otra podrida, para mostrar la fractura del personaje."
-      },
-      {
-        "titulo": "Plan desde la canción",
-        "texto": "Cámara y óptica al servicio del arco del personaje."
+        "texto": "Una moderna y lujosa, otra podrida: dos atmósferas para la fractura del personaje."
       },
       {
         "titulo": "Final en una celda",
-        "texto": "Luz más fría y Peiko agarrado a los barrotes."
+        "texto": "La luz se enfría y Peiko termina cantando agarrado a los barrotes."
       }
     ],
     "reto": "Que la caída se viera en la imagen y no solo en la letra.",
     "resultado": []
   },
   "y-el-ano-que-viene-que": {
-    "tarjeta": "Mi corto para el ESCAC Dreammakers Contest 2024 de Cupra: lo escribí, dirigí, fotografié, monté y protagonicé. Podio.",
+    "tarjeta": "Tres palabras obligatorias, *Ojo*, *Cine* y *Barcelona*, y un mes para convertirlas en un corto.",
     "proyecto": [
-      "Tres palabras obligatorias (*Ojo*, *Cine* y *Barcelona*) y un mes para hacer un corto. Las uní con mi relación con el cine, en un relato autobiográfico con voz en off. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín."
+      "Las uní de la única forma que me parecía honesta: contando mi propia relación con el cine. Es un relato autobiográfico en voz en off, y también me puse delante de la cámara. Me ayudaron Adrià Mira Lozano y Lara Ruiz Martín."
     ],
     "decisiones": [
       {
         "titulo": "La voz primero",
-        "texto": "Una voz en off cálida, con *Amélie* como referencia."
+        "texto": "Escribí la narración antes que nada, con *Amélie* como referencia: cálida y cercana."
       },
       {
         "titulo": "Contraste de ritmos",
-        "texto": "Montaje acelerado contra una voz tranquila."
+        "texto": "Un montaje acelerado contra una voz tranquila. De ahí sale la energía."
       }
     ],
-    "reto": "Unos 15 días reales para idear, rodar, montar y entregar. Me quedé solo con lo que contaba la historia.",
+    "reto": "El plazo real fue de unos 15 días para idear, rodar, montar y entregar. Lo resolví quedándome solo con lo que contaba la historia.",
     "resultado": [
       "Podio del ESCAC Dreammakers Contest 2024.",
       "Acceso a becas de la ESCAC."

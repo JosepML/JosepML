@@ -15,10 +15,10 @@ estado: borrador
 ---
 
 ## Tarjeta
-Cobertura de ciclismo de élite, como la Shimano Super Cup Massi en La Nucía, para Ocisport. Piezas para redes y para televisión.
+Ciclismo de élite, como la Shimano Super Cup Massi en La Nucía: la acción pasa una sola vez y muy rápido.
 
 ## El proyecto
-En una carrera la acción pasa una sola vez y muy rápido. Grabo a pie de pista y monto.
+Para Ocisport, con piezas para redes y para televisión.
 
 ## Decisiones clave
 - **Elegir sitio.** Me coloco en los puntos más espectaculares del circuito.
@@ -27,7 +27,7 @@ En una carrera la acción pasa una sola vez y muy rápido. Grabo a pie de pista 
 - **Sonido realzado.** Ruedas, esfuerzo y público sobre una base musical fuerte.
 
 ## El reto
-Estar en el sitio justo en el momento justo y condensar la carrera sin perder tensión.
+Estar en el sitio justo en el momento justo y, luego, condensar la carrera sin perder tensión.
 
 ## Para revisar con Josep (no se publica)
 - Año de la competición.
