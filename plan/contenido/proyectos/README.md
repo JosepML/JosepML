@@ -1,6 +1,6 @@
 # Textos de proyectos y artículos (tarea E)
 
-Estado: **borrador para revisión de Josep**. Josep revisa en tandas de 4 o 5 proyectos. Hasta su visto bueno, los archivos no se cargan en la base de datos.
+Estado: **borrador para revisión de Josep**. Respuestas de Josep del 2026-10-22 ya aplicadas (podio, 17.000 visualizaciones, spot no comercializado, título de Nosferatu). Josep revisa en tandas de 4 o 5 proyectos. Hasta su visto bueno, los archivos no se cargan en la base de datos.
 
 ## Cómo está hecho cada archivo
 
@@ -14,23 +14,23 @@ Los artículos del blog están en `../articulos/`, con el mismo formato.
 
 | # | Slug | Tipo | Servicios | Destacado | Pendiente principal |
 | --- | --- | --- | --- | --- | --- |
-| 1 | y-el-ano-que-viene-que | Cortometraje | Filmmaker, DF, Edición | Sí (1) | Podio o finalista; cámara |
-| 2 | 100-baladas-arkano | Videoclip | Filmmaker, DF, Edición | Sí (2) | Cifra de YouTube; año |
+| 1 | y-el-ano-que-viene-que | Cortometraje | Filmmaker, DF, Edición | Sí (1) | Cámara |
+| 2 | 100-baladas-arkano | Videoclip | Filmmaker, DF, Edición | Sí (2) | Año; cámara |
 | 3 | el-viajero | Cortometraje | Filmmaker, DF, Edición | No | Año; cámara |
 | 4 | kiboko | Documental | Edición | Sí (6) | Festivales; Arca Films |
 | 5 | no-se-esta-tan-mal-lovva | Videoclip | DF, Edición | Sí (4) | Productora; año |
 | 6 | el-cirujano | Cortometraje | DF | Sí (3) | Año del premio |
 | 7 | sin-piedad | Cortometraje | DF | No | Sin vídeo público |
-| 8 | expandete-spot-juno-media | Publicidad | Filmmaker, Edición | No | Si está publicado |
-| 9 | ep-oscuridad-adrian-munoz | Videoclip | DF | Sí (5) | Plataformas; año |
+| 8 | expandete-spot-juno-media | Publicidad | Filmmaker, Edición | No | Año; director de fotografía (Juan Fran) |
+| 9 | ep-oscuridad-adrian-munoz | Videoclip | DF | Sí (5) | Año; cámara |
 | 10 | sin-tiempo-peiko | Videoclip | Filmmaker, DF, Edición | No | Año; cámara |
 | 11 | conciertos | Eventos | Filmmaker, Edición | No | Años y clientes |
 | 12 | bodas | Eventos | Filmmaker, Edición | No | Sin vídeo público; privacidad |
 | 13 | eventos-deportivos | Eventos | Filmmaker, Edición | No | Competición y año |
 | 14 | reels-redes-sociales | Redes sociales | Filmmaker, Edición | No | Permisos de Disney y Consell |
-| 15 | recreacion-nosferatu | Recreación | DF, Edición | No | Título con "100€" |
-| 16 | recreacion-star-wars-luke-vader | Recreación | DF, Edición | No | Año: 2025 (a confirmar) |
-| 17 | recreacion-el-padrino | Recreación | DF, Edición | No | Mención al daltonismo |
+| 15 | recreacion-nosferatu | Recreación | DF, Edición | No | Año |
+| 16 | recreacion-star-wars-luke-vader | Recreación | DF, Edición | No | Año (2025 por el aniversario) |
+| 17 | recreacion-el-padrino | Recreación | DF, Edición | No | Mención al daltonismo (se mantiene salvo que Josep la quite) |
 | 18 | recreacion-star-wars-sin-cgi | Recreación | DF, Edición | No | Lugar del plano |
 
 Orden propuesto en Trabajos ("Todos"), tomado del mapa: 1, 2, 6, 5, 9, 4, 8, 10, 3, 7, 13, 11, 14, 12. Las recreaciones solo aparecen con su filtro.
