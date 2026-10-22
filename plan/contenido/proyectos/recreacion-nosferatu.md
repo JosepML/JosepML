@@ -39,6 +39,5 @@ Probamos hilos y cartones, pero el movimiento nunca se veía natural. La frustra
 El plano final se parece muchísimo al original. Más que una recreación, es una muestra de lo que se puede lograr con pasión, creatividad y trabajo en equipo, sin grandes presupuestos.
 
 ## Para revisar con Josep (no se publica)
-- El título incluye "con 100€". ¿Quieres mantenerlo? Es un dato del proyecto, no una tarifa, pero la web no muestra precios.
 - Año de rodaje.
 - Imagen del plano original para el deslizador antes/después.

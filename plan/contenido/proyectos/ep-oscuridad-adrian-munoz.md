@@ -39,4 +39,3 @@ Los vídeos han sumado 1.392.400 visualizaciones en total en las plataformas don
 ## Para revisar con Josep (no se publica)
 - Confirmar las plataformas y la fecha de publicación.
 - Cámara y óptica usadas.
-- ¿Quieres citar la cifra de visualizaciones tal cual, o prefieres no mostrarla?

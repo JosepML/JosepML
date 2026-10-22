@@ -32,10 +32,9 @@ El clip es dinámico y sigue la evolución de la pareja: se van acercando cada v
 Adaptar una idea que ya estaba escrita. Hay que respetar lo que alguien ha imaginado y, al mismo tiempo, traducirlo a un formato que funcione. Ajustar el ritmo de la edición a la canción fue el trabajo más fino del proyecto.
 
 ## El resultado
-Para mí, trabajar con un artista como Arkano fue una experiencia muy gratificante. Poder aportar mi mirada a su carrera es un hito personal y profesional, y una prueba de que el trabajo constante acaba abriendo puertas a proyectos grandes.
+El videoclip ha superado las 17.000 visualizaciones en YouTube. Para mí, trabajar con un artista como Arkano fue una experiencia muy gratificante. Poder aportar mi mirada a su carrera es un hito personal y profesional, y una prueba de que el trabajo constante acaba abriendo puertas a proyectos grandes.
 
 ## Para revisar con Josep (no se publica)
-- Cifra de visualizaciones en YouTube (en el mapa figura 17.000, pendiente de confirmar).
 - Año de estreno del videoclip.
 - ¿Cámara y óptica?
 - ¿Hay una frase o anécdota de Arkano o del rodaje que quieras incluir?

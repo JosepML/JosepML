@@ -36,9 +36,8 @@ Asumí la dirección, la producción y la postproducción. Me ocupé de todo el 
 Encontrar el entorno perfecto que la historia necesitaba, y hacerlo dentro de los plazos de un rodaje intensivo.
 
 ## El resultado
-El spot no llegó a publicarse como campaña. Queda aquí como muestra de dirección y de narrativa para marcas.
+El spot no se ha comercializado como campaña, así que no es público fuera de esta web. Queda aquí como muestra de dirección y de narrativa para marcas.
 
 ## Para revisar con Josep (no se publica)
-- Confirmar el estado de publicación. El texto antiguo tiene un vídeo en YouTube, pero el mapa dice que no se publicó.
 - Año de rodaje y cámara.
 - Confirmar el nombre del director de fotografía: el texto antiguo dice "Juan Fran".
