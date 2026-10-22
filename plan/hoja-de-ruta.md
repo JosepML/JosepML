@@ -32,7 +32,7 @@ Fecha: 2026-10-22. Sustituye al orden de trabajo de las fases 4, 5 y 6 (sus arch
 - [x] Ficha: galería en miniaturas con visor a pantalla completa
 - [x] Ficha: quitar «Del LOG al color»
 - [x] Fijar los tokens de diseño definitivos (colores, letras, radios, sombras y curvas de movimiento) en `src/styles/tokens.css`, y las piezas reutilizables (cristal, pastilla, tarjeta con foto, botón, etiqueta y titular con palabra de acento) documentadas en `plan/fase-3-direccion-visual.md`
-- [ ] Visto bueno de Josep → fase 3 «Hecha»
+- [x] Visto bueno de Josep → fase 3 «Hecha» (2026-10-22)
 
 **Hecho cuando:** Josep da el visto bueno a D y los tokens están en un archivo único que importan las tareas C a K.
 

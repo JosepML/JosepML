@@ -1,6 +1,6 @@
 # Fase 3: Dirección visual
 
-**Estado:** En revisión: prototipo D · Cristal en `/prototipos/d`, falta el visto bueno de Josep
+**Estado:** Hecha (2026-10-22): Josep aprueba D · Cristal
 **Depende de:** fase 1. Puede ir en paralelo con las fases 2 y 4.
 
 ## Objetivo
@@ -57,7 +57,7 @@ Prototipo en `localhost:3000/prototipos/d` y, tras el visto bueno, el sistema de
 
 ## Revisión de Josep
 
-- [ ] Da el visto bueno a la dirección visual
+- [x] Da el visto bueno a la dirección visual (2026-10-22)
 
 ## Registro
 
@@ -248,3 +248,6 @@ Josep: "es una buena base, pero sigue faltando mucho trabajo". Lo que pidió y l
 - Vídeo de fondo propio (ver arriba): hace falta el archivo del reel o el permiso de Josep para descargarlo de su canal e instalar las herramientas (yt-dlp y ffmpeg).
 - Logos oficiales de Kinepolis, Consell Valencià de la Joventut, Ayuntamiento de l'Alfàs del Pi, Ocisport, Mediterra Cinema, Cero Coma, Dreamore, Kymera, JUNO Media y sus clientes (que los pase Josep o descargarlos con su permiso). Después: pasar los tokens a `globals.css` y la tipografía a `layout.tsx`.
 - Datos pendientes ("Pendiente" en las fichas): año de *El Cirujano*, *Lovva*, *100 Baladas*, *EP Oscuridad* y *Kiboko*; productora de *Lovva*, *EP Oscuridad* y *Kiboko*; dirección de *Kiboko*; cámara de todos.
+
+**2026-10-22 (cierre)**
+- Josep da el visto bueno a D · Cristal. Fase 3 hecha. Lo que siga se pule en cada página durante la construcción (tareas C y S de `hoja-de-ruta.md`).

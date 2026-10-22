@@ -54,6 +54,7 @@ Nota para Claude en la nube: el contenedor en la nube no puede conectar con `*.s
 - 2026-10-20: clientes en dos filas de logos (Disney, Star Wars, Kinepolis, Consell Valencià de la Joventut, Ayuntamiento de l'Alfàs del Pi, Ocisport, Mediterra Cinema, Cero Coma, Dreamore, Kymera Producciones) y apartado propio **"Trabajo en sinergia con JUNO Media"**, sin decir que Josep es parte de JUNO, con sus clientes comunes (ForecourtTech, Arkano, SOM Events, Albir Confort, Mapache Events). La fase 4 necesita tabla `clientes` (nombre, logo, fila, orden, `con_juno`).
 - 2026-10-20: el vídeo de fondo de la portada debe ser un archivo propio (mp4 corto, sin sonido), no YouTube: el reproductor de YouTube enseña controles. Pendiente del archivo o del permiso de Josep para descargarlo de su canal.
 - 2026-10-20: el PC de Josep tiene desactivados los "Efectos de animación" de Windows, y el navegador lo trata como "reducir movimiento". Los prototipos muestran las animaciones igualmente (interruptor en la barra inferior); la web final respetará el ajuste de cada visitante.
+- 2026-10-22: **Josep aprueba D · Cristal** y la fase 3 queda cerrada. Tokens de diseño en `src/styles/tokens.css` y curvas en `src/styles/movimiento.ts`; piezas reutilizables en `fase-3-direccion-visual.md`. Orden de trabajo: `hoja-de-ruta.md`.
 
 ## Decisiones pendientes de Josep
 
@@ -63,4 +64,3 @@ Nota para Claude en la nube: el contenedor en la nube no puede conectar con `*.s
 | Plan de pago de Vercel para uso comercial (unos 20 USD/mes, confirmar precio) | Sí, solo desde el lanzamiento | 7 |
 | Fotos de Josep trabajando para "Sobre mí" | Usar las que tenga; si no, planificar sesión | 2 |
 | Idiomas | Solo español, base de datos preparada para añadir más | 4 |
-| Visto bueno a la dirección visual D · Cristal (o cambios) | D · Cristal tal cual | 3 |
