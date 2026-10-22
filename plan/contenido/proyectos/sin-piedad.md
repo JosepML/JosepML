@@ -8,7 +8,7 @@ año: [pendiente]
 direccion: Ángela Manzano
 productora_cliente: Proyecto personal de Ángela Manzano
 mi_papel: Dirección de fotografía
-camara: Blackmagic [modelo pendiente] · ópticas [pendiente]
+camara: Blackmagic Pocket Cinema Camera 4K [confirmar: "diría que"] · ópticas [pendiente]
 premios: []
 destacado: 0
 estado: borrador
