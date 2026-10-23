@@ -21,7 +21,7 @@
 
 ## Pendiente para los hilos siguientes
 
-- **S5, S6, S8, S9:** las tarjetas de Inicio ya enlazan a `/trabajos/<slug>`, `/servicios/<slug>`, `/sobre-mi` y `/blog/<slug>`, que hoy dan 404. El menú apunta a anclas de Inicio (`/#trabajos`...) hasta que cada página exista: cambiarlo en `src/components/marco/Marco.tsx`.
+- **S5, S6, S8:** las tarjetas de Inicio ya enlazan a `/trabajos/<slug>`, `/servicios/<slug>` y `/sobre-mi`, que hoy dan 404. El blog (S9) ya está hecho. El menú apunta a anclas de Inicio (`/#trabajos`...) hasta que cada página exista: cambiarlo en `src/components/marco/Marco.tsx`.
 - **Selección muestra 6 proyectos** (los de `destacado_orden` 1 a 6). El prototipo tenía 8 (también EXPÁNDE(TE) y Sin Tiempo). Si Josep los quiere, hace falta permitir más de 6 en `destacado_orden`.
 - **D (edición):** «Editar página» y el panel. `revalidarContenido()` ya está lista para llamarla al publicar.
 - **Tema claro:** se aplica tras cargar (se guarda en el navegador), así que quien lo eligió ve un instante el oscuro. Se puede arreglar con una cookie cuando se haga D.

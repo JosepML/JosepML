@@ -24,7 +24,7 @@ const eslintConfig = [
   {
     // Los prototipos usan imágenes externas de la web antigua; en la fase 5 se pasa a next/image
     // La web usa <img> con img() (src/components/comun/imagen.ts), que ya pasa por el optimizador de Next
-    files: ["src/app/prototipos/**", "src/components/**"],
+    files: ["src/app/prototipos/**", "src/components/**", "src/app/(web)/**"],
     rules: { "@next/next/no-img-element": "off" },
   },
 ];
