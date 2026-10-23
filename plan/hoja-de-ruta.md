@@ -49,11 +49,11 @@ Lee: `plan/fase-4-base-de-datos-y-migracion.md`, `plan/contenido/mapa-de-conteni
 **Hecho cuando:** el esquema está aplicado, los advisors no dan avisos y `plan/esquema.md` lo explica.
 
 ### C · Esqueleto de la web pública e Inicio conectado · Opus · hilo nuevo · necesita A y B
-- [ ] Pasar el prototipo D a componentes de producción en `src/components/` (Marco, menú, pie, índice lateral, scroll mágico, transición, tarjetas, bloques)
-- [ ] Capa de datos `src/lib/datos/` con caché por etiquetas y `revalidarContenido()`
-- [ ] Inicio `/` construido a partir de `bloques` de la base de datos (cada tipo de bloque es un componente)
-- [ ] Vídeo de portada como archivo propio (mp4 en Storage) en lugar de YouTube. Necesita el archivo de Josep; mientras no llegue, se usa YouTube.
-- [ ] `plan/patron-paginas.md`: cómo se hace una página nueva (receta que seguirán las tareas de Sonnet)
+- [x] Pasar el prototipo D a componentes de producción en `src/components/` (Marco, menú, pie, índice lateral, scroll mágico, transición, tarjetas, bloques)
+- [x] Capa de datos `src/lib/datos/` con caché por etiquetas y `revalidarContenido()`
+- [x] Inicio `/` construido a partir de `bloques` de la base de datos (cada tipo de bloque es un componente)
+- [ ] Vídeo de portada como archivo propio (mp4 en Storage) en lugar de YouTube. Necesita el archivo de Josep; mientras no llegue, se usa YouTube. El componente ya acepta el mp4 (`datos.video.medio`).
+- [x] `plan/patron-paginas.md`: cómo se hace una página nueva (receta que seguirán las tareas de Sonnet)
 
 **Hecho cuando:** Inicio en `localhost:3000` se ve igual que el prototipo D, leyendo los datos de Supabase.
 
@@ -81,7 +81,7 @@ Lee: `legacy/constants.ts`, `plan/contenido/fundamentos.md`, `plan/contenido/map
 | --- | --- | --- | --- |
 | S1 ✓ | Script `scripts/migrar-legacy.mjs` (hecho 2026-10-22, ver `plan/traspaso-carga-base.md`): proyectos y artículos de `legacy/constants.ts` a Supabase, guardando `id_antiguo` | B | 18/18 proyectos y 3/3 artículos en la base de datos; recuento en `fase-4` |
 | S2 | Copiar las ~90 imágenes de ImgBB e Imgur al bucket `medios` y reescribir las URLs (en el PC de Josep) | B, S1 | 0 URLs externas de imagen en la base de datos |
-| S3 | Cargar en la base de datos los textos de `plan/contenido/` (servicios, bloques de Inicio, Sobre mí, clientes, opiniones, canales) | B | Inicio y servicios sin textos fijos en el código |
+| S3 (casi) | Cargar en la base de datos los textos de `plan/contenido/` (servicios, bloques de Inicio, Sobre mí, clientes, opiniones, canales). Inicio, servicios, clientes, opiniones y canales los cargó C (`scripts/cargar-inicio.mjs`); falta Sobre mí, que va con S8 | B | Inicio y servicios sin textos fijos en el código |
 | S4 ✓ | Cargar los textos aprobados de E en `proyectos` y `articulos` | E, S1 | Cada ficha muestra su texto nuevo |
 | S5 | `/trabajos` con filtros por servicio y tipo, y la ficha `/trabajos/[slug]` (galería con visor y siguiente proyecto) | C | Las 18 fichas se abren sin errores, en claro y oscuro |
 | S6 | `/servicios/[slug]` (los 3) | C | Igual que el prototipo, con sus proyectos y preguntas frecuentes |
@@ -129,3 +129,4 @@ Sigue `plan/fase-7-lanzamiento.md`. Solo con la orden expresa de Josep.
 - 2026-10-22: `plan/repaso-final.md` con el repaso de cada sección, las preguntas abiertas y el orden de los hilos siguientes para dejar la web «niquelada». Blog del prototipo con imagen en las tarjetas; artículo del DSLR retirado.
 - 2026-10-22 (tarea S1): 18/18 proyectos, 2/2 artículos (el del DSLR retirado), 36 `proyecto_servicios`, 90 medios y 3 servicios mínimos cargados en la base con `scripts/migrar-legacy.mjs`. Detalle y pendientes en `plan/traspaso-carga-base.md`.
 - 2026-10-22 (tarea S4): textos de los 18 proyectos y los 2 artículos en la base, comprobados contra `plan/contenido/` (los cargó S1; S4 añadió la columna `frase` y corrigió pósteres, títulos de sección, cámaras y artículos con sus fotos). Nota en `plan/traspaso-textos-s4.md`. Falta la frase final de las 4 recreaciones.
+- 2026-10-23 (tarea C): Inicio `/` sale entero de Supabase (página y 11 bloques), con los componentes de producción en `src/components/`, la capa de datos en `src/lib/datos/` y la receta `plan/patron-paginas.md`. Igual que el prototipo D captura a captura. Cargados clientes, opiniones, canales y bloques; los servicios completos y los ajustes esperan a que Josep ejecute `supabase/datos/04-inicio.sql`. Detalle en `plan/traspaso-tarea-c.md`. Falta el visto bueno de Josep y el mp4 de portada.

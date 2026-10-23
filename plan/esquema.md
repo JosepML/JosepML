@@ -94,25 +94,25 @@ Los servicios del proyecto están en `proyecto_servicios` (`orden` y `destacado`
 
 Los once primeros son los del prototipo D (`TipoBloque` en `src/app/prototipos/d/datos.ts`). `galeria`, `video` y `cita` son para páginas libres.
 
-Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo`, `texto` (Markdown básico) e `imagen` (id de `medios`). Los extras de cada tipo los fija la tarea C al pasar cada bloque a componente; esta es la propuesta de partida:
+Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo`, `texto` (Markdown básico: párrafos separados por línea en blanco, `**negrita**`, `*cursiva*`) e `imagen` (id de `medios`). En los títulos, la palabra de acento (la que sale en la letra artística) es la última, salvo que se marque con `*asteriscos*`. Formato definitivo, fijado en la tarea C (los componentes están en `src/components/bloques/`):
 
 | `tipo` | Qué es | Extras en `datos` | Datos que lee de otras tablas |
 | --- | --- | --- | --- |
-| `portada` | Vídeo a pantalla completa y frase principal | `video`: `{"youtubeId", "inicio", "medio"}` | |
-| `servicios` | Lo que ofrezco | | `servicios` |
-| `filmmaker` | Lo que grabo, con un trabajo de cada tipo | `piezas`: `[{"nombre", "texto", "proyecto": "<id>"}]` | `proyectos` |
-| `trabajos` | Carrusel de proyectos con filtro por servicio | | `proyectos` con `destacado_orden` |
-| `cifras` | Números, premios y canales | `cifras`: `[{"valor", "etiqueta"}]` | `proyectos.premios`, `canales` |
+| `portada` | Vídeo a pantalla completa y frase principal | `papeles`: `["director de fotografía", ...]` (rotan tras «Soy»); `video`: `{"youtubeId", "inicio", "poster": "<medio>", "medio": "<medio mp4 o null>", "recorte"}`. Si hay `medio`, se usa el mp4 y YouTube queda de reserva | `ajustes.disponible` |
+| `servicios` | Lo que ofrezco | | `servicios` (y sus proyectos para las fotos) |
+| `filmmaker` | Lo que grabo, con un trabajo de cada tipo | `piezas`: `[{"nombre", "texto", "proyecto": "<id>"}]`; `enlace`: `{"texto", "href"}` | `proyectos` |
+| `trabajos` | Carrusel de proyectos con filtro por servicio | | `proyectos` con `destacado_orden` (Todos) y `proyecto_servicios` (filtros) |
+| `cifras` | Números, premios y canales | `cifras`: `[{"valor", "decimales"?, "prefijo"?, "sufijo"?, "unidad", "texto"}]` | `proyectos.premios` de tipo `ganado` y `podio`, `canales` |
 | `proceso` | Los pasos de un encargo | `pasos`: `[{"titulo", "texto"}]` | |
-| `sobre-mi` | Retrato y presentación | | |
+| `sobre-mi` | Retrato y presentación | `imagen`, `etiqueta`, `cita`, `papeles`: `[...]`, `enlace`: `{"texto", "href"}` | |
 | `opiniones` | Frases de clientes | | `opiniones` |
-| `clientes` | Logos y apartado JUNO Media | `juno`: `{"titulo", "texto"}` | `clientes` |
-| `blog` | Últimos artículos | `cantidad` | `articulos` |
-| `texto` | Sección libre | | |
-| `llamada` | Invitación a escribir (WhatsApp y correo) | | `ajustes` |
+| `clientes` | Logos y apartado JUNO Media | `juno`: `{"texto"}` | `clientes` (`con_juno` separa los dos grupos) |
+| `blog` | Últimos artículos | `cantidad`, `enlace`: `{"texto", "href"}` | `articulos` |
+| `texto` | Sección libre | (solo los comunes) | |
+| `llamada` | Invitación a escribir (WhatsApp y correo) | `opciones`: `[...]` (chips, detrás de los nombres de los servicios), `nota` | `ajustes.correo`, `ajustes.whatsapp`, `servicios` |
 | `galeria` | Rejilla de imágenes | `imagenes`: `[{"medio", "pie"}]` | |
 | `video` | Un vídeo | `youtubeId` o `medio` | |
-| `cita` | Frase destacada | `autor` | |
+| `cita` | Frase destacada | `autor` (la frase va en `titulo`) | |
 
 ## Cómo se usa desde la app (contrato para C y D)
 

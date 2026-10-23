@@ -36,7 +36,7 @@ if errorlevel 1 (
   echo.
   echo Aviso: no se pudo preparar la version final. Se arranca en modo desarrollo ^(mas lento^).
   echo.
-  echo Web en marcha: http://localhost:3000/prototipos
+  echo Web en marcha: http://localhost:3000  ^(prototipos: http://localhost:3000/prototipos^)
   echo Para parar el servidor, pulsa Ctrl+C en esta ventana.
   call npm.cmd run dev
   pause
@@ -44,7 +44,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo Web en marcha: http://localhost:3000/prototipos
+echo Web en marcha: http://localhost:3000  ^(prototipos: http://localhost:3000/prototipos^)
 echo Para parar el servidor, pulsa Ctrl+C en esta ventana.
 echo.
 call npm.cmd run start

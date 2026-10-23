@@ -42,7 +42,7 @@ Marca cada casilla cuando esté hecha en la web de verdad (no en el prototipo).
 
 ### Inicio
 - [ ] Vídeo de portada como mp4 propio (Josep lo tiene que pasar). Mientras, YouTube sin controles visibles.
-- [ ] Todos los bloques salen de la tabla `bloques` (nada fijo en el código).
+- [x] Todos los bloques salen de la tabla `bloques` (nada fijo en el código). Tarea C, 2026-10-23.
 - [ ] Logos de clientes: Cero Coma, Dreamore, Kymera, Ayuntamiento de l'Alfàs del Pi; bloque «En sinergia con JUNO Media» (ForecourtTech, Arkano, SOM Events, Albir Confort, Mapache Events). Nunca decir que Josep forma parte de JUNO. Falta el permiso o los archivos de los logos (también Kinepolis, si se usa).
 - [ ] Canales de YouTube: «Josep Mira» (destacado) y «Del Fan Para el Fan». Falta el enlace del segundo y si se muestran cifras.
 
