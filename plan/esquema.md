@@ -114,6 +114,8 @@ Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo
 | `video` | Un vídeo | `youtubeId` o `medio` | |
 | `cita` | Frase destacada | `autor` (la frase va en `titulo`) | |
 
+**Páginas con plantilla propia.** `trabajos` y `recreaciones` no se pintan con `PaginaBloques`: su primer bloque (`texto`) da la cabecera. El de `recreaciones` (`supabase/datos/07-recreaciones.sql`) lleva además `etiquetaAntes`/`etiquetaDespues` (rótulos del deslizador), `llamada` (título de la invitación final), `orden` (`[slug, ...]`) y `comparaciones`: `{"<slug>": {"original": {"medio", "recorte"?}, "recreacion": {"medio", "recorte"?}, "tamano"?: [ancho, alto]}}`. `recorte` es `[x, y, ancho, alto]` en píxeles de una imagen de `tamano`; sirve para sacar los dos lados de una comparación ya montada. Sin comparación, la recreación enseña el póster y el vídeo.
+
 ## Cómo se usa desde la app (contrato para C y D)
 
 | Acción | Cómo |

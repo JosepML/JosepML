@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Titular } from "@/components/piezas";
+import { EnlaceRecreaciones } from "@/components/trabajos/EnlaceRecreaciones";
 import { ListadoTrabajos } from "@/components/trabajos/ListadoTrabajos";
 import { getPagina } from "@/lib/datos/paginas";
 import { getProyectos } from "@/lib/datos/proyectos";
@@ -22,12 +23,19 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Trabajos() {
-  const [c, proyectos, servicios] = await Promise.all([cabecera(), getProyectos(), getServicios()]);
+  const [c, proyectos, servicios, recreaciones] = await Promise.all([cabecera(), getProyectos(), getServicios(), getPagina("recreaciones")]);
   return (
     <main className="px-4 pb-24 pt-32 sm:px-8 sm:pt-40">
       <div className="mx-auto max-w-7xl">
         <Titular nivel={1} antetitulo={c.antetitulo} titulo={c.titulo} texto={c.texto} />
         <ListadoTrabajos proyectos={proyectos} servicios={servicios} />
+        {recreaciones && (
+          <EnlaceRecreaciones
+            titulo={recreaciones.titulo}
+            texto={recreaciones.seo.descripcion}
+            recreaciones={proyectos.filter((p) => p.tipo?.slug === "recreacion")}
+          />
+        )}
       </div>
     </main>
   );

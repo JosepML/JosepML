@@ -18,10 +18,11 @@
 4. Logos de los clientes (solo Disney y Star Wars tienen; el resto sale con su nombre en letra).
 5. Enlace del canal «Del Fan, Para el Fan» (sin enlace, la tarjeta no muestra «Ver canal»).
 6. Póster de «Reels para redes»: el medio `2080844c…` de rbgescuela.com es una imagen de stock, no de Josep. Hoy la tarjeta usa un fotograma de YouTube; conviene sustituirlo y borrar el de stock.
+7. Fotogramas limpios de las películas originales para el deslizador de `/recreaciones` (hoy recorta las comparaciones montadas, que en Nosferatu llevan los rótulos quemados abajo, por eso se ve recortada por arriba) y uno de *El Imperio Contraataca* para Luke y Vader, que no tiene.
 
 ## Pendiente para los hilos siguientes
 
-- **S5, S6, S8 y S9 ya están hechos** (trabajos, fichas, servicios, Sobre mí y blog). Falta `/recreaciones` (S7): hoy las recreaciones solo se ven desde las páginas de servicio. Los títulos de «Mi mirada» de cada servicio siguen en el código (`src/components/servicios/PaginaServicio.tsx`) hasta que `servicios` tenga una columna para ellos (S15). 
+- **S5 a S9 ya están hechos** (trabajos, fichas, servicios, recreaciones, Sobre mí y blog). Falta `/contacto` (S10): hoy los botones «Hablemos» llevan a la llamada de Inicio. Los títulos de «Mi mirada» de cada servicio siguen en el código (`src/components/servicios/PaginaServicio.tsx`) hasta que `servicios` tenga una columna para ellos (S15). 
 - **Selección muestra 6 proyectos** (los de `destacado_orden` 1 a 6). El prototipo tenía 8 (también EXPÁNDE(TE) y Sin Tiempo). Si Josep los quiere, hace falta permitir más de 6 en `destacado_orden`.
 - **D (edición):** «Editar página» y el panel. `revalidarContenido()` ya está lista para llamarla al publicar.
 - **Tema claro:** se aplica tras cargar (se guarda en el navegador), así que quien lo eligió ve un instante el oscuro. Se puede arreglar con una cookie cuando se haga D.
