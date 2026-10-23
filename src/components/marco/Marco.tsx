@@ -10,7 +10,7 @@ import { CURVA } from "@/styles/movimiento";
 import { useReducir } from "../comun/hooks";
 import { Icono } from "../Iconos";
 import { Pie } from "./Pie";
-import { useScrollMagico } from "./scrollMagico";
+import { useAnclas, useScrollMagico } from "./scrollMagico";
 
 /** Menú principal. «Trabajos» primero (plan/contenido/fundamentos.md). Llevan a las secciones de Inicio
  *  mientras no existen sus páginas; las tareas S5 a S9 cambian cada uno a su página al crearla. */
@@ -39,6 +39,7 @@ export function Marco({ ajustes, children }: { ajustes: Ajustes; children: React
   useFoco();
   // Solo en Inicio: en las fichas y demás páginas el scroll es el normal
   useScrollMagico(ruta === RUTAS.inicio && !reducir);
+  useAnclas(ruta);
 
   useEffect(() => {
     try {
@@ -131,6 +132,13 @@ function Menu({ nombre }: { nombre: string }) {
     setCompacto(y > 40);
     setOculto(!reducir && y > 400 && y > previo + 4 ? true : y < previo - 4 ? false : oculto);
   });
+
+  // Con ratón, llevarlo arriba del todo vuelve a enseñar la barra aunque se haya escondido al bajar
+  useEffect(() => {
+    const mover = (e: PointerEvent) => e.pointerType === "mouse" && e.clientY < 90 && setOculto(false);
+    document.addEventListener("pointermove", mover, { passive: true });
+    return () => document.removeEventListener("pointermove", mover);
+  }, []);
 
   return (
     <>

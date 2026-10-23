@@ -42,6 +42,7 @@ export async function getProyectos(): Promise<Proyecto[]> {
         videoPortada: medio(medios, p.video_portada_id),
         videos: lista<VideoExtra>(p.videos),
         videosDebajoDelTexto: p.videos_debajo_del_texto,
+        conJuno: p.con_juno ?? false,
         premios: lista(p.premios)
           .map((x): Premio => {
             const o = objeto(x);

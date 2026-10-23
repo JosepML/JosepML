@@ -75,6 +75,8 @@ export type Proyecto = {
   videos: VideoExtra[];
   videosDebajoDelTexto: boolean;
   premios: Premio[];
+  /** Hecho bajo el sello de JUNO Media: la tarjeta y la ficha lo marcan */
+  conJuno: boolean;
   destacadoOrden: number | null;
   orden: number;
   /** Frase final con la parte en cursiva entre *asteriscos* */

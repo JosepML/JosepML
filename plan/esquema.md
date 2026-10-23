@@ -106,7 +106,7 @@ Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo
 | `proceso` | Los pasos de un encargo | `pasos`: `[{"titulo", "texto"}]` | |
 | `sobre-mi` | Retrato y presentación | `imagen`, `etiqueta`, `cita`, `papeles`: `[...]`, `enlace`: `{"texto", "href"}` | |
 | `opiniones` | Frases de clientes | | `opiniones` |
-| `clientes` | Logos y apartado JUNO Media | `juno`: `{"texto"}` | `clientes` (`con_juno` separa los dos grupos) |
+| `clientes` | Logos y apartado JUNO Media | `juno`: `{"texto", "enlace": {"texto", "href"}}` (el enlace «Así trabajamos» solo sale con `href`) | `clientes` (`con_juno` separa los dos grupos) |
 | `blog` | Últimos artículos | `cantidad`, `enlace`: `{"texto", "href"}` | `articulos` |
 | `texto` | Sección libre | (solo los comunes) | |
 | `llamada` | Invitación a escribir (WhatsApp y correo) | `opciones`: `[...]` (chips, detrás de los nombres de los servicios), `nota` | `ajustes.correo`, `ajustes.whatsapp`, `servicios` |
@@ -114,7 +114,7 @@ Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo
 | `video` | Un vídeo | `youtubeId` o `medio` | |
 | `cita` | Frase destacada | `autor` (la frase va en `titulo`) | |
 
-**Páginas con plantilla propia.** `trabajos` y `recreaciones` no se pintan con `PaginaBloques`: su primer bloque (`texto`) da la cabecera. El de `recreaciones` (`supabase/datos/07-recreaciones.sql`) lleva además `etiquetaAntes`/`etiquetaDespues` (rótulos del deslizador), `llamada` (título de la invitación final), `orden` (`[slug, ...]`) y `comparaciones`: `{"<slug>": {"original": {"medio", "recorte"?}, "recreacion": {"medio", "recorte"?}, "tamano"?: [ancho, alto]}}`. `recorte` es `[x, y, ancho, alto]` en píxeles de una imagen de `tamano`; sirve para sacar los dos lados de una comparación ya montada. Sin comparación, la recreación enseña el póster y el vídeo.
+**Páginas con plantilla propia.** `trabajos` y `recreaciones` no se pintan con `PaginaBloques`: su primer bloque (`texto`) da la cabecera. El de `trabajos` lleva `filtros` (`supabase/datos/08-filtros-trabajos.sql`): `{"todos" | "<slug de servicio>": [{"nombre", "tipos": [slug de tipo, ...]}]}`, la segunda fila de filtros de cada servicio; las categorías sin proyectos no salen. El de `recreaciones` (`supabase/datos/07-recreaciones.sql`) lleva además `etiquetaAntes`/`etiquetaDespues` (rótulos del deslizador), `llamada` (título de la invitación final), `orden` (`[slug, ...]`) y `comparaciones`: `{"<slug>": {"original": {"medio", "recorte"?}, "recreacion": {"medio", "recorte"?}, "tamano"?: [ancho, alto]}}`. `recorte` es `[x, y, ancho, alto]` en píxeles de una imagen de `tamano`; sirve para sacar los dos lados de una comparación ya montada. Sin comparación, la recreación enseña el póster y el vídeo.
 
 ## Cómo se usa desde la app (contrato para C y D)
 
@@ -172,6 +172,7 @@ Hecho el 2026-10-22: Josep tiene su usuario, está en `administradores` (comprob
 | `20261022153000_esquema_solido_2_funciones` | Borradores, publicación, historial, validaciones, redirecciones. La ejecutó Josep en el editor SQL (contiene `delete` dentro de funciones, que pide confirmación), así que no figura en el historial de Supabase; se comprobó que las 17 funciones coinciden con este archivo. La versión es aproximada |
 | `20261022153230_esquema_solido_3_seguridad` | Políticas RLS, permisos y almacenamiento |
 | `20261022230000_proyectos_frase` | Columna `proyectos.frase` (frase final de la ficha). Tarea S4 |
+| `20261023133000_proyectos_con_juno` | Columna `proyectos.con_juno` (hecho bajo el sello de JUNO Media; sello en tarjeta y ficha). Marcados los 4 con JUNO en la productora |
 
 ### Pendiente de limpieza (opcional, lo hace Josep desde el panel)
 

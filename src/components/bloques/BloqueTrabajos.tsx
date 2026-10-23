@@ -7,6 +7,7 @@ import type { Bloque, Proyecto } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
 import { CURVA_VIAJE } from "@/styles/movimiento";
 import { Enlace } from "../comun/Enlace";
+import { SelloJuno } from "../comun/SelloJuno";
 import { usePunteroFino, useReducir } from "../comun/hooks";
 import { img } from "../comun/imagen";
 import { Icono } from "../Iconos";
@@ -423,7 +424,10 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: Proyecto }) {
         </span>
 
         <div className="absolute inset-x-3 bottom-3 z-[3] rounded-[24px] border border-white/15 bg-black/60 p-4 text-white transition-transform duration-500 group-hover:-translate-y-1 sm:p-5">
-          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/60">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/60">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
+            {p.conJuno && <SelloJuno pequeno className="-my-1 shrink-0" />}
+          </div>
           <h3 className="mt-1 text-xl font-bold leading-tight tracking-[-0.025em] sm:text-2xl">{p.titulo}</h3>
           <p className="mt-1 text-sm text-white/70">{p.papel}</p>
         </div>

@@ -8,6 +8,9 @@ import { CURVA, Revelar } from "../piezas";
 
 type Filtro = { slug: string; nombre: string };
 
+/** Categoría de la segunda fila: un nombre que agrupa uno o más tipos de proyecto */
+export type Categoria = { nombre: string; tipos: string[] };
+
 /** Fila de pastillas de filtro, la misma de Selección en Inicio */
 function Pastillas({ id, filtros, actual, alElegir, etiqueta }: { id: string; filtros: Filtro[]; actual: string; alElegir: (s: string) => void; etiqueta: string }) {
   return (
@@ -39,30 +42,42 @@ function Pastillas({ id, filtros, actual, alElegir, etiqueta }: { id: string; fi
 
 /**
  * Todos los trabajos del listado general (las recreaciones tienen su página), con filtro por servicio y por
- * tipo a la vez. Solo salen los filtros que tienen algún proyecto.
+ * categoría a la vez. `categorias` da las de cada servicio (`todos`: sin servicio elegido), como las quiere
+ * Josep (página «trabajos», supabase/datos/08-filtros-trabajos.sql); si falta, una por tipo de proyecto.
+ * Solo salen los filtros que tienen algún proyecto.
  */
-export function ListadoTrabajos({ proyectos: todos, servicios }: { proyectos: Proyecto[]; servicios: Servicio[] }) {
+export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { proyectos: Proyecto[]; servicios: Servicio[]; categorias: Record<string, Categoria[]> }) {
   const proyectos = todos.filter((p) => p.tipo?.enListadoGeneral !== false);
   const [servicio, setServicio] = useState("todos");
-  const [tipo, setTipo] = useState("todos");
+  const [categoria, setCategoria] = useState("todos");
 
   const deServicio = (p: Proyecto) => servicio === "todos" || p.servicios.some((s) => s.slug === servicio);
-  const deTipo = (p: Proyecto) => tipo === "todos" || p.tipo?.slug === tipo;
   const filtrosServicio = [{ slug: "todos", nombre: "Todos" }, ...servicios.filter((s) => proyectos.some((p) => p.servicios.some((x) => x.slug === s.slug)))];
-  const tipos = new Map(proyectos.flatMap((p) => (p.tipo ? [[p.tipo.slug, p.tipo.nombre] as const] : [])));
-  const filtrosTipo = [{ slug: "todos", nombre: "Todos los tipos" }, ...[...tipos].map(([slug, nombre]) => ({ slug, nombre }))];
-  const visibles = proyectos.filter((p) => deServicio(p) && deTipo(p));
+  const porTipo = [...new Map(proyectos.flatMap((p) => (p.tipo ? [[p.tipo.slug, { nombre: p.tipo.nombre, tipos: [p.tipo.slug] }] as const] : []))).values()];
+  const delServicio = (categorias[servicio] ?? categorias.todos ?? porTipo).filter((c) => proyectos.some((p) => deServicio(p) && c.tipos.includes(p.tipo?.slug ?? "")));
+  const elegida = delServicio.find((c) => c.nombre === categoria);
+  const filtrosCategoria = [{ slug: "todos", nombre: "Todos los tipos" }, ...delServicio.map((c) => ({ slug: c.nombre, nombre: c.nombre }))];
+  const visibles = proyectos.filter((p) => deServicio(p) && (!elegida || elegida.tipos.includes(p.tipo?.slug ?? "")));
+  // Al cambiar de servicio, la categoría se mantiene solo si ese servicio también la tiene
+  const actualCategoria = elegida ? categoria : "todos";
+  const elegirServicio = (s: string) => {
+    setServicio(s);
+    const siguen = (categorias[s] ?? categorias.todos ?? porTipo).some((c) => c.nombre === categoria);
+    if (!siguen) setCategoria("todos");
+  };
 
   return (
     <>
       <Revelar retraso={0.15} className="mt-10 flex flex-col gap-3">
-        <Pastillas id="servicio" etiqueta="Filtrar por servicio" filtros={filtrosServicio} actual={servicio} alElegir={setServicio} />
-        {filtrosTipo.length > 2 && <Pastillas id="tipo" etiqueta="Filtrar por tipo" filtros={filtrosTipo} actual={tipo} alElegir={setTipo} />}
+        <Pastillas id="servicio" etiqueta="Filtrar por servicio" filtros={filtrosServicio} actual={servicio} alElegir={elegirServicio} />
+        {filtrosCategoria.length > 2 && (
+          <Pastillas key={servicio} id="tipo" etiqueta="Filtrar por tipo" filtros={filtrosCategoria} actual={actualCategoria} alElegir={setCategoria} />
+        )}
       </Revelar>
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
-          key={`${servicio}-${tipo}`}
+          key={`${servicio}-${actualCategoria}`}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}

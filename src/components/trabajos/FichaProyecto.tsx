@@ -9,6 +9,7 @@ import { RUTAS } from "@/lib/rutas";
 import { useReducir } from "../comun/hooks";
 import { img } from "../comun/imagen";
 import { Enlace } from "../comun/Enlace";
+import { SelloJuno } from "../comun/SelloJuno";
 import { CABECERA } from "../comun/Transicion";
 import { VideoFondo } from "../comun/VideoFondo";
 import { Icono } from "../Iconos";
@@ -110,6 +111,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
                   {premio.festival ? ` · ${premio.festival}` : ""}
                 </span>
               )}
+              {p.conJuno && <SelloJuno />}
             </motion.div>
             <motion.h1 {...entrar(0.35)} className="mt-4 max-w-4xl pb-[0.06em] text-[clamp(2.5rem,7vw,6.5rem)] font-extrabold leading-[1] tracking-[-0.05em] [text-wrap:balance]">
               {p.titulo}

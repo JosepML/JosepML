@@ -623,6 +623,7 @@ export type Database = {
           anio: number | null
           camara: string
           clip_id: string | null
+          con_juno: boolean
           como_lo_hicimos: string
           creado_en: string
           destacado_orden: number | null
@@ -663,6 +664,7 @@ export type Database = {
           anio?: number | null
           camara?: string
           clip_id?: string | null
+          con_juno?: boolean
           como_lo_hicimos?: string
           creado_en?: string
           destacado_orden?: number | null
@@ -703,6 +705,7 @@ export type Database = {
           anio?: number | null
           camara?: string
           clip_id?: string | null
+          con_juno?: boolean
           como_lo_hicimos?: string
           creado_en?: string
           destacado_orden?: number | null

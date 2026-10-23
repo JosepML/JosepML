@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import type { Bloque, Cliente, Opinion as DatoOpinion } from "@/lib/datos/tipos";
 import { lista, objeto, texto } from "@/lib/datos/util";
 import { useReducir } from "../comun/hooks";
+import { Enlace } from "../comun/Enlace";
 import { img } from "../comun/imagen";
 import { Icono } from "../Iconos";
 import { useDatos } from "../marco/DatosWeb";
@@ -154,6 +155,8 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
   const principales = clientes.filter((c) => !c.conJuno);
   const juno = clientes.filter((c) => c.conJuno);
   const textoJuno = texto(objeto(bloque.datos.juno).texto);
+  // «Así trabajamos»: lleva al artículo sobre la colaboración; sin dirección no sale
+  const enlaceJuno = objeto(objeto(bloque.datos.juno).enlace);
   const rejilla = useRef<HTMLDivElement>(null);
   const enPantalla = useInView(rejilla, { amount: 0.4 });
   const reducir = useReducir();
@@ -200,6 +203,15 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
             <span className="ml-[0.3em] font-light">MEDIA</span>
           </p>
           <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[var(--jm-ante)] [text-wrap:balance]">{textoJuno}</p>
+          {texto(enlaceJuno.href) && (
+            <Enlace
+              href={texto(enlaceJuno.href)}
+              className="group mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--jm-texto)] transition-colors hover:text-[var(--jm-acento)]"
+            >
+              {texto(enlaceJuno.texto) || "Así trabajamos"}
+              <Icono nombre="flecha" className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+            </Enlace>
+          )}
         </Revelar>
         <Revelar retraso={0.12}>
           {/* Las marcas en fila, separadas por líneas finas: nada de etiquetas */}

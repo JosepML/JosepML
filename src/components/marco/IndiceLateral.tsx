@@ -28,7 +28,7 @@ const NOMBRES: Record<TipoBloque, string> = {
  * al pasar el ratón aparece su nombre; al pulsar se va a ella con la misma curva del scroll mágico.
  * Solo en escritorio (en pantallas de menos de 1440 px las secciones le dejan sitio a la izquierda, ver web.css). La sección actual es la que ocupa el centro de la pantalla.
  * Al llegar a la última sección se despliega solo, con los nombres de todas, como invitación a volver
- * a cualquiera; al subir se repliega.
+ * a cualquiera; al subir se repliega. También se despliega mientras el ratón está encima.
  */
 export function IndiceLateral({ bloques }: { bloques: Bloque[] }) {
   const reducir = useReducir();
@@ -59,18 +59,22 @@ export function IndiceLateral({ bloques }: { bloques: Bloque[] }) {
 
   // En la portada (que ocupa todo el ancho) el índice taparía el titular: aparece al salir de ella
   const enPortada = bloques[0]?.tipo === "portada" && actual === bloques[0].id;
-  const desplegado = bloques.length > 1 && (alFinal || actual === bloques[bloques.length - 1].id);
+  const [encima, setEncima] = useState(false);
+  const alFinalDeLaPagina = alFinal || actual === bloques[bloques.length - 1]?.id;
+  const desplegado = bloques.length > 1 && (encima || alFinalDeLaPagina);
 
   return (
     <nav
       aria-label="Secciones"
       aria-hidden={enPortada}
+      onPointerEnter={(e) => e.pointerType === "mouse" && setEncima(true)}
+      onPointerLeave={() => setEncima(false)}
       className={`cristal cristal-fuerte fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-0.5 px-2 py-3 transition-[opacity,translate,border-radius,padding] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:flex ${
         enPortada ? "pointer-events-none -translate-x-3 opacity-0" : "opacity-100"
       } ${desplegado ? "rounded-[26px] pr-5" : "rounded-[22px]"}`}
     >
-      {/* Desplegado: un titular breve encima de la lista */}
-      <Plegable abierto={desplegado}>
+      {/* Desplegado al final: un titular breve encima de la lista (con el ratón encima no hace falta) */}
+      <Plegable abierto={desplegado && alFinalDeLaPagina}>
         <p className="whitespace-nowrap px-1.5 pb-2 pt-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--jm-tenue)]">
           ¿Quieres volver a algo?
         </p>

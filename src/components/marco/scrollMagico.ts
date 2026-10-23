@@ -46,6 +46,47 @@ export function encuadre(el: HTMLElement) {
   return el.offsetHeight <= window.innerHeight + 2 ? top + el.offsetHeight / 2 - window.innerHeight / 2 : top;
 }
 
+/** La sección entera que contiene un ancla (`#servicios` está dentro de su bloque), para encuadrarla */
+function seccionDe(id: string) {
+  const el = id ? document.getElementById(decodeURIComponent(id)) : null;
+  return el ? (el.closest<HTMLElement>("[data-bloque]") ?? el) : null;
+}
+
+/**
+ * Anclas de la misma página (`/#servicios`): en vez del salto del navegador, que deja la sección pegada
+ * arriba, la encuadra como el scroll mágico (centrada si cabe). Al llegar desde otra página con un ancla,
+ * corrige la posición cuando la página ya está montada.
+ */
+export function useAnclas(ruta: string) {
+  useEffect(() => {
+    const clic = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as HTMLElement | null)?.closest?.("a[href*='#']") as HTMLAnchorElement | null;
+      if (!a || a.target === "_blank") return;
+      const url = new URL(a.href, location.href);
+      if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+      const el = seccionDe(url.hash.slice(1));
+      if (!el) return;
+      e.preventDefault();
+      history.replaceState(history.state, "", url.hash);
+      deslizarA(encuadre(el));
+    };
+    document.addEventListener("click", clic, true);
+    return () => document.removeEventListener("click", clic, true);
+  }, []);
+
+  useEffect(() => {
+    const id = location.hash.slice(1);
+    if (!id) return;
+    // Las secciones de más abajo se montan escalonadas: se espera a que estén y se encuadra sin animación
+    const t = window.setTimeout(() => {
+      const el = seccionDe(id);
+      if (el) deslizarA(encuadre(el), true);
+    }, 450);
+    return () => window.clearTimeout(t);
+  }, [ruta]);
+}
+
 /**
  * "Scroll mágico" (solo en la portada): con la rueda del ratón, cada gesto lleva con una curva suave al
  * siguiente punto. Puntos:
