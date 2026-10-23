@@ -15,10 +15,10 @@ import { useScrollMagico } from "./scrollMagico";
 /** Menú principal. «Trabajos» primero (plan/contenido/fundamentos.md). Llevan a las secciones de Inicio
  *  mientras no existen sus páginas; las tareas S5 a S9 cambian cada uno a su página al crearla. */
 const ENLACES = [
-  { nombre: "Trabajos", href: "/#trabajos" },
+  { nombre: "Trabajos", href: RUTAS.trabajos },
   { nombre: "Servicios", href: "/#servicios" },
-  { nombre: "Sobre mí", href: "/#sobre-mi" },
-  { nombre: "Blog", href: "/#blog" },
+  { nombre: "Sobre mí", href: RUTAS.sobreMi },
+  { nombre: "Blog", href: RUTAS.blog },
 ];
 const HABLEMOS = "/#llamada";
 

@@ -42,13 +42,17 @@ export function Titular({
   texto,
   centrado,
   className = "",
+  nivel = 2,
 }: {
   antetitulo?: string;
   titulo?: string;
   texto?: string;
   centrado?: boolean;
   className?: string;
+  /** h1 en la cabecera de una página; h2 (por defecto) en las secciones */
+  nivel?: 1 | 2;
 }) {
+  const Encabezado = nivel === 1 ? "h1" : "h2";
   return (
     <div className={`${centrado ? "mx-auto text-center" : ""} max-w-3xl ${className}`}>
       {antetitulo && (
@@ -59,9 +63,9 @@ export function Titular({
         </Revelar>
       )}
       <Revelar retraso={0.08}>
-        <h2 className="mt-5 text-[clamp(2rem,min(5vw,7.4svh),4.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] [text-wrap:balance]">
+        <Encabezado className="mt-5 text-[clamp(2rem,min(5vw,7.4svh),4.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] [text-wrap:balance]">
           <TituloConAcento texto={titulo ?? ""} />
-        </h2>
+        </Encabezado>
       </Revelar>
       {texto && (
         <Revelar retraso={0.16}>

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const a = (await getArticulos()).find((x) => x.slug === slug);
   if (!a) return {};
   return {
-    title: a.seo.titulo || a.titulo,
+    title: a.seo.titulo ? { absolute: a.seo.titulo } : a.titulo,
     description: a.seo.descripcion || a.extracto,
     openGraph: a.imagen ? { images: [a.imagen.url] } : undefined,
   };

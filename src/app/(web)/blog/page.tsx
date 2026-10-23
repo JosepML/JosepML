@@ -17,7 +17,7 @@ async function cabecera() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const { pagina, titulo } = await cabecera();
-  return { title: pagina?.seo.titulo || "Blog", description: pagina?.seo.descripcion || titulo };
+  return { title: pagina?.seo.titulo ? { absolute: pagina.seo.titulo } : "Blog", description: pagina?.seo.descripcion || titulo };
 }
 
 export default async function Blog() {
@@ -25,7 +25,7 @@ export default async function Blog() {
   return (
     <main className="px-4 pb-24 pt-32 sm:px-8 sm:pt-40">
       <div className="mx-auto max-w-7xl">
-        <Titular antetitulo={c.antetitulo} titulo={c.titulo} texto={c.texto} />
+        <Titular nivel={1} antetitulo={c.antetitulo} titulo={c.titulo} texto={c.texto} />
         <div className={`mt-12 grid gap-3 ${articulos.length < 3 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {articulos.map((a, i) => (
             <Revelar key={a.slug} retraso={i * 0.08}>

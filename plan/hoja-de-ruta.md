@@ -83,10 +83,10 @@ Lee: `legacy/constants.ts`, `plan/contenido/fundamentos.md`, `plan/contenido/map
 | S2 | Copiar las ~90 imágenes de ImgBB e Imgur al bucket `medios` y reescribir las URLs (en el PC de Josep) | B, S1 | 0 URLs externas de imagen en la base de datos |
 | S3 (casi) | Cargar en la base de datos los textos de `plan/contenido/` (servicios, bloques de Inicio, Sobre mí, clientes, opiniones, canales). Inicio, servicios, clientes, opiniones y canales los cargó C (`scripts/cargar-inicio.mjs`); falta Sobre mí, que va con S8 | B | Inicio y servicios sin textos fijos en el código |
 | S4 ✓ | Cargar los textos aprobados de E en `proyectos` y `articulos` | E, S1 | Cada ficha muestra su texto nuevo |
-| S5 | `/trabajos` con filtros por servicio y tipo, y la ficha `/trabajos/[slug]` (galería con visor y siguiente proyecto) | C | Las 18 fichas se abren sin errores, en claro y oscuro |
-| S6 | `/servicios/[slug]` (los 3) | C | Igual que el prototipo, con sus proyectos y preguntas frecuentes |
+| S5 ✓ | (hecho en el hilo de C, 2026-10-23: `src/components/trabajos/`) `/trabajos` con filtros por servicio y tipo, y la ficha `/trabajos/[slug]` (galería con visor y siguiente proyecto) | C | Las 18 fichas se abren sin errores, en claro y oscuro |
+| S6 ✓ | `/servicios/[slug]` (los 3) (hecho en el hilo de C, 2026-10-23: `src/components/servicios/`) | C | Igual que el prototipo, con sus proyectos y preguntas frecuentes |
 | S7 | `/recreaciones` con antes y después | C | Las 4 recreaciones con su deslizador |
-| S8 | `/sobre-mi` | C | Texto, fotos y canales de YouTube |
+| S8 ✓ | `/sobre-mi` (hecho en el hilo de C, 2026-10-23: página de bloques, `scripts/cargar-sobre-mi.mjs`; faltan las fotos de Josep) | C | Texto, fotos y canales de YouTube |
 | S9 ✓ | `/blog` y `/blog/[slug]` (hecho en el hilo de C, 2026-10-23: `src/components/blog/`, el cuerpo se pinta desde el documento del editor con `ContenidoArticulo`) | C | 3 artículos legibles, con el ancho de lectura cuidado |
 | S10 | `/contacto` guiado que guarda en `mensajes` y avisa por correo; `/gracias` | C | Un mensaje de prueba llega al correo y a la base de datos |
 | S11 | Privacidad, cookies (aviso) y GA4 `G-RKBDRMVL1J` tras aceptar | C | GA4 recibe la visita solo tras aceptar |
@@ -132,3 +132,4 @@ Sigue `plan/fase-7-lanzamiento.md`. Solo con la orden expresa de Josep.
 - 2026-10-23 (tarea C): Inicio `/` sale entero de Supabase (página y 11 bloques), con los componentes de producción en `src/components/`, la capa de datos en `src/lib/datos/` y la receta `plan/patron-paginas.md`. Igual que el prototipo D captura a captura. Cargados clientes, opiniones, canales y bloques; los servicios completos y los ajustes esperan a que Josep ejecute `supabase/datos/04-inicio.sql`. Detalle en `plan/traspaso-tarea-c.md`. Falta el visto bueno de Josep y el mp4 de portada.
 - 2026-10-23: Josep ejecutó `supabase/datos/04-inicio.sql`; servicios publicados y ajustes completos. Su versión local está en `5648f35`.
 - 2026-10-23: `/blog` y `/blog/[slug]` montados (las tarjetas de Inicio daban 404). Cabecera del listado: primer bloque de la página `blog` si existe, si no el bloque Blog de Inicio. La invitación final de cada artículo repite el título de la llamada de Inicio.
+- 2026-10-23: S5, S6 y S8 hechos en el hilo de C para que Inicio no tuviera enlaces rotos: `/trabajos` (filtros por servicio y tipo, sin las recreaciones), las 18 fichas `/trabajos/[slug]`, los 3 servicios y `/sobre-mi` (página de bloques cargada en la base). El menú ya apunta a Trabajos, Sobre mí y Blog. Siguen sin página `/recreaciones` (S7) y `/contacto` (S10).
