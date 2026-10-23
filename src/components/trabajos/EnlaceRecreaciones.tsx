@@ -6,8 +6,11 @@ import { Icono } from "../Iconos";
 import { Revelar } from "../piezas";
 
 /** Tarjeta al final de /trabajos que lleva a /recreaciones (las recreaciones no salen en el listado) */
-export function EnlaceRecreaciones({ titulo, texto, recreaciones }: { titulo: string; texto: string; recreaciones: Proyecto[] }) {
-  const fotos = recreaciones.flatMap((p) => (p.poster ?? p.galeria[0]?.imagen ?? null) ?? []).slice(0, 4);
+/** `evitar`: medios que no sirven de foto (las comparaciones montadas, con marco y rótulos) */
+export function EnlaceRecreaciones({ titulo, texto, recreaciones, evitar }: { titulo: string; texto: string; recreaciones: Proyecto[]; evitar: Set<string> }) {
+  const fotos = recreaciones
+    .flatMap((p) => [p.poster, ...p.galeria.map((g) => g.imagen)].find((m) => m && !evitar.has(m.id)) ?? [])
+    .slice(0, 4);
   if (!recreaciones.length) return null;
   return (
     <Revelar className="mt-20">

@@ -2,7 +2,8 @@
 -- de /recreaciones (las recreaciones salen de `proyectos`, tipo «recreacion»). Escrito a mano; repetible.
 --
 -- comparaciones: no hay fotogramas sueltos de las películas originales, solo comparaciones ya montadas
--- (1280×720, marco blanco). `recorte` toma cada mitad, por dentro del marco y sin los rótulos quemados.
+-- (1280×720, marco blanco). `recorte` toma cada mitad, 3 px por dentro del marco y de la franja, y sin
+-- los rótulos quemados (por eso Nosferatu queda en plano medio).
 -- Luke y Vader no tiene comparación: enseña el póster y el vídeo. Para cambiar una, basta con poner dos
 -- medios sin `recorte` (`{"original":{"medio":…},"recreacion":{"medio":…}}`).
 begin;
@@ -25,18 +26,18 @@ select p.id, 0, 'texto', true, $json${
   "comparaciones": {
     "recreacion-nosferatu": {
       "tamano": [1280, 720],
-      "original": { "medio": "e078d7e1-8592-4f37-acd5-712f125a2f50", "recorte": [20, 18, 616, 366] },
-      "recreacion": { "medio": "e078d7e1-8592-4f37-acd5-712f125a2f50", "recorte": [643, 18, 616, 366] }
+      "original": { "medio": "e078d7e1-8592-4f37-acd5-712f125a2f50", "recorte": [23, 21, 612, 364] },
+      "recreacion": { "medio": "e078d7e1-8592-4f37-acd5-712f125a2f50", "recorte": [645, 21, 612, 364] }
     },
     "recreacion-el-padrino": {
       "tamano": [1280, 720],
-      "original": { "medio": "f458ccd4-f51f-4e81-bd81-faf54b29d3b5", "recorte": [20, 18, 616, 682] },
-      "recreacion": { "medio": "f458ccd4-f51f-4e81-bd81-faf54b29d3b5", "recorte": [643, 18, 616, 682] }
+      "original": { "medio": "f458ccd4-f51f-4e81-bd81-faf54b29d3b5", "recorte": [23, 21, 611, 676] },
+      "recreacion": { "medio": "f458ccd4-f51f-4e81-bd81-faf54b29d3b5", "recorte": [645, 21, 611, 676] }
     },
     "recreacion-star-wars-sin-cgi": {
       "tamano": [1280, 720],
-      "original": { "medio": "7713bac7-6f19-49dd-bda7-556ed15b0767", "recorte": [20, 18, 605, 340] },
-      "recreacion": { "medio": "7713bac7-6f19-49dd-bda7-556ed15b0767", "recorte": [20, 360, 605, 340] }
+      "original": { "medio": "7713bac7-6f19-49dd-bda7-556ed15b0767", "recorte": [23, 21, 594, 334] },
+      "recreacion": { "medio": "7713bac7-6f19-49dd-bda7-556ed15b0767", "recorte": [23, 362, 594, 334] }
     }
   }
 }$json$::jsonb

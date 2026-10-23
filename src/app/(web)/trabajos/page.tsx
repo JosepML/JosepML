@@ -5,7 +5,7 @@ import { ListadoTrabajos } from "@/components/trabajos/ListadoTrabajos";
 import { getPagina } from "@/lib/datos/paginas";
 import { getProyectos } from "@/lib/datos/proyectos";
 import { getServicios } from "@/lib/datos/servicios";
-import { texto } from "@/lib/datos/util";
+import { objeto, texto } from "@/lib/datos/util";
 
 // Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
 export const dynamic = "force-dynamic";
@@ -15,6 +15,11 @@ async function cabecera() {
   const [trabajos, inicio] = await Promise.all([getPagina("trabajos"), getPagina("inicio")]);
   const datos = trabajos?.bloques[0]?.datos ?? inicio?.bloques.find((b) => b.tipo === "trabajos")?.datos ?? {};
   return { pagina: trabajos, antetitulo: texto(datos.antetitulo) || "Trabajos", titulo: texto(datos.titulo) || "Trabajos", texto: texto(datos.texto) };
+}
+
+/** Ids de las imágenes que usan las comparaciones de /recreaciones */
+function mediosDeComparaciones(v: unknown) {
+  return new Set(Object.values(objeto(v)).flatMap((c) => [objeto(objeto(c).original).medio, objeto(objeto(c).recreacion).medio].map(texto)));
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,6 +39,7 @@ export default async function Trabajos() {
             titulo={recreaciones.titulo}
             texto={recreaciones.seo.descripcion}
             recreaciones={proyectos.filter((p) => p.tipo?.slug === "recreacion")}
+            evitar={mediosDeComparaciones(recreaciones.bloques[0]?.datos.comparaciones)}
           />
         )}
       </div>
