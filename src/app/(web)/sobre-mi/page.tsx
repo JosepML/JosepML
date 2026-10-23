@@ -22,6 +22,8 @@ export default async function SobreMi() {
   // El menú fijo tapa el principio: la primera sección baja lo que mide
   return (
     <div className="pt-16 sm:pt-20">
+      {/* Los bloques llevan h2; el h1 de la página (para buscadores y lectores de pantalla) es su título */}
+      <h1 className="sr-only">{r.pagina.titulo}</h1>
       <PaginaBloques bloques={r.pagina.bloques} datos={r.datos} />
     </div>
   );
