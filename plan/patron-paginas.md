@@ -43,7 +43,7 @@ Receta para las tareas S5 a S11. La escribió la tarea C, que dejó montados el 
 2. **Componentes** en `src/components/<seccion>/`. Copia la pieza del prototipo D, cambia los datos fijos por props con los tipos de `tipos.ts`, las clases `d-` por `jm-` y `var(--d-…)` por `var(--jm-…)`. Las imágenes, siempre con `img(url, ancho)`, que pide calidad 90.
 3. **Textos:** nada fijo en el código que Josep pueda querer cambiar. Si un texto no tiene sitio en su tabla, la página se hace con bloques (punto 3). Los textos en Markdown se pintan con `<Parrafos texto=… />` y los títulos con acento con `<TituloConAcento texto=… />`.
 4. **Enlaces:** con `RUTAS`. Al crear tu página, cambia en `src/components/marco/Marco.tsx` el enlace del menú que le toque (hoy apuntan a las anclas de Inicio, `/#trabajos`...).
-5. **Movimiento:** solo `transform` y `opacity`, con `CURVA` de `src/styles/movimiento.ts`. Con «reducir movimiento» (el Windows de Josep lo tiene activado) se mantienen los fundidos y el vídeo, y se quitan desplazamientos, desenfoques y marquesinas: usa `useReducir()`.
+5. **Movimiento:** solo `transform` y `opacity`, con `CURVA` de `src/styles/movimiento.ts`. La web se mueve siempre como el prototipo D, aunque el sistema pida «reducir movimiento» (decisión de Josep, que lo tiene activado en Windows): `useReducir()` devuelve `false`. Aun así, pasa por `useReducir()` todo lo que se desplaza, por si el repaso de accesibilidad (S20) decide respetarlo. Nunca ocultes contenido con «reducir»: como mucho, que se quede quieto.
 6. **Comprueba** en claro y oscuro, en móvil y con escalado 150 %. Después `npm run lint`, `npx tsc --noEmit` y `npm run build`.
 
 ## 3. Páginas hechas de bloques

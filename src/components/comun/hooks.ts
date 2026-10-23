@@ -25,11 +25,12 @@ export function usePantallaAncha() {
 }
 
 /**
- * "Reducir movimiento" del sistema del visitante. La web lo respeta, pero sin quedarse quieta: los
- * fundidos y el vídeo de portada siguen; lo que se quita es el desplazamiento (subidas, parallax,
- * desenfoques que se aclaran, marquesinas y el scroll mágico). Así se ve bien también en el PC de Josep,
- * que tiene desactivados los efectos de animación de Windows.
+ * "Reducir movimiento". La web se mueve siempre como el prototipo D aprobado, aunque el sistema pida
+ * reducir movimiento: Josep (que tiene desactivados los efectos de animación de Windows) lo pidió así, y
+ * con el ajuste del sistema se perdían los orbes del fondo, las marquesinas y el scroll mágico. Todo el
+ * código que se adapta sigue pasando por aquí: si algún día se quiere respetar el sistema (repaso de
+ * accesibilidad, S20), basta con devolver useMedia("(prefers-reduced-motion: reduce)").
  */
 export function useReducir() {
-  return useMedia("(prefers-reduced-motion: reduce)");
+  return false;
 }

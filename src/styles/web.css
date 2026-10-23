@@ -261,14 +261,16 @@
   display: none;
 }
 
-/* "Reducir movimiento" (data-reducir lo pone el Marco según el sistema del visitante): fuera lo que se
-   desplaza en bucle. Los fundidos siguen */
+/* "Reducir movimiento" (data-reducir, si useReducir() lo activa algún día): fuera lo que se mueve en
+   bucle. Las marquesinas se quedan quietas pero visibles (con opacidad 0 desaparecían las opiniones) */
 .jm-raiz[data-reducir] .orbes span,
-.jm-raiz[data-reducir] .jm-marquesina,
-.jm-raiz[data-reducir] .jm-marquesina-inversa,
 .jm-raiz[data-reducir] .latido::after {
   animation: none;
   opacity: 0;
+}
+.jm-raiz[data-reducir] .jm-marquesina,
+.jm-raiz[data-reducir] .jm-marquesina-inversa {
+  animation: none;
 }
 .jm-raiz[data-reducir] .boton:hover {
   transform: none;
