@@ -12,7 +12,7 @@
 
 ## Pendiente de Josep
 
-1. **Ejecutar `supabase/datos/04-inicio.sql` en el editor SQL** del proyecto «Web Josep Mira». Desde el contenedor, las sentencias grandes se quedaban esperando permiso. Completa los textos de los 3 servicios (mirada, aporto, para quién, pasos, preguntas, llamada, SEO), los **publica** y guarda correo, WhatsApp y redes en `ajustes`. Mientras no se ejecute, Inicio sale sin las tarjetas de servicios, sin los filtros de Selección y sin los chips de servicio en la llamada, y el pie sin redes. El archivo es repetible: lo que ya existe no se duplica.
+1. ~~Ejecutar `supabase/datos/04-inicio.sql` en el editor SQL~~ Hecho por Josep el 2026-10-23: los 3 servicios están completos y publicados, y `ajustes` tiene correo, WhatsApp y redes. El archivo es repetible, pero no hay que volver a ejecutarlo cuando Josep edite los servicios desde el panel (los pisaría).
 2. Vídeo de portada en mp4 (mientras, YouTube sin controles). Cuando esté en el bucket: un medio de tipo vídeo y su id en `bloques.datos.video.medio` de la portada.
 3. Foto de Sobre mí definitiva (la actual es una captura provisional de postimg).
 4. Logos de los clientes (solo Disney y Star Wars tienen; el resto sale con su nombre en letra).
