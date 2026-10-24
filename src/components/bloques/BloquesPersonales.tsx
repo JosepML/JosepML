@@ -284,8 +284,9 @@ function CabeceraCine({ bloque }: { bloque: Bloque }) {
         ) : (
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,var(--jm-orbe-a),transparent_60%),radial-gradient(circle_at_70%_70%,var(--jm-orbe-b),transparent_60%)]" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
-        <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-12 lg:p-16">
+        {/* Sombra solo abajo, donde va el título, y suave: la foto se ve con su color. El texto lleva su propia sombra */}
+        <div className="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-7 text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.45)] sm:p-12 lg:p-16">
           <Revelar retraso={0.25} className="max-w-4xl">
             {(antetitulo || editando) && (
               <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur-md">
