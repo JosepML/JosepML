@@ -4,6 +4,7 @@ import { startTransition, useEffect, useState } from "react";
 import { fotogramas, imagenesDe } from "@/lib/datos/seleccion";
 import type { Bloque, DatosWeb, TipoBloque } from "@/lib/datos/tipos";
 import { img } from "../comun/imagen";
+import { ProveedorBloque, useEdicion, ZonaEdicion } from "../edicion/contexto";
 import { ProveedorDatos, useDatos } from "../marco/DatosWeb";
 import { IndiceLateral } from "../marco/IndiceLateral";
 import { BloquePortada } from "./BloquePortada";
@@ -46,11 +47,14 @@ const ANCLAS: Partial<Record<TipoBloque, string>> = {
 /**
  * Una página hecha de bloques (Inicio y las páginas que cree Josep). Recibe de la página de servidor los
  * bloques y los datos que leen, y pinta cada bloque con su componente, con el índice lateral.
+ * Con `pagina`, Josep puede editarla en su sitio (modo «Editar página», src/components/edicion/).
  */
-export function PaginaBloques({ bloques, datos }: { bloques: Bloque[]; datos: DatosWeb }) {
+export function PaginaBloques({ bloques, datos, pagina }: { bloques: Bloque[]; datos: DatosWeb; pagina?: { id: string; slug: string; titulo: string } }) {
   return (
     <ProveedorDatos datos={datos}>
-      <Bloques bloques={bloques.filter((b) => b.tipo in COMPONENTES)} />
+      <ZonaEdicion pagina={pagina} publicados={bloques}>
+        {(lista) => <Bloques bloques={lista.filter((b) => b.tipo in COMPONENTES)} />}
+      </ZonaEdicion>
     </ProveedorDatos>
   );
 }
@@ -104,9 +108,10 @@ function useMontajeEscalonado() {
   return todo;
 }
 
-function Bloques({ bloques }: { bloques: Bloque[] }) {
+function Bloques({ bloques }: { bloques: (Bloque & { oculto?: boolean })[] }) {
   usePrecargaImagenes();
   const todo = useMontajeEscalonado();
+  const edicion = useEdicion();
   const vistos = new Set<TipoBloque>();
 
   return (
@@ -123,13 +128,24 @@ function Bloques({ bloques }: { bloques: Bloque[] }) {
             data-bloque={b.tipo}
             // En escritorio cada sección ocupa al menos la pantalla entera con el contenido centrado: el scroll
             // mágico la deja encuadrada y no asoman las vecinas (la portada ya mide una pantalla; el proceso es más alto)
-            className={`relative ${b.tipo !== "portada" && b.tipo !== "proceso" ? "lg:flex lg:min-h-svh lg:flex-col lg:justify-center" : ""}`}
+            className={`relative ${b.tipo !== "portada" && b.tipo !== "proceso" ? "lg:flex lg:min-h-svh lg:flex-col lg:justify-center" : ""} ${
+              edicion ? "jm-seccion-editada group/seccion" : ""
+            }`}
           >
-            <Componente bloque={b} ancla={ancla} />
+            {edicion ? (
+              <ProveedorBloque value={b.id}>
+                <div className={b.oculto ? "jm-seccion-oculta" : undefined}>
+                  <Componente bloque={b} ancla={ancla} />
+                </div>
+                <edicion.Herramientas bloque={{ id: b.id, tipo: b.tipo, visible: !b.oculto, datos: b.datos }} indice={i} total={bloques.length} />
+              </ProveedorBloque>
+            ) : (
+              <Componente bloque={b} ancla={ancla} />
+            )}
           </div>
         );
       })}
-      <IndiceLateral bloques={bloques} />
+      <IndiceLateral bloques={edicion ? bloques.filter((b) => !b.oculto) : bloques} />
     </main>
   );
 }

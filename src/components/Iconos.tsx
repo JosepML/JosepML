@@ -86,6 +86,47 @@ const TRAZOS: Record<string, React.ReactNode> = {
       </g>
     </>
   ),
+  // Panel y editor
+  subir: <path d="M12 16V4M7 9l5-5 5 5M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />,
+  duplicar: (
+    <>
+      <rect x="8" y="8" width="12" height="12" rx="3" />
+      <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+    </>
+  ),
+  arriba: <path d="M12 19V5M6 11l6-6 6 6" />,
+  abajo: <path d="M12 5v14M6 13l6 6 6-6" />,
+  deshacer: <path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" />,
+  rehacer: <path d="M15 14l5-5-5-5M20 9H10a6 6 0 0 0 0 12h3" />,
+  check: <path d="M5 12.5l4.5 4.5L19 7" />,
+  buscar: (
+    <>
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="M20 20l-4.2-4.2" />
+    </>
+  ),
+  estrella: <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" />,
+  "estrella-llena": <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" fill="currentColor" />,
+  imagen: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="3" />
+      <circle cx="9" cy="10" r="1.8" />
+      <path d="M21 16l-5-5-8 9" />
+    </>
+  ),
+  historial: <path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2" />,
+  externo: <path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4" />,
+  salir: <path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H4" />,
+  rejilla: (
+    <>
+      <rect x="4" y="4" width="7" height="7" rx="2" />
+      <rect x="13" y="4" width="7" height="7" rx="2" />
+      <rect x="4" y="13" width="7" height="7" rx="2" />
+      <rect x="13" y="13" width="7" height="7" rx="2" />
+    </>
+  ),
+  pagina: <path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM14 3v5h5M9 13h6M9 17h6" />,
+  alerta: <path d="M12 4l9 16H3zM12 10v4M12 17.5v.5" />,
 };
 
 export function Icono({ nombre, className = "h-5 w-5" }: { nombre: keyof typeof TRAZOS | string; className?: string }) {

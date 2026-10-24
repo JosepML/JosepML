@@ -58,13 +58,13 @@ Lee: `plan/fase-4-base-de-datos-y-migracion.md`, `plan/contenido/mapa-de-conteni
 **Hecho cuando:** Inicio en `localhost:3000` se ve igual que el prototipo D, leyendo los datos de Supabase.
 
 ### D · Sistema de edición · Opus · hilo nuevo · necesita B y C
-- [ ] Inicio de sesión en `/admin/entrar` y protección de `/admin` con el middleware
-- [ ] Modo «Editar página» real sobre `bloques`: texto editable en su sitio, cambiar imagen arrastrando (subida a `medios`), reordenar, ocultar, añadir y duplicar secciones, autoguardado en borrador, Publicar y Descartar
-- [ ] Base del panel `/admin`: barra lateral, lista con búsqueda y orden arrastrando, formulario genérico con autoguardado, campo de imagen, campo de galería, campo de vídeo (YouTube, Instagram o archivo), vista previa y Publicar
-- [ ] Proyectos completos en el panel (crear, editar, duplicar, ocultar, reordenar y destacar), que sirven de modelo para las demás pantallas
-- [ ] `plan/patron-panel.md`: receta para añadir una pantalla nueva al panel
+- [x] Inicio de sesión en `/admin/entrar` y protección de `/admin` con el middleware
+- [x] Modo «Editar página» real sobre `bloques`: texto editable en su sitio, cambiar imagen arrastrando (subida a `medios`), reordenar, ocultar, añadir y duplicar secciones, autoguardado en borrador, Publicar y Descartar
+- [x] Base del panel `/admin`: barra lateral, lista con búsqueda y orden arrastrando, formulario genérico con autoguardado, campo de imagen, campo de galería, campo de vídeo (YouTube, Instagram o archivo), vista previa y Publicar
+- [x] Proyectos completos en el panel (crear, editar, duplicar, ocultar, reordenar y destacar), que sirven de modelo para las demás pantallas
+- [x] `plan/patron-panel.md`: receta para añadir una pantalla nueva al panel
 
-**Hecho cuando:** Josep crea un proyecto de prueba y edita un texto de Inicio, y los dos se ven publicados sin tocar código.
+**Hecho cuando:** Josep crea un proyecto de prueba y edita un texto de Inicio, y los dos se ven publicados sin tocar código. (Probado en el emulador del contenedor; falta que Josep lo haga en su PC con la base real.)
 
 ### E · Textos de los proyectos y artículos · Opus · hilo nuevo · puede empezar ya
 Lee: `legacy/constants.ts`, `plan/contenido/fundamentos.md`, `plan/contenido/mapa-de-contenido.md`, `plan/contenido/trabajos-recreaciones-y-blog.md` y la web original (https://josepml.github.io/JosepML/#/).
@@ -135,3 +135,4 @@ Sigue `plan/fase-7-lanzamiento.md`. Solo con la orden expresa de Josep.
 - 2026-10-23: S5, S6 y S8 hechos en el hilo de C para que Inicio no tuviera enlaces rotos: `/trabajos` (filtros por servicio y tipo, sin las recreaciones), las 18 fichas `/trabajos/[slug]`, los 3 servicios y `/sobre-mi` (página de bloques cargada en la base). El menú ya apunta a Trabajos, Sobre mí y Blog. Siguen sin página `/recreaciones` (S7) y `/contacto` (S10).
 - 2026-10-23: S7 hecho: `/recreaciones` (orden Nosferatu, El Padrino, Luke y Vader, Star Wars sin CGI) con deslizador «Original / Mi recreación». No hay fotogramas sueltos de las películas: el deslizador recorta las comparaciones ya montadas de Nosferatu, El Padrino y Star Wars sin CGI; Luke y Vader enseña el póster y el vídeo hasta que haya un fotograma original. `/trabajos` acaba con una tarjeta que lleva a Recreaciones. Contenido en `supabase/datos/07-recreaciones.sql` (aplicado). Solo falta `/contacto` (S10).
 - 2026-10-23: apuntes de Josep: filtros de `/trabajos` con categorías propias por servicio (tipos nuevos `conciertos` «Aftermovies y conciertos» y `bodas`), sello «con JUNO Media» en tarjeta y ficha (`proyectos.con_juno`), enlace «Así trabajamos» en el bloque JUNO (espera el artículo), índice lateral que se despliega con el ratón encima, barra de arriba que vuelve al llevar el ratón arriba y anclas (`/#servicios`) encuadradas como el scroll mágico.
+- 2026-10-24 (tarea D): sistema de edición montado. `/admin/entrar` y middleware; modo «Editar página» en Inicio y Sobre mí (texto en su sitio, cambiar imagen arrastrando, reordenar, ocultar, añadir, duplicar y borrar secciones, deshacer, autoguardado, Publicar, Descartar, historial y vista previa); panel con Resumen, Páginas y Proyectos completos (lista con búsqueda, filtros y orden, destacados de Inicio, nuevo, duplicar, ocultar, borrar y formulario con autoguardado, galería, vídeos, premios y SEO); vista previa de toda la web con lo no publicado. Receta en `plan/patron-panel.md`, emulador de Supabase para probar en el contenedor en `scripts/supabase-local/`, detalle en `plan/traspaso-tarea-d.md`. Falta el visto bueno de Josep en su PC.

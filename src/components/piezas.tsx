@@ -5,6 +5,7 @@ import { animate, AnimatePresence, motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Icono } from "./Iconos";
 import { img } from "./comun/imagen";
+import { Editable, useEditando } from "./edicion/contexto";
 
 export { CURVA } from "@/styles/movimiento";
 import { CURVA } from "@/styles/movimiento";
@@ -53,23 +54,34 @@ export function Titular({
   nivel?: 1 | 2;
 }) {
   const Encabezado = nivel === 1 ? "h1" : "h2";
+  // En el modo «Editar página» los campos de un bloque se editan en su sitio (antetitulo, titulo y texto de sus
+  // datos) y los vacíos se enseñan para poder rellenarlos
+  const editando = useEditando();
   return (
     <div className={`${centrado ? "mx-auto text-center" : ""} max-w-3xl ${className}`}>
-      {antetitulo && (
+      {(antetitulo || editando) && (
         <Revelar>
           <span className="cristal inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)]">
-            {antetitulo}
+            <Editable campo="antetitulo" valor={antetitulo} vacio="Antetítulo">
+              {antetitulo}
+            </Editable>
           </span>
         </Revelar>
       )}
       <Revelar retraso={0.08}>
         <Encabezado className="mt-5 text-[clamp(2rem,min(5vw,7.4svh),4.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] [text-wrap:balance]">
-          <TituloConAcento texto={titulo ?? ""} />
+          <Editable campo="titulo" valor={titulo} vacio="Título">
+            <TituloConAcento texto={titulo ?? ""} />
+          </Editable>
         </Encabezado>
       </Revelar>
-      {texto && (
+      {(texto || (editando && texto !== undefined)) && (
         <Revelar retraso={0.16}>
-          <Parrafos texto={texto} className={`mt-5 max-w-xl text-lg leading-relaxed text-[var(--jm-suave)] [text-wrap:pretty] ${centrado ? "mx-auto" : ""}`} />
+          <div className={`mt-5 max-w-xl text-lg leading-relaxed text-[var(--jm-suave)] [text-wrap:pretty] ${centrado ? "mx-auto" : ""}`}>
+            <Editable campo="texto" valor={texto} multilinea bloqueHtml vacio="Texto">
+              <Parrafos texto={texto ?? ""} />
+            </Editable>
+          </div>
         </Revelar>
       )}
     </div>

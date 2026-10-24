@@ -3,6 +3,7 @@
 import type { Bloque } from "@/lib/datos/tipos";
 import { lista, objeto, texto } from "@/lib/datos/util";
 import { img } from "../comun/imagen";
+import { Editable } from "../edicion/contexto";
 import { useDatos, useMedio } from "../marco/DatosWeb";
 import { Revelar, Titular, TituloConAcento } from "../piezas";
 
@@ -82,9 +83,17 @@ export function BloqueCita({ bloque }: { bloque: Bloque }) {
       <Revelar>
         <figure className="cristal mx-auto max-w-6xl rounded-[var(--jm-radio-bloque)] px-6 py-20 text-center sm:px-16 sm:py-28">
           <blockquote className="text-[clamp(2rem,4.6vw,4rem)] font-extrabold leading-[1.08] tracking-[-0.04em] [text-wrap:balance]">
-            <TituloConAcento texto={frase} />
+            <Editable campo={bloque.datos.titulo || !bloque.datos.texto ? "titulo" : "texto"} valor={frase}>
+              <TituloConAcento texto={frase} />
+            </Editable>
           </blockquote>
-          {autor && <figcaption className="mt-6 text-sm font-semibold text-[var(--jm-suave)]">{autor}</figcaption>}
+          {autor && (
+            <figcaption className="mt-6 text-sm font-semibold text-[var(--jm-suave)]">
+              <Editable campo="autor" valor={autor}>
+                {autor}
+              </Editable>
+            </figcaption>
+          )}
         </figure>
       </Revelar>
     </section>

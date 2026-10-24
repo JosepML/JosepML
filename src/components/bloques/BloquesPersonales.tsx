@@ -9,6 +9,7 @@ import { usePunteroFino, useReducir } from "../comun/hooks";
 import { TarjetaArticulo } from "../blog/TarjetaArticulo";
 import { img } from "../comun/imagen";
 import { Icono } from "../Iconos";
+import { CambiarImagen, Editable, useEditando } from "../edicion/contexto";
 import { useDatos, useMedio } from "../marco/DatosWeb";
 import { Disponible, EVENTO_SERVICIO, Parrafos, Revelar, Titular, TituloConAcento } from "../piezas";
 
@@ -38,9 +39,15 @@ export function BloqueProceso({ bloque }: { bloque: Bloque }) {
                   <span className="relative flex h-[2.6rem] w-[2.6rem] items-center justify-center rounded-full bg-[var(--jm-acento)] text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(229,9,20,0.7)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-6 text-3xl font-extrabold tracking-[-0.035em]">{p.titulo}</h3>
+                  <h3 className="mt-6 text-3xl font-extrabold tracking-[-0.035em]">
+                    <Editable campo={`pasos.${i}.titulo`} valor={p.titulo}>
+                      {p.titulo}
+                    </Editable>
+                  </h3>
                   <p className="mt-3 text-[15px] leading-relaxed text-[var(--jm-suave)] transition-colors duration-500 [text-wrap:pretty] group-hover:text-[var(--jm-texto)]">
-                    {p.texto}
+                    <Editable campo={`pasos.${i}.texto`} valor={p.texto} multilinea>
+                      {p.texto}
+                    </Editable>
                   </p>
                 </li>
               </Revelar>
@@ -60,6 +67,7 @@ export function BloqueSobreMi({ bloque, ancla }: { bloque: Bloque; ancla?: strin
   const etiqueta = texto(bloque.datos.etiqueta);
   const cita = texto(bloque.datos.cita);
   const enlace = enlaceDe(bloque.datos.enlace);
+  const editando = useEditando();
   const ref = useRef<HTMLElement>(null);
   const reducir = useReducir();
   const fino = usePunteroFino();
@@ -100,9 +108,14 @@ export function BloqueSobreMi({ bloque, ancla }: { bloque: Bloque; ancla?: strin
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              {etiqueta && (
-                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
-                  <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">{etiqueta}</span>
+              <CambiarImagen campo="imagen" />
+              {(etiqueta || editando) && (
+                <div className="absolute bottom-4 left-4 right-4 z-30 flex flex-wrap gap-2">
+                  <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">
+                    <Editable campo="etiqueta" valor={etiqueta} vacio="Etiqueta">
+                      {etiqueta}
+                    </Editable>
+                  </span>
                 </div>
               )}
             </motion.div>
@@ -111,14 +124,22 @@ export function BloqueSobreMi({ bloque, ancla }: { bloque: Bloque; ancla?: strin
 
         <div>
           <Titular antetitulo={antetitulo} titulo={titulo} />
-          {cuerpo && (
+          {(cuerpo || editando) && (
             <Revelar retraso={0.15}>
-              <Parrafos texto={cuerpo} className="mt-6 text-lg leading-relaxed text-[var(--jm-suave)] [text-wrap:pretty] sm:text-xl" />
+              <div className="mt-6 text-lg leading-relaxed text-[var(--jm-suave)] [text-wrap:pretty] sm:text-xl">
+                <Editable campo="texto" valor={cuerpo} multilinea bloqueHtml vacio="Texto">
+                  <Parrafos texto={cuerpo ?? ""} />
+                </Editable>
+              </div>
             </Revelar>
           )}
-          {cita && (
+          {(cita || editando) && (
             <Revelar retraso={0.22}>
-              <p className="mt-6 border-l-2 border-[var(--jm-acento)] pl-4 text-xl font-semibold leading-snug tracking-[-0.02em] text-[var(--jm-texto)]">{cita}</p>
+              <p className="mt-6 border-l-2 border-[var(--jm-acento)] pl-4 text-xl font-semibold leading-snug tracking-[-0.02em] text-[var(--jm-texto)]">
+                <Editable campo="cita" valor={cita} vacio="Frase destacada">
+                  {cita}
+                </Editable>
+              </p>
             </Revelar>
           )}
           {papeles.length > 0 && (
@@ -183,22 +204,41 @@ export function BloqueBlog({ bloque, ancla }: { bloque: Bloque; ancla?: string }
 export function BloqueTexto({ bloque }: { bloque: Bloque }) {
   const { antetitulo, titulo = "", texto: cuerpo } = bloque.datos;
   const imagen = useMedio(bloque.datos.imagen);
+  const editando = useEditando();
   return (
     <section className="px-4 py-20 sm:px-8">
       <Revelar className="mx-auto max-w-5xl">
         <div data-foco className="cristal grid gap-8 overflow-hidden rounded-[40px] p-8 sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-center">
           <div>
-            {antetitulo && <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-acento)]">{antetitulo}</span>}
+            {(antetitulo || editando) && (
+              <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-acento)]">
+                <Editable campo="antetitulo" valor={antetitulo} vacio="Antetítulo">
+                  {antetitulo}
+                </Editable>
+              </span>
+            )}
             <h2 className="mt-3 text-4xl font-extrabold leading-[1.08] tracking-[-0.04em] [text-wrap:balance] sm:text-5xl">
-              <TituloConAcento texto={titulo} />
+              <Editable campo="titulo" valor={titulo} vacio="Título">
+                <TituloConAcento texto={titulo} />
+              </Editable>
             </h2>
-            {cuerpo && <Parrafos texto={cuerpo} className="mt-5 text-lg leading-relaxed text-[var(--jm-suave)]" />}
+            {(cuerpo || editando) && (
+              <div className="mt-5 text-lg leading-relaxed text-[var(--jm-suave)]">
+                <Editable campo="texto" valor={cuerpo} multilinea bloqueHtml vacio="Texto">
+                  <Parrafos texto={cuerpo ?? ""} />
+                </Editable>
+              </div>
+            )}
           </div>
           {imagen ? (
-            <img src={img(imagen.url, 1920)} alt={imagen.alt} className="aspect-[4/3] w-full rounded-[28px] object-cover" />
+            <div className="relative overflow-hidden rounded-[28px]">
+              <img src={img(imagen.url, 1920)} alt={imagen.alt} className="aspect-[4/3] w-full rounded-[28px] object-cover" />
+              <CambiarImagen campo="imagen" />
+            </div>
           ) : (
-            <div className="relative hidden aspect-[4/3] overflow-hidden rounded-[28px] md:block">
+            <div className={`relative aspect-[4/3] overflow-hidden rounded-[28px] ${editando ? "block" : "hidden md:block"}`}>
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,var(--jm-orbe-a),transparent_60%),radial-gradient(circle_at_70%_70%,var(--jm-orbe-b),transparent_60%)]" />
+              <CambiarImagen campo="imagen" />
             </div>
           )}
         </div>
@@ -215,6 +255,7 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
   const { ajustes, servicios } = useDatos();
   const opciones = textos(bloque.datos.opciones);
   const nota = texto(bloque.datos.nota);
+  const editando = useEditando();
   const [elegidos, setElegidos] = useState<string[]>(preseleccion);
 
   useEffect(() => {
@@ -239,9 +280,17 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
           <div className="relative">
             {ajustes.disponible && <Disponible />}
             <h2 className="mx-auto mt-6 max-w-4xl text-[clamp(2.4rem,min(6.5vw,9svh),6rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
-              <TituloConAcento texto={bloque.datos.titulo ?? ""} />
+              <Editable campo="titulo" valor={bloque.datos.titulo} vacio="Título">
+                <TituloConAcento texto={bloque.datos.titulo ?? ""} />
+              </Editable>
             </h2>
-            {bloque.datos.texto && <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[var(--jm-suave)] sm:text-xl">{bloque.datos.texto}</p>}
+            {(bloque.datos.texto || editando) && (
+              <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[var(--jm-suave)] sm:text-xl">
+                <Editable campo="texto" valor={bloque.datos.texto} multilinea vacio="Texto">
+                  {bloque.datos.texto}
+                </Editable>
+              </p>
+            )}
 
             <p className="mt-10 text-sm font-semibold lg:mt-[4svh]">¿Qué tienes en mente?</p>
             <div className="mx-auto mt-4 flex max-w-3xl flex-wrap justify-center gap-2">
@@ -281,7 +330,13 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
               </a>
             </div>
             {/* Ancho de lectura acotado y centrado: así no queda bajo el índice lateral desplegado en pantallas estrechas */}
-            {nota && <p className="mx-auto mt-6 max-w-md text-xs leading-relaxed text-[var(--jm-tenue)] [text-wrap:balance]">{nota}</p>}
+            {(nota || editando) && (
+              <p className="mx-auto mt-6 max-w-md text-xs leading-relaxed text-[var(--jm-tenue)] [text-wrap:balance]">
+                <Editable campo="nota" valor={nota} vacio="Nota pequeña">
+                  {nota}
+                </Editable>
+              </p>
+            )}
           </div>
         </div>
       </Revelar>

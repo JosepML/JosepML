@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+// Imitación local de Supabase (scripts/supabase-local, solo para probar en el contenedor de Claude)
+const local = process.env.NEXT_PUBLIC_SUPABASE_URL?.startsWith("http://localhost");
+
 const nextConfig: NextConfig = {
   // Las imágenes viven en el bucket `medios` de Supabase; mientras dura la migración (tarea S2), algunas
   // siguen en servidores externos (medios.url_origen).
@@ -19,6 +22,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "i.postimg.cc" },
       { protocol: "https", hostname: "www.platinocrowdfunding.com" },
       { protocol: "https", hostname: "rbgescuela.com" },
+      ...(local ? [{ protocol: "http" as const, hostname: "localhost", port: "54321" }] : []),
     ],
   },
 };

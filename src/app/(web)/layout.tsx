@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Montserrat } from "next/font/google";
 import { ProveedorTransicion } from "@/components/comun/Transicion";
+import { AvisoVistaPrevia } from "@/components/edicion/AvisoVistaPrevia";
 import { Marco } from "@/components/marco/Marco";
 import { getAjustes } from "@/lib/datos/ajustes";
+import { enVistaPrevia } from "@/lib/datos/cliente";
 import "@/styles/tokens.css";
 import "@/styles/web.css";
+import "@/styles/edicion.css";
 
 // Montserrat para todo el texto (lo pidió Josep) e Instrument Serif cursiva solo para la palabra de acento
 const base = Montserrat({ variable: "--font-base", subsets: ["latin"], weight: ["400", "500", "600", "700", "800"] });
@@ -21,11 +24,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function LayoutWeb({ children }: { children: React.ReactNode }) {
-  const ajustes = await getAjustes();
+  const [ajustes, previa] = await Promise.all([getAjustes(), enVistaPrevia()]);
   return (
     <div className={`${base.variable} ${acento.variable}`}>
       <ProveedorTransicion>
-        <Marco ajustes={ajustes}>{children}</Marco>
+        <Marco ajustes={ajustes}>
+          {children}
+          {previa && <AvisoVistaPrevia />}
+        </Marco>
       </ProveedorTransicion>
     </div>
   );

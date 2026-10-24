@@ -20,5 +20,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Inicio() {
   const r = await getPaginaConDatos("inicio");
   if (!r) notFound();
-  return <PaginaBloques bloques={r.pagina.bloques} datos={r.datos} />;
+  return <PaginaBloques bloques={r.pagina.bloques} datos={r.datos} pagina={{ id: r.pagina.id, slug: r.pagina.slug, titulo: r.pagina.titulo }} />;
 }

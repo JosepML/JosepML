@@ -7,6 +7,7 @@ import type { Bloque } from "@/lib/datos/tipos";
 import { usePantallaAncha, useReducir } from "../comun/hooks";
 import { VideoFondo } from "../comun/VideoFondo";
 import { Icono } from "../Iconos";
+import { Editable, useEditando } from "../edicion/contexto";
 import { useDatos, useMedio } from "../marco/DatosWeb";
 import { CURVA, Disponible, ModalVideo } from "../piezas";
 import { objeto, texto, textos } from "@/lib/datos/util";
@@ -31,6 +32,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
   const ancha = usePantallaAncha();
   const anima = ancha && !reducir;
   const [reel, setReel] = useState(false);
+  const editando = useEditando();
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   // Solo transform y opacidad, que no recalculan nada al hacer scroll
@@ -69,17 +71,20 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                 <Disponible className="!border-white/20 !bg-white/10 text-white" />
               </motion.div>
             )}
-            {antetitulo && (
+            {(antetitulo || editando) && (
               <motion.p
                 className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/70 sm:text-[13px]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.35, duration: 0.8 }}
               >
-                {antetitulo}
+                <Editable campo="antetitulo" valor={antetitulo} vacio="Antetítulo">
+                  {antetitulo}
+                </Editable>
               </motion.p>
             )}
             <h1 className="mt-3 max-w-6xl text-[clamp(2.9rem,9.5vw,9rem)] font-extrabold leading-[0.95] tracking-[-0.05em]">
+              <Editable campo="titulo" valor={titulo} vacio="Tu nombre">
               {palabras.map((p, i) => {
                 const ultima = i === palabras.length - 1;
                 const [, palabra, signos] = ultima ? (p.match(/^(.*?)([?!.,:…]*)$/) ?? [, p, ""]) : [, p, ""];
@@ -105,6 +110,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                   </motion.span>
                 );
               })}
+              </Editable>
             </h1>
 
             <div className="mt-7 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -118,7 +124,13 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                 <p className="flex items-baseline gap-[0.3em] text-[clamp(1.6rem,2.6vw,2.4rem)] font-bold leading-none tracking-[-0.03em] text-white">
                   Soy <PalabraRotatoria palabras={papeles.length ? papeles : PAPELES} />
                 </p>
-                {entradilla && <p className="mt-3 max-w-lg text-[17px] leading-[1.6] text-white/80 [text-wrap:pretty] sm:text-lg">{entradilla}</p>}
+                {(entradilla || editando) && (
+                  <p className="mt-3 max-w-lg text-[17px] leading-[1.6] text-white/80 [text-wrap:pretty] sm:text-lg">
+                    <Editable campo="texto" valor={entradilla} multilinea vacio="Entradilla">
+                      {entradilla}
+                    </Editable>
+                  </p>
+                )}
               </motion.div>
 
               <motion.div
