@@ -6,7 +6,7 @@ import { useState } from "react";
 import { imagenesDe, proyectosDe } from "@/lib/datos/seleccion";
 import type { Bloque, DatosWeb, Servicio } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
-import { ICONOS_SERVICIO } from "../bloques/BloqueServicios";
+import { BloqueFilmmaker, ICONOS_SERVICIO } from "../bloques/BloqueServicios";
 import { TarjetaProyecto } from "../bloques/BloqueTrabajos";
 import { BloqueLlamada } from "../bloques/BloquesPersonales";
 import { useReducir } from "../comun/hooks";
@@ -26,16 +26,18 @@ const TITULO_MIRADA: Record<string, string> = {
  * Página de un servicio (/servicios/<slug>), como la del prototipo D: qué hago, cómo lo veo, para quién,
  * sus proyectos, cómo trabajamos, preguntas frecuentes y la llamada con el servicio ya marcado.
  * `llamada`: el bloque de llamada de Inicio (opciones y nota), con el título propio del servicio encima.
+ * `especialidades`: en Filmmaker, el bloque «Lo que puedo grabar para ti» de Inicio, con las tarjetas que llevan
+ * a la página de cada especialidad.
  */
-export function PaginaServicio({ servicio: s, datos, llamada }: { servicio: Servicio; datos: DatosWeb; llamada: Bloque | null }) {
+export function PaginaServicio({ servicio: s, datos, llamada, especialidades }: { servicio: Servicio; datos: DatosWeb; llamada: Bloque | null; especialidades?: Bloque | null }) {
   return (
     <ProveedorDatos datos={datos}>
-      <Contenido servicio={s} datos={datos} llamada={llamada} />
+      <Contenido servicio={s} datos={datos} llamada={llamada} especialidades={especialidades ?? null} />
     </ProveedorDatos>
   );
 }
 
-function Contenido({ servicio: s, datos, llamada }: { servicio: Servicio; datos: DatosWeb; llamada: Bloque | null }) {
+function Contenido({ servicio: s, datos, llamada, especialidades }: { servicio: Servicio; datos: DatosWeb; llamada: Bloque | null; especialidades: Bloque | null }) {
   const reducir = useReducir();
   const proyectos = proyectosDe(datos.proyectos, s.slug);
   const otros = datos.servicios.filter((x) => x.slug !== s.slug);
@@ -128,6 +130,9 @@ function Contenido({ servicio: s, datos, llamada }: { servicio: Servicio; datos:
           </Revelar>
         </div>
       </section>
+
+      {/* Especialidades (Filmmaker): las mismas tarjetas que en Inicio, sin su botón, que trae aquí */}
+      {especialidades && <BloqueFilmmaker bloque={{ ...especialidades, datos: { ...especialidades.datos, enlace: undefined } }} />}
 
       {/* Proyectos de este servicio */}
       {proyectos.length > 0 && (

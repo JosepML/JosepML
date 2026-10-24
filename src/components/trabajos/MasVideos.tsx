@@ -22,24 +22,38 @@ const ROL: Record<string, string> = { proceso: "Cómo lo hicimos", making: "Maki
  * la ventana grande. Los horizontales en filas de dos o tres y los verticales (Shorts y reels) más estrechos.
  */
 export function MasVideos({ videos, titulo, arriba }: { videos: VideoExtra[]; titulo: string; arriba?: boolean }) {
-  const [abierto, setAbierto] = useState<VideoExtra | null>(null);
-  const validos = videos.filter((v) => (v.tipo === "instagram" ? embedInstagram(v.url) : v.tipo === "archivo" ? v.url : v.id));
-  if (!validos.length) return null;
-  const verticales = validos.every(esVertical);
-
+  if (!validos(videos).length) return null;
   return (
     <section className={`px-4 pb-24 sm:px-8 ${arriba ? "pt-20 sm:pt-28" : ""}`}>
       <div className="mx-auto max-w-7xl">
         <Revelar>
           <h2 className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">{titulo}</h2>
         </Revelar>
-        <div className={`mt-8 grid gap-3 ${verticales ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
-          {validos.map((v, i) => (
-            <Revelar key={`${v.id ?? v.url}-${i}`} retraso={Math.min(i, 5) * 0.06}>
-              <Tarjeta video={v} vertical={verticales && esVertical(v)} alAbrir={() => setAbierto(v)} />
-            </Revelar>
-          ))}
+        <div className="mt-8">
+          <RejillaVideos videos={videos} />
         </div>
+      </div>
+    </section>
+  );
+}
+
+/** Los que se pueden reproducir: Instagram con enlace válido, archivo con dirección, YouTube con id */
+const validos = (videos: VideoExtra[]) => videos.filter((v) => (v.tipo === "instagram" ? embedInstagram(v.url) : v.tipo === "archivo" ? v.url : v.id));
+
+/** Las tarjetas de vídeo y su ventana grande, sin título (lo pone quien la usa: la ficha o un bloque) */
+export function RejillaVideos({ videos }: { videos: VideoExtra[] }) {
+  const [abierto, setAbierto] = useState<VideoExtra | null>(null);
+  const lista = validos(videos);
+  if (!lista.length) return null;
+  const verticales = lista.every(esVertical);
+  return (
+    <>
+      <div className={`grid gap-3 ${verticales ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
+        {lista.map((v, i) => (
+          <Revelar key={`${v.id ?? v.url}-${i}`} retraso={Math.min(i, 5) * 0.06}>
+            <Tarjeta video={v} vertical={verticales && esVertical(v)} alAbrir={() => setAbierto(v)} />
+          </Revelar>
+        ))}
       </div>
       <ModalVideo
         abierto={!!abierto}
@@ -49,7 +63,7 @@ export function MasVideos({ videos, titulo, arriba }: { videos: VideoExtra[]; ti
         src={abierto?.tipo === "instagram" ? (embedInstagram(abierto.url) ?? undefined) : undefined}
         archivo={abierto?.tipo === "archivo" ? abierto.url : undefined}
       />
-    </section>
+    </>
   );
 }
 

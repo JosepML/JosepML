@@ -61,7 +61,7 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
   },
   filmmaker: {
     nombre: "Lo que grabo",
-    descripcion: "Un trabajo de cada tipo, en tarjetas con foto",
+    descripcion: "Tus especialidades, en tarjetas con foto que llevan a su página",
     campos: [
       antetitulo,
       titulo,
@@ -72,11 +72,12 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
         etiqueta: "Tarjetas",
         elemento: "Tarjeta",
         titulo: "nombre",
-        nuevo: { nombre: "", texto: "", proyecto: null },
+        nuevo: { nombre: "", texto: "", proyecto: null, href: "" },
         campos: [
           { tipo: "texto", clave: "nombre", etiqueta: "Nombre", placeholder: "Videoclips" },
           { tipo: "texto", clave: "texto", etiqueta: "Frase" },
-          { tipo: "proyecto", clave: "proyecto", etiqueta: "Proyecto que enseña", ayuda: "Su foto sale en la tarjeta y lleva a su ficha" },
+          { tipo: "proyecto", clave: "proyecto", etiqueta: "Proyecto que enseña", ayuda: "Su foto sale en la tarjeta" },
+          { tipo: "texto", clave: "href", etiqueta: "Lleva a", placeholder: "/servicios/filmmaker/videoclips", ayuda: "La página de esta especialidad. Vacío = la ficha del proyecto" },
         ],
       },
       enlace,
@@ -85,8 +86,19 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
   },
   trabajos: {
     nombre: "Selección de trabajos",
-    descripcion: "Carrusel con tus proyectos destacados",
-    campos: [antetitulo, titulo, nota("Los proyectos que salen aquí son los destacados: se eligen con la estrella en el panel, en Proyectos.")],
+    descripcion: "Tus destacados en carrusel, o todos los proyectos de unos tipos",
+    campos: [
+      antetitulo,
+      titulo,
+      texto,
+      {
+        tipo: "multiple",
+        clave: "tipos",
+        etiqueta: "Solo proyectos de estos tipos",
+        opciones: "tipos",
+        ayuda: "Sin ninguno, salen tus destacados en el carrusel (los de la estrella en Proyectos). Con tipos, todos sus proyectos en rejilla; si solo hay uno, también sus «Más vídeos».",
+      },
+    ],
     nuevo: { antetitulo: "Trabajos", titulo: "Selección de *trabajos*" },
   },
   cifras: {
@@ -204,8 +216,15 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
   },
   video: {
     nombre: "Vídeo",
-    descripcion: "Un vídeo de YouTube o un archivo propio",
-    campos: [antetitulo, titulo, texto, { tipo: "youtube", clave: "youtubeId", etiqueta: "Vídeo de YouTube" }, { tipo: "medio", clave: "medio", etiqueta: "O un vídeo propio (mp4)", acepta: "video" }],
+    descripcion: "Un vídeo, o varios en tarjetas",
+    campos: [
+      antetitulo,
+      titulo,
+      texto,
+      { tipo: "youtube", clave: "youtubeId", etiqueta: "Vídeo de YouTube" },
+      { tipo: "medio", clave: "medio", etiqueta: "O un vídeo propio (mp4)", acepta: "video" },
+      { tipo: "videos", clave: "videos", etiqueta: "O varios vídeos", ayuda: "En tarjetas que se abren en grande. Si hay alguno, manda sobre los dos de arriba." },
+    ],
     nuevo: { titulo: "" },
   },
   cita: {

@@ -13,6 +13,9 @@ import { img } from "../comun/imagen";
 import { Icono } from "../Iconos";
 import { useDatos } from "../marco/DatosWeb";
 import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
+import { lista } from "@/lib/datos/util";
+import { useEditando } from "../edicion/contexto";
+import { RejillaVideos } from "../trabajos/MasVideos";
 import { MASCARA_BORDE } from "./BloqueServicios";
 
 /**
@@ -28,6 +31,45 @@ import { MASCARA_BORDE } from "./BloqueServicios";
  * - Al cambiar de filtro: altura fija, la lista se funde y la nueva entra escalonada desde la primera.
  */
 export function BloqueTrabajos({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
+  // Con tipos elegidos (páginas de cada especialidad), todos los proyectos de esos tipos en rejilla
+  const tipos = lista(bloque.datos.tipos).filter((t): t is string => typeof t === "string");
+  return tipos.length ? <RejillaTipos bloque={bloque} tipos={tipos} ancla={ancla} /> : <Destacados bloque={bloque} ancla={ancla} />;
+}
+
+/**
+ * Todos los proyectos publicados de unos tipos (los videoclips, las bodas...), en rejilla. Si solo hay uno, debajo
+ * van sus «Más vídeos»: así una especialidad con un solo proyecto enseña varios trabajos igualmente.
+ */
+function RejillaTipos({ bloque, tipos, ancla }: { bloque: Bloque; tipos: string[]; ancla?: string }) {
+  const { proyectos } = useDatos();
+  const editando = useEditando();
+  const de = proyectos.filter((p) => p.tipo && tipos.includes(p.tipo.slug));
+  if (!de.length && !editando) return null;
+  const unico = de.length === 1 ? de[0] : null;
+  return (
+    <section id={ancla} className="px-4 py-20 sm:px-8 sm:py-24 lg:py-[5svh]">
+      <div className="mx-auto max-w-7xl">
+        <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
+        {!de.length && <p className="mt-8 text-[var(--jm-suave)]">Todavía no hay proyectos publicados de este tipo.</p>}
+        <div className={`mt-10 grid gap-4 lg:mt-[4svh] ${unico ? "mx-auto max-w-4xl" : "md:grid-cols-2"}`}>
+          {de.map((p, i) => (
+            <Revelar key={p.slug} retraso={(i % 2) * 0.08}>
+              <TarjetaProyecto proyecto={p} />
+            </Revelar>
+          ))}
+        </div>
+        {unico && unico.videos.length > 0 && (
+          <div className="mt-6">
+            <RejillaVideos videos={unico.videos} />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/** Los destacados de Inicio en el carrusel, con filtro por servicio */
+function Destacados({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   const { servicios, proyectos } = useDatos();
   const [filtro, setFiltro] = useState("todos");
   const [fondo, setFondo] = useState<string | null>(null);

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Icono } from "@/components/Iconos";
 import { exigirAdmin } from "@/lib/admin/sesion";
-import { RUTAS } from "@/lib/rutas";
+import { RUTAS, rutaPagina } from "@/lib/rutas";
 
 export const metadata: Metadata = { title: "Resumen" };
 
@@ -18,7 +18,7 @@ const NOMBRE_TABLA: Record<string, string> = {
 
 /** Dónde se edita cada cosa con cambios sin publicar */
 function enlace(tabla: string, fila: { id: string; slug?: string }) {
-  if (tabla === "paginas") return fila.slug === "inicio" ? "/?editar=1" : `/${fila.slug}?editar=1`;
+  if (tabla === "paginas") return fila.slug === "trabajos" || fila.slug === "recreaciones" ? `/admin/paginas/${fila.id}` : `${rutaPagina(fila.slug ?? "")}?editar=1`;
   return `/admin/${tabla}/${fila.id}`;
 }
 

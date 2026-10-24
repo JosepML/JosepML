@@ -4,6 +4,8 @@
 
 ## Orden recomendado
 
+0. **Proyectos nuevos** (pedido por Josep el 2026-10-24): la web lleva un año sin actualizarse. Añadir desde el panel los proyectos del último año, con su tipo para que salgan en la página de su especialidad (eventos corporativos, por ejemplo, en Spots y vídeo corporativo: puede hacer falta un tipo nuevo y añadirlo a los `tipos` de esa página).
+
 1. **S10 · Contacto** (Sonnet). `/contacto` guiado que inserta en `mensajes` (la RLS ya admite la inserción pública con límite) y `/gracias`. Aviso por correo a Josep: Edge Function o un servicio de correo; hay que elegir uno con Josep (no hay ninguno configurado). Al terminar, los «Hablemos» que hoy llevan a `/#llamada` pueden ir a `/contacto`, y la pantalla Mensajes del panel tendrá datos de verdad (S17).
 2. **S2 · Imágenes al bucket** (en el PC de Josep, con Remote Control: el contenedor no llega a ImgBB ni a Imgur). 95 de los 101 medios siguen fuera (`url_origen` sin `ruta`). Descargar cada uno a resolución original, subirlo a `medios/` y rellenar `ruta`, sin tocar los ids (todo apunta a ellos). Cuando esté, el recorte de la biblioteca funciona con todas las fotos y la web deja de depender de servicios externos. Antes de escribir en la base real, Josep da el visto bueno.
 3. **S11 · Privacidad y cookies** (Sonnet). Páginas legales como páginas de bloques y GA4 `G-RKBDRMVL1J` solo tras aceptar.

@@ -366,7 +366,14 @@ function Editor({ pagina, alCambiarVista }: { pagina: Pagina; alCambiarVista: (v
     return () => window.removeEventListener("keydown", teclas);
   }, [abiertoEditor, deshacer, rehacer]);
 
-  const opciones = useMemo(() => ({ proyectos: datosWeb.proyectos.map((p) => ({ valor: p.id, nombre: p.titulo })) }), [datosWeb.proyectos]);
+  const opciones = useMemo(
+    () => ({
+      proyectos: datosWeb.proyectos.map((p) => ({ valor: p.id, nombre: p.titulo })),
+      // Tipos de proyecto que tienen algo publicado (para «Solo proyectos de estos tipos»)
+      tipos: [...new Map(datosWeb.proyectos.flatMap((p) => (p.tipo ? [[p.tipo.slug, { valor: p.tipo.slug, nombre: p.tipo.nombre }] as const] : []))).values()],
+    }),
+    [datosWeb.proyectos],
+  );
 
   if (!admin) return null;
 

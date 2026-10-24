@@ -29,7 +29,7 @@ export type Campo =
   /** Vista previa de cómo sale en Google. Lee otros campos: no tiene valor propio */
   | (Base & { tipo: "google"; prefijo: string; titulo: string; descripcion: string; respaldoTitulo?: string; respaldoDescripcion?: string })
   /** Varios a la vez (lista de ids): los servicios de un proyecto */
-  | (Base & { tipo: "multiple"; opciones: Opcion[] | "servicios" })
+  | (Base & { tipo: "multiple"; opciones: Opcion[] | "servicios" | "tipos" })
   /** Un proyecto (su id) */
   | (Base & { tipo: "proyecto" })
   /** Un archivo de la biblioteca (su id). `acepta`: qué se puede elegir */

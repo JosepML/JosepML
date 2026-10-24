@@ -81,7 +81,9 @@ export function IndiceLateral({ bloques }: { bloques: Bloque[] }) {
       </Plegable>
       {bloques.map((b, i) => {
         const activa = actual === b.id;
-        const nombre = (b.tipo === "texto" ? b.datos.antetitulo || b.datos.titulo : NOMBRES[b.tipo]) || NOMBRES[b.tipo];
+        // Los textos y la rejilla de proyectos de una especialidad se nombran por su antetítulo
+        const propio = b.tipo === "texto" || (b.tipo === "trabajos" && Array.isArray(b.datos.tipos) && b.datos.tipos.length);
+        const nombre = (propio ? b.datos.antetitulo || String(b.datos.titulo ?? "").replace(/\*/g, "") : NOMBRES[b.tipo]) || NOMBRES[b.tipo];
         return (
           <button
             key={b.id}

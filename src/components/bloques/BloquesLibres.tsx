@@ -1,13 +1,14 @@
 "use client";
 
-import type { Bloque } from "@/lib/datos/tipos";
+import type { Bloque, VideoExtra } from "@/lib/datos/tipos";
 import { lista, objeto, texto } from "@/lib/datos/util";
 import { img } from "../comun/imagen";
-import { Editable } from "../edicion/contexto";
+import { Editable, useEditando } from "../edicion/contexto";
+import { RejillaVideos } from "../trabajos/MasVideos";
 import { useDatos, useMedio } from "../marco/DatosWeb";
 import { Revelar, Titular, TituloConAcento } from "../piezas";
 
-// Bloques para las páginas que cree Josep (no salen en Inicio): galería, vídeo y cita.
+// Bloques para las páginas que cree Josep (no salen en Inicio): galería, vídeo (uno o varios) y cita.
 
 /** Galería: rejilla de imágenes con su pie. `imagenes`: [{ medio, pie }] */
 export function BloqueGaleria({ bloque }: { bloque: Bloque }) {
@@ -47,7 +48,30 @@ export function BloqueGaleria({ bloque }: { bloque: Bloque }) {
 export function BloqueVideo({ bloque }: { bloque: Bloque }) {
   const archivo = useMedio(bloque.datos.medio);
   const youtubeId = texto(bloque.datos.youtubeId);
-  if (!archivo && !youtubeId) return null;
+  const { medios } = useDatos();
+  // Los vídeos subidos van por id: aquí se les pone su dirección
+  const videos = lista<VideoExtra>(bloque.datos.videos).map((v) => (v.tipo === "archivo" && v.medio ? { ...v, url: medios[v.medio]?.url ?? v.url } : v));
+  const editando = useEditando();
+  // Varios vídeos: en tarjetas que se abren en la ventana grande (como los «Más vídeos» de un proyecto)
+  if (videos.length) {
+    return (
+      <section className="px-4 py-20 sm:px-8 sm:py-24 lg:py-[5svh]">
+        <div className="mx-auto max-w-7xl">
+          {bloque.datos.titulo && <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />}
+          <div className="mt-10 lg:mt-[4svh]">
+            <RejillaVideos videos={videos} />
+          </div>
+        </div>
+      </section>
+    );
+  }
+  if (!archivo && !youtubeId) {
+    return editando ? (
+      <section className="px-4 py-16 sm:px-8">
+        <p className="cristal mx-auto max-w-3xl rounded-[28px] p-8 text-center text-[var(--jm-suave)]">Sección de vídeo vacía: añade uno o varios vídeos desde su formulario.</p>
+      </section>
+    ) : null;
+  }
   return (
     <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
       <div className="mx-auto max-w-6xl">
