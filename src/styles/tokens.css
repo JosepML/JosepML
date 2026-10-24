@@ -21,6 +21,8 @@
   --jm-medio: rgba(245, 245, 247, 0.52);
   --jm-linea: rgba(245, 245, 247, 0.12);
   --jm-logo-opacidad: 0.82;
+  /* Logos de JUNO: un poco por debajo de sus nombres escritos (52 %), que con letra fina pesan menos */
+  --jm-logo-juno: 0.46;
 
   /* Cristal */
   --jm-cristal: rgba(255, 255, 255, 0.06);
@@ -58,6 +60,7 @@
   --jm-medio: rgba(29, 29, 31, 0.54);
   --jm-linea: rgba(29, 29, 31, 0.12);
   --jm-logo-opacidad: 0.82;
+  --jm-logo-juno: 0.5;
 
   --jm-cristal: rgba(255, 255, 255, 0.55);
   --jm-cristal-base: rgba(255, 255, 255, 0.62);

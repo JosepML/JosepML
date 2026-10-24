@@ -41,6 +41,7 @@ export default async function Resumen() {
     ...[...(clientes ?? []), ...(canales ?? [])].map((f) => [f.id, { id: f.id, titulo: f.nombre }] as const),
     ...(opiniones ?? []).map((f) => [f.id, { id: f.id, titulo: `Opinión de ${f.autor || "alguien"}` }] as const),
   ]);
+  const inicio = (paginas ?? []).find((p) => p.slug === "inicio");
   const publicados = (proyectos ?? []).filter((p) => p.estado === "publicado").length;
 
   return (
@@ -63,8 +64,9 @@ export default async function Resumen() {
         </Link>
       )}
 
-      <div className="mt-10 grid gap-3 sm:grid-cols-3">
+      <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Atajo href="/?editar=1" icono="lapiz" titulo="Editar Inicio" texto="Textos, fotos y secciones, en la propia página" />
+        {inicio && <Atajo href={`/admin/paginas/${inicio.id}`} icono="asa" titulo="Orden de Inicio" texto="Qué sección va antes y cuál se oculta" />}
         <Atajo href="/admin/proyectos?nuevo=1" icono="mas" titulo="Nuevo proyecto" texto={`${publicados} publicados ahora`} />
         <Atajo href="/admin/articulos?nuevo=1" icono="mas" titulo="Nuevo artículo" texto={`${articulos?.length ?? 0} en el blog`} />
       </div>

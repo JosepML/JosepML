@@ -4,7 +4,7 @@ import { motion, useInView } from "motion/react";
 import { useRef, useState } from "react";
 import type { Bloque, Cliente, Opinion as DatoOpinion } from "@/lib/datos/tipos";
 import { lista, objeto, texto } from "@/lib/datos/util";
-import { useReducir } from "../comun/hooks";
+import { enFilas, useColumnas, useReducir } from "../comun/hooks";
 import { Enlace } from "../comun/Enlace";
 import { img } from "../comun/imagen";
 import { Icono } from "../Iconos";
@@ -160,41 +160,55 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
   const rejilla = useRef<HTMLDivElement>(null);
   const enPantalla = useInView(rejilla, { amount: 0.4 });
   const reducir = useReducir();
+  const columnas = useColumnas(6);
   return (
     <section className="py-20 sm:py-28 lg:py-[6svh]">
-      {/* Primera parte, la principal: titular de verdad y todas las marcas a la vista a la vez */}
-      <div className="px-4 sm:px-8">
-        <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} centrado />
-      </div>
-      {/* Sin marquesina: todas las marcas quietas y visibles, Disney y Star Wars primero. Entran escalonadas
-          una sola vez y, mientras la sección está en pantalla, un barrido de luz suave las recorre en
-          diagonal cada pocos segundos (ver .jm-barrido en cristal.css) */}
-      <div
-        ref={rejilla}
-        data-barrido={enPantalla && !reducir ? "" : undefined}
-        className="jm-barrido mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-y-2 px-4 sm:grid-cols-3 sm:px-8 lg:mt-[5svh] lg:grid-cols-5"
-      >
-        {principales.map((c, i) => (
-          <motion.div
-            key={c.id}
-            className="flex h-24 items-center justify-center px-3 text-center lg:h-28"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, ease: CURVA, delay: i * 0.05 }}
-          >
-            {/* El barrido sube la opacidad de cada marca por turnos: columna (de izquierda a derecha) y fila (un
-                poco después la de abajo), así la luz cruza la rejilla en una diagonal leve */}
-            <span className="jm-barrido-marca" style={{ animationDelay: `${(i % 5) * 0.34 + Math.floor(i / 5) * 0.22}s` }}>
-              <Logo cliente={c} grande barrido />
-            </span>
-          </motion.div>
-        ))}
+      {/* Primera parte, la principal: titular de verdad y todas las marcas a la vista a la vez. Si la sección no
+          cabe en la pantalla, el scroll mágico se para en cada parte (data-punto-alto) */}
+      <div data-punto-alto>
+        <div className="px-4 sm:px-8">
+          <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} centrado />
+        </div>
+        {/* Sin marquesina: todas las marcas quietas y visibles, Disney y Star Wars primero, en filas de seis en
+            ordenador. La última fila, si no está completa, va centrada. Entran escalonadas una sola vez y, mientras
+            la sección está en pantalla, un barrido de luz suave las recorre en diagonal cada pocos segundos (ver
+            .jm-barrido en web.css) */}
+        <div
+          ref={rejilla}
+          data-barrido={enPantalla && !reducir ? "" : undefined}
+          className="jm-barrido mx-auto mt-12 flex max-w-7xl flex-col gap-y-1 px-4 sm:px-8 lg:mt-[4.5svh]"
+        >
+          {enFilas(principales, columnas).map((fila, f) => (
+            <div key={f} className="flex justify-center">
+              {fila.map((c, k) => {
+                const i = f * columnas + k;
+                return (
+                  <motion.div
+                    key={c.id}
+                    className="flex h-24 items-center justify-center px-2 text-center lg:h-[min(7rem,12svh)]"
+                    style={{ width: `${100 / columnas}%` }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.8, ease: CURVA, delay: i * 0.05 }}
+                  >
+                    {/* El barrido sube la opacidad de cada marca por turnos: columna (de izquierda a derecha) y fila (un
+                        poco después la de abajo), así la luz cruza la rejilla en una diagonal leve. La pasada dura lo
+                        mismo tenga las columnas que tenga */}
+                    <span className="jm-barrido-marca" style={{ animationDelay: `${(k / Math.max(columnas - 1, 1)) * 1.36 + f * 0.22}s` }}>
+                      <Logo cliente={c} grande barrido />
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Segunda parte, secundaria dentro de la misma sección: JUNO más pequeño y con menos contraste */}
       {juno.length > 0 && (
-      <div className="mx-auto mt-14 max-w-5xl px-4 text-center sm:px-8 lg:mt-[6svh]">
+      <div data-punto-alto className="mx-auto mt-14 max-w-6xl px-4 text-center sm:px-8 lg:mt-[6svh]">
         <Revelar>
           {/* Dos líneas separadas: el rótulo pequeño arriba y la marca debajo, con aire entre ambas */}
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--jm-ante)]">En sinergia con</p>
@@ -214,11 +228,16 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
           )}
         </Revelar>
         <Revelar retraso={0.12}>
-          {/* Las marcas en fila, separadas por líneas finas: nada de etiquetas */}
-          <div className="mx-auto mt-8 grid grid-cols-2 border-y border-[var(--jm-linea)] md:grid-cols-5 md:divide-x md:divide-[var(--jm-linea)]">
-            {juno.map((c) => (
-              <div key={c.id} className="flex h-16 items-center justify-center">
-                <Logo cliente={c} compacto />
+          {/* Las marcas en filas, separadas por líneas finas: cada fila lleva las suyas y una línea la separa de la
+              siguiente, así la última, centrada, no tiene que cuadrar con la de arriba */}
+          <div className="mx-auto mt-8 flex flex-col divide-y divide-[var(--jm-linea)] border-y border-[var(--jm-linea)]">
+            {enFilas(juno, columnas).map((fila, f) => (
+              <div key={f} className="flex justify-center divide-x divide-[var(--jm-linea)]">
+                {fila.map((c) => (
+                  <div key={c.id} className="flex h-16 items-center justify-center" style={{ width: `${100 / columnas}%` }}>
+                    <Logo cliente={c} compacto />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
@@ -231,10 +250,13 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
 
 /**
  * Logo del cliente; si la imagen no carga (enlaces externos que caducan), su nombre en texto.
- * Con `barrido` va a tono pleno y la luminancia la pone el contenedor del barrido de luz (82 % → 100 %).
+ * Con `barrido`, la luminancia la pone sobre todo el contenedor del barrido de luz (82 % → 100 %). Un logo es una
+ * mancha llena y a la misma opacidad parece más brillante que un nombre en letra fina: por eso los logos van un
+ * punto por debajo de los nombres (ver .jm-logo-barrido y .jm-logo-compacto en web.css).
  */
 function Logo({ cliente: c, compacto, grande, barrido }: { cliente: Cliente; compacto?: boolean; grande?: boolean; barrido?: boolean }) {
   const [roto, setRoto] = useState(false);
+  const palabraLarga = Math.max(...c.nombre.split(/\s+/).map((p) => p.length)) > 13;
   return (
     <span className={`flex shrink-0 items-center justify-center ${compacto ? "h-12 px-3" : grande ? "h-20" : "h-16 px-10 sm:px-14"}`}>
       {c.logo && !roto ? (
@@ -242,7 +264,7 @@ function Logo({ cliente: c, compacto, grande, barrido }: { cliente: Cliente; com
           src={img(c.logo.url, 384)}
           alt={c.nombre}
           style={{ height: (c.altoLogo ?? 36) * (grande ? 0.85 : compacto ? 0.6 : 1) }}
-          className={`jm-logo w-auto object-contain ${barrido ? "!opacity-100" : ""}`}
+          className={`jm-logo w-auto object-contain ${barrido ? "jm-logo-barrido" : compacto ? "jm-logo-compacto" : ""}`}
           draggable={false}
           onError={() => setRoto(true)}
         />
@@ -260,8 +282,11 @@ function Logo({ cliente: c, compacto, grande, barrido }: { cliente: Cliente; com
             compacto
               ? "whitespace-nowrap text-[12px] tracking-[0.18em] text-[var(--jm-medio)]"
               : grande
-                ? // Los nombres largos pueden partirse en dos líneas centradas dentro de su celda
-                  `max-w-[15ch] text-[15px] leading-snug tracking-[0.16em] [text-wrap:balance] sm:text-[17px] ${barrido ? "text-[var(--jm-texto)]" : "text-[var(--jm-cliente)]"}`
+                ? // Los nombres largos pueden partirse en dos líneas centradas dentro de su celda; una palabra muy
+                  // larga (no se puede partir) va algo más pequeña para no pisar a la de al lado
+                  `leading-snug [text-wrap:balance] ${
+                    palabraLarga ? "text-[13px] tracking-[0.1em] sm:text-[15px] sm:tracking-[0.08em]" : "max-w-[15ch] text-[15px] tracking-[0.16em] sm:text-[17px]"
+                  } ${barrido ? "text-[var(--jm-texto)]" : "text-[var(--jm-cliente)]"}`
                 : "whitespace-nowrap text-[15px] tracking-[0.22em] text-[var(--jm-tenue)] sm:text-base"
           }`}
         >

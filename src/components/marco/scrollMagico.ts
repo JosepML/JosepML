@@ -92,7 +92,7 @@ export function useAnclas(ruta: string) {
  * siguiente punto. Puntos:
  * - Cada sección de la portada, centrada en la pantalla (si cabe) o desde su inicio (si es más alta).
  * - Dentro de una sección, los elementos marcados con data-punto (los pasos de "Cómo trabajamos"),
- *   cada uno centrado. Si encadenas gestos rápido (uno justo al terminar el viaje anterior), deja de ir
+ *   cada uno centrado. Los marcados con data-punto-alto, igual, pero solo si la sección no cabe entera. Si encadenas gestos rápido (uno justo al terminar el viaje anterior), deja de ir
  *   paso a paso y te lleva a la sección siguiente.
  * Reglas para que no moleste: solo responde a la rueda (nunca se mueve solo); en una sección más alta
  * que la pantalla y sin puntos, el scroll es normal hasta su borde; se ignora la inercia del trackpad
@@ -113,15 +113,17 @@ export function useScrollMagico(activo: boolean) {
         const top = el.getBoundingClientRect().top + window.scrollY;
         const alto = el.offsetHeight;
         if (alto < 40) continue;
-        const subs = el.querySelectorAll<HTMLElement>("[data-punto]");
+        // data-punto-alto: partes de una sección que solo cuentan como pasos si la sección no cabe en la pantalla
+        // (Clientes, que con muchas marcas puede quedar más alta que una pantalla baja)
+        const cabeEntera = alto <= vh + 2;
+        const subs = el.querySelectorAll<HTMLElement>(cabeEntera ? "[data-punto]" : "[data-punto], [data-punto-alto]");
         if (subs.length) {
           for (const s of subs) {
             const rs = s.getBoundingClientRect();
             lista.push({ destino: rs.top + window.scrollY + rs.height / 2 - vh / 2, top, alto, libre: false, sub: true });
           }
         } else {
-          const cabe = alto <= vh + 2;
-          lista.push({ destino: cabe ? top + alto / 2 - vh / 2 : top, top, alto, libre: !cabe, sub: false });
+          lista.push({ destino: cabeEntera ? top + alto / 2 - vh / 2 : top, top, alto, libre: !cabeEntera, sub: false });
         }
       }
       return lista

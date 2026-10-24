@@ -207,6 +207,18 @@
 .jm-raiz[data-tema="claro"] .jm-logo {
   filter: brightness(0);
 }
+/* Un logo es una mancha llena: a la misma opacidad que un nombre escrito se ve más brillante. Van un punto
+   por debajo para que, a la vista, logos y nombres pesen igual */
+.jm-logo.jm-logo-barrido,
+.jm-logo.jm-logo-barrido:hover {
+  opacity: 0.84;
+}
+.jm-logo.jm-logo-compacto {
+  opacity: var(--jm-logo-juno);
+}
+.jm-logo.jm-logo-compacto:hover {
+  opacity: var(--jm-logo-opacidad);
+}
 
 /* Barrido de luz en "Han confiado en mí": cada marca está al 82 % (escala de la sección) y sube al 100 %
    cuando le llega la luz. Una sola animación de opacidad por marca, con retrasos escalonados en el JSX para

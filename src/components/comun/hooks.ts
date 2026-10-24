@@ -34,3 +34,19 @@ export function usePantallaAncha() {
 export function useReducir() {
   return false;
 }
+
+/** Columnas de una rejilla según el ancho: 2 en móvil, 3 desde sm (640 px), 4 desde lg (1024 px) y `ancha` desde
+ *  1200 px. En el servidor, las de ordenador. */
+export function useColumnas(ancha: number) {
+  const sm = useMedia("(min-width: 640px)", true);
+  const lg = useMedia("(min-width: 1024px)", true);
+  const xl = useMedia("(min-width: 1200px)", true);
+  return xl ? ancha : lg ? 4 : sm ? 3 : 2;
+}
+
+/** Parte una lista en filas de `n` (la última puede quedar incompleta) */
+export function enFilas<T>(lista: T[], n: number): T[][] {
+  const filas: T[][] = [];
+  for (let i = 0; i < lista.length; i += n) filas.push(lista.slice(i, i + n));
+  return filas;
+}

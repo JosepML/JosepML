@@ -59,6 +59,7 @@ Inicio y Sobre mí se editan en su sitio con la pastilla «Editar página» (`sr
 - **Texto editable en un bloque:** envuélvelo con `<Editable campo="titulo" valor={d.titulo}>…</Editable>` (`multilinea` para textos largos, `bloqueHtml` si dentro hay párrafos). El `Titular` de `piezas.tsx` ya lo hace con antetítulo, título y texto.
 - **Imagen cambiable:** `<CambiarImagen campo="imagen" />` dentro de un contenedor `relative`.
 - **Tipo de bloque nuevo:** además de lo que dice `plan/patron-paginas.md`, añade su entrada en `CATALOGO` de `src/components/edicion/catalogo.ts` (nombre, descripción, campos y datos iniciales). Sin ella no sale en «Añadir sección» ni tiene formulario.
+- **Ordenar secciones** (`/admin/paginas/[id]`, `src/components/admin/paginas/OrdenSecciones.tsx`): el orden y el ojo de cada sección sin abrir la web. Escribe la lista de bloques en el mismo borrador que el editor y respeta lo demás que lleve.
 - Las páginas con plantilla propia (Trabajos, Recreaciones, fichas, servicios, blog) no se editan en su sitio: sus datos se cambian en el panel.
 
 ## 5. Probar en el contenedor

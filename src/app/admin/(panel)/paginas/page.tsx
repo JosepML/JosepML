@@ -20,7 +20,7 @@ export default async function Paginas() {
   return (
     <div className="mx-auto max-w-4xl">
       <h1 className="text-4xl font-extrabold tracking-[-0.04em]">Páginas</h1>
-      <p className="mt-2 max-w-xl text-[var(--jm-suave)]">Las páginas se editan en la propia web: ábrela y pulsa «Editar página» (abajo a la derecha). Cambias los textos haciendo clic encima, las fotos arrastrando, y las secciones desde el panel.</p>
+      <p className="mt-2 max-w-xl text-[var(--jm-suave)]">Las páginas se editan en la propia web: ábrela y pulsa «Editar página» (abajo a la derecha). Cambias los textos haciendo clic encima, las fotos arrastrando, y las secciones desde el panel. Para cambiar solo el orden de las secciones, «Ordenar secciones».</p>
       <ul className="mt-8 flex flex-col gap-2">
         {(paginas ?? []).map((p) => {
           const ruta = EN_SU_SITIO[p.slug];
@@ -35,10 +35,16 @@ export default async function Paginas() {
                 </span>
               </span>
               {ruta ? (
-                <Link href={`${ruta}?editar=1`} className="boton boton-acento px-4 py-2 text-sm">
-                  <Icono nombre="lapiz" className="h-4 w-4" />
-                  Editar en la web
-                </Link>
+                <span className="flex flex-wrap justify-end gap-1.5">
+                  <Link href={`/admin/paginas/${p.id}`} className="boton boton-suave px-4 py-2 text-sm" title="Cambiar el orden de las secciones u ocultarlas">
+                    <Icono nombre="asa" className="h-4 w-4" />
+                    Ordenar secciones
+                  </Link>
+                  <Link href={`${ruta}?editar=1`} className="boton boton-acento px-4 py-2 text-sm">
+                    <Icono nombre="lapiz" className="h-4 w-4" />
+                    Editar en la web
+                  </Link>
+                </span>
               ) : (
                 <span className="text-xs text-[var(--jm-tenue)]">Plantilla propia · pronto</span>
               )}
