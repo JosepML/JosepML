@@ -100,7 +100,7 @@ Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo
 | --- | --- | --- | --- |
 | `portada` | Vídeo a pantalla completa y frase principal | `papeles`: `["director de fotografía", ...]` (rotan tras «Soy»); `video`: `{"youtubeId", "inicio", "poster": "<medio>", "medio": "<medio mp4 o null>", "recorte"}`. Si hay `medio`, se usa el mp4 y YouTube queda de reserva | `ajustes.disponible` |
 | `servicios` | Lo que ofrezco | | `servicios` (y sus proyectos para las fotos) |
-| `filmmaker` | Lo que grabo: una tarjeta por especialidad | `piezas`: `[{"nombre", "texto", "proyecto": "<id>", "href"?}]` (`proyecto` pone la foto; `href`, la página de la especialidad; sin `href`, lleva a la ficha); `enlace`: `{"texto", "href"}` | `proyectos` |
+| `filmmaker` | Lo que grabo: una tarjeta por especialidad | `piezas`: `[{"nombre", "texto", "proyecto": "<id>", "href"?, "imagen"?}]` (`imagen`, la foto de la tarjeta; sin ella, la portada de `proyecto`; `href`, la página de la especialidad; sin `href`, lleva a la ficha); `enlace`: `{"texto", "href"}` | `proyectos` |
 | `trabajos` | Carrusel de proyectos con filtro por servicio, o rejilla de unos tipos | `tipos`?: `[slug de tipo, ...]`: con tipos, rejilla con todos sus proyectos publicados (si solo hay uno, también sus «Más vídeos») | `proyectos` con `destacado_orden` (Todos) y `proyecto_servicios` (filtros) |
 | `cifras` | Números, premios y canales | `cifras`: `[{"valor", "decimales"?, "prefijo"?, "sufijo"?, "unidad", "texto"}]` | `proyectos.premios` de tipo `ganado` y `podio`, `canales` |
 | `proceso` | Los pasos de un encargo | `pasos`: `[{"titulo", "texto"}]` | |
@@ -108,13 +108,13 @@ Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo
 | `opiniones` | Frases de clientes | | `opiniones` |
 | `clientes` | Logos y apartado JUNO Media | `juno`: `{"texto", "enlace": {"texto", "href"}}` (el enlace «Así trabajamos» solo sale con `href`) | `clientes` (`con_juno` separa los dos grupos) |
 | `blog` | Últimos artículos | `cantidad`, `enlace`: `{"texto", "href"}` | `articulos` |
-| `texto` | Sección libre | (solo los comunes) | |
+| `texto` | Sección libre (con `estilo: "cabecera"`, cabecera de cine con la imagen grande; si no, tarjeta) | (solo los comunes) | |
 | `llamada` | Invitación a escribir (WhatsApp y correo) | `opciones`: `[...]` (chips, detrás de los nombres de los servicios), `nota` | `ajustes.correo`, `ajustes.whatsapp`, `servicios` |
 | `galeria` | Rejilla de imágenes | `imagenes`: `[{"medio", "pie"}]` | |
 | `video` | Un vídeo, o varios en tarjetas | `youtubeId` o `medio`; o `videos`: `[{"tipo", "id"?, "url"?, "medio"?, "titulo"?}]` como `proyectos.videos` (si hay, mandan) | |
 | `cita` | Frase destacada | `autor` (la frase va en `titulo`) | |
 
-**Especialidades de un servicio.** Una página de bloques con slug `<servicio>-<especialidad>` (`filmmaker-videoclips`) se ve en `/servicios/<servicio>/<especialidad>` (`rutaPagina()` en `src/lib/rutas.ts`). Las de filmmaker las crea `supabase/datos/09-especialidades-filmmaker.sql`: texto, proceso, trabajos con `tipos` y la llamada.
+**Especialidades de un servicio.** Una página de bloques con slug `<servicio>-<especialidad>` (`filmmaker-videoclips`) se ve en `/servicios/<servicio>/<especialidad>` (`rutaPagina()` en `src/lib/rutas.ts`). Las de filmmaker las crea `supabase/datos/09-especialidades-filmmaker.sql`: texto, proceso, trabajos con `tipos` y la llamada. `10-especialidades-fotos.sql` pone el texto en `estilo: "cabecera"` (cabecera de cine) y fotos de galería en cabeceras y tarjetas. Con un solo proyecto, el bloque trabajos lo enseña en grande con un mosaico de su galería y sus vídeos.
 
 **Páginas con plantilla propia.** `trabajos` y `recreaciones` no se pintan con `PaginaBloques`: su primer bloque (`texto`) da la cabecera. El de `trabajos` lleva `filtros` (`supabase/datos/08-filtros-trabajos.sql`): `{"todos" | "<slug de servicio>": [{"nombre", "tipos": [slug de tipo, ...]}]}`, la segunda fila de filtros de cada servicio; las categorías sin proyectos no salen. El de `recreaciones` (`supabase/datos/07-recreaciones.sql`) lleva además `etiquetaAntes`/`etiquetaDespues` (rótulos del deslizador), `llamada` (título de la invitación final), `orden` (`[slug, ...]`) y `comparaciones`: `{"<slug>": {"original": {"medio", "recorte"?}, "recreacion": {"medio", "recorte"?}, "tamano"?: [ancho, alto]}}`. `recorte` es `[x, y, ancho, alto]` en píxeles de una imagen de `tamano`; sirve para sacar los dos lados de una comparación ya montada. Sin comparación, la recreación enseña el póster y el vídeo.
 

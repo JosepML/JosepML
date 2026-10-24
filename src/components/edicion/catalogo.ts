@@ -76,7 +76,8 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
         campos: [
           { tipo: "texto", clave: "nombre", etiqueta: "Nombre", placeholder: "Videoclips" },
           { tipo: "texto", clave: "texto", etiqueta: "Frase" },
-          { tipo: "proyecto", clave: "proyecto", etiqueta: "Proyecto que enseña", ayuda: "Su foto sale en la tarjeta" },
+          { tipo: "proyecto", clave: "proyecto", etiqueta: "Proyecto que enseña", ayuda: "Su portada sale en la tarjeta si no eliges otra foto" },
+          { tipo: "medio", clave: "imagen", etiqueta: "Foto de la tarjeta", acepta: "imagen", ayuda: "Mejor una de la galería que no sea la portada del proyecto, para no repetirla" },
           { tipo: "texto", clave: "href", etiqueta: "Lleva a", placeholder: "/servicios/filmmaker/videoclips", ayuda: "La página de esta especialidad. Vacío = la ficha del proyecto" },
         ],
       },
@@ -194,8 +195,23 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
   texto: {
     nombre: "Texto libre",
     descripcion: "Lo que quieras contar, con una imagen opcional",
-    campos: [antetitulo, titulo, texto, imagen],
-    nuevo: { titulo: "Una sección *nueva*", texto: "" },
+    campos: [
+      {
+        tipo: "seleccion",
+        clave: "estilo",
+        etiqueta: "Estilo",
+        opciones: [
+          { valor: "tarjeta", nombre: "Tarjeta con la imagen al lado" },
+          { valor: "cabecera", nombre: "Cabecera de cine: la imagen grande con el título encima" },
+        ],
+        obligatorio: true,
+      },
+      antetitulo,
+      titulo,
+      texto,
+      imagen,
+    ],
+    nuevo: { estilo: "tarjeta", titulo: "Una sección *nueva*", texto: "" },
   },
   llamada: {
     nombre: "Hablemos",

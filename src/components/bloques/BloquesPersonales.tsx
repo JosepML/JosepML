@@ -200,8 +200,16 @@ export function BloqueBlog({ bloque, ancla }: { bloque: Bloque; ancla?: string }
   );
 }
 
-/** Sección libre: lo que Josep quiera contar, creada desde el panel. */
+/**
+ * Sección libre: lo que Josep quiera contar, creada desde el panel. Con `estilo: "cabecera"` abre la página como
+ * una cabecera de cine (las especialidades de filmmaker); si no, una tarjeta con la imagen al lado.
+ */
 export function BloqueTexto({ bloque }: { bloque: Bloque }) {
+  if (bloque.datos.estilo === "cabecera") return <CabeceraCine bloque={bloque} />;
+  return <TarjetaTexto bloque={bloque} />;
+}
+
+function TarjetaTexto({ bloque }: { bloque: Bloque }) {
   const { antetitulo, titulo = "", texto: cuerpo } = bloque.datos;
   const imagen = useMedio(bloque.datos.imagen);
   const editando = useEditando();
@@ -243,6 +251,74 @@ export function BloqueTexto({ bloque }: { bloque: Bloque }) {
           )}
         </div>
       </Revelar>
+    </section>
+  );
+}
+
+/**
+ * Cabecera de cine: la foto a casi toda la pantalla, con las esquinas redondas, el antetítulo y el título encima
+ * sobre un degradado, y la foto que se aleja despacio al hacer scroll. Debajo, el texto a dos columnas: el primer
+ * párrafo grande, como entradilla, y el resto al lado.
+ */
+function CabeceraCine({ bloque }: { bloque: Bloque }) {
+  const { antetitulo, titulo = "", texto: cuerpo } = bloque.datos;
+  const imagen = useMedio(bloque.datos.imagen);
+  const editando = useEditando();
+  const marco = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: marco, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
+  const [entrada, ...resto] = String(cuerpo ?? "").trim().split(/\n\s*\n/).filter(Boolean);
+  return (
+    <section className="px-3 pt-4 sm:px-4">
+      <div ref={marco} data-foco className="relative mx-auto h-[min(76svh,820px)] min-h-[440px] max-w-[1720px] overflow-hidden rounded-[32px] bg-black sm:rounded-[44px]">
+        {imagen ? (
+          <motion.img
+            src={img(imagen.url, 3840)}
+            alt={imagen.alt}
+            style={{ y }}
+            initial={{ scale: 1.08, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0 h-[114%] w-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,var(--jm-orbe-a),transparent_60%),radial-gradient(circle_at_70%_70%,var(--jm-orbe-b),transparent_60%)]" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
+        <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-12 lg:p-16">
+          <Revelar retraso={0.25} className="max-w-4xl">
+            {(antetitulo || editando) && (
+              <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur-md">
+                <Editable campo="antetitulo" valor={antetitulo} vacio="Antetítulo">
+                  {antetitulo}
+                </Editable>
+              </span>
+            )}
+            <h2 className="mt-4 pb-[0.06em] text-5xl font-extrabold leading-[1.02] tracking-[-0.045em] [text-wrap:balance] sm:text-7xl lg:text-8xl">
+              <Editable campo="titulo" valor={titulo} vacio="Título">
+                <TituloConAcento texto={titulo} />
+              </Editable>
+            </h2>
+          </Revelar>
+        </div>
+        <CambiarImagen campo="imagen" />
+      </div>
+      {(cuerpo || editando) && (
+        <Revelar className="mx-auto mt-14 max-w-6xl px-4 sm:mt-20 sm:px-8">
+          {editando ? (
+            <div className="max-w-3xl text-xl leading-relaxed text-[var(--jm-suave)]">
+              <Editable campo="texto" valor={cuerpo} multilinea bloqueHtml vacio="Texto">
+                <Parrafos texto={cuerpo ?? ""} />
+              </Editable>
+            </div>
+          ) : (
+            <div className={`grid gap-8 ${resto.length ? "md:grid-cols-[1.15fr_1fr] md:gap-16" : ""}`}>
+              <Parrafos texto={entrada ?? ""} className="text-2xl font-semibold leading-snug tracking-[-0.02em] text-[var(--jm-texto)] [text-wrap:pretty] sm:text-[1.75rem]" />
+              {resto.length > 0 && <Parrafos texto={resto.join("\n\n")} className="text-lg leading-relaxed text-[var(--jm-suave)] [text-wrap:pretty] md:pt-1.5" />}
+            </div>
+          )}
+        </Revelar>
+      )}
     </section>
   );
 }

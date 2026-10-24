@@ -16,6 +16,7 @@ import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
 import { lista } from "@/lib/datos/util";
 import { useEditando } from "../edicion/contexto";
 import { RejillaVideos } from "../trabajos/MasVideos";
+import { Visor } from "../trabajos/Visor";
 import { MASCARA_BORDE } from "./BloqueServicios";
 
 /**
@@ -37,34 +38,127 @@ export function BloqueTrabajos({ bloque, ancla }: { bloque: Bloque; ancla?: stri
 }
 
 /**
- * Todos los proyectos publicados de unos tipos (los videoclips, las bodas...), en rejilla. Si solo hay uno, debajo
- * van sus «Más vídeos»: así una especialidad con un solo proyecto enseña varios trabajos igualmente.
+ * Todos los proyectos publicados de unos tipos (los videoclips, las bodas...). Con varios, el primero va en grande,
+ * a lo ancho, y el resto en rejilla. Con uno solo, la especialidad no se queda en una tarjeta suelta: el proyecto
+ * en grande, un mosaico con las fotos de su galería (sin repetir las que ya salen en la página) que se abren en
+ * grande, y sus «Más vídeos».
  */
 function RejillaTipos({ bloque, tipos, ancla }: { bloque: Bloque; tipos: string[]; ancla?: string }) {
   const { proyectos } = useDatos();
   const editando = useEditando();
   const de = proyectos.filter((p) => p.tipo && tipos.includes(p.tipo.slug));
   if (!de.length && !editando) return null;
-  const unico = de.length === 1 ? de[0] : null;
+  const [primero, ...resto] = de;
   return (
     <section id={ancla} className="px-4 py-20 sm:px-8 sm:py-24 lg:py-[5svh]">
       <div className="mx-auto max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
         {!de.length && <p className="mt-8 text-[var(--jm-suave)]">Todavía no hay proyectos publicados de este tipo.</p>}
-        <div className={`mt-10 grid gap-4 lg:mt-[4svh] ${unico ? "mx-auto max-w-4xl" : "md:grid-cols-2"}`}>
-          {de.map((p, i) => (
-            <Revelar key={p.slug} retraso={(i % 2) * 0.08}>
-              <TarjetaProyecto proyecto={p} />
-            </Revelar>
-          ))}
-        </div>
-        {unico && unico.videos.length > 0 && (
-          <div className="mt-6">
-            <RejillaVideos videos={unico.videos} />
+        {primero && (
+          <Revelar className="mt-10 lg:mt-[4svh]">
+            <ProyectoAncho proyecto={primero} />
+          </Revelar>
+        )}
+        {resto.length > 0 && (
+          <div className={`mt-4 grid gap-4 md:grid-cols-2 ${resto.length % 3 === 0 ? "lg:grid-cols-3" : ""}`}>
+            {resto.map((p, i) => (
+              <Revelar key={p.slug} retraso={(i % 3) * 0.08}>
+                <TarjetaProyecto proyecto={p} />
+              </Revelar>
+            ))}
+          </div>
+        )}
+        {primero && !resto.length && <Mosaico proyecto={primero} />}
+        {primero && !resto.length && primero.videos.length > 0 && (
+          <div className="mt-16">
+            <h3 className="text-2xl font-extrabold tracking-[-0.035em] sm:text-3xl">{primero.titulosSeccion.mas_videos || "Más vídeos"}</h3>
+            <div className="mt-6">
+              <RejillaVideos videos={primero.videos} />
+            </div>
           </div>
         )}
       </div>
     </section>
+  );
+}
+
+/** Un proyecto a lo ancho, en formato cine: la portada crece hasta la cabecera de su ficha al entrar */
+function ProyectoAncho({ proyecto: p }: { proyecto: Proyecto }) {
+  const premio = laurel(p);
+  return (
+    <Enlace href={RUTAS.proyecto(p.slug)} className="group block" aria-label={`Ver ${p.titulo}`} draggable={false}>
+      <div data-radio data-foco className="relative aspect-[4/5] overflow-hidden rounded-[36px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[2.2/1]">
+        {p.poster && (
+          <img
+            data-transicion
+            src={img(p.poster.url, 3840)}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.04]"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+        {premio && (
+          <span className="absolute left-5 top-5 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white">
+            <Icono nombre="laurel" className="h-3.5 w-3.5 text-[#ffcf7a]" />
+            {premio.nombre}
+          </span>
+        )}
+        <div className="absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between gap-6 p-6 text-white sm:p-10">
+          <div className="min-w-0">
+            <div className="flex items-center gap-3">
+              <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-white/65">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
+              {p.conJuno && <SelloJuno pequeno className="-my-1 shrink-0" />}
+            </div>
+            <h3 className="mt-2 pb-[0.06em] text-3xl font-extrabold leading-[1.04] tracking-[-0.045em] sm:text-5xl">{p.titulo}</h3>
+            {p.papel && <p className="mt-2 text-sm text-white/75 sm:text-base">{p.papel}</p>}
+            {p.textos.tarjeta && <p className="mt-3 hidden max-w-xl text-[15px] leading-snug text-white/70 [text-wrap:pretty] md:block">{p.textos.tarjeta}</p>}
+          </div>
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/15 backdrop-blur-xl transition-transform duration-500 group-hover:scale-110">
+            <Icono nombre="flecha" className="h-5 w-5" />
+          </span>
+        </div>
+      </div>
+    </Enlace>
+  );
+}
+
+/**
+ * Las fotos de la galería de un proyecto en mosaico: una grande y las demás alrededor. Deja fuera la portada (ya
+ * está en la tarjeta) y las que la página usa en otro sitio (la cabecera). Cada foto se abre en el visor.
+ */
+function Mosaico({ proyecto: p }: { proyecto: Proyecto }) {
+  const { medios } = useDatos();
+  const [foto, setFoto] = useState<number | null>(null);
+  const todas = p.galeria.map((g) => g.imagen).filter((m) => m.id !== p.poster?.id && !medios[m.id]);
+  // 5 llenan cuatro columnas (la grande ocupa dos por dos); 3 o 4, tres columnas con la grande y dos
+  const n = todas.length >= 5 ? 5 : todas.length >= 3 ? 3 : todas.length;
+  const fotos = todas.slice(0, n);
+  if (!fotos.length) return null;
+  const columnas = n === 5 ? "md:grid-cols-4" : n === 3 ? "md:grid-cols-3" : n === 2 ? "md:grid-cols-2" : "";
+  return (
+    <>
+      <div className={`mt-4 grid auto-rows-[150px] grid-cols-2 gap-4 sm:auto-rows-[200px] lg:auto-rows-[230px] ${columnas}`}>
+        {fotos.map((m, i) => (
+          <Revelar key={m.id} retraso={i * 0.06} className={i === 0 && n >= 3 ? "col-span-2 row-span-2" : n <= 2 ? "col-span-2 md:col-span-1 row-span-2" : ""}>
+            <button
+              type="button"
+              onClick={() => setFoto(i)}
+              aria-label={`Ver la foto ${i + 1} de ${p.titulo} en grande`}
+              className="group relative block h-full w-full overflow-hidden rounded-[28px] bg-black"
+            >
+              <img
+                src={img(m.url, i === 0 ? 1920 : 1080)}
+                alt={m.alt}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05]"
+              />
+              <span className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
+            </button>
+          </Revelar>
+        ))}
+      </div>
+      <Visor fotos={fotos.map((m) => m.url)} indice={foto} alCambiar={setFoto} titulo={p.titulo} />
+    </>
   );
 }
 

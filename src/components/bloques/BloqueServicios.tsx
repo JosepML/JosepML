@@ -137,13 +137,15 @@ function Tarjeta({ servicio: s, imagenes }: { servicio: Servicio; imagenes: stri
  * allí no es la cabecera) o, si no tiene, a ese trabajo.
  */
 export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
-  const { proyectos } = useDatos();
-  // Cada pieza: nombre, frase, el proyecto (id) que pone la foto y la página de la especialidad (`href`). Sin
-  // página, lleva a la ficha del proyecto. Sin proyecto publicado, no sale
+  const { proyectos, medios } = useDatos();
+  // Cada pieza: nombre, frase, el proyecto (id) que pone la foto, la página de la especialidad (`href`) y una
+  // foto propia (`imagen`, normalmente de la galería del proyecto, para no repetir su portada). Sin página, lleva
+  // a la ficha del proyecto. Sin proyecto publicado, no sale
   const piezas = lista(bloque.datos.piezas).flatMap((x) => {
     const o = objeto(x);
     const p = proyectos.find((y) => y.id === o.proyecto || y.slug === o.proyecto);
-    return p ? [{ nombre: texto(o.nombre), texto: texto(o.texto), proyecto: p, href: texto(o.href) }] : [];
+    const foto = typeof o.imagen === "string" ? medios[o.imagen]?.url : undefined;
+    return p ? [{ nombre: texto(o.nombre), texto: texto(o.texto), proyecto: p, href: texto(o.href), foto: foto ?? p.poster?.url }] : [];
   });
   const enlace = objeto(bloque.datos.enlace);
   return (
@@ -168,7 +170,7 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
             return (
               <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.07 + Math.floor(i / 3) * 0.1}>
                 <Enlace href={f.href || RUTAS.proyecto(p.slug)} fundido={!!f.href} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p.titulo}`}>
-                  <TarjetaFoto imagenes={p.poster ? [p.poster.url] : []} ancho={1200} className="aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
+                  <TarjetaFoto imagenes={f.foto ? [f.foto] : []} ancho={1200} className="aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
                     {() => (
                       <div className="relative flex h-full flex-col justify-end p-6">
                         <h3 className="text-2xl font-bold leading-tight tracking-[-0.025em]">{f.nombre}</h3>
