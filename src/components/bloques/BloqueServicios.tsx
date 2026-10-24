@@ -133,7 +133,8 @@ function Tarjeta({ servicio: s, imagenes }: { servicio: Servicio; imagenes: stri
 /**
  * Lo que grabo como filmmaker: la rejilla de servicios de la web antigua (spots, eventos, bodas, redes...)
  * con la estética D. Seis tarjetas con la foto de un trabajo real de cada tipo; en reposo el nombre, al
- * pasar el ratón la frase. Cada una lleva a ese trabajo.
+ * pasar el ratón la frase. Cada una lleva a la página de su especialidad (con fundido: la foto no crece, porque
+ * allí no es la cabecera) o, si no tiene, a ese trabajo.
  */
 export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
   const { proyectos } = useDatos();
@@ -166,7 +167,7 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
           {piezas.map(({ proyecto: p, ...f }, i) => {
             return (
               <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.07 + Math.floor(i / 3) * 0.1}>
-                <Enlace href={f.href || RUTAS.proyecto(p.slug)} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p.titulo}`}>
+                <Enlace href={f.href || RUTAS.proyecto(p.slug)} fundido={!!f.href} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p.titulo}`}>
                   <TarjetaFoto imagenes={p.poster ? [p.poster.url] : []} ancho={1200} className="aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
                     {() => (
                       <div className="relative flex h-full flex-col justify-end p-6">
