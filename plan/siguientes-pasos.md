@@ -1,5 +1,7 @@
 # Siguientes pasos
 
+> **2026-10-24: el orden vigente está en `plan/plan-publicacion.md`** (qué hace Opus y qué Sonnet hasta publicar). Este archivo queda como detalle de cada tarea.
+
 2026-10-24. Escrito al cerrar el panel (hilo de D). El panel está completo: lo que queda es web pública, datos y lanzamiento. Cada punto es un hilo; los marcados con Sonnet siguen `plan/patron-paginas.md` o `plan/patron-panel.md`.
 
 ## Orden recomendado
