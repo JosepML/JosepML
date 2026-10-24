@@ -14,6 +14,7 @@ import { CABECERA } from "../comun/Transicion";
 import { VideoFondo } from "../comun/VideoFondo";
 import { Icono } from "../Iconos";
 import { CURVA, enLinea, ModalVideo, Revelar, TituloConAcento } from "../piezas";
+import { MasVideos } from "./MasVideos";
 import { Visor } from "./Visor";
 
 /** Párrafos separados por una línea en blanco */
@@ -155,6 +156,9 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
         </section>
       )}
 
+      {/* Más vídeos (making of, versiones, reels): antes del texto, o después si así se marca en el panel */}
+      {!p.videosDebajoDelTexto && <MasVideos videos={p.videos} titulo={titulo("mas_videos", "Más vídeos")} arriba={!p.textos.tarjeta} />}
+
       {/* Cuerpo de la ficha: etiqueta a la izquierda y contenido a la derecha, como un dosier */}
       <section className="px-4 pb-24 sm:px-8">
         <div className="mx-auto max-w-6xl space-y-14">
@@ -226,12 +230,14 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
         </section>
       )}
 
+      {p.videosDebajoDelTexto && <MasVideos videos={p.videos} titulo={titulo("mas_videos", "Más vídeos")} />}
+
       {/* Fotogramas: cuadrícula de miniaturas; al pulsar una se abre el visor a pantalla completa */}
       {fotos.length > 0 && (
         <section className="px-4 pb-24 sm:px-8">
           <div className="mx-auto max-w-7xl">
             <Revelar>
-              <h2 className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">Fotogramas</h2>
+              <h2 className="text-3xl font-extrabold tracking-[-0.04em] sm:text-4xl">{titulo("fotogramas", "Fotogramas")}</h2>
             </Revelar>
             <div className="mt-8 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
               {p.galeria.map((g, i) => (

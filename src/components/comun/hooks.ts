@@ -50,3 +50,28 @@ export function enFilas<T>(lista: T[], n: number): T[][] {
   for (let i = 0; i < lista.length; i += n) filas.push(lista.slice(i, i + n));
   return filas;
 }
+
+// ---- Vídeo a pantalla completa abierto ------------------------------------------------------------
+// Mientras se ve un vídeo en la ventana grande, el resto de la página se para: los vídeos de fondo se pausan
+// (si no, el navegador decodifica dos vídeos a la vez) y las animaciones CSS se congelan (ver
+// .jm-raiz[data-video] en web.css). Así toda la potencia va al vídeo.
+let videoAbierto = false;
+const avisosVideo = new Set<() => void>();
+
+export function marcarVideoAbierto(abierto: boolean) {
+  if (videoAbierto === abierto) return;
+  videoAbierto = abierto;
+  document.querySelector(".jm-raiz")?.toggleAttribute("data-video", abierto);
+  avisosVideo.forEach((f) => f());
+}
+
+export function useVideoAbierto() {
+  return useSyncExternalStore(
+    (avisar) => {
+      avisosVideo.add(avisar);
+      return () => avisosVideo.delete(avisar);
+    },
+    () => videoAbierto,
+    () => false,
+  );
+}

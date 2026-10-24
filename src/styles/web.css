@@ -337,3 +337,14 @@ html {
 [data-bloque]:empty {
   display: none;
 }
+
+/* Con el vídeo grande abierto, la página de detrás se congela: ni orbes, ni marquesinas, ni barridos. Lo tapa
+   la ventana del vídeo y así el navegador no gasta nada en ella (ver marcarVideoAbierto en comun/hooks.ts) */
+.jm-raiz[data-video] *,
+.jm-raiz[data-video] *::before,
+.jm-raiz[data-video] *::after {
+  animation-play-state: paused !important;
+}
+.jm-raiz[data-video] .orbes {
+  visibility: hidden;
+}

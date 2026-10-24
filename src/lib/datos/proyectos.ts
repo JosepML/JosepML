@@ -40,7 +40,8 @@ export async function getProyectos(): Promise<Proyecto[]> {
         detrasDeCamaras: listaMedios(medios, p.detras_de_camaras),
         clip: medio(medios, p.clip_id),
         videoPortada: medio(medios, p.video_portada_id),
-        videos: lista<VideoExtra>(p.videos),
+        // Los vídeos subidos a la biblioteca se guardan por id: aquí se les pone su dirección
+        videos: lista<VideoExtra>(p.videos).map((v) => (v.tipo === "archivo" && v.medio ? { ...v, url: medio(medios, v.medio)?.url ?? v.url } : v)),
         videosDebajoDelTexto: p.videos_debajo_del_texto,
         conJuno: p.con_juno ?? false,
         premios: lista(p.premios)

@@ -2,7 +2,8 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { useReducir } from "../comun/hooks";
+import { createPortal } from "react-dom";
+import { marcarVideoAbierto, useReducir } from "../comun/hooks";
 import { img } from "../comun/imagen";
 import { Icono } from "../Iconos";
 import { CURVA } from "../piezas";
@@ -41,14 +42,24 @@ export function Visor({
       if (e.key === "ArrowLeft") ir(-1);
     };
     window.addEventListener("keydown", tecla);
-    // Sin scroll de la página detrás
+    return () => window.removeEventListener("keydown", tecla);
+  });
+
+  // Sin scroll de la página detrás, y la página parada (vídeo de la cabecera, orbes) mientras se ven las fotos
+  useEffect(() => {
+    if (!abierto) return;
+    marcarVideoAbierto(true);
     const antes = document.documentElement.style.overflow;
     document.documentElement.style.overflow = "hidden";
     return () => {
-      window.removeEventListener("keydown", tecla);
+      marcarVideoAbierto(false);
       document.documentElement.style.overflow = antes;
     };
-  });
+  }, [abierto]);
+
+  // Va a la raíz de la web, por encima del menú
+  const [raiz, setRaiz] = useState<HTMLElement | null>(null);
+  useEffect(() => setRaiz(document.querySelector<HTMLElement>(".jm-raiz") ?? document.body), []);
 
   // Precarga de las vecinas
   useEffect(() => {
@@ -60,15 +71,16 @@ export function Visor({
   }, [indice, fotos]);
 
   const desplazamiento = reducir ? 0 : 60;
+  if (!raiz) return null;
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {abierto && (
         <motion.div
           role="dialog"
           aria-modal
           aria-label={`Fotogramas de ${titulo}`}
-          className="fixed inset-0 z-[95] bg-[#050506]/[0.96]"
+          className="fixed inset-0 z-[120] bg-[#050506]/[0.96]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -139,6 +151,7 @@ export function Visor({
             ))}
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    raiz,
   );
 }

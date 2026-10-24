@@ -16,6 +16,7 @@ import { Miniatura, ProveedorMedios, useSoltarArchivos } from "../campos/medios"
 import { aSlug } from "../campos/tipos";
 import { useDialogos } from "../Dialogos";
 import { Insignia } from "../ListaContenido";
+import { Recortador } from "./Recortador";
 
 type Filtro = "todo" | "imagen" | "video" | "sin-usar" | "sin-alt";
 const FILTROS: { id: Filtro; nombre: string }[] = [
@@ -159,6 +160,11 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
             usos={usosDe(elegido.id)}
             alCerrar={() => setAbierto(null)}
             alCambiar={(c) => setMedios((l) => l.map((x) => (x.id === elegido.id ? { ...x, ...c } : x)))}
+            alRecortar={(nuevo) => {
+              setMedios((l) => [nuevo, ...l]);
+              setAbierto(nuevo.id);
+              router.refresh();
+            }}
             alBorrar={() => {
               setMedios((l) => l.filter((x) => x.id !== elegido.id));
               setAbierto(null);
@@ -171,17 +177,34 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
   );
 }
 
-function Detalle({ medio, usos, alCerrar, alCambiar, alBorrar }: { medio: MedioBiblioteca; usos: Uso[]; alCerrar: () => void; alCambiar: (c: Partial<MedioBiblioteca>) => void; alBorrar: () => void }) {
+function Detalle({
+  medio,
+  usos,
+  alCerrar,
+  alCambiar,
+  alBorrar,
+  alRecortar,
+}: {
+  medio: MedioBiblioteca;
+  usos: Uso[];
+  alCerrar: () => void;
+  alCambiar: (c: Partial<MedioBiblioteca>) => void;
+  alBorrar: () => void;
+  alRecortar: (nuevo: MedioBiblioteca) => void;
+}) {
   const { confirmar, avisar } = useDialogos();
+  const [recortando, setRecortando] = useState(false);
+  // SVG (vectorial) y GIF (animado) no se recortan: se perderían
+  const recortable = medio.tipo === "imagen" && !["image/svg+xml", "image/gif"].includes(medio.mime);
   const [titulo, setTitulo] = useState(medio.titulo);
   const [alt, setAlt] = useState(medio.alt);
   const [borrando, setBorrando] = useState(false);
 
   useEffect(() => {
-    const tecla = (e: KeyboardEvent) => e.key === "Escape" && alCerrar();
+    const tecla = (e: KeyboardEvent) => e.key === "Escape" && (recortando ? setRecortando(false) : alCerrar());
     window.addEventListener("keydown", tecla);
     return () => window.removeEventListener("keydown", tecla);
-  }, [alCerrar]);
+  }, [alCerrar, recortando]);
 
   const guardar = async (campo: "titulo" | "alt") => {
     const valor = (campo === "titulo" ? titulo : alt).trim();
@@ -224,7 +247,9 @@ function Detalle({ medio, usos, alCerrar, alCambiar, alBorrar }: { medio: MedioB
         transition={{ duration: 0.45, ease: CURVA }}
       >
         <div className="flex items-center justify-center bg-black/40 p-4 md:min-h-[28rem]">
-          {medio.tipo === "video" ? (
+          {recortando ? (
+            <Recortador medio={medio} alCancelar={() => setRecortando(false)} alTerminar={alRecortar} />
+          ) : medio.tipo === "video" ? (
             <video src={medio.url} controls playsInline className="max-h-[60svh] w-full rounded-[18px]" />
           ) : medio.tipo === "imagen" ? (
             <img src={img(medio.url, 1080)} alt={medio.alt} className="max-h-[60svh] w-auto rounded-[18px] object-contain" />
@@ -273,6 +298,11 @@ function Detalle({ medio, usos, alCerrar, alCambiar, alBorrar }: { medio: MedioB
             )}
           </div>
           <div className="mt-auto flex flex-wrap gap-2 pt-2">
+            {recortable && !recortando && (
+              <button type="button" onClick={() => setRecortando(true)} className="boton boton-suave px-4 py-2.5 text-sm" title="Se guarda como una imagen nueva: esta no cambia">
+                Recortar
+              </button>
+            )}
             <button type="button" onClick={copiar} className="boton boton-suave px-4 py-2.5 text-sm">
               Copiar enlace
             </button>

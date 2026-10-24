@@ -1,8 +1,9 @@
 "use client";
 
-import { useReducir } from "./comun/hooks";
+import { marcarVideoAbierto, useReducir } from "./comun/hooks";
 import { animate, AnimatePresence, motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Icono } from "./Iconos";
 import { img } from "./comun/imagen";
 import { Editable, useEditando } from "./edicion/contexto";
@@ -181,20 +182,54 @@ export function Contador({ valor, decimales = 0, prefijo = "", sufijo = "" }: { 
   );
 }
 
-/** Reproductor del reel con sonido, en una ventana de cristal. */
-export function ModalVideo({ id, abierto, alCerrar }: { id: string; abierto: boolean; alCerrar: () => void }) {
+/**
+ * Reproductor con sonido en una ventana grande. Por defecto, un vídeo de YouTube (`id`); con `src`, otra página
+ * de reproductor (el embed de Instagram) y con `archivo`, un vídeo propio. `vertical` para Shorts y reels.
+ */
+export function ModalVideo({
+  id,
+  src,
+  archivo,
+  vertical,
+  abierto,
+  alCerrar,
+}: {
+  id?: string;
+  src?: string;
+  archivo?: string;
+  vertical?: boolean;
+  abierto: boolean;
+  alCerrar: () => void;
+}) {
   useEffect(() => {
     if (!abierto) return;
     const tecla = (e: KeyboardEvent) => e.key === "Escape" && alCerrar();
     window.addEventListener("keydown", tecla);
-    return () => window.removeEventListener("keydown", tecla);
+    // Toda la potencia para el vídeo: la página de detrás se para (vídeos de fondo y animaciones) y no se mueve
+    marcarVideoAbierto(true);
+    const html = document.documentElement;
+    const antes = html.style.overflow;
+    html.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", tecla);
+      marcarVideoAbierto(false);
+      html.style.overflow = antes;
+    };
   }, [abierto, alCerrar]);
 
-  return (
+  // La ventana va al nivel de la raíz de la web (fuera del contenido, que tiene su propio z-index) para quedar
+  // también por encima del menú
+  const [raiz, setRaiz] = useState<HTMLElement | null>(null);
+  useEffect(() => setRaiz(document.querySelector<HTMLElement>(".jm-raiz") ?? document.body), []);
+  if (!raiz) return null;
+
+  return createPortal(
     <AnimatePresence>
       {abierto && (
         <motion.div
-          className="fixed inset-0 z-[95] flex items-center justify-center bg-black/50 p-3 backdrop-blur-xl sm:p-8"
+          // Sin desenfoque de fondo: un desenfoque a pantalla completa se recalcula en cada fotograma de lo que
+          // tiene detrás (el vídeo de la cabecera, los orbes) y hacía que el vídeo fuera a tirones
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-[rgba(4,4,6,0.9)] p-3 sm:p-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -204,32 +239,39 @@ export function ModalVideo({ id, abierto, alCerrar }: { id: string; abierto: boo
           aria-label="Reproductor de vídeo"
         >
           <motion.div
-            className="relative aspect-video w-full max-w-6xl overflow-hidden rounded-[28px] border border-white/15 bg-black shadow-2xl"
-            initial={{ scale: 0.92, y: 30 }}
-            animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.95, y: 20 }}
+            className={`relative overflow-hidden rounded-[28px] border border-white/15 bg-black shadow-2xl ${
+              vertical ? "aspect-[9/16] w-[min(100%,calc(min(86svh,860px)*0.5625))]" : "aspect-video w-full max-w-6xl"
+            }`}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.5, ease: CURVA }}
             onClick={(e) => e.stopPropagation()}
           >
-            <iframe
-              className="absolute inset-0 h-full w-full"
-              src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`}
-              allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-              allowFullScreen
-              title="Vídeo"
-            />
+            {archivo ? (
+              <video className="absolute inset-0 h-full w-full bg-black object-contain" src={archivo} autoPlay controls playsInline />
+            ) : (
+              <iframe
+                className="absolute inset-0 h-full w-full"
+                src={src ?? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                allowFullScreen
+                title="Vídeo"
+              />
+            )}
           </motion.div>
           <button
             type="button"
             onClick={alCerrar}
-            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur"
+            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-colors hover:bg-white/20"
             aria-label="Cerrar vídeo"
           >
             <Icono nombre="cerrar" />
           </button>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    raiz,
   );
 }
 

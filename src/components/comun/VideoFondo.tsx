@@ -2,7 +2,7 @@
 
 import { useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { usePantallaAncha, useReducir } from "./hooks";
+import { usePantallaAncha, useReducir, useVideoAbierto } from "./hooks";
 import { VideoYouTube } from "./VideoYouTube";
 import { img } from "./imagen";
 
@@ -21,7 +21,7 @@ type Props = {
 
 /**
  * Vídeo de fondo. Primero se pinta el póster (carga rápida en móvil); en pantallas anchas entra el vídeo
- * encima. Fuera de pantalla el vídeo se pausa (no se desmonta: rehacer el iframe daba tirones).
+ * encima. Fuera de pantalla, o con el vídeo grande abierto, el vídeo se pausa (no se desmonta: rehacer el iframe daba tirones).
  * Con "reducir movimiento" el vídeo sigue (es la imagen de la web), pero el póster no hace zoom.
  */
 export function VideoFondo({ archivo, youtubeId, inicio, poster, className = "", filtro, escala }: Props) {
@@ -29,7 +29,10 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, className = "",
   const reducir = useReducir();
   const caja = useRef<HTMLDivElement>(null);
   const propio = useRef<HTMLVideoElement>(null);
-  const visible = useInView(caja, { margin: "100px" });
+  const enPantalla = useInView(caja, { margin: "100px" });
+  // Con el vídeo grande abierto encima, el de fondo se pausa como si estuviera fuera de pantalla
+  const videoAbierto = useVideoAbierto();
+  const visible = enPantalla && !videoAbierto;
   const [listo, setListo] = useState(false);
   const [propioListo, setPropioListo] = useState(false);
 
