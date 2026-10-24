@@ -19,18 +19,28 @@ const NOMBRE_TABLA: Record<string, string> = {
 /** Dónde se edita cada cosa con cambios sin publicar */
 function enlace(tabla: string, fila: { id: string; slug?: string }) {
   if (tabla === "paginas") return fila.slug === "inicio" ? "/?editar=1" : `/${fila.slug}?editar=1`;
-  if (tabla === "proyectos") return `/admin/proyectos/${fila.id}`;
-  return null;
+  return `/admin/${tabla}/${fila.id}`;
 }
 
 export default async function Resumen() {
   const s = await exigirAdmin({ redirigir: "/admin" });
-  const [{ data: borradores }, { data: proyectos }, { data: paginas }] = await Promise.all([
+  const [{ data: borradores }, { data: proyectos }, { data: paginas }, { data: articulos }, { data: servicios }, { data: clientes }, { data: opiniones }, { data: canales }, { count: nuevos }] = await Promise.all([
     s.from("borradores").select("tabla, fila_id, actualizado_en").order("actualizado_en", { ascending: false }),
     s.from("proyectos").select("id, titulo, slug, estado"),
     s.from("paginas").select("id, titulo, slug"),
+    s.from("articulos").select("id, titulo, slug"),
+    s.from("servicios").select("id, nombre, slug"),
+    s.from("clientes").select("id, nombre"),
+    s.from("opiniones").select("id, autor"),
+    s.from("canales").select("id, nombre"),
+    s.from("mensajes").select("id", { count: "exact", head: true }).eq("estado", "nuevo"),
   ]);
-  const filas = new Map<string, { id: string; titulo: string; slug: string }>([...(proyectos ?? []), ...(paginas ?? [])].map((f) => [f.id, f]));
+  const filas = new Map<string, { id: string; titulo: string; slug?: string }>([
+    ...[...(proyectos ?? []), ...(paginas ?? []), ...(articulos ?? [])].map((f) => [f.id, f] as const),
+    ...(servicios ?? []).map((f) => [f.id, { ...f, titulo: f.nombre }] as const),
+    ...[...(clientes ?? []), ...(canales ?? [])].map((f) => [f.id, { id: f.id, titulo: f.nombre }] as const),
+    ...(opiniones ?? []).map((f) => [f.id, { id: f.id, titulo: `Opinión de ${f.autor || "alguien"}` }] as const),
+  ]);
   const publicados = (proyectos ?? []).filter((p) => p.estado === "publicado").length;
 
   return (
@@ -39,12 +49,24 @@ export default async function Resumen() {
       <h1 className="mt-2 text-4xl font-extrabold tracking-[-0.04em] sm:text-5xl">
         Hola, <span className="jm-serif jm-degradado-acento">Josep</span>
       </h1>
-      <p className="mt-3 max-w-xl text-[var(--jm-suave)]">Edita las páginas en la propia web con «Editar página», y los proyectos desde aquí. Nada cambia en la web hasta que pulsas Publicar.</p>
+      <p className="mt-3 max-w-xl text-[var(--jm-suave)]">Edita las páginas en la propia web con «Editar página», y lo demás desde aquí. Nada cambia en la web hasta que pulsas Publicar.</p>
+
+      {(nuevos ?? 0) > 0 && (
+        <Link href="/admin/mensajes" className="cristal mt-8 flex items-center gap-4 rounded-[24px] px-5 py-4 ring-1 ring-[var(--jm-acento)]/40 transition-transform duration-500 hover:-translate-y-0.5">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--jm-acento)] text-white">
+            <Icono nombre="correo" className="h-5 w-5" />
+          </span>
+          <span className="flex-1 font-semibold">
+            {nuevos} mensaje{nuevos === 1 ? "" : "s"} nuevo{nuevos === 1 ? "" : "s"} sin responder
+          </span>
+          <Icono nombre="flecha" className="h-4 w-4 text-[var(--jm-tenue)]" />
+        </Link>
+      )}
 
       <div className="mt-10 grid gap-3 sm:grid-cols-3">
         <Atajo href="/?editar=1" icono="lapiz" titulo="Editar Inicio" texto="Textos, fotos y secciones, en la propia página" />
         <Atajo href="/admin/proyectos?nuevo=1" icono="mas" titulo="Nuevo proyecto" texto={`${publicados} publicados ahora`} />
-        <Atajo href="/admin/paginas" icono="pagina" titulo="Páginas" texto="Inicio, Sobre mí y el resto" />
+        <Atajo href="/admin/articulos?nuevo=1" icono="mas" titulo="Nuevo artículo" texto={`${articulos?.length ?? 0} en el blog`} />
       </div>
 
       <section className="cristal mt-10 rounded-[32px] p-6 sm:p-8">

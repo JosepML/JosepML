@@ -8,24 +8,29 @@ import { salir } from "@/lib/admin/acceso";
 import { CURVA } from "@/styles/movimiento";
 import { Icono } from "../Iconos";
 
-/** Secciones del panel. Las que aún no existen se ven atenuadas: llegan con las tareas S14 a S17. */
-const SECCIONES: { nombre: string; href: string; icono: string; pronto?: boolean }[] = [
+/** Secciones del panel. `pronto`: se ve atenuada hasta que exista. `tambien`: otras rutas que la marcan activa. */
+const SECCIONES: { nombre: string; href: string; icono: string; pronto?: boolean; tambien?: string[] }[] = [
   { nombre: "Resumen", href: "/admin", icono: "rejilla" },
   { nombre: "Páginas", href: "/admin/paginas", icono: "pagina" },
   { nombre: "Proyectos", href: "/admin/proyectos", icono: "claqueta" },
-  { nombre: "Artículos", href: "/admin/articulos", icono: "lapiz", pronto: true },
-  { nombre: "Servicios", href: "/admin/servicios", icono: "camara", pronto: true },
-  { nombre: "Clientes y opiniones", href: "/admin/clientes", icono: "estrella", pronto: true },
-  { nombre: "Mensajes", href: "/admin/mensajes", icono: "correo", pronto: true },
-  { nombre: "Biblioteca", href: "/admin/medios", icono: "imagen", pronto: true },
+  { nombre: "Artículos", href: "/admin/articulos", icono: "lapiz" },
+  { nombre: "Servicios", href: "/admin/servicios", icono: "camara" },
+  { nombre: "Clientes y opiniones", href: "/admin/clientes", icono: "estrella", tambien: ["/admin/opiniones", "/admin/canales"] },
+  { nombre: "Mensajes", href: "/admin/mensajes", icono: "correo" },
+  { nombre: "Biblioteca", href: "/admin/biblioteca", icono: "imagen" },
+  { nombre: "Ajustes", href: "/admin/ajustes", icono: "ajustes" },
 ];
 
-export function BarraLateral() {
+export function BarraLateral({ mensajesNuevos = 0 }: { mensajesNuevos?: number }) {
   const ruta = usePathname();
   const [abierta, setAbierta] = useState(false);
   useEffect(() => setAbierta(false), [ruta]);
 
-  const activa = (href: string) => (href === "/admin" ? ruta === "/admin" : ruta.startsWith(href));
+  const activa = (href: string) => {
+    if (href === "/admin") return ruta === "/admin";
+    const s = SECCIONES.find((x) => x.href === href);
+    return [href, ...(s?.tambien ?? [])].some((h) => ruta === h || ruta.startsWith(`${h}/`));
+  };
 
   const contenido = (
     <>
@@ -50,6 +55,9 @@ export function BarraLateral() {
               {activa(s.href) && <motion.span layoutId="seccion-activa" className="absolute inset-0 rounded-full bg-white/[0.08]" transition={{ duration: 0.45, ease: CURVA }} />}
               <Icono nombre={s.icono} className="relative h-[18px] w-[18px]" />
               <span className="relative">{s.nombre}</span>
+              {s.href === "/admin/mensajes" && mensajesNuevos > 0 && (
+                <span className="relative ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[var(--jm-acento)] px-1.5 text-[11px] font-bold text-white">{mensajesNuevos}</span>
+              )}
             </Link>
           ),
         )}

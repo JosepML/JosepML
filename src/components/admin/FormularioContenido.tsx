@@ -40,7 +40,7 @@ type Props = {
 };
 
 /** Claves de primer nivel que edita el formulario */
-const clavesDe = (secciones: SeccionFormulario[]) => secciones.flatMap((s) => s.campos.filter((c) => c.tipo !== "nota").map((c) => c.clave));
+const clavesDe = (secciones: SeccionFormulario[]) => secciones.flatMap((s) => s.campos.filter((c) => c.tipo !== "nota" && c.tipo !== "google").map((c) => c.clave));
 
 function normalizar(v: unknown, sinOrden: boolean) {
   if (sinOrden && Array.isArray(v)) return JSON.stringify([...v].sort());

@@ -15,7 +15,7 @@ import { Icono } from "../Iconos";
 import { ProveedorDatos } from "../marco/DatosWeb";
 import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
 
-// Títulos de «Mi mirada»: aún no tienen columna en `servicios` (pendiente del panel, S15); si falta, el nombre
+// Títulos de «Mi mirada» de siempre, por si la columna `titulo_mirada` aún está vacía o no existe
 const TITULO_MIRADA: Record<string, string> = {
   "direccion-de-fotografia": "Decido qué siente quien mira",
   filmmaker: "Con tu equipo, o de principio a fin",
@@ -85,7 +85,7 @@ function Contenido({ servicio: s, datos, llamada }: { servicio: Servicio; datos:
       {s.mirada.length > 0 && (
       <section className="px-4 py-24 sm:px-8 sm:py-32">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <Titular antetitulo="Mi mirada" titulo={TITULO_MIRADA[s.slug] ?? s.nombre} />
+          <Titular antetitulo="Mi mirada" titulo={s.tituloMirada || TITULO_MIRADA[s.slug] || s.nombre} />
           <div className="flex flex-col gap-6">
             {s.mirada.map((parrafo, i) => (
               <Revelar key={i} retraso={i * 0.08}>

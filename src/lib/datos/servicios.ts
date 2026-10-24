@@ -15,6 +15,8 @@ export async function getServicios(): Promise<Servicio[]> {
       frase: s.frase,
       resumen: s.resumen,
       mirada: textos(s.mirada),
+      // La columna llega con la migración servicios_titulo_mirada; mientras, undefined
+      tituloMirada: s.titulo_mirada ?? "",
       aporto: textos(s.aporto),
       paraQuien: textos(s.para_quien),
       conQuien: s.con_quien,

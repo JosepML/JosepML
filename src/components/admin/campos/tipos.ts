@@ -18,7 +18,16 @@ export type Campo =
   | (Base & { tipo: "largo"; filas?: number; placeholder?: string })
   | (Base & { tipo: "numero"; min?: number; max?: number; paso?: number; placeholder?: string })
   | (Base & { tipo: "interruptor" })
-  | (Base & { tipo: "seleccion"; opciones: Opcion[] | "tipos" | "categorias"; vacio?: string })
+  /** `obligatorio`: sin la opción vacía (columnas que no admiten nada) */
+  | (Base & { tipo: "seleccion"; opciones: Opcion[] | "tipos" | "categorias"; vacio?: string; obligatorio?: boolean })
+  /** Enlace https. Vacío se guarda como null (las columnas de enlace no admiten texto vacío) */
+  | (Base & { tipo: "enlace"; placeholder?: string })
+  /** Fecha (AAAA-MM-DD) */
+  | (Base & { tipo: "fecha" })
+  /** Cuerpo de un artículo: editor visual que guarda el documento { type: "doc", content } */
+  | (Base & { tipo: "documento" })
+  /** Vista previa de cómo sale en Google. Lee otros campos: no tiene valor propio */
+  | (Base & { tipo: "google"; prefijo: string; titulo: string; descripcion: string; respaldoTitulo?: string; respaldoDescripcion?: string })
   /** Varios a la vez (lista de ids): los servicios de un proyecto */
   | (Base & { tipo: "multiple"; opciones: Opcion[] | "servicios" })
   /** Un proyecto (su id) */
@@ -32,7 +41,7 @@ export type Campo =
   /** Lista de vídeos extra de un proyecto: [{ tipo, id | url | medio, titulo }] */
   | (Base & { tipo: "videos" })
   /** Lista de frases sueltas: ["director de fotografía", ...] */
-  | (Base & { tipo: "textos"; placeholder?: string; nuevo?: string })
+  | (Base & { tipo: "textos"; placeholder?: string; nuevo?: string; largo?: boolean })
   /** Lista ordenada de objetos con sus campos. `titulo`: clave que da nombre a cada elemento en la lista */
   | (Base & { tipo: "lista"; campos: Campo[]; nuevo: Record<string, unknown>; titulo?: string; elemento?: string })
   /** Objeto con sus campos ({ texto, href }...) */

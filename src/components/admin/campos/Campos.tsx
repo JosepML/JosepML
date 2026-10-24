@@ -4,6 +4,7 @@ import { AnimatePresence, motion, Reorder, useDragControls } from "motion/react"
 import { createContext, useContext, useEffect, useId, useRef, useState } from "react";
 import { Icono } from "@/components/Iconos";
 import { CURVA } from "@/styles/movimiento";
+import { EditorDocumento } from "./EditorDocumento";
 import { Miniatura, SelectorMedios, useMediosConocidos, useSoltarArchivos } from "./medios";
 import { aSlug, idYoutube, type Campo, type Opcion, type OpcionesFormulario } from "./tipos";
 
@@ -105,7 +106,7 @@ function UnCampo({ campo, valor, datos, cambiar }: { campo: Campo; valor: unknow
         <>
           <Etiqueta campo={campo} htmlFor={id} />
           <select id={id} className="campo" value={cadena(valor)} onChange={(e) => cambiar(e.target.value || null)}>
-            <option value="">{campo.vacio ?? "Sin elegir"}</option>
+            {!campo.obligatorio && <option value="">{campo.vacio ?? "Sin elegir"}</option>}
             {lista.map((o) => (
               <option key={o.valor} value={o.valor}>
                 {o.nombre}
@@ -204,7 +205,7 @@ function UnCampo({ campo, valor, datos, cambiar }: { campo: Campo; valor: unknow
       return (
         <>
           <Etiqueta campo={campo} />
-          <CampoTextos valor={listaDe<string>(valor)} placeholder={campo.placeholder} alCambiar={cambiar} />
+          <CampoTextos valor={listaDe<string>(valor)} placeholder={campo.placeholder} largo={campo.largo} alCambiar={cambiar} />
           <Ayuda texto={campo.ayuda} />
         </>
       );
@@ -255,6 +256,73 @@ function UnCampo({ campo, valor, datos, cambiar }: { campo: Campo; valor: unknow
             />
           </div>
           <Ayuda texto={campo.ayuda ?? "La dirección de la página. Si la cambias cuando ya está publicada, la antigua lleva a la nueva."} />
+        </>
+      );
+    }
+
+    case "enlace": {
+      const v = cadena(valor);
+      const mal = v !== "" && !/^https:\/\/[^\s]+\.[^\s]+/.test(v);
+      return (
+        <>
+          <Etiqueta campo={campo} htmlFor={id} />
+          <input
+            id={id}
+            type="url"
+            inputMode="url"
+            className="campo"
+            value={v}
+            placeholder={campo.placeholder ?? "https://"}
+            onChange={(e) => cambiar(e.target.value.trim() || null)}
+            onBlur={(e) => {
+              const t = e.target.value.trim();
+              // Quien pega «www.algo.com» casi siempre quiere https
+              if (t && !/^https?:\/\//.test(t)) cambiar(`https://${t}`);
+              else if (t.startsWith("http://")) cambiar(t.replace(/^http:/, "https:"));
+            }}
+          />
+          {mal ? <span className="campo-ayuda !text-[#ff9f0a]">Tiene que empezar por https:// para que se pueda publicar</span> : <Ayuda texto={campo.ayuda} />}
+        </>
+      );
+    }
+
+    case "fecha":
+      return (
+        <>
+          <Etiqueta campo={campo} htmlFor={id} />
+          <input id={id} type="date" className="campo" value={cadena(valor).slice(0, 10)} onChange={(e) => cambiar(e.target.value || null)} />
+          <Ayuda texto={campo.ayuda} />
+        </>
+      );
+
+    case "documento":
+      return (
+        <>
+          <Etiqueta campo={campo} />
+          <EditorDocumento valor={valor} alCambiar={cambiar} />
+          <Ayuda texto={campo.ayuda} />
+        </>
+      );
+
+    case "google": {
+      const titulo = cadena(datos?.[campo.titulo]) || (campo.respaldoTitulo ? cadena(datos?.[campo.respaldoTitulo]) : "");
+      const descripcion = cadena(datos?.[campo.descripcion]) || (campo.respaldoDescripcion ? cadena(datos?.[campo.respaldoDescripcion]) : "");
+      const slug = cadena(datos?.slug);
+      const largoT = cadena(datos?.[campo.titulo]).length;
+      const largoD = cadena(datos?.[campo.descripcion]).length;
+      return (
+        <>
+          <Etiqueta campo={campo} />
+          <div className="rounded-[20px] bg-white px-5 py-4 font-[arial,sans-serif] text-left">
+            {/* El dominio aún no está decidido: se enseña el nombre de la web y la ruta, como hace Google */}
+            <p className="truncate text-[14px] leading-tight text-[#202124]">Josep Mira Lozano</p>
+            <p className="truncate text-[12px] text-[#4d5156]">… › {(campo.prefijo + slug).replace(/^\//, "").replace(/\//g, " › ")}</p>
+            <p className="mt-1 truncate text-[19px] leading-snug text-[#1a0dab]">{titulo || "Título de la página"}</p>
+            <p className="mt-1 line-clamp-2 text-[13.5px] leading-[1.55] text-[#4d5156]">{descripcion || "La descripción que se lee en los resultados de Google."}</p>
+          </div>
+          <span className="campo-ayuda">
+            Título: {largoT} de ~60 caracteres{largoT > 60 ? " (Google lo cortará)" : ""} · Descripción: {largoD} de ~155{largoD > 155 ? " (se cortará)" : ""}
+          </span>
         </>
       );
     }
@@ -529,12 +597,19 @@ function BotonAnadir({ texto, onClick }: { texto: string; onClick: () => void })
 
 // ---- Listas ---------------------------------------------------------------------------------------
 
-function CampoTextos({ valor, placeholder, alCambiar }: { valor: string[]; placeholder?: string; alCambiar: (v: string[]) => void }) {
+function CampoTextos({ valor, placeholder, largo, alCambiar }: { valor: string[]; placeholder?: string; largo?: boolean; alCambiar: (v: string[]) => void }) {
+  const cambiarUno = (i: number, v: string) => alCambiar(valor.map((x, n) => (n === i ? v : x)));
   return (
     <div className="flex flex-col gap-2">
       {valor.map((t, i) => (
-        <div key={i} className="flex items-center gap-1">
-          <input className="campo !py-2" value={t} placeholder={placeholder} onChange={(e) => alCambiar(valor.map((x, n) => (n === i ? e.target.value : x)))} />
+        <div key={i} className={`flex gap-1 ${largo ? "items-start" : "items-center"}`}>
+          {largo ? (
+            <div className="min-w-0 flex-1">
+              <AreaTexto valor={t} filas={3} placeholder={placeholder} alCambiar={(v) => cambiarUno(i, v)} />
+            </div>
+          ) : (
+            <input className="campo !py-2" value={t} placeholder={placeholder} onChange={(e) => cambiarUno(i, e.target.value)} />
+          )}
           <OrdenLista i={i} total={valor.length} lista={valor} alCambiar={alCambiar} />
         </div>
       ))}

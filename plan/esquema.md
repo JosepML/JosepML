@@ -56,7 +56,7 @@ Todas tienen `estado`, `publicado_en` (primera publicación), `creado_en` y `act
 
 Los servicios del proyecto están en `proyecto_servicios` (`orden` y `destacado` dentro de la página de cada servicio). En el borrador viajan como `"servicios": ["<id servicio>", ...]`.
 
-**`servicios`**: las páginas de servicio (`/servicios/<slug>`). `nombre`, `frase`, `resumen`, `mirada` (lista de párrafos), `aporto` y `para_quien` (listas de frases), `con_quien`, `pasos` (`[{"titulo", "texto"}]`), `preguntas` (`[{"pregunta", "respuesta"}]`), `llamada`, `imagen_id`, SEO y `orden`.
+**`servicios`**: las páginas de servicio (`/servicios/<slug>`). `nombre`, `frase`, `resumen`, `titulo_mirada`, `mirada` (lista de párrafos), `aporto` y `para_quien` (listas de frases), `con_quien`, `pasos` (`[{"titulo", "texto"}]`), `preguntas` (`[{"pregunta", "respuesta"}]`), `llamada`, `imagen_id`, SEO y `orden`.
 
 **`articulos`**: el blog. `slug`, `id_antiguo`, `titulo`, `fecha` (la que se muestra), `extracto`, `contenido` (documento del editor), `categoria_id`, `imagen_id` y SEO. En `contenido` hay nodos `paragraph`, `heading` (nivel 2), texto con marcas `italic` y `bold`, e `image` con `attrs: {"medio": "<id de medios>", "alt": "...", "pie": "..."}`.
 
@@ -173,6 +173,7 @@ Hecho el 2026-10-22: Josep tiene su usuario, está en `administradores` (comprob
 | `20261022153230_esquema_solido_3_seguridad` | Políticas RLS, permisos y almacenamiento |
 | `20261022230000_proyectos_frase` | Columna `proyectos.frase` (frase final de la ficha). Tarea S4 |
 | `20261023133000_proyectos_con_juno` | Columna `proyectos.con_juno` (hecho bajo el sello de JUNO Media; sello en tarjeta y ficha). Marcados los 4 con JUNO en la productora |
+| `20261024190000_servicios_titulo_mirada` | Columna `servicios.titulo_mirada` (título de «Mi mirada», antes fijo en el código), con los 3 títulos de siempre. **La ejecuta Josep en el editor SQL** (el hilo no tiene permiso); hasta entonces el panel no enseña ese campo y la web usa los títulos de siempre |
 
 ### Pendiente de limpieza (opcional, lo hace Josep desde el panel)
 

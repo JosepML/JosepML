@@ -6,11 +6,12 @@ import { exigirAdmin } from "@/lib/admin/sesion";
 export const dynamic = "force-dynamic";
 
 export default async function LayoutPanel({ children }: { children: React.ReactNode }) {
-  await exigirAdmin({ redirigir: "/admin" });
+  const s = await exigirAdmin({ redirigir: "/admin" });
+  const { count } = await s.from("mensajes").select("id", { count: "exact", head: true }).eq("estado", "nuevo");
   return (
     <ProveedorDialogos>
       <div className="lg:flex">
-        <BarraLateral />
+        <BarraLateral mensajesNuevos={count ?? 0} />
         <main className="min-w-0 flex-1 px-4 pb-24 pt-20 sm:px-8 lg:pt-10">{children}</main>
       </div>
     </ProveedorDialogos>

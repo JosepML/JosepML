@@ -99,6 +99,7 @@ export const SECCIONES_PROYECTO: SeccionFormulario[] = [
     campos: [
       { tipo: "texto", clave: "seo_titulo", etiqueta: "Título en Google", ayuda: "Unos 60 caracteres. Vacío = el título del proyecto" },
       { tipo: "largo", clave: "seo_descripcion", etiqueta: "Descripción en Google", filas: 3, ayuda: "Unos 155 caracteres. Vacío = el resumen" },
+      { tipo: "google", clave: "_google", etiqueta: "Así se verá", prefijo: "/trabajos/", titulo: "seo_titulo", descripcion: "seo_descripcion", respaldoTitulo: "titulo", respaldoDescripcion: "tarjeta" },
     ],
   },
 ];

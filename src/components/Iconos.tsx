@@ -127,6 +127,7 @@ const TRAZOS: Record<string, React.ReactNode> = {
   ),
   pagina: <path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM14 3v5h5M9 13h6M9 17h6" />,
   alerta: <path d="M12 4l9 16H3zM12 10v4M12 17.5v.5" />,
+  ajustes: <path d="M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4" />,
 };
 
 export function Icono({ nombre, className = "h-5 w-5" }: { nombre: keyof typeof TRAZOS | string; className?: string }) {

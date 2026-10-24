@@ -178,6 +178,9 @@ async function clavePrimaria(c, tabla) {
 
 function devolver(req, res, filas, estadoVacio = 201) {
   const pref = req.headers.prefer ?? "";
+  // count=exact: el total va en Content-Range (las cuentas del panel, con head: true)
+  if (pref.includes("count=")) res.setHeader("content-range", filas.length ? `0-${filas.length - 1}/${filas.length}` : "*/0");
+  if (req.method === "HEAD") return responder(res, 200, undefined);
   const objeto = (req.headers.accept ?? "").includes("vnd.pgrst.object");
   if (objeto) {
     if (filas.length !== 1) return responder(res, 406, { code: "PGRST116", message: "JSON object requested, multiple (or no) rows returned", details: `The result contains ${filas.length} rows`, hint: null });

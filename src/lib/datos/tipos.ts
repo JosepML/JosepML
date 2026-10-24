@@ -35,6 +35,8 @@ export type Servicio = {
   frase: string;
   resumen: string;
   mirada: string[];
+  /** Título de «Mi mirada». Vacío = el de siempre */
+  tituloMirada: string;
   aporto: string[];
   paraQuien: string[];
   conQuien: string;

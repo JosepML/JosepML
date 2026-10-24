@@ -99,7 +99,7 @@ export async function listar(tabla: TablaContenido): Promise<Resultado<FilaLista
     const conOrden = tabla !== "articulos" && tabla !== "paginas";
     const consulta = s.from(tabla).select("*");
     const [{ data, error }, { data: bs }] = await Promise.all([
-      conOrden ? consulta.order("orden") : consulta.order("creado_en", { ascending: false }),
+      conOrden ? consulta.order("orden") : tabla === "articulos" ? consulta.order("fecha", { ascending: false }) : consulta.order("creado_en", { ascending: false }),
       s.from("borradores").select("fila_id, datos").eq("tabla", tabla),
     ]);
     lanzar(error);
@@ -183,8 +183,10 @@ export async function duplicar(tabla: TablaContenido, id: string): Promise<Resul
     const { fila, borrador, extras } = r.datos;
     const todo: Generica = { ...fila, ...(borrador ?? {}) };
     const copia = Object.fromEntries(Object.entries(todo).filter(([k]) => !NO_COPIAR.has(k) && k in fila));
-    const base = String(copia.slug ?? "copia").replace(/-copia(-\d+)?$/, "");
-    copia.slug = await slugLibre(s, tabla, `${base}-copia`);
+    if ("slug" in fila) {
+      const base = String(copia.slug ?? "copia").replace(/-copia(-\d+)?$/, "");
+      copia.slug = await slugLibre(s, tabla, `${base}-copia`);
+    }
     if (typeof copia.titulo === "string") copia.titulo = `${copia.titulo} (copia)`;
     if (typeof copia.nombre === "string" && tabla !== "clientes") copia.nombre = `${copia.nombre} (copia)`;
     copia.orden = typeof fila.orden === "number" ? fila.orden : undefined;

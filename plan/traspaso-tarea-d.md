@@ -19,7 +19,8 @@ Probado de punta a punta en el emulador, con las migraciones reales y una copia 
 
 ## Pendiente para los hilos siguientes
 
-- **S14 a S17** (artículos, servicios, clientes, opiniones, canales, ajustes, biblioteca y mensajes) siguen `plan/patron-panel.md`. En la barra lateral salen como «Pronto».
+- **S14 a S17 hechos en este hilo** (2026-10-24, a petición de Josep): artículos con editor visual, servicios, clientes, opiniones, canales, ajustes, biblioteca y mensajes. Sin hacer de S16: **recortar** imágenes (la biblioteca sube, describe, enseña dónde se usa y borra lo que no se usa). S17 espera al formulario de contacto (S10) para tener mensajes de verdad.
+- **SQL para Josep:** `supabase/migrations/20261024190000_servicios_titulo_mirada.sql` (columna del título de «Mi mirada»). Hasta que la ejecute, el panel no enseña ese campo y la web usa los títulos de siempre.
 - **Trabajos y Recreaciones** tienen plantilla propia y no se editan en su sitio. Sus textos de cabecera, si Josep quiere cambiarlos, necesitan bloques o columnas nuevas.
 - **«Más vídeos» de un proyecto:** el panel ya los guarda (YouTube, Short, Instagram o archivo, con título) y la capa de datos los lee (`proyecto.videos`), pero la ficha `/trabajos/[slug]` todavía no los pinta. Es trabajo de la ficha (S5).
 - Los cambios de **orden** de la lista de proyectos y de **destacados** se guardan al instante, sin pasar por borrador (son de organización, no de contenido).

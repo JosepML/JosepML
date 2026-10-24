@@ -848,6 +848,7 @@ export type Database = {
           seo_descripcion: string
           seo_titulo: string
           slug: string
+          titulo_mirada: string
         }
         Insert: {
           actualizado_en?: string
@@ -872,6 +873,7 @@ export type Database = {
           seo_descripcion?: string
           seo_titulo?: string
           slug: string
+          titulo_mirada?: string
         }
         Update: {
           actualizado_en?: string
@@ -896,6 +898,7 @@ export type Database = {
           seo_descripcion?: string
           seo_titulo?: string
           slug?: string
+          titulo_mirada?: string
         }
         Relationships: [
           {
