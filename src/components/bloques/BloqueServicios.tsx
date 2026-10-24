@@ -49,11 +49,15 @@ function TarjetaFoto({
   imagenes,
   ancho,
   className,
+  suave = false,
   children,
 }: {
   imagenes: string[];
   ancho: 1200 | 1920;
   className: string;
+  /** Tarjetas apaisadas (filmmaker): la foto a todo color y la sombra solo al pie; se oscurece al pasar el ratón,
+   *  cuando aparece la frase */
+  suave?: boolean;
   children: (encima: boolean, fino: boolean) => React.ReactNode;
 }) {
   const fino = usePunteroFino();
@@ -71,11 +75,18 @@ function TarjetaFoto({
         imagenes={imagenes}
         activo={encima && fino}
         ancho={ancho}
-        className={`opacity-80 transition-opacity duration-700 group-hover:opacity-100 ${MASCARA_BORDE}`}
+        className={`${suave ? "" : "opacity-80 transition-opacity duration-700 group-hover:opacity-100"} ${MASCARA_BORDE}`}
       />
       {/* Negro del todo en el quinto inferior, donde va el texto: si no, lo que hay al pie de la foto (el borde
           de una persiana, el suelo...) se transparentaba como una raya bajo el título */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,#000_24%,rgba(0,0,0,0.55)_50%,rgba(0,0,0,0.1)_100%)]" />
+      {suave ? (
+        <>
+          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.3)_30%,transparent_58%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.45)_45%,rgba(0,0,0,0.1)_100%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+        </>
+      ) : (
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,#000_24%,rgba(0,0,0,0.55)_50%,rgba(0,0,0,0.1)_100%)]" />
+      )}
       {children(encima, fino)}
     </div>
   );
@@ -170,9 +181,9 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
             return (
               <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.07 + Math.floor(i / 3) * 0.1}>
                 <Enlace href={f.href || RUTAS.proyecto(p.slug)} fundido={!!f.href} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p.titulo}`}>
-                  <TarjetaFoto imagenes={f.foto ? [f.foto] : []} ancho={1200} className="aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
+                  <TarjetaFoto suave imagenes={f.foto ? [f.foto] : []} ancho={1200} className="aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
                     {() => (
-                      <div className="relative flex h-full flex-col justify-end p-6">
+                      <div className="relative flex h-full flex-col justify-end p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.5)]">
                         <h3 className="text-2xl font-bold leading-tight tracking-[-0.025em]">{f.nombre}</h3>
                         <Revelable>
                           <p className="mt-1.5 max-w-sm text-[15px] leading-snug text-white/80 [text-wrap:pretty]">{f.texto}</p>
