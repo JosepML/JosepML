@@ -6,6 +6,7 @@ extensión como título (`ais-10-anos-01.jpg` → `ais-10-anos-01`). Si una foto
 Uso: python3 scripts/generar-proyectos-nuevos.py
 """
 import json
+import sys
 import re
 from pathlib import Path
 
@@ -50,7 +51,7 @@ VIDEOS_R2 = videos_r2()
 
 # Sin cargar: Azahara (vídeo sin terminar)
 FUERA = {"azahara-video-oficial"}
-OCULTOS = {"frimar-evento-fotografia"}
+OCULTOS = {"frimar-evento-fotografia", "redencion", "tara", "mandalorian-grogu-reel"}  # de momento fuera de la vista previa
 
 SECCIONES = {"Tarjeta": "tarjeta", "El proyecto": "historia", "Decisiones clave": "como_lo_hicimos",
              "El reto": "el_reto", "Resultado": "el_resultado"}
@@ -164,7 +165,30 @@ def sql_servicios(f):
     return "\n".join(lineas) + "\n"
 
 
+AJUSTES = ["forecourttech-2025", "formacion-mario-bravo", "consell-valencia-joventut-charla",
+           "locos-de-atar-ultimo-concierto", "diferens-encuentro-2025", "atavicas-trailer-obra-de-teatro"]
+
+
+def ajustes():
+    """Solo textos y datos de las fichas ya cargadas (sin tocar portadas, galerías ni vídeos): scripts/... --ajustes"""
+    partes = ["-- Ajustes de textos tras el cuestionario de Josep (2026-10-25). Solo textos y datos: no toca portadas ni vídeos."]
+    for slug in AJUSTES:
+        f = leer(FICHAS / f"{slug}.md")
+        campos = {"titulo": f["titulo"], "anio": f["anio"], "productora": f["productora"], "papel": f["papel"],
+                  "con_juno": f["con_juno"], "tarjeta": f.get("tarjeta", ""), "historia": f.get("historia", ""),
+                  "como_lo_hicimos": f.get("como_lo_hicimos", ""), "el_reto": f.get("el_reto", ""),
+                  "el_resultado": f.get("el_resultado", "")}
+        sets = ",\n  ".join(f"{k} = {lit(v)}" for k, v in campos.items())
+        partes.append(f"update public.proyectos set\n  {sets}\nwhere idioma = 'es' and slug = '{slug}';")
+    ocultos = ", ".join(f"'{s}'" for s in sorted(OCULTOS - {"frimar-evento-fotografia"}))
+    partes.append("-- De momento ocultos (ni en la vista previa): se vuelven a enseñar poniendo publicado_en a null\n"
+                  f"update public.proyectos set publicado_en = now() where idioma = 'es' and estado = 'borrador' and slug in ({ocultos});")
+    print("\n\n".join(partes))
+
+
 def main():
+    if "--ajustes" in sys.argv:
+        return ajustes()
     fichas = [leer(r) for r in sorted(FICHAS.glob("*.md")) if r.stem not in ("README", "cuestionario") and r.stem not in FUERA]
     medios = "\n".join(
         f"insert into public.medios (url_origen, tipo, mime, titulo) values ('{R2}/{slug}/{a}', 'video', 'video/mp4', {lit(slug + ' · ' + t)}) on conflict do nothing;"

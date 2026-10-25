@@ -1,6 +1,6 @@
 ---
 slug: atavicas-trailer-obra-de-teatro
-titulo: Atávicas
+titulo: Atávicas. Mujeres de Lorca hacia la libertad
 tipo: publicidad
 servicios: [filmmaker, edicion]
 año: 2026
