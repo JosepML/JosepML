@@ -210,7 +210,7 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
 
       {/* Segunda parte, secundaria dentro de la misma sección: JUNO más pequeño y con menos contraste */}
       {juno.length > 0 && (
-      <div data-punto-alto className="mx-auto mt-14 max-w-6xl px-4 text-center sm:px-8 lg:mt-[6svh]">
+      <div data-punto-alto className="mx-auto mt-14 max-w-7xl px-4 text-center sm:px-8 lg:mt-[6svh]">
         <Revelar>
           {/* Dos líneas separadas: el rótulo pequeño arriba y la marca debajo, con aire entre ambas */}
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--jm-ante)]">En sinergia con</p>
@@ -282,7 +282,7 @@ function Logo({ cliente: c, compacto, grande, barrido }: { cliente: Cliente; com
         <span
           className={`font-semibold uppercase transition-colors duration-300 hover:text-[var(--jm-texto)] ${
             compacto
-              ? "whitespace-nowrap text-[12px] tracking-[0.18em] text-[var(--jm-medio)]"
+              ? "mx-5 max-w-[15ch] text-center text-[12px] leading-snug tracking-[0.18em] [text-wrap:balance] text-[var(--jm-medio)]"
               : grande
                 ? // Los nombres largos pueden partirse en dos líneas centradas dentro de su celda; una palabra muy
                   // larga (no se puede partir) va algo más pequeña para no pisar a la de al lado
