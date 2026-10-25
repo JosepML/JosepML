@@ -28,3 +28,7 @@ set galeria = coalesce((
   from public.medios m where m.titulo like 'aguita-de-coco-banner-%' and m.tipo = 'imagen'), '[]'::jsonb) || p.galeria
 where p.idioma = 'es' and p.slug = 'aguita-de-coco-visuales'
   and not exists (select 1 from public.medios m where m.id::text in (select e->>'medio' from jsonb_array_elements(p.galeria) e) and m.titulo like 'aguita-de-coco-banner-%');
+
+-- Kiboko: la portada pasa del fotograma de créditos a la persiana con el grafiti «Kiboko» (3.ª foto de su galería)
+update public.proyectos set imagen_id = 'a4763ee8-1608-475a-a9dc-0b37df4cfc30'
+where idioma = 'es' and slug = 'kiboko' and exists (select 1 from public.medios where id = 'a4763ee8-1608-475a-a9dc-0b37df4cfc30');
