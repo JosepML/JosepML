@@ -160,7 +160,7 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
   const rejilla = useRef<HTMLDivElement>(null);
   const enPantalla = useInView(rejilla, { amount: 0.4 });
   const reducir = useReducir();
-  const columnas = useColumnas(6);
+  const columnas = useColumnas(8);
   return (
     <section className="py-20 sm:py-28 lg:py-[6svh]">
       {/* Primera parte, la principal: titular de verdad y todas las marcas a la vista a la vez. Si la sección no
@@ -169,14 +169,14 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
         <div className="px-4 sm:px-8">
           <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} centrado />
         </div>
-        {/* Sin marquesina: todas las marcas quietas y visibles, Disney y Star Wars primero, en filas de seis en
+        {/* Sin marquesina: todas las marcas quietas y visibles, Disney y Star Wars primero, en filas de ocho en
             ordenador. La última fila, si no está completa, va centrada. Entran escalonadas una sola vez y, mientras
             la sección está en pantalla, un barrido de luz suave las recorre en diagonal cada pocos segundos (ver
             .jm-barrido en web.css) */}
         <div
           ref={rejilla}
           data-barrido={enPantalla && !reducir ? "" : undefined}
-          className="jm-barrido mx-auto mt-12 flex max-w-7xl flex-col gap-y-1 px-4 sm:px-8 lg:mt-[4.5svh]"
+          className="jm-barrido mx-auto mt-12 flex max-w-[96rem] flex-col gap-y-1 px-4 sm:px-8 lg:mt-[4.5svh]"
         >
           {enFilas(principales, columnas).map((fila, f) => (
             <div key={f} className="flex justify-center">
@@ -285,7 +285,7 @@ function Logo({ cliente: c, compacto, grande, barrido }: { cliente: Cliente; com
                 ? // Los nombres largos pueden partirse en dos líneas centradas dentro de su celda; una palabra muy
                   // larga (no se puede partir) va algo más pequeña para no pisar a la de al lado
                   `leading-snug [text-wrap:balance] ${
-                    palabraLarga ? "text-[13px] tracking-[0.1em] sm:text-[15px] sm:tracking-[0.08em]" : "max-w-[15ch] text-[15px] tracking-[0.16em] sm:text-[17px]"
+                    palabraLarga ? "mx-4 text-[13px] tracking-[0.1em] sm:text-[15px] sm:tracking-[0.08em]" : "mx-4 max-w-[15ch] text-[15px] tracking-[0.16em] sm:text-[17px]"
                   } ${barrido ? "text-[var(--jm-texto)]" : "text-[var(--jm-cliente)]"}`
                 : "whitespace-nowrap text-[15px] tracking-[0.22em] text-[var(--jm-tenue)] sm:text-base"
           }`}

@@ -151,12 +151,13 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
   const { proyectos, medios } = useDatos();
   // Cada pieza: nombre, frase, el proyecto (id) que pone la foto, la página de la especialidad (`href`) y una
   // foto propia (`imagen`, normalmente de la galería del proyecto, para no repetir su portada). Sin página, lleva
-  // a la ficha del proyecto. Sin proyecto publicado, no sale
+  // a la ficha del proyecto. Sin página ni proyecto publicado, no sale
   const piezas = lista(bloque.datos.piezas).flatMap((x) => {
     const o = objeto(x);
     const p = proyectos.find((y) => y.id === o.proyecto || y.slug === o.proyecto);
     const foto = typeof o.imagen === "string" ? medios[o.imagen]?.url : undefined;
-    return p ? [{ nombre: texto(o.nombre), texto: texto(o.texto), proyecto: p, href: texto(o.href), foto: foto ?? p.poster?.url }] : [];
+    const href = texto(o.href);
+    return p || href ? [{ nombre: texto(o.nombre), texto: texto(o.texto), proyecto: p, href, foto: foto ?? p?.poster?.url }] : [];
   });
   const enlace = objeto(bloque.datos.enlace);
   return (
@@ -180,7 +181,7 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
           {piezas.map(({ proyecto: p, ...f }, i) => {
             return (
               <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.07 + Math.floor(i / 3) * 0.1}>
-                <Enlace href={f.href || RUTAS.proyecto(p.slug)} fundido={!!f.href} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p.titulo}`}>
+                <Enlace href={f.href || RUTAS.proyecto(p!.slug)} fundido={!!f.href} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p?.titulo}`}>
                   <TarjetaFoto suave imagenes={f.foto ? [f.foto] : []} ancho={1200} className="aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
                     {() => (
                       <div className="relative flex h-full flex-col justify-end p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.5)]">
@@ -188,7 +189,7 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
                         <Revelable>
                           <p className="mt-1.5 max-w-sm text-[15px] leading-snug text-white/80 [text-wrap:pretty]">{f.texto}</p>
                           <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffc07a]">
-                            {f.href ? `Ver ${f.nombre.toLowerCase()}` : p.titulo}
+                            {f.href ? `Ver ${f.nombre.toLowerCase()}` : p?.titulo}
                             <Icono nombre="flecha" className="h-3.5 w-3.5" />
                           </span>
                         </Revelable>
