@@ -49,6 +49,13 @@ insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-
 insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a2-3x2-1080.mp4', 'video', 'video/mp4', $t$aguita-de-coco-visuales · Animación 2$t$) on conflict do nothing;
 insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a3-3x2-1080.mp4', 'video', 'video/mp4', $t$aguita-de-coco-visuales · Animación 3$t$) on conflict do nothing;
 insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a4-3x2-1080-30s.mp4', 'video', 'video/mp4', $t$aguita-de-coco-visuales · Animación 4$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel1-presentacion-james-v3.mp4', 'video', 'video/mp4', $t$albir-confort-reels · Reel 1 · Presentación de James$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel2-tip2-v1.mp4', 'video', 'video/mp4', $t$albir-confort-reels · Reel 2$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel3-tip3-v1.mp4', 'video', 'video/mp4', $t$albir-confort-reels · Reel 3$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel4-tip4-v1.mp4', 'video', 'video/mp4', $t$albir-confort-reels · Reel 4$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel5-tip5-v1.mp4', 'video', 'video/mp4', $t$albir-confort-reels · Reel 5$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel6-tip7-v1.mp4', 'video', 'video/mp4', $t$albir-confort-reels · Reel 6$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel7-tip11-v1.mp4', 'video', 'video/mp4', $t$albir-confort-reels · Reel 7$t$) on conflict do nothing;
 -- Tipos nuevos (por si la migración no los creó)
 insert into public.tipos_proyecto (slug, nombre, orden)
 select v.slug, v.nombre, v.orden from (values ('corporativo', 'Corporativo', 10), ('visuales-e-ia', 'Visuales e IA', 11)) as v(slug, nombre, orden)
@@ -142,11 +149,41 @@ on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = exc
 insert into public.proyecto_servicios (proyecto_id, servicio_id, orden, destacado) select p.id, s.id, 100, false from public.proyectos p, public.servicios s where p.idioma = 'es' and p.slug = 'albir-confort-real-estate' and s.slug = 'filmmaker' and s.idioma = 'es' on conflict (proyecto_id, servicio_id) do nothing;
 insert into public.proyecto_servicios (proyecto_id, servicio_id, orden, destacado) select p.id, s.id, 101, false from public.proyectos p, public.servicios s where p.idioma = 'es' and p.slug = 'albir-confort-real-estate' and s.slug = 'edicion' and s.idioma = 'es' on conflict (proyecto_id, servicio_id) do nothing;
 
--- Atávicas
+-- Albir Confort, reels para redes
+insert into public.proyectos (slug, titulo, tipo_id, categorias_extra, anio, direccion, productora, papel, camara, tarjeta, historia, como_lo_hicimos, el_reto, el_resultado, con_juno, videos, imagen_id, galeria, orden, estado, publicado_en)
+values (
+  $t$albir-confort-reels$t$,
+  $t$Albir Confort, reels para redes$t$,
+  (select id from public.tipos_proyecto where idioma = 'es' and slug = 'redes-sociales'),
+  '{}'::uuid[],
+  2026,
+  $t$$t$,
+  $t$Albir Confort$t$,
+  $t$Edición$t$,
+  $t$$t$,
+  $t$Siete reels para las redes de Albir Confort: James, su agente, explica en inglés cómo comprar una casa en la zona.$t$,
+  $t$Para Albir Confort, con JUNO Media, edité una serie de reels verticales en los que James, el agente de la inmobiliaria, habla a cámara en inglés. Empieza con su presentación y sigue con consejos para quien quiere comprar en España. Los temas van de los trámites y los impuestos a lo que ofrece la zona: Altea, el faro de Albir, los paseos y los eventos culturales.$t$,
+  $t$- **Planos de apoyo.** Mientras James habla, entran planos de llaves, papeles, viviendas y calles del pueblo para ilustrar lo que dice.
+- **Subtítulos en inglés.** Cada reel lleva sus subtítulos, pensados para verse sin sonido.
+- **Formato vertical.** Los siete están montados en 9:16 para Instagram y el resto de redes.$t$,
+  $t$$t$,
+  $t$$t$,
+  true,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal','vertical', true, 'titulo', $t$Reel 1 · Presentación de James$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel1-presentacion-james-v3.mp4')), jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 2$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel2-tip2-v1.mp4')), jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 3$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel3-tip3-v1.mp4')), jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 4$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel4-tip4-v1.mp4')), jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 5$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel5-tip5-v1.mp4')), jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 6$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel6-tip7-v1.mp4')), jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 7$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-reels/reel7-tip11-v1.mp4'))),
+  pg_temp.foto('albir-confort-reels-01'),
+  pg_temp.gal(array['albir-confort-reels-01','albir-confort-reels-02','albir-confort-reels-03','albir-confort-reels-04','albir-confort-reels-05','albir-confort-reels-06','albir-confort-reels-07']::text[]),
+  23,
+  'borrador',
+  null)
+on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
+
+insert into public.proyecto_servicios (proyecto_id, servicio_id, orden, destacado) select p.id, s.id, 100, false from public.proyectos p, public.servicios s where p.idioma = 'es' and p.slug = 'albir-confort-reels' and s.slug = 'edicion' and s.idioma = 'es' on conflict (proyecto_id, servicio_id) do nothing;
+
+-- Atávicas. Mujeres de Lorca hacia la libertad
 insert into public.proyectos (slug, titulo, tipo_id, categorias_extra, anio, direccion, productora, papel, camara, tarjeta, historia, como_lo_hicimos, el_reto, el_resultado, con_juno, videos, imagen_id, galeria, orden, estado, publicado_en)
 values (
   $t$atavicas-trailer-obra-de-teatro$t$,
-  $t$Atávicas$t$,
+  $t$Atávicas. Mujeres de Lorca hacia la libertad$t$,
   (select id from public.tipos_proyecto where idioma = 'es' and slug = 'publicidad'),
   '{}'::uuid[],
   2026,
@@ -166,7 +203,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/atavicas-trailer-obra-de-teatro/atavicas2026-neiraysantamaria-videoresumen-v2.mp4'))),
   pg_temp.foto('atavicas-trailer-obra-de-teatro-02'),
   pg_temp.gal(array['atavicas-trailer-obra-de-teatro-01','atavicas-trailer-obra-de-teatro-02','atavicas-trailer-obra-de-teatro-03','atavicas-trailer-obra-de-teatro-04','atavicas-trailer-obra-de-teatro-05','atavicas-trailer-obra-de-teatro-06','atavicas-trailer-obra-de-teatro-07','atavicas-trailer-obra-de-teatro-08']::text[]),
-  23,
+  24,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -181,13 +218,13 @@ values (
   $t$Consell Valencià de la Joventut, charla$t$,
   (select id from public.tipos_proyecto where idioma = 'es' and slug = 'corporativo'),
   array(select id from public.tipos_proyecto where idioma = 'es' and slug in ('redes-sociales')),
-  null,
+  2025,
   $t$$t$,
   $t$Consell Valencià de la Joventut$t$,
   $t$Grabación y edición$t$,
   $t$Sony FX3 · ópticas Tamron y Sony$t$,
   $t$El resumen de una charla del Consell Valencià de la Joventut, en horizontal y en vertical para redes.$t$,
-  $t$Para el Consell Valencià de la Joventut hice el vídeo resumen de una de sus charlas, en horizontal y en vertical, y una píldora para redes con los temas que se trataron.$t$,
+  $t$Para el Consell Valencià de la Joventut hice el vídeo resumen de una de sus charlas, en horizontal y en vertical, y una píldora para redes con los temas que se trataron. Grabamos entre Lara Ruiz Martín y yo.$t$,
   $t$$t$,
   $t$$t$,
   $t$$t$,
@@ -195,7 +232,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/consell-valencia-joventut-charla/videoresum-consell-horitzontal-v2.mp4'))),
   pg_temp.foto('consell-valencia-joventut-charla-01'),
   pg_temp.gal(array['consell-valencia-joventut-charla-01','consell-valencia-joventut-charla-02','consell-valencia-joventut-charla-03','consell-valencia-joventut-charla-04','consell-valencia-joventut-charla-05','consell-valencia-joventut-charla-06','consell-valencia-joventut-charla-07','consell-valencia-joventut-charla-08']::text[]),
-  24,
+  25,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -217,14 +254,14 @@ values (
   $t$Sony FX3 · ópticas Tamron y Sony$t$,
   $t$El resumen de un encuentro muy emocional entre los trabajadores de Diferens.$t$,
   $t$Para JUNO Media hice el vídeo resumen del encuentro de Diferens, una reunión de sus trabajadores muy emocional y personal.$t$,
-  $t$- **Lo personal por delante.** El vídeo se centra en las personas y en lo que se vivió, más que en la agenda del día.$t$,
+  $t$- **La emoción por delante.** El vídeo se centra en las personas y en lo que se vivió, más que en la agenda del día.$t$,
   $t$$t$,
   $t$$t$,
   true,
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/diferens-encuentro-2025/diferens-2025-v1.mp4'))),
   pg_temp.foto('diferens-encuentro-2025-04'),
   pg_temp.gal(array['diferens-encuentro-2025-01','diferens-encuentro-2025-02','diferens-encuentro-2025-03','diferens-encuentro-2025-04','diferens-encuentro-2025-05','diferens-encuentro-2025-06','diferens-encuentro-2025-07','diferens-encuentro-2025-08']::text[]),
-  25,
+  26,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -254,7 +291,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/el-xato-evento-boda/videoresumen-evento-xato-v2.mp4'))),
   pg_temp.foto('el-xato-evento-boda-04'),
   pg_temp.gal(array['el-xato-evento-boda-01','el-xato-evento-boda-02','el-xato-evento-boda-03','el-xato-evento-boda-04','el-xato-evento-boda-05','el-xato-evento-boda-06','el-xato-evento-boda-07','el-xato-evento-boda-08']::text[]),
-  26,
+  27,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -283,7 +320,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal','vertical', true, 'titulo', $t$Englobe$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/englobe-evento-redes/englobe-v4.mp4'))),
   pg_temp.foto('englobe-evento-redes-03'),
   pg_temp.gal(array['englobe-evento-redes-01','englobe-evento-redes-02','englobe-evento-redes-03','englobe-evento-redes-04','englobe-evento-redes-05','englobe-evento-redes-06','englobe-evento-redes-07','englobe-evento-redes-08']::text[]),
-  27,
+  28,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -314,7 +351,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Tráiler$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/ep-color-adrian-munoz/trailer-color-adrianmunoz-v2.mp4'))),
   pg_temp.foto('ep-color-adrian-munoz-03'),
   pg_temp.gal(array['ep-color-adrian-munoz-01','ep-color-adrian-munoz-02','ep-color-adrian-munoz-03','ep-color-adrian-munoz-04','ep-color-adrian-munoz-05','ep-color-adrian-munoz-06','ep-color-adrian-munoz-07','ep-color-adrian-munoz-08']::text[]),
-  28,
+  29,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -345,7 +382,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal','vertical', true, 'titulo', $t$El Langui con Grupo LON$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/evento-grupo-lon-el-langui/encuentros-lon-langui-v1.mp4'))),
   pg_temp.foto('evento-grupo-lon-el-langui-04'),
   pg_temp.gal(array['evento-grupo-lon-el-langui-01','evento-grupo-lon-el-langui-02','evento-grupo-lon-el-langui-03','evento-grupo-lon-el-langui-04','evento-grupo-lon-el-langui-05','evento-grupo-lon-el-langui-06']::text[]),
-  29,
+  30,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -402,7 +439,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Aftermovie$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-aftermovie/aftermovie-flama-2026-v03.mp4'))),
   pg_temp.foto('flama-aftermovie-01'),
   pg_temp.gal(array['flama-aftermovie-01','flama-aftermovie-02','flama-aftermovie-03','flama-aftermovie-04','flama-aftermovie-05','flama-aftermovie-06','flama-aftermovie-07','flama-aftermovie-08']::text[]),
-  31,
+  32,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -431,7 +468,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-benissa-video-oficial/videoresumen-flama-benissa-v3.mp4'))),
   pg_temp.foto('flama-benissa-video-oficial-03'),
   pg_temp.gal(array['flama-benissa-video-oficial-01','flama-benissa-video-oficial-02','flama-benissa-video-oficial-03','flama-benissa-video-oficial-04','flama-benissa-video-oficial-05','flama-benissa-video-oficial-06','flama-benissa-video-oficial-07','flama-benissa-video-oficial-08']::text[]),
-  32,
+  33,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -462,7 +499,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Foc i Flama$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-contenido-cinematografico-ia/video-flama-pantallas-v5.mp4'))),
   pg_temp.foto('flama-contenido-cinematografico-ia-02'),
   pg_temp.gal(array['flama-contenido-cinematografico-ia-01','flama-contenido-cinematografico-ia-02','flama-contenido-cinematografico-ia-03','flama-contenido-cinematografico-ia-04','flama-contenido-cinematografico-ia-05','flama-contenido-cinematografico-ia-06','flama-contenido-cinematografico-ia-07','flama-contenido-cinematografico-ia-08']::text[]),
-  33,
+  34,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -490,7 +527,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-la-nucia-video-oficial/flama-lanucia-v3.mp4'))),
   pg_temp.foto('flama-la-nucia-video-oficial-04'),
   pg_temp.gal(array['flama-la-nucia-video-oficial-01','flama-la-nucia-video-oficial-02','flama-la-nucia-video-oficial-03','flama-la-nucia-video-oficial-04','flama-la-nucia-video-oficial-05','flama-la-nucia-video-oficial-06','flama-la-nucia-video-oficial-07','flama-la-nucia-video-oficial-08']::text[]),
-  34,
+  35,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -510,8 +547,8 @@ values (
   $t$ForecourtTech$t$,
   $t$Grabación y edición$t$,
   $t$Sony FX3 · ópticas Tamron y Sony$t$,
-  $t$El vídeo resumen de ForecourtTech 2025, un congreso internacional del sector de las estaciones de servicio.$t$,
-  $t$Para JUNO Media hice el vídeo resumen de ForecourtTech 2025, un congreso sobre tecnología para estaciones de servicio y tiendas de conveniencia. Ponencias, mesas redondas, reuniones entre empresas, entrevistas a los asistentes y las cenas de networking, todo en inglés y montado en un solo vídeo.$t$,
+  $t$El vídeo resumen de ForecourtTech 2025, el congreso anual sobre tecnología para estaciones de servicio, en Alicante.$t$,
+  $t$Para JUNO Media hice el vídeo resumen de ForecourtTech 2025, el congreso anual sobre tecnología para estaciones de servicio y tiendas de conveniencia. Se celebró el 1 y 2 de octubre en el hotel Asia Gardens, en Alicante. Ponencias, reuniones de uno a uno entre empresas, entrevistas a los asistentes y las cenas de networking, todo en inglés y montado en un solo vídeo. Llevo tres ediciones seguidas con este evento: 2024, 2025 y 2026.$t$,
   $t$$t$,
   $t$$t$,
   $t$$t$,
@@ -519,7 +556,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/forecourttech-2025/forecourttech-2025-v3-withlogo.mp4'))),
   pg_temp.foto('forecourttech-2025-05'),
   pg_temp.gal(array['forecourttech-2025-01','forecourttech-2025-02','forecourttech-2025-03','forecourttech-2025-04','forecourttech-2025-05','forecourttech-2025-06','forecourttech-2025-07']::text[]),
-  35,
+  36,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -534,21 +571,21 @@ values (
   $t$Formación de Mario Bravo, vídeo promocional$t$,
   (select id from public.tipos_proyecto where idioma = 'es' and slug = 'publicidad'),
   '{}'::uuid[],
-  null,
+  2025,
   $t$$t$,
   $t$Mario Bravo$t$,
   $t$Grabación y edición$t$,
   $t$Sony FX3 · ópticas Tamron y Sony$t$,
   $t$El vídeo promocional de una formación para agentes inmobiliarios, en horizontal y en vertical.$t$,
-  $t$Mario Bravo se dedica al crecimiento estratégico de agencias inmobiliarias. Grabé una de sus formaciones para agentes y la convertí en un vídeo promocional, con la sesión, el trabajo en grupo y la opinión de los asistentes. Lo entregué en horizontal y en vertical.$t$,
+  $t$Mario Bravo se dedica al crecimiento estratégico de agencias inmobiliarias. Para JUNO Media grabé una de sus formaciones para agentes y la convertí en un vídeo promocional, con la sesión, el trabajo en grupo y la opinión de los asistentes. Lo entregué en horizontal y en vertical.$t$,
   $t$$t$,
   $t$$t$,
   $t$$t$,
-  false,
+  true,
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo promocional$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/formacion-mario-bravo/formacion-mario-bravo.mp4'))),
   pg_temp.foto('formacion-mario-bravo-04'),
   pg_temp.gal(array['formacion-mario-bravo-01','formacion-mario-bravo-02','formacion-mario-bravo-03','formacion-mario-bravo-04','formacion-mario-bravo-05','formacion-mario-bravo-06','formacion-mario-bravo-07']::text[]),
-  36,
+  37,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -580,7 +617,7 @@ values (
   $t$[]$t$::jsonb,
   pg_temp.foto('frimar-evento-fotografia-01'),
   pg_temp.gal(array['frimar-evento-fotografia-01','frimar-evento-fotografia-02','frimar-evento-fotografia-03']::text[]),
-  37,
+  38,
   'borrador',
   now())
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -608,7 +645,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/la-vibra-video-oficial/video-oficial-lavibra-v3.mp4'))),
   pg_temp.foto('la-vibra-video-oficial-05'),
   pg_temp.gal(array['la-vibra-video-oficial-01','la-vibra-video-oficial-02','la-vibra-video-oficial-03','la-vibra-video-oficial-04','la-vibra-video-oficial-05','la-vibra-video-oficial-06','la-vibra-video-oficial-07','la-vibra-video-oficial-08']::text[]),
-  38,
+  39,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -639,7 +676,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 1$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/lavanderia-grupo-lon/reel1-lon-v2.mp4')), jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 4$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/lavanderia-grupo-lon/reel4-lon-v2.mp4'))),
   pg_temp.foto('lavanderia-grupo-lon-01'),
   pg_temp.gal(array['lavanderia-grupo-lon-01','lavanderia-grupo-lon-02','lavanderia-grupo-lon-03','lavanderia-grupo-lon-04','lavanderia-grupo-lon-05','lavanderia-grupo-lon-06','lavanderia-grupo-lon-07']::text[]),
-  39,
+  40,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -655,11 +692,11 @@ values (
   '{}'::uuid[],
   2025,
   $t$$t$,
-  $t$$t$,
+  $t$Locos de Atar$t$,
   $t$Grabación y edición$t$,
   $t$Sony FX3 · ópticas Tamron y Sony$t$,
   $t$El último concierto de Locos de Atar antes de despedirse para siempre.$t$,
-  $t$Vídeo resumen del concierto de Locos de Atar de 2025, el último del grupo antes de parar para siempre. Había que captar la emoción del cantante, de la banda y del público.$t$,
+  $t$Me lo encargó JuanMi, el cantante del grupo: el vídeo resumen del concierto de Locos de Atar de 2025, el último antes de parar para siempre. Había que captar la emoción del cantante, de la banda y del público. Lara me ayudó como auxiliar.$t$,
   $t$- **Tres emociones.** El cantante, la banda y el público, cada uno con su espacio en el montaje.
 - **Una despedida.** El vídeo tenía que guardar lo que significó esa noche para todos.$t$,
   $t$Grabar una noche que no se iba a repetir, sabiendo que era la última.$t$,
@@ -668,7 +705,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$El último concierto$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/locos-de-atar-ultimo-concierto/videoresumen-concierto-lda-v1.mp4'))),
   pg_temp.foto('locos-de-atar-ultimo-concierto-03'),
   pg_temp.gal(array['locos-de-atar-ultimo-concierto-01','locos-de-atar-ultimo-concierto-02','locos-de-atar-ultimo-concierto-03','locos-de-atar-ultimo-concierto-04','locos-de-atar-ultimo-concierto-05','locos-de-atar-ultimo-concierto-06','locos-de-atar-ultimo-concierto-07','locos-de-atar-ultimo-concierto-08']::text[]),
-  40,
+  41,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -699,7 +736,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal','vertical', true, 'titulo', $t$Reel$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/louk-the-grill/reel-louk-v1.mp4'))),
   pg_temp.foto('louk-the-grill-02'),
   pg_temp.gal(array['louk-the-grill-01','louk-the-grill-02','louk-the-grill-03','louk-the-grill-04','louk-the-grill-05','louk-the-grill-06','louk-the-grill-07','louk-the-grill-08']::text[]),
-  41,
+  42,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -728,7 +765,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/madison-video-oficial/madison-videoresumen-v3.mp4'))),
   pg_temp.foto('madison-video-oficial-04'),
   pg_temp.gal(array['madison-video-oficial-01','madison-video-oficial-02','madison-video-oficial-03','madison-video-oficial-04','madison-video-oficial-05','madison-video-oficial-06','madison-video-oficial-07','madison-video-oficial-08']::text[]),
-  42,
+  43,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -757,9 +794,9 @@ values (
   $t$[{"tipo": "youtube-short", "id": "s8m1qUtDeNE", "titulo": "Reel"}]$t$::jsonb,
   null,
   '[]'::jsonb,
-  43,
+  44,
   'borrador',
-  null)
+  now())
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
 
 insert into public.proyecto_servicios (proyecto_id, servicio_id, orden, destacado) select p.id, s.id, 100, false from public.proyectos p, public.servicios s where p.idioma = 'es' and p.slug = 'mandalorian-grogu-reel' and s.slug = 'filmmaker' and s.idioma = 'es' on conflict (proyecto_id, servicio_id) do nothing;
@@ -786,7 +823,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/otra-movida-video-oficial/otramovida-videoresumen-v4-masterizada.mp4'))),
   pg_temp.foto('otra-movida-video-oficial-05'),
   pg_temp.gal(array['otra-movida-video-oficial-01','otra-movida-video-oficial-02','otra-movida-video-oficial-03','otra-movida-video-oficial-04','otra-movida-video-oficial-05','otra-movida-video-oficial-06','otra-movida-video-oficial-07','otra-movida-video-oficial-08']::text[]),
-  44,
+  45,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
@@ -818,9 +855,9 @@ values (
   $t$[{"tipo": "instagram", "url": "https://www.instagram.com/p/DSrquANDcfQ/", "titulo": "Tráiler"}]$t$::jsonb,
   null,
   '[]'::jsonb,
-  45,
+  46,
   'borrador',
-  null)
+  now())
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
 
 insert into public.proyecto_servicios (proyecto_id, servicio_id, orden, destacado) select p.id, s.id, 100, false from public.proyectos p, public.servicios s where p.idioma = 'es' and p.slug = 'redencion' and s.slug = 'direccion-de-fotografia' and s.idioma = 'es' on conflict (proyecto_id, servicio_id) do nothing;
@@ -849,9 +886,9 @@ values (
   $t$[{"tipo": "instagram", "url": "https://www.instagram.com/p/DePg7vdogPE/", "titulo": "Tráiler"}]$t$::jsonb,
   null,
   '[]'::jsonb,
-  46,
+  47,
   'borrador',
-  null)
+  now())
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;
 
 insert into public.proyecto_servicios (proyecto_id, servicio_id, orden, destacado) select p.id, s.id, 100, false from public.proyectos p, public.servicios s where p.idioma = 'es' and p.slug = 'tara' and s.slug = 'direccion-de-fotografia' and s.idioma = 'es' on conflict (proyecto_id, servicio_id) do nothing;
@@ -879,7 +916,7 @@ values (
   $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Amiral by Zorom$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/zorom-ia/spot-promotora-v4.mp4'))),
   pg_temp.foto('zorom-ia-02'),
   pg_temp.gal(array['zorom-ia-01','zorom-ia-02','zorom-ia-03','zorom-ia-04','zorom-ia-05','zorom-ia-06','zorom-ia-07','zorom-ia-08']::text[]),
-  47,
+  48,
   'borrador',
   null)
 on conflict (idioma, slug) do update set titulo = excluded.titulo, tipo_id = excluded.tipo_id, categorias_extra = excluded.categorias_extra, anio = excluded.anio, direccion = excluded.direccion, productora = excluded.productora, papel = excluded.papel, camara = excluded.camara, tarjeta = excluded.tarjeta, historia = excluded.historia, como_lo_hicimos = excluded.como_lo_hicimos, el_reto = excluded.el_reto, el_resultado = excluded.el_resultado, con_juno = excluded.con_juno, videos = excluded.videos, imagen_id = excluded.imagen_id, galeria = excluded.galeria;

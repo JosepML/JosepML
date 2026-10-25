@@ -24,7 +24,7 @@ FOTOS = {
     "flama-aftermovie": (8, 1), "aguita-de-coco-visuales": (5, 1), "diferens-encuentro-2025": (8, 4),
     "locos-de-atar-ultimo-concierto": (8, 3), "consell-valencia-joventut-charla": (8, 1),
     "forecourttech-2025": (7, 5), "formacion-mario-bravo": (7, 4), "flama-la-nucia-video-oficial": (8, 4),
-    "eventos-deportivos": (8, 0),  # ya tiene portada: las nuevas se añaden al final de su galería
+    "albir-confort-reels": (7, 1), "eventos-deportivos": (8, 0),  # ya tiene portada: las nuevas se añaden al final de su galería
 }
 
 VIDEOS = {
@@ -186,9 +186,24 @@ def ajustes():
     print("\n\n".join(partes))
 
 
+def solo(slug):
+    """Un solo proyecto (cabecera de funciones, vídeos en la biblioteca, proyecto y servicios): --solo <slug>"""
+    ficha = next(leer(r) for r in FICHAS.glob("*.md") if r.stem == slug)
+    cab = CABECERA.split("create function")[0].split("begin;")[0]  # solo los comentarios iniciales
+    cab = "-- Proyecto suelto, generado por scripts/generar-proyectos-nuevos.py --solo " + slug + "\n"
+    fun = "create or replace function" + CABECERA.split("create function", 1)[1].split("-- Vídeos propios")[0]
+    medios = "\n".join(
+        f"insert into public.medios (url_origen, tipo, mime, titulo) values ('{R2}/{slug}/{a}', 'video', 'video/mp4', {lit(slug + ' · ' + t)}) on conflict do nothing;"
+        for a, t, _, _ in VIDEOS_R2.get(slug, []))
+    orden = 20 + sorted(r.stem for r in FICHAS.glob("*.md")).index(slug)
+    print(cab + fun.replace("create function", "create or replace function") + "\n" + medios + "\n\n" + sql_proyecto(ficha, orden) + sql_servicios(ficha))
+
+
 def main():
     if "--ajustes" in sys.argv:
         return ajustes()
+    if "--solo" in sys.argv:
+        return solo(sys.argv[sys.argv.index("--solo") + 1])
     fichas = [leer(r) for r in sorted(FICHAS.glob("*.md")) if r.stem not in ("README", "cuestionario") and r.stem not in FUERA]
     medios = "\n".join(
         f"insert into public.medios (url_origen, tipo, mime, titulo) values ('{R2}/{slug}/{a}', 'video', 'video/mp4', {lit(slug + ' · ' + t)}) on conflict do nothing;"

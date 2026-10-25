@@ -28,3 +28,10 @@ aguita-de-coco-visuales|a1-3x2-1080.mp4|Animación 1|1|0
 aguita-de-coco-visuales|a2-3x2-1080.mp4|Animación 2|0|0
 aguita-de-coco-visuales|a3-3x2-1080.mp4|Animación 3|0|0
 aguita-de-coco-visuales|a4-3x2-1080-30s.mp4|Animación 4|0|0
+albir-confort-reels|reel1-presentacion-james-v3.mp4|Reel 1 · Presentación de James|1|1
+albir-confort-reels|reel2-tip2-v1.mp4|Reel 2|0|1
+albir-confort-reels|reel3-tip3-v1.mp4|Reel 3|0|1
+albir-confort-reels|reel4-tip4-v1.mp4|Reel 4|0|1
+albir-confort-reels|reel5-tip5-v1.mp4|Reel 5|0|1
+albir-confort-reels|reel6-tip7-v1.mp4|Reel 6|0|1
+albir-confort-reels|reel7-tip11-v1.mp4|Reel 7|0|1
