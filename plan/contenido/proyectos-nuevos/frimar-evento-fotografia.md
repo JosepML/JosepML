@@ -1,32 +1,35 @@
 ---
 slug: frimar-evento-fotografia
-titulo: Evento Frimar, fotografía
-tipo: corporativo (nuevo)
-servicios: [direccion-de-fotografia]  # confirmar, ver P1
-año: [pendiente]
-direccion: [pendiente]
+titulo: Aniversario de Frimar
+tipo: corporativo
+servicios: [filmmaker]
+año: 2026
+direccion: 
 productora_cliente: Frimar
 mi_papel: Fotografía del evento
-camara: [pendiente]
+camara: Sony A9 · Tamron 28-75
 premios: []
 destacado: 0
-estado: borrador
+estado: oculto
 con_juno: no
 ---
 
-> Solo fotografías, como Sin Piedad y Bodas: sin vídeo.
+> Solo fotografía fija (no es dirección de fotografía). **Oculto** de momento por ser un evento privado; Josep traerá dos fotos neutras que no comprometan a nadie.
 
 ## Tarjeta
-Fotografías de un evento muy emotivo de Frimar, hechas para guardar el recuerdo.
+Fotografía del aniversario de Frimar en el hotel Luxor de Terra Mítica: la emoción del día, sin posados.
 
 ## El proyecto
-Frimar celebró un evento con mucha carga emocional. Mi encargo fue fotografiarlo y convertir esa emoción en imágenes que se puedan guardar y mirar después.
+Frimar celebró su aniversario en el hotel Luxor de Terra Mítica, un evento con mucha carga emocional. Hice las fotografías para que ese día se pudiera recordar como se vivió.
 
 ## Decisiones clave
-- **Buscar el recuerdo bonito.** Elijo las imágenes que mejor devuelven lo que se sintió ese día.
-- **Capturar la emoción.** Fotografío lo que pasa, sin posados, para que se note lo que se vivió.
-- **Alta calidad.** Fotos pensadas para conservarse y ampliarse.
+- **Pasar desapercibido.** Cuanto menos se nota la cámara, más natural es lo que pasa delante.
+- **Buscar la emoción.** No pido posados: espero el momento en que aparece.
+- **Un recuerdo bonito.** Elijo las fotos que mejor devuelven lo que se sintió.
+- **Alta calidad.** Fotos pensadas para guardarse y ampliarse.
+
+## El reto
+Captar la emoción de un evento privado sin interrumpirlo.
 
 ## Para revisar con Josep (no se publica)
-- Las preguntas de este proyecto están en `cuestionario.md`.
-- Texto en borrador a partir de lo que contaste; lo que dice [pendiente] o [confirmar] no se publica.
+- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).

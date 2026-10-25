@@ -1,36 +1,35 @@
 ---
 slug: atavicas-trailer-obra-de-teatro
-titulo: Atávicas, tráiler de la obra de teatro
+titulo: Atávicas
 tipo: publicidad
 servicios: [filmmaker, edicion]
-año: [pendiente]
-direccion: [pendiente]
-productora_cliente: [pendiente]
-mi_papel: Grabación y montaje [confirmar]
-camara: [pendiente]
+año: 2026
+direccion: 
+productora_cliente: [compañía: se verá en el vídeo]
+mi_papel: Grabación y edición
+camara: Sony FX3 y Sony A7 III
 premios: []
 destacado: 0
 estado: borrador
-con_juno: no
+con_juno: sí
 ---
 
-> Dictado: «publicidad de atávicas». Lo he leído como el nombre de la obra (Atávicas): confirmar nombre y ortografía (P5). También puede ir en Eventos.
+> Encargo de JUNO Media. Dos ediciones. Candidato a destacado de Inicio (G8: «buen ejemplo de vídeo promocional»).
 
 ## Tarjeta
-Un tráiler de cine, dinámico, para una obra de teatro.
+El vídeo promocional de la obra de teatro Atávicas: un tráiler de cine, dinámico, de la propia función.
 
 ## El proyecto
-Vídeo publicitario oficial de la obra de teatro Atávicas. Fue una pieza muy creativa: hacer un tráiler cinematográfico y dinámico de una función.
+Para JUNO Media hice el vídeo promocional oficial de Atávicas, una obra de teatro de la que ya llevamos dos ediciones. El encargo principal era el vídeo resumen, y además la obra entera grabada en plano fijo. Grabamos el ensayo y la función en una misma tarde.
 
 ## Decisiones clave
-- **Dinamismo.** Una pieza con ritmo desde el primer segundo.
-- **Diversidad de encuadres.** Muchos planos y tamaños distintos para que la obra se vea de mil maneras.
-- **Montaje inmersivo.** Uso el propio sonido de la obra para meter al espectador dentro.
-- **Narrativa cortita con clímax.** Busco llegar a los mismos clímax que tiene la función.
+- **Dos cámaras, dos entregas.** Una cámara fija para la obra completa y otra en movimiento para el vídeo resumen.
+- **Diversidad de encuadres.** Muchos planos y tamaños distintos para que el tráiler tenga ritmo.
+- **El sonido de la obra.** El montaje usa el propio sonido de la función, para que sea inmersivo.
+- **Una narrativa cortita con clímax.** El vídeo llega a los mismos clímax que tiene la obra.
 
 ## El reto
-Condensar una obra de teatro en una narrativa cortita que llegue a los mismos clímax que la función.
+Sacar en una sola tarde, entre el ensayo y la función, la obra completa y el material para un tráiler de cine.
 
 ## Para revisar con Josep (no se publica)
-- Las preguntas de este proyecto están en `cuestionario.md`.
-- Texto en borrador a partir de lo que contaste; lo que dice [pendiente] o [confirmar] no se publica.
+- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).

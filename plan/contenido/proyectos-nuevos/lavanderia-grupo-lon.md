@@ -1,31 +1,35 @@
 ---
 slug: lavanderia-grupo-lon
-titulo: Lavandería Grupo LON
+titulo: Lavandería de Grupo LON
 tipo: publicidad
+categorias_extra: [redes-sociales]
 servicios: [edicion]
-año: [pendiente]
-direccion: [pendiente]
+año: 2026
+direccion: 
 productora_cliente: Grupo LON
 mi_papel: Edición
-camara: [pendiente]
+camara: 
 premios: []
 destacado: 0
 estado: borrador
 con_juno: sí
 ---
 
-> Proyecto grupal: vídeo principal arriba y los reels en «Más vídeos».
+> Lavanderías de Xeraco y La Nucía. 4 o 5 vídeos: el principal arriba y los reels en «Más vídeos». Grabaron Noelia Fluxà y Paula.
 
 ## Tarjeta
-Vídeo publicitario con entrevistas y recursos, y reels para redes, de la lavandería de Grupo LON.
+Entrevistas y fábrica convertidas en píldoras para redes, para la lavandería de Grupo LON.
 
 ## El proyecto
-Edité el vídeo principal de la lavandería de Grupo LON, con entrevistas cubiertas con recursos, y los reels para redes sociales de la misma lavandería. Todo junto en un mismo proyecto.
+Para la lavandería de Grupo LON, en Xeraco y La Nucía, edité un vídeo principal con entrevistas y una serie de vídeos para redes. Lo grabaron Noelia Fluxà y Paula.
 
 ## Decisiones clave
-- **Entrevistas con recursos.** Imágenes de apoyo sobre las entrevistas para que el vídeo se vea y no solo se escuche.
-- **Reels aparte.** Piezas verticales pensadas para redes sociales.
+- **Ordenar el material.** Primero, poner todo en orden y escoger lo mejor de cada entrevista.
+- **Lo que la empresa quiere decir.** Selecciono las frases que transmiten justo eso.
+- **Píldoras para redes.** Piezas cortas que mezclan las entrevistas con recursos de las propias fábricas.
+
+## El reto
+Convertir horas de entrevistas en píldoras cortas que la empresa pudiera usar en redes.
 
 ## Para revisar con Josep (no se publica)
-- Las preguntas de este proyecto están en `cuestionario.md`.
-- Texto en borrador a partir de lo que contaste; lo que dice [pendiente] o [confirmar] no se publica.
+- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).

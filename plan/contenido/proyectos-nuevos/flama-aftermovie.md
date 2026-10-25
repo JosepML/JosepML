@@ -1,25 +1,26 @@
 ---
 slug: flama-aftermovie
-titulo: Flama, aftermovie oficial
+titulo: Flama, aftermovie
 tipo: conciertos
 servicios: [filmmaker, edicion]
-año: [pendiente]
-direccion: [pendiente]
-productora_cliente: Tamilah y Fluxà [confirmar, ver P17]
+año: 2026
+direccion: 
+productora_cliente: Flama (SOM Events)
 mi_papel: Grabación y montaje
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 0
 estado: borrador
-con_juno: no
+con_juno: sí
 ---
+
+> Candidato a destacado de Inicio (G8).
 
 ## Tarjeta
 Aftermovie oficial de Flama.
 
 ## El proyecto
-Aftermovie oficial de Flama.
+Para JUNO Media. Aftermovie oficial de Flama. Es otra noche, distinta a la del vídeo de Benissa. Cada vídeo busca enseñar al máximo lo que da la orquesta y su energía.
 
 ## Para revisar con Josep (no se publica)
-- Las preguntas de este proyecto están en `cuestionario.md`.
-- Texto en borrador a partir de lo que contaste; lo que dice [pendiente] o [confirmar] no se publica.
+- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).

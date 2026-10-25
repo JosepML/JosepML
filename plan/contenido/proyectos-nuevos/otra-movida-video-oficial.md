@@ -1,25 +1,24 @@
 ---
 slug: otra-movida-video-oficial
-titulo: Otra Movida, vídeo oficial
+titulo: Otra Movida
 tipo: conciertos
 servicios: [filmmaker, edicion]
-año: [pendiente]
-direccion: [pendiente]
-productora_cliente: Tamilah y Fluxà [confirmar, ver P17]
+año: 2026
+direccion: 
+productora_cliente: Orquesta Otra Movida (Mapache Events)
 mi_papel: Grabación y montaje
-camara: [pendiente]
+camara: Sony FX3 · ópticas Tamron y Sony
 premios: []
 destacado: 0
 estado: borrador
-con_juno: no
+con_juno: sí
 ---
 
 ## Tarjeta
-Vídeo oficial de la orquesta Otra Movida.
+Vídeo oficial de la orquesta Otra Movida, grabado a varias cámaras.
 
 ## El proyecto
-Vídeo oficial de la orquesta Otra Movida. Con la colaboración de Noelia Fluxà.
+Para JUNO Media. Vídeo oficial de la orquesta Otra Movida, grabado a varias cámaras. Con la colaboración de Noelia Fluxà. Cada vídeo busca enseñar al máximo lo que da la orquesta y su energía.
 
 ## Para revisar con Josep (no se publica)
-- Las preguntas de este proyecto están en `cuestionario.md`.
-- Texto en borrador a partir de lo que contaste; lo que dice [pendiente] o [confirmar] no se publica.
+- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).

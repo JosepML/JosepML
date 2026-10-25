@@ -1,25 +1,26 @@
 ---
 slug: aguita-de-coco-visuales
-titulo: Visuales de Agüita de Coco
-tipo: visuales-e-ia (nuevo)
+titulo: Agüita de Coco, visuales
+tipo: visuales-e-ia
 servicios: [edicion]
-año: [pendiente]
-direccion: [pendiente]
-productora_cliente: Tamilah y Fluxà (Agüita de Coco)
-mi_papel: Diseño de animaciones para pantallas
-camara: [pendiente]
+año: 2026
+direccion: 
+productora_cliente: Agüita de Coco
+mi_papel: Animaciones para pantallas
+camara: 
 premios: []
 destacado: 0
 estado: borrador
 con_juno: no
 ---
 
+> No se dice cómo se hicieron (ni programa ni IA). El cliente se nombra como Agüita de Coco. Josep tiene fotos de las pantallas en el escenario.
+
 ## Tarjeta
-Animaciones para las pantallas de Agüita de Coco.
+Las animaciones de las pantallas LED de Agüita de Coco, para toda su gira.
 
 ## El proyecto
-Hice los visuales de Agüita de Coco para las pantallas, con animaciones pensadas para ellas.
+Hice los visuales de las pantallas LED del escenario de Agüita de Coco, que acompañan toda su gira.
 
 ## Para revisar con Josep (no se publica)
-- Las preguntas de este proyecto están en `cuestionario.md`.
-- Texto en borrador a partir de lo que contaste; lo que dice [pendiente] o [confirmar] no se publica.
+- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).

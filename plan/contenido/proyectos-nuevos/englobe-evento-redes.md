@@ -1,25 +1,24 @@
 ---
 slug: englobe-evento-redes
-titulo: Evento Englobe, vídeo para redes
+titulo: Englobe
 tipo: redes-sociales
 servicios: [edicion]
-año: [pendiente]
-direccion: [pendiente]
-productora_cliente: Englobe [confirmar]
-mi_papel: Edición
-camara: [pendiente]
+año: 2026
+direccion: 
+productora_cliente: Englobe
+mi_papel: Edición de vídeo y fotos
+camara: 
 premios: []
 destacado: 0
 estado: borrador
-con_juno: no
+con_juno: sí
 ---
 
 ## Tarjeta
-Vídeo del evento Englobe, editado para redes sociales.
+El vídeo y las fotos del evento Englobe, editados para redes.
 
 ## El proyecto
-Edición del vídeo del evento Englobe pensado para redes sociales.
+Para JUNO Media edité el vídeo y las fotos del evento Englobe.
 
 ## Para revisar con Josep (no se publica)
-- Las preguntas de este proyecto están en `cuestionario.md`.
-- Texto en borrador a partir de lo que contaste; lo que dice [pendiente] o [confirmar] no se publica.
+- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).
