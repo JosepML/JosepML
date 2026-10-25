@@ -232,7 +232,7 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
         <Revelar retraso={0.12}>
           {/* Las marcas en filas, separadas por líneas finas: cada fila lleva las suyas y una línea la separa de la
               siguiente, así la última, centrada, no tiene que cuadrar con la de arriba */}
-          <div className="mx-auto mt-8 flex flex-col divide-y divide-[var(--jm-linea)] border-y border-[var(--jm-linea)]">
+          <div className="mx-auto mt-8 flex flex-col divide-y divide-[var(--jm-linea)] border-t border-[var(--jm-linea)]">
             {enFilas(juno, columnasJuno).map((fila, f) => (
               <div key={f} className="flex justify-center divide-x divide-[var(--jm-linea)]">
                 {fila.map((c) => (
