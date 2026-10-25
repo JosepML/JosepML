@@ -57,6 +57,9 @@ function Fila({ etiqueta, children }: { etiqueta: string; children: React.ReactN
 export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto: Proyecto; siguiente: Proyecto | null; servicios: Servicio[] }) {
   const reducir = useReducir();
   const [video, setVideo] = useState(false);
+  // Vídeo principal propio (alojado fuera de YouTube): hace de «Ver completo» y no se repite en «Más vídeos»
+  const principal = p.youtubeId ? undefined : p.videos.find((v) => v.tipo === "archivo" && v.rol === "principal" && v.url);
+  const masVideos = principal ? p.videos.filter((v) => v !== principal) : p.videos;
   const [foto, setFoto] = useState<number | null>(null);
   const premio = laurel(p);
   const fotos = p.galeria.map((g) => g.imagen.url);
@@ -118,7 +121,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
               {p.titulo}
             </motion.h1>
           </div>
-          {p.youtubeId && (
+          {(p.youtubeId || principal) && (
             <motion.button
               {...entrar(0.5)}
               type="button"
@@ -157,7 +160,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
       )}
 
       {/* Más vídeos (making of, versiones, reels): antes del texto, o después si así se marca en el panel */}
-      {!p.videosDebajoDelTexto && <MasVideos videos={p.videos} titulo={titulo("mas_videos", "Más vídeos")} arriba={!p.textos.tarjeta} />}
+      {!p.videosDebajoDelTexto && <MasVideos videos={masVideos} titulo={titulo("mas_videos", "Más vídeos")} arriba={!p.textos.tarjeta} />}
 
       {/* Cuerpo de la ficha: etiqueta a la izquierda y contenido a la derecha, como un dosier */}
       <section className="px-4 pb-24 sm:px-8">
@@ -230,7 +233,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
         </section>
       )}
 
-      {p.videosDebajoDelTexto && <MasVideos videos={p.videos} titulo={titulo("mas_videos", "Más vídeos")} />}
+      {p.videosDebajoDelTexto && <MasVideos videos={masVideos} titulo={titulo("mas_videos", "Más vídeos")} />}
 
       {/* Fotogramas: cuadrícula de miniaturas; al pulsar una se abre el visor a pantalla completa */}
       {fotos.length > 0 && (
@@ -325,6 +328,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
       )}
 
       {p.youtubeId && <ModalVideo id={p.youtubeId} abierto={video} alCerrar={() => setVideo(false)} />}
+      {principal && <ModalVideo archivo={principal.url} vertical={!!principal.vertical} abierto={video} alCerrar={() => setVideo(false)} />}
       <Visor fotos={fotos} indice={foto} alCambiar={setFoto} titulo={p.titulo} />
     </main>
   );

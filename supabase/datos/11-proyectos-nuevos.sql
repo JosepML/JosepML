@@ -17,6 +17,38 @@ create function pg_temp.gal(titulos text[]) returns jsonb language sql as $$
   select coalesce(jsonb_agg(jsonb_build_object('medio', pg_temp.foto(t), 'pie', '') order by o), '[]'::jsonb)
   from unnest(titulos) with ordinality x(t, o) where pg_temp.foto(t) is not null $$;
 
+create function pg_temp.med(u text) returns uuid language sql as $$ select id from public.medios where url_origen = u order by creado_en limit 1 $$;
+
+-- Vídeos propios, alojados en el bucket público jml-videos de Cloudflare R2: cada uno entra en la biblioteca por su dirección
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/ep-color-adrian-munoz/trailer-color-adrianmunoz-v2.mp4', 'video', 'video/mp4', $t$ep-color-adrian-munoz · Tráiler$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/atavicas-trailer-obra-de-teatro/atavicas2026-neiraysantamaria-videoresumen-v2.mp4', 'video', 'video/mp4', $t$atavicas-trailer-obra-de-teatro · Vídeo resumen$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/ais-10-anos/escuela-ais-videoresumen-v1.mp4', 'video', 'video/mp4', $t$ais-10-anos · Vídeo resumen$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-real-estate/video-villa-dor-v1.mp4', 'video', 'video/mp4', $t$albir-confort-real-estate · Villa d'Or$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/el-xato-evento-boda/videoresumen-evento-xato-v2.mp4', 'video', 'video/mp4', $t$el-xato-evento-boda · Vídeo resumen$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/englobe-evento-redes/englobe-v4.mp4', 'video', 'video/mp4', $t$englobe-evento-redes · Englobe$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/evento-grupo-lon-el-langui/encuentros-lon-langui-v1.mp4', 'video', 'video/mp4', $t$evento-grupo-lon-el-langui · El Langui con Grupo LON$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/locos-de-atar-ultimo-concierto/videoresumen-concierto-lda-v1.mp4', 'video', 'video/mp4', $t$locos-de-atar-ultimo-concierto · El último concierto$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/lavanderia-grupo-lon/reel1-lon-v2.mp4', 'video', 'video/mp4', $t$lavanderia-grupo-lon · Reel 1$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/lavanderia-grupo-lon/reel4-lon-v2.mp4', 'video', 'video/mp4', $t$lavanderia-grupo-lon · Reel 4$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/louk-the-grill/reel-louk-v1.mp4', 'video', 'video/mp4', $t$louk-the-grill · Reel$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/eventos-deportivos/aftermovie-supercupmassi-lanucia-horizontal-v1.mp4', 'video', 'video/mp4', $t$eventos-deportivos · Aftermovie$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/eventos-deportivos/compactat-supercup-lanucia-tv-apunt.mp4', 'video', 'video/mp4', $t$eventos-deportivos · Resumen para À Punt$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/diferens-encuentro-2025/diferens-2025-v1.mp4', 'video', 'video/mp4', $t$diferens-encuentro-2025 · Vídeo resumen$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-aftermovie/aftermovie-flama-2026-v03.mp4', 'video', 'video/mp4', $t$flama-aftermovie · Aftermovie$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-la-nucia-video-oficial/flama-lanucia-v3.mp4', 'video', 'video/mp4', $t$flama-la-nucia-video-oficial · Vídeo oficial$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-benissa-video-oficial/videoresumen-flama-benissa-v3.mp4', 'video', 'video/mp4', $t$flama-benissa-video-oficial · Vídeo oficial$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/forecourttech-2025/forecourttech-2025-v3-withlogo.mp4', 'video', 'video/mp4', $t$forecourttech-2025 · Vídeo resumen$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/la-vibra-video-oficial/video-oficial-lavibra-v3.mp4', 'video', 'video/mp4', $t$la-vibra-video-oficial · Vídeo oficial$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/madison-video-oficial/madison-videoresumen-v3.mp4', 'video', 'video/mp4', $t$madison-video-oficial · Vídeo oficial$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/otra-movida-video-oficial/otramovida-videoresumen-v4-masterizada.mp4', 'video', 'video/mp4', $t$otra-movida-video-oficial · Vídeo oficial$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/consell-valencia-joventut-charla/videoresum-consell-horitzontal-v2.mp4', 'video', 'video/mp4', $t$consell-valencia-joventut-charla · Vídeo resumen$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/formacion-mario-bravo/formacion-mario-bravo.mp4', 'video', 'video/mp4', $t$formacion-mario-bravo · Vídeo promocional$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/zorom-ia/spot-promotora-v4.mp4', 'video', 'video/mp4', $t$zorom-ia · Amiral by Zorom$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-contenido-cinematografico-ia/video-flama-pantallas-v5.mp4', 'video', 'video/mp4', $t$flama-contenido-cinematografico-ia · Foc i Flama$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a1-3x2-1080.mp4', 'video', 'video/mp4', $t$aguita-de-coco-visuales · Animación 1$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a2-3x2-1080.mp4', 'video', 'video/mp4', $t$aguita-de-coco-visuales · Animación 2$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a3-3x2-1080.mp4', 'video', 'video/mp4', $t$aguita-de-coco-visuales · Animación 3$t$) on conflict do nothing;
+insert into public.medios (url_origen, tipo, mime, titulo) values ('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a4-3x2-1080-30s.mp4', 'video', 'video/mp4', $t$aguita-de-coco-visuales · Animación 4$t$) on conflict do nothing;
 -- Tipos nuevos (por si la migración no los creó)
 insert into public.tipos_proyecto (slug, nombre, orden)
 select v.slug, v.nombre, v.orden from (values ('corporativo', 'Corporativo', 10), ('visuales-e-ia', 'Visuales e IA', 11)) as v(slug, nombre, orden)
@@ -40,7 +72,7 @@ values (
   $t$$t$,
   $t$$t$,
   false,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Animación 1$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a1-3x2-1080.mp4')), jsonb_build_object('tipo', 'archivo',  'titulo', $t$Animación 2$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a2-3x2-1080.mp4')), jsonb_build_object('tipo', 'archivo',  'titulo', $t$Animación 3$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a3-3x2-1080.mp4')), jsonb_build_object('tipo', 'archivo',  'titulo', $t$Animación 4$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/aguita-de-coco-visuales/a4-3x2-1080-30s.mp4'))),
   pg_temp.foto('aguita-de-coco-visuales-01'),
   pg_temp.gal(array['aguita-de-coco-visuales-01','aguita-de-coco-visuales-02','aguita-de-coco-visuales-03','aguita-de-coco-visuales-04','aguita-de-coco-visuales-05']::text[]),
   20,
@@ -70,7 +102,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/ais-10-anos/escuela-ais-videoresumen-v1.mp4'))),
   pg_temp.foto('ais-10-anos-05'),
   pg_temp.gal(array['ais-10-anos-01','ais-10-anos-02','ais-10-anos-03','ais-10-anos-04','ais-10-anos-05','ais-10-anos-06','ais-10-anos-07','ais-10-anos-08']::text[]),
   21,
@@ -99,7 +131,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Villa d'Or$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/albir-confort-real-estate/video-villa-dor-v1.mp4'))),
   pg_temp.foto('albir-confort-real-estate-01'),
   pg_temp.gal(array['albir-confort-real-estate-01','albir-confort-real-estate-02','albir-confort-real-estate-03','albir-confort-real-estate-04','albir-confort-real-estate-05','albir-confort-real-estate-06']::text[]),
   22,
@@ -131,7 +163,7 @@ values (
   $t$Sacar en una sola tarde, entre el ensayo y la función, la obra completa y el material para un tráiler de cine.$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/atavicas-trailer-obra-de-teatro/atavicas2026-neiraysantamaria-videoresumen-v2.mp4'))),
   pg_temp.foto('atavicas-trailer-obra-de-teatro-02'),
   pg_temp.gal(array['atavicas-trailer-obra-de-teatro-01','atavicas-trailer-obra-de-teatro-02','atavicas-trailer-obra-de-teatro-03','atavicas-trailer-obra-de-teatro-04','atavicas-trailer-obra-de-teatro-05','atavicas-trailer-obra-de-teatro-06','atavicas-trailer-obra-de-teatro-07','atavicas-trailer-obra-de-teatro-08']::text[]),
   23,
@@ -160,7 +192,7 @@ values (
   $t$$t$,
   $t$$t$,
   false,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/consell-valencia-joventut-charla/videoresum-consell-horitzontal-v2.mp4'))),
   pg_temp.foto('consell-valencia-joventut-charla-01'),
   pg_temp.gal(array['consell-valencia-joventut-charla-01','consell-valencia-joventut-charla-02','consell-valencia-joventut-charla-03','consell-valencia-joventut-charla-04','consell-valencia-joventut-charla-05','consell-valencia-joventut-charla-06','consell-valencia-joventut-charla-07','consell-valencia-joventut-charla-08']::text[]),
   24,
@@ -189,7 +221,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/diferens-encuentro-2025/diferens-2025-v1.mp4'))),
   pg_temp.foto('diferens-encuentro-2025-04'),
   pg_temp.gal(array['diferens-encuentro-2025-01','diferens-encuentro-2025-02','diferens-encuentro-2025-03','diferens-encuentro-2025-04','diferens-encuentro-2025-05','diferens-encuentro-2025-06','diferens-encuentro-2025-07','diferens-encuentro-2025-08']::text[]),
   25,
@@ -219,7 +251,7 @@ values (
   $t$Un día entero de rodaje, de las ocho de la mañana al final de la comida, sin perder ningún paso del servicio.$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/el-xato-evento-boda/videoresumen-evento-xato-v2.mp4'))),
   pg_temp.foto('el-xato-evento-boda-04'),
   pg_temp.gal(array['el-xato-evento-boda-01','el-xato-evento-boda-02','el-xato-evento-boda-03','el-xato-evento-boda-04','el-xato-evento-boda-05','el-xato-evento-boda-06','el-xato-evento-boda-07','el-xato-evento-boda-08']::text[]),
   26,
@@ -248,7 +280,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal','vertical', true, 'titulo', $t$Englobe$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/englobe-evento-redes/englobe-v4.mp4'))),
   pg_temp.foto('englobe-evento-redes-03'),
   pg_temp.gal(array['englobe-evento-redes-01','englobe-evento-redes-02','englobe-evento-redes-03','englobe-evento-redes-04','englobe-evento-redes-05','englobe-evento-redes-06','englobe-evento-redes-07','englobe-evento-redes-08']::text[]),
   27,
@@ -279,7 +311,7 @@ values (
   $t$El artista se manchaba en cada toma. Había poco tiempo para sacar las mejores, y además las tomas espejo del tráiler anterior.$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Tráiler$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/ep-color-adrian-munoz/trailer-color-adrianmunoz-v2.mp4'))),
   pg_temp.foto('ep-color-adrian-munoz-03'),
   pg_temp.gal(array['ep-color-adrian-munoz-01','ep-color-adrian-munoz-02','ep-color-adrian-munoz-03','ep-color-adrian-munoz-04','ep-color-adrian-munoz-05','ep-color-adrian-munoz-06','ep-color-adrian-munoz-07','ep-color-adrian-munoz-08']::text[]),
   28,
@@ -310,7 +342,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal','vertical', true, 'titulo', $t$El Langui con Grupo LON$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/evento-grupo-lon-el-langui/encuentros-lon-langui-v1.mp4'))),
   pg_temp.foto('evento-grupo-lon-el-langui-04'),
   pg_temp.gal(array['evento-grupo-lon-el-langui-01','evento-grupo-lon-el-langui-02','evento-grupo-lon-el-langui-03','evento-grupo-lon-el-langui-04','evento-grupo-lon-el-langui-05','evento-grupo-lon-el-langui-06']::text[]),
   29,
@@ -341,7 +373,7 @@ update public.proyectos set
   el_resultado = $t$- Emitido en À Punt.
 - Publicado en las redes de la competición.$t$,
   con_juno = false,
-  videos = $t$[]$t$::jsonb,
+  videos = $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo',  'titulo', $t$Aftermovie$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/eventos-deportivos/aftermovie-supercupmassi-lanucia-horizontal-v1.mp4')), jsonb_build_object('tipo', 'archivo',  'titulo', $t$Resumen para À Punt$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/eventos-deportivos/compactat-supercup-lanucia-tv-apunt.mp4'))),
   galeria = galeria || (select coalesce(jsonb_agg(g), '[]'::jsonb) from jsonb_array_elements(pg_temp.gal(array['eventos-deportivos-01','eventos-deportivos-02','eventos-deportivos-03','eventos-deportivos-04','eventos-deportivos-05','eventos-deportivos-06','eventos-deportivos-07','eventos-deportivos-08']::text[])) g
     where not galeria @> jsonb_build_array(jsonb_build_object('medio', g ->> 'medio')))
 where idioma = 'es' and slug = 'eventos-deportivos';
@@ -367,7 +399,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Aftermovie$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-aftermovie/aftermovie-flama-2026-v03.mp4'))),
   pg_temp.foto('flama-aftermovie-01'),
   pg_temp.gal(array['flama-aftermovie-01','flama-aftermovie-02','flama-aftermovie-03','flama-aftermovie-04','flama-aftermovie-05','flama-aftermovie-06','flama-aftermovie-07','flama-aftermovie-08']::text[]),
   31,
@@ -396,7 +428,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-benissa-video-oficial/videoresumen-flama-benissa-v3.mp4'))),
   pg_temp.foto('flama-benissa-video-oficial-03'),
   pg_temp.gal(array['flama-benissa-video-oficial-01','flama-benissa-video-oficial-02','flama-benissa-video-oficial-03','flama-benissa-video-oficial-04','flama-benissa-video-oficial-05','flama-benissa-video-oficial-06','flama-benissa-video-oficial-07','flama-benissa-video-oficial-08']::text[]),
   32,
@@ -427,7 +459,7 @@ values (
   $t$La coherencia entre planos. Los modelos de entonces todavía no mantenían bien a los personajes y los espacios de un plano a otro, y había que conseguirlo igualmente.$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Foc i Flama$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-contenido-cinematografico-ia/video-flama-pantallas-v5.mp4'))),
   pg_temp.foto('flama-contenido-cinematografico-ia-02'),
   pg_temp.gal(array['flama-contenido-cinematografico-ia-01','flama-contenido-cinematografico-ia-02','flama-contenido-cinematografico-ia-03','flama-contenido-cinematografico-ia-04','flama-contenido-cinematografico-ia-05','flama-contenido-cinematografico-ia-06','flama-contenido-cinematografico-ia-07','flama-contenido-cinematografico-ia-08']::text[]),
   33,
@@ -455,7 +487,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/flama-la-nucia-video-oficial/flama-lanucia-v3.mp4'))),
   pg_temp.foto('flama-la-nucia-video-oficial-04'),
   pg_temp.gal(array['flama-la-nucia-video-oficial-01','flama-la-nucia-video-oficial-02','flama-la-nucia-video-oficial-03','flama-la-nucia-video-oficial-04','flama-la-nucia-video-oficial-05','flama-la-nucia-video-oficial-06','flama-la-nucia-video-oficial-07','flama-la-nucia-video-oficial-08']::text[]),
   34,
@@ -484,7 +516,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo resumen$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/forecourttech-2025/forecourttech-2025-v3-withlogo.mp4'))),
   pg_temp.foto('forecourttech-2025-05'),
   pg_temp.gal(array['forecourttech-2025-01','forecourttech-2025-02','forecourttech-2025-03','forecourttech-2025-04','forecourttech-2025-05','forecourttech-2025-06','forecourttech-2025-07']::text[]),
   35,
@@ -513,7 +545,7 @@ values (
   $t$$t$,
   $t$$t$,
   false,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo promocional$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/formacion-mario-bravo/formacion-mario-bravo.mp4'))),
   pg_temp.foto('formacion-mario-bravo-04'),
   pg_temp.gal(array['formacion-mario-bravo-01','formacion-mario-bravo-02','formacion-mario-bravo-03','formacion-mario-bravo-04','formacion-mario-bravo-05','formacion-mario-bravo-06','formacion-mario-bravo-07']::text[]),
   36,
@@ -573,7 +605,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/la-vibra-video-oficial/video-oficial-lavibra-v3.mp4'))),
   pg_temp.foto('la-vibra-video-oficial-05'),
   pg_temp.gal(array['la-vibra-video-oficial-01','la-vibra-video-oficial-02','la-vibra-video-oficial-03','la-vibra-video-oficial-04','la-vibra-video-oficial-05','la-vibra-video-oficial-06','la-vibra-video-oficial-07','la-vibra-video-oficial-08']::text[]),
   38,
@@ -604,7 +636,7 @@ values (
   $t$Convertir horas de entrevistas en píldoras cortas que la empresa pudiera usar en redes.$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 1$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/lavanderia-grupo-lon/reel1-lon-v2.mp4')), jsonb_build_object('tipo', 'archivo', 'vertical', true, 'titulo', $t$Reel 4$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/lavanderia-grupo-lon/reel4-lon-v2.mp4'))),
   pg_temp.foto('lavanderia-grupo-lon-01'),
   pg_temp.gal(array['lavanderia-grupo-lon-01','lavanderia-grupo-lon-02','lavanderia-grupo-lon-03','lavanderia-grupo-lon-04','lavanderia-grupo-lon-05','lavanderia-grupo-lon-06','lavanderia-grupo-lon-07']::text[]),
   39,
@@ -633,7 +665,7 @@ values (
   $t$Grabar una noche que no se iba a repetir, sabiendo que era la última.$t$,
   $t$$t$,
   false,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$El último concierto$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/locos-de-atar-ultimo-concierto/videoresumen-concierto-lda-v1.mp4'))),
   pg_temp.foto('locos-de-atar-ultimo-concierto-03'),
   pg_temp.gal(array['locos-de-atar-ultimo-concierto-01','locos-de-atar-ultimo-concierto-02','locos-de-atar-ultimo-concierto-03','locos-de-atar-ultimo-concierto-04','locos-de-atar-ultimo-concierto-05','locos-de-atar-ultimo-concierto-06','locos-de-atar-ultimo-concierto-07','locos-de-atar-ultimo-concierto-08']::text[]),
   40,
@@ -664,7 +696,7 @@ values (
   $t$Hacer un vídeo para redes, donde manda la gente, sin enseñar a la gente.$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal','vertical', true, 'titulo', $t$Reel$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/louk-the-grill/reel-louk-v1.mp4'))),
   pg_temp.foto('louk-the-grill-02'),
   pg_temp.gal(array['louk-the-grill-01','louk-the-grill-02','louk-the-grill-03','louk-the-grill-04','louk-the-grill-05','louk-the-grill-06','louk-the-grill-07','louk-the-grill-08']::text[]),
   41,
@@ -693,7 +725,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/madison-video-oficial/madison-videoresumen-v3.mp4'))),
   pg_temp.foto('madison-video-oficial-04'),
   pg_temp.gal(array['madison-video-oficial-01','madison-video-oficial-02','madison-video-oficial-03','madison-video-oficial-04','madison-video-oficial-05','madison-video-oficial-06','madison-video-oficial-07','madison-video-oficial-08']::text[]),
   42,
@@ -751,7 +783,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Vídeo oficial$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/otra-movida-video-oficial/otramovida-videoresumen-v4-masterizada.mp4'))),
   pg_temp.foto('otra-movida-video-oficial-05'),
   pg_temp.gal(array['otra-movida-video-oficial-01','otra-movida-video-oficial-02','otra-movida-video-oficial-03','otra-movida-video-oficial-04','otra-movida-video-oficial-05','otra-movida-video-oficial-06','otra-movida-video-oficial-07','otra-movida-video-oficial-08']::text[]),
   44,
@@ -844,7 +876,7 @@ values (
   $t$$t$,
   $t$$t$,
   true,
-  $t$[]$t$::jsonb,
+  $t$[]$t$::jsonb || jsonb_build_array(jsonb_build_object('tipo', 'archivo', 'rol', 'principal', 'titulo', $t$Amiral by Zorom$t$, 'medio', pg_temp.med('https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/zorom-ia/spot-promotora-v4.mp4'))),
   pg_temp.foto('zorom-ia-02'),
   pg_temp.gal(array['zorom-ia-01','zorom-ia-02','zorom-ia-03','zorom-ia-04','zorom-ia-05','zorom-ia-06','zorom-ia-07','zorom-ia-08']::text[]),
   47,

@@ -52,7 +52,8 @@ export type Premio = { nombre: string; tipo: string; festival: string; anio: num
 
 export type ImagenConPie = { imagen: Medio; pie: string };
 
-export type VideoExtra = { tipo: "youtube" | "youtube-short" | "instagram" | "archivo"; id?: string; url?: string; medio?: string; titulo?: string; rol?: string };
+/** `rol: "principal"` en un archivo propio: es el vídeo de «Ver completo» de la ficha (cuando no hay YouTube) y no sale en «Más vídeos» */
+export type VideoExtra = { tipo: "youtube" | "youtube-short" | "instagram" | "archivo"; id?: string; url?: string; medio?: string; titulo?: string; rol?: string; vertical?: boolean };
 
 export type Proyecto = {
   id: string;

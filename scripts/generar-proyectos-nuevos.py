@@ -32,6 +32,22 @@ VIDEOS = {
     "tara": [{"tipo": "instagram", "url": "https://www.instagram.com/p/DePg7vdogPE/", "titulo": "Tráiler"}],
 }
 
+R2 = "https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev"  # bucket público jml-videos (Cloudflare R2)
+
+
+def videos_r2():
+    """scripts/videos-r2.txt → {slug: [(archivo, título, principal, vertical)]}"""
+    d = {}
+    for linea in (RAIZ / "scripts/videos-r2.txt").read_text().splitlines():
+        if linea.startswith("#") or not linea.strip():
+            continue
+        slug, archivo, titulo, principal, vertical = linea.split("|")
+        d.setdefault(slug, []).append((archivo, titulo, principal == "1", vertical == "1"))
+    return d
+
+
+VIDEOS_R2 = videos_r2()
+
 # Sin cargar: Azahara (vídeo sin terminar)
 FUERA = {"azahara-video-oficial"}
 OCULTOS = {"frimar-evento-fotografia"}
@@ -93,6 +109,19 @@ def portada(slug):
     return f"pg_temp.foto('{slug}-{p:02d}')" if n and p else "null"
 
 
+def videos_sql(slug):
+    """Enlaces (YouTube, Instagram) más los vídeos propios, que se enlazan por su medio (url_origen en R2)"""
+    fijos = lit(json.dumps(VIDEOS.get(slug, []), ensure_ascii=False)) + "::jsonb"
+    propios = VIDEOS_R2.get(slug, [])
+    if not propios:
+        return fijos
+    piezas = []
+    for archivo, titulo, principal, vertical in propios:
+        extra = ("'rol', 'principal'," if principal else "") + ("'vertical', true," if vertical else "")
+        piezas.append(f"jsonb_build_object('tipo', 'archivo', {extra} 'titulo', {lit(titulo)}, 'medio', pg_temp.med('{R2}/{slug}/{archivo}'))")
+    return f"{fijos} || jsonb_build_array({', '.join(piezas)})"
+
+
 def sql_proyecto(f, orden):
     s = f["slug"]
     extra = ",".join(f"'{e}'" for e in f["extra"])
@@ -105,7 +134,7 @@ def sql_proyecto(f, orden):
         "tarjeta": lit(f.get("tarjeta", "")), "historia": lit(f.get("historia", "")),
         "como_lo_hicimos": lit(f.get("como_lo_hicimos", "")), "el_reto": lit(f.get("el_reto", "")),
         "el_resultado": lit(f.get("el_resultado", "")), "con_juno": lit(f["con_juno"]),
-        "videos": lit(json.dumps(VIDEOS.get(s, []), ensure_ascii=False)) + "::jsonb",
+        "videos": videos_sql(s),
     }
     if s == "eventos-deportivos":
         # Ya existe y está publicado: se actualizan textos y datos, y se añaden las fotos nuevas a su galería
@@ -137,7 +166,11 @@ def sql_servicios(f):
 
 def main():
     fichas = [leer(r) for r in sorted(FICHAS.glob("*.md")) if r.stem not in ("README", "cuestionario") and r.stem not in FUERA]
-    partes = [CABECERA]
+    medios = "\n".join(
+        f"insert into public.medios (url_origen, tipo, mime, titulo) values ('{R2}/{slug}/{a}', 'video', 'video/mp4', {lit(slug + ' · ' + t)}) on conflict do nothing;"
+        for slug, lista in VIDEOS_R2.items() for a, t, _, _ in lista
+    )
+    partes = [CABECERA.replace("@@MEDIOS@@", medios)]
     for i, f in enumerate(fichas):
         partes.append(sql_proyecto(f, 20 + i))
         partes.append(sql_servicios(f))
@@ -165,6 +198,10 @@ create function pg_temp.gal(titulos text[]) returns jsonb language sql as $$
   select coalesce(jsonb_agg(jsonb_build_object('medio', pg_temp.foto(t), 'pie', '') order by o), '[]'::jsonb)
   from unnest(titulos) with ordinality x(t, o) where pg_temp.foto(t) is not null $$;
 
+create function pg_temp.med(u text) returns uuid language sql as $$ select id from public.medios where url_origen = u order by creado_en limit 1 $$;
+
+-- Vídeos propios, alojados en el bucket público jml-videos de Cloudflare R2: cada uno entra en la biblioteca por su dirección
+@@MEDIOS@@
 -- Tipos nuevos (por si la migración no los creó)
 insert into public.tipos_proyecto (slug, nombre, orden)
 select v.slug, v.nombre, v.orden from (values ('corporativo', 'Corporativo', 10), ('visuales-e-ia', 'Visuales e IA', 11)) as v(slug, nombre, orden)

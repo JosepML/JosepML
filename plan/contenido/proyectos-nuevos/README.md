@@ -2,7 +2,7 @@
 
 2026-10-24, actualizado el 2026-10-25 con las respuestas de Josep y el material de `D:\VIDEOS WEB`. 29 fichas (Azahara aún sin cargar). Las fotos (fotogramas de los vídeos, 185) están en `D:\VIDEOS WEB\_WEB\SUBIR`, con el nombre `<slug>-NN.jpg`. La carga es `supabase/datos/11-proyectos-nuevos.sql`, generado desde estas fichas con `scripts/generar-proyectos-nuevos.py`: si cambia una ficha, se vuelve a generar. Lo que queda abierto, en `cuestionario.md`.
 
-**Cómo se carga:** 1) subir todas las fotos de `SUBIR` a la biblioteca de una vez; 2) ejecutar `11-proyectos-nuevos.sql` (ya incluye la migración de `categorias_extra`). Los proyectos entran en borrador: se ven en la vista previa y se publican desde el panel.
+**Cómo se carga:** 1) subir todas las fotos de `SUBIR` a la biblioteca de una vez; 2) ejecutar `11-proyectos-nuevos.sql` (ya incluye la migración de `categorias_extra` y enlaza los vídeos). **Vídeos:** están en el bucket público `jml-videos` de Cloudflare R2 (1080p, CRF 18, 3,9 GB; lista en `scripts/videos-r2.txt`). Cada uno entra en la biblioteca por su dirección (`medios.url_origen`) y la ficha lo reproduce con el vídeo con `rol: principal`. La dirección `r2.dev` vale para empezar, pero Cloudflare no la recomienda en producción: al lanzar, asociar un dominio propio al bucket y cambiar `R2` en el generador. Los proyectos entran en borrador: se ven en la vista previa y se publican desde el panel.
 
 Formato de las fichas: el mismo de `../proyectos/` (cabecera con los campos de la ficha técnica, `Tarjeta`, `El proyecto`, `Decisiones clave`, `El reto`, `Resultado`). Solo hay texto donde Josep dio datos: no se inventan cifras, premios ni decisiones. Lo que dice `[pendiente]` o `[confirmar]` no se publica.
 

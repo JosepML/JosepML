@@ -6,7 +6,7 @@ import { Icono } from "../Iconos";
 import { ModalVideo, Revelar } from "../piezas";
 
 /** Shorts y reels van en vertical */
-const esVertical = (v: VideoExtra) => v.tipo === "youtube-short" || v.tipo === "instagram";
+const esVertical = (v: VideoExtra) => v.tipo === "youtube-short" || v.tipo === "instagram" || !!v.vertical;
 
 /** Dirección del reproductor de Instagram a partir del enlace del reel o la publicación */
 function embedInstagram(url = "") {
