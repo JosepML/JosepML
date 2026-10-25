@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, Montserrat } from "next/font/google";
+import { RedireccionAntigua } from "@/components/comun/RedireccionAntigua";
 import { ProveedorTransicion } from "@/components/comun/Transicion";
 import { AvisoVistaPrevia } from "@/components/edicion/AvisoVistaPrevia";
 import { Marco } from "@/components/marco/Marco";
@@ -27,6 +28,7 @@ export default async function LayoutWeb({ children }: { children: React.ReactNod
   const [ajustes, previa] = await Promise.all([getAjustes(), enVistaPrevia()]);
   return (
     <div className={`${base.variable} ${acento.variable}`}>
+      <RedireccionAntigua />
       <ProveedorTransicion>
         <Marco ajustes={ajustes}>
           {children}
