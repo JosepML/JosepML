@@ -147,7 +147,7 @@ def main():
 
 
 CABECERA = """-- Proyectos nuevos de 2025 y 2026 (generado por scripts/generar-proyectos-nuevos.py desde
--- plan/contenido/proyectos-nuevos/; no se edita a mano). Después de la migración 20261025120000_proyectos_categorias_extra.
+-- plan/contenido/proyectos-nuevos/; no se edita a mano). Incluye la migración 20261025120000_proyectos_categorias_extra.
 --
 -- Antes de ejecutarlo: subir a la biblioteca las fotos de D:\\VIDEOS WEB\\_WEB\\SUBIR (todas a la vez). Se enlazan
 -- por su título, que es el nombre del archivo. Las que falten se saltan; se puede repetir cuando estén.
@@ -155,6 +155,9 @@ CABECERA = """-- Proyectos nuevos de 2025 y 2026 (generado por scripts/generar-p
 -- Repetirlo rehace los textos desde las fichas: si ya los has cambiado en el panel, no lo repitas.
 
 begin;
+
+-- La columna de la migración 20261025120000 (por si no se ha ejecutado: así basta con este archivo)
+alter table public.proyectos add column if not exists categorias_extra uuid[] not null default '{}';
 
 create function pg_temp.foto(t text) returns uuid language sql as $$
   select id from public.medios where titulo = t and tipo = 'imagen' order by creado_en desc limit 1 $$;
