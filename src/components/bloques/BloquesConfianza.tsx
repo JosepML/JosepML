@@ -161,6 +161,8 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
   const enPantalla = useInView(rejilla, { amount: 0.4 });
   const reducir = useReducir();
   const columnas = useColumnas(8);
+  // JUNO, más pequeño y con divisores: se queda en seis para que los nombres sin logo no se toquen
+  const columnasJuno = useColumnas(6);
   return (
     <section className="py-20 sm:py-28 lg:py-[6svh]">
       {/* Primera parte, la principal: titular de verdad y todas las marcas a la vista a la vez. Si la sección no
@@ -231,10 +233,10 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
           {/* Las marcas en filas, separadas por líneas finas: cada fila lleva las suyas y una línea la separa de la
               siguiente, así la última, centrada, no tiene que cuadrar con la de arriba */}
           <div className="mx-auto mt-8 flex flex-col divide-y divide-[var(--jm-linea)] border-y border-[var(--jm-linea)]">
-            {enFilas(juno, columnas).map((fila, f) => (
+            {enFilas(juno, columnasJuno).map((fila, f) => (
               <div key={f} className="flex justify-center divide-x divide-[var(--jm-linea)]">
                 {fila.map((c) => (
-                  <div key={c.id} className="flex h-16 items-center justify-center" style={{ width: `${100 / columnas}%` }}>
+                  <div key={c.id} className="flex h-16 items-center justify-center" style={{ width: `${100 / columnasJuno}%` }}>
                     <Logo cliente={c} compacto />
                   </div>
                 ))}
