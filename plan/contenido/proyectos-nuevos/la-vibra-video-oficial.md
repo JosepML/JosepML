@@ -5,7 +5,7 @@ tipo: conciertos
 servicios: [filmmaker, edicion]
 año: 2026
 direccion: 
-productora_cliente: La Vibra [cliente por confirmar]
+productora_cliente: Orquesta La Vibra (Mapache Events)
 mi_papel: Grabación y montaje
 camara: Sony FX3 · ópticas Tamron y Sony
 premios: []

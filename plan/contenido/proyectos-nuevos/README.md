@@ -21,8 +21,8 @@ Formato de las fichas: el mismo de `../proyectos/` (cabecera con los campos de l
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | frimar-evento-fotografia (oculto) | corporativo | | Filmmaker | | 2 fotos |
 | 2 | eventos-deportivos (revisión) | eventos | redes | Filmmaker, Edición | | enlaces de redes |
-| 3 | flama-contenido-cinematografico-ia | visuales-e-ia | | Edición | ¿? | vídeo |
-| 4 | zorom-ia (2025) | visuales-e-ia | | Edición | sí | qué era, vídeo |
+| 3 | flama-contenido-cinematografico-ia | visuales-e-ia | | Edición | sí | vídeo |
+| 4 | zorom-ia (2025) | visuales-e-ia | | Edición | sí | vídeo |
 | 5 | albir-confort-real-estate | publicidad | | Filmmaker, Edición | sí | cuántos vídeos |
 | 6 | atavicas-trailer-obra-de-teatro | publicidad | | Filmmaker, Edición | sí | compañía, vídeo |
 | 7 | ep-color-adrian-munoz | videoclip | | DF, Filmmaker, Edición | sí | vídeo |
@@ -32,10 +32,10 @@ Formato de las fichas: el mismo de `../proyectos/` (cabecera con los campos de l
 | 11 | louk-the-grill | redes-sociales | | Filmmaker, Edición | sí | vídeo |
 | 12 | lavanderia-grupo-lon | publicidad | redes | Edición | sí | vídeos |
 | 13 | ais-10-anos | corporativo | | Filmmaker, Edición | sí | vídeo final |
-| 14 | englobe-evento-redes | redes-sociales | | Edición | sí | qué es Englobe, vídeo |
+| 14 | englobe-evento-redes | redes-sociales | | Edición | sí | vídeo |
 | 15 | tara | cortometraje | | DF | | dossier, tráiler |
 | 16 | evento-grupo-lon-el-langui | publicidad | redes | Filmmaker, Edición | sí | vídeo |
-| 17 | flama-benissa-video-oficial, la-vibra-video-oficial, otra-movida-video-oficial, madison-video-oficial, azahara-video-oficial, flama-aftermovie | conciertos | | Filmmaker, Edición | sí | vídeos; cliente de La Vibra |
+| 17 | flama-benissa-video-oficial, la-vibra-video-oficial, otra-movida-video-oficial, madison-video-oficial, azahara-video-oficial, flama-aftermovie | conciertos | | Filmmaker, Edición | sí | vídeos |
 | 18 | aguita-de-coco-visuales | visuales-e-ia | | Edición | | fotos del escenario |
 
 ## Cuando lleguen vídeos, fotos y respuestas

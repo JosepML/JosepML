@@ -18,7 +18,7 @@ con_juno: sí
 El vídeo y las fotos del evento Englobe, editados para redes.
 
 ## El proyecto
-Para JUNO Media edité el vídeo y las fotos del evento Englobe.
+Para JUNO Media edité el vídeo y las fotos de un evento de Englobe, pensados para redes.
 
 ## Para revisar con Josep (no se publica)
 - Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).

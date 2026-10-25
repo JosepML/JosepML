@@ -20,7 +20,7 @@ con_juno: sí
 El décimo aniversario del colegio AIS, contado con su propia personalidad.
 
 ## El proyecto
-El colegio AIS, entre La Nucía y l'Alfàs del Pi, celebró sus 10 años. Hice el vídeo corporativo del evento para JUNO Media: Noelia Fluxà coordinaba y dirigía, Paula grabó con dron y yo me encargué de la cámara.
+El colegio AIS, entre La Nucía y l'Alfàs del Pi, celebró sus 10 años. Hice el vídeo corporativo del evento para JUNO Media: Noelia Fluxà coordinaba y dirigía, Paula grabó con dron y yo me encargué de la cámara y de la edición.
 
 ## Decisiones clave
 - **La esencia del colegio.** El vídeo replica el carácter muy personal que tiene AIS y que tuvo el evento.

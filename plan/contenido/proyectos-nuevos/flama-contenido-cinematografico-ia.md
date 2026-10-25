@@ -5,7 +5,7 @@ tipo: visuales-e-ia
 servicios: [edicion]
 año: 2026
 direccion: 
-productora_cliente: Flama (SOM Events) [confirmar]
+productora_cliente: Flama (SOM Events)
 mi_papel: Idea, generación con IA y montaje
 camara: 
 premios: []

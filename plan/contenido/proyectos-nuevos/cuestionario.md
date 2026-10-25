@@ -11,14 +11,7 @@ Respuestas de Josep del 2026-10-25 ya pasadas a las fichas. Aquí queda solo lo 
 - **R3 · Shimano Super Cup Massi:** enlaces de las piezas para redes y de quién son las redes donde se publicaron (¿Ocisport, la propia competición?).
 - **R4 · Tara:** el dossier, para completar la ficha.
 
-**Preguntas cortas**
-- **R5 · La Vibra:** ¿de qué cliente es (Mapache Events, SOM Events u otro)? Es la única orquesta que no me quedó clara.
-- **R6 · Vídeo con IA de Flama:** ¿fue encargo de JUNO Media y el cliente es SOM Events, como los conciertos de Flama?
-- **R7 · Zorom con IA (2025):** ¿qué era el vídeo (anuncio, presentación…) y cómo se llama? Con el enlace, me basta.
-- **R8 · AIS:** en la primera lista dijiste «grabación y edición» y luego «yo estaba en grabación». ¿Editaste también?
-- **R9 · Englobe:** ¿qué es Englobe (empresa, congreso, festival) y de qué fue el evento? Con una línea vale.
-- **R10 · Destacados de Inicio, uno por género.** Propuesta: Y el año que viene (cortometraje), EP Color (videoclip), Atávicas (publicidad), Flama aftermovie (conciertos), Kiboko (documental), Shimano Super Cup Massi (eventos deportivos), The Mandalorian y Grogu (redes), Flama con IA (visuales e IA) y AIS (corporativo). ¿Cambiarías alguno? (Hoy los destacados son Y el año que viene, 100 Baladas, El Cirujano, No se está tan mal, EP Oscuridad y Kiboko.)
-- **R11 · Logos de los clientes nuevos** (para la página de Clientes): AIS, LOUK, Englobe, Agüita de Coco, Las Chicas de Venus y Alicante Light Film. Si no los tienes, saldrán con el nombre en texto, como ahora otros.
+**Contestado el 2026-10-25 (segunda tanda):** La Vibra es de Mapache Events (por JUNO Media); el vídeo con IA de Flama fue por JUNO para SOM Events; Zorom con IA es una residencia sin construir, en vídeo a partir de sus renders, con un montaje tranquilo; en AIS también edité; Englobe, un evento; destacados de Inicio como en la propuesta (abajo); logos de clientes nuevos, de momento no (salen con el nombre en texto).
 
 ## Resumen de lo decidido
 
@@ -30,6 +23,7 @@ Respuestas de Josep del 2026-10-25 ya pasadas a las fichas. Aquí queda solo lo 
 - **Año:** 2026 todo, salvo Zorom con IA (2025).
 - **Personas:** Sento MM, Noelia Fluxà, Paula (sin apellido), Lara Ruiz Martín, Samuel Molina, Alejandro Palacios y El Langui, tal cual.
 - **Con JUNO Media:** todos salvo Frimar, Shimano (Ocisport), Redención, Tara, The Mandalorian y Grogu (agencia) y Agüita de Coco.
+- **Destacados de Inicio, uno por género:** Y el año que viene, EP Color, Atávicas, Flama aftermovie, Kiboko, Shimano Super Cup Massi, The Mandalorian y Grogu, Flama con IA y AIS.
 - **Frimar:** se carga **oculto** por ser un evento privado.
 - **EP Color y EP Oscuridad:** se enlazan entre sí. Sin cifras de visualizaciones.
 - **Agüita de Coco, visuales:** no se dice con qué se hicieron.
