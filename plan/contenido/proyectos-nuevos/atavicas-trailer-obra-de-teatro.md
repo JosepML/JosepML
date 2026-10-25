@@ -5,7 +5,7 @@ tipo: publicidad
 servicios: [filmmaker, edicion]
 año: 2026
 direccion: 
-productora_cliente: [compañía: se verá en el vídeo]
+productora_cliente: Neira y Santamaría
 mi_papel: Grabación y edición
 camara: Sony FX3 y Sony A7 III
 premios: []
@@ -20,7 +20,7 @@ con_juno: sí
 El vídeo promocional de la obra de teatro Atávicas: un tráiler de cine, dinámico, de la propia función.
 
 ## El proyecto
-Para JUNO Media hice el vídeo promocional oficial de Atávicas, una obra de teatro de la que ya llevamos dos ediciones. El encargo principal era el vídeo resumen, y además la obra entera grabada en plano fijo. Grabamos el ensayo y la función en una misma tarde.
+Para JUNO Media hice el vídeo promocional oficial de *Atávicas. Mujeres de Lorca hacia la libertad*, la obra de la compañía Neira y Santamaría, de la que ya llevamos dos ediciones. El encargo principal era el vídeo resumen, y además la obra entera grabada en plano fijo. Grabamos el ensayo y la función en una misma tarde.
 
 ## Decisiones clave
 - **Dos cámaras, dos entregas.** Una cámara fija para la obra completa y otra en movimiento para el vídeo resumen.

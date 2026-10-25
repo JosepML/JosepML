@@ -36,6 +36,7 @@ export const SECCIONES_PROYECTO: SeccionFormulario[] = [
       { tipo: "texto", clave: "titulo", etiqueta: "Título" },
       { tipo: "slug", clave: "slug", etiqueta: "Dirección", prefijo: "/trabajos/", desde: "titulo" },
       { tipo: "seleccion", clave: "tipo_id", etiqueta: "Tipo", opciones: "tipos", medio: true },
+      { tipo: "multiple", clave: "categorias_extra", etiqueta: "También sale en", opciones: "tipos", ayuda: "Otras categorías donde aparece, además de su tipo (por ejemplo, Redes sociales)" },
       { tipo: "numero", clave: "anio", etiqueta: "Año", min: 1990, max: 2100, medio: true },
       { tipo: "multiple", clave: "servicios", etiqueta: "Servicios", opciones: "servicios", ayuda: "En qué páginas de servicio sale este proyecto" },
       { tipo: "texto", clave: "papel", etiqueta: "Mi papel (corto)", placeholder: "Dirección de fotografía y montaje", ayuda: "Sale en la tarjeta y en la ficha" },

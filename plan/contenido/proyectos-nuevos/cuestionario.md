@@ -4,12 +4,18 @@ Respuestas de Josep del 2026-10-25 ya pasadas a las fichas. Aquí queda solo lo 
 
 ## Lo que queda
 
-**Para mañana, con el material**
-- **Vídeos y fotos de cada proyecto:** enlace (YouTube, Instagram o archivo) y de 4 a 8 fotogramas buenos. En Frimar, las dos fotos neutras. En Agüita de Coco, las fotos de las pantallas en el escenario. Las fotos van a la biblioteca del panel (ya no a ImgBB).
-- **R1 · Albir Confort:** cuántos vídeos hay, con sus enlaces.
-- **R2 · Atávicas:** el nombre de la compañía de teatro (saldrá en el vídeo).
-- **R3 · Shimano Super Cup Massi:** enlaces de las piezas para redes y de quién son las redes donde se publicaron (¿Ocisport, la propia competición?).
-- **R4 · Tara:** el dossier, para completar la ficha.
+**Para mañana (2026-10-26), después de cargar las fotos de D:\VIDEOS WEB**
+- **M1 · Dónde van los vídeos.** La biblioteca admite archivos de hasta 50 MB y los masters pesan de cientos de MB a varios GB. Opciones: subirlos a YouTube (públicos u ocultos) y enlazarlos; o sacar versiones web ligeras (1080p, menos de 50 MB) para alojarlos en la web; o subir el límite del almacenamiento. Mi recomendación: YouTube para los largos y versión web para los reels cortos.
+- **M2 · ForecourtTech 2025.** Por el vídeo, un congreso internacional sobre tecnología para estaciones de servicio y tiendas de conveniencia (ponencias, reuniones, cenas de networking). ¿Es así? ¿Grabaste y editaste tú?
+- **M3 · Formación de Mario Bravo.** Por el vídeo, una formación para agentes inmobiliarios. ¿De qué año es? ¿Grabaste y editaste tú?
+- **M4 · Consell Valencià de la Joventut.** ¿De qué año es la charla? ¿Grabaste y editaste tú? Hay vídeo resumen (horizontal y vertical) y una píldora de temáticas.
+- **M5 · Locos de Atar.** ¿Quién te lo encargó? ¿Grabaste y editaste tú? Y dos o tres frases de cómo fue el último concierto.
+- **M6 · Diferens.** ¿Grabaste y editaste tú? ¿Algo que contar del encuentro?
+- **M7 · Atávicas.** En el vídeo sale la compañía Neira y Santamaría (*Atávicas. Mujeres de Lorca hacia la libertad*). La he puesto como productora: ¿bien?
+- **M8 · Redención y Tara.** Solo hay enlace de Instagram: hacen falta fotogramas o fotos de rodaje.
+- **M9 · Albir Confort.** Hay el vídeo de Villa d'Or (horizontal y vertical) y 7 reels en los que solo editaste. ¿Los reels entran en la ficha o se quedan fuera?
+- **M10 · Azahara.** Sin cargar hasta que el vídeo esté terminado.
+- **M11 · Clientes duplicados.** En la tabla de clientes hay tres «SOM Events» en borrador además de «Som Events» publicado. ¿Borro los duplicados?
 
 **Contestado el 2026-10-25 (segunda tanda):** La Vibra es de Mapache Events (por JUNO Media); el vídeo con IA de Flama fue por JUNO para SOM Events; Zorom con IA es una residencia sin construir, en vídeo a partir de sus renders, con un montaje tranquilo; en AIS también edité; Englobe, un evento; destacados de Inicio como en la propuesta (abajo); logos de clientes nuevos, de momento no (salen con el nombre en texto).
 

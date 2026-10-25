@@ -34,7 +34,7 @@ Estar en el sitio justo en el momento justo y condensar la carrera sin perder te
 
 ## Resultado
 - Emitido en À Punt.
-- Publicado en las redes de la competición [confirmar de quién].
+- Publicado en las redes de la competición.
 
 ## Para revisar con Josep (no se publica)
 - Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).

@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { tiposDe } from "@/lib/datos/seleccion";
 import type { Proyecto, Servicio } from "@/lib/datos/tipos";
 import { TarjetaProyecto } from "../bloques/BloqueTrabajos";
 import { CURVA, Revelar } from "../piezas";
@@ -54,10 +55,10 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
   const deServicio = (p: Proyecto) => servicio === "todos" || p.servicios.some((s) => s.slug === servicio);
   const filtrosServicio = [{ slug: "todos", nombre: "Todos" }, ...servicios.filter((s) => proyectos.some((p) => p.servicios.some((x) => x.slug === s.slug)))];
   const porTipo = [...new Map(proyectos.flatMap((p) => (p.tipo ? [[p.tipo.slug, { nombre: p.tipo.nombre, tipos: [p.tipo.slug] }] as const] : []))).values()];
-  const delServicio = (categorias[servicio] ?? categorias.todos ?? porTipo).filter((c) => proyectos.some((p) => deServicio(p) && c.tipos.includes(p.tipo?.slug ?? "")));
+  const delServicio = (categorias[servicio] ?? categorias.todos ?? porTipo).filter((c) => proyectos.some((p) => deServicio(p) && tiposDe(p).some((t) => c.tipos.includes(t))));
   const elegida = delServicio.find((c) => c.nombre === categoria);
   const filtrosCategoria = [{ slug: "todos", nombre: "Todos los tipos" }, ...delServicio.map((c) => ({ slug: c.nombre, nombre: c.nombre }))];
-  const visibles = proyectos.filter((p) => deServicio(p) && (!elegida || elegida.tipos.includes(p.tipo?.slug ?? "")));
+  const visibles = proyectos.filter((p) => deServicio(p) && (!elegida || tiposDe(p).some((t) => elegida.tipos.includes(t))));
   // Al cambiar de servicio, la categoría se mantiene solo si ese servicio también la tiene
   const actualCategoria = elegida ? categoria : "todos";
   const elegirServicio = (s: string) => {

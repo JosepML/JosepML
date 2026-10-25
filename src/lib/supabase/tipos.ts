@@ -624,6 +624,7 @@ export type Database = {
           camara: string
           clip_id: string | null
           con_juno: boolean
+          categorias_extra: string[]
           como_lo_hicimos: string
           creado_en: string
           destacado_orden: number | null
@@ -665,6 +666,7 @@ export type Database = {
           camara?: string
           clip_id?: string | null
           con_juno?: boolean
+          categorias_extra?: string[]
           como_lo_hicimos?: string
           creado_en?: string
           destacado_orden?: number | null
@@ -706,6 +708,7 @@ export type Database = {
           camara?: string
           clip_id?: string | null
           con_juno?: boolean
+          categorias_extra?: string[]
           como_lo_hicimos?: string
           creado_en?: string
           destacado_orden?: number | null

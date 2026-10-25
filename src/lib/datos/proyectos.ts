@@ -44,6 +44,7 @@ export async function getProyectos(): Promise<Proyecto[]> {
         videos: lista<VideoExtra>(p.videos).map((v) => (v.tipo === "archivo" && v.medio ? { ...v, url: medio(medios, v.medio)?.url ?? v.url } : v)),
         videosDebajoDelTexto: p.videos_debajo_del_texto,
         conJuno: p.con_juno ?? false,
+        categoriasExtra: (p.categorias_extra ?? []).flatMap((id) => tipos.find((t) => t.id === id)?.slug ?? []),
         premios: lista(p.premios)
           .map((x): Premio => {
             const o = objeto(x);

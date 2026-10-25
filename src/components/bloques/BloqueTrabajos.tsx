@@ -2,7 +2,7 @@
 
 import { animate, AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { fotogramas, laurel, proyectosDe } from "@/lib/datos/seleccion";
+import { fotogramas, laurel, proyectosDe, tiposDe } from "@/lib/datos/seleccion";
 import type { Bloque, Proyecto } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
 import { CURVA_VIAJE } from "@/styles/movimiento";
@@ -46,7 +46,7 @@ export function BloqueTrabajos({ bloque, ancla }: { bloque: Bloque; ancla?: stri
 function RejillaTipos({ bloque, tipos, ancla }: { bloque: Bloque; tipos: string[]; ancla?: string }) {
   const { proyectos } = useDatos();
   const editando = useEditando();
-  const de = proyectos.filter((p) => p.tipo && tipos.includes(p.tipo.slug));
+  const de = proyectos.filter((p) => tiposDe(p).some((t) => tipos.includes(t)));
   if (!de.length && !editando) return null;
   const [primero, ...resto] = de;
   return (

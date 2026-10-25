@@ -79,6 +79,8 @@ export type Proyecto = {
   premios: Premio[];
   /** Hecho bajo el sello de JUNO Media: la tarjeta y la ficha lo marcan */
   conJuno: boolean;
+  /** Slugs de otros tipos en los que también sale (Redes sociales, por ejemplo) */
+  categoriasExtra: string[];
   destacadoOrden: number | null;
   orden: number;
   /** Frase final con la parte en cursiva entre *asteriscos* */

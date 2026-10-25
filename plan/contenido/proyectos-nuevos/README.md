@@ -1,6 +1,8 @@
 # Proyectos nuevos de este año
 
-2026-10-24, actualizado el 2026-10-25 con las respuestas de Josep. 23 fichas. **Nada está en la web ni en la base de datos todavía:** faltan vídeos, fotos y datos (ver `cuestionario.md`). Mañana se completan y se cargan, en tandas de 3 o 4 que Josep aprueba en su vista previa.
+2026-10-24, actualizado el 2026-10-25 con las respuestas de Josep y el material de `D:\VIDEOS WEB`. 29 fichas (Azahara aún sin cargar). Las fotos (fotogramas de los vídeos, 185) están en `D:\VIDEOS WEB\_WEB\SUBIR`, con el nombre `<slug>-NN.jpg`. La carga es `supabase/datos/11-proyectos-nuevos.sql`, generado desde estas fichas con `scripts/generar-proyectos-nuevos.py`: si cambia una ficha, se vuelve a generar. Lo que queda abierto, en `cuestionario.md`.
+
+**Cómo se carga:** 1) ejecutar la migración `20261025120000_proyectos_categorias_extra.sql`; 2) subir todas las fotos de `SUBIR` a la biblioteca de una vez; 3) ejecutar `11-proyectos-nuevos.sql`. Los proyectos entran en borrador: se ven en la vista previa y se publican desde el panel.
 
 Formato de las fichas: el mismo de `../proyectos/` (cabecera con los campos de la ficha técnica, `Tarjeta`, `El proyecto`, `Decisiones clave`, `El reto`, `Resultado`). Solo hay texto donde Josep dio datos: no se inventan cifras, premios ni decisiones. Lo que dice `[pendiente]` o `[confirmar]` no se publica.
 

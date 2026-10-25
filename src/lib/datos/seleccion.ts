@@ -43,3 +43,8 @@ export function fechaCorta(iso: string) {
   if (!a || !m || !d) return iso;
   return new Date(Date.UTC(a, m - 1, d)).toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).replace(".", "");
 }
+
+/** Todos los tipos en los que sale un proyecto: el suyo y sus categorías extra */
+export function tiposDe(p: Proyecto): string[] {
+  return [...(p.tipo ? [p.tipo.slug] : []), ...p.categoriasExtra];
+}
