@@ -334,7 +334,11 @@ export function Diapositivas({
             style={{
               opacity: n === i ? 1 : 0,
               transform: zoom ? "scale(1.08)" : "scale(1.01)",
-              transitionDuration: `1000ms, ${zoom ? intervalo + 400 : 1200}ms`,
+              // El zoom va lineal y dura lo que la foto sigue visible, para no frenarse antes del cambio. Al salir,
+              // el zoom vuelve a escala base solo cuando la foto ya se ha desvanecido (sin que se vea desinflarse)
+              transitionDuration: `1000ms, ${zoom ? intervalo + 1000 : 0}ms`,
+              transitionDelay: zoom ? "0ms" : "0ms, 1000ms",
+              transitionTimingFunction: `cubic-bezier(0.22,1,0.36,1), linear`,
             }}
           />
         );
