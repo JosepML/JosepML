@@ -20,15 +20,19 @@ con_juno: sí
 Un vídeo para redes de una coctelería que quería seguir siendo un misterio.
 
 ## El proyecto
-Para LOUK, en The Grill, de la mano de JUNO Media, grabé y edité un vídeo para redes sociales. Era un encargo curioso: querían una estética misteriosa, sin enseñar las caras de los clientes, que reflejara una experiencia premium.
+Para LOUK, en The Grill, de la mano de JUNO Media, grabé y edité un vídeo para redes. Querían una estética misteriosa, sin enseñar las caras de los clientes, que reflejara una experiencia premium.
 
 ## Decisiones clave
-- **Sin caras.** La gente casi no se ve; el protagonista es el sitio.
-- **El fuego.** El espectáculo de fuego que hacen es el centro del vídeo.
-- **Oscuro y cuidado.** Una imagen que tira a oscura, misteriosa y premium, como el local.
+- **Obturación baja.** Con ella consigo planos con dinamismo y una atmósfera de misterio.
+- **Cámara lenta y cambios de velocidad.** Para alargar el fuego y dar ritmo a los cortes.
+- **Arquitectura y detalles.** Planos del local y de las bebidas. Sin caras, el protagonista es el sitio.
+- **El fuego.** El espectáculo de fuego es el centro del vídeo.
 
 ## El reto
 Hacer un vídeo para redes, donde manda la gente, sin enseñar a la gente.
 
+## Frase final
+Un local misterioso se enseña *sin enseñar a nadie*.
+
 ## Para revisar con Josep (no se publica)
-- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).
+- Frase final propuesta por Claude: Josep la aprueba o la cambia.

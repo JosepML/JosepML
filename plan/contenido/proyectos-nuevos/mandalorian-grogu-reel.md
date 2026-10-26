@@ -20,10 +20,14 @@ con_juno: no
 Un reel reaccionando al tráiler de The Mandalorian y Grogu, para la campaña de Disney y Star Wars.
 
 ## El proyecto
-Una agencia de publicidad me encargó un reel para la campaña de promoción de The Mandalorian y Grogu. Lo grabé y lo edité reaccionando al tráiler, trabajando con las marcas de Disney y Star Wars. Se publicó en Instagram y en mi canal de YouTube «Del Fan Para el Fan».
+Una agencia de publicidad me encargó un reel de un minuto para la campaña de The Mandalorian y Grogu. Lo grabé y lo edité reaccionando al tráiler. Se publicó en Instagram y en YouTube, en mi canal «Del Fan Para el Fan».
 
 ## Resultado
 - Campaña oficial de Disney y Star Wars.
 
+## Frase final
+Un fan, un tráiler y *un minuto* para contarlo.
+
 ## Para revisar con Josep (no se publica)
-- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).
+- Frase final propuesta por Claude: Josep la aprueba o la cambia.
+- Oculto de momento. No sabe el nombre de la agencia.

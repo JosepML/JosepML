@@ -17,15 +17,22 @@ con_juno: sí
 > Colegio AIS, entre La Nucía y l'Alfàs del Pi. Vídeo de unos 4 minutos (se confirma con el vídeo final).
 
 ## Tarjeta
-El décimo aniversario del colegio AIS, contado con su propia personalidad.
+El décimo aniversario del colegio AIS, contado con la música y el tono de su propia personalidad.
 
 ## El proyecto
-El colegio AIS, entre La Nucía y l'Alfàs del Pi, celebró sus 10 años. Hice el vídeo corporativo del evento para JUNO Media: Noelia Fluxà coordinaba y dirigía, Paula grabó con dron y yo me encargué de la cámara y de la edición.
+Hice el vídeo corporativo del evento para JUNO Media. Noelia Fluxà coordinaba y dirigía, Paula grabó con dron y yo llevé la cámara y la edición.
 
 ## Decisiones clave
-- **La esencia del colegio.** El vídeo replica el carácter muy personal que tiene AIS y que tuvo el evento.
-- **Naturalista.** Un tono casi de documental, sin llegar a serlo.
-- **Una música diferente.** Una atmósfera alternativa, divertida y distinta, que busca el alma que querían representar.
+- **Música alternativa.** Un estilo de documental, naturalista, que te lleva al sentimiento de toda la celebración.
+- **La identidad del colegio.** El tono replica el carácter tan personal de AIS.
+- **Momentos que tenían que estar.** Los discursos iniciales, las actividades del día y la plantación de un árbol nuevo, muy importante para ellos.
+
+## El reto
+Mostrar todo lo que pasó durante el día sin que el vídeo se pareciera a un resumen de agenda.
+
+## Frase final
+Diez años de un colegio, contados *con su voz*.
 
 ## Para revisar con Josep (no se publica)
-- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).
+- Frase final propuesta por Claude: Josep la aprueba o la cambia.
+- Duración (unos 4 minutos) por confirmar con el vídeo final.

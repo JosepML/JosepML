@@ -54,7 +54,7 @@ FUERA = {"azahara-video-oficial"}
 OCULTOS = {"frimar-evento-fotografia", "redencion", "tara", "mandalorian-grogu-reel"}  # de momento fuera de la vista previa
 
 SECCIONES = {"Tarjeta": "tarjeta", "El proyecto": "historia", "Decisiones clave": "como_lo_hicimos",
-             "El reto": "el_reto", "Resultado": "el_resultado"}
+             "El reto": "el_reto", "Resultado": "el_resultado", "Frase final": "frase"}
 
 
 def lit(v):
@@ -134,7 +134,7 @@ def sql_proyecto(f, orden):
         "productora": lit(f["productora"]), "papel": lit(f["papel"]), "camara": lit(f["camara"]),
         "tarjeta": lit(f.get("tarjeta", "")), "historia": lit(f.get("historia", "")),
         "como_lo_hicimos": lit(f.get("como_lo_hicimos", "")), "el_reto": lit(f.get("el_reto", "")),
-        "el_resultado": lit(f.get("el_resultado", "")), "con_juno": lit(f["con_juno"]),
+        "el_resultado": lit(f.get("el_resultado", "")), "frase": lit(f.get("frase", "")), "con_juno": lit(f["con_juno"]),
         "videos": videos_sql(s),
     }
     if s == "eventos-deportivos":
@@ -169,6 +169,24 @@ AJUSTES = ["forecourttech-2025", "formacion-mario-bravo", "consell-valencia-jove
            "locos-de-atar-ultimo-concierto", "diferens-encuentro-2025", "atavicas-trailer-obra-de-teatro"]
 
 
+TEXTOS_PENDIENTES = {"albir-confort-real-estate"}  # propuestas sin confirmar por Josep: no se cargan
+
+
+def textos():
+    """Solo textos, camara y frase final de las fichas reescritas el 2026-10-26: --textos"""
+    partes = ["-- Textos completos de las fichas nuevas (respuestas de Josep del 2026-10-26). Solo textos, cámara y frase final."]
+    for r in sorted(FICHAS.glob("*.md")):
+        if r.stem in ("README", "cuestionario") or r.stem in TEXTOS_PENDIENTES or r.stem in OCULTOS - {"mandalorian-grogu-reel"} or r.stem in FUERA:
+            continue
+        f = leer(r)
+        campos = {"tarjeta": f.get("tarjeta", ""), "historia": f.get("historia", ""), "como_lo_hicimos": f.get("como_lo_hicimos", ""),
+                  "el_reto": f.get("el_reto", ""), "el_resultado": f.get("el_resultado", ""), "frase": f.get("frase", ""),
+                  "camara": f["camara"], "papel": f["papel"]}
+        sets = ",\n  ".join(f"{k} = {lit(v)}" for k, v in campos.items())
+        partes.append(f"update public.proyectos set\n  {sets}\nwhere idioma = 'es' and slug = '{f['slug']}';")
+    print("\n\n".join(partes))
+
+
 def ajustes():
     """Solo textos y datos de las fichas ya cargadas (sin tocar portadas, galerías ni vídeos): scripts/... --ajustes"""
     partes = ["-- Ajustes de textos tras el cuestionario de Josep (2026-10-25). Solo textos y datos: no toca portadas ni vídeos."]
@@ -200,6 +218,8 @@ def solo(slug):
 
 
 def main():
+    if "--textos" in sys.argv:
+        return textos()
     if "--ajustes" in sys.argv:
         return ajustes()
     if "--solo" in sys.argv:

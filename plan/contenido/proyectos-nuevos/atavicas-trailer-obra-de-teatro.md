@@ -20,10 +20,10 @@ con_juno: sí
 El vídeo promocional de la obra de teatro Atávicas: un tráiler de cine, dinámico, de la propia función.
 
 ## El proyecto
-Para JUNO Media hice el vídeo promocional oficial de *Atávicas. Mujeres de Lorca hacia la libertad*, la obra de la compañía Neira y Santamaría, de la que ya llevamos dos ediciones. El encargo principal era el vídeo resumen, y además la obra entera grabada en plano fijo. Grabamos el ensayo y la función en una misma tarde.
+Para JUNO Media hice el vídeo promocional oficial de *Atávicas. Mujeres de Lorca hacia la libertad*, de la compañía Neira y Santamaría. Es la segunda edición. Además del vídeo resumen grabé la obra entera, que dura una hora, en plano fijo.
 
 ## Decisiones clave
-- **Dos cámaras, dos entregas.** Una cámara fija para la obra completa y otra en movimiento para el vídeo resumen.
+- **Dos cámaras, dos entregas.** Una fija para la obra completa y otra en movimiento para el vídeo resumen.
 - **Diversidad de encuadres.** Muchos planos y tamaños distintos para que el tráiler tenga ritmo.
 - **El sonido de la obra.** El montaje usa el propio sonido de la función, para que sea inmersivo.
 - **Una narrativa cortita con clímax.** El vídeo llega a los mismos clímax que tiene la obra.
@@ -31,5 +31,9 @@ Para JUNO Media hice el vídeo promocional oficial de *Atávicas. Mujeres de Lor
 ## El reto
 Sacar en una sola tarde, entre el ensayo y la función, la obra completa y el material para un tráiler de cine.
 
+## Frase final
+Una obra de una hora, resumida en *un tráiler de cine*.
+
 ## Para revisar con Josep (no se publica)
-- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).
+- Frase final propuesta por Claude: Josep la aprueba o la cambia.
+- Duración del tráiler: se ve en el vídeo.

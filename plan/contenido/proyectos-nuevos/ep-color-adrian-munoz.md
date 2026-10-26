@@ -25,11 +25,15 @@ Tráiler del nuevo EP de Adrián Muñoz, Color, para JUNO Media. Hice la direcci
 ## Decisiones clave
 - **El antónimo de Oscuridad.** Allí, el cantante se hundía en un líquido negro, en blanco y negro. Aquí, todo lo contrario.
 - **Líquido blanco, de yogur.** Buscamos una mezcla espesa para que se comportara como el líquido negro del primer tráiler.
-- **Fondo blanco y color.** La imagen deja el blanco y negro y se va al color.
-- **Tomas espejo.** Planos paralelos a los del tráiler de Oscuridad, para que las dos piezas dialoguen.
+- **Plásticos por todas partes.** Cubrimos el set para que no se manchara nada, con mucho líquido cayendo.
+- **Tomas espejo.** La mayoría de las tomas en las que cae el líquido son planos paralelos a los del tráiler de Oscuridad, para que las dos piezas dialoguen.
 
 ## El reto
-El artista se manchaba en cada toma. Había poco tiempo para sacar las mejores, y además las tomas espejo del tráiler anterior.
+El artista se manchaba en cada toma. Había poco tiempo, media jornada, para sacar las mejores, y además las tomas espejo.
+
+## Frase final
+Si Oscuridad se hundía, Color *se salpica*.
 
 ## Para revisar con Josep (no se publica)
-- Lo que queda abierto está en `cuestionario.md` (sección «Lo que queda»).
+- Frase final propuesta por Claude: Josep la aprueba o la cambia.
+- Ni número de luces ni cantidad de líquido: Josep no lo recuerda.
