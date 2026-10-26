@@ -186,7 +186,9 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
         </div>
       </div>
 
-      <div className="sticky top-2 z-20 mt-5 flex flex-wrap items-center gap-2 rounded-[22px] bg-black/70 p-2 backdrop-blur-xl">
+      <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start">
+      {/* Carpetas en vertical: a la derecha en pantalla ancha (fijas al hacer scroll), arriba y con poco alto en el móvil */}
+      <aside className="flex max-h-56 w-full flex-col gap-1 overflow-y-auto rounded-[22px] bg-black/40 p-2.5 backdrop-blur-xl lg:sticky lg:top-4 lg:order-last lg:max-h-none lg:w-60 lg:shrink-0">
         <Pastilla activo={carpeta === "todas"} onClick={() => setCarpeta("todas")}>
           Todas las carpetas
         </Pastilla>
@@ -214,16 +216,17 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
               if (!nueva.trim()) setCreando(false);
             }}
             placeholder="Nombre de la carpeta"
-            className="campo !rounded-full !py-1.5 text-sm sm:max-w-[240px]"
+            className="campo !rounded-xl !py-2 text-sm"
           />
         ) : (
-          <button type="button" onClick={() => setCreando(true)} className="rounded-full px-3.5 py-1.5 text-[13px] font-semibold text-[var(--jm-suave)] ring-1 ring-[var(--jm-borde)] hover:text-[var(--jm-texto)]">
+          <button type="button" onClick={() => setCreando(true)} className="w-full rounded-xl px-3 py-2 text-left text-[13px] font-semibold text-[var(--jm-suave)] ring-1 ring-[var(--jm-borde)] hover:text-[var(--jm-texto)]">
             + Nueva carpeta
           </button>
         )}
-      </div>
+      </aside>
+      <div className="min-w-0 flex-1">
       {carpetaElegida && (
-        <div className="mt-3 flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <input
             key={carpetaElegida.id}
             defaultValue={carpetaElegida.nombre}
@@ -269,6 +272,8 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
         })}
       </div>
       {!visibles.length && <p className="mt-10 text-center text-sm text-[var(--jm-suave)]">No hay archivos que coincidan.</p>}
+      </div>
+      </div>
 
       {seleccion.length > 0 && (
         <div className="cristal cristal-fuerte fixed bottom-4 left-1/2 z-[60] flex w-[min(92vw,640px)] -translate-x-1/2 flex-wrap items-center gap-3 rounded-full px-5 py-2.5 text-sm">
@@ -347,7 +352,7 @@ function Pastilla({ activo, onClick, alSoltar, children }: { activo: boolean; on
         setEncima(false);
         alSoltar(JSON.parse(e.dataTransfer.getData(MIME_MEDIO)));
       }}
-      className={`rounded-full px-3.5 py-1.5 text-[13px] font-semibold transition-[box-shadow,color] ${activo ? "bg-white/10 text-[var(--jm-texto)]" : "bg-black/25 text-[var(--jm-tenue)] hover:text-[var(--jm-suave)]"} ${encima ? "ring-2 ring-[var(--jm-acento)]" : ""}`}
+      className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left text-[13px] font-semibold transition-[box-shadow,color] ${activo ? "bg-white/10 text-[var(--jm-texto)]" : "bg-black/25 text-[var(--jm-tenue)] hover:text-[var(--jm-suave)]"} ${encima ? "ring-2 ring-[var(--jm-acento)]" : ""}`}
     >
       {children}
     </button>
