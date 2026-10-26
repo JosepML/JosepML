@@ -4,7 +4,7 @@ import { animate, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import type { Medio } from "@/lib/datos/tipos";
 import { useReducir } from "../comun/hooks";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 
 /** Una imagen del deslizador. `recorte` (fracciones de 0 a 1) toma solo una parte: así una comparación
  *  ya montada (original y recreación en la misma imagen) sirve para los dos lados. */
@@ -28,7 +28,7 @@ function Imagen({ lado, alt, estilo }: { lado: Lado; alt: string; estilo?: React
     : { inset: 0, width: "100%", height: "100%" };
   return (
     <div className="absolute inset-0 overflow-hidden" style={estilo}>
-      <img src={img(lado.imagen.url, 2048)} alt={alt} loading="lazy" decoding="async" draggable={false} className={`absolute ${r ? "" : "object-cover"}`} style={posicion} />
+      <img src={img(lado.imagen.url, 2048)} alt={alt} loading="lazy" decoding="async" draggable={false} className={`absolute ${r ? "" : "object-cover"}`} style={r ? posicion : { ...posicion, ...enfoque(lado.imagen) }} />
     </div>
   );
 }

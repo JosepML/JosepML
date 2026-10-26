@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Bloque, DatosWeb, Proyecto } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
 import { BloqueLlamada } from "../bloques/BloquesPersonales";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { Enlace } from "../comun/Enlace";
 import { Icono } from "../Iconos";
 import { ProveedorDatos } from "../marco/DatosWeb";
@@ -101,7 +101,7 @@ function Ficha({ r, indice, etiquetas, alVerVideo }: { r: Recreacion; indice: nu
                 className="group relative block aspect-video w-full overflow-hidden rounded-[22px] bg-black sm:rounded-[28px]"
                 aria-label={`Ver el vídeo de ${p.titulo}`}
               >
-                <img src={img(poster.url, 2048)} alt={poster.alt || p.titulo} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" />
+                <img src={img(poster.url, 2048)} alt={poster.alt || p.titulo} style={enfoque(poster)} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" />
                 {p.youtubeId && (
                   <span className="absolute inset-0 flex items-center justify-center bg-black/20">
                     <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white backdrop-blur-md transition-transform duration-500 group-hover:scale-110">

@@ -2,7 +2,7 @@
 
 import type { Bloque, VideoExtra } from "@/lib/datos/tipos";
 import { lista, objeto, texto } from "@/lib/datos/util";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { Editable, useEditando } from "../edicion/contexto";
 import { RejillaVideos } from "../trabajos/MasVideos";
 import { useDatos, useMedio } from "../marco/DatosWeb";
@@ -32,6 +32,7 @@ export function BloqueGaleria({ bloque }: { bloque: Bloque }) {
                   alt={medio.alt}
                   loading="lazy"
                   decoding="async"
+                  style={enfoque(medio)}
                   className="aspect-[3/2] w-full rounded-[var(--jm-radio-medio)] object-cover"
                 />
                 {pie && <figcaption className="mt-2 px-1 text-sm text-[var(--jm-suave)]">{pie}</figcaption>}

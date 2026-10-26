@@ -9,7 +9,7 @@ import { CURVA_VIAJE } from "@/styles/movimiento";
 import { Enlace } from "../comun/Enlace";
 import { SelloJuno } from "../comun/SelloJuno";
 import { usePunteroFino, useReducir } from "../comun/hooks";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { Icono } from "../Iconos";
 import { useDatos } from "../marco/DatosWeb";
 import { CURVA, Diapositivas, Revelar, Titular } from "../piezas";
@@ -102,6 +102,7 @@ function ProyectoAncho({ proyecto: p }: { proyecto: Proyecto }) {
           <img
             data-transicion
             src={img(p.poster.url, 3840)}
+            style={enfoque(p.poster)}
             alt=""
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.04]"
           />
@@ -158,6 +159,7 @@ function Mosaico({ proyecto: p }: { proyecto: Proyecto }) {
             >
               <img
                 src={img(m.url, i === 0 ? 1920 : 1080)}
+                style={enfoque(m)}
                 alt={m.alt}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.05]"

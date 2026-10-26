@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 /**
  * URL de una imagen redimensionada por el optimizador de Next (ver images en next.config.ts), en
  * WebP/AVIF. Las URL que no son externas se devuelven tal cual.
@@ -9,4 +11,12 @@ export function img(url: string, ancho: 256 | 384 | 640 | 750 | 828 | 1080 | 120
   // Los SVG (logos) no pasan por el optimizador: ya son vectoriales y Next no los admite por seguridad
   if (!url.startsWith("http") || /\.svg(\?|$)/i.test(url)) return url;
   return `/_next/image?url=${encodeURIComponent(url)}&w=${ancho}&q=${calidad}`;
+}
+
+/**
+ * Estilo para una foto que se recorta (object-cover): el punto de interés que eligió Josep en la biblioteca
+ * queda visible. Sin punto, undefined y la foto se recorta por el centro, como siempre.
+ */
+export function enfoque(medio: { foco?: { x: number; y: number } | null } | null | undefined): CSSProperties | undefined {
+  return medio?.foco ? { objectPosition: `${medio.foco.x}% ${medio.foco.y}%` } : undefined;
 }

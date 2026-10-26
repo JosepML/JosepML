@@ -1,5 +1,5 @@
 import type { Medio } from "@/lib/datos/tipos";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 
 // El cuerpo de un artículo es un documento del editor (formato ProseMirror/TipTap): { type: "doc", content: [...] }.
 // Aquí se pinta sin dependencias. Lo que no se reconoce se salta en vez de romper la página, para que un
@@ -96,7 +96,7 @@ function Bloque({ nodo, medios }: { nodo: Nodo; medios: Record<string, Medio> })
       return (
         // Las imágenes salen algo más anchas que el texto, como en una revista
         <figure className="-mx-2 mt-10 sm:-mx-16">
-          <img src={img(url, 1920)} alt={cadena(nodo.attrs?.alt) || m?.alt || ""} loading="lazy" decoding="async" className="w-full rounded-[28px] object-cover" />
+          <img src={img(url, 1920)} alt={cadena(nodo.attrs?.alt) || m?.alt || ""} loading="lazy" decoding="async" className="w-full rounded-[28px] object-cover" style={enfoque(m)} />
           {pie && <figcaption className="mt-3 px-2 text-sm text-[var(--jm-tenue)] sm:px-16">{pie}</figcaption>}
         </figure>
       );

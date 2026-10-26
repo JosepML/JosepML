@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ContenidoArticulo } from "@/components/blog/ContenidoArticulo";
 import { TarjetaArticulo } from "@/components/blog/TarjetaArticulo";
-import { img } from "@/components/comun/imagen";
+import { enfoque, img } from "@/components/comun/imagen";
 import { Icono } from "@/components/Iconos";
 import { Revelar, TituloConAcento } from "@/components/piezas";
 import { getArticulos } from "@/lib/datos/articulos";
@@ -68,7 +68,7 @@ export default async function Articulo({ params }: Props) {
 
         {a.imagen && (
           <Revelar retraso={0.24} className="mx-auto mt-12 max-w-5xl">
-            <img src={img(a.imagen.url, 2048)} alt={a.imagen.alt} className="aspect-[16/9] w-full rounded-[36px] object-cover" />
+            <img src={img(a.imagen.url, 2048)} alt={a.imagen.alt} style={enfoque(a.imagen)} className="aspect-[16/9] w-full rounded-[36px] object-cover" />
           </Revelar>
         )}
 

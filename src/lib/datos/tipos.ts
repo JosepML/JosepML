@@ -14,6 +14,8 @@ export type Medio = {
   alt: string;
   ancho: number | null;
   alto: number | null;
+  /** Punto de interés (% desde la izquierda y desde arriba) para los recortes; vacío = centro */
+  foco?: { x: number; y: number } | null;
 };
 
 export type Ajustes = {

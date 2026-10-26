@@ -7,7 +7,7 @@ import type { Bloque } from "@/lib/datos/tipos";
 import { lista, objeto, texto, textos } from "@/lib/datos/util";
 import { usePunteroFino, useReducir } from "../comun/hooks";
 import { TarjetaArticulo } from "../blog/TarjetaArticulo";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { SeccionContacto } from "../contacto/SeccionContacto";
 import { FOTO_CONTACTO } from "@/lib/contacto/foto";
 import { Icono } from "../Iconos";
@@ -106,7 +106,7 @@ export function BloqueSobreMi({ bloque, ancla }: { bloque: Bloque; ancla?: strin
                   src={img(imagen.url, 1920)}
                   alt={imagen.alt}
                   className="absolute inset-0 h-full w-full origin-top object-cover object-[50%_0%] [will-change:transform]"
-                  style={{ scale: reducir ? 1 : escalaImg }}
+                  style={{ scale: reducir ? 1 : escalaImg, ...enfoque(imagen) }}
                 />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -253,7 +253,7 @@ function TarjetaTexto({ bloque }: { bloque: Bloque }) {
           </div>
           {imagen ? (
             <div className="relative overflow-hidden rounded-[28px]">
-              <img src={img(imagen.url, 1920)} alt={imagen.alt} className="aspect-[4/3] w-full rounded-[28px] object-cover" />
+              <img src={img(imagen.url, 1920)} alt={imagen.alt} style={enfoque(imagen)} className="aspect-[4/3] w-full rounded-[28px] object-cover" />
               <CambiarImagen campo="imagen" />
             </div>
           ) : (

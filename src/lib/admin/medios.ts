@@ -17,6 +17,8 @@ type FilaMedio = {
   titulo: string;
   ancho: number | null;
   alto: number | null;
+  foco_x: number | null;
+  foco_y: number | null;
   bytes: number | null;
   mime: string;
   creado_en: string;
@@ -30,6 +32,7 @@ function aMedio(f: FilaMedio): MedioBiblioteca {
     alt: f.texto_alternativo,
     ancho: f.ancho,
     alto: f.alto,
+    foco: f.foco_x != null && f.foco_y != null ? { x: f.foco_x, y: f.foco_y } : null,
     titulo: f.titulo,
     creadoEn: f.creado_en,
     bytes: f.bytes,
@@ -99,6 +102,21 @@ export async function cambiarTextoAlternativo(id: string, texto: string): Promis
     const s = await exigirAdmin();
     const { error } = await s.from("medios").update({ texto_alternativo: texto }).eq("id", id);
     if (error) throw new Error(error.message);
+    return { ok: true, datos: null };
+  } catch (e) {
+    return { ok: false, error: mensaje(e) };
+  }
+}
+
+/** Punto de interés de una foto (% desde la izquierda y desde arriba), o null para volver al centro */
+export async function cambiarFoco(id: string, foco: { x: number; y: number } | null): Promise<Resultado<null>> {
+  try {
+    const s = await exigirAdmin();
+    const x = foco ? Math.round(Math.min(100, Math.max(0, foco.x)) * 10) / 10 : null;
+    const y = foco ? Math.round(Math.min(100, Math.max(0, foco.y)) * 10) / 10 : null;
+    const { error } = await s.from("medios").update({ foco_x: x, foco_y: y }).eq("id", id);
+    if (error) throw new Error(error.message);
+    await revalidarContenido(["medios"]);
     return { ok: true, datos: null };
   } catch (e) {
     return { ok: false, error: mensaje(e) };

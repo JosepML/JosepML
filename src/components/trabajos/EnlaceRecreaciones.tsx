@@ -1,6 +1,6 @@
 import type { Proyecto } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { Enlace } from "../comun/Enlace";
 import { Icono } from "../Iconos";
 import { Revelar } from "../piezas";
@@ -17,7 +17,7 @@ export function EnlaceRecreaciones({ titulo, texto, recreaciones, evitar }: { ti
       <Enlace href={RUTAS.recreaciones} className="group relative block overflow-hidden rounded-[32px] bg-black sm:rounded-[40px]">
         <div className="absolute inset-0 grid grid-cols-2 sm:grid-cols-4">
           {fotos.map((f) => (
-            <img key={f.id} src={img(f.url, 1200)} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover opacity-60 transition-transform duration-[1.4s] group-hover:scale-105" />
+            <img key={f.id} src={img(f.url, 1200)} style={enfoque(f)} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover opacity-60 transition-transform duration-[1.4s] group-hover:scale-105" />
           ))}
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/25" />

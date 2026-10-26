@@ -2,7 +2,7 @@ import Link from "next/link";
 import { fechaCorta } from "@/lib/datos/seleccion";
 import type { Articulo } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { Icono } from "../Iconos";
 
 /** Tarjeta de un artículo (bloque Blog de Inicio, listado /blog y «Más artículos» de cada artículo). */
@@ -13,6 +13,7 @@ export function TarjetaArticulo({ articulo: a }: { articulo: Articulo }) {
         {a.imagen && (
           <img
             src={img(a.imagen.url, 828)}
+            style={enfoque(a.imagen)}
             alt=""
             loading="lazy"
             decoding="async"

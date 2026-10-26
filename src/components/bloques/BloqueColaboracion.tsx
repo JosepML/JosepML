@@ -7,7 +7,7 @@ import { RUTAS } from "@/lib/rutas";
 import { lista, objeto, texto } from "@/lib/datos/util";
 import { useReducir } from "../comun/hooks";
 import { Enlace } from "../comun/Enlace";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { Icono } from "../Iconos";
 import { CambiarImagen, Editable, useEditando } from "../edicion/contexto";
 import { useDatos } from "../marco/DatosWeb";
@@ -36,7 +36,7 @@ export function BloqueColaboracion({ bloque }: { bloque: Bloque }) {
   }
 }
 
-type Foto = { url: string; alt: string; pie?: string; href?: string };
+type Foto = { url: string; alt: string; pie?: string; href?: string; foco?: { x: number; y: number } | null };
 
 /** Fotos de reserva: la portada de cada proyecto hecho con JUNO Media, en el orden de los trabajos */
 function useFotosJuno(): Foto[] {
@@ -85,12 +85,12 @@ function Apertura({ bloque }: { bloque: Bloque }) {
     const m = typeof o.medio === "string" ? medios[o.medio] : undefined;
     if (!m) return [];
     const p = proyectos.find((p) => p.poster?.id === m.id || p.galeria.some((g) => g.imagen.id === m.id));
-    return [{ url: m.url, alt: m.alt || p?.titulo || "", pie: texto(o.pie) || p?.titulo, href: p ? RUTAS.proyecto(p.slug) : undefined }];
+    return [{ url: m.url, alt: m.alt || p?.titulo || "", pie: texto(o.pie) || p?.titulo, href: p ? RUTAS.proyecto(p.slug) : undefined, foco: m.foco }];
   });
   // Los proyectos elegidos a mano (su portada) mandan sobre las fotos sueltas; lo que falte lo pone la reserva
   const deProyectos = lista(bloque.datos.proyectos).flatMap((x): Foto[] => {
     const p = proyectos.find((p) => p.id === x);
-    return p?.poster ? [{ url: p.poster.url, alt: p.poster.alt || p.titulo, pie: p.titulo, href: RUTAS.proyecto(p.slug) }] : [];
+    return p?.poster ? [{ url: p.poster.url, alt: p.poster.alt || p.titulo, pie: p.titulo, href: RUTAS.proyecto(p.slug), foco: p.poster.foco }] : [];
   });
   const fotos = [0, 1, 2].map((i) => deProyectos[i] ?? elegidas[i] ?? reserva[i]).filter(Boolean) as Foto[];
 
@@ -183,7 +183,7 @@ function Apertura({ bloque }: { bloque: Bloque }) {
 function FotoConPie({ foto, className }: { foto: Foto; className: string }) {
   const contenido = (
     <>
-      <img src={img(foto.url, 1920)} alt={foto.alt} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]" />
+      <img src={img(foto.url, 1920)} alt={foto.alt} style={enfoque(foto)} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
       {foto.pie && (
         <span className="absolute bottom-2.5 left-2.5 hidden max-w-[calc(100%-1.25rem)] truncate rounded-full border border-white/20 bg-black/35 px-3 py-1 text-[11px] font-medium text-white backdrop-blur-md sm:bottom-4 sm:left-4 sm:block">
@@ -242,6 +242,7 @@ function Faceta({ indice: i, datos, reserva }: { indice: number; datos: Record<s
         {foto && (
           <img
             src={img(foto.url, 1200)}
+            style={enfoque(foto)}
             alt={foto.alt}
             loading="lazy"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
@@ -283,7 +284,7 @@ function Valor({ bloque }: { bloque: Bloque }) {
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
         <Revelar>
           <div ref={ref} className="relative aspect-[4/5] overflow-hidden rounded-[40px] bg-[var(--jm-fondo-2)] shadow-[var(--jm-sombra)] sm:aspect-[5/4] lg:aspect-auto lg:h-[min(76svh,740px)]">
-            {foto && <motion.img src={img(foto.url, 1920)} alt={foto.alt} style={{ scale: reducir ? 1 : escala }} className="absolute inset-0 h-full w-full object-cover [will-change:transform]" />}
+            {foto && <motion.img src={img(foto.url, 1920)} alt={foto.alt} style={{ scale: reducir ? 1 : escala, ...enfoque(foto) }} className="absolute inset-0 h-full w-full object-cover [will-change:transform]" />}
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent" />
             <span className="absolute bottom-5 left-5 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs text-white backdrop-blur-md sm:bottom-7 sm:left-7">
               <span className="font-medium text-white/65">con</span>

@@ -16,6 +16,7 @@ import { Miniatura, ProveedorMedios, useSoltarArchivos } from "../campos/medios"
 import { aSlug } from "../campos/tipos";
 import { useDialogos } from "../Dialogos";
 import { Insignia } from "../ListaContenido";
+import { PuntoDeInteres } from "./PuntoDeInteres";
 import { Recortador } from "./Recortador";
 
 type Filtro = "todo" | "imagen" | "video" | "sin-usar" | "sin-alt";
@@ -280,6 +281,7 @@ function Detalle({
               <span className="campo-ayuda">La leen quienes no ven la imagen y Google. Una frase basta.</span>
             </label>
           )}
+          {medio.tipo === "imagen" && <PuntoDeInteres medio={medio} alCambiar={alCambiar} />}
           <div>
             <span className="campo-etiqueta">Dónde se usa</span>
             {usos.length ? (

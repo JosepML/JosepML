@@ -7,7 +7,7 @@ import { laurel } from "@/lib/datos/seleccion";
 import type { Proyecto, Servicio } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
 import { useReducir } from "../comun/hooks";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { Enlace } from "../comun/Enlace";
 import { SelloJuno } from "../comun/SelloJuno";
 import { CABECERA } from "../comun/Transicion";
@@ -256,6 +256,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
                       alt={g.pie || g.imagen.alt || `Fotograma de ${p.titulo}`}
                       loading="lazy"
                       decoding="async"
+                      style={enfoque(g.imagen)}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
                     />
                     <span className="absolute inset-0 flex items-center justify-center bg-black/0 text-white opacity-0 transition-[opacity,background-color] duration-300 group-hover:bg-black/25 group-hover:opacity-100">
@@ -310,6 +311,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
                   <img
                     data-transicion
                     src={img(siguiente.poster.url, 3840)}
+                    style={enfoque(siguiente.poster)}
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105"
                   />

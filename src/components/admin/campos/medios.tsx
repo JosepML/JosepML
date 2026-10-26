@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { img } from "@/components/comun/imagen";
+import { enfoque, img } from "@/components/comun/imagen";
 import { Icono } from "@/components/Iconos";
 import { listarMedios, mediosPorId, type MedioBiblioteca } from "@/lib/admin/medios";
 import { ACEPTA, subirArchivo } from "@/lib/admin/subir";
@@ -43,7 +43,7 @@ export function Miniatura({ medio, className = "", ancho = 384 }: { medio: Medio
     return <video src={`${medio.url}#t=0.5`} muted playsInline preload="metadata" className={`bg-black object-cover ${className}`} />;
   if (medio.tipo === "documento")
     return <div className={`flex items-center justify-center bg-white/5 text-xs font-semibold text-[var(--jm-suave)] ${className}`}>PDF</div>;
-  return <img src={img(medio.url, ancho)} alt={medio.alt} draggable={false} className={`object-cover ${className}`} />;
+  return <img src={img(medio.url, ancho)} alt={medio.alt} draggable={false} className={`object-cover ${className}`} style={enfoque(medio)} />;
 }
 
 // ---- Subir arrastrando ----------------------------------------------------------------------------

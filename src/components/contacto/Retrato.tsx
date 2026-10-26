@@ -4,7 +4,7 @@ import { motion, useMotionValue, useScroll, useSpring, useTransform } from "moti
 import { useRef } from "react";
 import type { Medio } from "@/lib/datos/tipos";
 import { usePunteroFino, useReducir } from "../comun/hooks";
-import { img } from "../comun/imagen";
+import { enfoque, img } from "../comun/imagen";
 import { Revelar } from "../piezas";
 
 /**
@@ -55,7 +55,7 @@ export function Retrato({
             src={img(medio.url, 1920)}
             alt={medio.alt}
             className="absolute inset-0 h-full w-full origin-top object-cover object-center [will-change:transform]"
-            style={{ scale: reducir ? 1 : escala }}
+            style={{ scale: reducir ? 1 : escala, ...enfoque(medio) }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           {children && (

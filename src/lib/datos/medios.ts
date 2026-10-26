@@ -4,7 +4,8 @@ import type { Medio } from "./tipos";
 function aMedio(f: Fila<"medios">): Medio | null {
   const url = f.ruta ? urlBucket(f.ruta) : f.url_origen;
   if (!url) return null;
-  return { id: f.id, url, tipo: f.tipo, alt: f.texto_alternativo, ancho: f.ancho, alto: f.alto };
+  const foco = f.foco_x != null && f.foco_y != null ? { x: f.foco_x, y: f.foco_y } : null;
+  return { id: f.id, url, tipo: f.tipo, alt: f.texto_alternativo, ancho: f.ancho, alto: f.alto, foco };
 }
 
 /** Biblioteca de medios por id, con la URL resuelta (bucket si ya está subido; si no, la URL de origen) */
