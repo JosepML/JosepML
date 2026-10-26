@@ -4,15 +4,18 @@
 // ocultar. Escribe en el mismo borrador que el modo «Editar página» (la lista entera de bloques, en orden), así
 // que lo que se mueve aquí se ve allí y al revés, y nada llega a la web hasta Publicar.
 
-import { Reorder, useDragControls } from "motion/react";
+import { AnimatePresence, motion, Reorder, useDragControls } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useDialogos } from "@/components/admin/Dialogos";
+import { Campos, ProveedorOpciones } from "@/components/admin/campos/Campos";
+import type { OpcionesFormulario } from "@/components/admin/campos/tipos";
 import { Insignia } from "@/components/admin/ListaContenido";
 import { textoGuardado, useAutoguardado } from "@/components/admin/useAutoguardado";
 import { CATALOGO } from "@/components/edicion/catalogo";
 import { Icono } from "@/components/Iconos";
+import { CURVA } from "@/styles/movimiento";
 import { descartar, publicar, type ParaEditar } from "@/lib/admin/contenido";
 import type { TipoBloque } from "@/lib/datos/tipos";
 
@@ -26,7 +29,7 @@ function tituloDe(b: BloqueEditable) {
   return t.replace(/\*/g, "").trim();
 }
 
-export function OrdenSecciones({ id, titulo, ruta, inicial }: { id: string; titulo: string; ruta: string; inicial: ParaEditar }) {
+export function OrdenSecciones({ id, titulo, ruta, inicial, opciones }: { id: string; titulo: string; ruta: string; inicial: ParaEditar; opciones: OpcionesFormulario }) {
   const router = useRouter();
   const { confirmar, avisar } = useDialogos();
   const [publicados, setPublicados] = useState(() => (inicial.extras.bloques as BloqueEditable[]) ?? []);
@@ -34,6 +37,7 @@ export function OrdenSecciones({ id, titulo, ruta, inicial }: { id: string; titu
   const [otros, setOtros] = useState(() => Object.fromEntries(Object.entries(inicial.borrador ?? {}).filter(([k]) => k !== "bloques")));
   const [bloques, setBloques] = useState<BloqueEditable[]>(() => (inicial.borrador?.bloques as BloqueEditable[] | undefined) ?? publicados);
   const [publicando, setPublicando] = useState(false);
+  const [abierto, setAbierto] = useState<string | null>(null);
 
   const cambios = useMemo(() => (json(bloques) === json(publicados) ? { ...otros } : { ...otros, bloques }), [bloques, otros, publicados]);
   const [cambiosIniciales, setCambiosIniciales] = useState<Record<string, unknown>>(() => inicial.borrador ?? {});
@@ -51,6 +55,7 @@ export function OrdenSecciones({ id, titulo, ruta, inicial }: { id: string; titu
     [lista[i], lista[j]] = [lista[j], lista[i]];
     setBloques(lista);
   };
+  const cambiarDato = (bid: string, clave: string, valor: unknown) => setBloques((l) => l.map((b) => (b.id === bid ? { ...b, datos: { ...b.datos, [clave]: valor } } : b)));
   const alternar = (bid: string) => setBloques((l) => l.map((b) => (b.id === bid ? { ...b, visible: !b.visible } : b)));
 
   const alPublicar = async () => {
@@ -118,7 +123,7 @@ export function OrdenSecciones({ id, titulo, ruta, inicial }: { id: string; titu
       </div>
 
       <p className="max-w-xl text-[var(--jm-suave)]">
-        Arrastra las secciones para cambiar el orden en que salen en la página, o usa las flechas. El ojo la oculta sin borrarla. Nada cambia en la web hasta que pulsas Publicar.
+        Arrastra las secciones para cambiar su orden, o usa las flechas. El ojo la oculta sin borrarla y el lápiz abre su contenido: textos, fotos y qué proyectos salen y en qué orden. Nada cambia en la web hasta que pulsas Publicar.
       </p>
       {otrosCambios && (
         <p className="mt-4 rounded-[20px] bg-[var(--jm-calido)]/10 px-4 py-3 text-sm text-[var(--jm-calido)]">
@@ -126,14 +131,16 @@ export function OrdenSecciones({ id, titulo, ruta, inicial }: { id: string; titu
         </p>
       )}
 
+      <ProveedorOpciones opciones={opciones}>
       <Reorder.Group axis="y" values={bloques} onReorder={setBloques} className="mt-6 flex flex-col gap-2">
         {bloques.map((b, i) => (
-          <Fila key={b.id} b={b} n={i + 1} nueva={!porId.has(b.id)} primera={i === 0} ultima={i === bloques.length - 1} alSubir={() => mover(i, -1)} alBajar={() => mover(i, 1)} alVisible={() => alternar(b.id)} />
+          <Fila key={b.id} b={b} n={i + 1} abierto={abierto === b.id} alAbrir={() => setAbierto(abierto === b.id ? null : b.id)} alCambiar={(clave, valor) => cambiarDato(b.id, clave, valor)} nueva={!porId.has(b.id)} primera={i === 0} ultima={i === bloques.length - 1} alSubir={() => mover(i, -1)} alBajar={() => mover(i, 1)} alVisible={() => alternar(b.id)} />
         ))}
       </Reorder.Group>
+      </ProveedorOpciones>
 
       <p className="mt-6 text-sm text-[var(--jm-tenue)]">
-        Para cambiar textos, fotos o añadir secciones,{" "}
+        Para añadir secciones nuevas,{" "}
         <Link href={`${ruta}?editar=1`} className="font-semibold text-[var(--jm-texto)] underline-offset-4 hover:underline">
           edita la página en la web
         </Link>
@@ -143,7 +150,10 @@ export function OrdenSecciones({ id, titulo, ruta, inicial }: { id: string; titu
   );
 }
 
-function Fila({ b, n, nueva, primera, ultima, alSubir, alBajar, alVisible }: { b: BloqueEditable; n: number; nueva: boolean; primera: boolean; ultima: boolean; alSubir: () => void; alBajar: () => void; alVisible: () => void }) {
+/** Las cuatro partes del bloque «colaboracion» se distinguen por su nombre en la lista */
+const PARTES: Record<string, string> = { apertura: "Apertura", relacion: "Lo que nos une", valor: "Para tu proyecto", productora: "La productora" };
+
+function Fila({ b, n, abierto, alAbrir, alCambiar, nueva, primera, ultima, alSubir, alBajar, alVisible }: { b: BloqueEditable; n: number; abierto: boolean; alAbrir: () => void; alCambiar: (clave: string, valor: unknown) => void; nueva: boolean; primera: boolean; ultima: boolean; alSubir: () => void; alBajar: () => void; alVisible: () => void }) {
   const controles = useDragControls();
   const info = CATALOGO[b.tipo];
   const t = tituloDe(b);
@@ -152,15 +162,16 @@ function Fila({ b, n, nueva, primera, ultima, alSubir, alBajar, alVisible }: { b
       value={b}
       dragListener={false}
       dragControls={controles}
-      className="cristal flex items-center gap-3 rounded-[24px] p-2 pr-3"
+      className="cristal rounded-[24px]"
       whileDrag={{ scale: 1.02, boxShadow: "0 24px 50px -16px rgba(0,0,0,0.6)", zIndex: 10 }}
     >
+      <div className="flex items-center gap-3 p-2 pr-3">
       <button type="button" onPointerDown={(e) => controles.start(e)} className="flex h-10 w-6 shrink-0 cursor-grab touch-none items-center justify-center text-[var(--jm-tenue)] active:cursor-grabbing" aria-label="Arrastrar para ordenar">
         <Icono nombre="asa" className="h-4 w-4" />
       </button>
       <span className="w-5 shrink-0 text-center text-xs font-semibold tabular-nums text-[var(--jm-tenue)]">{n}</span>
       <span className={`min-w-0 flex-1 py-1.5 ${b.visible ? "" : "opacity-50"}`}>
-        <span className="block font-semibold leading-snug">{info?.nombre ?? b.tipo}</span>
+        <span className="block font-semibold leading-snug">{(b.tipo === "colaboracion" && PARTES[String(b.datos.parte)]) || info?.nombre || b.tipo}</span>
         <span className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[var(--jm-tenue)]">
           {t && <span className="line-clamp-1">{t}</span>}
           {nueva && <Insignia color="bg-white/15 text-[var(--jm-suave)]">Nueva</Insignia>}
@@ -177,7 +188,22 @@ function Fila({ b, n, nueva, primera, ultima, alSubir, alBajar, alVisible }: { b
         <button type="button" onClick={alVisible} className="boton-icono" aria-label={b.visible ? "Ocultar sección" : "Mostrar sección"} title={b.visible ? "Ocultar sección" : "Mostrar sección"}>
           <Icono nombre={b.visible ? "ojo" : "ojo-no"} className="h-[18px] w-[18px]" />
         </button>
+        {info && (
+          <button type="button" onClick={alAbrir} className={`boton-icono ${abierto ? "!text-[var(--jm-acento)]" : ""}`} aria-label="Editar el contenido" aria-expanded={abierto} title="Editar el contenido">
+            <Icono nombre="lapiz" className="h-[18px] w-[18px]" />
+          </button>
+        )}
       </div>
+      </div>
+      <AnimatePresence initial={false}>
+        {abierto && info && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.45, ease: CURVA }} className="overflow-hidden">
+            <div className="border-t border-[var(--jm-borde)] px-4 pb-5 pt-4">
+              <Campos campos={info.campos} datos={b.datos} cambiar={alCambiar} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Reorder.Item>
   );
 }

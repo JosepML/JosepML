@@ -13,11 +13,25 @@ const CON_PLANTILLA = new Set(["trabajos", "recreaciones"]);
 
 export default async function EditarPagina({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  await exigirAdmin({ redirigir: `/admin/paginas/${id}` });
-  const r = await cargarParaEditar("paginas", id);
+  const sesion = await exigirAdmin({ redirigir: `/admin/paginas/${id}` });
+  const [r, { data: proyectos }, { data: tipos }] = await Promise.all([
+    cargarParaEditar("paginas", id),
+    sesion.from("proyectos").select("id, titulo").order("orden"),
+    sesion.from("tipos_proyecto").select("slug, nombre").order("orden"),
+  ]);
   if (!r.ok) notFound();
   const slug = String(r.datos.fila.slug ?? "");
   const ruta = rutaPagina(slug);
   if (CON_PLANTILLA.has(slug)) return <EditorCabecera id={id} slug={slug} ruta={ruta} inicial={r.datos} />;
-  return <OrdenSecciones id={id} titulo={String(r.datos.fila.titulo || slug)} ruta={ruta} inicial={r.datos} />;
+  return (
+    <OrdenSecciones
+      id={id} titulo={String(r.datos.fila.titulo || slug)}
+      ruta={ruta}
+      inicial={r.datos}
+      opciones={{
+        proyectos: (proyectos ?? []).map((p) => ({ valor: p.id, nombre: p.titulo })),
+        tipos: (tipos ?? []).map((t) => ({ valor: t.slug, nombre: t.nombre })),
+      }}
+    />
+  );
 }

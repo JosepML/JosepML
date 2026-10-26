@@ -87,7 +87,12 @@ function Apertura({ bloque }: { bloque: Bloque }) {
     const p = proyectos.find((p) => p.poster?.id === m.id || p.galeria.some((g) => g.imagen.id === m.id));
     return [{ url: m.url, alt: m.alt || p?.titulo || "", pie: texto(o.pie) || p?.titulo, href: p ? RUTAS.proyecto(p.slug) : undefined }];
   });
-  const fotos = [0, 1, 2].map((i) => elegidas[i] ?? reserva[i]).filter(Boolean) as Foto[];
+  // Los proyectos elegidos a mano (su portada) mandan sobre las fotos sueltas; lo que falte lo pone la reserva
+  const deProyectos = lista(bloque.datos.proyectos).flatMap((x): Foto[] => {
+    const p = proyectos.find((p) => p.id === x);
+    return p?.poster ? [{ url: p.poster.url, alt: p.poster.alt || p.titulo, pie: p.titulo, href: RUTAS.proyecto(p.slug) }] : [];
+  });
+  const fotos = [0, 1, 2].map((i) => deProyectos[i] ?? elegidas[i] ?? reserva[i]).filter(Boolean) as Foto[];
 
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });

@@ -283,10 +283,17 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
       { ...titulo, si: { clave: "parte", valores: ["apertura", "relacion", "valor"] } },
       { ...texto, si: { clave: "parte", valores: ["apertura", "relacion", "valor", "productora"] } },
       {
+        tipo: "proyectos",
+        clave: "proyectos",
+        etiqueta: "Proyectos del tríptico (tres)",
+        ayuda: "Sale la portada de cada uno, en este orden (el segundo, el grande), y lleva a su ficha. Sin elegir, salen tres de JUNO Media.",
+        si: { clave: "parte", valores: ["apertura"] },
+      },
+      {
         tipo: "galeria",
         clave: "imagenes",
-        etiqueta: "Fotos (tres)",
-        ayuda: "Sin fotos, salen las portadas de tres proyectos con JUNO Media",
+        etiqueta: "O fotos sueltas (tres)",
+        ayuda: "Solo se usan para los huecos que dejen los proyectos de arriba",
         si: { clave: "parte", valores: ["apertura"] },
       },
       {
