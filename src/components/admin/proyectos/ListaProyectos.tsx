@@ -36,7 +36,7 @@ const FILTROS: { id: Filtro; nombre: string }[] = [
 ];
 
 /** Máximo de destacados en Inicio: los que caben en el carrusel de Selección sin que se haga largo */
-const MAX_DESTACADOS = 8;
+const MAX_DESTACADOS = 12;
 
 export type OrdenServicio = { id: string; nombre: string; proyectos: string[] };
 
@@ -152,12 +152,43 @@ export function ListaProyectos({ inicial, porServicio }: { inicial: FilaProyecto
                 <Miniatura medio={p.poster} className="pointer-events-none aspect-video w-full" />
                 <span className="absolute left-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/70 text-[10px] font-bold text-white">{p.destacado}</span>
                 <span className="block truncate bg-black/40 px-2 py-1.5 text-xs font-semibold">{p.titulo}</span>
+                <button
+                  type="button"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={() => void alternarDestacado(p)}
+                  className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/70 text-[11px] font-bold text-white hover:bg-[#e50914]"
+                  aria-label={`Quitar «${p.titulo}» de Inicio`}
+                  title="Quitar de Inicio"
+                >
+                  ×
+                </button>
               </Reorder.Item>
             ))}
           </Reorder.Group>
         ) : (
           <p className="mt-3 text-sm text-[var(--jm-suave)]">Marca proyectos con la estrella para que salgan en Inicio.</p>
         )}
+        <label className="mt-4 flex flex-wrap items-center gap-3 text-xs text-[var(--jm-tenue)]">
+          Añadir a la selección
+          <select
+            value=""
+            onChange={(e) => {
+              const p = lista.find((x) => x.id === e.target.value);
+              if (p) void alternarDestacado(p);
+            }}
+            className="campo !w-auto !rounded-full !py-1.5 text-[13px]"
+          >
+            <option value="">Elige un trabajo…</option>
+            {lista
+              .filter((x) => x.destacado === null)
+              .map((x) => (
+                <option key={x.id} value={x.id}>
+                  {x.titulo}
+                  {x.estado !== "publicado" ? " (no visible en la web)" : ""}
+                </option>
+              ))}
+          </select>
+        </label>
       </section>
 
       <OrdenPorServicio servicios={porServicio} lista={lista} alGuardar={ordenarPorServicio} alResultado={resultado} />
