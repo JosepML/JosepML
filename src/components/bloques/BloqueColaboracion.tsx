@@ -113,18 +113,8 @@ function Apertura({ bloque }: { bloque: Bloque }) {
       </div>
 
       <div className="relative mx-auto max-w-5xl text-center">
-        {(antetitulo || editando) && (
-          <Revelar>
-            <span className="cristal inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)]">
-              <Editable campo="antetitulo" valor={antetitulo} vacio="Antetítulo">
-                {antetitulo}
-              </Editable>
-            </span>
-          </Revelar>
-        )}
-
-        <p className="mt-8 flex items-center justify-center gap-3 text-lg sm:gap-5 sm:text-2xl" aria-label="Josep Mira y JUNO Media">
-          <motion.span className="font-extrabold tracking-[-0.03em]" initial={desde(-28)} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, ease: CURVA, delay: 0.15 }}>
+        <p className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 text-lg sm:gap-5 sm:text-2xl" aria-label="Josep Mira y JUNO Media">
+          <motion.span className="text-right font-extrabold tracking-[-0.03em]" initial={desde(-28)} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, ease: CURVA, delay: 0.15 }}>
             Josep Mira
           </motion.span>
           <motion.span
@@ -136,7 +126,7 @@ function Apertura({ bloque }: { bloque: Bloque }) {
           >
             ×
           </motion.span>
-          <motion.span className="tracking-[0.16em]" initial={desde(28)} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, ease: CURVA, delay: 0.15 }}>
+          <motion.span className="text-left tracking-[0.16em]" initial={desde(28)} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, ease: CURVA, delay: 0.15 }}>
             <MarcaJuno />
           </motion.span>
         </p>
@@ -148,6 +138,16 @@ function Apertura({ bloque }: { bloque: Bloque }) {
             </Editable>
           </h2>
         </Revelar>
+        {(antetitulo || editando) && (
+          <Revelar retraso={0.36}>
+            <span className="cristal mt-6 inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)]">
+              <Editable campo="antetitulo" valor={antetitulo} vacio="Antetítulo">
+                {antetitulo}
+              </Editable>
+            </span>
+          </Revelar>
+        )}
+
         {(entrada || editando) && (
           <Revelar retraso={0.42}>
             <div className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--jm-suave)] [text-wrap:pretty] sm:text-xl">
