@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-import { tiposDe } from "@/lib/datos/seleccion";
+import { proyectosDe, tiposDe } from "@/lib/datos/seleccion";
 import type { Proyecto, Servicio } from "@/lib/datos/tipos";
 import { TarjetaProyecto } from "../bloques/BloqueTrabajos";
 import { CURVA, Revelar } from "../piezas";
@@ -58,7 +58,9 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
   const delServicio = (categorias[servicio] ?? categorias.todos ?? porTipo).filter((c) => proyectos.some((p) => deServicio(p) && tiposDe(p).some((t) => c.tipos.includes(t))));
   const elegida = delServicio.find((c) => c.nombre === categoria);
   const filtrosCategoria = [{ slug: "todos", nombre: "Todos los tipos" }, ...delServicio.map((c) => ({ slug: c.nombre, nombre: c.nombre }))];
-  const visibles = proyectos.filter((p) => deServicio(p) && (!elegida || tiposDe(p).some((t) => elegida.tipos.includes(t))));
+  const cumple = (p: Proyecto) => deServicio(p) && (!elegida || tiposDe(p).some((t) => elegida.tipos.includes(t)));
+  // Dentro de un servicio, el orden que Josep le dio en el panel («Orden por servicio»); en «Todos», el general
+  const visibles = servicio === "todos" ? proyectos.filter(cumple) : proyectosDe(proyectos, servicio).filter(cumple);
   // Al cambiar de servicio, la categoría se mantiene solo si ese servicio también la tiene
   const actualCategoria = elegida ? categoria : "todos";
   const elegirServicio = (s: string) => {
