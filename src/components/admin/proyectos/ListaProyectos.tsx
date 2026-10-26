@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, Reorder, useDragControls } from "motion/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { cambiarAlInstante, cambiarVisible, crear, duplicar, borrar, reordenar, ordenarPorServicio } from "@/lib/admin/contenido";
 import type { Medio } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
@@ -60,6 +60,8 @@ export function ListaProyectos({ inicial, porServicio }: { inicial: FilaProyecto
     });
   }, [lista, busqueda, filtro]);
   // Ordenar arrastrando solo con la lista entera a la vista (con filtros, el orden sería ambiguo)
+  const tira = useRef<HTMLUListElement>(null);
+  const desplazar = (dx: number) => tira.current?.scrollBy({ left: dx, behavior: "smooth" });
   const ordenable = filtro === "todos" && !busqueda.trim();
   const destacados = lista.filter((p) => p.destacado !== null).sort((a, b) => a.destacado! - b.destacado!);
 
@@ -137,7 +139,19 @@ export function ListaProyectos({ inicial, porServicio }: { inicial: FilaProyecto
           <span className="text-xs text-[var(--jm-tenue)]">Arrastra para cambiar el orden del carrusel</span>
         </div>
         {destacados.length ? (
-          <Reorder.Group axis="x" values={destacados} onReorder={(n) => void ordenarDestacados(n)} className="sin-barra mt-4 flex gap-2 overflow-x-auto pb-1">
+          <div className="relative mt-4">
+          <button type="button" onClick={() => desplazar(-360)} className="boton-icono absolute -left-3 top-1/2 z-10 -translate-y-1/2 bg-black/70" aria-label="Ver los anteriores">‹</button>
+          <button type="button" onClick={() => desplazar(360)} className="boton-icono absolute -right-3 top-1/2 z-10 -translate-y-1/2 bg-black/70" aria-label="Ver los siguientes">›</button>
+          <Reorder.Group
+            ref={tira}
+            axis="x"
+            values={destacados}
+            onReorder={(n) => void ordenarDestacados(n)}
+            onWheel={(e) => {
+              if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) tira.current?.scrollBy({ left: e.deltaY });
+            }}
+            className="sin-barra flex gap-2 overflow-x-auto pb-1"
+          >
             {destacados.map((p) => (
               <Reorder.Item
                 key={p.id}
@@ -165,6 +179,7 @@ export function ListaProyectos({ inicial, porServicio }: { inicial: FilaProyecto
               </Reorder.Item>
             ))}
           </Reorder.Group>
+          </div>
         ) : (
           <p className="mt-3 text-sm text-[var(--jm-suave)]">Marca proyectos con la estrella para que salgan en Inicio.</p>
         )}
