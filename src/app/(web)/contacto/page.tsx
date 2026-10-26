@@ -17,21 +17,25 @@ export default async function Contacto() {
   const foto = (await getServicio("filmmaker"))?.imagen ?? null;
   return (
     <section className="px-4 pb-24 pt-28 sm:px-8 sm:pt-32">
-      <div className="mx-auto grid max-w-7xl items-start gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
+      <div className="mx-auto grid max-w-7xl items-start gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+        {/* Texto arriba y la foto debajo; el formulario, al lado. En pantallas altas la columna se queda fija mientras se rellena */}
         <div className="lg:sticky lg:top-28">
-          <Retrato medio={foto} etiqueta="Josep Mira Lozano · Filmmaker, director de fotografía y editor" />
-        </div>
-        <div>
           <Titular nivel={1} antetitulo="Contacto" titulo="Hablemos de tu *proyecto*" />
           <Revelar retraso={0.12}>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-[var(--jm-suave)]">
               Cuéntame qué tienes en mente, aunque aún no esté claro. Lo pensamos juntos y te propongo cómo llevarlo a la pantalla. Sin compromiso.
             </p>
           </Revelar>
-          <Revelar retraso={0.2} className="mt-8">
-            <FormularioContacto />
-          </Revelar>
+          <Retrato
+            className="mt-8 lg:mt-10"
+            aspecto="aspect-[4/5] max-w-md lg:aspect-[3/2] lg:max-w-none"
+            medio={foto}
+            etiqueta="Josep Mira Lozano · Filmmaker, director de fotografía y editor"
+          />
         </div>
+        <Revelar retraso={0.2}>
+          <FormularioContacto />
+        </Revelar>
       </div>
     </section>
   );

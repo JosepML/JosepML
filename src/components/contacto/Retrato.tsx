@@ -11,7 +11,18 @@ import { Revelar } from "../piezas";
  * Retrato de «Sobre mí» para Contacto y Gracias: se inclina con el ratón, con un zoom muy leve al hacer scroll
  * (anclado arriba para que la cabeza no se corte) y una etiqueta pequeña abajo. Sin foto, no pinta nada.
  */
-export function Retrato({ medio, etiqueta, className = "" }: { medio: Medio | null; etiqueta?: string; className?: string }) {
+export function Retrato({
+  medio,
+  etiqueta,
+  className = "",
+  aspecto = "aspect-[4/5] max-w-md lg:max-w-none",
+}: {
+  medio: Medio | null;
+  etiqueta?: string;
+  className?: string;
+  /** Proporción y ancho del marco (clases de Tailwind) */
+  aspecto?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const reducir = useReducir();
   const fino = usePunteroFino();
@@ -27,7 +38,7 @@ export function Retrato({ medio, etiqueta, className = "" }: { medio: Medio | nu
     <Revelar className={className}>
       <div ref={ref} style={{ perspective: 1200 }}>
         <motion.div
-          className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[44px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] lg:max-w-none"
+          className={`relative mx-auto ${aspecto} overflow-hidden rounded-[44px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)]`}
           style={{ rotateX: srx, rotateY: sry }}
           onPointerMove={(e) => {
             if (!fino || reducir) return;
