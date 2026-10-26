@@ -32,11 +32,11 @@ export function fotosCabeceraDe(servicio: Servicio, proyectos: Proyecto[]): stri
   return servicio.fotosCabecera.length ? servicio.fotosCabecera.map((m) => m.url) : imagenesDe(servicio, proyectos);
 }
 
-/** Fotogramas de un proyecto para las diapositivas al pasar el ratón: la galería, o al menos el póster */
+/** Fotogramas de un proyecto para las tarjetas: el póster primero (es la foto que Josep eligió para la tarjeta) y, detrás, el resto de la galería */
 export function fotogramas(p: Proyecto): string[] {
   const g = p.galeria.map((x) => x.imagen.url);
-  if (g.length > 1) return g;
-  return p.poster ? [p.poster.url] : g;
+  const todas = p.poster ? [p.poster.url, ...g.filter((u) => u !== p.poster!.url)] : g;
+  return todas.length > 1 ? todas : p.poster ? [p.poster.url] : g;
 }
 
 /** El premio que se enseña en la tarjeta (laurel): el primero de la lista */
