@@ -46,7 +46,7 @@ function medidas(archivo: File): Promise<{ ancho: number | null; alto: number | 
 }
 
 /** Sube un archivo y lo deja en la biblioteca. Lanza un Error con un mensaje para Josep si algo falla. */
-export async function subirArchivo(archivo: File): Promise<MedioBiblioteca> {
+export async function subirArchivo(archivo: File, foco: { x: number; y: number } | null = null): Promise<MedioBiblioteca> {
   if (!ACEPTA.split(",").includes(archivo.type)) throw new Error(`«${archivo.name}» no es una imagen, un vídeo mp4/webm ni un pdf.`);
   if (archivo.size > MAXIMO) throw new Error(`«${archivo.name}» pesa ${(archivo.size / 1048576).toFixed(0)} MB; el máximo es 50 MB.`);
   const ahora = new Date();
@@ -57,7 +57,7 @@ export async function subirArchivo(archivo: File): Promise<MedioBiblioteca> {
   ]);
   if (error) throw new Error(/row-level|unauthorized|jwt/i.test(error.message) ? "Tu sesión ha caducado: vuelve a entrar para subir archivos." : `No se pudo subir «${archivo.name}»: ${error.message}`);
   const tipo = archivo.type.startsWith("image/") ? "imagen" : archivo.type.startsWith("video/") ? "video" : "documento";
-  const r = await registrarMedio({ ruta, tipo, mime: archivo.type, bytes: archivo.size, ...m, titulo: archivo.name.replace(/\.[^.]+$/, "") });
+  const r = await registrarMedio({ ruta, tipo, mime: archivo.type, bytes: archivo.size, ...m, titulo: archivo.name.replace(/\.[^.]+$/, ""), foco });
   if (!r.ok) throw new Error(r.error);
   return r.datos;
 }

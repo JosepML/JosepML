@@ -76,6 +76,8 @@ export type DatosSubida = {
   alto: number | null;
   duracion: number | null;
   titulo: string;
+  /** Punto de interés elegido al subir (vacío = centro) */
+  foco?: { x: number; y: number } | null;
 };
 
 /** Da de alta en la biblioteca un archivo que el navegador acaba de subir al bucket */
@@ -84,7 +86,7 @@ export async function registrarMedio(d: DatosSubida): Promise<Resultado<MedioBib
     const s = await exigirAdmin();
     const { data, error } = await s
       .from("medios")
-      .insert({ ruta: d.ruta, tipo: d.tipo, mime: d.mime, bytes: d.bytes, ancho: d.ancho, alto: d.alto, duracion: d.duracion, titulo: d.titulo })
+      .insert({ ruta: d.ruta, tipo: d.tipo, mime: d.mime, bytes: d.bytes, ancho: d.ancho, alto: d.alto, duracion: d.duracion, titulo: d.titulo, foco_x: d.foco?.x ?? null, foco_y: d.foco?.y ?? null })
       .select("*")
       .single();
     if (error) throw new Error(error.message);

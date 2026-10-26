@@ -50,12 +50,12 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
   const input = useRef<HTMLInputElement>(null);
   useEffect(() => setMedios(iniciales), [iniciales]);
 
-  const { encima, subiendo, error, setError, subir, manejadores } = useSoltarArchivos(
+  const { encima, subiendo, error, setError, subir, manejadores, fotoElegida } = useSoltarArchivos(
     (nuevos) => {
       setMedios((m) => [...nuevos, ...m]);
       router.refresh();
     },
-    { multiple: true },
+    { multiple: true, elegirFoco: true },
   );
 
   const usosDe = (id: string) => usos[id.toLowerCase()] ?? [];
@@ -74,6 +74,7 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
 
   return (
     <div className="relative mx-auto max-w-6xl" {...manejadores}>
+      {fotoElegida}
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-4xl font-extrabold tracking-[-0.04em]">Biblioteca</h1>

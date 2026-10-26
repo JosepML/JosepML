@@ -6,6 +6,8 @@ import { enfoque, img } from "@/components/comun/imagen";
 import { Icono } from "@/components/Iconos";
 import { listarMedios, mediosPorId, type MedioBiblioteca } from "@/lib/admin/medios";
 import { ACEPTA, subirArchivo } from "@/lib/admin/subir";
+import type { Foco } from "../biblioteca/PuntoDeInteres";
+import { ElegirFotoSubida } from "./ElegirFotoSubida";
 import type { Medio } from "@/lib/datos/tipos";
 import { CURVA } from "@/styles/movimiento";
 
@@ -49,11 +51,13 @@ export function Miniatura({ medio, className = "", ancho = 384 }: { medio: Medio
 // ---- Subir arrastrando ----------------------------------------------------------------------------
 
 /** Estado y manejadores para soltar archivos sobre una zona. `alSubir` recibe los medios ya en la biblioteca. */
-export function useSoltarArchivos(alSubir: (m: MedioBiblioteca[]) => void, opciones: { multiple?: boolean } = {}) {
+/** `elegirFoco`: antes de subir, se pregunta el punto de interés de cada foto (hay que pintar `fotoElegida` en el JSX) */
+export function useSoltarArchivos(alSubir: (m: MedioBiblioteca[]) => void, opciones: { multiple?: boolean; elegirFoco?: boolean } = {}) {
   const { registrar } = useMediosConocidos();
   const [encima, setEncima] = useState(false);
   const [subiendo, setSubiendo] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [pidiendo, setPidiendo] = useState<{ archivos: File[]; resolver: (focos: Foco[] | null) => void } | null>(null);
   const profundidad = useRef(0);
 
   const subir = useCallback(
@@ -61,11 +65,21 @@ export function useSoltarArchivos(alSubir: (m: MedioBiblioteca[]) => void, opcio
       const lista = opciones.multiple ? archivos : archivos.slice(0, 1);
       if (!lista.length) return;
       setError(null);
+      // Solo las fotos que se recortan (no los gif ni los svg, que no se recortan)
+      const fotos = lista.filter((a) => a.type.startsWith("image/") && !["image/gif", "image/svg+xml"].includes(a.type));
+      let focos: Foco[] = [];
+      if (opciones.elegirFoco && fotos.length) {
+        const elegidos = await new Promise<Foco[] | null>((resolver) => setPidiendo({ archivos: fotos, resolver }));
+        setPidiendo(null);
+        if (!elegidos) return;
+        focos = elegidos;
+      }
       setSubiendo((n) => n + lista.length);
       const hechos: MedioBiblioteca[] = [];
       for (const a of lista) {
         try {
-          hechos.push(await subirArchivo(a));
+          const i = fotos.indexOf(a);
+          hechos.push(await subirArchivo(a, i >= 0 ? (focos[i] ?? null) : null));
         } catch (e) {
           setError(e instanceof Error ? e.message : String(e));
         } finally {
@@ -78,7 +92,7 @@ export function useSoltarArchivos(alSubir: (m: MedioBiblioteca[]) => void, opcio
         alSubir(hechos);
       }
     },
-    [alSubir, opciones.multiple, registrar],
+    [alSubir, opciones.multiple, opciones.elegirFoco, registrar],
   );
 
   const manejadores = {
@@ -103,7 +117,9 @@ export function useSoltarArchivos(alSubir: (m: MedioBiblioteca[]) => void, opcio
       subir([...e.dataTransfer.files]);
     },
   };
-  return { encima, subiendo, error, setError, subir, manejadores };
+  // Lo que hay que pintar en el JSX de quien usa el hook (la pregunta del punto de interés, si toca)
+  const fotoElegida = pidiendo ? <ElegirFotoSubida archivos={pidiendo.archivos} alTerminar={pidiendo.resolver} /> : null;
+  return { encima, subiendo, error, setError, subir, manejadores, fotoElegida };
 }
 
 // ---- Selector (subir o elegir de la biblioteca) ---------------------------------------------------
@@ -134,7 +150,7 @@ export function SelectorMedios({ abierto, alCerrar, alElegir, acepta = "imagen",
     },
     [alElegir, alCerrar],
   );
-  const { encima, subiendo, error, subir, manejadores } = useSoltarArchivos(terminar, { multiple });
+  const { encima, subiendo, error, subir, manejadores, fotoElegida } = useSoltarArchivos(terminar, { multiple, elegirFoco: true });
 
   useEffect(() => {
     if (!abierto) return;
@@ -164,6 +180,8 @@ export function SelectorMedios({ abierto, alCerrar, alElegir, acepta = "imagen",
   const filtroArchivo = acepta === "imagen" ? ACEPTA.split(",").filter((t) => t.startsWith("image/")).join(",") : acepta === "video" ? "video/mp4,video/webm" : ACEPTA;
 
   return (
+    <>
+    {fotoElegida}
     <AnimatePresence>
       {abierto && (
         <motion.div
@@ -269,5 +287,6 @@ export function SelectorMedios({ abierto, alCerrar, alElegir, acepta = "imagen",
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   );
 }

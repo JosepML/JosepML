@@ -358,11 +358,12 @@ export function AreaTexto({ id, valor, filas, placeholder, alCambiar }: { id?: s
 export function CampoMedio({ valor, acepta, alCambiar }: { valor: string | null; acepta: "imagen" | "video" | "todo"; alCambiar: (v: string | null) => void }) {
   const { medios } = useMediosConocidos();
   const [abierto, setAbierto] = useState(false);
-  const { encima, subiendo, error, manejadores } = useSoltarArchivos((m) => alCambiar(m[0].id));
+  const { encima, subiendo, error, manejadores, fotoElegida } = useSoltarArchivos((m) => alCambiar(m[0].id), { elegirFoco: true });
   const medio = valor ? medios[valor] : null;
 
   return (
     <div {...manejadores}>
+      {fotoElegida}
       <div
         className={`flex items-center gap-4 rounded-[20px] border p-2.5 transition-colors duration-300 ${
           encima ? "border-[var(--jm-acento)] bg-[rgba(229,9,20,0.08)]" : "border-[var(--jm-borde)] bg-black/15"
@@ -404,7 +405,7 @@ export function CampoGaleria({ valor, alCambiar }: { valor: Foto[]; alCambiar: (
   const [destino, setDestino] = useState<number | null>(null);
   const [pieAbierto, setPieAbierto] = useState<number | null>(null);
   const anadir = (m: { id: string }[]) => alCambiar([...valor, ...m.map((x) => ({ medio: x.id, pie: "" }))]);
-  const { encima, subiendo, error, manejadores } = useSoltarArchivos(anadir, { multiple: true });
+  const { encima, subiendo, error, manejadores, fotoElegida } = useSoltarArchivos(anadir, { multiple: true, elegirFoco: true });
 
   const mover = (de: number, a: number) => {
     if (a < 0 || a >= valor.length || de === a) return;
@@ -416,6 +417,8 @@ export function CampoGaleria({ valor, alCambiar }: { valor: Foto[]; alCambiar: (
 
   return (
     <div {...manejadores} className={`rounded-[22px] border p-2.5 transition-colors duration-300 ${encima ? "border-[var(--jm-acento)] bg-[rgba(229,9,20,0.08)]" : "border-[var(--jm-borde)] bg-black/15"}`}>
+      {fotoElegida}
+      {fotoElegida}
       <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
         {valor.map((f, i) => (
           <div
