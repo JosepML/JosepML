@@ -38,6 +38,7 @@ export default async function Paginas() {
   const fila = (p: FilaPagina) => {
     const ruta = rutaPagina(p.slug);
     const plantilla = CON_PLANTILLA.has(p.slug);
+    const juno = p.slug === "juno-media";
     return (
       <li key={p.id} className="cristal flex flex-wrap items-center gap-x-4 gap-y-3 rounded-[24px] px-5 py-4">
         <Icono nombre="pagina" className="h-5 w-5 shrink-0 text-[var(--jm-suave)]" />
@@ -50,7 +51,17 @@ export default async function Paginas() {
           </span>
         </span>
         <span className="flex flex-wrap justify-end gap-1.5">
-          {plantilla ? (
+          {juno ? (
+            <>
+              <Link href={`/admin/paginas/${p.id}`} className="boton boton-acento px-4 py-2 text-sm">
+                <Icono nombre="lapiz" className="h-4 w-4" />
+                Editar JUNO Media
+              </Link>
+              <Link href={`${ruta}?editar=1`} className="boton boton-suave px-4 py-2 text-sm">
+                Editar en la web
+              </Link>
+            </>
+          ) : plantilla ? (
             <Link href={`/admin/paginas/${p.id}`} className="boton boton-acento px-4 py-2 text-sm">
               <Icono nombre="lapiz" className="h-4 w-4" />
               Editar cabecera
