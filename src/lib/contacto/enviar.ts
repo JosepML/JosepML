@@ -41,6 +41,8 @@ export async function enviarContacto(_previo: EstadoContacto, datos: FormData): 
   // Lo que se eligió en las pastillas («Filmmaker, Videoclip»): texto libre, acotado al límite de la base
   const servicio = texto("servicio").slice(0, 120);
   const mensaje = texto("mensaje");
+  // De dónde viene (contacto, llamada del final…): solo letras, números y guiones, para que no entre cualquier cosa
+  const origen = /^[a-z0-9_-]{1,40}$/.test(texto("origen")) ? texto("origen") : "contacto";
 
   if (nombre.length < 2) return { error: "Dime tu nombre, por favor." };
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) return { error: "Revisa el correo: parece que le falta algo." };
@@ -54,7 +56,7 @@ export async function enviarContacto(_previo: EstadoContacto, datos: FormData): 
     telefono,
     servicio,
     mensaje,
-    origen: "contacto",
+    origen,
     acepta_privacidad: true,
   });
   if (error) return { error: "No se ha podido enviar ahora mismo. Prueba de nuevo en un rato." };

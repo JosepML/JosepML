@@ -8,6 +8,7 @@ import { lista, objeto, texto, textos } from "@/lib/datos/util";
 import { usePunteroFino, useReducir } from "../comun/hooks";
 import { TarjetaArticulo } from "../blog/TarjetaArticulo";
 import { img } from "../comun/imagen";
+import { FormularioContacto } from "../contacto/FormularioContacto";
 import { Icono } from "../Iconos";
 import { CambiarImagen, Editable, useEditando } from "../edicion/contexto";
 import { useDatos, useMedio } from "../marco/DatosWeb";
@@ -401,21 +402,24 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
               })}
             </div>
 
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row lg:mt-[4svh]">
-              <Link href={elegidos.length ? `/contacto?temas=${encodeURIComponent(elegidos.join(","))}` : "/contacto"} className="boton boton-acento px-8 py-4 text-base">
-                <Icono nombre="correo" className="h-5 w-5" />
-                Escríbeme
-              </Link>
-              <a
-                href={`https://wa.me/${ajustes.whatsapp}?text=${encodeURIComponent(mensajeWa)}`}
-                target="_blank"
-                rel="noreferrer"
-                className="boton border border-[var(--jm-borde)] bg-[var(--jm-cristal)] px-8 py-4 text-base hover:border-[#25d366]"
-              >
-                <Icono nombre="whatsapp" className="h-5 w-5 text-[#25d366]" />
-                WhatsApp
-              </a>
-            </div>
+            {/* El formulario de Contacto, en pequeño, aquí mismo: lo marcado arriba va con el mensaje */}
+            <FormularioContacto
+              compacto
+              opciones={[]}
+              elegidos={elegidos}
+              origen="llamada"
+              junto={
+                <a
+                  href={`https://wa.me/${ajustes.whatsapp}?text=${encodeURIComponent(mensajeWa)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="boton border border-[var(--jm-borde)] bg-[var(--jm-cristal)] px-8 py-4 text-base hover:border-[#25d366]"
+                >
+                  <Icono nombre="whatsapp" className="h-5 w-5 text-[#25d366]" />
+                  O por WhatsApp
+                </a>
+              }
+            />
             {/* Ancho de lectura acotado y centrado: así no queda bajo el índice lateral desplegado en pantallas estrechas */}
             {(nota || editando) && (
               <p className="mx-auto mt-6 max-w-md text-xs leading-relaxed text-[var(--jm-tenue)] [text-wrap:balance]">
