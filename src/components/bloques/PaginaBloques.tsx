@@ -10,6 +10,7 @@ import { IndiceLateral } from "../marco/IndiceLateral";
 import { BloquePortada } from "./BloquePortada";
 import { BloqueFilmmaker, BloqueServicios } from "./BloqueServicios";
 import { BloqueTrabajos } from "./BloqueTrabajos";
+import { BloqueColaboracion } from "./BloqueColaboracion";
 import { BloqueCifras, BloqueClientes, BloqueOpiniones } from "./BloquesConfianza";
 import { BloqueCita, BloqueGaleria, BloqueVideo } from "./BloquesLibres";
 import { BloqueBlog, BloqueLlamada, BloqueProceso, BloqueSobreMi, BloqueTexto } from "./BloquesPersonales";
@@ -33,6 +34,7 @@ const COMPONENTES: Record<TipoBloque, (p: PropsBloque) => React.ReactNode> = {
   galeria: BloqueGaleria,
   video: BloqueVideo,
   cita: BloqueCita,
+  colaboracion: BloqueColaboracion,
 };
 
 /** Anclas a las que apuntan el menú y los botones (/#trabajos...): las lleva el primer bloque de cada tipo */

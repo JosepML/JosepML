@@ -1035,6 +1035,7 @@ export type Database = {
         | "galeria"
         | "video"
         | "cita"
+        | "colaboracion"
       tipo_medio: "imagen" | "video" | "documento"
     }
     CompositeTypes: {
@@ -1182,6 +1183,7 @@ export const Constants = {
         "galeria",
         "video",
         "cita",
+        "colaboracion",
       ],
       tipo_medio: ["imagen", "video", "documento"],
     },

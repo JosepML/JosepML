@@ -21,6 +21,7 @@ const NOMBRES: Record<TipoBloque, string> = {
   galeria: "Galería",
   video: "Vídeo",
   cita: "Cita",
+  colaboracion: "Colaboración",
 };
 
 /**

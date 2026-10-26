@@ -22,7 +22,7 @@ export function ProveedorOpciones({ opciones, children }: { opciones: OpcionesFo
 export function Campos({ campos, datos, cambiar }: { campos: Campo[]; datos: Datos; cambiar: (clave: string, valor: unknown) => void }) {
   return (
     <div className="grid grid-cols-2 gap-x-3 gap-y-5">
-      {campos.map((c) => (
+      {campos.filter((c) => !c.si || c.si.valores.includes(String(datos?.[c.si.clave] ?? ""))).map((c) => (
         <div key={c.clave} className={c.medio ? "col-span-2 sm:col-span-1" : "col-span-2"}>
           <UnCampo campo={c} valor={datos?.[c.clave]} datos={datos} cambiar={(v) => cambiar(c.clave, v)} />
         </div>

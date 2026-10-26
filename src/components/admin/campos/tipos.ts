@@ -10,6 +10,8 @@ type Base = {
   ayuda?: string;
   /** Ocupa media fila en pantallas anchas (dos campos cortos lado a lado) */
   medio?: boolean;
+  /** Solo se enseña cuando otro campo del mismo nivel vale uno de estos valores (las partes de un bloque) */
+  si?: { clave: string; valores: string[] };
 };
 
 export type Campo =

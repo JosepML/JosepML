@@ -257,10 +257,72 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
     campos: [{ ...titulo, etiqueta: "Frase" }, { tipo: "texto", clave: "autor", etiqueta: "Quién la dijo" }],
     nuevo: { titulo: "Una frase que *inspira*", autor: "" },
   },
+  colaboracion: {
+    nombre: "Colaboración",
+    descripcion: "Tu colaboración con JUNO Media, en cuatro partes",
+    campos: [
+      {
+        tipo: "seleccion",
+        clave: "parte",
+        etiqueta: "Parte",
+        opciones: [
+          { valor: "apertura", nombre: "Apertura: los dos nombres, el titular y tres fotos" },
+          { valor: "relacion", nombre: "Lo que nos une: tres facetas con foto" },
+          { valor: "valor", nombre: "Para tu proyecto: foto grande y las formas de trabajar juntos" },
+          { valor: "productora", nombre: "La productora: su marca, su lema, su web y las marcas" },
+        ],
+        obligatorio: true,
+      },
+      antetitulo,
+      { ...titulo, si: { clave: "parte", valores: ["apertura", "relacion", "valor"] } },
+      { ...texto, si: { clave: "parte", valores: ["apertura", "relacion", "valor", "productora"] } },
+      {
+        tipo: "galeria",
+        clave: "imagenes",
+        etiqueta: "Fotos (tres)",
+        ayuda: "Sin fotos, salen las portadas de tres proyectos con JUNO Media",
+        si: { clave: "parte", valores: ["apertura"] },
+      },
+      {
+        tipo: "lista",
+        clave: "facetas",
+        etiqueta: "Facetas",
+        elemento: "Faceta",
+        titulo: "titulo",
+        nuevo: { titulo: "", texto: "", imagen: null },
+        campos: [
+          { tipo: "texto", clave: "titulo", etiqueta: "Palabra", placeholder: "Profesional" },
+          { tipo: "largo", clave: "texto", etiqueta: "Texto", filas: 3 },
+          { tipo: "medio", clave: "imagen", etiqueta: "Foto", acepta: "imagen" },
+        ],
+        si: { clave: "parte", valores: ["relacion"] },
+      },
+      { ...imagen, si: { clave: "parte", valores: ["valor"] } },
+      {
+        tipo: "lista",
+        clave: "opciones",
+        etiqueta: "Formas de trabajar juntos",
+        elemento: "Forma",
+        titulo: "titulo",
+        nuevo: { titulo: "", texto: "" },
+        campos: [
+          { tipo: "texto", clave: "titulo", etiqueta: "Título" },
+          { tipo: "largo", clave: "texto", etiqueta: "Texto", filas: 2 },
+        ],
+        si: { clave: "parte", valores: ["valor"] },
+      },
+      { tipo: "texto", clave: "lema", etiqueta: "Lema", ayuda: "En la letra artística, bajo la marca", si: { clave: "parte", valores: ["productora"] } },
+      { ...enlace, si: { clave: "parte", valores: ["productora"] } },
+      { tipo: "texto", clave: "rotulo", etiqueta: "Rótulo sobre las marcas", si: { clave: "parte", valores: ["productora"] } },
+      { ...nota("Las marcas son los clientes marcados «con JUNO Media» en el panel, en Clientes."), si: { clave: "parte", valores: ["productora"] } },
+    ],
+    nuevo: { parte: "apertura", titulo: "Un filmmaker y una productora, *en sinergia*" },
+  },
 };
 
-/** Nombre que se ve en la lista de secciones: su título (sin asteriscos) o el nombre del tipo */
+/** Nombre que se ve en la lista de secciones: su título (sin asteriscos), su antetítulo o el nombre del tipo */
 export function nombreBloque(tipo: TipoBloque, datos: Record<string, unknown>) {
   const t = typeof datos.titulo === "string" ? datos.titulo.replace(/\*/g, "").trim() : "";
-  return t || CATALOGO[tipo]?.nombre || tipo;
+  const ante = typeof datos.antetitulo === "string" ? datos.antetitulo.trim() : "";
+  return t || ante || CATALOGO[tipo]?.nombre || tipo;
 }

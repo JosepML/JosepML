@@ -113,6 +113,7 @@ Todos aceptan en `datos` los campos comunes del prototipo: `antetitulo`, `titulo
 | `galeria` | Rejilla de imágenes | `imagenes`: `[{"medio", "pie"}]` | |
 | `video` | Un vídeo, o varios en tarjetas | `youtubeId` o `medio`; o `videos`: `[{"tipo", "id"?, "url"?, "medio"?, "titulo"?}]` como `proyectos.videos` (si hay, mandan) | |
 | `cita` | Frase destacada | `autor` (la frase va en `titulo`) | |
+| `colaboracion` | Colaboración con una productora (página /juno-media) | `parte`: `apertura` (`texto`, `imagenes`: `[{"medio", "pie"}]`), `relacion` (`facetas`: `[{"titulo", "texto", "imagen"}]`), `valor` (`texto`, `imagen`, `opciones`: `[{"titulo", "texto"}]`) o `productora` (`lema`, `texto`, `enlace`, `rotulo`; las marcas son los clientes «con JUNO Media») | Las fotos que faltan salen de los proyectos con JUNO Media |
 
 **Especialidades de un servicio.** Una página de bloques con slug `<servicio>-<especialidad>` (`filmmaker-videoclips`) se ve en `/servicios/<servicio>/<especialidad>` (`rutaPagina()` en `src/lib/rutas.ts`). Las de filmmaker las crea `supabase/datos/09-especialidades-filmmaker.sql`: texto, proceso, trabajos con `tipos` y la llamada. `10-especialidades-fotos.sql` pone el texto en `estilo: "cabecera"` (cabecera de cine) y fotos de galería en cabeceras y tarjetas. Con un solo proyecto, el bloque trabajos lo enseña en grande con un mosaico de su galería y sus vídeos.
 

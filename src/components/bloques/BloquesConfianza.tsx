@@ -256,7 +256,7 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
  * mancha llena y a la misma opacidad parece más brillante que un nombre en letra fina: por eso los logos van un
  * punto por debajo de los nombres (ver .jm-logo-barrido y .jm-logo-compacto en web.css).
  */
-function Logo({ cliente: c, compacto, grande, barrido }: { cliente: Cliente; compacto?: boolean; grande?: boolean; barrido?: boolean }) {
+export function Logo({ cliente: c, compacto, grande, barrido }: { cliente: Cliente; compacto?: boolean; grande?: boolean; barrido?: boolean }) {
   const [roto, setRoto] = useState(false);
   const palabraLarga = Math.max(...c.nombre.split(/\s+/).map((p) => p.length)) > 13;
   return (
