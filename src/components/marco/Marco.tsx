@@ -20,7 +20,7 @@ const ENLACES = [
   { nombre: "Sobre mí", href: RUTAS.sobreMi },
   { nombre: "Blog", href: RUTAS.blog },
 ];
-const HABLEMOS = "/#llamada";
+const HABLEMOS = RUTAS.contacto;
 
 type Tema = "oscuro" | "claro";
 const CLAVE_TEMA = "jm-tema";
