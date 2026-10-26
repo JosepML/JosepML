@@ -4,10 +4,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { enfoque, img } from "@/components/comun/imagen";
 import { Icono } from "@/components/Iconos";
-import { listarMedios, mediosPorId, type MedioBiblioteca } from "@/lib/admin/medios";
+import { listarCarpetas, listarMedios, mediosPorId, type MedioBiblioteca } from "@/lib/admin/medios";
 import { ACEPTA, subirArchivo } from "@/lib/admin/subir";
 import type { Foco } from "../biblioteca/PuntoDeInteres";
 import { ElegirFotoSubida } from "./ElegirFotoSubida";
+import { aSlug } from "./tipos";
 import type { Medio } from "@/lib/datos/tipos";
 import { CURVA } from "@/styles/movimiento";
 
@@ -138,6 +139,8 @@ type PropsSelector = {
 export function SelectorMedios({ abierto, alCerrar, alElegir, acepta = "imagen", multiple, titulo }: PropsSelector) {
   const [biblioteca, setBiblioteca] = useState<MedioBiblioteca[] | null>(cacheBiblioteca);
   const [busqueda, setBusqueda] = useState("");
+  // Nombre de cada carpeta por id: la búsqueda también mira el nombre de la carpeta de cada foto
+  const [nombresCarpeta, setNombresCarpeta] = useState<Record<string, string>>({});
   const [elegidos, setElegidos] = useState<string[]>([]);
   const [errorCarga, setErrorCarga] = useState<string | null>(null);
   const input = useRef<HTMLInputElement>(null);
@@ -160,6 +163,7 @@ export function SelectorMedios({ abierto, alCerrar, alElegir, acepta = "imagen",
         setBiblioteca(r.datos);
       } else setErrorCarga(r.error);
     });
+    listarCarpetas().then((r) => r.ok && setNombresCarpeta(Object.fromEntries(r.datos.map((c) => [c.id, c.nombre]))));
     const tecla = (e: KeyboardEvent) => e.key === "Escape" && alCerrar();
     window.addEventListener("keydown", tecla);
     return () => window.removeEventListener("keydown", tecla);
@@ -167,8 +171,8 @@ export function SelectorMedios({ abierto, alCerrar, alElegir, acepta = "imagen",
 
   const visibles = (biblioteca ?? []).filter((m) => {
     if (acepta !== "todo" && m.tipo !== acepta) return false;
-    const q = busqueda.trim().toLowerCase();
-    return !q || `${m.titulo} ${m.alt} ${m.url}`.toLowerCase().includes(q);
+    const q = aSlug(busqueda);
+    return !q || aSlug(`${m.titulo} ${m.alt} ${m.url} ${nombresCarpeta[m.carpetaId ?? ""] ?? ""}`).includes(q);
   });
 
   const alternar = (m: MedioBiblioteca) => {

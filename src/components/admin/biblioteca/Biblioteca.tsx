@@ -90,9 +90,11 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
       if (filtro === "video" && m.tipo !== "video") return false;
       if (filtro === "sin-usar" && usosDe(m.id).length) return false;
       if (filtro === "sin-alt" && (m.tipo !== "imagen" || m.alt.trim())) return false;
-      return !q || aSlug(`${nombre(m)} ${m.alt}`).includes(q);
+      // La búsqueda también mira el nombre de la carpeta: «nosferatu» trae todas las fotos de esa carpeta
+      const de = carpetas.find((c) => c.id === m.carpetaId)?.nombre ?? "";
+      return !q || aSlug(`${nombre(m)} ${m.alt} ${de}`).includes(q);
     });
-  }, [medios, filtro, busqueda, usos, carpeta, carpetaElegida]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [medios, filtro, busqueda, usos, carpeta, carpetaElegida, carpetas]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const elegido = medios.find((m) => m.id === abierto) ?? null;
 
