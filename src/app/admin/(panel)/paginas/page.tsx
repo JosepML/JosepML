@@ -57,12 +57,11 @@ export default async function Paginas() {
             </Link>
           ) : (
             <>
-              <Link href={`/admin/paginas/${p.id}`} className="boton boton-suave px-4 py-2 text-sm" title="Cambiar el orden de las secciones u ocultarlas">
-                <Icono nombre="asa" className="h-4 w-4" />
-                Ordenar secciones
-              </Link>
-              <Link href={`${ruta}?editar=1`} className="boton boton-acento px-4 py-2 text-sm">
+              <Link href={`/admin/paginas/${p.id}`} className="boton boton-acento px-4 py-2 text-sm" title="Textos, fotos, proyectos que salen y orden de las secciones">
                 <Icono nombre="lapiz" className="h-4 w-4" />
+                Editar contenido
+              </Link>
+              <Link href={`${ruta}?editar=1`} className="boton boton-suave px-4 py-2 text-sm">
                 Editar en la web
               </Link>
             </>
@@ -76,7 +75,7 @@ export default async function Paginas() {
     <div className="mx-auto max-w-4xl">
       <h1 className="text-4xl font-extrabold tracking-[-0.04em]">Páginas</h1>
       <p className="mt-2 max-w-xl text-[var(--jm-suave)]">
-        Las páginas se editan en la propia web: ábrela y pulsa «Editar página» (abajo a la derecha). Cambias los textos haciendo clic encima, las fotos arrastrando, y las secciones desde el panel. Trabajos y Recreaciones se montan solas con tus proyectos: de ellas se edita la cabecera.
+        «Editar contenido» abre las secciones de la página: con el lápiz de cada una cambias sus textos, fotos y qué proyectos salen y en qué orden, y con las flechas el orden de las secciones. «Editar en la web» te deja cambiar los textos haciendo clic encima. Trabajos y Recreaciones se montan solas con tus proyectos: de ellas se edita la cabecera.
       </p>
       <ul className="mt-8 flex flex-col gap-2">{principales.map(fila)}</ul>
       {especialidades.length > 0 && (
