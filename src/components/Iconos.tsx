@@ -59,7 +59,7 @@ const TRAZOS: Record<string, React.ReactNode> = {
       <path d="M16 11l6-3v9l-6-3" />
     </>
   ),
-  // Claqueta: la tablilla de abajo y la pala de arriba, levantada sobre su bisagra con las rayas en diagonal
+  // Claqueta: la tablilla de abajo y la pala de arriba, levantada sobre su bisagra con las rayas en diagonal (sin más detalle, para que no cargue)
   claqueta: (
     <>
       <rect x="3" y="10.5" width="18" height="9.5" rx="2" />
@@ -67,7 +67,6 @@ const TRAZOS: Record<string, React.ReactNode> = {
         <rect x="3.5" y="5.5" width="17" height="5" rx="1.2" />
         <path d="M8 5.5l-2 5M12.5 5.5l-2 5M17 5.5l-2 5" />
       </g>
-      <path d="M7 15.5h6" />
     </>
   ),
   ritmo: <path d="M3 12h3l2-6 4 12 3-9 2 3h4" />,
