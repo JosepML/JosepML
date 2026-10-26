@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { imagenesDe } from "@/lib/datos/seleccion";
-import type { Bloque, Servicio } from "@/lib/datos/tipos";
+import { imagenesDe, mediosDeServicio } from "@/lib/datos/seleccion";
+import type { Bloque, Medio, Servicio } from "@/lib/datos/tipos";
 import { lista, objeto, texto } from "@/lib/datos/util";
 import { RUTAS } from "@/lib/rutas";
 import { Enlace } from "../comun/Enlace";
@@ -32,7 +32,7 @@ export function BloqueServicios({ bloque, ancla }: { bloque: Bloque; ancla?: str
         <div className="mt-14 grid gap-4 md:grid-cols-3 lg:mt-[5svh]">
           {servicios.map((s, i) => (
             <Revelar key={s.slug} retraso={i * 0.08}>
-              <Tarjeta servicio={s} imagenes={imagenesDe(s, proyectos)} />
+              <Tarjeta servicio={s} imagenes={imagenesDe(s, proyectos)} medios={mediosDeServicio(s, proyectos)} />
             </Revelar>
           ))}
         </div>
@@ -47,12 +47,14 @@ export function BloqueServicios({ bloque, ancla }: { bloque: Bloque; ancla?: str
  */
 function TarjetaFoto({
   imagenes,
+  medios,
   ancho,
   className,
   suave = false,
   children,
 }: {
   imagenes: string[];
+  medios?: Medio[];
   ancho: 1200 | 1920;
   className: string;
   /** Tarjetas apaisadas (filmmaker): la foto a todo color y la sombra solo al pie; se oscurece al pasar el ratón,
@@ -73,6 +75,7 @@ function TarjetaFoto({
           recorta aparte del degradado, así que en el suavizado del borde se colaba 1 px gris de la foto */}
       <Diapositivas
         imagenes={imagenes}
+        medios={medios}
         activo={encima && fino}
         ancho={ancho}
         className={`${suave ? "" : "opacity-95 transition-opacity duration-700 group-hover:opacity-100"} ${MASCARA_BORDE}`}
@@ -101,10 +104,10 @@ function Revelable({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Tarjeta({ servicio: s, imagenes }: { servicio: Servicio; imagenes: string[] }) {
+function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagenes: string[]; medios?: Medio[] }) {
   return (
     <Link href={RUTAS.servicio(s.slug)} className="block">
-      <TarjetaFoto imagenes={imagenes} ancho={1200} className="aspect-[4/5] md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]">
+      <TarjetaFoto imagenes={imagenes} medios={medios} ancho={1200} className="aspect-[4/5] md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]">
         {() => (
           <div className="relative flex h-full flex-col justify-between p-7">
             <div className="flex items-start justify-between">

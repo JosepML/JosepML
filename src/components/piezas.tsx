@@ -5,7 +5,8 @@ import { animate, AnimatePresence, motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Icono } from "./Iconos";
-import { img } from "./comun/imagen";
+import { enfoque, img } from "./comun/imagen";
+import type { Medio } from "@/lib/datos/tipos";
 import { Editable, useEditando } from "./edicion/contexto";
 
 export { CURVA } from "@/styles/movimiento";
@@ -292,12 +293,15 @@ export function Disponible({ className = "" }: { className?: string }) {
  */
 export function Diapositivas({
   imagenes,
+  medios,
   activo,
   className = "",
   intervalo = 1600,
   ancho = 1920,
 }: {
   imagenes: string[];
+  /** Las fotos de `imagenes` como medios, para aplicar su punto de interés al recortarlas */
+  medios?: Medio[];
   activo: boolean;
   className?: string;
   intervalo?: number;
@@ -322,6 +326,7 @@ export function Diapositivas({
         // Cada foto tiene su propio zoom: solo la que se ve crece, desde cero, durante su turno. Las demás vuelven
         // a su escala mínima al salir, así que al volver a verse empiezan otra vez
         const zoom = n === i && activo && !reducir;
+        const foco = enfoque(medios?.find((m) => m.url === src));
         return (
           <img
             key={src}
@@ -334,6 +339,7 @@ export function Diapositivas({
             style={{
               opacity: n === i ? 1 : 0,
               // Escala base de 1.1: recorta las franjas negras que algunas fotos traen de origen, también sin zoom
+              ...foco,
               transform: zoom ? "scale(1.18)" : "scale(1.1)",
               // El zoom va lineal y dura lo que la foto sigue visible, para no frenarse antes del cambio. Al salir,
               // el zoom vuelve a escala base solo cuando la foto ya se ha desvanecido (sin que se vea desinflarse)

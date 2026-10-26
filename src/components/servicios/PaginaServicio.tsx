@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
-import { fotosCabeceraDe, imagenesDe, proyectosDe } from "@/lib/datos/seleccion";
+import { fotosCabeceraDe, imagenesDe, mediosDeServicio, proyectosDe } from "@/lib/datos/seleccion";
 import type { Bloque, DatosWeb, Servicio } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
 import { BloqueFilmmaker, ICONOS_SERVICIO } from "../bloques/BloqueServicios";
@@ -51,7 +51,7 @@ function Contenido({ servicio: s, datos, llamada, especialidades }: { servicio: 
   return (
     <main>
       <header className="relative m-2 h-[82svh] min-h-[560px] overflow-hidden rounded-[28px] bg-black sm:m-3 sm:rounded-[40px]">
-        <Diapositivas imagenes={fotosCabeceraDe(s, datos.proyectos)} activo intervalo={3800} ancho={3840} />
+        <Diapositivas imagenes={fotosCabeceraDe(s, datos.proyectos)} medios={s.fotosCabecera.length ? s.fotosCabecera : mediosDeServicio(s, datos.proyectos)} activo intervalo={3800} ancho={3840} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/30" />
         <div className="absolute inset-x-0 bottom-0 z-10 p-6 pb-10 text-white sm:p-12 sm:pb-14">
           <motion.div {...entrar(0.15)} className="flex items-center gap-3">

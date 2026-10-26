@@ -1,5 +1,5 @@
 // Funciones puras sobre los datos ya cargados. Sin nada de servidor: las pueden usar los componentes de cliente.
-import type { Proyecto, Servicio } from "./tipos";
+import type { Medio, Proyecto, Servicio } from "./tipos";
 
 /**
  * Proyectos de un filtro de Trabajos (o de la página de un servicio):
@@ -25,6 +25,17 @@ export function proyectosDe(proyectos: Proyecto[], filtro: string): Proyecto[] {
 export function imagenesDe(servicio: Servicio, proyectos: Proyecto[], cuantas = 4): string[] {
   const urls = proyectosDe(proyectos, servicio.slug).flatMap((p) => (p.poster ? [p.poster.url] : []));
   return [...(servicio.imagen ? [servicio.imagen.url] : []), ...urls].slice(0, cuantas);
+}
+
+/** Las fotos de un proyecto como medios (con su punto de interés), para los fotogramas que se recortan */
+export function mediosDeProyecto(p: Proyecto): Medio[] {
+  return [p.poster, ...p.galeria.map((g) => g.imagen)].filter((m): m is Medio => !!m);
+}
+
+/** Las fotos de las tarjetas de un servicio como medios (la de su tarjeta y la del póster de cada proyecto) */
+export function mediosDeServicio(servicio: Servicio, proyectos: Proyecto[]): Medio[] {
+  const posters = proyectosDe(proyectos, servicio.slug).flatMap((p) => (p.poster ? [p.poster] : []));
+  return [...(servicio.imagen ? [servicio.imagen] : []), ...posters];
 }
 
 /** Fotos del carrusel de la cabecera de un servicio: solo las que Josep eligió para ella (independientes de la tarjeta). Si no eligió ninguna, las de la tarjeta */
