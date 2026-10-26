@@ -1,3 +1,4 @@
+import { FOTO_CONTACTO } from "../contacto/foto";
 import { getAjustes } from "./ajustes";
 import { getArticulos } from "./articulos";
 import { getCanales, getClientes, getOpiniones } from "./confianza";
@@ -25,8 +26,11 @@ export async function getPaginaConDatos(slug: string): Promise<{ pagina: Pagina;
     getMedios(),
   ]);
   if (!pagina) return null;
+  // La foto de Contacto no la cita ningún bloque, pero el bloque «Hablemos» la necesita
+  const usados = mediosDeBloques(pagina, medios);
+  for (const id of [ajustes.fotoContacto, FOTO_CONTACTO]) if (id && medios[id]) usados[id] = medios[id];
   return {
     pagina,
-    datos: { ajustes, servicios, proyectos, articulos, clientes, opiniones, canales, medios: mediosDeBloques(pagina, medios) },
+    datos: { ajustes, servicios, proyectos, articulos, clientes, opiniones, canales, medios: usados },
   };
 }
