@@ -1,6 +1,8 @@
 "use server";
 
-// Envío del formulario de contacto: lo guarda en `mensajes` (la base lo limita a 30 por hora y valida los campos)
+// Envío del formulario de contacto: lo guarda en `mensajes` (la base lo limita a 30 por hora y valida los campos) y
+// avisa a Josep por correo con el formulario de Formspree que ya usaba la web antigua (el identificador es público).
+// Si el aviso falla, el mensaje ya está guardado en el panel y quien escribe no ve ningún error.
 
 import { redirect } from "next/navigation";
 import { RUTAS } from "@/lib/rutas";
@@ -9,6 +11,28 @@ import { createClient } from "@/lib/supabase/server";
 export type EstadoContacto = { error?: string };
 
 const SERVICIOS = ["filmmaker", "direccion-de-fotografia", "edicion", "otro"];
+const FORMSPREE = "https://formspree.io/f/mrblvlpb";
+
+async function avisarPorCorreo(m: { nombre: string; correo: string; telefono: string; servicio: string; mensaje: string }) {
+  try {
+    await fetch(FORMSPREE, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: `Web nueva · mensaje de ${m.nombre}`,
+        _replyto: m.correo,
+        nombre: m.nombre,
+        correo: m.correo,
+        telefono: m.telefono || "—",
+        servicio: m.servicio || "—",
+        mensaje: m.mensaje,
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+  } catch {
+    // El mensaje ya está en el panel de Mensajes
+  }
+}
 
 export async function enviarContacto(_previo: EstadoContacto, datos: FormData): Promise<EstadoContacto> {
   const texto = (clave: string) => String(datos.get(clave) ?? "").trim();
@@ -35,7 +59,11 @@ export async function enviarContacto(_previo: EstadoContacto, datos: FormData): 
   });
   if (error) return { error: "No se ha podido enviar ahora mismo. Prueba de nuevo en un rato." };
 
+<<<<<<< Updated upstream
   await avisar({ nombre, correo, telefono, servicio, mensaje });
+=======
+  await avisarPorCorreo({ nombre, correo, telefono, servicio: SERVICIOS.includes(servicio) ? servicio : "", mensaje });
+>>>>>>> Stashed changes
   redirect(RUTAS.gracias);
 }
 
