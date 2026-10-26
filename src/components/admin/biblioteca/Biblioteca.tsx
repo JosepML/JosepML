@@ -65,6 +65,9 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
   useEffect(() => setCarpetas(carpetasIniciales), [carpetasIniciales]);
 
   const carpetaElegida = carpetas.find((c) => c.id === carpeta) ?? null;
+  // En la raíz (sin búsqueda) la zona de fotos muestra las carpetas como tarjetas; al entrar, solo sus fotos
+  const enRaiz = carpeta === "todas" && !busqueda.trim();
+  const sinCarpeta = medios.filter((m) => !m.carpetaId).length;
 
   const { encima, subiendo, error, setError, subir, manejadores, fotoElegida } = useSoltarArchivos(
     (nuevos) => {
@@ -236,6 +239,26 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
         </div>
       </aside>
       <div className="min-w-0 flex-1">
+      {enRaiz ? (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+          {carpetas.map((c) => (
+            <CarpetaTarjeta key={c.id} nombre={c.nombre} cuantos={medios.filter((m) => m.carpetaId === c.id).length} alEntrar={() => setCarpeta(c.id)} alSoltar={(ids) => mover(ids, c.id)} />
+          ))}
+          <CarpetaTarjeta nombre="Sin carpeta" cuantos={sinCarpeta} alEntrar={() => setCarpeta("sin")} alSoltar={(ids) => mover(ids, null)} />
+        </div>
+      ) : (
+      <>
+      <nav className="flex flex-wrap items-center gap-2 text-sm">
+        <button type="button" onClick={() => setCarpeta("todas")} className="flex items-center gap-1 rounded-full px-2.5 py-1 font-semibold text-[var(--jm-suave)] ring-1 ring-[var(--jm-borde)] hover:text-[var(--jm-texto)]">
+          <Icono nombre="izquierda" className="h-3.5 w-3.5" />
+          Volver
+        </button>
+        <button type="button" onClick={() => setCarpeta("todas")} className="font-semibold text-[var(--jm-suave)] underline-offset-4 hover:underline">
+          Biblioteca
+        </button>
+        <Icono nombre="derecha" className="h-3.5 w-3.5 text-[var(--jm-tenue)]" />
+        <span className="font-semibold">{carpetaElegida?.nombre ?? (carpeta === "sin" ? "Sin carpeta" : "Resultados")}</span>
+      </nav>
       {carpetaElegida && (
         <div className="flex flex-wrap items-center gap-3">
           <input
@@ -283,6 +306,8 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
         })}
       </div>
       {!visibles.length && <p className="mt-10 text-center text-sm text-[var(--jm-suave)]">No hay archivos que coincidan.</p>}
+      </>
+      )}
       </div>
       </div>
 
@@ -344,6 +369,37 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
 }
 
 /** Pastilla de los filtros de la biblioteca (carpetas) */
+/** Carpeta en la raíz de la biblioteca: un clic entra en ella y las fotos arrastradas encima se mueven a esa carpeta */
+function CarpetaTarjeta({ nombre, cuantos, alEntrar, alSoltar }: { nombre: string; cuantos: number; alEntrar: () => void; alSoltar: (ids: string[]) => void }) {
+  const [encima, setEncima] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={alEntrar}
+      onDragOver={(e) => {
+        if (!e.dataTransfer.types.includes(MIME_MEDIO)) return;
+        e.preventDefault();
+        setEncima(true);
+      }}
+      onDragLeave={() => setEncima(false)}
+      onDrop={(e) => {
+        e.preventDefault();
+        setEncima(false);
+        alSoltar(JSON.parse(e.dataTransfer.getData(MIME_MEDIO)));
+      }}
+      className={`flex items-center gap-3 rounded-[18px] bg-white/[0.04] p-4 text-left ring-1 transition-[box-shadow,background-color] hover:bg-white/[0.07] ${encima ? "ring-2 ring-[var(--jm-acento)]" : "ring-[var(--jm-borde)]"}`}
+    >
+      <Icono nombre="carpeta" className="h-9 w-9 shrink-0 text-[var(--jm-suave)]" />
+      <span className="min-w-0">
+        <span className="block truncate text-sm font-semibold">{nombre}</span>
+        <span className="text-xs text-[var(--jm-tenue)]">
+          {cuantos} {cuantos === 1 ? "elemento" : "elementos"}
+        </span>
+      </span>
+    </button>
+  );
+}
+
 /** Si recibe `alSoltar`, es una carpeta donde se pueden soltar las fotos arrastradas */
 function Pastilla({ activo, onClick, alSoltar, children }: { activo: boolean; onClick: () => void; alSoltar?: (ids: string[]) => void; children: React.ReactNode }) {
   const [encima, setEncima] = useState(false);
