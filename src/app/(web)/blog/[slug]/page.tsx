@@ -81,7 +81,7 @@ export default async function Articulo({ params }: Props) {
       <div className="mx-auto mt-20 max-w-[680px]">
         <div className="cristal flex flex-col items-start gap-5 rounded-[32px] p-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-lg font-bold tracking-[-0.02em]">{llamada.replace(/\*/g, "")}</p>
-          <Link href="/#llamada" className="boton boton-acento px-6 py-3 text-sm">
+          <Link href={RUTAS.contacto} className="boton boton-acento px-6 py-3 text-sm">
             Hablemos
             <Icono nombre="flecha" className="h-4 w-4" />
           </Link>

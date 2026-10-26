@@ -356,7 +356,6 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
   }, []);
 
   const alternar = (t: string) => setElegidos((l) => (l.includes(t) ? l.filter((x) => x !== t) : [...l, t]));
-  const asunto = elegidos.length ? `Proyecto: ${elegidos.join(", ")}` : "Tengo una historia que contar";
   const mensajeWa = `Hola, Josep. ${elegidos.length ? `Tengo en mente: ${elegidos.join(", ")}. ` : ""}Me gustaría contarte mi proyecto.`;
 
   return (
@@ -403,10 +402,10 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
             </div>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row lg:mt-[4svh]">
-              <a href={`mailto:${ajustes.correo}?subject=${encodeURIComponent(asunto)}`} className="boton boton-acento px-8 py-4 text-base">
+              <Link href="/contacto" className="boton boton-acento px-8 py-4 text-base">
                 <Icono nombre="correo" className="h-5 w-5" />
                 Escríbeme
-              </a>
+              </Link>
               <a
                 href={`https://wa.me/${ajustes.whatsapp}?text=${encodeURIComponent(mensajeWa)}`}
                 target="_blank"

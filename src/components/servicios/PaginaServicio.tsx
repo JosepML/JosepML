@@ -75,7 +75,7 @@ function Contenido({ servicio: s, datos, llamada, especialidades }: { servicio: 
             <a href="#proyectos" className="boton border border-white/25 bg-white/10 px-6 py-3.5 text-sm text-white backdrop-blur-xl hover:bg-white/20">
               Ver proyectos
             </a>
-            <a href="#llamada" className="boton boton-acento px-6 py-3.5 text-sm">
+            <a href={RUTAS.contacto} className="boton boton-acento px-6 py-3.5 text-sm">
               Hablemos de tu proyecto
               <Icono nombre="flecha" className="h-4 w-4" />
             </a>

@@ -291,7 +291,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
                 <TituloConAcento texto="¿Quieres algo así para tu proyecto?" />
               </h2>
             </div>
-            <Link href="/#llamada" className="boton boton-acento relative self-start px-7 py-3.5 text-sm sm:self-auto">
+            <Link href={RUTAS.contacto} className="boton boton-acento relative self-start px-7 py-3.5 text-sm sm:self-auto">
               Hablemos
               <Icono nombre="flecha" className="h-4 w-4" />
             </Link>

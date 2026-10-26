@@ -154,7 +154,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                 <Link href="#trabajos" className="boton border border-white/25 bg-white/10 px-6 py-3.5 text-sm text-white backdrop-blur-xl hover:bg-white/20">
                   Ver trabajos
                 </Link>
-                <Link href="#llamada" className="boton boton-acento px-6 py-3.5 text-sm">
+                <Link href="/contacto" className="boton boton-acento px-6 py-3.5 text-sm">
                   Hablemos
                   <Icono nombre="flecha" className="h-4 w-4" />
                 </Link>
