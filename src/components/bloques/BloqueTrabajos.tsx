@@ -575,7 +575,14 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: Proyecto }) {
             {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 shrink-0" />}
           </div>
           <h3 className="mt-1 text-xl font-bold leading-tight tracking-[-0.025em] sm:text-2xl">{p.titulo}</h3>
-          <p className="mt-1 text-sm text-white/70">{p.papel}</p>
+          {/* El cargo no ocupa línea hasta que se pasa el ratón: la fila se abre despacio y el texto aparece con ella */}
+          {p.papel && (
+            <div className="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grid-rows-[1fr] group-hover:opacity-100">
+              <p className="min-h-0 overflow-hidden text-sm text-white/70">
+                <span className="block pt-1">{p.papel}</span>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </Enlace>
