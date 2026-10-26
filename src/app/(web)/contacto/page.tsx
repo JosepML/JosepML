@@ -26,9 +26,10 @@ export default async function Contacto({ searchParams }: { searchParams: Promise
   const marcados = (temas ?? "").split(",").map((t) => t.trim()).filter((t) => opciones.includes(t));
   return (
     <section className="px-4 pb-24 pt-28 sm:px-8 sm:pt-32">
-      <div className="mx-auto grid max-w-7xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
-        <div className="lg:sticky lg:top-28">
-          <Retrato medio={foto}>
+      <div className="mx-auto grid max-w-7xl items-stretch gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+        {/* En pantallas anchas la foto y el formulario miden lo mismo: manda el más alto y el otro se estira */}
+        <div className="lg:h-full">
+          <Retrato medio={foto} className="lg:h-full">
             <Titular nivel={1} antetitulo="Contacto" titulo="Hablemos de tu *proyecto*" />
             <Revelar retraso={0.12}>
               <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--jm-suave)]">
@@ -37,7 +38,7 @@ export default async function Contacto({ searchParams }: { searchParams: Promise
             </Revelar>
           </Retrato>
         </div>
-        <Revelar retraso={0.2}>
+        <Revelar retraso={0.2} className="lg:h-full">
           <FormularioContacto opciones={opciones} marcados={marcados} />
         </Revelar>
       </div>

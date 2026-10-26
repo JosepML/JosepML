@@ -5,11 +5,11 @@ import { enviarContacto, type EstadoContacto } from "@/lib/contacto/enviar";
 import { Icono } from "../Iconos";
 
 const CAMPO =
-  "w-full rounded-2xl border border-white/12 bg-black/20 px-4 py-3.5 text-base text-[var(--jm-texto)] outline-none transition-[border-color,background-color,box-shadow] duration-300 placeholder:text-[var(--jm-tenue)] hover:border-white/25 focus:border-[var(--jm-acento)] focus:bg-black/30 focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--jm-acento)_22%,transparent)]";
+  "w-full rounded-2xl border border-white/12 bg-black/20 px-4 py-3.5 text-base font-normal text-[var(--jm-texto)] outline-none transition-[border-color,background-color,box-shadow] duration-300 placeholder:text-[var(--jm-tenue)] hover:border-white/25 focus:border-[var(--jm-acento)] focus:bg-black/30 focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--jm-acento)_22%,transparent)]";
 
-function Etiqueta({ texto, opcional, children }: { texto: string; opcional?: boolean; children: React.ReactNode }) {
+function Etiqueta({ texto, opcional, llena, children }: { texto: string; opcional?: boolean; llena?: boolean; children: React.ReactNode }) {
   return (
-    <label className="grid gap-2 text-left text-[13px] font-semibold tracking-wide text-[var(--jm-suave)]">
+    <label className={`grid gap-2 ${llena ? "h-full grid-rows-[auto_1fr]" : ""} text-left text-sm font-medium text-[var(--jm-suave)]`}>
       <span>
         {texto}
         {opcional && <span className="ml-2 text-xs font-normal text-[var(--jm-tenue)]">opcional</span>}
@@ -23,7 +23,7 @@ function Etiqueta({ texto, opcional, children }: { texto: string; opcional?: boo
 function Pastilla({ texto, activo, alCambiar }: { texto: string; activo: boolean; alCambiar: () => void }) {
   return (
     <label
-      className={`group inline-flex cursor-pointer select-none items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition-[background-color,border-color,color,transform] duration-300 active:scale-95 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--jm-acento)] ${
+      className={`group inline-flex cursor-pointer select-none items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-normal transition-[background-color,border-color,color,transform] duration-300 active:scale-95 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--jm-acento)] ${
         activo
           ? "border-transparent bg-[var(--jm-acento)] text-white shadow-[0_8px_24px_-10px_var(--jm-acento)]"
           : "border-white/12 bg-white/[0.04] text-[var(--jm-suave)] hover:border-white/30 hover:text-[var(--jm-texto)]"
@@ -62,7 +62,7 @@ export function FormularioContacto({ opciones, marcados = [], elegidos: externos
   return (
     <form
       action={accion}
-      className={compacto ? "mx-auto mt-8 grid max-w-2xl gap-5 text-left lg:mt-[3svh]" : "cristal relative grid gap-6 overflow-hidden rounded-[32px] p-6 sm:p-9"}
+      className={compacto ? "mx-auto mt-8 grid max-w-2xl gap-5 text-left lg:mt-[3svh]" : "cristal relative flex h-full flex-col gap-5 overflow-hidden rounded-[32px] p-6 sm:p-8"}
     >
       {!compacto && (
         <>
@@ -91,7 +91,7 @@ export function FormularioContacto({ opciones, marcados = [], elegidos: externos
 
       {externos === undefined && (
         <fieldset className="relative grid gap-3">
-          <legend className="mb-1 text-[13px] font-semibold tracking-wide text-[var(--jm-suave)]">
+          <legend className="mb-1 text-sm font-medium text-[var(--jm-suave)]">
             ¿Qué tienes en mente?<span className="ml-2 text-xs font-normal text-[var(--jm-tenue)]">opcional, puedes elegir varias</span>
           </legend>
           <div className="flex flex-wrap gap-2">
@@ -102,15 +102,15 @@ export function FormularioContacto({ opciones, marcados = [], elegidos: externos
         </fieldset>
       )}
 
-      <div className="relative grid">
-        <Etiqueta texto="Cuéntame tu proyecto">
+      <div className={`relative grid ${compacto ? "" : "flex-1"}`}>
+        <Etiqueta texto="Cuéntame tu proyecto" llena={!compacto}>
           <textarea
             name="mensaje"
             required
             minLength={10}
-            rows={compacto ? 4 : 6}
+            rows={compacto ? 4 : 5}
             placeholder="Qué quieres contar, para quién y para cuándo. Cuanto más me cuentes, mejor."
-            className={`${CAMPO} resize-y leading-relaxed`}
+            className={`${CAMPO} leading-relaxed ${compacto ? "resize-y" : "h-full min-h-32 resize-none"}`}
           />
         </Etiqueta>
       </div>
