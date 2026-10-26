@@ -75,7 +75,7 @@ function TarjetaFoto({
         imagenes={imagenes}
         activo={encima && fino}
         ancho={ancho}
-        className={`${suave ? "" : "opacity-80 transition-opacity duration-700 group-hover:opacity-100"} ${MASCARA_BORDE}`}
+        className={`${suave ? "" : "opacity-95 transition-opacity duration-700 group-hover:opacity-100"} ${MASCARA_BORDE}`}
       />
       {/* Negro del todo en el quinto inferior, donde va el texto: si no, lo que hay al pie de la foto (el borde
           de una persiana, el suelo...) se transparentaba como una raya bajo el título */}
@@ -85,7 +85,7 @@ function TarjetaFoto({
           <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.45)_45%,rgba(0,0,0,0.1)_100%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
         </>
       ) : (
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,#000_24%,rgba(0,0,0,0.55)_50%,rgba(0,0,0,0.1)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,rgba(0,0,0,0.92)_14%,rgba(0,0,0,0.5)_34%,rgba(0,0,0,0.12)_52%,transparent_70%)]" />
       )}
       {children(encima, fino)}
     </div>
