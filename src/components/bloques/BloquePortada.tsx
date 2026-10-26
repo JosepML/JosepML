@@ -26,6 +26,8 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
   const youtubeId = texto(video.youtubeId) || null;
   const poster = useMedio(video.poster);
   const archivo = useMedio(video.medio);
+  // El vídeo completo en Cloudflare: si está, el botón lo reproduce en lugar del de YouTube
+  const completo = useMedio(video.completo);
   const papeles = textos(bloque.datos.papeles);
   const ref = useRef<HTMLElement>(null);
   const reducir = useReducir();
@@ -139,7 +141,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.05, duration: 0.9, ease: CURVA }}
               >
-                {youtubeId && (
+                {(completo || youtubeId) && (
                 <button
                   type="button"
                   onClick={() => setReel(true)}
@@ -185,7 +187,9 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
           </motion.a>
         </motion.div>
       </div>
-      {youtubeId && <ModalVideo id={youtubeId} abierto={reel} alCerrar={() => setReel(false)} />}
+      {(completo || youtubeId) && (
+        <ModalVideo archivo={completo?.url} id={youtubeId ?? undefined} abierto={reel} alCerrar={() => setReel(false)} />
+      )}
     </section>
   );
 }
