@@ -23,6 +23,8 @@ export function proyectosDe(proyectos: Proyecto[], filtro: string): Proyecto[] {
 
 /** Fotos de la tarjeta de un servicio: los pósters de sus primeros proyectos (o su imagen propia primero) */
 export function imagenesDe(servicio: Servicio, proyectos: Proyecto[], cuantas = 4): string[] {
+  // Si Josep ha elegido las fotos de la cabecera, son esas y solo esas
+  if (servicio.fotosCabecera.length) return servicio.fotosCabecera.map((m) => m.url);
   const urls = proyectosDe(proyectos, servicio.slug).flatMap((p) => (p.poster ? [p.poster.url] : []));
   return [...(servicio.imagen ? [servicio.imagen.url] : []), ...urls].slice(0, cuantas);
 }

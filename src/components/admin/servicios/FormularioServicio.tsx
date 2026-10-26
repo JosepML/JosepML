@@ -6,9 +6,10 @@ import { FormularioContenido } from "../FormularioContenido";
 import { SECCIONES_SERVICIO } from "./esquema";
 
 export function FormularioServicio({ id, inicial }: { id: string; inicial: ParaEditar }) {
-  // «Título de Mi mirada» llega con la migración servicios_titulo_mirada: sin la columna, el campo no se enseña
+  // Los campos que llegan con una migración (titulo_mirada, fotos_cabecera) no se enseñan si la tabla aún no los tiene
   // (el borrador no admite campos que la tabla no tiene)
-  const secciones = "titulo_mirada" in inicial.fila ? SECCIONES_SERVICIO : SECCIONES_SERVICIO.map((s) => ({ ...s, campos: s.campos.filter((c) => c.clave !== "titulo_mirada") }));
+  const sinColumna = ["titulo_mirada", "fotos_cabecera"].filter((c) => !(c in inicial.fila));
+  const secciones = sinColumna.length ? SECCIONES_SERVICIO.map((s) => ({ ...s, campos: s.campos.filter((c) => !sinColumna.includes(c.clave)) })) : SECCIONES_SERVICIO;
   return (
     <FormularioContenido
       tabla="servicios"

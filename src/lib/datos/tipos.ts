@@ -44,6 +44,8 @@ export type Servicio = {
   preguntas: { pregunta: string; respuesta: string }[];
   llamada: string;
   imagen: Medio | null;
+  /** Fotos del carrusel de la cabecera, elegidas en el panel. Vacío = la imagen propia y los pósteres de sus proyectos */
+  fotosCabecera: Medio[];
   seo: { titulo: string; descripcion: string };
 };
 

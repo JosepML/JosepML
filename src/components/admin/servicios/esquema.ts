@@ -12,6 +12,7 @@ export const SECCIONES_SERVICIO: SeccionFormulario[] = [
       { tipo: "texto", clave: "frase", etiqueta: "Frase de la cabecera", ayuda: "La línea naranja debajo del nombre" },
       { tipo: "largo", clave: "resumen", etiqueta: "Resumen", filas: 3, ayuda: "Sale en la tarjeta del servicio en Inicio" },
       { tipo: "medio", clave: "imagen_id", etiqueta: "Imagen", ayuda: "Opcional: va la primera en las fotos que pasan de la cabecera y de la tarjeta. Las demás salen de los pósteres de sus proyectos" },
+      { tipo: "galeria", clave: "fotos_cabecera", etiqueta: "Fotos que pasan en la cabecera", ayuda: "Elige y ordena las fotos del carrusel de la cabecera (y de la tarjeta en Inicio). Si no pones ninguna, salen la imagen de arriba y los pósteres de sus primeros proyectos" },
     ],
   },
   {

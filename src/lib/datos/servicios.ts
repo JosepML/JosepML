@@ -1,5 +1,5 @@
 import { filas } from "./cliente";
-import { getMedios, medio } from "./medios";
+import { getMedios, listaMedios, medio } from "./medios";
 import type { Servicio } from "./tipos";
 import { lista, objeto, texto, textos } from "./util";
 
@@ -26,6 +26,8 @@ export async function getServicios(): Promise<Servicio[]> {
         .filter((p) => p.pregunta),
       llamada: s.llamada,
       imagen: medio(medios, s.imagen_id),
+      // La columna llega con la migración servicios_fotos_cabecera; mientras, undefined
+      fotosCabecera: listaMedios(medios, s.fotos_cabecera).map((x) => x.imagen),
       seo: { titulo: s.seo_titulo, descripcion: s.seo_descripcion },
     }));
 }

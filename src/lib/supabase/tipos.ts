@@ -834,6 +834,7 @@ export type Database = {
           con_quien: string
           creado_en: string
           estado: Database["public"]["Enums"]["estado_publicacion"]
+          fotos_cabecera: Json
           frase: string
           grupo: string
           id: string
@@ -859,6 +860,7 @@ export type Database = {
           con_quien?: string
           creado_en?: string
           estado?: Database["public"]["Enums"]["estado_publicacion"]
+          fotos_cabecera?: Json
           frase?: string
           grupo?: string
           id?: string
@@ -884,6 +886,7 @@ export type Database = {
           con_quien?: string
           creado_en?: string
           estado?: Database["public"]["Enums"]["estado_publicacion"]
+          fotos_cabecera?: Json
           frase?: string
           grupo?: string
           id?: string
