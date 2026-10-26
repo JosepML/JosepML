@@ -19,7 +19,7 @@ function Etiqueta({ texto, opcional, llena, children }: { texto: string; opciona
   );
 }
 
-/** Pastilla que se marca: el mismo gesto en el formulario de Contacto y en la llamada del final de las páginas */
+/** Pastilla que se marca */
 function Pastilla({ texto, activo, alCambiar }: { texto: string; activo: boolean; alCambiar: () => void }) {
   return (
     <label
@@ -41,41 +41,31 @@ type Props = {
   opciones: string[];
   /** Las que llegan marcadas (?temas=…) */
   marcados?: string[];
-  /**
-   * Versión para la llamada del final de las páginas: las pastillas las pone quien lo usa y las pasa aquí; sin teléfono
-   * y más baja.
-   */
-  elegidos?: string[];
-  compacto?: boolean;
+  /** Si quien lo usa guarda las marcadas (por ejemplo, la llamada del final de las páginas, que reacciona a los botones de servicio) */
+  valor?: string[];
+  alCambiar?: (lista: string[]) => void;
   /** De dónde viene el mensaje (se guarda con él) */
   origen?: string;
-  /** Lo que va junto al botón de enviar (el WhatsApp, en la llamada del final) */
-  junto?: React.ReactNode;
+  /** Línea pequeña junto al botón */
+  nota?: React.ReactNode;
 };
 
-export function FormularioContacto({ opciones, marcados = [], elegidos: externos, compacto = false, origen = "contacto", junto }: Props) {
+export function FormularioContacto({ opciones, marcados = [], valor, alCambiar, origen = "contacto", nota }: Props) {
   const [estado, accion, enviando] = useActionState<EstadoContacto, FormData>(enviarContacto, {});
   const [propios, setPropios] = useState<string[]>(marcados);
-  const elegidos = externos ?? propios;
-  const alternar = (t: string) => setPropios((l) => (l.includes(t) ? l.filter((x) => x !== t) : [...l, t]));
+  const elegidos = valor ?? propios;
+  const alternar = (t: string) => {
+    const nueva = elegidos.includes(t) ? elegidos.filter((x) => x !== t) : [...elegidos, t];
+    (alCambiar ?? setPropios)(nueva);
+  };
 
   return (
-    <form
-      action={accion}
-      className={compacto ? "mx-auto mt-8 grid max-w-2xl gap-5 text-left lg:mt-[3svh]" : "cristal relative flex h-full flex-col gap-5 overflow-hidden rounded-[32px] p-6 sm:p-8"}
-    >
-      {!compacto && (
-        <>
-          <div aria-hidden className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,var(--jm-orbe-a),transparent)] opacity-70" />
-          <div className="relative flex flex-wrap items-center justify-between gap-3">
-            <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)]">
-              <Icono nombre="correo" className="h-4 w-4 text-[var(--jm-acento)]" />
-              Mensaje directo
-            </p>
-            <span className="rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-xs text-[var(--jm-suave)]">Respuesta en menos de 24 h</span>
-          </div>
-        </>
-      )}
+    <form action={accion} className="cristal relative flex h-full flex-col gap-5 overflow-hidden rounded-[32px] p-6 text-left sm:p-8">
+      <div aria-hidden className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,var(--jm-orbe-a),transparent)] opacity-70" />
+      <p className="relative flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)]">
+        <Icono nombre="correo" className="h-4 w-4 text-[var(--jm-acento)]" />
+        Mensaje directo
+      </p>
 
       <input type="hidden" name="origen" value={origen} />
       <input type="hidden" name="servicio" value={elegidos.join(", ")} />
@@ -89,42 +79,41 @@ export function FormularioContacto({ opciones, marcados = [], elegidos: externos
         </Etiqueta>
       </div>
 
-      {externos === undefined && (
-        <fieldset className="relative grid gap-3">
-          <legend className="mb-1 text-sm font-medium text-[var(--jm-suave)]">
-            ¿Qué tienes en mente?<span className="ml-2 text-xs font-normal text-[var(--jm-tenue)]">opcional, puedes elegir varias</span>
-          </legend>
-          <div className="flex flex-wrap gap-2">
-            {opciones.map((t) => (
-              <Pastilla key={t} texto={t} activo={elegidos.includes(t)} alCambiar={() => alternar(t)} />
-            ))}
-          </div>
-        </fieldset>
-      )}
+      <fieldset className="relative grid gap-3">
+        <legend className="mb-1 text-sm font-medium text-[var(--jm-suave)]">
+          ¿Qué tienes en mente?<span className="ml-2 text-xs font-normal text-[var(--jm-tenue)]">opcional, puedes elegir varias</span>
+        </legend>
+        <div className="flex flex-wrap gap-2">
+          {opciones.map((t) => (
+            <Pastilla key={t} texto={t} activo={elegidos.includes(t)} alCambiar={() => alternar(t)} />
+          ))}
+        </div>
+      </fieldset>
 
-      <div className={`relative grid ${compacto ? "" : "flex-1"}`}>
-        <Etiqueta texto="Cuéntame tu proyecto" llena={!compacto}>
+      <div className="relative grid flex-1">
+        <Etiqueta texto="Cuéntame tu proyecto" llena>
           <textarea
             name="mensaje"
             required
             minLength={10}
-            rows={compacto ? 4 : 5}
+            rows={5}
             placeholder="Qué quieres contar, para quién y para cuándo. Cuanto más me cuentes, mejor."
-            className={`${CAMPO} leading-relaxed ${compacto ? "resize-y" : "h-full min-h-32 resize-none"}`}
+            className={`${CAMPO} h-full min-h-32 resize-none leading-relaxed`}
           />
         </Etiqueta>
       </div>
 
-      {!compacto && (
-        <div className="relative grid">
-          <Etiqueta texto="Teléfono" opcional>
-            <input name="telefono" type="tel" autoComplete="tel" placeholder="Si prefieres que te llame" className={CAMPO} />
-          </Etiqueta>
-        </div>
-      )}
+      <div className="relative grid">
+        <Etiqueta texto="Teléfono" opcional>
+          <input name="telefono" type="tel" autoComplete="tel" placeholder="Si prefieres que te llame" className={CAMPO} />
+        </Etiqueta>
+      </div>
 
-      <label className="relative flex items-start gap-3 text-left text-sm leading-relaxed text-[var(--jm-suave)]">
-        <input name="acepta" type="checkbox" required className="mt-1 h-[18px] w-[18px] shrink-0 accent-[var(--jm-acento)]" />
+      <label className="relative flex cursor-pointer items-start gap-3 text-left text-sm leading-relaxed text-[var(--jm-suave)]">
+        <input name="acepta" type="checkbox" required className="peer sr-only" />
+        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-white/25 bg-black/20 transition-[background-color,border-color,box-shadow] duration-200 peer-checked:border-transparent peer-checked:bg-[var(--jm-acento)] peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--jm-acento)] peer-checked:[&>svg]:scale-100 peer-checked:[&>svg]:opacity-100">
+          <Icono nombre="check" className="h-3.5 w-3.5 scale-50 text-white opacity-0 transition-[transform,opacity] duration-200" />
+        </span>
         <span>Acepto que guardes mis datos para responderme. Solo los uso para eso.</span>
       </label>
 
@@ -134,13 +123,12 @@ export function FormularioContacto({ opciones, marcados = [], elegidos: externos
         </p>
       )}
 
-      <div className={`relative flex flex-wrap items-center gap-3 ${compacto ? "justify-center" : "gap-x-6"}`}>
+      <div className="relative flex flex-wrap items-center gap-x-6 gap-y-3">
         <button type="submit" disabled={enviando} className="boton boton-acento group px-8 py-4 text-base disabled:opacity-60">
           {enviando ? "Enviando…" : "Enviar mensaje"}
           {!enviando && <Icono nombre="flecha" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />}
         </button>
-        {junto}
-        {!compacto && <p className="text-xs text-[var(--jm-tenue)]">Te respondo personalmente, normalmente en menos de 24 horas.</p>}
+        <p className="text-xs text-[var(--jm-tenue)]">{nota ?? "Te respondo personalmente, normalmente en menos de 24 horas."}</p>
       </div>
     </form>
   );

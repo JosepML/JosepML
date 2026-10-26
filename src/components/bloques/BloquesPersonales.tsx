@@ -8,7 +8,8 @@ import { lista, objeto, texto, textos } from "@/lib/datos/util";
 import { usePunteroFino, useReducir } from "../comun/hooks";
 import { TarjetaArticulo } from "../blog/TarjetaArticulo";
 import { img } from "../comun/imagen";
-import { FormularioContacto } from "../contacto/FormularioContacto";
+import { SeccionContacto } from "../contacto/SeccionContacto";
+import { FOTO_CONTACTO } from "@/lib/contacto/foto";
 import { Icono } from "../Iconos";
 import { CambiarImagen, Editable, useEditando } from "../edicion/contexto";
 import { useDatos, useMedio } from "../marco/DatosWeb";
@@ -341,7 +342,7 @@ function CabeceraCine({ bloque }: { bloque: Bloque }) {
  * servicios y las `opciones` del bloque). Abre el correo o WhatsApp con lo elegido ya escrito.
  */
 export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bloque; ancla?: string; preseleccion?: string[] }) {
-  const { ajustes, servicios } = useDatos();
+  const { ajustes, servicios, medios } = useDatos();
   const opciones = textos(bloque.datos.opciones);
   const nota = texto(bloque.datos.nota);
   const editando = useEditando();
@@ -356,81 +357,42 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
     return () => window.removeEventListener(EVENTO_SERVICIO, elegir);
   }, []);
 
-  const alternar = (t: string) => setElegidos((l) => (l.includes(t) ? l.filter((x) => x !== t) : [...l, t]));
-  const mensajeWa = `Hola, Josep. ${elegidos.length ? `Tengo en mente: ${elegidos.join(", ")}. ` : ""}Me gustaría contarte mi proyecto.`;
+  // Es la misma pieza que la página de Contacto: la foto de Josep con el título encima y el formulario al lado
+  const foto = medios[ajustes.fotoContacto || FOTO_CONTACTO] ?? medios[FOTO_CONTACTO] ?? servicios.find((s) => s.slug === "filmmaker")?.imagen ?? null;
 
   return (
-    <section id={ancla} className="scroll-mt-24 px-3 py-16 sm:px-6 sm:py-24 lg:py-[5svh]">
-      <Revelar>
-        <div className="cristal relative mx-auto max-w-7xl overflow-hidden rounded-[48px] px-6 py-16 text-center sm:px-12 sm:py-24 lg:py-[6svh]">
-          <div className="pointer-events-none absolute -left-24 -top-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,var(--jm-orbe-a),transparent)]" />
-          <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,var(--jm-orbe-b),transparent)]" />
-          <div className="relative">
-            {ajustes.disponible && <Disponible />}
-            <h2 className="mx-auto mt-6 max-w-4xl text-[clamp(2.4rem,min(6.5vw,9svh),6rem)] font-extrabold leading-[1.02] tracking-[-0.05em] [text-wrap:balance]">
+    <section id={ancla} className="scroll-mt-24 px-4 py-16 sm:px-8 sm:py-24 lg:py-[5svh]">
+      <SeccionContacto
+        medio={foto}
+        opciones={[...servicios.map((s) => s.nombre), ...opciones]}
+        valor={elegidos}
+        alCambiar={setElegidos}
+        origen="llamada"
+        nota={
+          nota || editando ? (
+            <Editable campo="nota" valor={nota} vacio="Nota pequeña">
+              {nota}
+            </Editable>
+          ) : undefined
+        }
+        cabecera={
+          <>
+            {ajustes.disponible && <Disponible className="mb-4" />}
+            <h2 className="text-[clamp(2rem,4.2vw,3.4rem)] font-extrabold leading-[1.04] tracking-[-0.04em] [text-wrap:balance]">
               <Editable campo="titulo" valor={bloque.datos.titulo} vacio="Título">
                 <TituloConAcento texto={bloque.datos.titulo ?? ""} />
               </Editable>
             </h2>
             {(bloque.datos.texto || editando) && (
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-[var(--jm-suave)] sm:text-xl">
+              <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--jm-suave)]">
                 <Editable campo="texto" valor={bloque.datos.texto} multilinea vacio="Texto">
                   {bloque.datos.texto}
                 </Editable>
               </p>
             )}
-
-            <p className="mt-10 text-sm font-semibold lg:mt-[4svh]">¿Qué tienes en mente?</p>
-            <div className="mx-auto mt-4 flex max-w-3xl flex-wrap justify-center gap-2">
-              {[...servicios.map((s) => s.nombre), ...opciones].map((t) => {
-                const si = elegidos.includes(t);
-                return (
-                  <motion.button
-                    key={t}
-                    type="button"
-                    onClick={() => alternar(t)}
-                    whileTap={{ scale: 0.94 }}
-                    aria-pressed={si}
-                    className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-300 ${
-                      si ? "border-transparent bg-[var(--jm-acento)] text-white" : "border-[var(--jm-borde)] bg-[var(--jm-cristal)] hover:border-[var(--jm-acento)]"
-                    }`}
-                  >
-                    {si && "✓ "}
-                    {t}
-                  </motion.button>
-                );
-              })}
-            </div>
-
-            {/* El formulario de Contacto, en pequeño, aquí mismo: lo marcado arriba va con el mensaje */}
-            <FormularioContacto
-              compacto
-              opciones={[]}
-              elegidos={elegidos}
-              origen="llamada"
-              junto={
-                <a
-                  href={`https://wa.me/${ajustes.whatsapp}?text=${encodeURIComponent(mensajeWa)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="boton border border-[var(--jm-borde)] bg-[var(--jm-cristal)] px-8 py-4 text-base hover:border-[#25d366]"
-                >
-                  <Icono nombre="whatsapp" className="h-5 w-5 text-[#25d366]" />
-                  O por WhatsApp
-                </a>
-              }
-            />
-            {/* Ancho de lectura acotado y centrado: así no queda bajo el índice lateral desplegado en pantallas estrechas */}
-            {(nota || editando) && (
-              <p className="mx-auto mt-6 max-w-md text-xs leading-relaxed text-[var(--jm-tenue)] [text-wrap:balance]">
-                <Editable campo="nota" valor={nota} vacio="Nota pequeña">
-                  {nota}
-                </Editable>
-              </p>
-            )}
-          </div>
-        </div>
-      </Revelar>
+          </>
+        }
+      />
     </section>
   );
 }

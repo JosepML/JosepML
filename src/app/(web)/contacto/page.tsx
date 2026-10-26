@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { FormularioContacto } from "@/components/contacto/FormularioContacto";
-import { Retrato } from "@/components/contacto/Retrato";
+import { SeccionContacto } from "@/components/contacto/SeccionContacto";
 import { Revelar, Titular } from "@/components/piezas";
 import { getPagina } from "@/lib/datos/paginas";
 import { getFotoContacto } from "@/lib/datos/contacto";
@@ -26,22 +25,21 @@ export default async function Contacto({ searchParams }: { searchParams: Promise
   const marcados = (temas ?? "").split(",").map((t) => t.trim()).filter((t) => opciones.includes(t));
   return (
     <section className="px-4 pb-24 pt-28 sm:px-8 sm:pt-32">
-      <div className="mx-auto grid max-w-7xl items-stretch gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
-        {/* En pantallas anchas la foto y el formulario miden lo mismo: manda el más alto y el otro se estira */}
-        <div className="lg:h-full">
-          <Retrato medio={foto} className="lg:h-full">
+      <SeccionContacto
+        medio={foto}
+        opciones={opciones}
+        marcados={marcados}
+        cabecera={
+          <>
             <Titular nivel={1} antetitulo="Contacto" titulo="Hablemos de tu *proyecto*" />
             <Revelar retraso={0.12}>
               <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--jm-suave)]">
                 Cuéntame qué tienes en mente, aunque aún no esté claro. Lo pensamos juntos y te propongo cómo llevarlo a la pantalla. Sin compromiso.
               </p>
             </Revelar>
-          </Retrato>
-        </div>
-        <Revelar retraso={0.2} className="lg:h-full">
-          <FormularioContacto opciones={opciones} marcados={marcados} />
-        </Revelar>
-      </div>
+          </>
+        }
+      />
     </section>
   );
 }

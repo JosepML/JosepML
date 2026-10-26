@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FormularioAjustes } from "@/components/admin/ajustes/FormularioAjustes";
 import { exigirAdmin } from "@/lib/admin/sesion";
 import { getAjustes } from "@/lib/datos/ajustes";
-import { FOTO_CONTACTO } from "@/lib/datos/contacto";
+import { FOTO_CONTACTO } from "@/lib/contacto/foto";
 
 export const metadata: Metadata = { title: "Ajustes" };
 
