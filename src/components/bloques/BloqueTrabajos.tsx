@@ -107,7 +107,7 @@ function ProyectoAncho({ proyecto: p }: { proyecto: Proyecto }) {
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-white/65">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
-              {p.conJuno && <SelloJuno pequeno className="-my-1 shrink-0" />}
+              {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 shrink-0" />}
             </div>
             <h3 className="mt-2 pb-[0.06em] text-3xl font-extrabold leading-[1.04] tracking-[-0.045em] sm:text-5xl">{p.titulo}</h3>
             {p.papel && <p className="mt-2 text-sm text-white/75 sm:text-base">{p.papel}</p>}
@@ -562,7 +562,7 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: Proyecto }) {
         <div className="absolute inset-x-3 bottom-3 z-[3] rounded-[24px] border border-white/15 bg-black/60 p-4 text-white transition-transform duration-500 group-hover:-translate-y-1 sm:p-5">
           <div className="flex items-center justify-between gap-3">
             <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/60">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
-            {p.conJuno && <SelloJuno pequeno className="-my-1 shrink-0" />}
+            {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 shrink-0" />}
           </div>
           <h3 className="mt-1 text-xl font-bold leading-tight tracking-[-0.025em] sm:text-2xl">{p.titulo}</h3>
           <p className="mt-1 text-sm text-white/70">{p.papel}</p>

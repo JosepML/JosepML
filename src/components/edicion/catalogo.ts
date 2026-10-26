@@ -210,6 +210,7 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
       titulo,
       texto,
       imagen,
+      enlace,
     ],
     nuevo: { estilo: "tarjeta", titulo: "Una sección *nueva*", texto: "" },
   },

@@ -213,6 +213,7 @@ function TarjetaTexto({ bloque }: { bloque: Bloque }) {
   const { antetitulo, titulo = "", texto: cuerpo } = bloque.datos;
   const imagen = useMedio(bloque.datos.imagen);
   const editando = useEditando();
+  const enlace = enlaceDe(bloque.datos.enlace);
   return (
     <section className="px-4 py-20 sm:px-8">
       <Revelar className="mx-auto max-w-5xl">
@@ -236,6 +237,16 @@ function TarjetaTexto({ bloque }: { bloque: Bloque }) {
                   <Parrafos texto={cuerpo ?? ""} />
                 </Editable>
               </div>
+            )}
+            {enlace && (
+              <a
+                href={enlace.href}
+                {...(/^https?:/.test(enlace.href) ? { target: "_blank", rel: "noopener" } : {})}
+                className="boton mt-8 border border-[var(--jm-borde)] px-6 py-3 text-sm hover:bg-[var(--jm-cristal)]"
+              >
+                {enlace.texto}
+                <Icono nombre="flecha" className="h-4 w-4" />
+              </a>
             )}
           </div>
           {imagen ? (

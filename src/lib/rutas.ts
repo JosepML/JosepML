@@ -6,6 +6,7 @@ export const RUTAS = {
   servicio: (slug: string) => `/servicios/${slug}`,
   recreaciones: "/recreaciones",
   sobreMi: "/sobre-mi",
+  juno: "/juno-media",
   blog: "/blog",
   articulo: (slug: string) => `/blog/${slug}`,
   contacto: "/contacto",
