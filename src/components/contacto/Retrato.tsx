@@ -15,13 +15,13 @@ export function Retrato({
   medio,
   etiqueta,
   className = "",
-  aspecto = "aspect-[4/5] max-w-md lg:max-w-none",
+  children,
 }: {
   medio: Medio | null;
   etiqueta?: string;
   className?: string;
-  /** Proporción y ancho del marco (clases de Tailwind) */
-  aspecto?: string;
+  /** Texto que va encima de la foto, abajo, en blanco */
+  children?: React.ReactNode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reducir = useReducir();
@@ -38,7 +38,7 @@ export function Retrato({
     <Revelar className={className}>
       <div ref={ref} style={{ perspective: 1200 }}>
         <motion.div
-          className={`relative mx-auto ${aspecto} overflow-hidden rounded-[44px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)]`}
+          className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[44px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] lg:max-w-none"
           style={{ rotateX: srx, rotateY: sry }}
           onPointerMove={(e) => {
             if (!fino || reducir) return;
@@ -58,7 +58,13 @@ export function Retrato({
             style={{ scale: reducir ? 1 : escala }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-          {etiqueta && (
+          {children && (
+            // Dentro de la foto el texto siempre es claro, sea cual sea el tema
+            <div className="absolute inset-x-0 bottom-0 z-30 p-7 text-white sm:p-10 [--jm-suave:rgba(255,255,255,0.82)] [--jm-texto:#fff]">
+              {children}
+            </div>
+          )}
+          {etiqueta && !children && (
             <div className="absolute bottom-4 left-4 right-4 z-30 flex flex-wrap gap-2">
               <span className="rounded-full border border-white/20 bg-black/35 px-3.5 py-1.5 text-xs font-medium text-white">{etiqueta}</span>
             </div>
