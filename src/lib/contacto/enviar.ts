@@ -10,7 +10,6 @@ import { createClient } from "@/lib/supabase/server";
 
 export type EstadoContacto = { error?: string };
 
-const SERVICIOS = ["filmmaker", "direccion-de-fotografia", "edicion", "otro"];
 const FORMSPREE = "https://formspree.io/f/mrblvlpb";
 
 async function avisarPorCorreo(m: { nombre: string; correo: string; telefono: string; servicio: string; mensaje: string }) {
@@ -39,7 +38,8 @@ export async function enviarContacto(_previo: EstadoContacto, datos: FormData): 
   const nombre = texto("nombre");
   const correo = texto("correo");
   const telefono = texto("telefono");
-  const servicio = texto("servicio");
+  // Lo que se eligió en las pastillas («Filmmaker, Videoclip»): texto libre, acotado al límite de la base
+  const servicio = texto("servicio").slice(0, 120);
   const mensaje = texto("mensaje");
 
   if (nombre.length < 2) return { error: "Dime tu nombre, por favor." };
@@ -52,13 +52,13 @@ export async function enviarContacto(_previo: EstadoContacto, datos: FormData): 
     nombre,
     correo,
     telefono,
-    servicio: SERVICIOS.includes(servicio) ? servicio : "",
+    servicio,
     mensaje,
     origen: "contacto",
     acepta_privacidad: true,
   });
   if (error) return { error: "No se ha podido enviar ahora mismo. Prueba de nuevo en un rato." };
 
-  await avisarPorCorreo({ nombre, correo, telefono, servicio: SERVICIOS.includes(servicio) ? servicio : "", mensaje });
+  await avisarPorCorreo({ nombre, correo, telefono, servicio, mensaje });
   redirect(RUTAS.gracias);
 }

@@ -402,7 +402,7 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
             </div>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row lg:mt-[4svh]">
-              <Link href="/contacto" className="boton boton-acento px-8 py-4 text-base">
+              <Link href={elegidos.length ? `/contacto?temas=${encodeURIComponent(elegidos.join(","))}` : "/contacto"} className="boton boton-acento px-8 py-4 text-base">
                 <Icono nombre="correo" className="h-5 w-5" />
                 Escríbeme
               </Link>

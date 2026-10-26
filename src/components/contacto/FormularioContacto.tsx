@@ -7,13 +7,6 @@ import { Icono } from "../Iconos";
 const CAMPO =
   "w-full rounded-2xl border border-[var(--jm-borde)] bg-white/[0.04] px-4 py-3.5 text-base text-[var(--jm-texto)] outline-none transition-colors placeholder:text-[var(--jm-tenue)] hover:border-white/30 focus:border-[var(--jm-acento)] focus:bg-white/[0.07]";
 
-const SERVICIOS = [
-  { valor: "filmmaker", texto: "Filmmaker" },
-  { valor: "direccion-de-fotografia", texto: "Dirección de fotografía" },
-  { valor: "edicion", texto: "Edición" },
-  { valor: "otro", texto: "Otra cosa" },
-];
-
 function Etiqueta({ texto, opcional, children }: { texto: string; opcional?: boolean; children: React.ReactNode }) {
   return (
     <label className="grid gap-2 text-sm font-medium text-[var(--jm-suave)]">
@@ -26,9 +19,10 @@ function Etiqueta({ texto, opcional, children }: { texto: string; opcional?: boo
   );
 }
 
-export function FormularioContacto() {
+export function FormularioContacto({ opciones, marcados = [] }: { opciones: string[]; marcados?: string[] }) {
   const [estado, accion, enviando] = useActionState<EstadoContacto, FormData>(enviarContacto, {});
-  const [servicio, setServicio] = useState("");
+  const [elegidos, setElegidos] = useState<string[]>(marcados);
+  const alternar = (t: string) => setElegidos((l) => (l.includes(t) ? l.filter((x) => x !== t) : [...l, t]));
 
   return (
     <form action={accion} className="cristal grid gap-6 rounded-[32px] p-6 sm:p-9">
@@ -43,35 +37,27 @@ export function FormularioContacto() {
 
       <fieldset className="grid gap-3">
         <legend className="mb-1 text-sm font-medium text-[var(--jm-suave)]">
-          ¿Qué necesitas?<span className="ml-2 text-xs font-normal text-[var(--jm-tenue)]">opcional</span>
+          ¿Qué tienes en mente?<span className="ml-2 text-xs font-normal text-[var(--jm-tenue)]">opcional, puedes elegir varias</span>
         </legend>
         <div className="flex flex-wrap gap-2">
-          {SERVICIOS.map((s) => {
-            const activo = servicio === s.valor;
+          {opciones.map((t) => {
+            const activo = elegidos.includes(t);
             return (
               <label
-                key={s.valor}
+                key={t}
                 className={`cursor-pointer select-none rounded-full border px-4 py-2 text-sm font-medium transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--jm-acento)] ${
                   activo
                     ? "border-[var(--jm-acento)] bg-[var(--jm-acento)] text-white"
                     : "border-[var(--jm-borde)] bg-white/[0.04] text-[var(--jm-suave)] hover:border-white/30 hover:text-[var(--jm-texto)]"
                 }`}
               >
-                <input
-                  type="radio"
-                  name="servicio"
-                  value={s.valor}
-                  checked={activo}
-                  // Pulsar el elegido otra vez lo quita: el servicio es opcional
-                  onClick={() => activo && setServicio("")}
-                  onChange={() => setServicio(s.valor)}
-                  className="sr-only"
-                />
-                {s.texto}
+                <input type="checkbox" checked={activo} onChange={() => alternar(t)} className="sr-only" />
+                {t}
               </label>
             );
           })}
         </div>
+        <input type="hidden" name="servicio" value={elegidos.join(", ")} />
       </fieldset>
 
       <Etiqueta texto="Cuéntame tu proyecto">
