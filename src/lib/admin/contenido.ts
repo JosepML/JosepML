@@ -246,6 +246,23 @@ export async function reordenar(tabla: TablaContenido, ids: string[]): Promise<R
   });
 }
 
+/**
+ * Orden de los proyectos dentro de un servicio (Filmmaker, Dirección de fotografía, Edición), de primero a último.
+ * Es el orden real de esa página y de su filtro en Trabajos: el listado manda, así que se quita lo «destacado»
+ * por servicio (que hasta ahora ponía unos delante de otros).
+ */
+export async function ordenarPorServicio(servicioId: string, proyectoIds: string[]): Promise<Resultado<null>> {
+  return intentar(async () => {
+    const s = await db();
+    const resultados = await Promise.all(
+      proyectoIds.map((id, i) => s.from("proyecto_servicios").update({ orden: i + 1, destacado: false }).eq("servicio_id", servicioId).eq("proyecto_id", id)),
+    );
+    lanzar(resultados.find((r) => r.error)?.error ?? null);
+    await revalidarContenido(["proyectos", "proyecto_servicios"]);
+    return null;
+  });
+}
+
 /** Campos que se cambian al momento desde la lista, sin pasar por el borrador */
 const AL_INSTANTE: Partial<Record<TablaContenido, string[]>> = { proyectos: ["destacado_orden"] };
 

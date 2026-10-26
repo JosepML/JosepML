@@ -4,7 +4,7 @@ import { AnimatePresence, motion, Reorder, useDragControls } from "motion/react"
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-import { cambiarAlInstante, cambiarVisible, crear, duplicar, borrar, reordenar } from "@/lib/admin/contenido";
+import { cambiarAlInstante, cambiarVisible, crear, duplicar, borrar, reordenar, ordenarPorServicio } from "@/lib/admin/contenido";
 import type { Medio } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
 import { CURVA } from "@/styles/movimiento";
@@ -38,7 +38,9 @@ const FILTROS: { id: Filtro; nombre: string }[] = [
 /** Máximo de destacados en Inicio: los que caben en el carrusel de Selección sin que se haga largo */
 const MAX_DESTACADOS = 8;
 
-export function ListaProyectos({ inicial }: { inicial: FilaProyecto[] }) {
+export type OrdenServicio = { id: string; nombre: string; proyectos: string[] };
+
+export function ListaProyectos({ inicial, porServicio }: { inicial: FilaProyecto[]; porServicio: OrdenServicio[] }) {
   const router = useRouter();
   const buscar = useSearchParams();
   const { confirmar, avisar } = useDialogos();
@@ -157,6 +159,8 @@ export function ListaProyectos({ inicial }: { inicial: FilaProyecto[] }) {
           <p className="mt-3 text-sm text-[var(--jm-suave)]">Marca proyectos con la estrella para que salgan en Inicio.</p>
         )}
       </section>
+
+      <OrdenPorServicio servicios={porServicio} lista={lista} alGuardar={ordenarPorServicio} alResultado={resultado} />
 
       {/* Buscar y filtrar */}
       <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -366,5 +370,76 @@ function NuevoProyecto({ alCerrar }: { alCerrar: () => void }) {
         </div>
       </motion.form>
     </motion.div>
+  );
+}
+
+/**
+ * Orden de los proyectos dentro de cada servicio: es el que ven las páginas de Filmmaker, Dirección de fotografía y
+ * Edición y sus filtros en Trabajos. Un servicio a la vez; se arrastra y se guarda al soltar.
+ */
+function OrdenPorServicio({
+  servicios,
+  lista,
+  alGuardar,
+  alResultado,
+}: {
+  servicios: OrdenServicio[];
+  lista: FilaProyecto[];
+  alGuardar: (servicioId: string, ids: string[]) => Promise<{ ok: boolean; error?: string }>;
+  alResultado: (r: { ok: boolean; error?: string }, ok?: string) => boolean;
+}) {
+  const [abierto, setAbierto] = useState(false);
+  const [actual, setActual] = useState(servicios[0]?.id ?? "");
+  const [ordenes, setOrdenes] = useState(() => Object.fromEntries(servicios.map((s) => [s.id, s.proyectos])));
+  useEffect(() => setOrdenes(Object.fromEntries(servicios.map((s) => [s.id, s.proyectos]))), [servicios]);
+  const servicio = servicios.find((s) => s.id === actual);
+  const filas = (ordenes[actual] ?? []).flatMap((id) => lista.find((p) => p.id === id) ?? []);
+  if (!servicios.length) return null;
+
+  return (
+    <section className="cristal mt-6 rounded-[28px] p-5">
+      <button type="button" onClick={() => setAbierto((a) => !a)} className="flex w-full items-center justify-between gap-3 text-left" aria-expanded={abierto}>
+        <h2 className="text-sm font-bold">Orden por servicio</h2>
+        <span className="text-xs text-[var(--jm-tenue)]">{abierto ? "Cerrar" : "Un orden propio para Filmmaker, Dirección de fotografía y Edición"}</span>
+      </button>
+      <AnimatePresence initial={false}>
+        {abierto && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.45, ease: CURVA }} className="overflow-hidden">
+            <div className="mt-4 flex flex-wrap gap-1 rounded-full bg-black/25 p-1 w-fit max-w-full">
+              {servicios.map((s) => (
+                <button key={s.id} type="button" onClick={() => setActual(s.id)} className={`relative rounded-full px-3.5 py-1.5 text-[13px] font-semibold transition-colors ${actual === s.id ? "text-[var(--jm-texto)]" : "text-[var(--jm-tenue)] hover:text-[var(--jm-suave)]"}`}>
+                  {actual === s.id && <motion.span layoutId="orden-servicio" className="absolute inset-0 rounded-full bg-white/10" transition={{ duration: 0.4, ease: CURVA }} />}
+                  <span className="relative">{s.nombre}</span>
+                </button>
+              ))}
+            </div>
+            <p className="mt-3 text-xs text-[var(--jm-tenue)]">
+              Arrastra para ordenar «{servicio?.nombre}»: el primero es el primero que se ve en su página y en su filtro de Trabajos. Los ocultos y sin publicar también cuentan, para que ya estén en su sitio al publicarlos.
+            </p>
+            <Reorder.Group axis="y" values={filas} onReorder={(n) => setOrdenes((o) => ({ ...o, [actual]: n.map((p) => p.id) }))} className="mt-3 flex flex-col gap-1.5">
+              {filas.map((p, i) => (
+                <FilaServicio key={p.id} p={p} puesto={i + 1} alSoltar={async () => alResultado(await alGuardar(actual, ordenes[actual] ?? []), "Orden guardado")} />
+              ))}
+            </Reorder.Group>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+}
+
+function FilaServicio({ p, puesto, alSoltar }: { p: FilaProyecto; puesto: number; alSoltar: () => void }) {
+  const controles = useDragControls();
+  const visible = p.estado === "publicado";
+  return (
+    <Reorder.Item value={p} dragListener={false} dragControls={controles} onDragEnd={alSoltar} className="flex items-center gap-3 rounded-[18px] bg-black/20 p-1.5 pr-3" whileDrag={{ scale: 1.02, boxShadow: "0 18px 40px -16px rgba(0,0,0,0.6)", zIndex: 10 }}>
+      <button type="button" onPointerDown={(e) => controles.start(e)} className="flex h-9 w-6 shrink-0 cursor-grab touch-none items-center justify-center text-[var(--jm-tenue)] active:cursor-grabbing" aria-label="Arrastrar para ordenar">
+        <Icono nombre="asa" className="h-4 w-4" />
+      </button>
+      <span className="w-5 shrink-0 text-center text-xs font-bold text-[var(--jm-tenue)]">{puesto}</span>
+      <Miniatura medio={p.poster} className={`pointer-events-none aspect-video w-16 shrink-0 rounded-[10px] ${visible ? "" : "opacity-50"}`} />
+      <span className="min-w-0 flex-1 truncate text-sm font-semibold">{p.titulo || "Sin título"}</span>
+      {p.nuevo ? <Insignia color="bg-white/15 text-[var(--jm-suave)]">Sin publicar</Insignia> : !visible && <Insignia color="bg-[#ff9f0a]/15 text-[#ffb340]">Oculto</Insignia>}
+    </Reorder.Item>
   );
 }

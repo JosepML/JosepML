@@ -8,7 +8,21 @@ export const metadata: Metadata = { title: "Proyectos" };
 
 export default async function Proyectos() {
   const s = await exigirAdmin({ redirigir: "/admin/proyectos" });
-  const [r, { data: tipos }] = await Promise.all([listar("proyectos"), s.from("tipos_proyecto").select("id, nombre")]);
+  const [r, { data: tipos }, { data: servicios }, { data: enlaces }] = await Promise.all([
+    listar("proyectos"),
+    s.from("tipos_proyecto").select("id, nombre"),
+    s.from("servicios").select("id, nombre, orden").eq("idioma", "es").order("orden"),
+    s.from("proyecto_servicios").select("proyecto_id, servicio_id, orden, destacado"),
+  ]);
+  // Orden de cada servicio tal como se ve en la web: primero los destacados por servicio y luego el resto
+  const porServicio = (servicios ?? []).map((sv) => ({
+    id: sv.id,
+    nombre: sv.nombre,
+    proyectos: (enlaces ?? [])
+      .filter((e) => e.servicio_id === sv.id)
+      .sort((a, b) => Number(b.destacado) - Number(a.destacado) || a.orden - b.orden)
+      .map((e) => e.proyecto_id),
+  }));
   if (!r.ok) return <p className="text-[#ff6b6b]">{r.error}</p>;
   // Póster de cada uno (o la primera foto de la galería), para reconocerlos de un vistazo
   const poster = (p: Record<string, unknown>) => {
@@ -19,6 +33,7 @@ export default async function Proyectos() {
   const medios = await mediosPorId(ids);
   return (
     <ListaProyectos
+      porServicio={porServicio}
       inicial={r.datos.map((p) => {
         const d = { ...p, ...(p.borrador ?? {}) };
         const m = medios.ok ? medios.datos[poster(p) ?? ""] : undefined;
