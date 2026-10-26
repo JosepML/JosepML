@@ -75,6 +75,8 @@ export type Proyecto = {
   youtubeInicio: number | null;
   /** Póster (imagen_id); si falta, la primera de la galería */
   poster: Medio | null;
+  /** Imagen propia de la cabecera de la ficha. Null = el póster */
+  imagenCabecera: Medio | null;
   galeria: ImagenConPie[];
   detrasDeCamaras: ImagenConPie[];
   clip: Medio | null;

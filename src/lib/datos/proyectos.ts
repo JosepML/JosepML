@@ -36,6 +36,7 @@ export async function getProyectos(): Promise<Proyecto[]> {
         youtubeId: p.youtube_id,
         youtubeInicio: p.youtube_inicio,
         poster: medio(medios, p.imagen_id) ?? galeria[0]?.imagen ?? null,
+        imagenCabecera: medio(medios, p.imagen_cabecera_id),
         galeria,
         detrasDeCamaras: listaMedios(medios, p.detras_de_camaras),
         clip: medio(medios, p.clip_id),

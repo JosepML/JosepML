@@ -640,6 +640,7 @@ export type Database = {
           id: string
           id_antiguo: string | null
           idioma: string
+          imagen_cabecera_id: string | null
           imagen_id: string | null
           mi_papel: string
           orden: number
@@ -682,6 +683,7 @@ export type Database = {
           id?: string
           id_antiguo?: string | null
           idioma?: string
+          imagen_cabecera_id?: string | null
           imagen_id?: string | null
           mi_papel?: string
           orden?: number
@@ -724,6 +726,7 @@ export type Database = {
           id?: string
           id_antiguo?: string | null
           idioma?: string
+          imagen_cabecera_id?: string | null
           imagen_id?: string | null
           mi_papel?: string
           orden?: number
@@ -758,6 +761,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "idiomas"
             referencedColumns: ["codigo"]
+          },
+          {
+            foreignKeyName: "proyectos_imagen_cabecera_id_fkey"
+            columns: ["imagen_cabecera_id"]
+            isOneToOne: false
+            referencedRelation: "medios"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "proyectos_imagen_id_fkey"

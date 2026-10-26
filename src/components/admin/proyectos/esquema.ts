@@ -51,6 +51,7 @@ export const SECCIONES_PROYECTO: SeccionFormulario[] = [
     titulo: "Imágenes y vídeo",
     campos: [
       { tipo: "medio", clave: "imagen_id", etiqueta: "Póster", ayuda: "La foto de la tarjeta. Si falta, se usa la primera de la galería" },
+      { tipo: "medio", clave: "imagen_cabecera_id", etiqueta: "Imagen de la cabecera de la ficha", ayuda: "Opcional. Es la foto grande de arriba en la página del proyecto (mientras carga el vídeo, o si no hay). Si falta, se usa el póster" },
       { tipo: "youtube", clave: "youtube_id", etiqueta: "Vídeo principal (YouTube)", medio: true },
       { tipo: "numero", clave: "youtube_inicio", etiqueta: "Vista previa desde el segundo", min: 0, medio: true },
       { tipo: "galeria", clave: "galeria", etiqueta: "Galería (fotogramas)" },
