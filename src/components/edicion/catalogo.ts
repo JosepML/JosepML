@@ -106,6 +106,12 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
         opciones: [{ valor: "juno", nombre: "Todos los hechos con JUNO Media" }],
         vacio: "Los destacados o los de los tipos de arriba",
       },
+      {
+        tipo: "proyectos",
+        clave: "proyectos",
+        etiqueta: "O elige tú los proyectos",
+        ayuda: "Salen justo estos, en este orden (el primero, en grande). Si no eliges ninguno, sale lo de arriba.",
+      },
     ],
     nuevo: { antetitulo: "Trabajos", titulo: "Selección de *trabajos*" },
   },

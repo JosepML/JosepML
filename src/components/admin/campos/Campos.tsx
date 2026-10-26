@@ -149,6 +149,15 @@ function UnCampo({ campo, valor, datos, cambiar }: { campo: Campo; valor: unknow
       );
     }
 
+    case "proyectos":
+      return (
+        <>
+          <Etiqueta campo={campo} />
+          <CampoProyectos valor={listaDe<string>(valor)} opciones={opciones.proyectos ?? []} alCambiar={cambiar} />
+          <Ayuda texto={campo.ayuda} />
+        </>
+      );
+
     case "proyecto":
       return (
         <>
@@ -614,6 +623,32 @@ function CampoTextos({ valor, placeholder, largo, alCambiar }: { valor: string[]
         </div>
       ))}
       <BotonAnadir texto="Añadir" onClick={() => alCambiar([...valor, ""])} />
+    </div>
+  );
+}
+
+/** Proyectos elegidos, en su orden (subir, bajar, quitar), y un desplegable para añadir otro */
+function CampoProyectos({ valor, opciones, alCambiar }: { valor: string[]; opciones: Opcion[]; alCambiar: (v: string[]) => void }) {
+  const nombre = (id: string) => opciones.find((o) => o.valor === id)?.nombre ?? "Proyecto que ya no existe";
+  const libres = opciones.filter((o) => !valor.includes(o.valor));
+  return (
+    <div className="flex flex-col gap-2">
+      {valor.map((id, i) => (
+        <div key={id} className="flex items-center gap-1 rounded-[18px] border border-[var(--jm-borde)] bg-[var(--jm-cristal)] py-1 pl-4 pr-1">
+          <span className="min-w-0 flex-1 truncate text-sm font-medium">{nombre(id)}</span>
+          <OrdenLista i={i} total={valor.length} lista={valor} alCambiar={alCambiar} />
+        </div>
+      ))}
+      {libres.length > 0 && (
+        <select className="campo" value="" onChange={(e) => e.target.value && alCambiar([...valor, e.target.value])} aria-label="Añadir un proyecto">
+          <option value="">+ Añadir un proyecto</option>
+          {libres.map((o) => (
+            <option key={o.valor} value={o.valor}>
+              {o.nombre}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 }

@@ -34,6 +34,8 @@ export type Campo =
   | (Base & { tipo: "multiple"; opciones: Opcion[] | "servicios" | "tipos" })
   /** Un proyecto (su id) */
   | (Base & { tipo: "proyecto" })
+  /** Varios proyectos en el orden que se elija: lista de ids */
+  | (Base & { tipo: "proyectos" })
   /** Un archivo de la biblioteca (su id). `acepta`: qué se puede elegir */
   | (Base & { tipo: "medio"; acepta?: "imagen" | "video" | "todo" })
   /** Lista ordenada de imágenes con pie: [{ medio, pie }] */
