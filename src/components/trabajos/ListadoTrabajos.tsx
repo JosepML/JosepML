@@ -63,6 +63,7 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
   const actualCategoria = elegida ? categoria : "todos";
   const elegirServicio = (s: string) => {
     setServicio(s);
+    if (s === "todos") return setCategoria("todos");
     const siguen = (categorias[s] ?? categorias.todos ?? porTipo).some((c) => c.nombre === categoria);
     if (!siguen) setCategoria("todos");
   };
@@ -71,9 +72,21 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
     <>
       <Revelar retraso={0.15} className="mt-10 flex flex-col gap-3">
         <Pastillas id="servicio" etiqueta="Filtrar por servicio" filtros={filtrosServicio} actual={servicio} alElegir={elegirServicio} />
-        {filtrosCategoria.length > 2 && (
-          <Pastillas key={servicio} id="tipo" etiqueta="Filtrar por tipo" filtros={filtrosCategoria} actual={actualCategoria} alElegir={setCategoria} />
-        )}
+        {/* Las categorías solo salen dentro de un servicio (en «Todos» eran tantas que saturaban): se despliegan
+            hacia abajo con un fundido y, al cambiar de servicio, la fila se cruza con la nueva */}
+        <AnimatePresence initial={false} mode="popLayout">
+          {servicio !== "todos" && filtrosCategoria.length > 2 && (
+            <motion.div
+              key={servicio}
+              initial={{ opacity: 0, y: -8, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
+              transition={{ duration: 0.45, ease: CURVA }}
+            >
+              <Pastillas id="tipo" etiqueta="Filtrar por tipo" filtros={filtrosCategoria} actual={actualCategoria} alElegir={setCategoria} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Revelar>
 
       <AnimatePresence mode="wait" initial={false}>
