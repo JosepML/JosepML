@@ -54,7 +54,7 @@ export function Retrato({
           <motion.img
             src={img(medio.url, 1920)}
             alt={medio.alt}
-            className="absolute inset-0 h-full w-full origin-top object-cover object-[50%_0%] [will-change:transform]"
+            className="absolute inset-0 h-full w-full origin-top object-cover object-center [will-change:transform]"
             style={{ scale: reducir ? 1 : escala }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
