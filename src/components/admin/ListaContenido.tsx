@@ -29,7 +29,12 @@ export type FilaContenido = {
   miniatura?: Medio | null;
   /** Dirección en la web, si tiene página propia */
   ruta?: string | null;
+  /** Id del grupo al que pertenece, si la lista va separada en apartados (ver `grupos`) */
+  grupo?: string;
 };
+
+/** Apartado de una lista separada (por ejemplo, clientes míos y clientes de JUNO) */
+export type GrupoLista = { id: string; nombre: string; ayuda?: string };
 
 type Filtro = "todos" | "web" | "ocultos" | "cambios";
 const FILTROS: { id: Filtro; nombre: string }[] = [
@@ -66,9 +71,11 @@ type Props = {
   ordenable?: boolean;
   crearCon: ConfigCrear;
   buscarTexto?: string;
+  /** Si se pasa, la lista se separa en estos apartados, cada uno con su orden */
+  grupos?: GrupoLista[];
 };
 
-export function ListaContenido({ tabla, titulo, descripcion, pestanas, base, filas, ordenable: conOrden = true, crearCon, buscarTexto = "Buscar" }: Props) {
+export function ListaContenido({ tabla, titulo, descripcion, pestanas, base, filas, ordenable: conOrden = true, crearCon, buscarTexto = "Buscar", grupos }: Props) {
   const router = useRouter();
   const buscar = useSearchParams();
   const { confirmar, avisar } = useDialogos();
@@ -151,12 +158,40 @@ export function ListaContenido({ tabla, titulo, descripcion, pestanas, base, fil
       {conOrden && !ordenable && <p className="mt-3 text-xs text-[var(--jm-tenue)]">Para ordenar arrastrando, quita la búsqueda y el filtro.</p>}
       {conOrden && ordenable && lista.length > 1 && <p className="mt-6 text-xs text-[var(--jm-tenue)]">Arrastra por el asa para cambiar el orden en la web.</p>}
 
-      <Reorder.Group axis="y" values={visibles} onReorder={setLista} className="mt-4 flex flex-col gap-2">
-        {visibles.map((p) => (
-          <Fila key={p.id} p={p} base={base} ordenable={ordenable} alSoltar={guardarOrden} alVisible={() => alternarVisible(p)} alDuplicar={() => alDuplicar(p)} alBorrar={() => alBorrar(p)} />
-        ))}
-      </Reorder.Group>
-      {!visibles.length && <p className="mt-8 text-center text-sm text-[var(--jm-suave)]">{lista.length ? "No hay nada que coincida." : "Todavía no hay nada. Crea el primero."}</p>}
+      {grupos ? (
+        grupos.map((g) => {
+          const delGrupo = visibles.filter((p) => p.grupo === g.id);
+          // Reordenar un apartado recoloca solo sus filas, en los huecos que ocupaban en la lista entera
+          const alReordenar = (nuevo: FilaContenido[]) =>
+            setLista((l) => {
+              let i = 0;
+              return l.map((x) => (x.grupo === g.id && delGrupo.some((d) => d.id === x.id) ? nuevo[i++] : x));
+            });
+          return (
+            <section key={g.id} className="mt-10 first:mt-6">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                <h2 className="text-lg font-bold tracking-tight">
+                  {g.nombre} <span className="ml-1 text-sm font-medium text-[var(--jm-tenue)]">{lista.filter((p) => p.grupo === g.id).length}</span>
+                </h2>
+                {g.ayuda && <p className="text-xs text-[var(--jm-tenue)]">{g.ayuda}</p>}
+              </div>
+              <Reorder.Group axis="y" values={delGrupo} onReorder={alReordenar} className="mt-3 flex flex-col gap-2">
+                {delGrupo.map((p) => (
+                  <Fila key={p.id} p={p} base={base} ordenable={ordenable} alSoltar={guardarOrden} alVisible={() => alternarVisible(p)} alDuplicar={() => alDuplicar(p)} alBorrar={() => alBorrar(p)} />
+                ))}
+              </Reorder.Group>
+              {!delGrupo.length && <p className="mt-3 text-sm text-[var(--jm-suave)]">Nada aquí todavía.</p>}
+            </section>
+          );
+        })
+      ) : (
+        <Reorder.Group axis="y" values={visibles} onReorder={setLista} className="mt-4 flex flex-col gap-2">
+          {visibles.map((p) => (
+            <Fila key={p.id} p={p} base={base} ordenable={ordenable} alSoltar={guardarOrden} alVisible={() => alternarVisible(p)} alDuplicar={() => alDuplicar(p)} alBorrar={() => alBorrar(p)} />
+          ))}
+        </Reorder.Group>
+      )}
+      {!grupos && !visibles.length && <p className="mt-8 text-center text-sm text-[var(--jm-suave)]">{lista.length ? "No hay nada que coincida." : "Todavía no hay nada. Crea el primero."}</p>}
 
       <AnimatePresence>{creando && <Nuevo tabla={tabla} base={base} config={crearCon} alCerrar={() => setCreando(false)} />}</AnimatePresence>
     </div>

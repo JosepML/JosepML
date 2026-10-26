@@ -21,11 +21,16 @@ export default async function Clientes() {
       titulo="Clientes"
       pestanas={PESTANAS_CONFIANZA}
       base="/admin/clientes"
+      grupos={[
+        { id: "propios", nombre: "Mis clientes" },
+        { id: "juno", nombre: "Clientes de JUNO Media", ayuda: "Salen en el apartado «En sinergia con JUNO Media»" },
+      ]}
       crearCon={{ texto: "Nuevo cliente", ayuda: "Escribe su nombre; el logo lo pones después. No sale en la web hasta que lo publiques.", clave: "nombre", etiqueta: "Nombre", placeholder: "Ayuntamiento de l'Alfàs del Pi" }}
       filas={filas.map(({ c, d }) => ({
         id: c.id,
         titulo: String(d.nombre ?? ""),
-        detalle: [ESTILO[String(d.estilo)] ?? "", d.con_juno ? "Con JUNO Media" : ""].filter(Boolean).join(" · "),
+        detalle: ESTILO[String(d.estilo)] ?? "",
+        grupo: d.con_juno ? "juno" : "propios",
         estado: String(c.estado),
         nuevo: !c.publicado_en,
         hayBorrador: c.hayBorrador,
