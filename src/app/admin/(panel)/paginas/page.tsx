@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Páginas" };
 /** Páginas con plantilla propia: su contenido sale de los proyectos y solo se edita su cabecera */
 const CON_PLANTILLA = new Set(["trabajos", "recreaciones"]);
 /** Orden de los grupos de la lista */
-const PRINCIPALES = ["inicio", "sobre-mi", "trabajos", "recreaciones"];
+const PRINCIPALES = ["inicio", "sobre-mi", "trabajos", "recreaciones", "juno-media"];
 
 type FilaPagina = { id: string; titulo: string; slug: string; estado: string };
 
