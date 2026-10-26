@@ -333,7 +333,8 @@ export function Diapositivas({
             className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)]"
             style={{
               opacity: n === i ? 1 : 0,
-              transform: zoom ? "scale(1.08)" : "scale(1.01)",
+              // Escala base de 1.1: recorta las franjas negras que algunas fotos traen de origen, también sin zoom
+              transform: zoom ? "scale(1.18)" : "scale(1.1)",
               // El zoom va lineal y dura lo que la foto sigue visible, para no frenarse antes del cambio. Al salir,
               // el zoom vuelve a escala base solo cuando la foto ya se ha desvanecido (sin que se vea desinflarse)
               transitionDuration: `1000ms, ${zoom ? intervalo + 1000 : 0}ms`,
