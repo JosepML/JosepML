@@ -97,7 +97,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
           borderRadius: CABECERA.radio,
         }}
       >
-        <VideoFondo archivo={p.videoPortada?.url ?? p.clip?.url} youtubeId={p.youtubeId} inicio={p.youtubeInicio ?? undefined} poster={(p.imagenCabecera ?? p.poster)?.url} />
+        <VideoFondo archivo={p.videoPortada?.url ?? p.clip?.url ?? principal?.url} youtubeId={p.youtubeId} inicio={p.youtubeInicio ?? undefined} poster={(p.imagenCabecera ?? p.poster)?.url} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30" />
         <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col gap-6 p-6 text-white sm:p-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
