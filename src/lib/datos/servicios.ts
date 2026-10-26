@@ -27,6 +27,7 @@ export async function getServicios(): Promise<Servicio[]> {
       llamada: s.llamada,
       imagen: medio(medios, s.imagen_id),
       // La columna llega con la migración servicios_fotos_cabecera; mientras, undefined
+      imagenApaisada: medio(medios, s.imagen_apaisada_id),
       fotosCabecera: listaMedios(medios, s.fotos_cabecera).map((x) => x.imagen),
       seo: { titulo: s.seo_titulo, descripcion: s.seo_descripcion },
     }));

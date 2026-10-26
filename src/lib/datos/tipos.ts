@@ -46,6 +46,8 @@ export type Servicio = {
   imagen: Medio | null;
   /** Fotos del carrusel de la cabecera, elegidas en el panel. Vacío = la imagen propia y los pósteres de sus proyectos */
   fotosCabecera: Medio[];
+  /** Foto en formato ancho (tarjetas «Otro servicio»). Null = la imagen de la tarjeta */
+  imagenApaisada: Medio | null;
   seo: { titulo: string; descripcion: string };
 };
 

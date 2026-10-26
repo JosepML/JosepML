@@ -193,7 +193,7 @@ function Contenido({ servicio: s, datos, llamada, especialidades }: { servicio: 
         <div className="mx-auto grid max-w-7xl gap-3 sm:grid-cols-2">
           {otros.map((o) => (
             <Link key={o.slug} href={RUTAS.servicio(o.slug)} className="group relative block h-56 overflow-hidden rounded-[32px] bg-black">
-              {fotos(o)[0] && <img src={img(fotos(o)[0], 1200)} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-[1.4s] group-hover:scale-105" />}
+              {(o.imagenApaisada?.url ?? fotos(o)[0]) && <img src={img(o.imagenApaisada?.url ?? fotos(o)[0], 1200)} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-[1.4s] group-hover:scale-105" />}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 to-black/10" />
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-7 text-white">
                 <div>

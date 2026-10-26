@@ -839,6 +839,7 @@ export type Database = {
           grupo: string
           id: string
           idioma: string
+          imagen_apaisada_id: string | null
           imagen_id: string | null
           llamada: string
           mirada: Json
@@ -865,6 +866,7 @@ export type Database = {
           grupo?: string
           id?: string
           idioma?: string
+          imagen_apaisada_id?: string | null
           imagen_id?: string | null
           llamada?: string
           mirada?: Json
@@ -891,6 +893,7 @@ export type Database = {
           grupo?: string
           id?: string
           idioma?: string
+          imagen_apaisada_id?: string | null
           imagen_id?: string | null
           llamada?: string
           mirada?: Json
@@ -913,6 +916,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "idiomas"
             referencedColumns: ["codigo"]
+          },
+          {
+            foreignKeyName: "servicios_imagen_apaisada_id_fkey"
+            columns: ["imagen_apaisada_id"]
+            isOneToOne: false
+            referencedRelation: "medios"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "servicios_imagen_id_fkey"
