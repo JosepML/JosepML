@@ -99,6 +99,13 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
         opciones: "tipos",
         ayuda: "Sin ninguno, salen tus destacados en el carrusel (los de la estrella en Proyectos). Con tipos, todos sus proyectos en rejilla; si solo hay uno, también sus «Más vídeos».",
       },
+      {
+        tipo: "seleccion",
+        clave: "origen",
+        etiqueta: "Qué proyectos",
+        opciones: [{ valor: "juno", nombre: "Todos los hechos con JUNO Media" }],
+        vacio: "Los destacados o los de los tipos de arriba",
+      },
     ],
     nuevo: { antetitulo: "Trabajos", titulo: "Selección de *trabajos*" },
   },

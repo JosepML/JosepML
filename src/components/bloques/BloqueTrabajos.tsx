@@ -34,7 +34,13 @@ import { MASCARA_BORDE } from "./BloqueServicios";
 export function BloqueTrabajos({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   // Con tipos elegidos (páginas de cada especialidad), todos los proyectos de esos tipos en rejilla
   const tipos = lista(bloque.datos.tipos).filter((t): t is string => typeof t === "string");
-  return tipos.length ? <RejillaTipos bloque={bloque} tipos={tipos} ancla={ancla} /> : <Destacados bloque={bloque} ancla={ancla} />;
+  // Con origen «juno» (página de JUNO Media), los proyectos hechos con JUNO Media: los siete primeros, que son muchos
+  if (bloque.datos.origen === "juno") return <RejillaTipos bloque={bloque} cumple={(p) => p.conJuno} maximo={7} ancla={ancla} />;
+  return tipos.length ? (
+    <RejillaTipos bloque={bloque} cumple={(p) => tiposDe(p).some((t) => tipos.includes(t))} ancla={ancla} />
+  ) : (
+    <Destacados bloque={bloque} ancla={ancla} />
+  );
 }
 
 /**
@@ -43,10 +49,10 @@ export function BloqueTrabajos({ bloque, ancla }: { bloque: Bloque; ancla?: stri
  * en grande, un mosaico con las fotos de su galería (sin repetir las que ya salen en la página) que se abren en
  * grande, y sus «Más vídeos».
  */
-function RejillaTipos({ bloque, tipos, ancla }: { bloque: Bloque; tipos: string[]; ancla?: string }) {
+function RejillaTipos({ bloque, cumple, maximo, ancla }: { bloque: Bloque; cumple: (p: Proyecto) => boolean; maximo?: number; ancla?: string }) {
   const { proyectos } = useDatos();
   const editando = useEditando();
-  const de = proyectos.filter((p) => tiposDe(p).some((t) => tipos.includes(t)));
+  const de = proyectos.filter(cumple).slice(0, maximo);
   if (!de.length && !editando) return null;
   const [primero, ...resto] = de;
   return (

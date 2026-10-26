@@ -1,25 +1,22 @@
--- Página «JUNO Media» (/juno-media): explica la colaboración de Josep con JUNO Media. La etiqueta «con JUNO MEDIA» de
--- los proyectos y el apartado de Clientes llevan a ella. Es una página de bloques, editable en su sitio. Repetible.
+-- Página «JUNO Media» (/juno-media): la colaboración de Josep con JUNO Media. La etiqueta «con JUNO MEDIA» de los
+-- proyectos y el apartado de Clientes llevan a ella. Página de bloques, editable en su sitio. Repetible.
+-- Versión 2 (2026-10-26): textos y estructura revisados con Josep. Si la página ya existía, ver 21-juno-media-v2.sql.
 begin;
 
 insert into public.paginas (slug, titulo, seo_titulo, seo_descripcion, estado, publicado_en)
-values ('juno-media', 'JUNO Media', $t$Mi colaboración con JUNO Media · Josep Mira Lozano$t$,
-  $t$Trabajo en sinergia con JUNO Media, productora audiovisual: una colaboración estrecha para que los proyectos de gran envergadura cuenten con una productora.$t$, 'publicado', now())
+values ('juno-media', 'JUNO Media', $t$Mi colaboración con JUNO Media · Josep Mira Lozano$t$, $t$Trabajo en sinergia con JUNO Media: puedes contar conmigo directamente o, en los proyectos grandes, con la producción de una productora audiovisual detrás.$t$, 'publicado', now())
 on conflict (idioma, slug) do nothing;
 
 insert into public.bloques (pagina_id, orden, tipo, visible, datos)
 select pg.id, b.orden, b.tipo::public.tipo_bloque, true, b.datos
 from public.paginas pg
 cross join lateral (values
-  (0, 'texto', $json${"estilo": "cabecera", "antetitulo": "En sinergia con JUNO Media", "titulo": "Una colaboración *muy estrecha*", "texto": "JUNO Media es una productora audiovisual y cinematográfica. No formo parte de ella, pero trabajamos codo con codo. Es una conexión personal, artística y profesional.\n\nMuchos de mis proyectos nacen mano a mano con JUNO Media. Así puedo ofrecerte algo más que mis manos cuando el proyecto lo pide."}$json$::jsonb
-     || jsonb_strip_nulls(jsonb_build_object('imagen', (select imagen_id::text from public.proyectos where slug = 'ep-oscuridad-adrian-munoz' and idioma = 'es')))),
-  (1, 'proceso', $json${"antetitulo": "Cómo trabajamos juntos", "titulo": "Cuando el proyecto *pide más*", "pasos": [
-    {"titulo": "Una conexión de verdad", "texto": "No es una relación de encargos sueltos: nos conocemos y trabajamos juntos de forma muy estrecha."},
-    {"titulo": "Proyectos de gran envergadura", "texto": "Si tu proyecto es grande, puedes asegurarte la producción de una productora audiovisual como JUNO Media."},
-    {"titulo": "Tú eliges", "texto": "Siempre puedes escoger esa opción. Y si prefieres hablar solo conmigo, también."},
-    {"titulo": "Yo te lo propongo", "texto": "Si veo que tu proyecto necesita las manos de una productora, te lo digo y lo preparamos con ellos."}]}$json$::jsonb),
-  (2, 'texto', $json${"estilo": "tarjeta", "antetitulo": "Su web", "titulo": "Conoce a *JUNO Media*", "texto": "Una productora audiovisual y cinematográfica, a la medida de cada cliente. Aquí puedes ver quiénes son y qué hacen.", "enlace": {"texto": "Ir a la web de JUNO Media", "href": "https://junomedia.es"}}$json$::jsonb),
-  (3, 'llamada', coalesce((select x.datos from public.bloques x join public.paginas i on i.id = x.pagina_id where i.slug = 'inicio' and i.idioma = 'es' and x.tipo = 'llamada' order by x.orden limit 1), '{}'::jsonb))
+  (0, 'texto', $json${"estilo": "cabecera", "antetitulo": "JUNO Media y yo", "titulo": "Donde *empezó todo*", "imagen": "508f8ec8-b800-45cd-bf9a-013f1b276ef9", "texto": "JUNO Media es la productora con la que más trabajo y donde di mis primeros pasos. Desde entonces no hemos dejado de crear juntos: hoy, los proyectos que nacen allí los sacamos adelante Noelia Fluxà y yo.\n\nNos une una relación personal, artística y profesional. Y sigo siendo independiente: puedes trabajar conmigo directamente o, cuando el proyecto lo pide, con toda una productora detrás."}$json$::jsonb),
+  (1, 'proceso', $json${"antetitulo": "Cómo trabajamos", "titulo": "Cercanía de autónomo, *respaldo de productora*", "pasos": [{"titulo": "Conmigo, directamente", "texto": "Me llamas, hablamos de tu idea y la levantamos juntos: rodaje, luz o montaje."}, {"titulo": "Un equipo pequeño", "texto": "Lo que entra en JUNO Media lo hacemos Noelia y yo. Trato directo y el mismo cuidado de principio a fin."}, {"titulo": "Una productora, si hace falta", "texto": "En los proyectos de gran envergadura, la producción queda en manos de una productora audiovisual y cinematográfica."}, {"titulo": "Tú eliges cómo", "texto": "Esa opción está siempre sobre la mesa. Y si veo que tu proyecto la necesita, te lo propongo yo."}]}$json$::jsonb),
+  (2, 'cita', $json${"titulo": "Una productora detrás y *el mismo equipo* de siempre."}$json$::jsonb),
+  (3, 'trabajos', $json${"antetitulo": "Proyectos con JUNO Media", "titulo": "Lo que hemos hecho *juntos*", "texto": "Videoclips, conciertos, eventos, cine y publicidad: buena parte de mi trabajo nace de esta colaboración.", "origen": "juno"}$json$::jsonb),
+  (4, 'texto', $json${"estilo": "tarjeta", "antetitulo": "La productora", "titulo": "Conoce a *JUNO Media*", "imagen": "d8248ed7-bb85-48e0-8559-4a9779e5deb8", "texto": "Productora audiovisual y cinematográfica, a la medida de cada proyecto. Si buscas una producción completa, su web es un buen punto de partida.", "enlace": {"texto": "Visitar junomedia.es", "href": "https://junomedia.es"}}$json$::jsonb),
+  (5, 'llamada', coalesce((select x.datos from public.bloques x join public.paginas i on i.id = x.pagina_id where i.slug = 'inicio' and i.idioma = 'es' and x.tipo = 'llamada' order by x.orden limit 1), '{}'::jsonb) || $json${"titulo": "¿Tienes un proyecto en mente?", "texto": "Cuéntamelo. Te diré con sinceridad cómo lo veo y si conviene afrontarlo a solas o con JUNO Media."}$json$::jsonb)
 ) as b(orden, tipo, datos)
 where pg.slug = 'juno-media' and pg.idioma = 'es'
   and not exists (select 1 from public.bloques x where x.pagina_id = pg.id);
