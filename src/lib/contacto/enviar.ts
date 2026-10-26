@@ -35,5 +35,41 @@ export async function enviarContacto(_previo: EstadoContacto, datos: FormData): 
   });
   if (error) return { error: "No se ha podido enviar ahora mismo. Prueba de nuevo en un rato." };
 
+  await avisar({ nombre, correo, telefono, servicio, mensaje });
   redirect(RUTAS.gracias);
+}
+
+/**
+ * Aviso por correo con Resend. Si falta la clave o el correo de destino no hace nada, y si falla
+ * no se lo mostramos al cliente: el mensaje ya está guardado en el panel.
+ */
+async function avisar(datos: { nombre: string; correo: string; telefono: string; servicio: string; mensaje: string }) {
+  const clave = process.env.RESEND_API_KEY;
+  const destino = process.env.CONTACTO_CORREO;
+  if (!clave || !destino) return;
+
+  const lineas = [
+    `Nombre: ${datos.nombre}`,
+    `Correo: ${datos.correo}`,
+    datos.telefono ? `Teléfono: ${datos.telefono}` : "",
+    datos.servicio ? `Servicio: ${datos.servicio}` : "",
+    "",
+    datos.mensaje,
+  ].filter(Boolean);
+
+  try {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${clave}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "Web Josep Mira <onboarding@resend.dev>",
+        to: [destino],
+        reply_to: datos.correo,
+        subject: `Nuevo mensaje de ${datos.nombre}`,
+        text: lineas.join("\n"),
+      }),
+    });
+  } catch {
+    // El mensaje ya está en el panel; un fallo del correo no debe tumbar el envío
+  }
 }
