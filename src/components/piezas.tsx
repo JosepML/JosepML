@@ -318,22 +318,27 @@ export function Diapositivas({
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {imagenes.map((src, n) => (
-        <img
-          key={src}
-          src={img(src, ancho)}
-          alt=""
-          data-transicion={n === 0 ? "" : undefined}
-          draggable={false}
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)]"
-          style={{
-            opacity: n === i ? 1 : 0,
-            transform: activo && !reducir ? "scale(1.08)" : "scale(1.01)",
-            transitionDuration: `1000ms, ${activo ? 6000 : 1200}ms`,
-          }}
-        />
-      ))}
+      {imagenes.map((src, n) => {
+        // Cada foto tiene su propio zoom: solo la que se ve crece, desde cero, durante su turno. Las demás vuelven
+        // a su escala mínima al salir, así que al volver a verse empiezan otra vez
+        const zoom = n === i && activo && !reducir;
+        return (
+          <img
+            key={src}
+            src={img(src, ancho)}
+            alt=""
+            data-transicion={n === 0 ? "" : undefined}
+            draggable={false}
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{
+              opacity: n === i ? 1 : 0,
+              transform: zoom ? "scale(1.08)" : "scale(1.01)",
+              transitionDuration: `1000ms, ${zoom ? intervalo + 400 : 1200}ms`,
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
