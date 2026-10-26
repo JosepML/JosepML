@@ -373,6 +373,7 @@ export type Database = {
           actualizado_en: string
           alto: number | null
           ancho: number | null
+          carpeta: string
           foco_x: number | null
           foco_y: number | null
           bytes: number | null
@@ -390,6 +391,7 @@ export type Database = {
           actualizado_en?: string
           alto?: number | null
           ancho?: number | null
+          carpeta?: string
           foco_x?: number | null
           foco_y?: number | null
           bytes?: number | null
@@ -407,6 +409,7 @@ export type Database = {
           actualizado_en?: string
           alto?: number | null
           ancho?: number | null
+          carpeta?: string
           foco_x?: number | null
           foco_y?: number | null
           bytes?: number | null

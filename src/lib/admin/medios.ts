@@ -6,7 +6,7 @@ import { urlBucket } from "@/lib/datos/url";
 import { exigirAdmin } from "./sesion";
 import type { Resultado } from "./tipos";
 
-export type MedioBiblioteca = Medio & { titulo: string; creadoEn: string; bytes: number | null; mime: string };
+export type MedioBiblioteca = Medio & { titulo: string; creadoEn: string; bytes: number | null; mime: string; carpeta: string };
 
 type FilaMedio = {
   id: string;
@@ -17,6 +17,7 @@ type FilaMedio = {
   titulo: string;
   ancho: number | null;
   alto: number | null;
+  carpeta: string;
   foco_x: number | null;
   foco_y: number | null;
   bytes: number | null;
@@ -33,6 +34,7 @@ function aMedio(f: FilaMedio): MedioBiblioteca {
     ancho: f.ancho,
     alto: f.alto,
     foco: f.foco_x != null && f.foco_y != null ? { x: f.foco_x, y: f.foco_y } : null,
+    carpeta: f.carpeta ?? "",
     titulo: f.titulo,
     creadoEn: f.creado_en,
     bytes: f.bytes,
@@ -119,6 +121,33 @@ export async function cambiarFoco(id: string, foco: { x: number; y: number } | n
     const { error } = await s.from("medios").update({ foco_x: x, foco_y: y }).eq("id", id);
     if (error) throw new Error(error.message);
     await revalidarContenido(["medios"]);
+    return { ok: true, datos: null };
+  } catch (e) {
+    return { ok: false, error: mensaje(e) };
+  }
+}
+
+/** Carpeta de una o varias fotos del panel ("" = sin carpeta). Solo organiza: la web no la usa */
+export async function cambiarCarpeta(ids: string[], carpeta: string): Promise<Resultado<null>> {
+  try {
+    const s = await exigirAdmin();
+    const { error } = await s.from("medios").update({ carpeta: carpeta.trim().slice(0, 120) }).in("id", ids);
+    if (error) throw new Error(error.message);
+    return { ok: true, datos: null };
+  } catch (e) {
+    return { ok: false, error: mensaje(e) };
+  }
+}
+
+/** Organiza de una vez: cada grupo es una carpeta con sus fotos */
+export async function organizarCarpetas(grupos: { carpeta: string; ids: string[] }[]): Promise<Resultado<null>> {
+  try {
+    const s = await exigirAdmin();
+    for (const g of grupos) {
+      if (!g.ids.length) continue;
+      const { error } = await s.from("medios").update({ carpeta: g.carpeta.trim().slice(0, 120) }).in("id", g.ids);
+      if (error) throw new Error(error.message);
+    }
     return { ok: true, datos: null };
   } catch (e) {
     return { ok: false, error: mensaje(e) };

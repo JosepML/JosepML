@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { img } from "@/components/comun/imagen";
 import { Icono } from "@/components/Iconos";
-import { borrarMedio, cambiarMedio, type MedioBiblioteca, type Uso } from "@/lib/admin/medios";
+import { borrarMedio, cambiarCarpeta, cambiarMedio, organizarCarpetas, type MedioBiblioteca, type Uso } from "@/lib/admin/medios";
 import { ACEPTA } from "@/lib/admin/subir";
 import { CURVA } from "@/styles/movimiento";
 import { Miniatura, ProveedorMedios, useSoltarArchivos } from "../campos/medios";
@@ -45,6 +45,9 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
   const router = useRouter();
   const [medios, setMedios] = useState(iniciales);
   const [filtro, setFiltro] = useState<Filtro>("todo");
+  // null = todas las carpetas; "" = sin carpeta; si no, el nombre de la carpeta
+  const [carpetaVista, setCarpetaVista] = useState<string | null>(null);
+  const { confirmar, avisar } = useDialogos();
   const [busqueda, setBusqueda] = useState("");
   const [abierto, setAbierto] = useState<string | null>(null);
   const input = useRef<HTMLInputElement>(null);
@@ -59,6 +62,26 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
   );
 
   const usosDe = (id: string) => usos[id.toLowerCase()] ?? [];
+  const carpetas = useMemo(() => [...new Set(medios.map((m) => m.carpeta).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es")), [medios]);
+
+  // Una carpeta por proyecto donde se usa la foto; las que no están en ningún proyecto, a «Otros usos» o «Sin usar»
+  const organizar = async () => {
+    const grupos = new Map<string, string[]>();
+    for (const m of medios.filter((x) => !x.carpeta)) {
+      const de = usosDe(m.id);
+      const proyecto = de.find((u) => u.href.startsWith("/admin/proyectos/"));
+      const nombreCarpeta = proyecto ? proyecto.donde.replace(/^Proyecto «(.*)»$/, "$1") : de.length ? "Otros usos" : "Sin usar";
+      grupos.set(nombreCarpeta, [...(grupos.get(nombreCarpeta) ?? []), m.id]);
+    }
+    const total = [...grupos.values()].flat().length;
+    if (!total) return avisar("Todas las fotos ya tienen carpeta");
+    if (!(await confirmar({ titulo: `¿Organizar ${total} fotos?`, texto: `Se crean ${grupos.size} carpetas, una por proyecto, más «Otros usos» y «Sin usar». Las fotos que ya tienen carpeta no se tocan.`, aceptar: "Organizar" }))) return;
+    const r = await organizarCarpetas([...grupos].map(([carpeta, ids]) => ({ carpeta, ids })));
+    if (!r.ok) return avisar(r.error, "error");
+    const porId = new Map([...grupos].flatMap(([carpeta, ids]) => ids.map((id) => [id, carpeta] as const)));
+    setMedios((l) => l.map((x) => (porId.has(x.id) ? { ...x, carpeta: porId.get(x.id)! } : x)));
+    avisar("Biblioteca organizada");
+  };
   const visibles = useMemo(() => {
     const q = aSlug(busqueda);
     return medios.filter((m) => {
@@ -66,9 +89,10 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
       if (filtro === "video" && m.tipo !== "video") return false;
       if (filtro === "sin-usar" && usosDe(m.id).length) return false;
       if (filtro === "sin-alt" && (m.tipo !== "imagen" || m.alt.trim())) return false;
+      if (carpetaVista !== null && m.carpeta !== carpetaVista) return false;
       return !q || aSlug(`${nombre(m)} ${m.alt}`).includes(q);
     });
-  }, [medios, filtro, busqueda, usos]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [medios, filtro, busqueda, usos, carpetaVista]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const elegido = medios.find((m) => m.id === abierto) ?? null;
 
@@ -82,6 +106,9 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
             {medios.length} archivos · {medios.filter((m) => !usosDe(m.id).length).length} sin usar
           </p>
         </div>
+        <button type="button" onClick={organizar} className="boton boton-suave px-5 py-3 text-sm" title="Una carpeta por proyecto donde se usa cada foto">
+          Organizar por proyecto
+        </button>
         <button type="button" onClick={() => input.current?.click()} className="boton boton-acento px-5 py-3 text-sm">
           <Icono nombre="subir" className="h-4 w-4" />
           Subir archivos
@@ -126,6 +153,22 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
         </div>
       </div>
 
+      {(carpetas.length > 0 || medios.some((m) => !m.carpeta)) && (
+        <div className="mt-5 flex flex-wrap gap-1.5">
+          {[{ id: null as string | null, nombre: "Todas" }, { id: "", nombre: "Sin carpeta" }, ...carpetas.map((c) => ({ id: c as string | null, nombre: c }))].map((c) => (
+            <button
+              key={c.nombre}
+              type="button"
+              onClick={() => setCarpetaVista(c.id)}
+              className={`rounded-full px-3 py-1.5 text-[12px] font-semibold ring-1 ring-[var(--jm-borde)] transition-colors ${carpetaVista === c.id ? "bg-white/15 text-[var(--jm-texto)]" : "text-[var(--jm-tenue)] hover:text-[var(--jm-suave)]"}`}
+            >
+              {c.nombre}
+              <span className="ml-1.5 opacity-60">{medios.filter((m) => c.id === null || m.carpeta === c.id).length}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {visibles.map((m) => {
           const sinUsar = !usosDe(m.id).length;
@@ -160,6 +203,7 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
             key={elegido.id}
             medio={elegido}
             usos={usosDe(elegido.id)}
+            carpetas={carpetas}
             alCerrar={() => setAbierto(null)}
             alCambiar={(c) => setMedios((l) => l.map((x) => (x.id === elegido.id ? { ...x, ...c } : x)))}
             alRecortar={(nuevo) => {
@@ -182,6 +226,7 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
 function Detalle({
   medio,
   usos,
+  carpetas,
   alCerrar,
   alCambiar,
   alBorrar,
@@ -189,6 +234,7 @@ function Detalle({
 }: {
   medio: MedioBiblioteca;
   usos: Uso[];
+  carpetas: string[];
   alCerrar: () => void;
   alCambiar: (c: Partial<MedioBiblioteca>) => void;
   alBorrar: () => void;
@@ -201,6 +247,7 @@ function Detalle({
   const [titulo, setTitulo] = useState(medio.titulo);
   const [alt, setAlt] = useState(medio.alt);
   const [borrando, setBorrando] = useState(false);
+  const [carpeta, setCarpeta] = useState(medio.carpeta);
 
   useEffect(() => {
     const tecla = (e: KeyboardEvent) => e.key === "Escape" && (recortando ? setRecortando(false) : alCerrar());
@@ -215,6 +262,15 @@ function Detalle({
     if (!r.ok) return avisar(r.error, "error");
     alCambiar(campo === "titulo" ? { titulo: valor } : { alt: valor });
     avisar("Guardado");
+  };
+
+  const guardarCarpeta = async () => {
+    const valor = carpeta.trim();
+    if (valor === medio.carpeta) return;
+    const r = await cambiarCarpeta([medio.id], valor);
+    if (!r.ok) return avisar(r.error, "error");
+    alCambiar({ carpeta: valor });
+    avisar("Carpeta guardada");
   };
 
   const quitar = async () => {
@@ -283,6 +339,16 @@ function Detalle({
             </label>
           )}
           {medio.tipo === "imagen" && <PuntoDeInteres medio={medio} alCambiar={alCambiar} />}
+          <label className="block">
+            <span className="campo-etiqueta">Carpeta</span>
+            <input className="campo mt-1.5" list="carpetas-biblioteca" value={carpeta} onChange={(e) => setCarpeta(e.target.value)} onBlur={guardarCarpeta} placeholder="Sin carpeta" />
+            <datalist id="carpetas-biblioteca">
+              {carpetas.map((c) => (
+                <option key={c} value={c} />
+              ))}
+            </datalist>
+            <span className="campo-ayuda">Escribe una carpeta nueva o elige una existente</span>
+          </label>
           <div>
             <span className="campo-etiqueta">Dónde se usa</span>
             {usos.length ? (
