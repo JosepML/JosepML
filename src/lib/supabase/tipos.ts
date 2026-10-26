@@ -250,6 +250,24 @@ export type Database = {
           },
         ]
       }
+      carpetas: {
+        Row: {
+          creado_en: string
+          id: string
+          nombre: string
+        }
+        Insert: {
+          creado_en?: string
+          id?: string
+          nombre: string
+        }
+        Update: {
+          creado_en?: string
+          id?: string
+          nombre?: string
+        }
+        Relationships: []
+      }
       categorias_articulo: {
         Row: {
           actualizado_en: string
@@ -376,6 +394,7 @@ export type Database = {
           foco_x: number | null
           foco_y: number | null
           bytes: number | null
+          carpeta_id: string | null
           creado_en: string
           duracion: number | null
           id: string
@@ -393,6 +412,7 @@ export type Database = {
           foco_x?: number | null
           foco_y?: number | null
           bytes?: number | null
+          carpeta_id?: string | null
           creado_en?: string
           duracion?: number | null
           id?: string
@@ -410,6 +430,7 @@ export type Database = {
           foco_x?: number | null
           foco_y?: number | null
           bytes?: number | null
+          carpeta_id?: string | null
           creado_en?: string
           duracion?: number | null
           id?: string

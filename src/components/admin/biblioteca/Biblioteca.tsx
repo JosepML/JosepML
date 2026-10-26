@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { img } from "@/components/comun/imagen";
 import { Icono } from "@/components/Iconos";
-import { borrarMedio, cambiarMedio, type MedioBiblioteca, type Uso } from "@/lib/admin/medios";
+import { borrarCarpeta, borrarMedio, cambiarMedio, crearCarpeta, moverMedios, renombrarCarpeta, type Carpeta, type MedioBiblioteca, type Uso } from "@/lib/admin/medios";
 import { ACEPTA } from "@/lib/admin/subir";
 import { CURVA } from "@/styles/movimiento";
 import { Miniatura, ProveedorMedios, useSoltarArchivos } from "../campos/medios";
@@ -32,8 +32,11 @@ const FILTROS: { id: Filtro; nombre: string }[] = [
 const nombre = (m: MedioBiblioteca) => m.titulo || decodeURIComponent(m.url.split("?")[0].split("/").pop() ?? "").replace(/^[0-9a-f]{8}-/, "") || "Sin nombre";
 const tamano = (b: number | null) => (b == null ? "" : b > 1048576 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`);
 const fecha = (iso: string) => new Date(iso).toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric" });
+const porNombre = (a: Carpeta, b: Carpeta) => a.nombre.localeCompare(b.nombre, "es");
+/** Tipo de arrastre de las fotos: lleva los ids de las que se mueven a una carpeta */
+const MIME_MEDIO = "application/x-jm-medios";
 
-export function Biblioteca(props: { medios: MedioBiblioteca[]; usos: Record<string, Uso[]> }) {
+export function Biblioteca(props: { medios: MedioBiblioteca[]; usos: Record<string, Uso[]>; carpetas: Carpeta[] }) {
   return (
     <ProveedorMedios>
       <Contenido {...props} />
@@ -41,18 +44,32 @@ export function Biblioteca(props: { medios: MedioBiblioteca[]; usos: Record<stri
   );
 }
 
-function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; usos: Record<string, Uso[]> }) {
+function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { medios: MedioBiblioteca[]; usos: Record<string, Uso[]>; carpetas: Carpeta[] }) {
   const router = useRouter();
+  const { avisar, confirmar } = useDialogos();
   const [medios, setMedios] = useState(iniciales);
+  const [carpetas, setCarpetas] = useState(carpetasIniciales);
+  // "todas", "sin" (archivos sin carpeta) o el id de una carpeta
+  const [carpeta, setCarpeta] = useState<string>("todas");
+  const [creando, setCreando] = useState(false);
+  const [nueva, setNueva] = useState("");
+  // Fotos marcadas para moverlas de una vez (también se arrastran juntas)
+  const [seleccion, setSeleccion] = useState<string[]>([]);
   const [filtro, setFiltro] = useState<Filtro>("todo");
   const [busqueda, setBusqueda] = useState("");
   const [abierto, setAbierto] = useState<string | null>(null);
   const input = useRef<HTMLInputElement>(null);
   useEffect(() => setMedios(iniciales), [iniciales]);
+  useEffect(() => setCarpetas(carpetasIniciales), [carpetasIniciales]);
+
+  const carpetaElegida = carpetas.find((c) => c.id === carpeta) ?? null;
 
   const { encima, subiendo, error, setError, subir, manejadores, fotoElegida } = useSoltarArchivos(
     (nuevos) => {
-      setMedios((m) => [...nuevos, ...m]);
+      // Lo que se sube entra en la carpeta que está abierta (si hay una)
+      const destino = carpetaElegida?.id ?? null;
+      if (destino) moverMedios(nuevos.map((m) => m.id), destino);
+      setMedios((m) => [...nuevos.map((x) => ({ ...x, carpetaId: destino })), ...m]);
       router.refresh();
     },
     { multiple: true, elegirFoco: true },
@@ -62,15 +79,58 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
   const visibles = useMemo(() => {
     const q = aSlug(busqueda);
     return medios.filter((m) => {
+      if (carpeta === "sin" && m.carpetaId) return false;
+      if (carpetaElegida && m.carpetaId !== carpetaElegida.id) return false;
       if (filtro === "imagen" && m.tipo !== "imagen") return false;
       if (filtro === "video" && m.tipo !== "video") return false;
       if (filtro === "sin-usar" && usosDe(m.id).length) return false;
       if (filtro === "sin-alt" && (m.tipo !== "imagen" || m.alt.trim())) return false;
       return !q || aSlug(`${nombre(m)} ${m.alt}`).includes(q);
     });
-  }, [medios, filtro, busqueda, usos]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [medios, filtro, busqueda, usos, carpeta, carpetaElegida]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const elegido = medios.find((m) => m.id === abierto) ?? null;
+
+  const crear = async () => {
+    const r = await crearCarpeta(nueva);
+    if (!r.ok) return avisar(r.error, "error");
+    setCarpetas((l) => [...l, r.datos].sort(porNombre));
+    setCarpeta(r.datos.id);
+    setNueva("");
+    setCreando(false);
+  };
+
+  const renombrar = async (c: Carpeta, valor: string) => {
+    const n = valor.trim();
+    if (!n || n === c.nombre) return;
+    const r = await renombrarCarpeta(c.id, n);
+    if (!r.ok) return avisar(r.error, "error");
+    setCarpetas((l) => l.map((x) => (x.id === c.id ? { ...x, nombre: n } : x)).sort(porNombre));
+  };
+
+  const borrar = async (c: Carpeta) => {
+    if (!(await confirmar({ titulo: `¿Borrar la carpeta «${c.nombre}»?`, texto: "Sus archivos no se borran: quedan en «Sin carpeta».", aceptar: "Borrar", peligro: true }))) return;
+    const r = await borrarCarpeta(c.id);
+    if (!r.ok) return avisar(r.error, "error");
+    setCarpetas((l) => l.filter((x) => x.id !== c.id));
+    setMedios((l) => l.map((x) => (x.carpetaId === c.id ? { ...x, carpetaId: null } : x)));
+    setCarpeta("todas");
+  };
+
+  const mover = async (ids: string[], carpetaId: string | null) => {
+    const r = await moverMedios(ids, carpetaId);
+    if (!r.ok) return avisar(r.error, "error");
+    setMedios((l) => l.map((x) => (ids.includes(x.id) ? { ...x, carpetaId } : x)));
+    setSeleccion([]);
+  };
+
+  const alternar = (id: string) => setSeleccion((l) => (l.includes(id) ? l.filter((x) => x !== id) : [...l, id]));
+
+  // Al arrastrar una foto marcada se mueven todas las marcadas; si no, solo la que se arrastra
+  const arrastrar = (e: React.DragEvent, id: string) => {
+    e.dataTransfer.setData(MIME_MEDIO, JSON.stringify(seleccion.includes(id) ? seleccion : [id]));
+    e.dataTransfer.effectAllowed = "move";
+  };
 
   return (
     <div className="relative mx-auto max-w-6xl" {...manejadores}>
@@ -126,25 +186,111 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
         </div>
       </div>
 
+      <div className="sticky top-2 z-20 mt-5 flex flex-wrap items-center gap-2 rounded-[22px] bg-black/70 p-2 backdrop-blur-xl">
+        <Pastilla activo={carpeta === "todas"} onClick={() => setCarpeta("todas")}>
+          Todas las carpetas
+        </Pastilla>
+        {carpetas.map((c) => (
+          <Pastilla key={c.id} activo={carpeta === c.id} onClick={() => setCarpeta(c.id)} alSoltar={(ids) => mover(ids, c.id)}>
+            {c.nombre} <span className="opacity-60">{medios.filter((m) => m.carpetaId === c.id).length}</span>
+          </Pastilla>
+        ))}
+        <Pastilla activo={carpeta === "sin"} onClick={() => setCarpeta("sin")} alSoltar={(ids) => mover(ids, null)}>
+          Sin carpeta
+        </Pastilla>
+        {creando ? (
+          <input
+            autoFocus
+            value={nueva}
+            onChange={(e) => setNueva(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") crear();
+              if (e.key === "Escape") {
+                setNueva("");
+                setCreando(false);
+              }
+            }}
+            onBlur={() => {
+              if (!nueva.trim()) setCreando(false);
+            }}
+            placeholder="Nombre de la carpeta"
+            className="campo !rounded-full !py-1.5 text-sm sm:max-w-[240px]"
+          />
+        ) : (
+          <button type="button" onClick={() => setCreando(true)} className="rounded-full px-3.5 py-1.5 text-[13px] font-semibold text-[var(--jm-suave)] ring-1 ring-[var(--jm-borde)] hover:text-[var(--jm-texto)]">
+            + Nueva carpeta
+          </button>
+        )}
+      </div>
+      {carpetaElegida && (
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <input
+            key={carpetaElegida.id}
+            defaultValue={carpetaElegida.nombre}
+            aria-label="Nombre de la carpeta"
+            onBlur={(e) => renombrar(carpetaElegida, e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()}
+            className="campo !py-1.5 text-sm sm:max-w-xs"
+          />
+          <button type="button" onClick={() => borrar(carpetaElegida)} className="text-xs font-semibold text-[#ff6b6b] underline-offset-4 hover:underline">
+            Borrar carpeta
+          </button>
+          <span className="text-xs text-[var(--jm-tenue)]">Sus archivos no se borran: quedan en «Sin carpeta».</span>
+        </div>
+      )}
+
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {visibles.map((m) => {
           const sinUsar = !usosDe(m.id).length;
           return (
-            <button key={m.id} type="button" onClick={() => setAbierto(m.id)} className="group text-left">
-              <div className="relative overflow-hidden rounded-[18px] ring-1 ring-[var(--jm-borde)] transition-[box-shadow] duration-300 group-hover:ring-2 group-hover:ring-[var(--jm-acento)]">
-                <Miniatura medio={m} className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.03]" />
-                <span className="absolute left-2 top-2 flex gap-1">
-                  {m.tipo === "video" && <Insignia color="bg-black/70 text-white">Vídeo</Insignia>}
-                  {sinUsar && <Insignia color="bg-black/70 text-[var(--jm-suave)]">Sin usar</Insignia>}
-                </span>
-                {m.tipo === "imagen" && !m.alt.trim() && <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-[#ff9f0a] shadow" title="Sin descripción" />}
-              </div>
-              <span className="mt-1.5 block truncate px-1 text-xs text-[var(--jm-suave)]">{nombre(m)}</span>
-            </button>
+            <div key={m.id} draggable onDragStart={(e) => arrastrar(e, m.id)} className="group relative">
+              <button type="button" onClick={() => setAbierto(m.id)} className="block w-full text-left">
+                <div className={`relative overflow-hidden rounded-[18px] ring-1 transition-[box-shadow] duration-300 group-hover:ring-2 group-hover:ring-[var(--jm-acento)] ${seleccion.includes(m.id) ? "ring-2 ring-[var(--jm-acento)]" : "ring-[var(--jm-borde)]"}`}>
+                  <Miniatura medio={m} className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.03]" />
+                  <span className="absolute left-2 top-2 flex gap-1">
+                    {m.tipo === "video" && <Insignia color="bg-black/70 text-white">Vídeo</Insignia>}
+                    {sinUsar && <Insignia color="bg-black/70 text-[var(--jm-suave)]">Sin usar</Insignia>}
+                  </span>
+                  {m.tipo === "imagen" && !m.alt.trim() && <span className="absolute bottom-2 right-2 h-2.5 w-2.5 rounded-full bg-[#ff9f0a] shadow" title="Sin descripción" />}
+                </div>
+                <span className="mt-1.5 block truncate px-1 text-xs text-[var(--jm-suave)]">{nombre(m)}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => alternar(m.id)}
+                aria-pressed={seleccion.includes(m.id)}
+                aria-label={seleccion.includes(m.id) ? "Quitar de la selección" : "Seleccionar"}
+                className={`absolute right-2 top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 transition-opacity ${seleccion.includes(m.id) ? "border-[var(--jm-acento)] bg-[var(--jm-acento)] text-white" : "border-white/80 bg-black/40 text-transparent opacity-0 group-hover:opacity-100"}`}
+              >
+                <Icono nombre="check" className="h-3.5 w-3.5" />
+              </button>
+            </div>
           );
         })}
       </div>
       {!visibles.length && <p className="mt-10 text-center text-sm text-[var(--jm-suave)]">No hay archivos que coincidan.</p>}
+
+      {seleccion.length > 0 && (
+        <div className="cristal cristal-fuerte fixed bottom-4 left-1/2 z-[60] flex w-[min(92vw,640px)] -translate-x-1/2 flex-wrap items-center gap-3 rounded-full px-5 py-2.5 text-sm">
+          <span className="font-semibold">
+            {seleccion.length} {seleccion.length === 1 ? "seleccionada" : "seleccionadas"}
+          </span>
+          <select className="campo !w-auto !py-1.5 text-sm" value="" onChange={(e) => e.target.value && mover(seleccion, e.target.value === "sin" ? null : e.target.value)}>
+            <option value="" disabled>
+              Mover a…
+            </option>
+            <option value="sin">Sin carpeta</option>
+            {carpetas.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.nombre}
+              </option>
+            ))}
+          </select>
+          <button type="button" onClick={() => setSeleccion([])} className="ml-auto text-xs font-semibold text-[var(--jm-suave)] underline-offset-4 hover:underline">
+            Quitar selección
+          </button>
+        </div>
+      )}
 
       <AnimatePresence>
         {encima && (
@@ -160,6 +306,8 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
             key={elegido.id}
             medio={elegido}
             usos={usosDe(elegido.id)}
+            carpetas={carpetas}
+            alMover={(c) => mover([elegido.id], c)}
             alCerrar={() => setAbierto(null)}
             alCambiar={(c) => setMedios((l) => l.map((x) => (x.id === elegido.id ? { ...x, ...c } : x)))}
             alRecortar={(nuevo) => {
@@ -179,9 +327,38 @@ function Contenido({ medios: iniciales, usos }: { medios: MedioBiblioteca[]; uso
   );
 }
 
+/** Pastilla de los filtros de la biblioteca (carpetas) */
+/** Si recibe `alSoltar`, es una carpeta donde se pueden soltar las fotos arrastradas */
+function Pastilla({ activo, onClick, alSoltar, children }: { activo: boolean; onClick: () => void; alSoltar?: (ids: string[]) => void; children: React.ReactNode }) {
+  const [encima, setEncima] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      onDragOver={(e) => {
+        if (!alSoltar || !e.dataTransfer.types.includes(MIME_MEDIO)) return;
+        e.preventDefault();
+        setEncima(true);
+      }}
+      onDragLeave={() => setEncima(false)}
+      onDrop={(e) => {
+        if (!alSoltar) return;
+        e.preventDefault();
+        setEncima(false);
+        alSoltar(JSON.parse(e.dataTransfer.getData(MIME_MEDIO)));
+      }}
+      className={`rounded-full px-3.5 py-1.5 text-[13px] font-semibold transition-[box-shadow,color] ${activo ? "bg-white/10 text-[var(--jm-texto)]" : "bg-black/25 text-[var(--jm-tenue)] hover:text-[var(--jm-suave)]"} ${encima ? "ring-2 ring-[var(--jm-acento)]" : ""}`}
+    >
+      {children}
+    </button>
+  );
+}
+
 function Detalle({
   medio,
   usos,
+  carpetas,
+  alMover,
   alCerrar,
   alCambiar,
   alBorrar,
@@ -189,6 +366,8 @@ function Detalle({
 }: {
   medio: MedioBiblioteca;
   usos: Uso[];
+  carpetas: Carpeta[];
+  alMover: (carpetaId: string | null) => void;
   alCerrar: () => void;
   alCambiar: (c: Partial<MedioBiblioteca>) => void;
   alBorrar: () => void;
@@ -274,6 +453,17 @@ function Detalle({
             <span className="campo-etiqueta">Nombre</span>
             <input className="campo mt-1.5" value={titulo} onChange={(e) => setTitulo(e.target.value)} onBlur={() => guardar("titulo")} />
             <span className="campo-ayuda">Solo para encontrarlo aquí</span>
+          </label>
+          <label className="block">
+            <span className="campo-etiqueta">Carpeta</span>
+            <select className="campo mt-1.5" value={medio.carpetaId ?? ""} onChange={(e) => alMover(e.target.value || null)}>
+              <option value="">Sin carpeta</option>
+              {carpetas.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.nombre}
+                </option>
+              ))}
+            </select>
           </label>
           {medio.tipo !== "documento" && (
             <label className="block">

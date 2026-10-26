@@ -6,7 +6,10 @@ import { urlBucket } from "@/lib/datos/url";
 import { exigirAdmin } from "./sesion";
 import type { Resultado } from "./tipos";
 
-export type MedioBiblioteca = Medio & { titulo: string; creadoEn: string; bytes: number | null; mime: string };
+export type MedioBiblioteca = Medio & { titulo: string; creadoEn: string; bytes: number | null; mime: string; carpetaId: string | null };
+
+/** Carpeta de la biblioteca: agrupa archivos (una por proyecto, por ejemplo) */
+export type Carpeta = { id: string; nombre: string };
 
 type FilaMedio = {
   id: string;
@@ -20,6 +23,7 @@ type FilaMedio = {
   foco_x: number | null;
   foco_y: number | null;
   bytes: number | null;
+  carpeta_id: string | null;
   mime: string;
   creado_en: string;
 };
@@ -37,6 +41,7 @@ function aMedio(f: FilaMedio): MedioBiblioteca {
     creadoEn: f.creado_en,
     bytes: f.bytes,
     mime: f.mime,
+    carpetaId: f.carpeta_id,
   };
 }
 
@@ -186,6 +191,71 @@ export async function usosDeMedios(): Promise<Resultado<Record<string, Uso[]>>> 
       if (de) anotar(b.datos, { donde: `${de.donde} (sin publicar)`, href: de.href });
     }
     return { ok: true, datos: usos };
+  } catch (e) {
+    return { ok: false, error: mensaje(e) };
+  }
+}
+
+/** Carpetas de la biblioteca, por nombre */
+export async function listarCarpetas(): Promise<Resultado<Carpeta[]>> {
+  try {
+    const s = await exigirAdmin();
+    const { data, error } = await s.from("carpetas").select("id, nombre").order("nombre");
+    if (error) throw new Error(error.message);
+    return { ok: true, datos: data ?? [] };
+  } catch (e) {
+    return { ok: false, error: mensaje(e) };
+  }
+}
+
+/** Crea una carpeta vacía */
+export async function crearCarpeta(nombre: string): Promise<Resultado<Carpeta>> {
+  try {
+    const limpio = nombre.trim().slice(0, 120);
+    if (!limpio) throw new Error("La carpeta necesita un nombre.");
+    const s = await exigirAdmin();
+    const { data, error } = await s.from("carpetas").insert({ nombre: limpio }).select("id, nombre").single();
+    if (error) throw new Error(error.message);
+    return { ok: true, datos: data };
+  } catch (e) {
+    return { ok: false, error: mensaje(e) };
+  }
+}
+
+/** Cambia el nombre de una carpeta */
+export async function renombrarCarpeta(id: string, nombre: string): Promise<Resultado<null>> {
+  try {
+    const limpio = nombre.trim().slice(0, 120);
+    if (!limpio) throw new Error("La carpeta necesita un nombre.");
+    const s = await exigirAdmin();
+    const { error } = await s.from("carpetas").update({ nombre: limpio }).eq("id", id);
+    if (error) throw new Error(error.message);
+    return { ok: true, datos: null };
+  } catch (e) {
+    return { ok: false, error: mensaje(e) };
+  }
+}
+
+/** Borra una carpeta. Sus archivos no se borran: se quedan sin carpeta. */
+export async function borrarCarpeta(id: string): Promise<Resultado<null>> {
+  try {
+    const s = await exigirAdmin();
+    const { error } = await s.from("carpetas").delete().eq("id", id);
+    if (error) throw new Error(error.message);
+    return { ok: true, datos: null };
+  } catch (e) {
+    return { ok: false, error: mensaje(e) };
+  }
+}
+
+/** Mete uno o varios archivos en una carpeta, o los saca de la suya (null) */
+export async function moverMedios(ids: string[], carpetaId: string | null): Promise<Resultado<null>> {
+  try {
+    if (!ids.length) return { ok: true, datos: null };
+    const s = await exigirAdmin();
+    const { error } = await s.from("medios").update({ carpeta_id: carpetaId }).in("id", ids);
+    if (error) throw new Error(error.message);
+    return { ok: true, datos: null };
   } catch (e) {
     return { ok: false, error: mensaje(e) };
   }
