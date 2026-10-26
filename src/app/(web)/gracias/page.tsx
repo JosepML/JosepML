@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Retrato } from "@/components/contacto/Retrato";
 import { Icono } from "@/components/Iconos";
 import { Revelar, Titular } from "@/components/piezas";
+import { getFotoContacto } from "@/lib/datos/contacto";
 import { getServicio } from "@/lib/datos/servicios";
 import { RUTAS } from "@/lib/rutas";
 
@@ -21,7 +22,7 @@ const PASOS = [
 ];
 
 export default async function Gracias() {
-  const foto = (await getServicio("filmmaker"))?.imagen ?? null;
+  const foto = await getFotoContacto((await getServicio("filmmaker"))?.imagen ?? null);
   return (
     <section className="px-4 pb-24 pt-28 sm:px-8 sm:pt-32">
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">

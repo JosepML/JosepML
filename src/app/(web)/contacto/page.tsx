@@ -3,6 +3,7 @@ import { FormularioContacto } from "@/components/contacto/FormularioContacto";
 import { Retrato } from "@/components/contacto/Retrato";
 import { Revelar, Titular } from "@/components/piezas";
 import { getPagina } from "@/lib/datos/paginas";
+import { getFotoContacto } from "@/lib/datos/contacto";
 import { getServicios } from "@/lib/datos/servicios";
 import { textos } from "@/lib/datos/util";
 
@@ -16,8 +17,8 @@ export const dynamic = "force-dynamic";
 
 export default async function Contacto({ searchParams }: { searchParams: Promise<{ temas?: string }> }) {
   const [servicios, inicio, { temas }] = await Promise.all([getServicios(), getPagina("inicio"), searchParams]);
-  // La foto es la del servicio Filmmaker: así cambia desde el panel
-  const foto = servicios.find((s) => s.slug === "filmmaker")?.imagen ?? null;
+  // Foto de Josep en un rodaje; si faltara, la del servicio Filmmaker
+  const foto = await getFotoContacto(servicios.find((s) => s.slug === "filmmaker")?.imagen ?? null);
   // Las mismas pastillas que la llamada «¿Tienes una historia que contar?» del final de las páginas: los servicios y las ideas
   // de ese bloque. Lo que se eligió allí llega aquí marcado (?temas=Filmmaker,Videoclip)
   const ideas = textos(inicio?.bloques.find((b) => b.tipo === "llamada")?.datos.opciones);
