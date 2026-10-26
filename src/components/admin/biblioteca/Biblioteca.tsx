@@ -352,7 +352,7 @@ function Pastilla({ activo, onClick, alSoltar, children }: { activo: boolean; on
         setEncima(false);
         alSoltar(JSON.parse(e.dataTransfer.getData(MIME_MEDIO)));
       }}
-      className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left text-[13px] font-semibold transition-[box-shadow,color] ${activo ? "bg-white/10 text-[var(--jm-texto)]" : "bg-black/25 text-[var(--jm-tenue)] hover:text-[var(--jm-suave)]"} ${encima ? "ring-2 ring-[var(--jm-acento)]" : ""}`}
+      className={`flex w-full items-center justify-between gap-2 rounded-xl px-3 py-1.5 text-left text-[12.5px] font-semibold transition-[box-shadow,color] ${activo ? "bg-white/10 text-[var(--jm-texto)]" : "bg-black/25 text-[var(--jm-tenue)] hover:text-[var(--jm-suave)]"} ${encima ? "ring-2 ring-[var(--jm-acento)]" : ""}`}
     >
       {children}
     </button>
