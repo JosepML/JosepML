@@ -11,8 +11,8 @@ export const SECCIONES_SERVICIO: SeccionFormulario[] = [
       { tipo: "slug", clave: "slug", etiqueta: "Dirección", prefijo: "/servicios/", desde: "nombre" },
       { tipo: "texto", clave: "frase", etiqueta: "Frase de la cabecera", ayuda: "La línea naranja debajo del nombre" },
       { tipo: "largo", clave: "resumen", etiqueta: "Resumen", filas: 3, ayuda: "Sale en la tarjeta del servicio en Inicio" },
-      { tipo: "medio", clave: "imagen_id", etiqueta: "Imagen de la cabecera", ayuda: "Opcional: es siempre la primera foto de la cabecera y de la tarjeta en Inicio" },
-      { tipo: "galeria", clave: "fotos_cabecera", etiqueta: "Fotos que pasan en la cabecera", ayuda: "Las que pasan detrás de la imagen de arriba, en la cabecera y en la tarjeta de Inicio. Si no pones ninguna, salen los pósteres de sus primeros proyectos" },
+      { tipo: "medio", clave: "imagen_id", etiqueta: "Imagen de la tarjeta", ayuda: "Opcional: va la primera en la tarjeta del servicio en Inicio. Las demás salen de los pósteres de sus proyectos. No cambia la cabecera" },
+      { tipo: "galeria", clave: "fotos_cabecera", etiqueta: "Fotos que pasan en la cabecera", ayuda: "Solo la cabecera de la página del servicio: son independientes de la imagen de la tarjeta y de los proyectos. Si no pones ninguna, la cabecera usa las de la tarjeta" },
     ],
   },
   {

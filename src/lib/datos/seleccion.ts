@@ -21,15 +21,15 @@ export function proyectosDe(proyectos: Proyecto[], filtro: string): Proyecto[] {
     });
 }
 
-/** Fotos de la cabecera y la tarjeta de un servicio: su imagen propia primero y, detrás, las elegidas en el panel o los pósteres de sus primeros proyectos */
+/** Fotos de la tarjeta de un servicio en Inicio: su imagen propia primero y, detrás, los pósteres de sus primeros proyectos */
 export function imagenesDe(servicio: Servicio, proyectos: Proyecto[], cuantas = 4): string[] {
-  // La imagen propia del servicio va siempre la primera. Detrás, las fotos que Josep eligió para la cabecera o,
-  // si no eligió ninguna, los pósteres de sus primeros proyectos
-  const elegidas = servicio.fotosCabecera.map((m) => m.url);
-  const detras = elegidas.length ? elegidas : proyectosDe(proyectos, servicio.slug).flatMap((p) => (p.poster ? [p.poster.url] : []));
-  const urls = [...(servicio.imagen ? [servicio.imagen.url] : []), ...detras];
-  const unicas = [...new Set(urls)];
-  return elegidas.length ? unicas : unicas.slice(0, cuantas);
+  const urls = proyectosDe(proyectos, servicio.slug).flatMap((p) => (p.poster ? [p.poster.url] : []));
+  return [...(servicio.imagen ? [servicio.imagen.url] : []), ...urls].slice(0, cuantas);
+}
+
+/** Fotos del carrusel de la cabecera de un servicio: solo las que Josep eligió para ella (independientes de la tarjeta). Si no eligió ninguna, las de la tarjeta */
+export function fotosCabeceraDe(servicio: Servicio, proyectos: Proyecto[]): string[] {
+  return servicio.fotosCabecera.length ? servicio.fotosCabecera.map((m) => m.url) : imagenesDe(servicio, proyectos);
 }
 
 /** Fotogramas de un proyecto para las diapositivas al pasar el ratón: la galería, o al menos el póster */
