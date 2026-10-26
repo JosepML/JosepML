@@ -1,10 +1,12 @@
-import type { Medio } from "./tipos";
+import { getAjustes } from "./ajustes";
 import { getMedios, medio } from "./medios";
+import type { Medio } from "./tipos";
 
-/** Foto de Josep para Contacto y Gracias (biblioteca de medios: «Josep en un rodaje, con la cámara y el estabilizador») */
+/** Foto por defecto de Contacto y Gracias (biblioteca: «Josep en un rodaje, con la cámara y el estabilizador») */
 export const FOTO_CONTACTO = "3fba6b76-b61e-407d-9a7b-bf7232f72c4b";
 
-/** La foto de Contacto y Gracias; si faltara en la biblioteca, la que se le pase de reserva (la del servicio Filmmaker) */
+/** La que se elige en Ajustes → «Foto de Contacto»; si no hay o no existe, la de por defecto y, al final, la que se pase de reserva */
 export async function getFotoContacto(reserva: Medio | null): Promise<Medio | null> {
-  return medio(await getMedios(), FOTO_CONTACTO) ?? reserva;
+  const [ajustes, medios] = await Promise.all([getAjustes(), getMedios()]);
+  return medio(medios, ajustes.fotoContacto) ?? medio(medios, FOTO_CONTACTO) ?? reserva;
 }

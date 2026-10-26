@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { guardarAjustes } from "@/lib/admin/ajustes";
 import { Campos } from "../campos/Campos";
+import { ProveedorMedios } from "../campos/medios";
 import type { Campo } from "../campos/tipos";
 import { useDialogos } from "../Dialogos";
 
@@ -28,6 +29,11 @@ const CAMPOS: { titulo: string; descripcion?: string; campos: Campo[] }[] = [
       { tipo: "texto", clave: "correo", etiqueta: "Correo", placeholder: "hola@josepmira.com", medio: true },
       { tipo: "texto", clave: "whatsapp", etiqueta: "WhatsApp", placeholder: "34600000000", ayuda: "Con el prefijo del país, solo números", medio: true },
     ],
+  },
+  {
+    titulo: "Foto de Contacto",
+    descripcion: "La foto de Josep que sale junto al formulario de Contacto y en la página de «Gracias».",
+    campos: [{ tipo: "medio", clave: "fotoContacto", etiqueta: "Foto", acepta: "imagen", ayuda: "Mejor vertical, con la cara en el tercio de arriba: el título va encima, abajo." }],
   },
   {
     titulo: "Redes",
@@ -81,6 +87,7 @@ export function FormularioAjustes({ inicial }: { inicial: Datos }) {
   };
 
   return (
+    <ProveedorMedios ids={[String(datos.fotoContacto ?? "")].filter(Boolean)}>
     <div className="mx-auto max-w-3xl">
       <div className="sticky top-16 z-30 -mx-2 mb-8 lg:top-4">
         <div className="cristal cristal-fuerte flex flex-wrap items-center justify-between gap-3 rounded-[28px] px-5 py-3.5">
@@ -112,5 +119,6 @@ export function FormularioAjustes({ inicial }: { inicial: Datos }) {
         ))}
       </div>
     </div>
+    </ProveedorMedios>
   );
 }

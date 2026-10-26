@@ -26,6 +26,8 @@ export type Ajustes = {
   disponible: boolean;
   ubicacion: string;
   redes: { instagram?: string; youtube?: string; linkedin?: string };
+  /** Foto de Contacto y Gracias (id de `medios`); vacía = la de por defecto */
+  fotoContacto?: string;
 };
 
 export type Servicio = {
