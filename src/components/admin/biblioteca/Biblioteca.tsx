@@ -52,6 +52,8 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
   // "todas", "sin" (archivos sin carpeta) o el id de una carpeta
   const [carpeta, setCarpeta] = useState<string>("todas");
   const [creando, setCreando] = useState(false);
+  // Buscador de la columna de carpetas: filtra la lista por nombre mientras se escribe
+  const [buscarCarpeta, setBuscarCarpeta] = useState("");
   const [nueva, setNueva] = useState("");
   // Fotos marcadas para moverlas de una vez (también se arrastran juntas)
   const [seleccion, setSeleccion] = useState<string[]>([]);
@@ -188,11 +190,19 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
 
       <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start">
       {/* Carpetas en vertical: a la derecha en pantalla ancha (fijas al hacer scroll), arriba y con poco alto en el móvil */}
-      <aside className="flex max-h-56 w-full flex-col gap-1 overflow-y-auto rounded-[22px] bg-black/40 p-2.5 backdrop-blur-xl lg:sticky lg:top-4 lg:order-last lg:max-h-[60svh] lg:w-60 lg:shrink-0">
+      <aside className="flex max-h-56 w-full flex-col gap-2 rounded-[22px] bg-black/40 p-2.5 backdrop-blur-xl lg:sticky lg:top-4 lg:order-last lg:max-h-[75svh] lg:w-60 lg:shrink-0">
+        <input
+          value={buscarCarpeta}
+          onChange={(e) => setBuscarCarpeta(e.target.value)}
+          placeholder="Buscar proyecto…"
+          aria-label="Buscar proyecto"
+          className="campo !rounded-xl !py-2 text-sm"
+        />
+        <div className="flex min-h-0 flex-col gap-1 overflow-y-auto">
         <Pastilla activo={carpeta === "todas"} onClick={() => setCarpeta("todas")}>
           Todas las carpetas
         </Pastilla>
-        {carpetas.map((c) => (
+        {carpetas.filter((c) => aSlug(c.nombre).includes(aSlug(buscarCarpeta))).map((c) => (
           <Pastilla key={c.id} activo={carpeta === c.id} onClick={() => setCarpeta(c.id)} alSoltar={(ids) => mover(ids, c.id)}>
             {c.nombre} <span className="opacity-60">{medios.filter((m) => m.carpetaId === c.id).length}</span>
           </Pastilla>
@@ -223,6 +233,7 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
             + Nueva carpeta
           </button>
         )}
+        </div>
       </aside>
       <div className="min-w-0 flex-1">
       {carpetaElegida && (
