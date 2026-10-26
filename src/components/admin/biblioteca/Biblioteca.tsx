@@ -188,7 +188,7 @@ function Contenido({ medios: iniciales, usos, carpetas: carpetasIniciales }: { m
 
       <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-start">
       {/* Carpetas en vertical: a la derecha en pantalla ancha (fijas al hacer scroll), arriba y con poco alto en el móvil */}
-      <aside className="flex max-h-56 w-full flex-col gap-1 overflow-y-auto rounded-[22px] bg-black/40 p-2.5 backdrop-blur-xl lg:sticky lg:top-4 lg:order-last lg:max-h-[calc(100svh-2rem)] lg:w-60 lg:shrink-0">
+      <aside className="flex max-h-56 w-full flex-col gap-1 overflow-y-auto rounded-[22px] bg-black/40 p-2.5 backdrop-blur-xl lg:sticky lg:top-4 lg:order-last lg:max-h-[60svh] lg:w-60 lg:shrink-0">
         <Pastilla activo={carpeta === "todas"} onClick={() => setCarpeta("todas")}>
           Todas las carpetas
         </Pastilla>
