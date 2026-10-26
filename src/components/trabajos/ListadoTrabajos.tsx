@@ -96,7 +96,7 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.45, ease: CURVA }}
-          className="mt-10 grid gap-4 md:grid-cols-2"
+          className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
         >
           {visibles.map((p) => (
             <TarjetaProyecto key={p.slug} proyecto={p} />
