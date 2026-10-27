@@ -67,6 +67,7 @@ export type Proyecto = {
   id: string;
   slug: string;
   titulo: string;
+  idAntiguo: string | null;
   tipo: { slug: string; nombre: string; enListadoGeneral: boolean } | null;
   /** Servicios del proyecto, con su orden y si es destacado en la página de cada servicio */
   servicios: { slug: string; orden: number; destacado: boolean }[];
@@ -106,6 +107,7 @@ export type Articulo = {
   id: string;
   slug: string;
   titulo: string;
+  idAntiguo: string | null;
   /** AAAA-MM-DD */
   fecha: string;
   extracto: string;

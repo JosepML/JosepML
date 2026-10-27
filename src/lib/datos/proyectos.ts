@@ -23,6 +23,7 @@ export async function getProyectos(): Promise<Proyecto[]> {
       return {
         id: p.id,
         slug: p.slug,
+        idAntiguo: p.id_antiguo,
         titulo: p.titulo,
         tipo: tipo ? { slug: tipo.slug, nombre: tipo.nombre, enListadoGeneral: tipo.en_listado_general } : null,
         servicios: enlaces

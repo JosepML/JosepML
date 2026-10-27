@@ -25,6 +25,20 @@ const nextConfig: NextConfig = {
       ...(local ? [{ protocol: "http" as const, hostname: "localhost", port: "54321" }] : []),
     ],
   },
+  // Redirecciones permanentes de rutas antiguas sin # (por si algún enlace externo quitó el # o viene de /JosepML)
+  async redirects() {
+    return [
+      { source: "/portfolio", destination: "/trabajos", permanent: true },
+      { source: "/project/:id", destination: "/trabajos/:id", permanent: true },
+      { source: "/recreations", destination: "/recreaciones", permanent: true },
+      { source: "/about", destination: "/sobre-mi", permanent: true },
+      { source: "/contact", destination: "/contacto", permanent: true },
+      { source: "/thanks", destination: "/gracias", permanent: true },
+      { source: "/privacy", destination: "/privacidad", permanent: true },
+      { source: "/JosepML", destination: "/", permanent: true },
+      { source: "/JosepML/:path*", destination: "/:path*", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

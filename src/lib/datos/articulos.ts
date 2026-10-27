@@ -12,6 +12,7 @@ export async function getArticulos(): Promise<Articulo[]> {
       return {
         id: a.id,
         slug: a.slug,
+        idAntiguo: a.id_antiguo,
         titulo: a.titulo,
         fecha: a.fecha,
         extracto: a.extracto,
