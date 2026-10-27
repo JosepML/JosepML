@@ -2,7 +2,7 @@
 
 import { useInView } from "motion/react";
 import { type CSSProperties, useEffect, useRef, useState } from "react";
-import { usePantallaAncha, useReducir, useVideoAbierto } from "./hooks";
+import { useReducir, useVideoAbierto } from "./hooks";
 import { VideoYouTube } from "./VideoYouTube";
 import { img } from "./imagen";
 
@@ -27,7 +27,6 @@ type Props = {
  * Con "reducir movimiento" el vídeo sigue (es la imagen de la web), pero el póster no hace zoom.
  */
 export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className = "", filtro, escala }: Props) {
-  const ancha = usePantallaAncha();
   const reducir = useReducir();
   const caja = useRef<HTMLDivElement>(null);
   const propio = useRef<HTMLVideoElement>(null);
@@ -39,13 +38,15 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className
   const [propioListo, setPropioListo] = useState(false);
 
   // Crear o arrancar el reproductor espera a que la portada ya haya mostrado su póster y la página
-  // esté quieta un momento (700 ms): así siempre se ve primero la imagen y nunca una pantalla en negro.
+  // esté quieta un momento (150 ms para archivo mp4, 600 ms para YouTube): así siempre se ve
+  // primero la imagen y nunca una pantalla en negro, tanto en móvil como en escritorio.
   useEffect(() => {
     if (listo || !visible) return;
-    let t = window.setTimeout(() => setListo(true), 700);
+    const espera = archivo ? 150 : 600;
+    let t = window.setTimeout(() => setListo(true), espera);
     const reiniciar = () => {
       window.clearTimeout(t);
-      t = window.setTimeout(() => setListo(true), 700);
+      t = window.setTimeout(() => setListo(true), espera);
     };
     window.addEventListener("scroll", reiniciar, { passive: true });
     window.addEventListener("wheel", reiniciar, { passive: true });
@@ -54,16 +55,20 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className
       window.removeEventListener("scroll", reiniciar);
       window.removeEventListener("wheel", reiniciar);
     };
-  }, [listo, visible]);
+  }, [listo, visible, archivo]);
 
-  const conVideo = listo && ancha;
+  const conVideo = listo;
 
   // El vídeo propio arranca cuando toca (conVideo) y se pausa fuera de pantalla
   useEffect(() => {
     const v = propio.current;
     if (!v) return;
-    if (conVideo && visible) v.play().catch(() => {});
-    else v.pause();
+    if (conVideo && visible) {
+      const p = v.play();
+      if (p !== undefined) p.catch(() => {});
+    } else {
+      v.pause();
+    }
   }, [conVideo, visible, archivo]);
 
   return (
@@ -81,11 +86,13 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className
         <video
           ref={propio}
           src={archivo}
+          autoPlay
           muted
           loop
           playsInline
           preload="auto"
           aria-hidden
+          onPlaying={() => setPropioListo(true)}
           onTimeUpdate={(e) => {
             if (!propioListo && e.currentTarget.currentTime > 0.12) setPropioListo(true);
           }}
