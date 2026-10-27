@@ -44,10 +44,10 @@ export function fotosCabeceraDe(servicio: Servicio, proyectos: Proyecto[]): stri
 }
 
 /** Fotogramas de un proyecto para las tarjetas: el póster primero (es la foto que Josep eligió para la tarjeta) y, detrás, el resto de la galería */
-export function fotogramas(p: Proyecto): string[] {
+export function fotogramas(p: Proyecto, cuantas = 4): string[] {
   const g = p.galeria.map((x) => x.imagen.url);
   const todas = p.poster ? [p.poster.url, ...g.filter((u) => u !== p.poster!.url)] : g;
-  return todas.length > 1 ? todas : p.poster ? [p.poster.url] : g;
+  return (todas.length > 1 ? todas : p.poster ? [p.poster.url] : g).slice(0, cuantas);
 }
 
 /** El premio que se enseña en la tarjeta (laurel): el primero de la lista */

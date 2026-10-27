@@ -52,9 +52,9 @@ export default async function LayoutWeb({ children }: { children: React.ReactNod
         <Marco ajustes={ajustes}>
           {children}
           {previa && <AvisoVistaPrevia />}
+          <ConsentimientoCookies />
         </Marco>
       </ProveedorTransicion>
-      <ConsentimientoCookies />
     </div>
   );
 }

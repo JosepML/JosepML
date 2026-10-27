@@ -309,6 +309,10 @@ export function Diapositivas({
   ancho?: 640 | 750 | 828 | 1080 | 1200 | 1920 | 3840;
 }) {
   const [i, setI] = useState(0);
+  const [haActivado, setHaActivado] = useState(false);
+  useEffect(() => {
+    if (activo && !haActivado) setHaActivado(true);
+  }, [activo, haActivado]);
   const reducir = useReducir();
 
   useEffect(() => {
@@ -322,7 +326,7 @@ export function Diapositivas({
 
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
-      {imagenes.map((src, n) => {
+      {(haActivado ? imagenes : imagenes.slice(0, 1)).map((src, n) => {
         // Cada foto tiene su propio zoom: solo la que se ve crece, desde cero, durante su turno. Las demás vuelven
         // a su escala mínima al salir, así que al volver a verse empiezan otra vez
         const zoom = n === i && activo && !reducir;

@@ -1,7 +1,7 @@
 "use client";
 
 import { startTransition, useEffect, useState } from "react";
-import { fotogramas, imagenesDe } from "@/lib/datos/seleccion";
+import { imagenesDe } from "@/lib/datos/seleccion";
 import type { Bloque, DatosWeb, TipoBloque } from "@/lib/datos/tipos";
 import { img } from "../comun/imagen";
 import { ProveedorBloque, useEdicion, ZonaEdicion } from "../edicion/contexto";
@@ -67,27 +67,29 @@ export function PaginaBloques({ bloques, datos, pagina }: { bloques: Bloque[]; d
  * justo en mitad del deslizamiento.
  */
 function usePrecargaImagenes() {
-  const { servicios, proyectos, medios } = useDatos();
+  const { servicios, proyectos } = useDatos();
   useEffect(() => {
-    const ocioso = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 1500));
-    const cancelar = window.cancelIdleCallback ?? window.clearTimeout;
-    const id = ocioso(() => {
+
+
+    const id = window.setTimeout(() => {
       const urls = new Set<string>();
-      for (const s of servicios) imagenesDe(s, proyectos).forEach((u) => urls.add(img(u, 1200)));
+      for (const s of servicios) imagenesDe(s, proyectos, 1).forEach((u) => urls.add(img(u, 1200)));
       for (const p of proyectos) {
-        fotogramas(p).forEach((u) => urls.add(img(u, 1920)));
-        if (p.poster) urls.add(img(p.poster.url, 256));
+        if (p.destacadoOrden !== null && p.poster) urls.add(img(p.poster.url, 256));
+
       }
-      for (const m of Object.values(medios)) if (m.tipo === "imagen") urls.add(img(m.url, 1920));
+
       for (const u of urls) {
         const i = new Image();
         i.decoding = "async";
         i.src = u;
         i.decode().catch(() => {});
       }
-    });
-    return () => cancelar(id as number);
-  }, [servicios, proyectos, medios]);
+    }, 2500);
+    return () => window.clearTimeout(id);
+  }, [servicios, proyectos]);
+
+
 }
 
 // La primera carga se hidrata entera (tiene que coincidir con el HTML del servidor). Las siguientes
@@ -103,9 +105,11 @@ function useMontajeEscalonado() {
     yaMontada = true;
     if (todo) return;
     const ocioso = window.requestIdleCallback ?? ((f: () => void) => window.setTimeout(f, 120));
+
     const cancelar = window.cancelIdleCallback ?? window.clearTimeout;
     const id = ocioso(() => startTransition(() => setTodo(true)), { timeout: 400 } as IdleRequestOptions);
     return () => cancelar(id as number);
+
   }, [todo]);
   return todo;
 }
