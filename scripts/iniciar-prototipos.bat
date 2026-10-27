@@ -12,6 +12,12 @@ if errorlevel 1 (
   exit /b 1
 )
 
+REM Si ya habia un servidor anterior escuchando en el puerto 3000, se cierra para que no sirva archivos antiguos.
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":3000 " ^| findstr "LISTENING"') do (
+  echo Cerrando servidor anterior en el puerto 3000 ^(PID %%a^)...
+  taskkill /F /PID %%a >nul 2>nul
+)
+
 where git >nul 2>nul
 if not errorlevel 1 (
   echo Actualizando la rama de trabajo...
