@@ -34,3 +34,9 @@ export function mediosDeBloques(pagina: Pagina, medios: Record<string, Medio>) {
   pagina.bloques.forEach((b) => recorrer(b.datos));
   return usados;
 }
+
+/** Slugs de todas las páginas publicadas (para el sitemap) */
+export async function getSlugsPaginas(): Promise<string[]> {
+  const paginas = await filas("paginas");
+  return paginas.map((p) => p.slug);
+}

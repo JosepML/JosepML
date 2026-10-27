@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { URL_SITIO } from "@/lib/seo/url";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -14,6 +15,7 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(URL_SITIO),
   title: "Josep Mira Lozano · Dirección de fotografía y filmmaker",
   description: "Director de fotografía, filmmaker y editor.",
   robots: { index: false, follow: false },

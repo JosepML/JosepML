@@ -17,7 +17,7 @@ async function cabecera() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const { pagina, titulo } = await cabecera();
-  return { title: pagina?.seo.titulo ? { absolute: pagina.seo.titulo } : "Blog", description: pagina?.seo.descripcion || titulo };
+  return { title: pagina?.seo.titulo ? { absolute: pagina.seo.titulo } : "Blog", description: pagina?.seo.descripcion || titulo.replace(/\*/g, "") };
 }
 
 export default async function Blog() {

@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ContenidoArticulo } from "@/components/blog/ContenidoArticulo";
 import { TarjetaArticulo } from "@/components/blog/TarjetaArticulo";
 import { enfoque, img } from "@/components/comun/imagen";
 import { Icono } from "@/components/Iconos";
 import { Revelar, TituloConAcento } from "@/components/piezas";
+import { JsonLdArticulo } from "@/components/seo/JsonLd";
 import { getArticulos } from "@/lib/datos/articulos";
 import { getMedios } from "@/lib/datos/medios";
 import { getPagina } from "@/lib/datos/paginas";
 import { fechaCorta } from "@/lib/datos/seleccion";
 import { RUTAS } from "@/lib/rutas";
+import { sinAcento } from "@/lib/seo/url";
 import { texto } from "@/lib/datos/util";
 
 // Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
@@ -18,28 +20,39 @@ export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ slug: string }> };
 
+// Artículo de la web antigua que Josep retiró: redirige al índice del blog para no dar 404
+const ARTICULOS_RETIRADOS = new Set(["dslr-vs-cine-la-camara-no-hace-al-cineasta"]);
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const a = (await getArticulos()).find((x) => x.slug === slug);
+  const articulos = await getArticulos();
+  const a = articulos.find((x) => x.slug === slug) ?? articulos.find((x) => x.idAntiguo === slug);
   if (!a) return {};
   return {
-    title: a.seo.titulo ? { absolute: a.seo.titulo } : a.titulo,
-    description: a.seo.descripcion || a.extracto,
-    openGraph: a.imagen ? { images: [a.imagen.url] } : undefined,
+    title: a.seo.titulo ? { absolute: a.seo.titulo } : sinAcento(a.titulo),
+    description: sinAcento(a.seo.descripcion || a.extracto),
+    openGraph: a.imagen ? { type: "article", publishedTime: a.fecha, images: [a.imagen.url] } : { type: "article", publishedTime: a.fecha },
   };
 }
 
 export default async function Articulo({ params }: Props) {
   const { slug } = await params;
+  if (ARTICULOS_RETIRADOS.has(slug)) permanentRedirect(RUTAS.blog);
+
   const [articulos, medios, inicio] = await Promise.all([getArticulos(), getMedios(), getPagina("inicio")]);
   const a = articulos.find((x) => x.slug === slug);
-  if (!a) notFound();
+  if (!a) {
+    const porIdAntiguo = articulos.find((x) => x.idAntiguo === slug);
+    if (porIdAntiguo) permanentRedirect(RUTAS.articulo(porIdAntiguo.slug));
+    notFound();
+  }
   // La invitación final repite el título de la llamada de Inicio, para que se edite en un solo sitio
   const llamada = texto(inicio?.bloques.find((b) => b.tipo === "llamada")?.datos.titulo) || "¿Tienes una historia que contar?";
   const otros = articulos.filter((x) => x.slug !== slug).slice(0, 3);
 
   return (
     <main className="px-4 pb-24 pt-32 sm:px-8 sm:pt-40">
+      <JsonLdArticulo articulo={a} />
       <article>
         <header className="mx-auto max-w-3xl">
           <Revelar>

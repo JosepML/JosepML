@@ -66,13 +66,19 @@ export function Marco({ ajustes, children }: { ajustes: Ajustes; children: React
   return (
     <ContextoTema.Provider value={{ tema, cambiarTema }}>
       <div data-tema={tema} data-reducir={reducir ? "" : undefined} className="jm-raiz relative min-h-svh overflow-x-clip transition-colors duration-700">
+        <a
+          href="#contenido-principal"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-[var(--jm-acento)] focus:px-5 focus:py-2.5 focus:text-xs focus:font-semibold focus:text-white"
+        >
+          Saltar al contenido
+        </a>
         <div className="orbes" aria-hidden>
           <span />
           <span />
           <span />
         </div>
         <Menu nombre={ajustes.nombre} />
-        <div className="relative z-[2]">
+        <div id="contenido-principal" className="relative z-[2]">
           {children}
           <Pie ajustes={ajustes} />
         </div>
@@ -140,12 +146,21 @@ function Menu({ nombre }: { nombre: string }) {
     return () => document.removeEventListener("pointermove", mover);
   }, []);
 
+  // Con teclado, Escape cierra el menú móvil
+  useEffect(() => {
+    if (!abierto) return;
+    const alTecla = (e: KeyboardEvent) => e.key === "Escape" && setAbierto(false);
+    document.addEventListener("keydown", alTecla);
+    return () => document.removeEventListener("keydown", alTecla);
+  }, [abierto]);
+
   return (
     <>
       <motion.header
         className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3 sm:pt-4"
         animate={{ y: oculto && !abierto ? -100 : 0 }}
         transition={{ duration: 0.5, ease: CURVA }}
+        onFocusCapture={() => setOculto(false)}
       >
         <nav
           aria-label="Principal"
