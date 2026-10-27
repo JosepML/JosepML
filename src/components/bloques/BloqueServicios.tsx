@@ -107,7 +107,7 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
         imagenes={imagenes}
         medios={medios}
         ancho={1920}
-        className="h-[192px] sm:h-[215px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
+        className="h-[225px] sm:h-[250px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
       >
         {() => (
           <>
@@ -123,7 +123,6 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
               </div>
               <div className="[text-shadow:0_2px_16px_rgba(0,0,0,0.65)]">
                 <h3 className="text-xl font-extrabold leading-tight tracking-[-0.025em]">{s.nombre}</h3>
-                <p className="jm-serif mt-0.5 text-[16px] leading-tight text-[#ffc07a]">{s.frase}</p>
               </div>
             </div>
 
