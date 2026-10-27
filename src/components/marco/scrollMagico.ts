@@ -7,8 +7,14 @@ import { CURVA_VIAJE as CURVA_SCROLL } from "@/styles/movimiento";
 const DURACION = 1.05;
 /** Un gesto que llega justo después de terminar un viaje cuenta como "voy con prisa" */
 const MARGEN_PRISA = 450;
-const CLAVE_RENDIMIENTO = "jm-scroll-magico-rendimiento-v2";
-const CLAVE_ANTIGUA = "jm-desactivar-scroll-magico";
+
+/** Escudo de arranque: durante los primeros 4,5 segundos de vida de la página no se evalúa rendimiento */
+const TIEMPO_ESCUDO_ARRANQUE = 4500;
+/** Margen de calentamiento dentro de cada viaje individual (creación de capas en GPU) */
+const CALENTAMIENTO_VIAJE = 350;
+/** Umbral de fotograma congelado: 120 ms (menos de 8 FPS / parón evidente de ~7-8 cuadros a 60 Hz) */
+const UMBRAL_CONGELACION_MS = 120;
+
 const EVENTO_RENDIMIENTO = "jm-desactivar-scroll-magico";
 
 type Punto = { destino: number; top: number; alto: number; libre: boolean; sub: boolean };
@@ -18,6 +24,11 @@ let control: { stop: () => void } | null = null;
 let viajando = false;
 let finViaje = 0;
 let monitorRaf: number | null = null;
+
+// Control adaptativo en memoria (sin persistir en sessionStorage para no bloquear al usuario tras recargar)
+let desactivadoEnMemoria = false;
+let viajesConCongelacion = 0;
+let ultimoViajeCongelado = 0;
 
 /** Comprueba si el dispositivo tiene recursos de hardware extremadamente reducidos (CPU mononúcleo o modo ahorro) */
 export function esHardwareModesto(): boolean {
@@ -36,34 +47,38 @@ export function esHardwareModesto(): boolean {
   return false;
 }
 
-/** Comprueba si el scroll mágico ha sido desactivado en esta sesión */
+/** Comprueba si el scroll mágico ha sido desactivado (solo en memoria o por hardware mononúcleo) */
 export function scrollMagicoDesactivado(): boolean {
   if (typeof window === "undefined") return false;
   try {
-    // Limpieza de la clave antigua con umbral demasiado estricto
-    sessionStorage.removeItem(CLAVE_ANTIGUA);
-    if (sessionStorage.getItem(CLAVE_RENDIMIENTO) === "1") return true;
+    // Limpieza de cualquier clave residual antigua en sessionStorage
+    sessionStorage.removeItem("jm-scroll-magico-rendimiento-v2");
+    sessionStorage.removeItem("jm-desactivar-scroll-magico");
   } catch {}
-  return esHardwareModesto();
+  return desactivadoEnMemoria || esHardwareModesto();
 }
 
-/** Desactiva el scroll mágico inmediatamente y activa el modo nativo para toda la sesión */
+/** Desactiva el scroll mágico inmediatamente y activa el modo nativo solo en memoria */
 export function desactivarScrollMagico(motivo?: string) {
   if (typeof window === "undefined") return;
-  try {
-    sessionStorage.setItem(CLAVE_RENDIMIENTO, "1");
-  } catch {}
+  desactivadoEnMemoria = true;
   detenerVigilanciaFPS();
   control?.stop();
   viajando = false;
   if (process.env.NODE_ENV !== "production") {
-    console.info(`[Rendimiento] Scroll mágico desactivado por ${motivo ?? "fluidez"}. Pasando a scroll nativo.`);
+    console.info(`[Rendimiento] Scroll mágico desactivado en memoria por ${motivo ?? "fluidez"}. Pasando a scroll nativo.`);
   }
   window.dispatchEvent(new CustomEvent(EVENTO_RENDIMIENTO));
 }
 
 function iniciarVigilanciaFPS() {
   detenerVigilanciaFPS();
+
+  // Escudo de arranque: si la página lleva menos de 4,5 segundos cargada, no vigilar (se están montando vídeos, fuentes y capas)
+  if (performance.now() < TIEMPO_ESCUDO_ARRANQUE) {
+    return;
+  }
+
   const inicioViaje = performance.now();
   let ultimo = performance.now();
   let caidasConsecutivas = 0;
@@ -86,21 +101,35 @@ function iniciarVigilanciaFPS() {
     const delta = ahora - ultimo;
     ultimo = ahora;
 
-    // Margen de calentamiento: los primeros 250 ms son de promoción de capas del navegador; no se evalúan
+    // Margen de calentamiento del viaje individual (primeros 350 ms)
     const transcurrido = ahora - inicioViaje;
-    if (transcurrido > 250 && !document.hidden) {
-      // Un fotograma de más de 90ms representa una congelación real (menos de 11 FPS / pérdida de más de 5 cuadros a 60Hz)
-      if (delta > 90) {
+    if (transcurrido > CALENTAMIENTO_VIAJE && !document.hidden) {
+      // Solo cuenta si el cuadro tarda más de 120 ms (congelación grave real)
+      if (delta > UMBRAL_CONGELACION_MS) {
         caidasConsecutivas++;
         totalCaidas++;
-        // Solo desactivar si hay 3 congelaciones seguidas (~300ms de bloqueo continuo) o más de 6 congelaciones graves
-        if (caidasConsecutivas >= 3 || totalCaidas >= 6) {
+        // Si este viaje individual experimenta 3 congelaciones consecutivas o más de 5 en total:
+        if (caidasConsecutivas >= 3 || totalCaidas >= 5) {
           monitorRaf = null;
-          desactivarScrollMagico("congelación grave de fotogramas");
+          const momento = performance.now();
+          // Exigir al menos 2 viajes independientes con congelaciones en menos de 30 segundos
+          if (momento - ultimoViajeCongelado < 30000) {
+            viajesConCongelacion++;
+          } else {
+            viajesConCongelacion = 1;
+          }
+          ultimoViajeCongelado = momento;
+
+          if (viajesConCongelacion >= 2) {
+            desactivarScrollMagico("congelaciones reiteradas en múltiples viajes");
+          } else {
+            // En el primer viaje con problemas, frenar el viaje actual para aliviar al navegador pero sin desactivar el scroll mágico
+            control?.stop();
+            viajando = false;
+          }
           return;
         }
       } else if (delta < 35) {
-        // Al recuperar fluidez normal (> 30 FPS), se limpia la racha de caídas consecutivas
         caidasConsecutivas = 0;
       }
     }
