@@ -20,10 +20,10 @@ export function BloqueGaleria({ bloque }: { bloque: Bloque }) {
   });
   if (!imagenes.length) return null;
   return (
-    <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
+    <section className="px-4 py-8 sm:px-8 sm:py-32 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
         {bloque.datos.titulo && <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />}
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-12 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3">
           {imagenes.map(({ medio, pie }, i) => (
             <Revelar key={`${medio.id}-${i}`} retraso={(i % 3) * 0.07}>
               <figure>
@@ -56,10 +56,10 @@ export function BloqueVideo({ bloque }: { bloque: Bloque }) {
   // Varios vídeos: en tarjetas que se abren en la ventana grande (como los «Más vídeos» de un proyecto)
   if (videos.length) {
     return (
-      <section className="px-4 py-20 sm:px-8 sm:py-24 lg:py-[5svh]">
+      <section className="px-4 py-8 sm:px-8 sm:py-24 lg:py-[5svh]">
         <div className="mx-auto max-w-7xl">
           {bloque.datos.titulo && <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />}
-          <div className="mt-10 lg:mt-[4svh]">
+          <div className="mt-5 sm:mt-10 lg:mt-[4svh]">
             <RejillaVideos videos={videos} />
           </div>
         </div>
@@ -74,10 +74,10 @@ export function BloqueVideo({ bloque }: { bloque: Bloque }) {
     ) : null;
   }
   return (
-    <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
+    <section className="px-4 py-8 sm:px-8 sm:py-32 lg:py-[6svh]">
       <div className="mx-auto max-w-6xl">
         {bloque.datos.titulo && <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />}
-        <Revelar className="mt-12">
+        <Revelar className="mt-5 sm:mt-12">
           <div className="relative aspect-video overflow-hidden rounded-[var(--jm-radio-bloque)] bg-black shadow-[var(--jm-sombra-foto)]">
             {archivo ? (
               <video src={archivo.url} controls playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover" />
@@ -104,10 +104,10 @@ export function BloqueCita({ bloque }: { bloque: Bloque }) {
   const frase = bloque.datos.titulo || bloque.datos.texto || "";
   if (!frase) return null;
   return (
-    <section className="px-3 py-16 sm:px-6 sm:py-24">
+    <section className="px-3 py-8 sm:px-6 sm:py-24">
       <Revelar>
-        <figure className="cristal mx-auto max-w-6xl rounded-[var(--jm-radio-bloque)] px-6 py-20 text-center sm:px-16 sm:py-28">
-          <blockquote className="text-[clamp(2rem,4.6vw,4rem)] font-extrabold leading-[1.08] tracking-[-0.04em] [text-wrap:balance]">
+        <figure className="cristal mx-auto max-w-6xl rounded-[var(--jm-radio-bloque)] px-5 py-10 text-center sm:px-16 sm:py-28">
+          <blockquote className="text-[clamp(1.4rem,4.6vw,4rem)] font-extrabold leading-[1.1] tracking-[-0.04em] [text-wrap:balance] sm:leading-[1.08]">
             <Editable campo={bloque.datos.titulo || !bloque.datos.texto ? "titulo" : "texto"} valor={frase}>
               <TituloConAcento texto={frase} />
             </Editable>

@@ -7,7 +7,7 @@ import { RUTAS } from "@/lib/rutas";
 import { Icono } from "../Iconos";
 
 const CAMPO =
-  "w-full rounded-2xl border border-white/12 bg-black/20 px-4 py-3.5 text-base font-normal text-[var(--jm-texto)] outline-none transition-[border-color,background-color,box-shadow] duration-300 placeholder:text-[var(--jm-tenue)] hover:border-white/25 focus:border-[var(--jm-acento)] focus:bg-black/30 focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--jm-acento)_22%,transparent)]";
+  "w-full rounded-xl border border-white/12 bg-black/20 px-3.5 py-2.5 text-sm font-normal text-[var(--jm-texto)] outline-none transition-[border-color,background-color,box-shadow] duration-300 placeholder:text-[var(--jm-tenue)] hover:border-white/25 focus:border-[var(--jm-acento)] focus:bg-black/30 focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--jm-acento)_22%,transparent)] sm:rounded-2xl sm:px-4 sm:py-3.5 sm:text-base";
 
 function Etiqueta({ texto, opcional, llena, children }: { texto: string; opcional?: boolean; llena?: boolean; children: React.ReactNode }) {
   return (
@@ -25,7 +25,7 @@ function Etiqueta({ texto, opcional, llena, children }: { texto: string; opciona
 function Pastilla({ texto, activo, alCambiar }: { texto: string; activo: boolean; alCambiar: () => void }) {
   return (
     <label
-      className={`group inline-flex cursor-pointer select-none items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-normal transition-[background-color,border-color,color,transform] duration-300 active:scale-95 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--jm-acento)] ${
+      className={`group inline-flex cursor-pointer select-none items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-normal transition-[background-color,border-color,color,transform] duration-300 active:scale-95 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-[var(--jm-acento)] sm:px-4 sm:py-2 sm:text-sm ${
         activo
           ? "border-transparent bg-[var(--jm-acento)] text-white shadow-[0_8px_24px_-10px_var(--jm-acento)]"
           : "border-white/12 bg-white/[0.04] text-[var(--jm-suave)] hover:border-white/30 hover:text-[var(--jm-texto)]"
@@ -62,7 +62,7 @@ export function FormularioContacto({ opciones, marcados = [], valor, alCambiar, 
   };
 
   return (
-    <form action={accion} className="cristal relative flex h-full flex-col gap-5 overflow-hidden rounded-[32px] p-6 text-left sm:p-8">
+    <form action={accion} className="cristal relative flex h-full flex-col gap-3.5 overflow-hidden rounded-[24px] p-4 text-left sm:gap-5 sm:rounded-[32px] sm:p-8">
       <div aria-hidden className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,var(--jm-orbe-a),transparent)] opacity-70" />
       <p className="relative flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)]">
         <Icono nombre="correo" className="h-4 w-4 text-[var(--jm-acento)]" />
@@ -72,7 +72,7 @@ export function FormularioContacto({ opciones, marcados = [], valor, alCambiar, 
       <input type="hidden" name="origen" value={origen} />
       <input type="hidden" name="servicio" value={elegidos.join(", ")} />
 
-      <div className="relative grid gap-5 sm:grid-cols-2 sm:gap-6">
+      <div className="relative grid gap-3.5 sm:grid-cols-2 sm:gap-6">
         <Etiqueta texto="Nombre">
           <input name="nombre" required minLength={2} autoComplete="name" placeholder="Cómo te llamas" className={CAMPO} />
         </Etiqueta>
@@ -100,7 +100,7 @@ export function FormularioContacto({ opciones, marcados = [], valor, alCambiar, 
             minLength={10}
             rows={5}
             placeholder="Qué quieres contar, para quién y para cuándo. Cuanto más me cuentes, mejor."
-            className={`${CAMPO} h-full min-h-32 resize-none leading-relaxed`}
+            className={`${CAMPO} h-full min-h-24 resize-none leading-relaxed sm:min-h-32`}
           />
         </Etiqueta>
       </div>
@@ -132,7 +132,7 @@ export function FormularioContacto({ opciones, marcados = [], valor, alCambiar, 
       )}
 
       <div className="relative flex flex-wrap items-center gap-x-6 gap-y-3">
-        <button type="submit" disabled={enviando} className="boton boton-acento group px-8 py-4 text-base disabled:opacity-60">
+        <button type="submit" disabled={enviando} className="boton boton-acento group px-6 py-3 text-sm disabled:opacity-60 sm:px-8 sm:py-4 sm:text-base">
           {enviando ? "Enviando…" : "Enviar mensaje"}
           {!enviando && <Icono nombre="flecha" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />}
         </button>

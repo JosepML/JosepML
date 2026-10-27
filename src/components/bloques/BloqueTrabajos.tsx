@@ -60,17 +60,17 @@ function RejillaTipos({ bloque, cumple, maximo, orden, ancla }: { bloque: Bloque
   if (!de.length && !editando) return null;
   const [primero, ...resto] = de;
   return (
-    <section id={ancla} className="px-4 py-12 sm:px-8 sm:py-24 lg:py-[5svh]">
+    <section id={ancla} className="px-4 py-8 sm:px-8 sm:py-24 lg:py-[5svh]">
       <div className="mx-auto max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
         {!de.length && <p className="mt-8 text-[var(--jm-suave)]">Todavía no hay proyectos publicados de este tipo.</p>}
         {primero && (
-          <Revelar className="mt-10 lg:mt-[4svh]">
+          <Revelar className="mt-5 sm:mt-10 lg:mt-[4svh]">
             <ProyectoAncho proyecto={primero} />
           </Revelar>
         )}
         {resto.length > 0 && (
-          <div className={`mt-4 grid gap-4 md:grid-cols-2 ${resto.length % 3 === 0 ? "lg:grid-cols-3" : ""}`}>
+          <div className={`mt-3 grid grid-cols-2 gap-2.5 sm:mt-4 sm:gap-4 md:grid-cols-2 ${resto.length % 3 === 0 ? "lg:grid-cols-3" : ""}`}>
             {resto.map((p, i) => (
               <Revelar key={p.slug} retraso={(i % 3) * 0.08}>
                 <TarjetaProyecto proyecto={p} />
@@ -118,7 +118,7 @@ function ProyectoAncho({ proyecto: p }: { proyecto: Proyecto }) {
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-white/65">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
-              {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 shrink-0" />}
+              {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 hidden shrink-0 sm:inline-flex" />}
             </div>
             <h3 className="mt-1 pb-[0.06em] text-xl font-extrabold leading-[1.04] tracking-[-0.045em] sm:mt-2 sm:text-5xl">{p.titulo}</h3>
             {p.papel && <p className="mt-2 text-sm text-white/75 sm:text-base">{p.papel}</p>}
@@ -186,7 +186,7 @@ function Destacados({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   ];
 
   return (
-    <section id={ancla} className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-8 sm:min-h-0 sm:py-24 lg:min-h-[100svh] lg:py-[5svh]">
+    <section id={ancla} className="relative overflow-hidden py-8 sm:py-24 lg:py-[5svh]">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <AnimatePresence initial={false}>
           {fondo && (
@@ -210,7 +210,7 @@ function Destacados({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
       <div className="relative mx-auto flex max-w-7xl flex-col gap-3 px-4 sm:gap-6 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
         <Revelar retraso={0.15}>
-          <div className="cristal sin-barra flex max-w-full gap-1 overflow-x-auto rounded-full p-1" role="tablist" aria-label="Filtrar por servicio">
+          <div className="cristal sin-barra flex w-fit max-w-full gap-0.5 overflow-x-auto rounded-full p-1 sm:gap-1" role="tablist" aria-label="Filtrar por servicio">
             {filtros.map((f) => (
               <button
                 key={f.slug}
@@ -567,6 +567,7 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: Proyecto }) {
             {premio.nombre}
           </span>
         )}
+        {p.conJuno && <SelloJuno pequeno enTarjeta className="absolute right-2 top-2 z-[3] origin-top-right scale-75 sm:hidden" />}
         <span className="absolute right-4 top-4 z-[3] hidden h-10 w-10 translate-y-1 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:flex">
           <Icono nombre="flecha" className="h-4 w-4 -rotate-45" />
         </span>
@@ -574,7 +575,7 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: Proyecto }) {
         <div className="absolute inset-x-2 bottom-2 z-[3] rounded-[14px] border border-white/15 bg-black/65 p-2 text-white transition-transform duration-500 group-hover:-translate-y-1 sm:inset-x-3 sm:bottom-3 sm:rounded-[24px] sm:p-5">
           <div className="flex items-center justify-between gap-3">
             <p className="truncate text-[9px] font-medium uppercase tracking-[0.1em] text-white/60 sm:text-[11px] sm:tracking-[0.14em]">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
-            {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 shrink-0" />}
+            {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 hidden shrink-0 sm:inline-flex" />}
           </div>
           <h3 className="mt-0.5 truncate text-xs font-bold leading-tight tracking-[-0.02em] sm:mt-1 sm:text-2xl">{p.titulo}</h3>
           {/* El cargo no ocupa línea hasta que se pasa el ratón: la fila se abre despacio y el texto aparece con ella */}

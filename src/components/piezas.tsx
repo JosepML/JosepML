@@ -30,7 +30,7 @@ export function Revelar({
       className={className}
       initial={{ opacity: 0, y: reducir ? 0 : y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-15px" }}
       transition={{ duration: 0.9, delay: retraso, ease: CURVA }}
     >
       {children}
@@ -63,7 +63,7 @@ export function Titular({
     <div className={`${centrado ? "mx-auto text-center" : ""} max-w-3xl ${className}`}>
       {(antetitulo || editando) && (
         <Revelar>
-          <span className="cristal inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)]">
+          <span className="cristal inline-flex rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)] sm:px-3.5 sm:py-1.5 sm:text-[11px]">
             <Editable campo="antetitulo" valor={antetitulo} vacio="Antetítulo">
               {antetitulo}
             </Editable>
@@ -71,7 +71,7 @@ export function Titular({
         </Revelar>
       )}
       <Revelar retraso={0.08}>
-        <Encabezado className="mt-5 text-[clamp(2rem,min(5vw,7.4svh),4.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] [text-wrap:balance]">
+        <Encabezado className="mt-2.5 text-[clamp(1.65rem,6.5vw,2.2rem)] font-extrabold leading-[1.06] tracking-[-0.04em] [text-wrap:balance] sm:mt-5 sm:text-[clamp(2rem,min(5vw,7.4svh),4.4rem)] sm:leading-[1.05]">
           <Editable campo="titulo" valor={titulo} vacio="Título">
             <TituloConAcento texto={titulo ?? ""} />
           </Editable>
@@ -79,7 +79,7 @@ export function Titular({
       </Revelar>
       {(texto || (editando && texto !== undefined)) && (
         <Revelar retraso={0.16}>
-          <div className={`mt-5 max-w-xl text-lg leading-relaxed text-[var(--jm-suave)] [text-wrap:pretty] ${centrado ? "mx-auto" : ""}`}>
+          <div className={`mt-2 max-w-xl text-[13.5px] leading-snug text-[var(--jm-suave)] [text-wrap:pretty] sm:mt-5 sm:text-lg sm:leading-relaxed ${centrado ? "mx-auto" : ""}`}>
             <Editable campo="texto" valor={texto} multilinea bloqueHtml vacio="Texto">
               <Parrafos texto={texto ?? ""} />
             </Editable>
@@ -160,7 +160,7 @@ export function enLinea(t: string): React.ReactNode[] {
 /** Número que cuenta hasta su valor al entrar en pantalla. */
 export function Contador({ valor, decimales = 0, prefijo = "", sufijo = "" }: { valor: number; decimales?: number; prefijo?: string; sufijo?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const visto = useInView(ref, { once: true, margin: "-60px" });
+  const visto = useInView(ref, { once: true, margin: "0px" });
   const reducir = useReducir();
   const [n, setN] = useState(0);
 

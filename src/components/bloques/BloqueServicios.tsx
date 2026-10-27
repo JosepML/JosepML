@@ -10,7 +10,7 @@ import { Enlace } from "../comun/Enlace";
 import { usePunteroFino } from "../comun/hooks";
 import { Icono } from "../Iconos";
 import { useDatos } from "../marco/DatosWeb";
-import { Diapositivas, Revelar, Titular, TituloConAcento } from "../piezas";
+import { Diapositivas, Revelar, Titular } from "../piezas";
 
 /** Desvanece la foto de una tarjeta antes del borde inferior, para que no asome en el suavizado de la esquina */
 export const MASCARA_BORDE = "[mask-image:linear-gradient(to_top,transparent,#000_10%)]";
@@ -20,36 +20,15 @@ export const ICONOS_SERVICIO: Record<string, string> = { "direccion-de-fotografi
 
 /**
  * Servicios: en escritorio, tres tarjetas verticales con revelación al pasar el ratón.
- * En móvil, tarjetas horizontales compactas para que quepan las tres en una sola pantalla
- * y el usuario las vea de un solo vistazo.
+ * En móvil, tres banners panorámicos amplios que dejan ver bien la fotografía de fondo y caben juntos en una pantalla.
  */
 export function BloqueServicios({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   const { servicios, proyectos } = useDatos();
   return (
-    <section id={ancla} className="flex min-h-[100svh] flex-col justify-center px-4 py-8 sm:min-h-0 sm:py-24 lg:min-h-[100svh] lg:py-[6svh]">
+    <section id={ancla} className="px-4 py-8 sm:px-8 sm:py-24 lg:py-[6svh]">
       <div className="mx-auto w-full max-w-7xl">
-        <div className="max-w-3xl">
-          {bloque.datos.antetitulo && (
-            <Revelar>
-              <span className="cristal inline-flex rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)] sm:px-3.5 sm:py-1.5 sm:text-[11px]">
-                {bloque.datos.antetitulo}
-              </span>
-            </Revelar>
-          )}
-          <Revelar retraso={0.08}>
-            <h2 className="mt-2 text-2xl font-extrabold leading-[1.08] tracking-[-0.035em] sm:mt-5 sm:text-[clamp(2rem,min(5vw,7.4svh),4.4rem)]">
-              <TituloConAcento texto={bloque.datos.titulo ?? ""} />
-            </h2>
-          </Revelar>
-          {bloque.datos.texto && (
-            <Revelar retraso={0.12}>
-              <p className="mt-1.5 max-w-2xl text-xs leading-snug text-[var(--jm-suave)] sm:mt-4 sm:text-lg sm:leading-relaxed">
-                {bloque.datos.texto}
-              </p>
-            </Revelar>
-          )}
-        </div>
-        <div className="mt-5 grid gap-2.5 sm:mt-12 sm:gap-4 md:grid-cols-3 lg:mt-[5svh]">
+        <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
+        <div className="mt-4 grid gap-3 sm:mt-12 sm:gap-4 md:grid-cols-3 lg:mt-[5svh]">
           {servicios.map((s, i) => (
             <Revelar key={s.slug} retraso={i * 0.08}>
               <Tarjeta servicio={s} imagenes={imagenesDe(s, proyectos)} medios={mediosDeServicio(s, proyectos)} />
@@ -101,11 +80,11 @@ function TarjetaFoto({
       {/* Degradados de contraste para legibilidad de títulos */}
       {suave ? (
         <>
-          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72)_0%,rgba(0,0,0,0.3)_30%,transparent_58%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.78)_0%,rgba(0,0,0,0.35)_38%,transparent_68%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.45)_45%,rgba(0,0,0,0.1)_100%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
         </>
       ) : (
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,rgba(0,0,0,0.92)_14%,rgba(0,0,0,0.5)_34%,rgba(0,0,0,0.12)_52%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,rgba(0,0,0,0.88)_16%,rgba(0,0,0,0.38)_42%,rgba(0,0,0,0.08)_65%,transparent_85%)]" />
       )}
       {children(encima, fino)}
     </div>
@@ -128,25 +107,24 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
         imagenes={imagenes}
         medios={medios}
         ancho={1920}
-        className="h-[120px] sm:h-[135px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
+        className="h-[168px] sm:h-[195px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
       >
         {() => (
           <>
-            {/* Versión móvil (< md): banner panorámico que deja ver la imagen */}
-            <div className="relative flex h-full items-center justify-between gap-3 px-4 py-3 sm:px-5 sm:py-4 md:hidden">
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
-              <div className="relative z-[2] flex min-w-0 items-center gap-3.5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/15 backdrop-blur-sm">
-                  <Icono nombre={ICONOS_SERVICIO[s.slug] ?? "camara"} className="h-5 w-5" />
+            {/* Versión móvil (< md): banner panorámico amplio que deja ver la imagen de fondo y sitúa el texto abajo */}
+            <div className="relative flex h-full flex-col justify-between p-4 sm:p-5 md:hidden">
+              <div className="flex items-start justify-between">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-black/35 backdrop-blur-sm">
+                  <Icono nombre={ICONOS_SERVICIO[s.slug] ?? "camara"} className="h-4 w-4" />
                 </span>
-                <div className="min-w-0">
-                  <h3 className="truncate text-lg font-bold leading-tight tracking-[-0.02em]">{s.nombre}</h3>
-                  <p className="jm-serif mt-0.5 truncate text-[14px] leading-tight text-[#ffc07a]">{s.frase}</p>
-                </div>
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-black/35 backdrop-blur-sm">
+                  <Icono nombre="flecha" className="h-4 w-4" />
+                </span>
               </div>
-              <span className="relative z-[2] flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/25 bg-black/40">
-                <Icono nombre="flecha" className="h-4 w-4" />
-              </span>
+              <div className="[text-shadow:0_2px_16px_rgba(0,0,0,0.65)]">
+                <h3 className="text-xl font-extrabold leading-tight tracking-[-0.025em]">{s.nombre}</h3>
+                <p className="jm-serif mt-0.5 text-[16px] leading-tight text-[#ffc07a]">{s.frase}</p>
+              </div>
             </div>
 
             {/* Versión escritorio (>= md): tarjeta vertical cinematográfica completa */}
@@ -188,7 +166,7 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
 
 /**
  * Lo que grabo como filmmaker: la rejilla de servicios de la web antigua (spots, eventos, bodas, redes...).
- * En móvil se organiza en 2 columnas compactas para que se visualicen los proyectos con armonía.
+ * En móvil se organiza en 2 columnas compactas con cabecera ajustada para que quepan las 6 tarjetas en una pantalla.
  */
 export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
   const { proyectos, medios } = useDatos();
@@ -201,36 +179,36 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
   });
   const enlace = objeto(bloque.datos.enlace);
   return (
-    <section className="px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
+    <section className="px-4 py-8 sm:px-8 sm:py-24 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-3 sm:gap-6 lg:flex-row lg:items-end lg:justify-between">
           <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
           {texto(enlace.href) && (
             <Revelar retraso={0.1}>
               <Link
                 href={texto(enlace.href)}
-                className="boton border border-[var(--jm-borde)] px-5 py-2.5 text-sm hover:bg-[var(--jm-cristal)]"
+                className="boton w-fit border border-[var(--jm-borde)] px-4 py-2 text-xs hover:bg-[var(--jm-cristal)] sm:px-5 sm:py-2.5 sm:text-sm"
               >
                 {texto(enlace.texto) || "Ver más"}
-                <Icono nombre="flecha" className="h-4 w-4" />
+                <Icono nombre="flecha" className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Link>
             </Revelar>
           )}
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-2.5 sm:mt-12 sm:gap-3 lg:mt-[5svh] lg:grid-cols-3">
+        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:mt-12 sm:gap-3 lg:mt-[5svh] lg:grid-cols-3">
           {piezas.map(({ proyecto: p, ...f }, i) => {
             return (
-              <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.07 + Math.floor(i / 3) * 0.1}>
+              <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.06}>
                 <Enlace href={f.href || RUTAS.proyecto(p!.slug)} fundido={!!f.href} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p?.titulo}`}>
-                  <TarjetaFoto suave imagenes={f.foto ? [f.foto] : []} ancho={1200} className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
+                  <TarjetaFoto suave imagenes={f.foto ? [f.foto] : []} ancho={1200} className="aspect-[16/11] sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
                     {() => (
-                      <div className="relative flex h-full flex-col justify-end p-3.5 sm:p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.5)]">
-                        <h3 className="text-sm font-bold leading-tight tracking-[-0.025em] sm:text-2xl">{f.nombre}</h3>
+                      <div className="relative flex h-full flex-col justify-end p-3 sm:p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]">
+                        <h3 className="text-[13px] font-bold leading-tight tracking-[-0.02em] sm:text-2xl">{f.nombre}</h3>
                         <Revelable>
-                          <p className="mt-1 line-clamp-2 max-w-sm text-xs leading-snug text-white/80 [text-wrap:pretty] sm:mt-1.5 sm:line-clamp-none sm:text-[15px]">{f.texto}</p>
-                          <span className="mt-2 inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#ffc07a] sm:mt-3 sm:gap-1.5 sm:text-xs">
+                          <p className="mt-0.5 line-clamp-2 max-w-sm text-[11px] leading-snug text-white/80 [text-wrap:pretty] sm:mt-1.5 sm:line-clamp-none sm:text-[15px]">{f.texto}</p>
+                          <span className="mt-1.5 inline-flex items-center gap-1 text-[9.5px] font-semibold uppercase tracking-[0.12em] text-[#ffc07a] sm:mt-3 sm:gap-1.5 sm:text-xs">
                             {f.href ? `Ver ${f.nombre.toLowerCase()}` : p?.titulo}
-                            <Icono nombre="flecha" className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                            <Icono nombre="flecha" className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
                           </span>
                         </Revelable>
                       </div>

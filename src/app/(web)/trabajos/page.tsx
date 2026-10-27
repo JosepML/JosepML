@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Trabajos() {
   const [c, proyectos, servicios, recreaciones] = await Promise.all([cabecera(), getProyectos(), getServicios(), getPagina("recreaciones")]);
   return (
-    <main className="px-4 pb-24 pt-32 sm:px-8 sm:pt-40">
+    <main className="px-4 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-40">
       <div className="mx-auto max-w-7xl">
         <Titular nivel={1} antetitulo={c.antetitulo} titulo={c.titulo} texto={c.texto} />
         <ListadoTrabajos proyectos={proyectos} servicios={servicios} categorias={c.categorias} />

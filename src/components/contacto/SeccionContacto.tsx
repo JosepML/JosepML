@@ -30,7 +30,7 @@ export function SeccionContacto({
   origen?: string;
 }) {
   return (
-    <div className="mx-auto grid max-w-7xl items-stretch gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+    <div className="mx-auto grid max-w-7xl items-stretch gap-4 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
       <div className="lg:h-full">
         {medio ? (
           <Retrato medio={medio} className="lg:h-full">

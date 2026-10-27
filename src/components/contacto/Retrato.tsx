@@ -38,7 +38,7 @@ export function Retrato({
     <Revelar className={className}>
       <div ref={ref} className="lg:h-full" style={{ perspective: 1200 }}>
         <motion.div
-          className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[28px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] sm:rounded-[44px] lg:aspect-auto lg:h-full lg:min-h-[34rem] lg:max-w-none"
+          className={`relative mx-auto ${children ? "aspect-[16/10] sm:aspect-[4/5]" : "aspect-[4/5]"} max-w-md overflow-hidden rounded-[24px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] sm:rounded-[44px] lg:aspect-auto lg:h-full lg:min-h-[34rem] lg:max-w-none`}
           style={{ rotateX: srx, rotateY: sry }}
           onPointerMove={(e) => {
             if (!fino || reducir) return;
@@ -57,10 +57,10 @@ export function Retrato({
             className="absolute inset-0 h-full w-full origin-top object-cover object-center [will-change:transform]"
             style={{ scale: reducir ? 1 : escala, ...enfoque(medio) }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
           {children && (
             // Dentro de la foto el texto siempre es claro, sea cual sea el tema
-            <div className="absolute inset-x-0 bottom-0 z-30 p-7 text-white sm:p-10 [--jm-suave:rgba(255,255,255,0.82)] [--jm-texto:#fff]">
+            <div className="absolute inset-x-0 bottom-0 z-30 p-5 text-white sm:p-10 [--jm-suave:rgba(255,255,255,0.82)] [--jm-texto:#fff]">
               {children}
             </div>
           )}

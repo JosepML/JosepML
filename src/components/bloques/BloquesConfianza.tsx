@@ -30,48 +30,48 @@ export function BloqueCifras({ bloque }: { bloque: Bloque }) {
     proyectos.flatMap((p) => p.premios.filter((x) => x.tipo === tipo).map((x) => ({ premio: x.nombre, donde: x.festival, obra: p.titulo }))),
   );
   return (
-    <section className="flex min-h-[100svh] flex-col justify-center px-4 py-8 sm:min-h-0 sm:px-8 sm:py-24 lg:py-[6svh]">
+    <section className="px-4 py-8 sm:px-8 sm:py-24 lg:py-[6svh]">
       <div className="mx-auto w-full max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
-        <div className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-12 sm:grid-cols-2 lg:mt-[4svh] lg:grid-cols-4 lg:gap-3">
+        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:mt-12 sm:grid-cols-2 lg:mt-[4svh] lg:grid-cols-4 lg:gap-3">
           {cifras.map((c, i) => (
-            <Revelar key={`${c.unidad}-${i}`} retraso={i * 0.08}>
-              <div data-foco className="cristal flex h-full aspect-square flex-col justify-between rounded-[20px] p-3.5 sm:aspect-auto sm:min-h-[220px] sm:rounded-[32px] sm:p-7 lg:min-h-[min(30svh,260px)]">
+            <Revelar key={`${c.unidad}-${i}`} retraso={i * 0.04}>
+              <div data-foco className="cristal flex h-full min-h-[135px] flex-col justify-between gap-2 rounded-[20px] p-4 sm:min-h-[220px] sm:rounded-[32px] sm:p-7 lg:min-h-[min(30svh,260px)]">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--jm-tenue)] sm:text-[11px] sm:tracking-[0.16em]">{c.unidad}</span>
                 <div>
-                  <p className="jm-degradado whitespace-nowrap text-[clamp(2rem,7.2vw,4.8rem)] font-extrabold leading-none tracking-[-0.055em]">
+                  <p className="jm-degradado whitespace-nowrap text-[clamp(2.3rem,8.5vw,4.8rem)] font-extrabold leading-none tracking-[-0.055em]">
                     <Contador valor={c.valor} decimales={c.decimales} prefijo={c.prefijo} sufijo={c.sufijo} />
                   </p>
-                  <p className="mt-1 line-clamp-2 text-xs text-[var(--jm-suave)] sm:mt-3 sm:line-clamp-none sm:text-sm">{c.texto}</p>
+                  <p className="mt-1.5 text-xs leading-snug text-[var(--jm-suave)] sm:mt-3 sm:text-sm">{c.texto}</p>
                 </div>
               </div>
             </Revelar>
           ))}
           {premios.map((p, i) => (
-            <Revelar key={`${p.premio}-${p.obra}`} retraso={0.16 + i * 0.08}>
-              <div data-foco className="cristal relative flex h-full aspect-square flex-col justify-between overflow-hidden rounded-[20px] p-3.5 sm:aspect-auto sm:min-h-[200px] sm:rounded-[32px] sm:p-7 lg:min-h-[min(30svh,260px)]">
+            <Revelar key={`${p.premio}-${p.obra}`} retraso={0.08 + i * 0.04}>
+              <div data-foco className="cristal relative flex h-full min-h-[135px] flex-col justify-between gap-3 overflow-hidden rounded-[20px] p-4 sm:min-h-[200px] sm:gap-6 sm:rounded-[32px] sm:p-7 lg:min-h-[min(30svh,260px)]">
                 <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,var(--jm-orbe-b),transparent)]" />
-                <Icono nombre="laurel" className="h-6 w-6 shrink-0 text-[#e9b45c] sm:h-12 sm:w-12" />
+                <Icono nombre="laurel" className="h-8 w-8 shrink-0 text-[#e9b45c] sm:h-12 sm:w-12" />
                 <div className="relative">
-                  <p className="line-clamp-2 text-sm font-extrabold leading-tight tracking-[-0.03em] sm:line-clamp-none sm:text-3xl">{p.premio}</p>
-                  {p.donde && <p className="mt-0.5 line-clamp-1 text-[11px] text-[var(--jm-suave)] sm:mt-1 sm:text-sm">{p.donde}</p>}
-                  <p className="mt-1 line-clamp-1 text-xs font-semibold text-[var(--jm-acento)] sm:mt-2 sm:text-[15px]">{p.obra}</p>
+                  <p className="text-lg font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl">{p.premio}</p>
+                  {p.donde && <p className="mt-1 text-xs leading-snug text-[var(--jm-suave)] sm:text-sm">{p.donde}</p>}
+                  <p className="mt-1.5 text-xs font-semibold text-[var(--jm-acento)] sm:mt-2 sm:text-[15px]">{p.obra}</p>
                 </div>
               </div>
             </Revelar>
           ))}
           {/* Canales de YouTube: de ahí vienen muchos de esos años */}
           {canales.map((c, i) => (
-            <Revelar key={c.id} retraso={0.3 + i * 0.08} className="col-span-2 sm:col-span-2 lg:col-span-2">
-              <div data-foco className="cristal flex h-full items-center gap-3 rounded-[20px] p-3.5 sm:items-start sm:gap-5 sm:rounded-[32px] sm:p-7">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#ff0033] text-white shadow-[0_10px_30px_-10px_rgba(255,0,51,0.7)] sm:h-14 sm:w-14 sm:rounded-2xl">
+            <Revelar key={c.id} retraso={0.16 + i * 0.04} className="col-span-2 sm:col-span-2 lg:col-span-2">
+              <div data-foco className="cristal flex h-full items-center gap-3.5 rounded-[20px] p-4 sm:items-start sm:gap-5 sm:rounded-[32px] sm:p-7">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#ff0033] text-white shadow-[0_10px_30px_-10px_rgba(255,0,51,0.7)] sm:h-14 sm:w-14 sm:rounded-2xl">
                   <Icono nombre="play" className="ml-0.5 h-4 w-4 sm:h-6 sm:w-6" />
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--jm-tenue)] sm:text-[11px] sm:tracking-[0.16em]">Canal de YouTube</p>
                   <p className="mt-0.5 text-base font-bold tracking-[-0.03em] sm:mt-1 sm:text-2xl">{c.nombre}</p>
                   {c.cifra && <p className="text-xs font-semibold text-[var(--jm-texto)] sm:text-sm">{c.cifra}</p>}
-                  <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-[var(--jm-suave)] sm:mt-2 sm:line-clamp-none sm:text-sm">{c.texto}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-[var(--jm-suave)] sm:mt-2 sm:text-sm">{c.texto}</p>
                   {c.url && (
                     <a
                       href={c.url}
@@ -127,13 +127,13 @@ export function BloqueOpiniones({ bloque }: { bloque: Bloque }) {
 
 function Opinion({ texto, autor: quien, contexto: tipo }: DatoOpinion) {
   return (
-    <figure data-foco className="cristal flex w-[230px] shrink-0 flex-col justify-between gap-3 rounded-[18px] p-3.5 sm:w-[380px] sm:gap-6 sm:rounded-[28px] sm:p-6">
+    <figure data-foco className="cristal flex w-[250px] shrink-0 flex-col justify-between gap-3 rounded-[18px] p-4 sm:w-[380px] sm:gap-6 sm:rounded-[28px] sm:p-6">
       <blockquote className="text-[13px] font-medium leading-snug tracking-[-0.01em] sm:text-[17px]">
         <span className="mb-1 block text-2xl font-extrabold leading-none text-[var(--jm-acento)] sm:mb-2 sm:text-4xl">“</span>
-        <span className="line-clamp-4 sm:line-clamp-none">{texto}</span>
+        {texto}
       </blockquote>
       <figcaption className="flex items-center gap-2.5 text-xs text-[var(--jm-suave)] sm:gap-3">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[var(--jm-acento)] to-[var(--jm-calido)] text-[10px] font-bold text-white sm:h-8 sm:w-8 sm:text-[11px]">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[var(--jm-acento)] to-[var(--jm-calido)] text-[10px] font-bold text-white sm:h-8 sm:w-8 sm:text-[11px]">
           {quien.trim()[0] ?? "“"}
         </span>
         <span className="min-w-0">
@@ -191,8 +191,8 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
                     style={{ width: `${100 / columnas}%` }}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-60px" }}
-                    transition={{ duration: 0.8, ease: CURVA, delay: i * 0.05 }}
+                    viewport={{ once: true, margin: "-20px" }}
+                    transition={{ duration: 0.8, ease: CURVA, delay: i * 0.04 }}
                   >
                     <span className="jm-barrido-marca" style={{ animationDelay: `${(k / Math.max(columnas - 1, 1)) * 1.36 + f * 0.22}s` }}>
                       <Logo cliente={c} grande barrido />

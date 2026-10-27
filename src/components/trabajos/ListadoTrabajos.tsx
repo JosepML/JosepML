@@ -12,10 +12,10 @@ type Filtro = { slug: string; nombre: string };
 /** Categoría de la segunda fila: un nombre que agrupa uno o más tipos de proyecto */
 export type Categoria = { nombre: string; tipos: string[] };
 
-/** Fila de pastillas de filtro, la misma de Selección en Inicio */
+/** Fila de pastillas de filtro: w-fit para ajustarse al contenido sin sobrar barra y flex-wrap para que ninguna palabra se corte en los bordes */
 function Pastillas({ id, filtros, actual, alElegir, etiqueta }: { id: string; filtros: Filtro[]; actual: string; alElegir: (s: string) => void; etiqueta: string }) {
   return (
-    <div className="cristal sin-barra flex w-full max-w-full gap-1 overflow-x-auto rounded-full p-1" role="tablist" aria-label={etiqueta}>
+    <div className="cristal flex w-fit max-w-full flex-wrap gap-0.5 rounded-[20px] p-1 sm:gap-1 sm:rounded-full" role="tablist" aria-label={etiqueta}>
       {filtros.map((f) => (
         <button
           key={f.slug}
@@ -86,7 +86,7 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
 
   return (
     <>
-      <Revelar retraso={0.15} className="mt-6 flex flex-col gap-2.5 sm:mt-10 sm:gap-3">
+      <Revelar retraso={0.15} className="mt-5 flex flex-col gap-2 sm:mt-10 sm:gap-3">
         <Pastillas id="servicio" etiqueta="Filtrar por servicio" filtros={filtrosServicio} actual={servicio} alElegir={elegirServicio} />
         {/* Las categorías solo salen dentro de un servicio (en «Todos» eran tantas que saturaban): se despliegan
             hacia abajo con un fundido y, al cambiar de servicio, la fila se cruza con la nueva */}
@@ -112,7 +112,7 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.45, ease: CURVA }}
-          className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
+          className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
         >
           {visibles.map((p) => (
             <TarjetaProyecto key={p.slug} proyecto={p} />
