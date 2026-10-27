@@ -8,7 +8,7 @@ import { Icono } from "../Iconos";
 /** Tarjeta de un artículo (bloque Blog de Inicio, listado /blog y «Más artículos» de cada artículo). */
 export function TarjetaArticulo({ articulo: a }: { articulo: Articulo }) {
   return (
-    <Link href={RUTAS.articulo(a.slug)} data-foco className="cristal group flex h-full flex-col overflow-hidden rounded-[32px] transition-transform duration-500 hover:-translate-y-1.5">
+    <Link href={RUTAS.articulo(a.slug)} data-foco className="cristal group flex h-full flex-col overflow-hidden rounded-[24px] sm:rounded-[32px] transition-transform duration-500 hover:-translate-y-1.5">
       <div className="relative aspect-[16/9] overflow-hidden bg-black">
         {a.imagen && (
           <img
@@ -23,7 +23,7 @@ export function TarjetaArticulo({ articulo: a }: { articulo: Articulo }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         {a.categoria && <span className="cristal absolute left-5 top-5 rounded-full px-3 py-1 text-[11px] font-semibold">{a.categoria.nombre}</span>}
       </div>
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <p className="text-xs text-[var(--jm-tenue)]">
           <time dateTime={a.fecha}>{fechaCorta(a.fecha)}</time>
         </p>

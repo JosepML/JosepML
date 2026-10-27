@@ -30,13 +30,13 @@ export function BloqueCifras({ bloque }: { bloque: Bloque }) {
     proyectos.flatMap((p) => p.premios.filter((x) => x.tipo === tipo).map((x) => ({ premio: x.nombre, donde: x.festival, obra: p.titulo }))),
   );
   return (
-    <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
+    <section className="px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:mt-[4svh] lg:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:mt-12 sm:grid-cols-2 lg:mt-[4svh] lg:grid-cols-4">
           {cifras.map((c, i) => (
             <Revelar key={`${c.unidad}-${i}`} retraso={i * 0.08}>
-              <div data-foco className="cristal flex h-full min-h-[220px] flex-col justify-between rounded-[32px] p-7 lg:min-h-[min(30svh,260px)]">
+              <div data-foco className="cristal flex h-full min-h-[170px] flex-col justify-between rounded-[24px] p-5 sm:min-h-[220px] sm:rounded-[32px] sm:p-7 lg:min-h-[min(30svh,260px)]">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-tenue)]">{c.unidad}</span>
                 <div>
                   <p className="jm-degradado whitespace-nowrap text-[clamp(2.8rem,min(4.6vw,9svh),4.8rem)] font-extrabold leading-none tracking-[-0.055em]">
@@ -49,7 +49,7 @@ export function BloqueCifras({ bloque }: { bloque: Bloque }) {
           ))}
           {premios.map((p, i) => (
             <Revelar key={`${p.premio}-${p.obra}`} retraso={0.16 + i * 0.08}>
-              <div data-foco className="cristal relative flex h-full min-h-[200px] flex-col justify-between gap-6 overflow-hidden rounded-[32px] p-7 lg:min-h-[min(30svh,260px)]">
+              <div data-foco className="cristal relative flex h-full min-h-[170px] flex-col justify-between gap-6 overflow-hidden rounded-[24px] p-5 sm:min-h-[200px] sm:rounded-[32px] sm:p-7 lg:min-h-[min(30svh,260px)]">
                 <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,var(--jm-orbe-b),transparent)]" />
                 <Icono nombre="laurel" className="h-12 w-12 shrink-0 text-[#e9b45c]" />
                 <div className="relative">
@@ -63,7 +63,7 @@ export function BloqueCifras({ bloque }: { bloque: Bloque }) {
           {/* Canales de YouTube: de ahí vienen muchos de esos años */}
           {canales.map((c, i) => (
             <Revelar key={c.id} retraso={0.3 + i * 0.08} className="sm:col-span-2 lg:col-span-2">
-              <div data-foco className="cristal flex h-full items-start gap-5 rounded-[32px] p-7">
+              <div data-foco className="cristal flex h-full items-start gap-4 rounded-[24px] p-5 sm:gap-5 sm:rounded-[32px] sm:p-7">
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#ff0033] text-white shadow-[0_10px_30px_-10px_rgba(255,0,51,0.7)]">
                   <Icono nombre="play" className="ml-0.5 h-6 w-6" />
                 </span>
@@ -105,11 +105,11 @@ export function BloqueOpiniones({ bloque }: { bloque: Bloque }) {
   if (!opiniones.length) return null;
 
   return (
-    <section ref={ref} className="overflow-hidden py-24 sm:py-32 lg:py-[6svh]">
+    <section ref={ref} className="overflow-hidden py-12 sm:py-24 lg:py-[6svh]">
       <div className="px-4 sm:px-8">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} centrado />
       </div>
-      <div className="jm-marquesina-pausa jm-mascara-lados mt-14 flex flex-col gap-4 lg:mt-[5svh]">
+      <div className="jm-marquesina-pausa jm-mascara-lados mt-8 sm:mt-14 flex flex-col gap-4 lg:mt-[5svh]">
         <div className={`${enPantalla ? "jm-marquesina" : ""} flex w-max gap-4`} style={{ "--duracion": "70s" } as React.CSSProperties}>
           {fila1.map((o, i) => (
             <Opinion key={`a-${i}`} {...o} />
@@ -127,7 +127,7 @@ export function BloqueOpiniones({ bloque }: { bloque: Bloque }) {
 
 function Opinion({ texto, autor: quien, contexto: tipo }: DatoOpinion) {
   return (
-    <figure data-foco className="cristal flex w-[320px] shrink-0 flex-col justify-between gap-6 rounded-[28px] p-6 sm:w-[380px]">
+    <figure data-foco className="cristal flex w-[280px] shrink-0 flex-col justify-between gap-5 rounded-[22px] p-5 sm:w-[380px] sm:gap-6 sm:rounded-[28px] sm:p-6">
       <blockquote className="text-[17px] font-medium leading-snug tracking-[-0.01em]">
         <span className="mb-2 block text-4xl font-extrabold leading-none text-[var(--jm-acento)]">“</span>
         {texto}
@@ -164,7 +164,7 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
   // JUNO, más pequeño y con divisores: se queda en seis para que los nombres sin logo no se toquen
   const columnasJuno = useColumnas(6);
   return (
-    <section className="py-20 sm:py-28 lg:py-[6svh]">
+    <section className="py-12 sm:py-24 lg:py-[6svh]">
       {/* Primera parte, la principal: titular de verdad y todas las marcas a la vista a la vez. Si la sección no
           cabe en la pantalla, el scroll mágico se para en cada parte (data-punto-alto) */}
       <div data-punto-alto>
@@ -178,7 +178,7 @@ export function BloqueClientes({ bloque }: { bloque: Bloque }) {
         <div
           ref={rejilla}
           data-barrido={enPantalla && !reducir ? "" : undefined}
-          className="jm-barrido mx-auto mt-12 flex max-w-[96rem] flex-col gap-y-1 px-4 sm:px-8 lg:mt-[4.5svh]"
+          className="jm-barrido mx-auto mt-8 sm:mt-12 flex max-w-[96rem] flex-col gap-y-1 px-4 sm:px-8 lg:mt-[4.5svh]"
         >
           {enFilas(principales, columnas).map((fila, f) => (
             <div key={f} className="flex justify-center">

@@ -60,7 +60,7 @@ function RejillaTipos({ bloque, cumple, maximo, orden, ancla }: { bloque: Bloque
   if (!de.length && !editando) return null;
   const [primero, ...resto] = de;
   return (
-    <section id={ancla} className="px-4 py-20 sm:px-8 sm:py-24 lg:py-[5svh]">
+    <section id={ancla} className="px-4 py-12 sm:px-8 sm:py-24 lg:py-[5svh]">
       <div className="mx-auto max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
         {!de.length && <p className="mt-8 text-[var(--jm-suave)]">Todavía no hay proyectos publicados de este tipo.</p>}
@@ -97,7 +97,7 @@ function ProyectoAncho({ proyecto: p }: { proyecto: Proyecto }) {
   const premio = laurel(p);
   return (
     <Enlace href={RUTAS.proyecto(p.slug)} className="group block" aria-label={`Ver ${p.titulo}`} draggable={false}>
-      <div data-radio data-foco className="relative aspect-[4/5] overflow-hidden rounded-[36px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[2.2/1]">
+      <div data-radio data-foco className="relative aspect-[16/10] overflow-hidden rounded-[24px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[2.2/1] sm:rounded-[36px]">
         {p.poster && (
           <img
             data-transicion
@@ -114,13 +114,13 @@ function ProyectoAncho({ proyecto: p }: { proyecto: Proyecto }) {
             {premio.nombre}
           </span>
         )}
-        <div className="absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between gap-6 p-6 text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.45)] sm:p-10">
+        <div className="absolute inset-x-0 bottom-0 z-[3] flex items-end justify-between gap-4 p-4 text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.45)] sm:gap-6 sm:p-10">
           <div className="min-w-0">
             <div className="flex items-center gap-3">
               <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-white/65">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
               {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 shrink-0" />}
             </div>
-            <h3 className="mt-2 pb-[0.06em] text-3xl font-extrabold leading-[1.04] tracking-[-0.045em] sm:text-5xl">{p.titulo}</h3>
+            <h3 className="mt-1 pb-[0.06em] text-xl font-extrabold leading-[1.04] tracking-[-0.045em] sm:mt-2 sm:text-5xl">{p.titulo}</h3>
             {p.papel && <p className="mt-2 text-sm text-white/75 sm:text-base">{p.papel}</p>}
             {p.textos.tarjeta && <p className="mt-3 hidden max-w-xl text-[15px] leading-snug text-white/70 [text-wrap:pretty] md:block">{p.textos.tarjeta}</p>}
           </div>
@@ -186,7 +186,7 @@ function Destacados({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   ];
 
   return (
-    <section id={ancla} className="relative overflow-hidden py-20 sm:py-24 lg:py-[5svh]">
+    <section id={ancla} className="relative overflow-hidden py-12 sm:py-24 lg:py-[5svh]">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <AnimatePresence initial={false}>
           {fondo && (
@@ -347,7 +347,7 @@ function Carrusel({
 
   return (
     <motion.div
-      className="relative mt-12 lg:mt-[4svh]"
+      className="relative mt-8 sm:mt-12 lg:mt-[4svh]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.3 } }}
       exit={{ opacity: 0, transition: { duration: 0.22 } }}
@@ -556,7 +556,7 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: Proyecto }) {
       <div
         data-radio
         data-foco
-        className="relative aspect-[4/5] overflow-hidden rounded-[32px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[3/2]"
+        className="relative aspect-[16/10] overflow-hidden rounded-[22px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[3/2] sm:rounded-[32px]"
       >
         <Diapositivas imagenes={fotogramas(p)} medios={mediosDeProyecto(p)} activo={encima && fino} ancho={1200} className={MASCARA_BORDE} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />

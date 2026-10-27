@@ -38,7 +38,7 @@ export function Retrato({
     <Revelar className={className}>
       <div ref={ref} className="lg:h-full" style={{ perspective: 1200 }}>
         <motion.div
-          className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[44px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] lg:aspect-auto lg:h-full lg:min-h-[34rem] lg:max-w-none"
+          className="relative mx-auto aspect-[4/5] max-w-md overflow-hidden rounded-[28px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] sm:rounded-[44px] lg:aspect-auto lg:h-full lg:min-h-[34rem] lg:max-w-none"
           style={{ rotateX: srx, rotateY: sry }}
           onPointerMove={(e) => {
             if (!fino || reducir) return;

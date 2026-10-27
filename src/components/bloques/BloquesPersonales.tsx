@@ -30,18 +30,18 @@ function enlaceDe(v: unknown) {
 export function BloqueProceso({ bloque }: { bloque: Bloque }) {
   const pasos = lista(bloque.datos.pasos).map((p) => ({ titulo: texto(objeto(p).titulo), texto: texto(objeto(p).texto) }));
   return (
-    <section className="px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
+    <section className="px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
-        <div className="relative mt-14 lg:mt-[6svh]">
+        <div className="relative mt-8 sm:mt-14 lg:mt-[6svh]">
           <ol className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
             {pasos.map((p, i) => (
               <Revelar key={`${p.titulo}-${i}`} retraso={0.15 + i * 0.12}>
-                <li data-foco className="cristal group h-full rounded-[32px] p-7 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 lg:p-8">
-                  <span className="relative flex h-[2.6rem] w-[2.6rem] items-center justify-center rounded-full bg-[var(--jm-acento)] text-sm font-bold text-white shadow-[0_8px_24px_-8px_rgba(229,9,20,0.7)]">
+                <li data-foco className="cristal group h-full rounded-[24px] p-5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 sm:rounded-[32px] sm:p-7 lg:p-8">
+                  <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[var(--jm-acento)] text-xs font-bold text-white shadow-[0_8px_24px_-8px_rgba(229,9,20,0.7)] sm:h-[2.6rem] sm:w-[2.6rem] sm:text-sm">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-6 text-3xl font-extrabold tracking-[-0.035em]">
+                  <h3 className="mt-4 text-2xl font-extrabold tracking-[-0.035em] sm:mt-6 sm:text-3xl">
                     <Editable campo={`pasos.${i}.titulo`} valor={p.titulo}>
                       {p.titulo}
                     </Editable>
@@ -83,12 +83,12 @@ export function BloqueSobreMi({ bloque, ancla }: { bloque: Bloque; ancla?: strin
   const sry = useSpring(ry, { stiffness: 150, damping: 18 });
 
   return (
-    <section ref={ref} id={ancla} className="scroll-mt-24 px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
+    <section ref={ref} id={ancla} className="scroll-mt-24 px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-20">
         <Revelar>
           <div style={{ perspective: 1200 }}>
             <motion.div
-              className="relative mx-auto aspect-[4/5] overflow-hidden rounded-[44px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] lg:h-[min(76svh,720px)]"
+              className="relative mx-auto aspect-[4/5] overflow-hidden rounded-[28px] shadow-[0_40px_80px_-30px_rgba(0,0,0,0.6)] sm:rounded-[44px] lg:h-[min(76svh,720px)]"
               style={{ rotateX: srx, rotateY: sry }}
               onPointerMove={(e) => {
                 if (!fino || reducir) return;
@@ -177,7 +177,7 @@ export function BloqueBlog({ bloque, ancla }: { bloque: Bloque; ancla?: string }
   const enlace = enlaceDe(bloque.datos.enlace);
   if (!articulos.length) return null;
   return (
-    <section id={ancla} className="scroll-mt-24 px-4 py-24 sm:px-8 sm:py-32 lg:py-[6svh]">
+    <section id={ancla} className="scroll-mt-24 px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
@@ -190,7 +190,7 @@ export function BloqueBlog({ bloque, ancla }: { bloque: Bloque; ancla?: string }
             </Revelar>
           )}
         </div>
-        <div className={`mt-12 grid gap-3 ${articulos.length < 3 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
+        <div className={`mt-8 sm:mt-12 grid gap-3 ${articulos.length < 3 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {articulos.map((a, i) => (
             <Revelar key={a.slug} retraso={i * 0.08}>
               <TarjetaArticulo articulo={a} />
@@ -361,7 +361,7 @@ export function BloqueLlamada({ bloque, ancla, preseleccion = [] }: { bloque: Bl
   const foto = medios[ajustes.fotoContacto || FOTO_CONTACTO] ?? medios[FOTO_CONTACTO] ?? servicios.find((s) => s.slug === "filmmaker")?.imagen ?? null;
 
   return (
-    <section id={ancla} className="scroll-mt-24 px-4 py-16 sm:px-8 sm:py-24 lg:py-[5svh]">
+    <section id={ancla} className="scroll-mt-24 px-4 py-12 sm:px-8 sm:py-24 lg:py-[5svh]">
       <SeccionContacto
         medio={foto}
         opciones={[...servicios.map((s) => s.nombre), ...opciones]}
