@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Ajustes } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
 import { CURVA } from "@/styles/movimiento";
@@ -22,18 +22,14 @@ const ENLACES = [
 ];
 const HABLEMOS = RUTAS.contacto;
 
-type Tema = "oscuro" | "claro";
-const CLAVE_TEMA = "jm-tema";
-
-const ContextoTema = createContext<{ tema: Tema; cambiarTema: () => void }>({ tema: "oscuro", cambiarTema: () => {} });
-export const useTema = () => useContext(ContextoTema);
+/** Tema fijo: la web utiliza exclusivamente la dirección visual cinematográfica oscura */
+export const useTema = () => ({ tema: "oscuro" as const, cambiarTema: () => {} });
 
 /**
- * Marco de toda la web pública: tema claro u oscuro (oscuro por defecto; se recuerda en este navegador),
+ * Marco de toda la web pública: diseño cinematográfico oscuro predeterminado,
  * fondo con orbes, menú de cristal, foco de luz de las tarjetas, scroll mágico en Inicio y pie.
  */
 export function Marco({ ajustes, children }: { ajustes: Ajustes; children: React.ReactNode }) {
-  const [tema, setTema] = useState<Tema>("oscuro");
   const reducir = useReducir();
   const ruta = usePathname();
   useFoco();
@@ -41,49 +37,25 @@ export function Marco({ ajustes, children }: { ajustes: Ajustes; children: React
   useScrollMagico(ruta === RUTAS.inicio && !reducir);
   useAnclas(ruta);
 
-  useEffect(() => {
-    try {
-      const t = localStorage.getItem(CLAVE_TEMA);
-      if (t === "claro" || t === "oscuro") setTema(t);
-    } catch {}
-  }, []);
-
-  const cambiarTema = useCallback(() => {
-    setTema((t) => {
-      const nuevo = t === "oscuro" ? "claro" : "oscuro";
-      try {
-        localStorage.setItem(CLAVE_TEMA, nuevo);
-      } catch {}
-      return nuevo;
-    });
-  }, []);
-
-  // El fondo de la página (fuera del lienzo) sigue al tema, para que no asome otro color al hacer scroll elástico
-  useEffect(() => {
-    document.body.style.background = tema === "claro" ? "#f5f5f7" : "#09090b";
-  }, [tema]);
-
   return (
-    <ContextoTema.Provider value={{ tema, cambiarTema }}>
-      <div data-tema={tema} data-reducir={reducir ? "" : undefined} className="jm-raiz relative min-h-svh overflow-x-clip transition-colors duration-700">
-        <a
-          href="#contenido-principal"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-[var(--jm-acento)] focus:px-5 focus:py-2.5 focus:text-xs focus:font-semibold focus:text-white"
-        >
-          Saltar al contenido
-        </a>
-        <div className="orbes" aria-hidden>
-          <span />
-          <span />
-          <span />
-        </div>
-        <Menu nombre={ajustes.nombre} />
-        <div id="contenido-principal" className="relative z-[2]">
-          {children}
-          <Pie ajustes={ajustes} />
-        </div>
+    <div data-tema="oscuro" data-reducir={reducir ? "" : undefined} className="jm-raiz relative min-h-svh overflow-x-clip">
+      <a
+        href="#contenido-principal"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-[var(--jm-acento)] focus:px-5 focus:py-2.5 focus:text-xs focus:font-semibold focus:text-white"
+      >
+        Saltar al contenido
+      </a>
+      <div className="orbes" aria-hidden>
+        <span />
+        <span />
+        <span />
       </div>
-    </ContextoTema.Provider>
+      <Menu nombre={ajustes.nombre} />
+      <div id="contenido-principal" className="relative z-[2]">
+        {children}
+        <Pie ajustes={ajustes} />
+      </div>
+    </div>
   );
 }
 
@@ -126,7 +98,6 @@ function useFoco() {
 const nombreCorto = (nombre: string) => nombre.split(" ").slice(0, 2).join(" ");
 
 function Menu({ nombre }: { nombre: string }) {
-  const { tema, cambiarTema } = useTema();
   const reducir = useReducir();
   const { scrollY } = useScroll();
   const [compacto, setCompacto] = useState(false);
@@ -184,24 +155,6 @@ function Menu({ nombre }: { nombre: string }) {
             ))}
           </div>
           <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={cambiarTema}
-              aria-label={tema === "oscuro" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-              className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--jm-suave)] transition-colors hover:bg-[var(--jm-cristal)] hover:text-[var(--jm-texto)]"
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={tema}
-                  initial={{ rotate: reducir ? 0 : -90, opacity: 0, scale: reducir ? 1 : 0.6 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: reducir ? 0 : 90, opacity: 0, scale: reducir ? 1 : 0.6 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Icono nombre={tema === "oscuro" ? "sol" : "luna"} className="h-[18px] w-[18px]" />
-                </motion.span>
-              </AnimatePresence>
-            </button>
             <Link href={HABLEMOS} className="boton boton-acento hidden px-5 py-2 text-[13px] sm:inline-flex">
               Hablemos
             </Link>
