@@ -37,7 +37,7 @@ Actualizado el 2026-10-27. Resumen unificado del proyecto, reglas de Josep, esta
 | **S2** | Migración de las 95 imágenes externas al bucket `medios/migradas/` | Hecha |
 | **S5–S9** | `/trabajos`, `/trabajos/[slug]`, `/servicios/[slug]`, `/servicios/[slug]/[especialidad]`, `/recreaciones`, `/sobre-mi`, `/juno-media`, `/blog` y `/blog/[slug]` | Hecha |
 | **S10** | `/contacto` y `/gracias`, guardado en `mensajes` + aviso por correo con Formspree (`https://formspree.io/f/mrblvlpb`) | Hecha |
-| **S11** | `/aviso-legal`, `/privacidad`, `/cookies`, banner de cookies AEPD y GA4 (`G-RKBDRMVL1J`) tras aceptar | Hecha (pendiente de rellenar datos de Josep en `src/lib/datos/legales.ts`) |
+| **S11** | `/aviso-legal`, `/privacidad`, `/cookies`, banner de cookies AEPD y GA4 (`G-RKBDRMVL1J`) tras aceptar | Hecha (datos legales de Josep incorporados en `src/lib/datos/legales.ts`) |
 | **S12** | Metadatos SEO, Schema.org (`src/components/seo/JsonLd.tsx`), `/sitemap.xml`, `/robots.txt` y `/opengraph-image` | Hecha |
 | **S13** | Redirecciones de rutas antiguas con `#` (`RedireccionAntigua.tsx`), sin `#` (`next.config.ts`) y por `id_antiguo` | Hecha |
 | **S14–S17** | Panel completo: artículos, servicios, clientes, opiniones, canales, ajustes, biblioteca (recorte, foco, carpetas tipo Drive) y mensajes | Hecha |

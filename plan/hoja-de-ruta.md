@@ -89,7 +89,7 @@ Lee: `legacy/constants.ts`, `plan/contenido/fundamentos.md`, `plan/contenido/map
 | S8 ✓ | `/sobre-mi` (hecho en el hilo de C, 2026-10-23: página de bloques, `scripts/cargar-sobre-mi.mjs`; faltan las fotos de Josep) | C | Texto, fotos y canales de YouTube |
 | S9 ✓ | `/blog` y `/blog/[slug]` (hecho en el hilo de C, 2026-10-23: `src/components/blog/`, el cuerpo se pinta desde el documento del editor con `ContenidoArticulo`) | C | 3 artículos legibles, con el ancho de lectura cuidado |
 | S10 ✓ | `/contacto` guiado que guarda en `mensajes` y avisa por correo (Formspree); `/gracias` | C | Un mensaje de prueba llega al correo y a la base de datos |
-| S11 ✓ | Privacidad, aviso legal, cookies (aviso AEPD) y GA4 `G-RKBDRMVL1J` tras aceptar (faltan datos fiscales de Josep en `src/lib/datos/legales.ts`) | C | GA4 recibe la visita solo tras aceptar |
+| S11 ✓ | Privacidad, aviso legal, cookies (aviso AEPD) y GA4 `G-RKBDRMVL1J` tras aceptar (datos legales de Josep incorporados en `src/lib/datos/legales.ts`) | C | GA4 recibe la visita solo tras aceptar |
 | S12 ✓ | SEO: metadatos, Schema.org (Person, Service, CreativeWork, Article), `sitemap.xml`, `robots.txt` e imágenes OG | S5–S9 | Validadores de Google sin errores |
 | S13 ✓ | Redirecciones de las URLs antiguas con hash (`/#/project/<id>`, etc.) y por `id_antiguo` | S1, S5 | Todas las URLs antiguas llevan a su página nueva |
 | S14 ✓ | (hecho en el hilo de D, 2026-10-24) Panel: artículos con editor visual (títulos, negritas, imágenes y vídeos en el texto) y SEO con vista previa de Google | D | Josep escribe y publica un artículo de prueba |
