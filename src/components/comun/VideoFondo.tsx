@@ -36,8 +36,8 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, className = "",
   const [listo, setListo] = useState(false);
   const [propioListo, setPropioListo] = useState(false);
 
-  // Crear el reproductor de YouTube bloquea la GPU unos 250 ms, así que solo se crea con el vídeo a la
-  // vista y la página quieta un momento: nunca en mitad de un scroll. Una vez creado se queda.
+  // Crear o arrancar el reproductor espera a que la portada ya haya mostrado su póster y la página
+  // esté quieta un momento (700 ms): así siempre se ve primero la imagen y nunca una pantalla en negro.
   useEffect(() => {
     if (listo || !visible) return;
     let t = window.setTimeout(() => setListo(true), 700);
@@ -54,23 +54,23 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, className = "",
     };
   }, [listo, visible]);
 
-  // El vídeo propio también se pausa fuera de pantalla
+  const conVideo = listo && ancha;
+
+  // El vídeo propio arranca cuando toca (conVideo) y se pausa fuera de pantalla
   useEffect(() => {
     const v = propio.current;
     if (!v) return;
-    if (visible) v.play().catch(() => {});
+    if (conVideo && visible) v.play().catch(() => {});
     else v.pause();
-  }, [visible, archivo]);
-
-  const conVideo = listo && ancha;
+  }, [conVideo, visible, archivo]);
 
   return (
     <div ref={caja} className={`absolute inset-0 overflow-hidden bg-black ${className}`} style={{ filter: filtro }}>
       {poster && (
         <img
-          src={img(poster, 3840)}
+          src={img(poster, 1920)}
           alt=""
-          className={`absolute inset-0 h-full w-full object-cover ${reducir || conVideo || !visible ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
+          className={`absolute inset-0 h-full w-full object-cover ${reducir || propioListo || !visible ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
           fetchPriority="high"
         />
       )}
@@ -78,14 +78,14 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, className = "",
         <video
           ref={propio}
           src={archivo}
-          poster={poster ? img(poster, 1920) : undefined}
           muted
           loop
           playsInline
-          autoPlay
-          preload="metadata"
+          preload="auto"
           aria-hidden
-          onPlaying={() => setPropioListo(true)}
+          onTimeUpdate={(e) => {
+            if (!propioListo && e.currentTarget.currentTime > 0.12) setPropioListo(true);
+          }}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
           style={{ opacity: propioListo ? 1 : 0 }}
         />
