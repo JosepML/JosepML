@@ -348,3 +348,26 @@ html {
 .jm-raiz[data-video] .orbes {
   visibility: hidden;
 }
+
+
+/* Banners de servicios en Inicio: en móvil altura amplia para llenar la pantalla y dejar ver la foto */
+.jm-banner-servicio {
+  height: clamp(200px, 24.5svh, 275px);
+}
+@media (min-width: 640px) {
+  .jm-banner-servicio {
+    height: clamp(230px, 27svh, 300px);
+  }
+}
+@media (min-width: 768px) {
+  .jm-banner-servicio {
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+}
+@media (min-width: 1024px) {
+  .jm-banner-servicio {
+    aspect-ratio: auto;
+    height: min(56svh, 600px);
+  }
+}

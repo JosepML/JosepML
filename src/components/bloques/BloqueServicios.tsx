@@ -67,7 +67,7 @@ function TarjetaFoto({
     <div
       onPointerEnter={() => setEncima(true)}
       onPointerLeave={() => setEncima(false)}
-      className={`group relative isolate h-full overflow-hidden rounded-[22px] bg-black text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 [clip-path:inset(0_round_22px)] md:rounded-[36px] md:[clip-path:inset(0_round_36px)] ${className}`}
+      className={`group relative isolate overflow-hidden rounded-[22px] bg-black text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 [clip-path:inset(0_round_22px)] md:rounded-[36px] md:[clip-path:inset(0_round_36px)] ${className}`}
     >
       {/* Máscara: la foto se desvanece del todo antes del borde inferior */}
       <Diapositivas
@@ -107,7 +107,7 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
         imagenes={imagenes}
         medios={medios}
         ancho={1920}
-        className="h-[clamp(215px,25svh,270px)] sm:h-[clamp(235px,27svh,300px)] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
+        className="jm-banner-servicio w-full"
       >
         {() => (
           <>
