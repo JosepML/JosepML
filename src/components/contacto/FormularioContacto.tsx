@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useState } from "react";
 import { enviarContacto, type EstadoContacto } from "@/lib/contacto/enviar";
+import { RUTAS } from "@/lib/rutas";
 import { Icono } from "../Iconos";
 
 const CAMPO =
@@ -114,7 +116,13 @@ export function FormularioContacto({ opciones, marcados = [], valor, alCambiar, 
         <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-white/25 bg-black/20 transition-[background-color,border-color,box-shadow] duration-200 peer-checked:border-transparent peer-checked:bg-[var(--jm-acento)] peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--jm-acento)] peer-checked:[&>svg]:scale-100 peer-checked:[&>svg]:opacity-100">
           <Icono nombre="check" className="h-3.5 w-3.5 scale-50 text-white opacity-0 transition-[transform,opacity] duration-200" />
         </span>
-        <span>Acepto que guardes mis datos para responderme. Solo los uso para eso.</span>
+        <span>
+          Acepto que guardes mis datos para responderme. Solo los uso para eso.{" "}
+          <Link href={RUTAS.privacidad} className="underline decoration-white/30 underline-offset-4 transition-colors hover:text-[var(--jm-texto)]">
+            Política de privacidad
+          </Link>
+          .
+        </span>
       </label>
 
       {estado.error && (

@@ -11,6 +11,9 @@ export const RUTAS = {
   articulo: (slug: string) => `/blog/${slug}`,
   contacto: "/contacto",
   gracias: "/gracias",
+  avisoLegal: "/aviso-legal",
+  privacidad: "/privacidad",
+  cookies: "/cookies",
 } as const;
 
 /** Las páginas de cada especialidad de un servicio («filmmaker-videoclips») viven bajo él: /servicios/filmmaker/videoclips */
