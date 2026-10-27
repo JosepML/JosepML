@@ -7,7 +7,8 @@ import { CURVA_VIAJE as CURVA_SCROLL } from "@/styles/movimiento";
 const DURACION = 1.05;
 /** Un gesto que llega justo después de terminar un viaje cuenta como "voy con prisa" */
 const MARGEN_PRISA = 450;
-const CLAVE_RENDIMIENTO = "jm-desactivar-scroll-magico";
+const CLAVE_RENDIMIENTO = "jm-scroll-magico-rendimiento-v2";
+const CLAVE_ANTIGUA = "jm-desactivar-scroll-magico";
 const EVENTO_RENDIMIENTO = "jm-desactivar-scroll-magico";
 
 type Punto = { destino: number; top: number; alto: number; libre: boolean; sub: boolean };
@@ -18,20 +19,15 @@ let viajando = false;
 let finViaje = 0;
 let monitorRaf: number | null = null;
 
-/** Comprueba si el dispositivo tiene recursos de hardware muy limitados (CPU <= 2 hilos o RAM < 4 GB) */
+/** Comprueba si el dispositivo tiene recursos de hardware extremadamente reducidos (CPU mononúcleo o modo ahorro) */
 export function esHardwareModesto(): boolean {
   if (typeof window === "undefined" || typeof navigator === "undefined") return false;
   try {
-    // 2 o menos hilos lógicos de procesador
-    if (typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 2) {
+    // Únicamente mononúcleo estricto (1 solo hilo)
+    if (typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency === 1) {
       return true;
     }
-    // Menos de 4 GB de RAM disponibles (en navegadores compatibles con Device Memory API)
-    const navMem = (navigator as unknown as { deviceMemory?: number }).deviceMemory;
-    if (typeof navMem === "number" && navMem > 0 && navMem < 4) {
-      return true;
-    }
-    // Modo ahorro de datos activo
+    // Modo ahorro de datos explícito del usuario
     const conn = (navigator as unknown as { connection?: { saveData?: boolean } }).connection;
     if (conn?.saveData) {
       return true;
@@ -40,10 +36,12 @@ export function esHardwareModesto(): boolean {
   return false;
 }
 
-/** Comprueba si el scroll mágico ha sido desactivado en esta sesión (o por hardware modesto) */
+/** Comprueba si el scroll mágico ha sido desactivado en esta sesión */
 export function scrollMagicoDesactivado(): boolean {
   if (typeof window === "undefined") return false;
   try {
+    // Limpieza de la clave antigua con umbral demasiado estricto
+    sessionStorage.removeItem(CLAVE_ANTIGUA);
     if (sessionStorage.getItem(CLAVE_RENDIMIENTO) === "1") return true;
   } catch {}
   return esHardwareModesto();
@@ -66,6 +64,7 @@ export function desactivarScrollMagico(motivo?: string) {
 
 function iniciarVigilanciaFPS() {
   detenerVigilanciaFPS();
+  const inicioViaje = performance.now();
   let ultimo = performance.now();
   let caidasConsecutivas = 0;
   let totalCaidas = 0;
@@ -87,19 +86,21 @@ function iniciarVigilanciaFPS() {
     const delta = ahora - ultimo;
     ultimo = ahora;
 
-    // Solo evaluar si la pestaña está visible (si está oculta en segundo plano, rAF se congela intencionadamente)
-    if (!document.hidden) {
-      // Delta normal: ~16.6ms a 60Hz u ~8.3ms a 120Hz.
-      // Más de 50ms indica pérdida de fotogramas evidente (< 20 FPS o congelación)
-      if (delta > 50) {
+    // Margen de calentamiento: los primeros 250 ms son de promoción de capas del navegador; no se evalúan
+    const transcurrido = ahora - inicioViaje;
+    if (transcurrido > 250 && !document.hidden) {
+      // Un fotograma de más de 90ms representa una congelación real (menos de 11 FPS / pérdida de más de 5 cuadros a 60Hz)
+      if (delta > 90) {
         caidasConsecutivas++;
         totalCaidas++;
-        if (caidasConsecutivas >= 2 || totalCaidas >= 3) {
+        // Solo desactivar si hay 3 congelaciones seguidas (~300ms de bloqueo continuo) o más de 6 congelaciones graves
+        if (caidasConsecutivas >= 3 || totalCaidas >= 6) {
           monitorRaf = null;
-          desactivarScrollMagico("caída de fotogramas");
+          desactivarScrollMagico("congelación grave de fotogramas");
           return;
         }
-      } else if (delta < 28) {
+      } else if (delta < 35) {
+        // Al recuperar fluidez normal (> 30 FPS), se limpia la racha de caídas consecutivas
         caidasConsecutivas = 0;
       }
     }
@@ -207,7 +208,7 @@ export function useAnclas(ruta: string) {
  * Reglas para que no moleste: solo responde a la rueda (nunca se mueve solo); en una sección más alta
  * que la pantalla y sin puntos, el scroll es normal hasta su borde; se ignora la inercia del trackpad
  * mientras dura el viaje; se cancela con teclado o clic; apagado en táctil, con "reducir movimiento",
- * con el editor abierto, con un vídeo abierto o si se detecta rendimiento bajo (frame drops).
+ * con el editor abierto, con un vídeo abierto o si se detecta rendimiento bajo extremo (congelaciones graves).
  */
 export function useScrollMagico(activo: boolean) {
   const [desactivado, setDesactivado] = useState(() => scrollMagicoDesactivado());
