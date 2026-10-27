@@ -25,8 +25,8 @@ export const ICONOS_SERVICIO: Record<string, string> = { "direccion-de-fotografi
 export function BloqueServicios({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   const { servicios, proyectos } = useDatos();
   return (
-    <section id={ancla} className="px-4 py-8 sm:px-8 sm:py-24 lg:py-[6svh]">
-      <div className="mx-auto w-full max-w-7xl">
+    <section id={ancla} className="flex min-h-[100svh] flex-col justify-center px-4 py-6 sm:px-8 sm:py-24 lg:py-[6svh]">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
         <div className="mt-4 grid gap-3 sm:mt-12 sm:gap-4 md:grid-cols-3 lg:mt-[5svh]">
           {servicios.map((s, i) => (
@@ -107,7 +107,7 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
         imagenes={imagenes}
         medios={medios}
         ancho={1920}
-        className="h-[200px] sm:h-[225px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
+        className="h-[clamp(215px,25svh,270px)] sm:h-[clamp(235px,27svh,300px)] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
       >
         {() => (
           <>
