@@ -30,27 +30,29 @@ function enlaceDe(v: unknown) {
 export function BloqueProceso({ bloque }: { bloque: Bloque }) {
   const pasos = lista(bloque.datos.pasos).map((p) => ({ titulo: texto(objeto(p).titulo), texto: texto(objeto(p).texto) }));
   return (
-    <section className="px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
-      <div className="mx-auto max-w-7xl">
+    <section className="flex min-h-[100svh] flex-col justify-center px-4 py-8 sm:min-h-0 sm:px-8 sm:py-24 lg:py-[6svh]">
+      <div className="mx-auto w-full max-w-7xl">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
-        <div className="relative mt-8 sm:mt-14 lg:mt-[6svh]">
-          <ol className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+        <div className="relative mt-5 sm:mt-14 lg:mt-[6svh]">
+          <ol className="relative grid grid-cols-2 gap-2.5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
             {pasos.map((p, i) => (
               <Revelar key={`${p.titulo}-${i}`} retraso={0.15 + i * 0.12}>
-                <li data-foco className="cristal group h-full rounded-[24px] p-5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 sm:rounded-[32px] sm:p-7 lg:p-8">
-                  <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[var(--jm-acento)] text-xs font-bold text-white shadow-[0_8px_24px_-8px_rgba(229,9,20,0.7)] sm:h-[2.6rem] sm:w-[2.6rem] sm:text-sm">
+                <li data-foco className="cristal group flex h-full flex-col justify-between rounded-[20px] p-3.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 sm:rounded-[32px] sm:p-7 lg:p-8">
+                  <span className="relative flex h-7 w-7 items-center justify-center rounded-full bg-[var(--jm-acento)] text-[11px] font-bold text-white shadow-[0_8px_24px_-8px_rgba(229,9,20,0.7)] sm:h-[2.6rem] sm:w-[2.6rem] sm:text-sm">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-4 text-2xl font-extrabold tracking-[-0.035em] sm:mt-6 sm:text-3xl">
-                    <Editable campo={`pasos.${i}.titulo`} valor={p.titulo}>
-                      {p.titulo}
-                    </Editable>
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-[var(--jm-suave)] transition-colors duration-500 [text-wrap:pretty] group-hover:text-[var(--jm-texto)]">
-                    <Editable campo={`pasos.${i}.texto`} valor={p.texto} multilinea>
-                      {p.texto}
-                    </Editable>
-                  </p>
+                  <div>
+                    <h3 className="mt-2 text-sm font-bold tracking-tight sm:mt-6 sm:text-3xl">
+                      <Editable campo={`pasos.${i}.titulo`} valor={p.titulo}>
+                        {p.titulo}
+                      </Editable>
+                    </h3>
+                    <p className="mt-1 line-clamp-3 text-[11px] leading-snug text-[var(--jm-suave)] transition-colors duration-500 [text-wrap:pretty] group-hover:text-[var(--jm-texto)] sm:mt-3 sm:line-clamp-none sm:text-[15px] sm:leading-relaxed">
+                      <Editable campo={`pasos.${i}.texto`} valor={p.texto} multilinea>
+                        {p.texto}
+                      </Editable>
+                    </p>
+                  </div>
                 </li>
               </Revelar>
             ))}
@@ -83,8 +85,76 @@ export function BloqueSobreMi({ bloque, ancla }: { bloque: Bloque; ancla?: strin
   const sry = useSpring(ry, { stiffness: 150, damping: 18 });
 
   return (
-    <section ref={ref} id={ancla} className="scroll-mt-24 px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
-      <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-20">
+    <section ref={ref} id={ancla} className="scroll-mt-24 px-4 py-8 sm:px-8 sm:py-24 lg:min-h-0 lg:py-[6svh]">
+      {/* Móvil: tarjeta unificada de póster editorial que cabe en una pantalla */}
+      <div className="lg:hidden">
+        <div className="relative mx-auto flex h-[82svh] min-h-[500px] max-h-[640px] w-full flex-col justify-between overflow-hidden rounded-[28px] border border-white/10 bg-black p-5 shadow-[0_30px_70px_-25px_rgba(0,0,0,0.8)]">
+          {imagen && (
+            <img
+              src={img(imagen.url, 1200)}
+              alt={imagen.alt}
+              className="absolute inset-0 h-full w-full object-cover object-[50%_15%]"
+              style={enfoque(imagen)}
+            />
+          )}
+          {/* Degradado cinematográfico para que el texto contraste a la perfección */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/30" />
+          <CambiarImagen campo="imagen" />
+
+          {/* Arriba: antetítulo y etiqueta */}
+          <div className="relative z-10 flex items-center justify-between gap-2">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/70">
+              {antetitulo || "Sobre mí"}
+            </span>
+            {(etiqueta || editando) && (
+              <span className="rounded-full border border-white/20 bg-black/40 px-3 py-1 text-[11px] font-medium text-white backdrop-blur-md">
+                <Editable campo="etiqueta" valor={etiqueta} vacio="Etiqueta">
+                  {etiqueta}
+                </Editable>
+              </span>
+            )}
+          </div>
+
+          {/* Abajo: título, snippet de bio, roles y enlace */}
+          <div className="relative z-10 flex flex-col gap-3">
+            <div>
+              <h2 className="text-2xl font-black leading-tight tracking-[-0.03em] text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]">
+                <Editable campo="titulo" valor={titulo} vacio="Título">
+                  {titulo}
+                </Editable>
+              </h2>
+              {cuerpo && (
+                <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-white/80 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
+                  {cuerpo.replace(/<[^>]+>/g, "").slice(0, 160)}...
+                </p>
+              )}
+            </div>
+
+            {papeles.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {papeles.slice(0, 3).map((p) => (
+                  <span key={p} className="rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-md">
+                    {p}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {enlace && (
+              <Link
+                href={enlace.href}
+                className="boton mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-[var(--jm-acento)] px-4 py-2 text-xs font-semibold text-white shadow-[0_6px_20px_-6px_rgba(229,9,20,0.7)]"
+              >
+                {enlace.texto}
+                <Icono nombre="flecha" className="h-3.5 w-3.5" />
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Pantalla grande: retrato 3D a la izquierda y biografía a la derecha */}
+      <div className="mx-auto hidden max-w-7xl items-center gap-8 lg:grid lg:grid-cols-2 lg:gap-20">
         <Revelar>
           <div style={{ perspective: 1200 }}>
             <motion.div
@@ -145,15 +215,15 @@ export function BloqueSobreMi({ bloque, ancla }: { bloque: Bloque; ancla?: strin
             </Revelar>
           )}
           {papeles.length > 0 && (
-          <Revelar retraso={0.28}>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {papeles.map((p) => (
-                <span key={p} className="cristal rounded-full px-4 py-2 text-sm font-medium">
-                  {p}
-                </span>
-              ))}
-            </div>
-          </Revelar>
+            <Revelar retraso={0.28}>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {papeles.map((p) => (
+                  <span key={p} className="cristal rounded-full px-4 py-2 text-sm font-medium">
+                    {p}
+                  </span>
+                ))}
+              </div>
+            </Revelar>
           )}
           {enlace && (
             <Revelar retraso={0.34}>
@@ -177,20 +247,20 @@ export function BloqueBlog({ bloque, ancla }: { bloque: Bloque; ancla?: string }
   const enlace = enlaceDe(bloque.datos.enlace);
   if (!articulos.length) return null;
   return (
-    <section id={ancla} className="scroll-mt-24 px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
+    <section id={ancla} className="scroll-mt-24 px-4 py-8 sm:px-8 sm:py-24 lg:py-[6svh]">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
           {enlace && (
             <Revelar>
-              <Link href={enlace.href} className="boton border border-[var(--jm-borde)] px-5 py-2.5 text-sm hover:bg-[var(--jm-cristal)]">
+              <Link href={enlace.href} className="boton w-fit border border-[var(--jm-borde)] px-4 py-2 text-xs hover:bg-[var(--jm-cristal)] sm:px-5 sm:py-2.5 sm:text-sm">
                 {enlace.texto}
                 <Icono nombre="flecha" className="h-4 w-4" />
               </Link>
             </Revelar>
           )}
         </div>
-        <div className={`mt-8 sm:mt-12 grid gap-3 ${articulos.length < 3 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
+        <div className={`mt-5 grid gap-2.5 sm:mt-12 sm:gap-3 ${articulos.length < 3 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
           {articulos.map((a, i) => (
             <Revelar key={a.slug} retraso={i * 0.08}>
               <TarjetaArticulo articulo={a} />

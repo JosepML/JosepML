@@ -10,7 +10,7 @@ import { Enlace } from "../comun/Enlace";
 import { usePunteroFino } from "../comun/hooks";
 import { Icono } from "../Iconos";
 import { useDatos } from "../marco/DatosWeb";
-import { Diapositivas, Revelar, Titular } from "../piezas";
+import { Diapositivas, Revelar, Titular, TituloConAcento } from "../piezas";
 
 /** Desvanece la foto de una tarjeta antes del borde inferior, para que no asome en el suavizado de la esquina */
 export const MASCARA_BORDE = "[mask-image:linear-gradient(to_top,transparent,#000_10%)]";
@@ -26,10 +26,30 @@ export const ICONOS_SERVICIO: Record<string, string> = { "direccion-de-fotografi
 export function BloqueServicios({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   const { servicios, proyectos } = useDatos();
   return (
-    <section id={ancla} className="px-4 py-12 sm:px-8 sm:py-24 lg:py-[6svh]">
-      <div className="mx-auto max-w-7xl">
-        <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} texto={bloque.datos.texto} />
-        <div className="mt-8 grid gap-2.5 sm:mt-14 sm:gap-4 md:grid-cols-3 lg:mt-[5svh]">
+    <section id={ancla} className="flex min-h-[100svh] flex-col justify-center px-4 py-8 sm:min-h-0 sm:py-24 lg:min-h-[100svh] lg:py-[6svh]">
+      <div className="mx-auto w-full max-w-7xl">
+        <div className="max-w-3xl">
+          {bloque.datos.antetitulo && (
+            <Revelar>
+              <span className="cristal inline-flex rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--jm-suave)] sm:px-3.5 sm:py-1.5 sm:text-[11px]">
+                {bloque.datos.antetitulo}
+              </span>
+            </Revelar>
+          )}
+          <Revelar retraso={0.08}>
+            <h2 className="mt-2 text-2xl font-extrabold leading-[1.08] tracking-[-0.035em] sm:mt-5 sm:text-[clamp(2rem,min(5vw,7.4svh),4.4rem)]">
+              <TituloConAcento texto={bloque.datos.titulo ?? ""} />
+            </h2>
+          </Revelar>
+          {bloque.datos.texto && (
+            <Revelar retraso={0.12}>
+              <p className="mt-1.5 max-w-2xl text-xs leading-snug text-[var(--jm-suave)] sm:mt-4 sm:text-lg sm:leading-relaxed">
+                {bloque.datos.texto}
+              </p>
+            </Revelar>
+          )}
+        </div>
+        <div className="mt-5 grid gap-2.5 sm:mt-12 sm:gap-4 md:grid-cols-3 lg:mt-[5svh]">
           {servicios.map((s, i) => (
             <Revelar key={s.slug} retraso={i * 0.08}>
               <Tarjeta servicio={s} imagenes={imagenesDe(s, proyectos)} medios={mediosDeServicio(s, proyectos)} />
@@ -108,22 +128,23 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
         imagenes={imagenes}
         medios={medios}
         ancho={1920}
-        className="h-[105px] sm:h-[125px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
+        className="h-[120px] sm:h-[135px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
       >
         {() => (
           <>
-            {/* Versión móvil (< md): tarjeta horizontal para ver las 3 en pantalla completa sin scrolling largo */}
+            {/* Versión móvil (< md): banner panorámico que deja ver la imagen */}
             <div className="relative flex h-full items-center justify-between gap-3 px-4 py-3 sm:px-5 sm:py-4 md:hidden">
-              <div className="flex min-w-0 items-center gap-3.5">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/15">
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
+              <div className="relative z-[2] flex min-w-0 items-center gap-3.5">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/15 backdrop-blur-sm">
                   <Icono nombre={ICONOS_SERVICIO[s.slug] ?? "camara"} className="h-5 w-5" />
                 </span>
                 <div className="min-w-0">
                   <h3 className="truncate text-lg font-bold leading-tight tracking-[-0.02em]">{s.nombre}</h3>
-                  <p className="jm-serif mt-0.5 truncate text-[15px] leading-tight text-[#ffc07a]">{s.frase}</p>
+                  <p className="jm-serif mt-0.5 truncate text-[14px] leading-tight text-[#ffc07a]">{s.frase}</p>
                 </div>
               </div>
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/25 bg-black/40">
+              <span className="relative z-[2] flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/25 bg-black/40">
                 <Icono nombre="flecha" className="h-4 w-4" />
               </span>
             </div>

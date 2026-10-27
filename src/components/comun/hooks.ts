@@ -2,7 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 
-function useMedia(consulta: string, porDefecto = false) {
+export function useMedia(consulta: string, porDefecto = false) {
   return useSyncExternalStore(
     (avisar) => {
       const mq = window.matchMedia(consulta);

@@ -15,7 +15,7 @@ export type Categoria = { nombre: string; tipos: string[] };
 /** Fila de pastillas de filtro, la misma de Selección en Inicio */
 function Pastillas({ id, filtros, actual, alElegir, etiqueta }: { id: string; filtros: Filtro[]; actual: string; alElegir: (s: string) => void; etiqueta: string }) {
   return (
-    <div className="cristal sin-barra flex w-fit max-w-full gap-1 overflow-x-auto rounded-full p-1" role="tablist" aria-label={etiqueta}>
+    <div className="cristal sin-barra flex w-full max-w-full gap-1 overflow-x-auto rounded-full p-1" role="tablist" aria-label={etiqueta}>
       {filtros.map((f) => (
         <button
           key={f.slug}
@@ -23,7 +23,7 @@ function Pastillas({ id, filtros, actual, alElegir, etiqueta }: { id: string; fi
           role="tab"
           aria-selected={actual === f.slug}
           onClick={() => alElegir(f.slug)}
-          className={`relative whitespace-nowrap rounded-full px-4 py-2 text-[13px] font-medium transition-colors duration-300 ${
+          className={`relative whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-medium transition-colors duration-300 sm:px-4 sm:py-2 sm:text-[13px] ${
             actual === f.slug ? "text-white" : "text-[var(--jm-suave)] hover:text-[var(--jm-texto)]"
           }`}
         >
@@ -34,7 +34,21 @@ function Pastillas({ id, filtros, actual, alElegir, etiqueta }: { id: string; fi
               transition={{ type: "spring", stiffness: 380, damping: 32, mass: 0.8 }}
             />
           )}
-          <span className="relative">{f.nombre}</span>
+          <span className="relative">
+            {f.slug === "direccion-de-fotografia" ? (
+              <>
+                <span className="sm:hidden">Fotografía</span>
+                <span className="hidden sm:inline">{f.nombre}</span>
+              </>
+            ) : f.nombre === "Todos los tipos" ? (
+              <>
+                <span className="sm:hidden">Todos</span>
+                <span className="hidden sm:inline">{f.nombre}</span>
+              </>
+            ) : (
+              f.nombre
+            )}
+          </span>
         </button>
       ))}
     </div>
@@ -72,7 +86,7 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
 
   return (
     <>
-      <Revelar retraso={0.15} className="mt-10 flex flex-col gap-3">
+      <Revelar retraso={0.15} className="mt-6 flex flex-col gap-2.5 sm:mt-10 sm:gap-3">
         <Pastillas id="servicio" etiqueta="Filtrar por servicio" filtros={filtrosServicio} actual={servicio} alElegir={elegirServicio} />
         {/* Las categorías solo salen dentro de un servicio (en «Todos» eran tantas que saturaban): se despliegan
             hacia abajo con un fundido y, al cambiar de servicio, la fila se cruza con la nueva */}
@@ -98,12 +112,12 @@ export function ListadoTrabajos({ proyectos: todos, servicios, categorias }: { p
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.45, ease: CURVA }}
-          className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+          className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
         >
           {visibles.map((p) => (
             <TarjetaProyecto key={p.slug} proyecto={p} />
           ))}
-          {visibles.length === 0 && <p className="text-[var(--jm-suave)]">No hay trabajos con este filtro.</p>}
+          {visibles.length === 0 && <p className="col-span-full text-[var(--jm-suave)]">No hay trabajos con este filtro.</p>}
         </motion.div>
       </AnimatePresence>
     </>

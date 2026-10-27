@@ -110,7 +110,7 @@ function ProyectoAncho({ proyecto: p }: { proyecto: Proyecto }) {
         <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
         {premio && (
           <span className="absolute left-5 top-5 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white">
-            <Icono nombre="laurel" className="h-3.5 w-3.5 text-[#ffcf7a]" />
+            <Icono nombre="laurel" className="h-2.5 w-2.5 text-[#ffcf7a] sm:h-3.5 sm:w-3.5" />
             {premio.nombre}
           </span>
         )}
@@ -186,7 +186,7 @@ function Destacados({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   ];
 
   return (
-    <section id={ancla} className="relative overflow-hidden py-12 sm:py-24 lg:py-[5svh]">
+    <section id={ancla} className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-8 sm:min-h-0 sm:py-24 lg:min-h-[100svh] lg:py-[5svh]">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <AnimatePresence initial={false}>
           {fondo && (
@@ -207,7 +207,7 @@ function Destacados({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--jm-fondo)] via-transparent to-[var(--jm-fondo)]" />
       </div>
 
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-3 px-4 sm:gap-6 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
         <Titular antetitulo={bloque.datos.antetitulo} titulo={bloque.datos.titulo} />
         <Revelar retraso={0.15}>
           <div className="cristal sin-barra flex max-w-full gap-1 overflow-x-auto rounded-full p-1" role="tablist" aria-label="Filtrar por servicio">
@@ -218,7 +218,7 @@ function Destacados({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
                 role="tab"
                 aria-selected={filtro === f.slug}
                 onClick={() => setFiltro(f.slug)}
-                className={`relative whitespace-nowrap rounded-full px-4 py-2 text-[13px] font-medium transition-colors duration-300 ${
+                className={`relative whitespace-nowrap rounded-full px-2.5 py-1.5 text-xs font-medium transition-colors duration-300 sm:px-4 sm:py-2 sm:text-[13px] ${
                   filtro === f.slug ? "text-white" : "text-[var(--jm-suave)] hover:text-[var(--jm-texto)]"
                 }`}
               >
@@ -229,7 +229,7 @@ function Destacados({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
                     transition={{ type: "spring", stiffness: 380, damping: 32, mass: 0.8 }}
                   />
                 )}
-                <span className="relative">{f.nombre}</span>
+                <span className="relative">{f.slug === "direccion-de-fotografia" ? (<><span className="sm:hidden">Fotografía</span><span className="hidden sm:inline">{f.nombre}</span></>) : f.nombre}</span>
               </button>
             ))}
           </div>
@@ -289,8 +289,8 @@ function Carrusel({
   // portátiles con el escalado de Windows al 150 % (unos 630 px de alto): la tarjeta, como mucho el 46 %
   const altoVentana = typeof window === "undefined" ? 900 : window.innerHeight;
   // Tarjetas verticales y más estrechas: en pantalla ancha se ven la central y casi dos vecinas por lado
-  const W = movil ? ancho * 0.78 : Math.min(ancho * 0.22, 440, altoVentana * 0.46 * (3 / 4));
-  const gap = movil ? 14 : 24;
+  const W = movil ? Math.round(ancho * 0.68) : Math.min(ancho * 0.22, 440, altoVentana * 0.46 * (3 / 4));
+  const gap = movil ? 12 : 24;
   const paso = W + gap;
   const alto = W * (4 / 3);
   const lado = Math.max(0, (ancho - W) / 2);
@@ -347,7 +347,7 @@ function Carrusel({
 
   return (
     <motion.div
-      className="relative mt-8 sm:mt-12 lg:mt-[4svh]"
+      className="relative mt-4 sm:mt-12 lg:mt-[4svh]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.3 } }}
       exit={{ opacity: 0, transition: { duration: 0.22 } }}
@@ -391,7 +391,7 @@ function Carrusel({
       </div>
 
       {/* Indicador y flechas */}
-      <div className="relative mx-auto mt-8 flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-8 lg:mt-[2.5svh]">
+      <div className="relative mx-auto mt-4 sm:mt-8 flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-8 lg:mt-[2.5svh]">
         <div className="flex items-center gap-1.5" role="tablist" aria-label="Proyectos">
           {proyectos.map((p, j) => (
             <button
@@ -515,7 +515,7 @@ function TarjetaCarrusel({ proyecto: p, activa, compacta }: { proyecto: Proyecto
         />
         {premio && (
           <span className="absolute left-5 top-5 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white">
-            <Icono nombre="laurel" className="h-3.5 w-3.5 text-[#ffcf7a]" />
+            <Icono nombre="laurel" className="h-2.5 w-2.5 text-[#ffcf7a] sm:h-3.5 sm:w-3.5" />
             {premio.nombre}
           </span>
         )}
@@ -556,27 +556,27 @@ export function TarjetaProyecto({ proyecto: p }: { proyecto: Proyecto }) {
       <div
         data-radio
         data-foco
-        className="relative aspect-[16/10] overflow-hidden rounded-[22px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[3/2] sm:rounded-[32px]"
+        className="relative aspect-[16/10] overflow-hidden rounded-[16px] bg-black shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] sm:aspect-[3/2] sm:rounded-[32px]"
       >
         <Diapositivas imagenes={fotogramas(p)} medios={mediosDeProyecto(p)} activo={encima && fino} ancho={1200} className={MASCARA_BORDE} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent" />
 
         {premio && (
-          <span className="absolute left-4 top-4 z-[3] inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/45 px-3 py-1.5 text-[11px] font-medium text-white">
-            <Icono nombre="laurel" className="h-3.5 w-3.5 text-[#ffcf7a]" />
+          <span className="absolute left-2 top-2 z-[3] inline-flex items-center gap-1 rounded-full border border-white/20 bg-black/45 px-2 py-0.5 text-[9px] font-medium text-white sm:left-4 sm:top-4 sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-[11px]">
+            <Icono nombre="laurel" className="h-2.5 w-2.5 text-[#ffcf7a] sm:h-3.5 sm:w-3.5" />
             {premio.nombre}
           </span>
         )}
-        <span className="absolute right-4 top-4 z-[3] flex h-10 w-10 translate-y-1 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="absolute right-4 top-4 z-[3] hidden h-10 w-10 translate-y-1 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:flex">
           <Icono nombre="flecha" className="h-4 w-4 -rotate-45" />
         </span>
 
-        <div className="absolute inset-x-3 bottom-3 z-[3] rounded-[24px] border border-white/15 bg-black/60 p-4 text-white transition-transform duration-500 group-hover:-translate-y-1 sm:p-5">
+        <div className="absolute inset-x-2 bottom-2 z-[3] rounded-[14px] border border-white/15 bg-black/65 p-2 text-white transition-transform duration-500 group-hover:-translate-y-1 sm:inset-x-3 sm:bottom-3 sm:rounded-[24px] sm:p-5">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/60">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
+            <p className="truncate text-[9px] font-medium uppercase tracking-[0.1em] text-white/60 sm:text-[11px] sm:tracking-[0.14em]">{[p.tipo?.nombre, p.anio].filter(Boolean).join(" · ")}</p>
             {p.conJuno && <SelloJuno pequeno enTarjeta className="-my-1 shrink-0" />}
           </div>
-          <h3 className="mt-1 text-xl font-bold leading-tight tracking-[-0.025em] sm:text-2xl">{p.titulo}</h3>
+          <h3 className="mt-0.5 truncate text-xs font-bold leading-tight tracking-[-0.02em] sm:mt-1 sm:text-2xl">{p.titulo}</h3>
           {/* El cargo no ocupa línea hasta que se pasa el ratón: la fila se abre despacio y el texto aparece con ella */}
           {p.papel && (
             <div className="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grid-rows-[1fr] group-hover:opacity-100">

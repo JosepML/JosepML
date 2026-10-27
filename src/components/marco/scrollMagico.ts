@@ -249,7 +249,7 @@ export function useScrollMagico(activo: boolean) {
   }, []);
 
   useEffect(() => {
-    if (!activo || desactivado || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (!activo || desactivado || typeof window === "undefined" || window.innerWidth < 768 || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
 
     let ultimoEvento = 0;
 

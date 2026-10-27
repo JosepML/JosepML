@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import type { Ajustes } from "@/lib/datos/tipos";
 import { RUTAS } from "@/lib/rutas";
 import { CURVA } from "@/styles/movimiento";
-import { useReducir } from "../comun/hooks";
+import { usePantallaAncha, useReducir } from "../comun/hooks";
 import { Icono } from "../Iconos";
 import { Pie } from "./Pie";
 import { useAnclas, useScrollMagico } from "./scrollMagico";
@@ -33,8 +33,9 @@ export function Marco({ ajustes, children }: { ajustes: Ajustes; children: React
   const reducir = useReducir();
   const ruta = usePathname();
   useFoco();
-  // Solo en Inicio: en las fichas y demás páginas el scroll es el normal
-  useScrollMagico(ruta === RUTAS.inicio && !reducir);
+  const ancha = usePantallaAncha();
+  // Solo en Inicio y en pantalla de ordenador (en móvil el scroll es siempre 100% nativo)
+  useScrollMagico(ancha && ruta === RUTAS.inicio && !reducir);
   useAnclas(ruta);
 
   return (
