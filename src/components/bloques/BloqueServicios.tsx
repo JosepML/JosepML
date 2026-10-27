@@ -107,7 +107,7 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
         imagenes={imagenes}
         medios={medios}
         ancho={1920}
-        className="h-[225px] sm:h-[250px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
+        className="h-[168px] sm:h-[195px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
       >
         {() => (
           <>
