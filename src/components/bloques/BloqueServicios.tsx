@@ -203,14 +203,16 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
                   <TarjetaFoto suave imagenes={f.foto ? [f.foto] : []} ancho={1200} className="aspect-[16/11] sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
                     {() => (
                       <div className="relative flex h-full flex-col justify-end p-3 sm:p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]">
-                        <h3 className="text-[13px] font-bold leading-tight tracking-[-0.02em] sm:text-2xl">{f.nombre}</h3>
-                        <Revelable>
-                          <p className="mt-0.5 line-clamp-2 max-w-sm text-[11px] leading-snug text-white/80 [text-wrap:pretty] sm:mt-1.5 sm:line-clamp-none sm:text-[15px]">{f.texto}</p>
-                          <span className="mt-1.5 inline-flex items-center gap-1 text-[9.5px] font-semibold uppercase tracking-[0.12em] text-[#ffc07a] sm:mt-3 sm:gap-1.5 sm:text-xs">
-                            {f.href ? `Ver ${f.nombre.toLowerCase()}` : p?.titulo}
-                            <Icono nombre="flecha" className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
-                          </span>
-                        </Revelable>
+                        <h3 className="text-[13.5px] font-bold leading-tight tracking-[-0.02em] sm:text-2xl">{f.nombre}</h3>
+                        <div className="hidden sm:block">
+                          <Revelable>
+                            <p className="mt-0.5 line-clamp-2 max-w-sm text-[11px] leading-snug text-white/80 [text-wrap:pretty] sm:mt-1.5 sm:line-clamp-none sm:text-[15px]">{f.texto}</p>
+                            <span className="mt-1.5 inline-flex items-center gap-1 text-[9.5px] font-semibold uppercase tracking-[0.12em] text-[#ffc07a] sm:mt-3 sm:gap-1.5 sm:text-xs">
+                              {f.href ? `Ver ${f.nombre.toLowerCase()}` : p?.titulo}
+                              <Icono nombre="flecha" className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
+                            </span>
+                          </Revelable>
+                        </div>
                       </div>
                     )}
                   </TarjetaFoto>
