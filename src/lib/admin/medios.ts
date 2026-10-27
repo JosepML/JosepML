@@ -121,8 +121,15 @@ export async function cambiarFoco(id: string, foco: { x: number; y: number } | n
     const s = await exigirAdmin();
     const x = foco ? Math.round(Math.min(100, Math.max(0, foco.x)) * 10) / 10 : null;
     const y = foco ? Math.round(Math.min(100, Math.max(0, foco.y)) * 10) / 10 : null;
-    const { error } = await s.from("medios").update({ foco_x: x, foco_y: y }).eq("id", id);
+    const { data: actual, error } = await s.from("medios").update({ foco_x: x, foco_y: y }).eq("id", id).select("ancho, alto, bytes, url_origen").single();
     if (error) throw new Error(error.message);
+    // Si la misma foto existe duplicada en otra carpeta de la biblioteca, sincroniza también su punto de interés
+    if (actual?.ancho && actual?.alto) {
+      const { data: iguales } = await s.from("medios").select("id").eq("ancho", actual.ancho).eq("alto", actual.alto);
+      if (iguales && iguales.length === 2) {
+        await s.from("medios").update({ foco_x: x, foco_y: y }).in("id", iguales.map((m) => m.id));
+      }
+    }
     await revalidarContenido(["medios"]);
     return { ok: true, datos: null };
   } catch (e) {

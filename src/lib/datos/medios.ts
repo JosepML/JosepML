@@ -1,18 +1,38 @@
 import { filas, urlBucket, type Fila } from "./cliente";
 import type { Medio } from "./tipos";
 
-function aMedio(f: Fila<"medios">): Medio | null {
+function aMedio(f: Fila<"medios">, todas: Fila<"medios">[]): Medio | null {
   const url = f.ruta ? urlBucket(f.ruta) : f.url_origen;
   if (!url) return null;
-  const foco = f.foco_x != null && f.foco_y != null ? { x: f.foco_x, y: f.foco_y } : null;
+  let fx = f.foco_x;
+  let fy = f.foco_y;
+  // Si una foto está duplicada en la biblioteca (por ejemplo, subida en dos carpetas) y el punto de interés
+  // se marcó en la otra copia, lo hereda para que ambas recorten igual en la web.
+  if (fx == null || fy == null) {
+    const gemelo = todas.find(
+      (o) =>
+        o.id !== f.id &&
+        o.foco_x != null &&
+        o.foco_y != null &&
+        ((f.url_origen && o.url_origen === f.url_origen) ||
+          (f.bytes && o.bytes === f.bytes) ||
+          (f.ancho && f.alto && o.ancho === f.ancho && o.alto === f.alto && todas.filter((x) => x.ancho === f.ancho && x.alto === f.alto).length === 2)),
+    );
+    if (gemelo) {
+      fx = gemelo.foco_x;
+      fy = gemelo.foco_y;
+    }
+  }
+  const foco = fx != null && fy != null ? { x: fx, y: fy } : null;
   return { id: f.id, url, tipo: f.tipo, alt: f.texto_alternativo, ancho: f.ancho, alto: f.alto, foco };
 }
 
 /** Biblioteca de medios por id, con la URL resuelta (bucket si ya está subido; si no, la URL de origen) */
 export async function getMedios(): Promise<Record<string, Medio>> {
+  const todas = await filas("medios");
   const lista: Record<string, Medio> = {};
-  for (const f of await filas("medios")) {
-    const m = aMedio(f);
+  for (const f of todas) {
+    const m = aMedio(f, todas);
     if (m) lista[f.id] = m;
   }
   return lista;

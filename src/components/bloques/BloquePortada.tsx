@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { Bloque } from "@/lib/datos/tipos";
 import { usePantallaAncha, useReducir } from "../comun/hooks";
+import { enfoque } from "../comun/imagen";
 import { VideoFondo } from "../comun/VideoFondo";
 import { Icono } from "../Iconos";
 import { Editable, useEditando } from "../edicion/contexto";
@@ -58,6 +59,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
             youtubeId={youtubeId}
             inicio={typeof video.inicio === "number" ? video.inicio : 0}
             poster={poster?.url}
+            foco={enfoque(poster)}
             escala={typeof video.recorte === "number" ? video.recorte : undefined}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/35" />

@@ -15,8 +15,10 @@ export function img(url: string, ancho: 256 | 384 | 640 | 750 | 828 | 1080 | 120
 
 /**
  * Estilo para una foto que se recorta (object-cover): el punto de interés que eligió Josep en la biblioteca
- * queda visible. Sin punto, undefined y la foto se recorta por el centro, como siempre.
+ * queda visible y el zoom (scale) pivota sobre ese mismo punto. Sin punto, undefined y la foto se recorta por el centro.
  */
 export function enfoque(medio: { foco?: { x: number; y: number } | null } | null | undefined): CSSProperties | undefined {
-  return medio?.foco ? { objectPosition: `${medio.foco.x}% ${medio.foco.y}%` } : undefined;
+  return medio?.foco
+    ? { objectPosition: `${medio.foco.x}% ${medio.foco.y}%`, transformOrigin: `${medio.foco.x}% ${medio.foco.y}%` }
+    : undefined;
 }

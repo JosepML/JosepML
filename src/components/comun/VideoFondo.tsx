@@ -1,7 +1,7 @@
 "use client";
 
 import { useInView } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { usePantallaAncha, useReducir, useVideoAbierto } from "./hooks";
 import { VideoYouTube } from "./VideoYouTube";
 import { img } from "./imagen";
@@ -12,6 +12,8 @@ type Props = {
   youtubeId?: string | null;
   inicio?: number;
   poster?: string | null;
+  /** Punto de interés del póster al recortarse (object-position) */
+  foco?: CSSProperties;
   className?: string;
   /** Filtro CSS para el póster y el vídeo (p. ej. blanco y negro) */
   filtro?: string;
@@ -24,7 +26,7 @@ type Props = {
  * encima. Fuera de pantalla, o con el vídeo grande abierto, el vídeo se pausa (no se desmonta: rehacer el iframe daba tirones).
  * Con "reducir movimiento" el vídeo sigue (es la imagen de la web), pero el póster no hace zoom.
  */
-export function VideoFondo({ archivo, youtubeId, inicio, poster, className = "", filtro, escala }: Props) {
+export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className = "", filtro, escala }: Props) {
   const ancha = usePantallaAncha();
   const reducir = useReducir();
   const caja = useRef<HTMLDivElement>(null);
@@ -70,6 +72,7 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, className = "",
         <img
           src={img(poster, 1920)}
           alt=""
+          style={foco}
           className={`absolute inset-0 h-full w-full object-cover ${reducir || propioListo || !visible ? "" : "animate-[kenburns_24s_ease-in-out_infinite_alternate]"}`}
           fetchPriority="high"
         />

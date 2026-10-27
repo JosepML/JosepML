@@ -107,7 +107,7 @@ function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagen
         imagenes={imagenes}
         medios={medios}
         ancho={1920}
-        className="h-[168px] sm:h-[195px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
+        className="h-[192px] sm:h-[215px] md:h-auto md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]"
       >
         {() => (
           <>
@@ -173,9 +173,10 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
   const piezas = lista(bloque.datos.piezas).flatMap((x) => {
     const o = objeto(x);
     const p = proyectos.find((y) => y.id === o.proyecto || y.slug === o.proyecto);
-    const foto = typeof o.imagen === "string" ? medios[o.imagen]?.url : undefined;
+    const m = typeof o.imagen === "string" ? medios[o.imagen] : undefined;
+    const medio = m ? (m.foco || !p?.poster?.foco ? m : { ...m, foco: p.poster.foco }) : p?.poster;
     const href = texto(o.href);
-    return p || href ? [{ nombre: texto(o.nombre), texto: texto(o.texto), proyecto: p, href, foto: foto ?? p?.poster?.url }] : [];
+    return p || href ? [{ nombre: texto(o.nombre), texto: texto(o.texto), proyecto: p, href, foto: medio?.url, medio }] : [];
   });
   const enlace = objeto(bloque.datos.enlace);
   return (
@@ -200,7 +201,7 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
             return (
               <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.06}>
                 <Enlace href={f.href || RUTAS.proyecto(p!.slug)} fundido={!!f.href} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p?.titulo}`}>
-                  <TarjetaFoto suave imagenes={f.foto ? [f.foto] : []} ancho={1200} className="aspect-[16/11] sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
+                  <TarjetaFoto suave imagenes={f.foto ? [f.foto] : []} medios={f.medio ? [f.medio] : undefined} ancho={1200} className="aspect-[16/11] sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
                     {() => (
                       <div className="relative flex h-full flex-col justify-end p-3 sm:p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]">
                         <h3 className="text-[13.5px] font-bold leading-tight tracking-[-0.02em] sm:text-2xl">{f.nombre}</h3>
