@@ -107,7 +107,7 @@ function Revelable({ children }: { children: React.ReactNode }) {
 function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagenes: string[]; medios?: Medio[] }) {
   return (
     <Link href={RUTAS.servicio(s.slug)} className="block">
-      <TarjetaFoto imagenes={imagenes} medios={medios} ancho={1200} className="aspect-[4/5] md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]">
+      <TarjetaFoto imagenes={imagenes} medios={medios} ancho={1920} className="aspect-[4/5] md:aspect-[3/4] lg:aspect-auto lg:h-[min(56svh,600px)]">
         {() => (
           <div className="relative flex h-full flex-col justify-between p-7">
             <div className="flex items-start justify-between">
