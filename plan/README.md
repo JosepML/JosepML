@@ -6,17 +6,17 @@ Plan completo y razonado (documento para leer y comentar): https://claude.ai/cod
 
 ## Estado de las fases
 
-**Orden de trabajo desde el 2026-10-22:** [hoja-de-ruta.md](hoja-de-ruta.md) (tareas para Opus y para Sonnet, cada una en su hilo).
+**Orden de trabajo desde el 2026-10-22:** [hoja-de-ruta.md](hoja-de-ruta.md) y [plan-publicacion.md](plan-publicacion.md). Resumen de traspaso en [traspaso-proyecto.md](traspaso-proyecto.md).
 
 | Fase | Archivo | Estado |
 | --- | --- | --- |
 | 1. Preparación | [fase-1-preparacion.md](fase-1-preparacion.md) | Hecha |
-| 2. Contenido y textos | [fase-2-contenido-y-textos.md](fase-2-contenido-y-textos.md) | En revisión: textos en `plan/contenido/`, faltan datos de Josep |
+| 2. Contenido y textos | [fase-2-contenido-y-textos.md](fase-2-contenido-y-textos.md) | Hecha (18 proyectos iniciales + 29 proyectos nuevos en `plan/contenido/`) |
 | 3. Dirección visual | [fase-3-direccion-visual.md](fase-3-direccion-visual.md) | Hecha (2026-10-22): D · Cristal aprobado; tokens en `src/styles/tokens.css` |
-| 4. Base de datos y migración | [fase-4-base-de-datos-y-migracion.md](fase-4-base-de-datos-y-migracion.md) | En curso: esquema y seguridad hechos (`plan/esquema.md`); falta cargar el contenido (S1 a S3) |
-| 5. Web pública | [fase-5-web-publica.md](fase-5-web-publica.md) | Bloqueada por 2, 3 y 4 |
-| 6. Panel privado | [fase-6-panel-privado.md](fase-6-panel-privado.md) | Bloqueada por 4 y 5 |
-| 7. Pruebas y lanzamiento | [fase-7-lanzamiento.md](fase-7-lanzamiento.md) | Bloqueada por 6 |
+| 4. Base de datos y migración | [fase-4-base-de-datos-y-migracion.md](fase-4-base-de-datos-y-migracion.md) | Hecha (esquema, seguridad, migración S1, imágenes al bucket S2 y cargas S3–S4) |
+| 5. Web pública | [fase-5-web-publica.md](fase-5-web-publica.md) | Hecha (C, S5–S13: todas las páginas públicas, contacto, legales, cookies + GA4, SEO y redirecciones; falta rellenar datos legales de Josep en `src/lib/datos/legales.ts`) |
+| 6. Panel privado | [fase-6-panel-privado.md](fase-6-panel-privado.md) | Hecha (D, S14–S19: edición en página, panel completo, biblioteca con carpetas y foco, copia de seguridad y guía del panel) |
+| 7. Pruebas y lanzamiento | [fase-7-lanzamiento.md](fase-7-lanzamiento.md) | Lista para lanzar cuando Josep confirme sus datos legales y dé la orden |
 
 Las fases 2, 3 y 4 pueden hacerse en paralelo, cada una en su chat.
 

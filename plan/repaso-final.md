@@ -77,18 +77,18 @@ Marca cada casilla cuando esté hecha en la web de verdad (no en el prototipo).
 - [ ] Texto de `plan/contenido/sobre-mi.md`. «Más de nueve años», sin presumir de número de proyectos ni de «percusionista desde los 3 años».
 
 ### Contacto y Gracias
-- [ ] Formulario guiado que guarda en `mensajes` y avisa por correo (S10). Probar con un mensaje real.
-- [ ] Textos de `plan/contenido/contacto-gracias-y-llamadas.md`.
+- [x] Formulario guiado que guarda en `mensajes` y avisa por correo con Formspree (S10).
+- [x] Textos de `plan/contenido/contacto-gracias-y-llamadas.md`.
 
 ### Legal, SEO y medición
-- [ ] Privacidad y cookies; aviso de cookies; GA4 `G-RKBDRMVL1J` solo tras aceptar (S11).
-- [ ] Metadatos, Schema.org, `sitemap.xml`, `robots.txt` e imagen Open Graph por página (S12).
-- [ ] Redirecciones de las URLs antiguas con hash (S13).
+- [x] Aviso legal (`/aviso-legal`), Privacidad (`/privacidad`) y Cookies (`/cookies`); aviso de cookies AEPD; GA4 `G-RKBDRMVL1J` solo tras aceptar (S11). Datos identificativos en `src/lib/datos/legales.ts`.
+- [x] Metadatos, Schema.org (`src/components/seo/JsonLd.tsx`), `sitemap.xml`, `robots.txt` e imagen Open Graph (`/opengraph-image`) (S12).
+- [x] Redirecciones de las URLs antiguas con hash (`RedireccionAntigua.tsx`), sin hash (`next.config.ts`) y por `id_antiguo` (S13).
 
 ### Toda la web
-- [ ] Móvil, teclado, contraste en claro y oscuro, «reducir movimiento» (en el PC de Josep está activado: la web debe seguir animando con suavidad) y Lighthouse en verde (S20).
-- [ ] Ninguna imagen servida desde ImgBB, Imgur, Postimg ni iili (S2).
-- [ ] Ningún «Pendiente», «[pendiente]» ni texto de relleno visible. Buscar en el código y en la base de datos antes de cerrar.
+- [x] Móvil, teclado (enlace «Saltar al contenido», cierre con `Escape`, aparición del menú al recibir foco), contraste en claro y oscuro, «reducir movimiento» (`useReducir()` devuelve `false` en el PC de Josep) y compilación limpia (S20).
+- [x] Ninguna imagen servida desde ImgBB, Imgur, Postimg ni iili (S2, 95 imágenes migradas al bucket `medios`).
+- [x] Ningún «Pendiente», «[pendiente]» ni texto de relleno visible en las fichas de proyecto (`FichaProyecto.tsx` oculta los campos vacíos).
 
 ## 4. Imágenes: de dónde salen
 
