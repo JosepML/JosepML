@@ -43,7 +43,9 @@ export const CATALOGO: Record<TipoBloque, InfoBloque> = {
         clave: "video",
         etiqueta: "Vídeo de fondo",
         campos: [
-          { tipo: "medio", clave: "medio", etiqueta: "Vídeo propio (mp4)", acepta: "video", ayuda: "Si hay vídeo propio, se usa este y YouTube queda de reserva" },
+          { tipo: "medio", clave: "medio", etiqueta: "Vídeo horizontal (16:9)", acepta: "video", ayuda: "Se usa en ordenador y pantallas en horizontal" },
+          { tipo: "medio", clave: "vertical", etiqueta: "Vídeo vertical (9:16)", acepta: "video", ayuda: "Se usa en móviles y pantallas en vertical" },
+          { tipo: "medio", clave: "completo", etiqueta: "Vídeo completo (botón «Ver reel»)", acepta: "video", ayuda: "Vídeo que se abre en grande al pulsar «Ver reel»" },
           { tipo: "youtube", clave: "youtubeId", etiqueta: "Vídeo de YouTube (reel)", medio: true },
           { tipo: "numero", clave: "inicio", etiqueta: "Empieza en el segundo", min: 0, medio: true },
           { tipo: "medio", clave: "poster", etiqueta: "Imagen mientras carga" },

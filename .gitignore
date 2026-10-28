@@ -33,3 +33,8 @@ next-env.d.ts
 # Copias de seguridad locales (S18)
 copias-seguridad/*
 !copias-seguridad/README.md
+
+# Carpetas de trabajo locales (capturas y salidas de redes sociales)
+capturas-juno/
+capturas-revision/
+_rrss-salida/

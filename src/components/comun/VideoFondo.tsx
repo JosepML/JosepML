@@ -2,13 +2,15 @@
 
 import { useInView } from "motion/react";
 import { type CSSProperties, useEffect, useRef, useState } from "react";
-import { useReducir, useVideoAbierto } from "./hooks";
+import { useMedia, useReducir, useVideoAbierto } from "./hooks";
 import { VideoYouTube } from "./VideoYouTube";
 import { img } from "./imagen";
 
 type Props = {
   /** Vídeo propio (mp4 o webm del bucket `medios`): es lo preferido. Si no hay, YouTube; sin ninguno, el póster */
   archivo?: string | null;
+  /** Vídeo vertical opcional para pantallas en vertical / móvil */
+  archivoVertical?: string | null;
   youtubeId?: string | null;
   inicio?: number;
   poster?: string | null;
@@ -26,8 +28,11 @@ type Props = {
  * encima. Fuera de pantalla, o con el vídeo grande abierto, el vídeo se pausa (no se desmonta: rehacer el iframe daba tirones).
  * Con "reducir movimiento" el vídeo sigue (es la imagen de la web), pero el póster no hace zoom.
  */
-export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className = "", filtro, escala }: Props) {
+export function VideoFondo({ archivo, archivoVertical, youtubeId, inicio, poster, foco, className = "", filtro, escala }: Props) {
   const reducir = useReducir();
+  const esVertical = useMedia("(orientation: portrait)");
+  // Si la pantalla está en vertical y hay vídeo vertical adaptado, se usa; en horizontal o sin vertical, el normal
+  const archivoActual = esVertical && archivoVertical ? archivoVertical : (archivo || archivoVertical);
   const caja = useRef<HTMLDivElement>(null);
   const propio = useRef<HTMLVideoElement>(null);
   const enPantalla = useInView(caja, { margin: "100px" });
@@ -37,12 +42,16 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className
   const [listo, setListo] = useState(false);
   const [propioListo, setPropioListo] = useState(false);
 
+  useEffect(() => {
+    setPropioListo(false);
+  }, [archivoActual]);
+
   // Crear o arrancar el reproductor espera a que la portada ya haya mostrado su póster y la página
   // esté quieta un momento (150 ms para archivo mp4, 600 ms para YouTube): así siempre se ve
   // primero la imagen y nunca una pantalla en negro, tanto en móvil como en escritorio.
   useEffect(() => {
     if (listo || !visible) return;
-    const espera = archivo ? 150 : 600;
+    const espera = archivoActual ? 150 : 600;
     let t = window.setTimeout(() => setListo(true), espera);
     const reiniciar = () => {
       window.clearTimeout(t);
@@ -55,7 +64,7 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className
       window.removeEventListener("scroll", reiniciar);
       window.removeEventListener("wheel", reiniciar);
     };
-  }, [listo, visible, archivo]);
+  }, [listo, visible, archivoActual]);
 
   const conVideo = listo;
 
@@ -69,7 +78,7 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className
     } else {
       v.pause();
     }
-  }, [conVideo, visible, archivo]);
+  }, [conVideo, visible, archivoActual]);
 
   return (
     <div ref={caja} className={`absolute inset-0 overflow-hidden bg-black ${className}`} style={{ filter: filtro }}>
@@ -82,10 +91,10 @@ export function VideoFondo({ archivo, youtubeId, inicio, poster, foco, className
           fetchPriority="high"
         />
       )}
-      {archivo ? (
+      {archivoActual ? (
         <video
           ref={propio}
-          src={archivo}
+          src={archivoActual}
           autoPlay
           muted
           loop

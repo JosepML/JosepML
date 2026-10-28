@@ -35,3 +35,5 @@ albir-confort-reels|reel4-tip4-v1.mp4|Reel 4|0|1
 albir-confort-reels|reel5-tip5-v1.mp4|Reel 5|0|1
 albir-confort-reels|reel6-tip7-v1.mp4|Reel 6|0|1
 albir-confort-reels|reel7-tip11-v1.mp4|Reel 7|0|1
+y-el-ano-que-viene-que|portada-horizontal.mp4|Portada horizontal (16:9)|1|0
+y-el-ano-que-viene-que|portada-vertical.mp4|Portada vertical (9:16)|0|1

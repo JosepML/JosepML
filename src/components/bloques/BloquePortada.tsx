@@ -26,9 +26,21 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
   const video = objeto(bloque.datos.video);
   const youtubeId = texto(video.youtubeId) || null;
   const poster = useMedio(video.poster);
-  const archivo = useMedio(video.medio);
-  // El vídeo completo en Cloudflare: si está, el botón lo reproduce en lugar del de YouTube
-  const completo = useMedio(video.completo);
+  const archivoHorizontalMedio = useMedio(video.horizontal ?? video.medio);
+  const archivoVerticalMedio = useMedio(video.vertical);
+  const completoMedio = useMedio(video.completo);
+
+  // Vídeos adaptados en Cloudflare R2: si la base de datos ya tiene el UUID se usa; si aún tiene el vídeo
+  // provisional anterior (portada-inicio.mp4) o no se ha asignado el vertical, entra la versión adaptada:
+  const R2_BASE = "https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/y-el-ano-que-viene-que";
+  const urlHorizontal =
+    archivoHorizontalMedio?.url && !archivoHorizontalMedio.url.endsWith("portada-inicio.mp4")
+      ? archivoHorizontalMedio.url
+      : `${R2_BASE}/portada-horizontal.mp4`;
+  const urlVertical = archivoVerticalMedio?.url ?? `${R2_BASE}/portada-vertical.mp4`;
+  const urlCompleto = completoMedio?.url ?? `${R2_BASE}/y-el-ano-que-viene-que-completo.mp4`;
+
+
   const papeles = textos(bloque.datos.papeles);
   const ref = useRef<HTMLElement>(null);
   const reducir = useReducir();
@@ -55,7 +67,8 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
         >
           {/* El reel provisional es panorámico con bandas negras y subtítulos dentro: se recorta más para ocultarlos */}
           <VideoFondo
-            archivo={archivo?.url}
+            archivo={urlHorizontal}
+            archivoVertical={urlVertical}
             youtubeId={youtubeId}
             inicio={typeof video.inicio === "number" ? video.inicio : 0}
             poster={poster?.url}
@@ -143,7 +156,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.05, duration: 0.9, ease: CURVA }}
               >
-                {(completo || youtubeId) && (
+                {(urlCompleto || youtubeId) && (
                 <button
                   type="button"
                   onClick={() => setReel(true)}
@@ -189,8 +202,8 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
           </motion.a>
         </motion.div>
       </div>
-      {(completo || youtubeId) && (
-        <ModalVideo archivo={completo?.url} id={youtubeId ?? undefined} abierto={reel} alCerrar={() => setReel(false)} />
+      {(urlCompleto || youtubeId) && (
+        <ModalVideo archivo={urlCompleto} id={youtubeId ?? undefined} abierto={reel} alCerrar={() => setReel(false)} />
       )}
     </section>
   );
