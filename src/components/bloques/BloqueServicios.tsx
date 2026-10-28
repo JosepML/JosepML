@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { imagenesDe, mediosDeServicio } from "@/lib/datos/seleccion";
 import type { Bloque, Medio, Proyecto, Servicio } from "@/lib/datos/tipos";
 import { lista, objeto, texto } from "@/lib/datos/util";
@@ -19,9 +19,8 @@ export const MASCARA_BORDE = "[mask-image:linear-gradient(to_top,transparent,#00
 export const ICONOS_SERVICIO: Record<string, string> = { "direccion-de-fotografia": "camara", filmmaker: "claqueta", edicion: "ritmo" };
 
 /**
- * Servicios: en escritorio y tableta, tres tarjetas verticales con revelación al pasar el ratón (o al tocar).
- * En móvil, tres banners panorámicos amplios que dejan ver bien la fotografía de fondo y caben juntos en una pantalla.
- * Al tocar sobre una tarjeta se revela el texto descriptivo y se mantiene abierto.
+ * Servicios: en escritorio, tres tarjetas verticales cinematográficas con revelación al pasar el ratón.
+ * En móvil y tableta táctil, de entrada solo aparece el título; al tocar sobre la tarjeta se despliega la descripción.
  */
 export function BloqueServicios({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   const { servicios, proyectos } = useDatos();
@@ -70,8 +69,7 @@ function TarjetaFoto({
    *  cuando aparece la frase */
   suave?: boolean;
   activo?: boolean;
-  /** Recibe `revelado`: con ratón, mientras está el puntero encima; en táctil (móvil y tableta), tras pulsar la tarjeta */
-  children: (revelado: boolean, fino: boolean) => React.ReactNode;
+  children: (encima: boolean, fino: boolean) => React.ReactNode;
 }) {
   const fino = usePunteroFino();
   const [encima, setEncima] = useState(false);
@@ -79,7 +77,7 @@ function TarjetaFoto({
 
   return (
     <div
-      onPointerEnter={(e) => e.pointerType !== "touch" && setEncima(true)}
+      onPointerEnter={() => setEncima(true)}
       onPointerLeave={() => setEncima(false)}
       className={`group relative isolate overflow-hidden rounded-[22px] bg-black text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 [clip-path:inset(0_round_22px)] md:rounded-[36px] md:[clip-path:inset(0_round_36px)] ${className}`}
     >
@@ -89,7 +87,7 @@ function TarjetaFoto({
         medios={medios}
         activo={revelado}
         ancho={ancho}
-        className={`${suave ? "" : `transition-opacity duration-700 ${revelado ? "opacity-100" : "opacity-95"}`} ${MASCARA_BORDE}`}
+        className={`${suave ? "" : "opacity-95 transition-opacity duration-700 [@media(hover:hover)]:group-hover:opacity-100"} ${MASCARA_BORDE}`}
       />
       {/* Degradados de contraste para legibilidad de títulos */}
       {suave ? (
@@ -97,7 +95,7 @@ function TarjetaFoto({
           <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.78)_0%,rgba(0,0,0,0.35)_38%,transparent_68%)]" />
           <div
             className={`absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.45)_45%,rgba(0,0,0,0.1)_100%)] transition-opacity duration-700 ${
-              revelado ? "opacity-100" : "opacity-0"
+              activo ? "opacity-100" : "opacity-0 [@media(hover:hover)]:group-hover:opacity-100"
             }`}
           />
         </>
@@ -106,12 +104,12 @@ function TarjetaFoto({
           <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,rgba(0,0,0,0.88)_16%,rgba(0,0,0,0.38)_42%,rgba(0,0,0,0.08)_65%,transparent_85%)]" />
           <div
             className={`absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.6)_40%,transparent_75%)] transition-opacity duration-500 ${
-              revelado ? "opacity-100" : "opacity-0"
+              activo ? "opacity-100" : "opacity-0 [@media(hover:hover)]:group-hover:opacity-100"
             }`}
           />
         </>
       )}
-      {children(revelado, fino)}
+      {children(encima, fino)}
     </div>
   );
 }
@@ -120,9 +118,10 @@ function TarjetaFoto({
 function Revelable({ children, abierto = false }: { children: React.ReactNode; abierto?: boolean }) {
   return (
     <div
-      aria-hidden={!abierto}
       className={`grid transition-[grid-template-rows,opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        abierto ? "grid-rows-[1fr] opacity-100 translate-y-0" : "grid-rows-[0fr] opacity-0 translate-y-2 pointer-events-none"
+        abierto
+          ? "grid-rows-[1fr] opacity-100 translate-y-0"
+          : "grid-rows-[0fr] opacity-0 translate-y-2 pointer-events-none [@media(hover:hover)]:group-hover:grid-rows-[1fr] [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:pointer-events-auto"
       }`}
     >
       <div className="overflow-hidden">{children}</div>
@@ -143,15 +142,20 @@ function Tarjeta({
   activo?: boolean;
   alActivar?: () => void;
 }) {
-  const fino = usePunteroFino();
+  const esToque = useRef(false);
 
   const alPulsar = (e: React.MouseEvent) => {
-    // Si estamos en ordenador con ratón fino, el clic siempre navega al instante
-    if (fino && (e.nativeEvent as PointerEvent).pointerType !== 'touch') return;
+    const eraToque = esToque.current;
+    setTimeout(() => {
+      esToque.current = false;
+    }, 400);
 
     // Si pulsa directamente la flecha de la esquina, navega al instante
     const target = e.target as HTMLElement | null;
     if (target?.closest("[data-enlace-directo]")) return;
+
+    // En ordenador con ratón (no toque táctil): navega directamente al hacer clic
+    if (!eraToque) return;
 
     // En pantallas táctiles (móvil y tableta):
     // El primer toque activa el servicio para mostrar el subtexto y mantenerlo visible;
@@ -163,9 +167,16 @@ function Tarjeta({
   };
 
   return (
-    <Link href={RUTAS.servicio(s.slug)} onClick={alPulsar} className="block">
+    <Link
+      href={RUTAS.servicio(s.slug)}
+      onClick={alPulsar}
+      onTouchStart={() => {
+        esToque.current = true;
+      }}
+      className="block"
+    >
       <TarjetaFoto imagenes={imagenes} medios={medios} ancho={1920} activo={activo} className="jm-banner-servicio w-full">
-        {(revelado) => (
+        {() => (
           <>
             {/* Versión móvil (< md): banner panorámico amplio. Al tocarlo o pulsar, revela el subtexto y se mantiene */}
             <div className="relative flex h-full flex-col justify-between p-4 sm:p-5 md:hidden">
@@ -177,7 +188,7 @@ function Tarjeta({
                   data-enlace-directo
                   aria-label={`Ver servicio ${s.nombre}`}
                   className={`flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-black/35 backdrop-blur-sm transition-all duration-500 ${
-                    revelado ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_15px_rgba(255,192,122,0.3)]" : ""
+                    activo ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_15px_rgba(255,192,122,0.3)]" : ""
                   }`}
                 >
                   <Icono nombre="flecha" className="h-4 w-4" />
@@ -187,7 +198,7 @@ function Tarjeta({
                 <h3 className="text-xl font-extrabold leading-tight tracking-[-0.025em]">{s.nombre}</h3>
                 <div
                   className={`grid transition-[grid-template-rows,opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                    revelado
+                    activo
                       ? "grid-rows-[1fr] opacity-100 translate-y-0 mt-1.5"
                       : "grid-rows-[0fr] opacity-0 translate-y-2 mt-0 pointer-events-none"
                   }`}
@@ -203,34 +214,49 @@ function Tarjeta({
               </div>
             </div>
 
-            {/* Versión tableta y escritorio (>= md): tarjeta vertical con reveal completo al pasar el ratón o al tocar */}
-            <div className="relative hidden h-full flex-col justify-between p-6 lg:p-7 md:flex">
+            {/* Versión escritorio y tableta (>= md): tarjeta vertical cinematográfica completa (Captura 2) */}
+            <div className="relative hidden h-full flex-col justify-between p-7 md:flex">
               <div className="flex items-start justify-between">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm transition-colors duration-500">
-                  <Icono nombre={ICONOS_SERVICIO[s.slug] ?? "camara"} className="h-5 w-5" />
+                <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-white/15">
+                  <Icono nombre={ICONOS_SERVICIO[s.slug] ?? "camara"} className="h-6 w-6" />
                 </span>
                 <span
                   data-enlace-directo
                   aria-label={`Ver servicio ${s.nombre}`}
-                  className={`flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-all duration-500 ${
-                    revelado ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_20px_rgba(255,192,122,0.35)]" : ""
+                  className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-black/30 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    activo
+                      ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_20px_rgba(255,192,122,0.35)]"
+                      : "[@media(hover:hover)]:group-hover:border-[#ffc07a]/60 [@media(hover:hover)]:group-hover:bg-[#ffc07a]/20 [@media(hover:hover)]:group-hover:text-[#ffc07a] [@media(hover:hover)]:group-hover:-rotate-45 [@media(hover:hover)]:group-hover:scale-110 [@media(hover:hover)]:group-hover:shadow-[0_0_20px_rgba(255,192,122,0.35)]"
                   }`}
                 >
                   <Icono nombre="flecha" className="h-4 w-4" />
                 </span>
               </div>
-              <div className="[text-shadow:0_2px_16px_rgba(0,0,0,0.65)]">
-                <h3 className="text-xl font-bold leading-tight tracking-[-0.03em] lg:text-2xl">{s.nombre}</h3>
-                <Revelable abierto={revelado}>
-                  <p className="jm-serif mt-2 text-sm leading-snug text-[#ffc07a] lg:text-base">{s.frase}</p>
-                  <p className="mt-1.5 text-xs leading-relaxed text-neutral-300">
-                    {Array.isArray(s.paraQuien) ? s.paraQuien.join(" · ") : s.paraQuien}
-                  </p>
-                  <span className="mt-3.5 inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 transition-colors duration-300">
-                    Ver proyectos
-                    <Icono nombre="flecha" className="h-3 w-3 transition-transform duration-300" />
-                  </span>
+              <div>
+                <h3 className="text-[30px] font-bold leading-[1.1] tracking-[-0.03em] [text-wrap:balance]">{s.nombre}</h3>
+                {/* Entre el título y el enlace aparecen, al pasar el ratón o al tocar, la frase y las pastillas */}
+                <Revelable abierto={activo}>
+                  <p className="jm-serif mt-2 text-[26px] leading-tight text-[#ffc07a]">{s.frase}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {s.paraQuien.slice(0, 3).map((q) => (
+                      <span key={q} className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium">
+                        {q}
+                      </span>
+                    ))}
+                  </div>
                 </Revelable>
+                {/* Siempre visible de forma predeterminada: en reposo con margen mt-4, en hover/activo con mt-6 */}
+                <span
+                  className={`inline-flex items-center gap-1.5 text-sm font-semibold text-white/85 transition-[margin] duration-700 ${
+                    activo ? "mt-6" : "mt-4 [@media(hover:hover)]:group-hover:mt-6"
+                  }`}
+                >
+                  Ver proyectos y cómo trabajo
+                  <Icono
+                    nombre="flecha"
+                    className="h-4 w-4 transition-transform duration-500 [@media(hover:hover)]:group-hover:translate-x-1"
+                  />
+                </span>
               </div>
             </div>
           </>
@@ -256,12 +282,18 @@ function TarjetaEspecialidad({
   activo?: boolean;
   alActivar?: () => void;
 }) {
-  const fino = usePunteroFino();
+  const esToque = useRef(false);
 
   const alPulsar = (e: React.MouseEvent) => {
-    if (fino && (e.nativeEvent as PointerEvent).pointerType !== 'touch') return;
+    const eraToque = esToque.current;
+    setTimeout(() => {
+      esToque.current = false;
+    }, 400);
+
     const target = e.target as HTMLElement | null;
     if (target?.closest("[data-enlace-directo]")) return;
+
+    if (!eraToque) return;
 
     if (!activo) {
       e.preventDefault();
@@ -276,6 +308,9 @@ function TarjetaEspecialidad({
       href={destino}
       fundido={!!f.href}
       onClick={alPulsar}
+      onTouchStart={() => {
+        esToque.current = true;
+      }}
       className="block"
       aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p?.titulo}`}
     >
@@ -287,7 +322,7 @@ function TarjetaEspecialidad({
         activo={activo}
         className="aspect-[16/11] sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]"
       >
-        {(revelado) => (
+        {() => (
           <div className="relative flex h-full flex-col justify-end p-3 sm:p-5 lg:p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]">
             <div className="flex items-start justify-between gap-1">
               <h3 className="text-[13.5px] font-bold leading-tight tracking-[-0.02em] sm:text-lg lg:text-2xl">{f.nombre}</h3>
@@ -295,15 +330,15 @@ function TarjetaEspecialidad({
                 data-enlace-directo
                 aria-label={`Ver ${f.nombre}`}
                 className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-all duration-500 sm:h-7 sm:w-7 ${
-                  revelado
-                    ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110"
-                    : "pointer-events-none opacity-0"
+                  activo
+                    ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 opacity-100"
+                    : "opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:-rotate-45"
                 }`}
               >
                 <Icono nombre="flecha" className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
               </span>
             </div>
-            <Revelable abierto={revelado}>
+            <Revelable abierto={activo}>
               <p className="mt-1 line-clamp-2 max-w-sm text-[11px] leading-snug text-white/85 [text-wrap:pretty] sm:mt-1.5 sm:line-clamp-none sm:text-sm">
                 {f.texto}
               </p>
