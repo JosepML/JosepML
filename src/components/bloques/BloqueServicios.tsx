@@ -70,15 +70,16 @@ function TarjetaFoto({
    *  cuando aparece la frase */
   suave?: boolean;
   activo?: boolean;
-  children: (encima: boolean, fino: boolean) => React.ReactNode;
+  /** Recibe `revelado`: con ratón, mientras está el puntero encima; en táctil (móvil y tableta), tras pulsar la tarjeta */
+  children: (revelado: boolean, fino: boolean) => React.ReactNode;
 }) {
   const fino = usePunteroFino();
   const [encima, setEncima] = useState(false);
-  const revelado = (encima && fino) || (!fino && activo);
+  const revelado = activo || (fino && encima);
 
   return (
     <div
-      onPointerEnter={() => setEncima(true)}
+      onPointerEnter={(e) => e.pointerType !== "touch" && setEncima(true)}
       onPointerLeave={() => setEncima(false)}
       className={`group relative isolate overflow-hidden rounded-[22px] bg-black text-white shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 [clip-path:inset(0_round_22px)] md:rounded-[36px] md:[clip-path:inset(0_round_36px)] ${className}`}
     >
@@ -88,7 +89,7 @@ function TarjetaFoto({
         medios={medios}
         activo={revelado}
         ancho={ancho}
-        className={`${suave ? "" : "opacity-95 transition-opacity duration-700 group-hover:opacity-100"} ${MASCARA_BORDE}`}
+        className={`${suave ? "" : `transition-opacity duration-700 ${revelado ? "opacity-100" : "opacity-95"}`} ${MASCARA_BORDE}`}
       />
       {/* Degradados de contraste para legibilidad de títulos */}
       {suave ? (
@@ -96,7 +97,7 @@ function TarjetaFoto({
           <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.78)_0%,rgba(0,0,0,0.35)_38%,transparent_68%)]" />
           <div
             className={`absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.45)_45%,rgba(0,0,0,0.1)_100%)] transition-opacity duration-700 ${
-              revelado ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+              revelado ? "opacity-100" : "opacity-0"
             }`}
           />
         </>
@@ -110,19 +111,18 @@ function TarjetaFoto({
           />
         </>
       )}
-      {children(encima, fino)}
+      {children(revelado, fino)}
     </div>
   );
 }
 
 /** Lo que se revela al pasar el ratón (en escritorio) o al pulsar la tarjeta (en táctil / móvil / tableta). */
-function Revelable({ children, activo = false }: { children: React.ReactNode; activo?: boolean }) {
+function Revelable({ children, abierto = false }: { children: React.ReactNode; abierto?: boolean }) {
   return (
     <div
+      aria-hidden={!abierto}
       className={`grid transition-[grid-template-rows,opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        activo
-          ? "grid-rows-[1fr] opacity-100 translate-y-0"
-          : "grid-rows-[0fr] opacity-0 translate-y-2 pointer-events-none [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:grid-rows-[1fr] [@media(hover:hover)]:group-hover:pointer-events-auto"
+        abierto ? "grid-rows-[1fr] opacity-100 translate-y-0" : "grid-rows-[0fr] opacity-0 translate-y-2 pointer-events-none"
       }`}
     >
       <div className="overflow-hidden">{children}</div>
@@ -147,7 +147,7 @@ function Tarjeta({
 
   const alPulsar = (e: React.MouseEvent) => {
     // Si estamos en ordenador con ratón fino, el clic siempre navega al instante
-    if (fino) return;
+    if (fino && (e.nativeEvent as PointerEvent).pointerType !== 'touch') return;
 
     // Si pulsa directamente la flecha de la esquina, navega al instante
     const target = e.target as HTMLElement | null;
@@ -165,7 +165,7 @@ function Tarjeta({
   return (
     <Link href={RUTAS.servicio(s.slug)} onClick={alPulsar} className="block">
       <TarjetaFoto imagenes={imagenes} medios={medios} ancho={1920} activo={activo} className="jm-banner-servicio w-full">
-        {() => (
+        {(revelado) => (
           <>
             {/* Versión móvil (< md): banner panorámico amplio. Al tocarlo o pulsar, revela el subtexto y se mantiene */}
             <div className="relative flex h-full flex-col justify-between p-4 sm:p-5 md:hidden">
@@ -177,7 +177,7 @@ function Tarjeta({
                   data-enlace-directo
                   aria-label={`Ver servicio ${s.nombre}`}
                   className={`flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-black/35 backdrop-blur-sm transition-all duration-500 ${
-                    activo ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_15px_rgba(255,192,122,0.3)]" : ""
+                    revelado ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_15px_rgba(255,192,122,0.3)]" : ""
                   }`}
                 >
                   <Icono nombre="flecha" className="h-4 w-4" />
@@ -187,7 +187,7 @@ function Tarjeta({
                 <h3 className="text-xl font-extrabold leading-tight tracking-[-0.025em]">{s.nombre}</h3>
                 <div
                   className={`grid transition-[grid-template-rows,opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                    activo
+                    revelado
                       ? "grid-rows-[1fr] opacity-100 translate-y-0 mt-1.5"
                       : "grid-rows-[0fr] opacity-0 translate-y-2 mt-0 pointer-events-none"
                   }`}
@@ -206,14 +206,14 @@ function Tarjeta({
             {/* Versión tableta y escritorio (>= md): tarjeta vertical con reveal completo al pasar el ratón o al tocar */}
             <div className="relative hidden h-full flex-col justify-between p-6 lg:p-7 md:flex">
               <div className="flex items-start justify-between">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm transition-colors duration-500 group-hover:border-white/40">
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm transition-colors duration-500">
                   <Icono nombre={ICONOS_SERVICIO[s.slug] ?? "camara"} className="h-5 w-5" />
                 </span>
                 <span
                   data-enlace-directo
                   aria-label={`Ver servicio ${s.nombre}`}
-                  className={`flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-all duration-500 group-hover:border-[#ffc07a]/60 group-hover:bg-[#ffc07a]/20 group-hover:text-[#ffc07a] group-hover:-rotate-45 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,192,122,0.35)] ${
-                    activo ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_20px_rgba(255,192,122,0.35)]" : ""
+                  className={`flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-all duration-500 ${
+                    revelado ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_20px_rgba(255,192,122,0.35)]" : ""
                   }`}
                 >
                   <Icono nombre="flecha" className="h-4 w-4" />
@@ -221,14 +221,14 @@ function Tarjeta({
               </div>
               <div className="[text-shadow:0_2px_16px_rgba(0,0,0,0.65)]">
                 <h3 className="text-xl font-bold leading-tight tracking-[-0.03em] lg:text-2xl">{s.nombre}</h3>
-                <Revelable activo={activo}>
+                <Revelable abierto={revelado}>
                   <p className="jm-serif mt-2 text-sm leading-snug text-[#ffc07a] lg:text-base">{s.frase}</p>
                   <p className="mt-1.5 text-xs leading-relaxed text-neutral-300">
                     {Array.isArray(s.paraQuien) ? s.paraQuien.join(" · ") : s.paraQuien}
                   </p>
-                  <span className="mt-3.5 inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 transition-colors duration-300 group-hover:text-white">
+                  <span className="mt-3.5 inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 transition-colors duration-300">
                     Ver proyectos
-                    <Icono nombre="flecha" className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <Icono nombre="flecha" className="h-3 w-3 transition-transform duration-300" />
                   </span>
                 </Revelable>
               </div>
@@ -259,7 +259,7 @@ function TarjetaEspecialidad({
   const fino = usePunteroFino();
 
   const alPulsar = (e: React.MouseEvent) => {
-    if (fino) return;
+    if (fino && (e.nativeEvent as PointerEvent).pointerType !== 'touch') return;
     const target = e.target as HTMLElement | null;
     if (target?.closest("[data-enlace-directo]")) return;
 
@@ -287,7 +287,7 @@ function TarjetaEspecialidad({
         activo={activo}
         className="aspect-[16/11] sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]"
       >
-        {() => (
+        {(revelado) => (
           <div className="relative flex h-full flex-col justify-end p-3 sm:p-5 lg:p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]">
             <div className="flex items-start justify-between gap-1">
               <h3 className="text-[13.5px] font-bold leading-tight tracking-[-0.02em] sm:text-lg lg:text-2xl">{f.nombre}</h3>
@@ -295,15 +295,15 @@ function TarjetaEspecialidad({
                 data-enlace-directo
                 aria-label={`Ver ${f.nombre}`}
                 className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-sm transition-all duration-500 sm:h-7 sm:w-7 ${
-                  activo
+                  revelado
                     ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110"
-                    : "opacity-0 group-hover:opacity-100"
+                    : "pointer-events-none opacity-0"
                 }`}
               >
                 <Icono nombre="flecha" className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
               </span>
             </div>
-            <Revelable activo={activo}>
+            <Revelable abierto={revelado}>
               <p className="mt-1 line-clamp-2 max-w-sm text-[11px] leading-snug text-white/85 [text-wrap:pretty] sm:mt-1.5 sm:line-clamp-none sm:text-sm">
                 {f.texto}
               </p>
