@@ -3,10 +3,15 @@ import { notFound } from "next/navigation";
 import { JsonLdServicio } from "@/components/seo/JsonLd";
 import { PaginaServicio } from "@/components/servicios/PaginaServicio";
 import { getPaginaConDatos } from "@/lib/datos/web";
+import { getServicios } from "@/lib/datos/servicios";
 import { sinAcento } from "@/lib/seo/url";
 
-// Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
-export const dynamic = "force-dynamic";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const servicios = await getServicios();
+  return servicios.map((s) => ({ slug: s.slug }));
+}
 
 type Props = { params: Promise<{ slug: string }> };
 

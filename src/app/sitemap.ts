@@ -6,7 +6,7 @@ import { getServicios } from "@/lib/datos/servicios";
 import { RUTAS, rutaPagina } from "@/lib/rutas";
 import { urlAbsoluta } from "@/lib/seo/url";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [servicios, proyectos, articulos, paginas] = await Promise.all([

@@ -5,7 +5,6 @@ import { getPagina } from "@/lib/datos/paginas";
 import { getPaginaConDatos } from "@/lib/datos/web";
 
 // Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const pagina = await getPagina("juno-media");

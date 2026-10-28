@@ -6,7 +6,6 @@ import { getPagina } from "@/lib/datos/paginas";
 import { texto } from "@/lib/datos/util";
 
 // Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
-export const dynamic = "force-dynamic";
 
 /** Cabecera del blog: el bloque de texto de la página «blog» y, si no existe, el bloque Blog de Inicio */
 async function cabecera() {

@@ -7,8 +7,17 @@ import { getServicios } from "@/lib/datos/servicios";
 import { RUTAS } from "@/lib/rutas";
 import { sinAcento } from "@/lib/seo/url";
 
-// Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
-export const dynamic = "force-dynamic";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const proyectos = await getProyectos();
+  const slugs = new Set<string>();
+  for (const p of proyectos) {
+    if (p.slug) slugs.add(p.slug);
+    if (p.idAntiguo) slugs.add(p.idAntiguo);
+  }
+  return Array.from(slugs).map((slug) => ({ slug }));
+}
 
 type Props = { params: Promise<{ slug: string }> };
 

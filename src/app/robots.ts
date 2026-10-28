@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { URL_SITIO } from "@/lib/seo/url";
 
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
   // Al lanzar (fase 7), NEXT_PUBLIC_INDEXAR="1" abre el rastreo público.
   const indexar = process.env.NEXT_PUBLIC_INDEXAR === "1";

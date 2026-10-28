@@ -8,7 +8,6 @@ import { getServicios } from "@/lib/datos/servicios";
 import { lista, objeto, texto, textos } from "@/lib/datos/util";
 
 // Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
-export const dynamic = "force-dynamic";
 
 /** Cabecera: el primer bloque de la página «trabajos» (supabase/datos/06-trabajos.sql) y, si no existe, el bloque Selección de Inicio */
 async function cabecera() {

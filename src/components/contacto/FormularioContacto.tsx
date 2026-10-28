@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect, useState } from "react";
 import { enviarContacto, type EstadoContacto } from "@/lib/contacto/enviar";
 import { RUTAS } from "@/lib/rutas";
 import { Icono } from "../Iconos";
@@ -53,8 +54,16 @@ type Props = {
 };
 
 export function FormularioContacto({ opciones, marcados = [], valor, alCambiar, origen = "contacto", nota }: Props) {
+  const router = useRouter();
   const [estado, accion, enviando] = useActionState<EstadoContacto, FormData>(enviarContacto, {});
   const [propios, setPropios] = useState<string[]>(marcados);
+
+  useEffect(() => {
+    if (estado?.ok) {
+      router.push(RUTAS.gracias);
+    }
+  }, [estado?.ok, router]);
+
   const elegidos = valor ?? propios;
   const alternar = (t: string) => {
     const nueva = elegidos.includes(t) ? elegidos.filter((x) => x !== t) : [...elegidos, t];

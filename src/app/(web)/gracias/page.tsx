@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 };
 
 // Como el resto de la web: los datos (menú, ajustes) se leen en cada visita, no al compilar
-export const dynamic = "force-dynamic";
 
 const PASOS = [
   { titulo: "Leo tu mensaje", texto: "Lo leo yo, con calma, sin respuestas automáticas." },

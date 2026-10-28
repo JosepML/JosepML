@@ -15,13 +15,25 @@ import { RUTAS } from "@/lib/rutas";
 import { sinAcento } from "@/lib/seo/url";
 import { texto } from "@/lib/datos/util";
 
-// Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
-export const dynamic = "force-dynamic";
+// Artículo de la web antigua que Josep retiró: redirige al índice del blog para no dar 404
+const ARTICULOS_RETIRADOS = new Set(["dslr-vs-cine-la-camara-no-hace-al-cineasta"]);
+
+export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };
 
-// Artículo de la web antigua que Josep retiró: redirige al índice del blog para no dar 404
-const ARTICULOS_RETIRADOS = new Set(["dslr-vs-cine-la-camara-no-hace-al-cineasta"]);
+export async function generateStaticParams() {
+  const articulos = await getArticulos();
+  const slugs = new Set<string>();
+  for (const a of articulos) {
+    if (a.slug) slugs.add(a.slug);
+    if (a.idAntiguo) slugs.add(a.idAntiguo);
+  }
+  for (const r of ARTICULOS_RETIRADOS) {
+    slugs.add(r);
+  }
+  return Array.from(slugs).map((slug) => ({ slug }));
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

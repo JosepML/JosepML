@@ -6,7 +6,6 @@ import { getPaginaConDatos } from "@/lib/datos/web";
 
 // Se pinta en cada visita con los datos de la caché (src/lib/datos/cliente.ts): así la compilación no
 // depende de que haya conexión con Supabase, y lo que Josep publica se ve en cuanto se vacía la caché.
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const pagina = await getPagina("inicio");

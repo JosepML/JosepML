@@ -3,12 +3,23 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PaginaBloques } from "@/components/bloques/PaginaBloques";
 import { Icono } from "@/components/Iconos";
-import { getPagina } from "@/lib/datos/paginas";
+import { getPagina, getSlugsPaginas } from "@/lib/datos/paginas";
 import { getPaginaConDatos } from "@/lib/datos/web";
 import { RUTAS, slugEspecialidad } from "@/lib/rutas";
 
-// Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
-export const dynamic = "force-dynamic";
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const paginas = await getSlugsPaginas();
+  const params: { slug: string; especialidad: string }[] = [];
+  for (const p of paginas) {
+    const m = p.match(/^(filmmaker|direccion-de-fotografia|edicion)-(.+)$/);
+    if (m) {
+      params.push({ slug: m[1], especialidad: m[2] });
+    }
+  }
+  return params;
+}
 
 type Props = { params: Promise<{ slug: string; especialidad: string }> };
 

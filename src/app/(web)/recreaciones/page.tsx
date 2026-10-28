@@ -8,7 +8,6 @@ import { lista, objeto, texto, textos } from "@/lib/datos/util";
 import { getPaginaConDatos } from "@/lib/datos/web";
 
 // Datos de la caché en cada visita (ver src/app/(web)/page.tsx)
-export const dynamic = "force-dynamic";
 
 /**
  * Una comparación: `{ original: { medio, recorte? }, recreacion: { medio, recorte? }, tamano? }`. `recorte` es
