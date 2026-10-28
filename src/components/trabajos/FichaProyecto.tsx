@@ -58,8 +58,29 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
   const reducir = useReducir();
   const [video, setVideo] = useState(false);
   // Vídeo principal propio (alojado fuera de YouTube): hace de «Ver completo» y no se repite en «Más vídeos»
-  const principal = p.youtubeId ? undefined : p.videos.find((v) => v.tipo === "archivo" && v.rol === "principal" && v.url);
-  const masVideos = principal ? p.videos.filter((v) => v !== principal) : p.videos;
+  // Vídeo propio en Cloudflare R2 (o archivo propio en la base de datos).
+  // Para «Y el año que viene, ¿qué?», el vídeo completo está en Cloudflare R2 y tiene prioridad absoluta sobre YouTube.
+  const videoCloudflareYElAno =
+    p.slug === "y-el-ano-que-viene-que"
+      ? {
+          tipo: "archivo" as const,
+          rol: "principal" as const,
+          titulo: "Y el año que viene, ¿qué?",
+          vertical: false,
+          url: "https://pub-6f35ba056b9043b7bcb5b19b06b6a6e2.r2.dev/y-el-ano-que-viene-que/y-el-ano-que-viene-que-completo.mp4",
+        }
+      : undefined;
+
+  const principal =
+    p.videos.find((v) => v.tipo === "archivo" && v.rol === "principal" && v.url) ??
+    (p.slug === "y-el-ano-que-viene-que" ? videoCloudflareYElAno : undefined) ??
+    p.videos.find((v) => v.tipo === "archivo" && v.url) ??
+    (p.videos.length > 0 ? p.videos.find((v) => v.url) : undefined);
+
+  // Si hay vídeo propio principal explícito, no lo repetimos en «Más vídeos».
+  // Si se tomó el primer vídeo de una serie de piezas/reels (como en Lavandería Grupo LON), se mantienen todas en «Más vídeos».
+  const tieneRolPrincipalExplicito = p.videos.some((v) => v.rol === "principal");
+  const masVideos = tieneRolPrincipalExplicito && principal ? p.videos.filter((v) => v !== principal) : p.videos;
   const [foto, setFoto] = useState<number | null>(null);
   const premio = laurel(p);
   const fotos = p.galeria.map((g) => g.imagen.url);
@@ -97,7 +118,7 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
           borderRadius: CABECERA.radio,
         }}
       >
-        <VideoFondo archivo={p.videoPortada?.url ?? p.clip?.url ?? principal?.url} youtubeId={p.youtubeId} inicio={p.youtubeInicio ?? undefined} poster={(p.imagenCabecera ?? p.poster)?.url} foco={enfoque(p.imagenCabecera ?? p.poster)} />
+        <VideoFondo archivo={p.videoPortada?.url ?? p.clip?.url ?? principal?.url} youtubeId={principal ? undefined : (p.youtubeId ?? undefined)} inicio={p.youtubeInicio ?? undefined} poster={(p.imagenCabecera ?? p.poster)?.url} foco={enfoque(p.imagenCabecera ?? p.poster)} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30" />
         <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col gap-6 p-6 text-white sm:p-12 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -329,8 +350,11 @@ export function FichaProyecto({ proyecto: p, siguiente, servicios }: { proyecto:
         </section>
       )}
 
-      {p.youtubeId && <ModalVideo id={p.youtubeId} abierto={video} alCerrar={() => setVideo(false)} />}
-      {principal && <ModalVideo archivo={principal.url} vertical={!!principal.vertical} abierto={video} alCerrar={() => setVideo(false)} />}
+      {principal ? (
+        <ModalVideo archivo={principal.url} vertical={!!principal.vertical} abierto={video} alCerrar={() => setVideo(false)} />
+      ) : p.youtubeId ? (
+        <ModalVideo id={p.youtubeId} abierto={video} alCerrar={() => setVideo(false)} />
+      ) : null}
       <Visor fotos={fotos} indice={foto} alCambiar={setFoto} titulo={p.titulo} />
     </main>
   );

@@ -136,10 +136,10 @@ export function ConsentimientoCookies() {
       {mostrarBanner && (
         <aside
           aria-label="Aviso de cookies"
-          className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-2xl sm:inset-x-8 sm:bottom-6"
+          className="fixed inset-x-3 top-3 z-50 mx-auto max-w-2xl sm:inset-x-8 sm:top-auto sm:bottom-6"
         >
-          <div className="cristal flex flex-col gap-4 rounded-[28px] p-5 shadow-2xl sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-6 sm:py-5">
-            <div className="text-sm leading-relaxed text-[var(--jm-suave)]">
+          <div className="cristal flex flex-col gap-3 rounded-[22px] p-4 shadow-2xl sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:rounded-[28px] sm:px-6 sm:py-5">
+            <div className="text-xs leading-relaxed text-[var(--jm-suave)] sm:text-sm">
               <p className="font-semibold text-[var(--jm-texto)]">Cookies en esta web</p>
               <p className="mt-1">
                 Uso cookies técnicas para que la web funcione y, solo si aceptas, Google Analytics para saber qué páginas se visitan. Nada de publicidad.{" "}
@@ -153,18 +153,18 @@ export function ConsentimientoCookies() {
                 .
               </p>
             </div>
-            <div className="flex shrink-0 flex-wrap items-center gap-2.5">
+            <div className="flex shrink-0 flex-wrap items-center gap-2 sm:gap-2.5">
               <button
                 type="button"
                 onClick={() => elegir("rechazadas")}
-                className="boton border border-[var(--jm-borde)] bg-white/[0.04] px-5 py-2.5 text-xs font-semibold text-[var(--jm-texto)] transition-colors hover:bg-white/[0.1]"
+                className="boton border border-[var(--jm-borde)] bg-white/[0.04] px-4 py-2 text-xs font-semibold text-[var(--jm-texto)] transition-colors hover:bg-white/[0.1] sm:px-5 sm:py-2.5"
               >
                 Rechazar
               </button>
               <button
                 type="button"
                 onClick={() => elegir("aceptadas")}
-                className="boton boton-acento px-5 py-2.5 text-xs font-semibold"
+                className="boton boton-acento px-4 py-2 text-xs font-semibold sm:px-5 sm:py-2.5"
               >
                 Aceptar
               </button>

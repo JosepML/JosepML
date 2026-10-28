@@ -1,12 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { RUTAS } from "@/lib/rutas";
 
 /**
  * Marca de los proyectos hechos bajo el sello de JUNO Media (`proyectos.con_juno`). Dice «con»: Josep trabaja
  * en sinergia con JUNO Media, no forma parte de ella. Va sobre imagen, así que siempre en blanco. Lleva a la
- * página que explica la colaboración (/juno-media). Dentro de una tarjeta que ya es un enlace no puede haber otro
+ * página que explica la colaboración (/juno-media/). Dentro de una tarjeta que ya es un enlace no puede haber otro
  * enlace, así que ahí es un botón que navega sin abrir la tarjeta.
  */
 export function SelloJuno({ pequeno, className = "", enTarjeta }: { pequeno?: boolean; className?: string; enTarjeta?: boolean }) {
@@ -45,8 +46,8 @@ export function SelloJuno({ pequeno, className = "", enTarjeta }: { pequeno?: bo
     );
   }
   return (
-    <a href={RUTAS.juno} aria-label="Cómo trabajo con JUNO Media" className={clases}>
+    <Link href={RUTAS.juno} aria-label="Cómo trabajo con JUNO Media" className={clases}>
       {marca}
-    </a>
+    </Link>
   );
 }

@@ -203,7 +203,7 @@ export function BloquePortada({ bloque }: { bloque: Bloque }) {
         </motion.div>
       </div>
       {(urlCompleto || youtubeId) && (
-        <ModalVideo archivo={urlCompleto} id={youtubeId ?? undefined} abierto={reel} alCerrar={() => setReel(false)} />
+        <ModalVideo archivo={urlCompleto} id={urlCompleto ? undefined : (youtubeId ?? undefined)} abierto={reel} alCerrar={() => setReel(false)} />
       )}
     </section>
   );
