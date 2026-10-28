@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { imagenesDe, mediosDeServicio } from "@/lib/datos/seleccion";
-import type { Bloque, Medio, Proyecto, Servicio } from "@/lib/datos/tipos";
+import type { Bloque, Medio, Servicio } from "@/lib/datos/tipos";
 import { lista, objeto, texto } from "@/lib/datos/util";
 import { RUTAS } from "@/lib/rutas";
 import { Enlace } from "../comun/Enlace";
@@ -24,7 +24,6 @@ export const ICONOS_SERVICIO: Record<string, string> = { "direccion-de-fotografi
  */
 export function BloqueServicios({ bloque, ancla }: { bloque: Bloque; ancla?: string }) {
   const { servicios, proyectos } = useDatos();
-  const [servicioActivo, setServicioActivo] = useState<string | null>(null);
   return (
     <section id={ancla} className="flex min-h-[100svh] flex-col justify-center px-4 py-6 sm:px-8 sm:py-24 lg:py-[6svh]">
       <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center">
@@ -32,13 +31,7 @@ export function BloqueServicios({ bloque, ancla }: { bloque: Bloque; ancla?: str
         <div className="mt-4 grid gap-3 sm:mt-12 sm:gap-4 md:grid-cols-3 lg:mt-[5svh]">
           {servicios.map((s, i) => (
             <Revelar key={s.slug} retraso={i * 0.08}>
-              <Tarjeta
-                servicio={s}
-                imagenes={imagenesDe(s, proyectos)}
-                medios={mediosDeServicio(s, proyectos)}
-                activoMovil={servicioActivo === s.slug}
-                alActivarMovil={() => setServicioActivo(s.slug)}
-              />
+              <Tarjeta servicio={s} imagenes={imagenesDe(s, proyectos)} medios={mediosDeServicio(s, proyectos)} />
             </Revelar>
           ))}
         </div>
@@ -57,7 +50,6 @@ function TarjetaFoto({
   ancho,
   className,
   suave = false,
-  activoMovil = false,
   children,
 }: {
   imagenes: string[];
@@ -67,7 +59,6 @@ function TarjetaFoto({
   /** Tarjetas apaisadas (filmmaker): la foto a todo color y la sombra solo al pie; se oscurece al pasar el ratón,
    *  cuando aparece la frase */
   suave?: boolean;
-  activoMovil?: boolean;
   children: (encima: boolean, fino: boolean) => React.ReactNode;
 }) {
   const fino = usePunteroFino();
@@ -82,7 +73,7 @@ function TarjetaFoto({
       <Diapositivas
         imagenes={imagenes}
         medios={medios}
-        activo={(encima && fino) || (!fino && activoMovil)}
+        activo={encima && fino}
         ancho={ancho}
         className={`${suave ? "" : "opacity-95 transition-opacity duration-700 group-hover:opacity-100"} ${MASCARA_BORDE}`}
       />
@@ -90,13 +81,10 @@ function TarjetaFoto({
       {suave ? (
         <>
           <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.78)_0%,rgba(0,0,0,0.35)_38%,transparent_68%)]" />
-          <div className={`absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.45)_45%,rgba(0,0,0,0.1)_100%)] transition-opacity duration-700 ${activoMovil ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`} />
+          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,rgba(0,0,0,0.45)_45%,rgba(0,0,0,0.1)_100%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
         </>
       ) : (
-        <>
-          <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,rgba(0,0,0,0.88)_16%,rgba(0,0,0,0.38)_42%,rgba(0,0,0,0.08)_65%,transparent_85%)]" />
-          <div className={`absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.6)_40%,transparent_75%)] transition-opacity duration-500 ${activoMovil ? "opacity-100" : "opacity-0"}`} />
-        </>
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,#000_0%,rgba(0,0,0,0.88)_16%,rgba(0,0,0,0.38)_42%,rgba(0,0,0,0.08)_65%,transparent_85%)]" />
       )}
       {children(encima, fino)}
     </div>
@@ -112,85 +100,29 @@ function Revelable({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Tarjeta({
-  servicio: s,
-  imagenes,
-  medios,
-  activoMovil = false,
-  alActivarMovil,
-}: {
-  servicio: Servicio;
-  imagenes: string[];
-  medios?: Medio[];
-  activoMovil?: boolean;
-  alActivarMovil?: () => void;
-}) {
-  const fino = usePunteroFino();
-
-  const alPulsar = (e: React.MouseEvent) => {
-    // Si pulsa directamente la flecha de la esquina, navega al instante
-    const target = e.target as HTMLElement | null;
-    if (target?.closest("[data-enlace-directo]")) return;
-
-    // En pantallas táctiles: el primer toque activa el servicio para mostrar el subtexto
-    // y mantenerlo visible; el segundo toque navega a la página del servicio
-    if (!fino && !activoMovil) {
-      e.preventDefault();
-      alActivarMovil?.();
-    }
-  };
-
+function Tarjeta({ servicio: s, imagenes, medios }: { servicio: Servicio; imagenes: string[]; medios?: Medio[] }) {
   return (
-    <Link
-      href={RUTAS.servicio(s.slug)}
-      onClick={alPulsar}
-      onTouchStart={() => {
-        if (!fino && !activoMovil) alActivarMovil?.();
-      }}
-      className="block"
-    >
+    <Link href={RUTAS.servicio(s.slug)} className="block">
       <TarjetaFoto
         imagenes={imagenes}
         medios={medios}
         ancho={1920}
-        activoMovil={activoMovil}
         className="jm-banner-servicio w-full"
       >
         {() => (
           <>
-            {/* Versión móvil (< md): banner panorámico amplio. Al tocarlo o poner el dedo encima, revela el subtexto y se mantiene */}
+            {/* Versión móvil (< md): banner panorámico amplio que deja ver la imagen de fondo y sitúa el texto abajo */}
             <div className="relative flex h-full flex-col justify-between p-4 sm:p-5 md:hidden">
               <div className="flex items-start justify-between">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-black/35 backdrop-blur-sm">
                   <Icono nombre={ICONOS_SERVICIO[s.slug] ?? "camara"} className="h-4 w-4" />
                 </span>
-                <span
-                  data-enlace-directo
-                  aria-label={`Ver servicio ${s.nombre}`}
-                  className={`flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-black/35 backdrop-blur-sm transition-all duration-500 ${
-                    activoMovil ? "border-[#ffc07a]/60 bg-[#ffc07a]/20 text-[#ffc07a] -rotate-45 scale-110 shadow-[0_0_15px_rgba(255,192,122,0.3)]" : ""
-                  }`}
-                >
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-black/35 backdrop-blur-sm">
                   <Icono nombre="flecha" className="h-4 w-4" />
                 </span>
               </div>
               <div className="[text-shadow:0_2px_16px_rgba(0,0,0,0.65)]">
                 <h3 className="text-xl font-extrabold leading-tight tracking-[-0.025em]">{s.nombre}</h3>
-                <div
-                  className={`grid transition-[grid-template-rows,opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                    activoMovil
-                      ? "grid-rows-[1fr] opacity-100 translate-y-0 mt-1.5"
-                      : "grid-rows-[0fr] opacity-0 translate-y-2 mt-0 pointer-events-none"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p className="jm-serif text-[15px] sm:text-base leading-snug text-[#ffc07a]">{s.frase}</p>
-                    <span className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-white/90">
-                      Ver proyectos y cómo trabajo
-                      <Icono nombre="flecha" className="h-3 w-3" />
-                    </span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -232,105 +164,11 @@ function Tarjeta({
 }
 
 /**
- * Tarjeta de cada especialidad en «Lo que grabo como filmmaker».
- * En móvil (< sm): solo muestra el título por defecto; al tocar encima revela el texto completo y el enlace.
- * El segundo toque navega a la página.
- */
-function TarjetaEspecialidad({
-  pieza: f,
-  proyecto: p,
-  activoMovil,
-  alActivarMovil,
-}: {
-  pieza: { nombre: string; texto: string; href?: string; foto?: string; medio?: Medio | null };
-  proyecto?: Proyecto;
-  activoMovil: boolean;
-  alActivarMovil: () => void;
-}) {
-  const fino = usePunteroFino();
-
-  const alPulsar = (e: React.MouseEvent) => {
-    // Si pulsa directamente el enlace/flecha, navega al instante
-    const target = e.target as HTMLElement | null;
-    if (target?.closest("[data-enlace-directo]")) return;
-
-    // En pantallas táctiles: el primer toque activa la especialidad para mostrar el texto;
-    // el segundo toque navega a la página
-    if (!fino && !activoMovil) {
-      e.preventDefault();
-      alActivarMovil();
-    }
-  };
-
-  const destino = f.href || (p ? RUTAS.proyecto(p.slug) : "#");
-
-  return (
-    <Enlace
-      href={destino}
-      fundido={!!f.href}
-      onClick={alPulsar}
-      onTouchStart={() => {
-        if (!fino && !activoMovil) alActivarMovil();
-      }}
-      className="block"
-      aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p?.titulo}`}
-    >
-      <TarjetaFoto
-        suave
-        imagenes={f.foto ? [f.foto] : []}
-        medios={f.medio ? [f.medio] : undefined}
-        ancho={1200}
-        activoMovil={activoMovil}
-        className="aspect-[16/11] min-h-[140px] sm:min-h-0 sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]"
-      >
-        {() => (
-          <div className="relative flex h-full flex-col justify-end p-3 sm:p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.65)]">
-            <h3 className="text-[13.5px] font-bold leading-tight tracking-[-0.02em] sm:text-2xl">{f.nombre}</h3>
-
-            {/* Versión móvil (< sm): oculto por defecto, se despliega al tocar la tarjeta */}
-            <div
-              className={`grid transition-[grid-template-rows,opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:hidden ${
-                activoMovil
-                  ? "grid-rows-[1fr] opacity-100 translate-y-0 mt-1"
-                  : "grid-rows-[0fr] opacity-0 translate-y-1 mt-0 pointer-events-none"
-              }`}
-            >
-              <div className="overflow-hidden">
-                <p className="line-clamp-3 text-[11px] leading-snug text-white/90 [text-wrap:pretty]">{f.texto}</p>
-                <span
-                  data-enlace-directo
-                  className="mt-1.5 inline-flex items-center gap-1 text-[10px] font-semibold text-[#ffc07a]"
-                >
-                  {f.href ? `Ver ${f.nombre.toLowerCase()}` : p?.titulo}
-                  <Icono nombre="flecha" className="h-2.5 w-2.5 shrink-0" />
-                </span>
-              </div>
-            </div>
-
-            {/* Versión ordenador (>= sm): se revela al pasar el ratón */}
-            <div className="hidden sm:block">
-              <Revelable>
-                <p className="mt-0.5 line-clamp-2 max-w-sm text-[11px] leading-snug text-white/80 [text-wrap:pretty] sm:mt-1.5 sm:line-clamp-none sm:text-[15px]">{f.texto}</p>
-                <span className="mt-1.5 inline-flex items-center gap-1 text-[9.5px] font-semibold uppercase tracking-[0.12em] text-[#ffc07a] sm:mt-3 sm:gap-1.5 sm:text-xs">
-                  {f.href ? `Ver ${f.nombre.toLowerCase()}` : p?.titulo}
-                  <Icono nombre="flecha" className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
-                </span>
-              </Revelable>
-            </div>
-          </div>
-        )}
-      </TarjetaFoto>
-    </Enlace>
-  );
-}
-
-/**
  * Lo que grabo como filmmaker: la rejilla de servicios de la web antigua (spots, eventos, bodas, redes...).
- * En móvil se organiza en 2 columnas compactas. Al pulsar una tarjeta revela el texto completo igual que «Lo que hago».
+ * En móvil se organiza en 2 columnas compactas con cabecera ajustada para que quepan las 6 tarjetas en una pantalla.
  */
 export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
   const { proyectos, medios } = useDatos();
-  const [piezaActiva, setPiezaActiva] = useState<number | null>(null);
   const piezas = lista(bloque.datos.piezas).flatMap((x) => {
     const o = objeto(x);
     const p = proyectos.find((y) => y.id === o.proyecto || y.slug === o.proyecto);
@@ -358,16 +196,30 @@ export function BloqueFilmmaker({ bloque }: { bloque: Bloque }) {
           )}
         </div>
         <div className="mt-4 grid grid-cols-2 gap-2.5 sm:mt-12 sm:gap-3 lg:mt-[5svh] lg:grid-cols-3">
-          {piezas.map(({ proyecto: p, ...f }, i) => (
-            <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.06}>
-              <TarjetaEspecialidad
-                pieza={f}
-                proyecto={p}
-                activoMovil={piezaActiva === i}
-                alActivarMovil={() => setPiezaActiva(i)}
-              />
-            </Revelar>
-          ))}
+          {piezas.map(({ proyecto: p, ...f }, i) => {
+            return (
+              <Revelar key={`${f.nombre}-${i}`} retraso={(i % 3) * 0.06}>
+                <Enlace href={f.href || RUTAS.proyecto(p!.slug)} fundido={!!f.href} className="block" aria-label={f.href ? `${f.nombre}: cómo trabajo y proyectos` : `${f.nombre}: ver ${p?.titulo}`}>
+                  <TarjetaFoto suave imagenes={f.foto ? [f.foto] : []} medios={f.medio ? [f.medio] : undefined} ancho={1200} className="aspect-[16/11] sm:aspect-[16/10] lg:aspect-auto lg:h-[min(26svh,280px)]">
+                    {() => (
+                      <div className="relative flex h-full flex-col justify-end p-3 sm:p-6 [text-shadow:0_2px_18px_rgba(0,0,0,0.55)]">
+                        <h3 className="text-[13.5px] font-bold leading-tight tracking-[-0.02em] sm:text-2xl">{f.nombre}</h3>
+                        <div className="hidden sm:block">
+                          <Revelable>
+                            <p className="mt-0.5 line-clamp-2 max-w-sm text-[11px] leading-snug text-white/80 [text-wrap:pretty] sm:mt-1.5 sm:line-clamp-none sm:text-[15px]">{f.texto}</p>
+                            <span className="mt-1.5 inline-flex items-center gap-1 text-[9.5px] font-semibold uppercase tracking-[0.12em] text-[#ffc07a] sm:mt-3 sm:gap-1.5 sm:text-xs">
+                              {f.href ? `Ver ${f.nombre.toLowerCase()}` : p?.titulo}
+                              <Icono nombre="flecha" className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
+                            </span>
+                          </Revelable>
+                        </div>
+                      </div>
+                    )}
+                  </TarjetaFoto>
+                </Enlace>
+              </Revelar>
+            );
+          })}
         </div>
       </div>
     </section>
