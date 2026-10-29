@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Next.js
+.next
+out
+next-env.d.ts
+.env*.local
+*.tsbuildinfo
+
+# Copias de seguridad locales (S18)
+copias-seguridad/*
+!copias-seguridad/README.md
+
+# Carpetas de trabajo locales (capturas y salidas de redes sociales)
+capturas-juno/
+capturas-revision/
+_rrss-salida/
+
+# Respaldo del panel de administración (separado para exportación estática)
+respaldo-panel-admin/
+
