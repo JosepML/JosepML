@@ -140,9 +140,8 @@ export function ConsentimientoCookies() {
         >
           <div className="cristal flex flex-col gap-3 rounded-[22px] p-4 shadow-2xl sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:rounded-[28px] sm:px-6 sm:py-5">
             <div className="text-xs leading-relaxed text-[var(--jm-suave)] sm:text-sm">
-              <p className="font-semibold text-[var(--jm-texto)]">Cookies en esta web</p>
-              <p className="mt-1">
-                Uso cookies técnicas para que la web funcione y, solo si aceptas, Google Analytics para saber qué páginas se visitan. Nada de publicidad.{" "}
+              <p>
+                Solo uso cookies esenciales y de métricas para saber qué contenidos interesan más.{" "}
                 <Link
                   href={RUTAS.cookies}
                   onClick={() => setForzarVisible(false)}
