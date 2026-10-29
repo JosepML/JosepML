@@ -38,3 +38,7 @@ copias-seguridad/*
 capturas-juno/
 capturas-revision/
 _rrss-salida/
+
+# Respaldo del panel de administración (separado para exportación estática)
+respaldo-panel-admin/
+
