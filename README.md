@@ -1,14 +1,20 @@
-# Web de Josep Mira Lozano
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-Web nueva en construcción (Next.js + Supabase). La web publicada actualmente sigue en la rama `master`; el código antiguo está en `legacy/` para migrar su contenido.
+# Run and deploy your AI Studio app
 
-## Verla en tu ordenador
+This contains everything you need to run your app locally.
 
-Requisito: [Node.js](https://nodejs.org) 20 o superior.
+View your app in AI Studio: https://ai.studio/apps/f34f4c0f-04fd-4054-8a85-356a393b272f
 
-```bash
-npm install
-npm run dev
-```
+## Run Locally
 
-Abre http://localhost:3000.
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

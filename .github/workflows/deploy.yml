@@ -1,55 +1,31 @@
-name: Desplegar Web Pública en GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["master", "main"]
-  workflow_dispatch:
-  repository_dispatch:
-    types: [publicar_contenido]
-
-# Permisos requeridos para desplegar en GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Permite un despliegue concurrente a la vez para evitar colisiones
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    branches:
+      - master # Cambiado a master porque el repo se inicializó con master por defecto
 
 jobs:
   build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Instalar Node.js
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: 20
+          cache: 'npm'
 
-      - name: Instalar dependencias
-        run: npm ci
+      - name: Install dependencies
+        run: npm install
 
-      - name: Compilar sitio estático
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://oadmqwtnxpbotxcgzaoo.supabase.co' }}
-          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_cuj1iVbaEM0X_C9YiYV7eQ_FgwCxbbo' }}
-          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || '' }}
-          NEXT_PUBLIC_INDEXAR: ${{ vars.NEXT_PUBLIC_INDEXAR || '0' }}
+      - name: Build
         run: npm run build
 
-      - name: Subir artefacto para GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: ./out
-
-      - name: Desplegar en GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
